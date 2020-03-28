@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertService } from '../../help/alert.service';
 import { InventoryService } from '../inventory.service';
+import { InventoryAddComponent } from '../inventory-add/inventory-add.component';
+import { InventoryEditComponent } from '../inventory-edit/inventory-edit.component';
 
 @Component({
   selector: 'app-inventory',
@@ -11,6 +13,8 @@ import { InventoryService } from '../inventory.service';
 export class InventoryComponent implements OnInit {
 
   history: any;
+  @ViewChild('modalsAdd') modalsAdd: InventoryAddComponent
+  @ViewChild('modalsEdit') modalsEdit: InventoryEditComponent
   isLoadding = false;
   constructor(
     private router: Router,
@@ -39,11 +43,11 @@ export class InventoryComponent implements OnInit {
   }
 
   onClickAdd() {
-    this.router.navigate(['staff/inventory/add']);
+    this.modalsAdd.open()
   }
 
   onClickEdit(l) {
-    this.router.navigate(['staff/inventory/edit', { id: l.id }]);
+    this.modalsEdit.open(l.id)
   }
 
 }
