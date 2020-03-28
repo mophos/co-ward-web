@@ -9,7 +9,8 @@ import { InventoryService } from '../inventory.service';
 })
 export class InventoryAddComponent implements OnInit {
 
-  suppiles: any;
+  suppiles: any
+  hospcode: any = '11283'
 
   constructor(
     private alertService: AlertService,
