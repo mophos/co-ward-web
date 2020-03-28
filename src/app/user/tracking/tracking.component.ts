@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertService } from '../../help/alert.service';
 import { TrackingService } from '../tracking.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { TrackingDetailComponent } from '../tracking-detail/tracking-detail.component';
 
 @Component({
   selector: 'app-tracking',
@@ -11,6 +12,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class TrackingComponent implements OnInit {
 
   list: any
+  @ViewChild('modalsDetail') modalsDetail: TrackingDetailComponent;
 
   constructor(
     private alertService: AlertService,
@@ -21,7 +23,6 @@ export class TrackingComponent implements OnInit {
 
   async ngOnInit() {
     await this.getlist();
-    console.log(this.list);
   }
 
   async getlist() {
@@ -38,7 +39,7 @@ export class TrackingComponent implements OnInit {
   }
 
   onOpenDetails(l) {
-    this.router.navigate(['staff/tracking/details', { id: l.id }]);
+    this.modalsDetail.open(l.id)
   }
 
 }

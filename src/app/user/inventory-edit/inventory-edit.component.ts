@@ -15,20 +15,18 @@ export class InventoryEditComponent implements OnInit {
   suppiles: any;
   isLoadding = false;
   isSave = false;
+  modalsEdit: any = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private alertService: AlertService,
     private inventoryService: InventoryService,
   ) {
-    const params = this.route.snapshot.params;
-    this.id = params.id;
-    console.log(this.id);
-    
+
   }
 
   async ngOnInit() {
-    await this.getSuppiles();
+    
   }
 
   async getSuppiles() {
@@ -72,6 +70,7 @@ export class InventoryEditComponent implements OnInit {
           this.alertService.success();
           this.router.navigate(['staff/inventory']);
         }
+        this.modalsEdit = false;
         this.isLoadding = false;
       }
       this.isSave = false;
@@ -80,6 +79,13 @@ export class InventoryEditComponent implements OnInit {
       this.isSave = false;
       this.alertService.error();
     }
+  }
+
+  async open(id) {
+    console.log(id);
+    this.id = id
+    await this.getSuppiles();
+    this.modalsEdit = true
   }
 
 }

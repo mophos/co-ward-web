@@ -24,6 +24,11 @@ import { TrackingDetailComponent } from './tracking-detail/tracking-detail.compo
     BrowserAnimationsModule,
     FormsModule,
     HelpModule
+  ],
+  exports:[
+    InventoryAddComponent,
+    InventoryEditComponent,
+    TrackingDetailComponent
   ]
 })
 export class UserModule { }
