@@ -10,8 +10,8 @@ import { InventoryService } from '../inventory.service';
 })
 export class InventoryComponent implements OnInit {
 
-  history: any
-
+  history: any;
+  isLoadding = false;
   constructor(
     private router: Router,
     private alertService: AlertService,
@@ -24,13 +24,16 @@ export class InventoryComponent implements OnInit {
 
   async getlist() {
     try {
+      this.isLoadding = true;
       const rs: any = await this.inventoryService.getBalanceList();
       if (rs.ok) {
         this.history = rs.rows;
       } else {
         this.alertService.error(rs.error);
       }
+      this.isLoadding = false;
     } catch (error) {
+      this.isLoadding = false;
       this.alertService.error(error);
     }
   }
