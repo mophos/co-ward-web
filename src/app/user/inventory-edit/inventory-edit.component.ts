@@ -23,6 +23,8 @@ export class InventoryEditComponent implements OnInit {
   ) {
     const params = this.route.snapshot.params;
     this.id = params.id;
+    console.log(this.id);
+    
   }
 
   async ngOnInit() {
@@ -54,10 +56,10 @@ export class InventoryEditComponent implements OnInit {
       const confirm: any = await this.alertService.confirm();
       if (confirm) {
         this.isLoadding = true;
-        const objBalancedetails: any = [];
+        const objBalanceDetails: any = [];
         for (const i of this.suppiles) {
           if (+i.qty !== +i.qtyOld) {
-            objBalancedetails.push({
+            objBalanceDetails.push({
               id: i.id,
               qty: i.qty,
               qty_old: i.qtyOld,
@@ -65,7 +67,7 @@ export class InventoryEditComponent implements OnInit {
           }
         }
 
-        const rs: any = await this.inventoryService.updateBalance(objBalancedetails);
+        const rs: any = await this.inventoryService.updateBalance(this.id, objBalanceDetails);
         if (rs.ok) {
           this.alertService.success();
           this.router.navigate(['staff/inventory']);

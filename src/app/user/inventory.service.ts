@@ -29,8 +29,8 @@ export class InventoryService {
     return await this.http.get(url).toPromise();
   }
 
-  async updateBalance(data) {
-    const url = `${this.apiUrl}/v1/staff/balance`;
+  async updateBalance(id, data) {
+    const url = `${this.apiUrl}/v1/staff/balance/${id}`;
     return await this.http.put(url, { data }).toPromise();
   }
 }
