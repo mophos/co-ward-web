@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from '../../help/alert.service';
 import { TrackingService } from '../tracking.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-tracking',
@@ -12,9 +13,11 @@ export class TrackingComponent implements OnInit {
   list: any
 
   constructor(
-    private alertService:AlertService,
-    private trackingService:TrackingService,
-  ) { }
+    private alertService: AlertService,
+    private trackingService: TrackingService,
+    private router: Router,
+  ) {
+  }
 
   async ngOnInit() {
     await this.getlist();
@@ -32,6 +35,10 @@ export class TrackingComponent implements OnInit {
     } catch (error) {
       this.alertService.error(error);
     }
+  }
+
+  onOpenDetails(l) {
+    this.router.navigate(['staff/tracking/details', { id: l.id }]);
   }
 
 }
