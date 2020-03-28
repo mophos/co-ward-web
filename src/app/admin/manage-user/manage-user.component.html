@@ -1,12 +1,18 @@
 <div class="clr-row">
-  <div class="clr-col-2  text-align-right">
+  <div class="clr-col-1">
     <button class="btn btn-sm btn-success" (click)="onClickAdd()">
       <clr-icon shape="plus"></clr-icon> เพิ่มรายการ
     </button>
   </div>
+  <div class="clr-col-1">
+    ค้นหา :
+  </div>
+  <div class="clr-col-3">
+    <input class="clr-input width-fit" (keyup)="doEnter($event)" name="query" [(ngModel)]="query" placeholder="Enter เพื่อค้นหา" />
+  </div>
 </div>
 
-<clr-datagrid>
+<clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
   <clr-dg-column>#</clr-dg-column>
   <clr-dg-column>ชื่อ</clr-dg-column>
   <clr-dg-column>นามสกุล</clr-dg-column>
@@ -31,11 +37,16 @@
       </div>
     </clr-dg-cell>
   </clr-dg-row>
-  <!-- <clr-dg-footer>{{l.length}} users</clr-dg-footer> -->
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgTotalItems]="total" [clrDgPageSize]="limit">
+      <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
+      {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} จาก {{pagination.totalItems}} รายการ
+    </clr-dg-pagination>
+  </clr-dg-footer>
 </clr-datagrid>
 
 <clr-modal [(clrModalOpen)]="modal" [clrModalClosable]="false">
-  <h3 class="modal-title">เพิ่ม/แก้ไข เวชภัณฑ์</h3>
+  <h3 class="modal-title">เพิ่ม/แก้ไข ชื่อผู้ใช้งาน</h3>
   <div class="modal-body">
     <div class="clr-row">
       <div class="clr-col-12">
@@ -90,7 +101,7 @@
         <div class="clr-form clr-form-compact clr-row">
           <label class="clr-control-label clr-col-3">ระดับ</label>
           <select name="level" [(ngModel)]="level">
-            <option value="STAFF" selected>STAFF</option>
+            <option value="STAFF">STAFF</option>
             <option value="ADMIN">ADMIN</option>
             <option value="MANAGER">MANAGER</option>
           </select>
@@ -99,7 +110,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" [disabled]="!name || !code || !unit" (click)="save()">
+    <button type="button" class="btn btn-success" [disabled]="!username || !password || !hospcode || !prename || !fname || !lname || !position || !email || !level" (click)="save()">
       บันทึก
     </button>
     <button type="button" class="btn btn-danger" (click)="modal = false">
