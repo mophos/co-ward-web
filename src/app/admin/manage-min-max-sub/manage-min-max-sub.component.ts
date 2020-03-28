@@ -14,6 +14,8 @@ export class ManageMinMaxSubComponent implements OnInit {
   ministryCode: any;
   subMinistryCode: any;
 
+  hospcode: any;
+
   modal: boolean = false;
 
   total: any;
@@ -22,6 +24,7 @@ export class ManageMinMaxSubComponent implements OnInit {
   limit = 20;
 
   list: any = [];
+  listDetail: any = [];
   constructor(
     private route: ActivatedRoute,
     private minmaxTypeService: MinMaxService,
@@ -58,14 +61,41 @@ export class ManageMinMaxSubComponent implements OnInit {
   }
 
   async onClickEdit(hospcode) {
+    this.hospcode = hospcode;
     try {
       this.modal = true;
-
       let rs: any = await this.minmaxTypeService.getSupplies(hospcode);
-      console.log(rs);
-
+      if (rs.ok) {
+        this.listDetail = rs.rows;
+      } else {
+        this.alertService.error();
+      }
     } catch (error) {
+      this.alertService.error(error);
+    }
+  }
 
+  async save() {
+    try {
+      let data = [];
+      for (const v of this.listDetail) {
+        const obj: any = {};
+        obj.supplies_id = v.id;
+        obj.min = v.min === null ? 0 : v.min;
+        obj.max = v.max === null ? 0 : v.max;
+        data.push(obj);
+      }
+      let rs: any = await this.minmaxTypeService.save(data, this.hospcode);
+      if (rs.ok) {
+        this.alertService.success();
+        this.getList();
+        this.modal = false;
+      } else {
+        this.alertService.error();
+      }
+    } catch (error) {
+      this.alertService.error();
+      this.modal = false;
     }
   }
 }
