@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { InventoryComponent } from './inventory/inventory.component';
+import { InventoryAddComponent } from './inventory-add/inventory-add.component';
 
 const routes: Routes = [
   {
@@ -10,7 +11,13 @@ const routes: Routes = [
     // canActivate: [AdminGuard],
     children: [
       { path: '', redirectTo: 'inventory', pathMatch: 'full' },
-      { path: 'inventory', component: InventoryComponent },
+      {
+        path: 'inventory',
+        children: [
+          { path: '', component: InventoryComponent },
+          { path: 'add', component: InventoryAddComponent },
+        ]
+      },
     ]
   }
 ];
