@@ -38,10 +38,10 @@ export class MinMaxService {
   //   return this.http.get(url).toPromise();
   // }
 
-  // save(data: any) {
-  //   const _url = `${this.url}/v1/admin/supplies-min-max`;
-  //   return this.http.post(_url, { data: data }).toPromise();
-  // }
+  save(data: any, hospcode: any) {
+    const _url = `${this.url}/v1/admin/supplies-min-max?hospcode=${hospcode}`;
+    return this.http.post(_url, { data: data }).toPromise();
+  }
 
   // update(data: any, id: any) {
   //   const _url = `${this.url}/v1/admin/supplies-min-max/${id}`;
