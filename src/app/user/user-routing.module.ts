@@ -5,6 +5,7 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { InventoryAddComponent } from './inventory-add/inventory-add.component';
 import { InventoryEditComponent } from './inventory-edit/inventory-edit.component';
 import { TrackingComponent } from './tracking/tracking.component';
+import { TrackingDetailComponent } from './tracking-detail/tracking-detail.component';
 import { AuthGuard } from '../auth-guard.service';
 
 const routes: Routes = [
@@ -22,7 +23,13 @@ const routes: Routes = [
           { path: 'edit', component: InventoryEditComponent },
         ]
       },
-      { path: 'tracking', component: TrackingComponent },
+      {
+        path: 'tracking',
+        children: [
+          { path: '', component: TrackingComponent },
+          { path: 'details', component: TrackingDetailComponent },
+        ]
+      },
     ]
   }
 ];
