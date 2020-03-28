@@ -8,19 +8,24 @@ export class SuppliesService {
 
   constructor(private http: HttpClient, @Inject('API_URL') private url: string) { }
 
-  getList() {
-    const url = `${this.url}/v1/admin/supplies`;
+  getList(query = '', limit, offset) {
+    const url = `${this.url}/v1/admin/supplies?query=${query}&limit=${limit}&offset=${offset}`;
+    return this.http.get(url).toPromise();
+  }
+
+  getListTotal(query = '') {
+    const url = `${this.url}/v1/admin/supplies/total?query=${query}`;
     return this.http.get(url).toPromise();
   }
 
   save(data: any) {
     const url = `${this.url}/v1/admin/supplies`;
-    return this.http.post(url, data).toPromise();
+    return this.http.post(url, { data: data }).toPromise();
   }
 
   update(data: any, id: any) {
     const url = `${this.url}/v1/admin/supplies/${id}`;
-    return this.http.put(url, data).toPromise();
+    return this.http.put(url, { data: data }).toPromise();
   }
 
   remove(id: any) {

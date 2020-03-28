@@ -1,3 +1,21 @@
-<p>
-  manage-min-max works!
-</p>
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="javascript://" routerLink="/admin/manage-min-max">รายการสังกัด</a>
+</nav>
+
+<clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
+  <clr-dg-column>#</clr-dg-column>
+  <clr-dg-column>รายการ</clr-dg-column>
+  <clr-dg-column></clr-dg-column>
+
+  <clr-dg-row *ngFor="let l of list; let idx=index;">
+    <clr-dg-cell>{{idx+1}}</clr-dg-cell>
+    <clr-dg-cell>{{l.name}}</clr-dg-cell>
+    <clr-dg-cell style="text-align: center;">
+      <div class="btn-group">
+        <button class="btn btn-sm btn-success" (click)="onClickEdit(l)" title="แก้ไข">
+          <clr-icon shape="note"></clr-icon>
+        </button>
+      </div>
+    </clr-dg-cell>
+  </clr-dg-row>
+</clr-datagrid>

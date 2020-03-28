@@ -23,6 +23,12 @@ export class ManageUserComponent implements OnInit {
   level: any;
   id: any;
 
+  total: any;
+  query: any;
+  offset = 0;
+  limit = 20;
+
+  loading = false;
   isUpdate = false;
   modal = false;
 
@@ -32,19 +38,45 @@ export class ManageUserComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getTotal();
     this.getList();
+  }
+
+  async getTotal() {
+    try {
+      this.loading = true;
+      const rs: any = await this.userService.getListTotal(this.query);
+      if (rs.ok) {
+        this.total = rs.rows;
+      } else {
+        this.alertService.error(rs.error);
+      }
+    } catch (error) {
+      this.loading = false;
+      this.alertService.error(error.message);
+    }
   }
 
   async getList() {
     try {
-      const rs: any = await this.userService.getList();
+      this.loading = true;
+      const rs: any = await this.userService.getList(this.query, this.limit, this.offset);
       if (rs.ok) {
         this.list = rs.rows;
       } else {
-        this.alertService.error();
+        this.alertService.error(rs.error);
       }
+      this.loading = false;
     } catch (error) {
-      this.alertService.error(error);
+      this.loading = false;
+      this.alertService.error(error.message);
+    }
+  }
+
+  async doEnter(e) {
+    if (e.keyCode === 13) {
+      this.offset = 0;
+      await this.getList();
     }
   }
 
@@ -77,7 +109,7 @@ export class ManageUserComponent implements OnInit {
         lname: this.lname,
         position: this.position,
         email: this.email,
-        level: this.level
+        type: this.level
       }
 
       let rs: any;
@@ -105,7 +137,7 @@ export class ManageUserComponent implements OnInit {
     this.isUpdate = true;
     this.id = l.id;
     this.username = l.username;
-    this.password = l.password;
+    this.password = null;
     this.hospcode = l.hospcode;
     this.prename = l.prename;
     this.fname = l.fname;
