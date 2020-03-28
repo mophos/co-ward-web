@@ -18,8 +18,8 @@ export class ManageSuppliesComponent implements OnInit {
   remark: any;
   id: any;
 
-  isUpdate: boolean = false;
-  modal: boolean = false;
+  isUpdate = false;
+  modal = false;
 
   constructor(
     private suppliesService: SuppliesService,
@@ -32,8 +32,7 @@ export class ManageSuppliesComponent implements OnInit {
 
   async getList() {
     try {
-      let rs: any = await this.suppliesService.getList();
-      console.log(rs);
+      const rs: any = await this.suppliesService.getList();
       if (rs.ok) {
         this.list = rs.rows;
       }

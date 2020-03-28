@@ -26,26 +26,28 @@ export class LoginComponent implements OnInit {
 
   async doLogin() {
     if (this.username && this.password) {
-      let rs: any = await this.loginService.doLogin(this.username, this.password);
+      const rs: any = await this.loginService.doLogin(this.username, this.password);
       if (rs.ok) {
+        sessionStorage.setItem('token', rs.token);
         const decoded = this.jwtHelper.decodeToken(rs.token);
-        console.log(decoded);
-        
         if (decoded.type === 'ADMIN') {
           this.route.navigate(['/admin']);
-        }
-        else if (decoded.type === 'STAFF') {
+        } else if (decoded.type === 'STAFF') {
           this.route.navigate(['/staff']);
-        }
-        else if (decoded.type === 'MANAGER') {
+        } else if (decoded.type === 'MANAGER') {
           this.route.navigate(['/manager']);
         }
       }
     } else {
       this.isError = true;
-      this.errorMessage = 'กรุณาระบุชื่อผู้ใช้งาน หรือ รหัสผ่าน'
+      this.errorMessage = 'กรุณาระบุชื่อผู้ใช้งาน หรือ รหัสผ่าน';
     }
+  }
 
+  onKeyEnter(e) {
+    if (+e.keyCode === 13) {
+      this.doLogin();
+    }
   }
 
 }
