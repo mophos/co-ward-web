@@ -8,9 +8,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { InventoryComponent } from './inventory/inventory.component';
 import { LayoutComponent } from './layout/layout.component';
+import { InventoryAddComponent } from './inventory-add/inventory-add.component';
 
 @NgModule({
-  declarations: [InventoryComponent, LayoutComponent],
+  declarations: [InventoryComponent, LayoutComponent, InventoryAddComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

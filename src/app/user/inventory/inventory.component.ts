@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { InventoryService } from '../inventory.service';
 
 @Component({
   selector: 'app-inventory',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InventoryComponent implements OnInit {
 
-  constructor() { }
+  history: any
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  onClickAdd() {
+    this.router.navigate(['staff/inventory/add']);
   }
 
 }
