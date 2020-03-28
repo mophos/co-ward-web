@@ -1,3 +1,109 @@
-<p>
-  manage-user works!
-</p>
+<div class="clr-row">
+  <div class="clr-col-2  text-align-right">
+    <button class="btn btn-sm btn-success" (click)="onClickAdd()">
+      <clr-icon shape="plus"></clr-icon> เพิ่มรายการ
+    </button>
+  </div>
+</div>
+
+<clr-datagrid>
+  <clr-dg-column>#</clr-dg-column>
+  <clr-dg-column>ชื่อ</clr-dg-column>
+  <clr-dg-column>นามสกุล</clr-dg-column>
+  <clr-dg-column>ตำแหน่ง</clr-dg-column>
+  <clr-dg-column>ชื่อผู้ใช้งาน</clr-dg-column>
+  <clr-dg-column></clr-dg-column>
+
+  <clr-dg-row *ngFor="let l of list; let idx=index;">
+    <clr-dg-cell>{{idx+1}}</clr-dg-cell>
+    <clr-dg-cell>{{l.prename}} {{l.fname}}</clr-dg-cell>
+    <clr-dg-cell>{{l.lname}}</clr-dg-cell>
+    <clr-dg-cell>{{l.position}}</clr-dg-cell>
+    <clr-dg-cell>{{l.username}}</clr-dg-cell>
+    <clr-dg-cell style="text-align: center;">
+      <div class="btn-group">
+        <button class="btn btn-sm btn-success" (click)="onClickEdit(l)" title="แก้ไข">
+          <clr-icon shape="note"></clr-icon>
+        </button>
+        <button class="btn btn-sm btn-danger" (click)="onClickRemove(l)" title="ลบ">
+          <clr-icon shape="trash"></clr-icon>
+        </button>
+      </div>
+    </clr-dg-cell>
+  </clr-dg-row>
+  <!-- <clr-dg-footer>{{l.length}} users</clr-dg-footer> -->
+</clr-datagrid>
+
+<clr-modal [(clrModalOpen)]="modal" [clrModalClosable]="false">
+  <h3 class="modal-title">เพิ่ม/แก้ไข เวชภัณฑ์</h3>
+  <div class="modal-body">
+    <div class="clr-row">
+      <div class="clr-col-12">
+        <div class="clr-form clr-form-compact clr-row">
+          <label class="clr-control-label clr-col-3">ชื่อผู้ใช้งาน</label>
+          <input type="text" name="username" [(ngModel)]="username" class="clr-col-9 clr-input width-fit">
+        </div>
+      </div>
+      <div class="clr-col-12">
+        <div class="clr-form clr-form-compact clr-row">
+          <label class="clr-control-label clr-col-3">รหัสผ่าน</label>
+          <input type="text" name="password" [(ngModel)]="password" class="clr-col-9 clr-input width-fit">
+        </div>
+      </div>
+      <div class="clr-col-12">
+        <div class="clr-form clr-form-compact clr-row">
+          <label class="clr-control-label clr-col-3">รหัสโรงพยาบาล</label>
+          <input type="text" name="hospcode" [(ngModel)]="hospcode" class="clr-col-9 clr-input width-fit">
+        </div>
+      </div>
+      <div class="clr-col-12">
+        <div class="clr-form clr-form-compact clr-row">
+          <label class="clr-control-label clr-col-3">คำนำหน้าชื่อ</label>
+          <input type="text" name="prename" [(ngModel)]="prename" class="clr-col-9 clr-input width-fit">
+        </div>
+      </div>
+      <div class="clr-col-12">
+        <div class="clr-form clr-form-compact clr-row">
+          <label class="clr-control-label clr-col-3">ชื่อ</label>
+          <input type="text" name="fname" [(ngModel)]="fname" class="clr-col-9 clr-input width-fit">
+        </div>
+      </div>
+      <div class="clr-col-12">
+        <div class="clr-form clr-form-compact clr-row">
+          <label class="clr-control-label clr-col-3">นามสกุล</label>
+          <input type="text" name="lname" [(ngModel)]="lname" class="clr-col-9 clr-input width-fit">
+        </div>
+      </div>
+      <div class="clr-col-12">
+        <div class="clr-form clr-form-compact clr-row">
+          <label class="clr-control-label clr-col-3">ตำแหน่ง</label>
+          <input type="text" name="position" [(ngModel)]="position" class="clr-col-9 clr-input width-fit">
+        </div>
+      </div>
+      <div class="clr-col-12">
+        <div class="clr-form clr-form-compact clr-row">
+          <label class="clr-control-label clr-col-3">อีเมล</label>
+          <input type="text" name="email" [(ngModel)]="email" class="clr-col-9 clr-input width-fit">
+        </div>
+      </div>
+      <div class="clr-col-12">
+        <div class="clr-form clr-form-compact clr-row">
+          <label class="clr-control-label clr-col-3">ระดับ</label>
+          <select name="level" [(ngModel)]="level">
+            <option value="STAFF" selected>STAFF</option>
+            <option value="ADMIN">ADMIN</option>
+            <option value="MANAGER">MANAGER</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" [disabled]="!name || !code || !unit" (click)="save()">
+      บันทึก
+    </button>
+    <button type="button" class="btn btn-danger" (click)="modal = false">
+      ปิด
+    </button>
+  </div>
+</clr-modal>
