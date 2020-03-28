@@ -42,9 +42,6 @@ export function tokenGetter() {
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     AlertService,
   ],
-  exports: [
-
-  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

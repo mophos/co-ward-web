@@ -1,3 +1,4 @@
+import { HelpModule } from './../help/help.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -9,16 +10,19 @@ import { FormsModule } from '@angular/forms';
 import { InventoryComponent } from './inventory/inventory.component';
 import { LayoutComponent } from './layout/layout.component';
 import { InventoryAddComponent } from './inventory-add/inventory-add.component';
+import { InventoryEditComponent } from './inventory-edit/inventory-edit.component';
+import { TrackingComponent } from './tracking/tracking.component';
 
 @NgModule({
-  declarations: [InventoryComponent, LayoutComponent, InventoryAddComponent],
+  declarations: [InventoryComponent, LayoutComponent, InventoryAddComponent, InventoryEditComponent, TrackingComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
     BrowserModule,
     ClarityModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    HelpModule
   ]
 })
 export class UserModule { }

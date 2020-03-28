@@ -1,25 +1,31 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService } from '../../help/alert.service';
 import { InventoryService } from '../inventory.service';
-import { Router } from '@angular/router';
 
 
 @Component({
-  selector: 'app-inventory-add',
-  templateUrl: './inventory-add.component.html',
+  selector: 'app-inventory-edit',
+  templateUrl: './inventory-edit.component.html',
   styles: []
 })
-export class InventoryAddComponent implements OnInit {
+export class InventoryEditComponent implements OnInit {
 
+  id: any;
   suppiles: any;
   isLoadding = false;
   isSave = false;
-
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private alertService: AlertService,
     private inventoryService: InventoryService,
-    private router: Router,
-  ) { }
+  ) {
+    const params = this.route.snapshot.params;
+    this.id = params.id;
+    console.log(this.id);
+    
+  }
 
   async ngOnInit() {
     await this.getSuppiles();
@@ -28,9 +34,12 @@ export class InventoryAddComponent implements OnInit {
   async getSuppiles() {
     try {
       this.isLoadding = true;
-      const rs: any = await this.inventoryService.getSuppiles();
+      const rs: any = await this.inventoryService.getBalanceEdit(this.id);
       if (rs.ok) {
         this.suppiles = rs.rows;
+        for (const i of this.suppiles) {
+          i.qtyOld = i.qty;
+        }
       } else {
         this.alertService.error(rs.error);
       }
@@ -47,14 +56,18 @@ export class InventoryAddComponent implements OnInit {
       const confirm: any = await this.alertService.confirm();
       if (confirm) {
         this.isLoadding = true;
-        const objBalancedetails: any = [];
+        const objBalanceDetails: any = [];
         for (const i of this.suppiles) {
-          objBalancedetails.push({
-            supplies_id: i.id,
-            qty: i.qty,
-          });
+          if (+i.qty !== +i.qtyOld) {
+            objBalanceDetails.push({
+              id: i.id,
+              qty: i.qty,
+              qty_old: i.qtyOld,
+            });
+          }
         }
-        const rs: any = await this.inventoryService.saveBalance(objBalancedetails);
+
+        const rs: any = await this.inventoryService.updateBalance(this.id, objBalanceDetails);
         if (rs.ok) {
           this.alertService.success();
           this.router.navigate(['staff/inventory']);
@@ -63,9 +76,10 @@ export class InventoryAddComponent implements OnInit {
       }
       this.isSave = false;
     } catch (error) {
-      this.isSave = false;
       this.isLoadding = false;
+      this.isSave = false;
       this.alertService.error();
     }
   }
+
 }

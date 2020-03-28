@@ -29,7 +29,7 @@ export class UserService {
   }
 
   remove(id: any) {
-    const _url = `${this.url}/v1/admin/user/${id}`;
-    return this.http.delete(_url).toPromise();
+    const url = `${this.url}/v1/admin/user/${id}`;
+    return this.http.delete(url).toPromise();
   }
 }
