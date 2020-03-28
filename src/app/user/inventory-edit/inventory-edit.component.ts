@@ -58,7 +58,7 @@ export class InventoryEditComponent implements OnInit {
         }
       }
 
-      let rs: any = await this.inventoryService.updateBalance(objBalancedetails)
+      let rs: any = await this.inventoryService.updateBalance(this.id, objBalancedetails)
       if (rs.ok) {
         this.alertService.success();
         this.router.navigate(['staff/inventory']);
