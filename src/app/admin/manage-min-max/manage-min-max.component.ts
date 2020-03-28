@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class ManageMinMaxComponent implements OnInit {
 
   list: any = [];
-
+  loading = false;
   constructor(
     private minmaxTypeService: MinMaxService,
     private alertService: AlertService,
@@ -24,13 +24,16 @@ export class ManageMinMaxComponent implements OnInit {
 
   async getList() {
     try {
-      let rs: any = await this.minmaxTypeService.getList();
+      this.loading = true;
+      const rs: any = await this.minmaxTypeService.getList();
       if (rs.ok) {
         this.list = rs.rows;
       } else {
         this.alertService.error();
       }
+      this.loading = false;
     } catch (error) {
+      this.loading = false;
       this.alertService.error(error);
     }
   }

@@ -10,6 +10,8 @@ export class LayoutComponent implements OnInit {
 
   fullname: any;
   hospname: any;
+  collapsible = false;
+  collapse = false;
   public jwtHelper = new JwtHelperService();
   constructor(
     private route: Router,
