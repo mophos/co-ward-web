@@ -25,6 +25,7 @@ export class ManageRequestSubComponent implements OnInit {
 
   list: any = [];
   listDetail: any = [];
+  loading = false;
   constructor(
     private route: ActivatedRoute,
     private requestService: RequestService,
@@ -42,13 +43,16 @@ export class ManageRequestSubComponent implements OnInit {
 
   async getList() {
     try {
+      this.loading = true;
       let rs: any = await this.requestService.getListHosp(this.hosptypeCode, this.ministryCode, this.subMinistryCode, this.query, this.limit, this.offset);
       if (rs.ok) {
         this.list = rs.rows;
       } else {
         this.alertService.error();
       }
+      this.loading = false;
     } catch (error) {
+      this.loading = false;
       this.alertService.error(error);
     }
   }

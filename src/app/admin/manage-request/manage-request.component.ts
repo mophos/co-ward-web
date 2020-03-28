@@ -10,7 +10,7 @@ import { AlertService } from '../../help/alert.service';
 })
 export class ManageRequestComponent implements OnInit {
   list: any = [];
-
+  loading = false;
   constructor(
     private requestService: RequestService,
     private alertService: AlertService,
@@ -23,13 +23,16 @@ export class ManageRequestComponent implements OnInit {
 
   async getList() {
     try {
-      let rs: any = await this.requestService.getList();
+      this.loading = true;
+      const rs: any = await this.requestService.getList();
       if (rs.ok) {
         this.list = rs.rows;
       } else {
         this.alertService.error();
       }
+      this.loading = false;
     } catch (error) {
+      this.loading = false;
       this.alertService.error(error);
     }
   }
