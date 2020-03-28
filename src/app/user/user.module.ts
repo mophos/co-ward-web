@@ -10,9 +10,10 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { LayoutComponent } from './layout/layout.component';
 import { InventoryAddComponent } from './inventory-add/inventory-add.component';
 import { InventoryEditComponent } from './inventory-edit/inventory-edit.component';
+import { TrackingComponent } from './tracking/tracking.component';
 
 @NgModule({
-  declarations: [InventoryComponent, LayoutComponent, InventoryAddComponent, InventoryEditComponent],
+  declarations: [InventoryComponent, LayoutComponent, InventoryAddComponent, InventoryEditComponent, TrackingComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
