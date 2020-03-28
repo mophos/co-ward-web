@@ -12,7 +12,7 @@ const routes: Routes = [
     component: LayoutComponent,
     // canActivate: [AdminGuard],
     children: [
-      { path: '', redirectTo: 'login', pathMatch: 'full' },
+      { path: '', redirectTo: 'manage-request', pathMatch: 'full' },
       { path: 'manage-suppiles', component: ManageSuppilesComponent },
       { path: 'manage-min-max', component: ManageMinMaxComponent },
       { path: 'manage-user', component: ManageUserComponent },
