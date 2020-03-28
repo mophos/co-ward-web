@@ -29,13 +29,15 @@ export class LoginComponent implements OnInit {
       let rs: any = await this.loginService.doLogin(this.username, this.password);
       if (rs.ok) {
         const decoded = this.jwtHelper.decodeToken(rs.token);
-        if (decoded.type === 'admin') {
+        console.log(decoded);
+        
+        if (decoded.type === 'ADMIN') {
           this.route.navigate(['/admin']);
         }
-        else if (decoded.type === 'staff') {
+        else if (decoded.type === 'STAFF') {
           this.route.navigate(['/staff']);
         }
-        else if (decoded.type === 'manager') {
+        else if (decoded.type === 'MANAGER') {
           this.route.navigate(['/manager']);
         }
       }

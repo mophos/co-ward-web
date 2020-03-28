@@ -1,0 +1,80 @@
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="javascript://" routerLink="/material">รายการเวชภัณฑ์</a>
+  <span class="breadcrumb-item active">อำเภอ</span>
+</nav>
+
+<div class="clr-row">
+  <div class="clr-col-2  text-align-right">
+    <button class="btn btn-sm btn-success" (click)="onClickAdd()">
+      <clr-icon shape="plus"></clr-icon> เพิ่มรายการ
+    </button>
+  </div>
+</div>
+
+<clr-datagrid>
+  <clr-dg-column>#</clr-dg-column>
+  <clr-dg-column>รหัสเวชภัณฑ์</clr-dg-column>
+  <clr-dg-column>รายการ</clr-dg-column>
+  <clr-dg-column>หน่วย</clr-dg-column>
+  <clr-dg-column>หมายเหตุ</clr-dg-column>
+  <clr-dg-column></clr-dg-column>
+
+  <clr-dg-row *ngFor="let l of list; let idx=index;">
+    <clr-dg-cell>{{idx+1}}</clr-dg-cell>
+    <clr-dg-cell>{{l.code}}</clr-dg-cell>
+    <clr-dg-cell>{{l.name}}</clr-dg-cell>
+    <clr-dg-cell>{{l.unit}}</clr-dg-cell>
+    <clr-dg-cell>{{l.remark}}</clr-dg-cell>
+    <clr-dg-cell style="text-align: center;">
+      <div class="btn-group">
+        <button class="btn btn-sm btn-success" (click)="onClickEdit(l)" title="แก้ไข">
+          <clr-icon shape="note"></clr-icon>
+        </button>
+        <button class="btn btn-sm btn-danger" (click)="onClickRemove(l)" title="ลบ">
+          <clr-icon shape="trash"></clr-icon>
+        </button>
+      </div>
+    </clr-dg-cell>
+  </clr-dg-row>
+  <!-- <clr-dg-footer>{{l.length}} users</clr-dg-footer> -->
+</clr-datagrid>
+
+<clr-modal [(clrModalOpen)]="modal" [clrModalClosable]="false">
+  <h3 class="modal-title">เพิ่ม/แก้ไข เวชภัณฑ์</h3>
+  <div class="modal-body">
+    <div class="clr-row">
+      <div class="clr-col-12">
+        <div class="clr-form clr-form-compact clr-row">
+          <label class="clr-control-label clr-col-3">รหัสเวชภัณฑ์</label>
+          <input type="text" name="code" [(ngModel)]="code" class="clr-col-9 clr-input width-fit">
+        </div>
+      </div>
+      <div class="clr-col-12">
+        <div class="clr-form clr-form-compact clr-row">
+          <label class="clr-control-label clr-col-3">ชื่อเวชภัณฑ์</label>
+          <input type="text" name="name" [(ngModel)]="name" class="clr-col-9 clr-input width-fit">
+        </div>
+      </div>
+      <div class="clr-col-12">
+        <div class="clr-form clr-form-compact clr-row">
+          <label class="clr-control-label clr-col-3">หน่วย</label>
+          <input type="text" name="unit" [(ngModel)]="unit" class="clr-col-9 clr-input width-fit">
+        </div>
+      </div>
+      <div class="clr-col-12">
+        <div class="clr-form clr-form-compact clr-row">
+          <label class="clr-control-label clr-col-3">หมายเหตุ</label>
+          <input type="text" name="remark" [(ngModel)]="remark" class="clr-col-9 clr-input width-fit">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" [disabled]="!name || !code || !unit" (click)="save()">
+      บันทึก
+    </button>
+    <button type="button" class="btn btn-danger" (click)="modal = false">
+      ปิด
+    </button>
+  </div>
+</clr-modal>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
-import { ManageSuppilesComponent } from './manage-suppiles/manage-suppiles.component';
+import { ManageSuppliesComponent } from './manage-supplies/manage-supplies.component';
 import { ManageMinMaxComponent } from './manage-min-max/manage-min-max.component';
 import { ManageUserComponent } from './manage-user/manage-user.component';
 import { ManageRequestComponent } from './manage-request/manage-request.component';
@@ -13,10 +13,10 @@ const routes: Routes = [
     // canActivate: [AdminGuard],
     children: [
       { path: '', redirectTo: 'manage-request', pathMatch: 'full' },
-      { path: 'manage-suppiles', component: ManageSuppilesComponent },
+      { path: 'manage-request', component: ManageRequestComponent },
       { path: 'manage-min-max', component: ManageMinMaxComponent },
       { path: 'manage-user', component: ManageUserComponent },
-      { path: 'manage-request', component: ManageRequestComponent }
+      { path: 'manage-supplies', component: ManageSuppliesComponent },
     ]
   }
 ];
