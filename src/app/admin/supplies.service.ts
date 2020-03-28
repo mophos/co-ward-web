@@ -20,12 +20,12 @@ export class SuppliesService {
 
   save(data: any) {
     const url = `${this.url}/v1/admin/supplies`;
-    return this.http.post(url, { data: data }).toPromise();
+    return this.http.post(url, { data }).toPromise();
   }
 
   update(data: any, id: any) {
     const url = `${this.url}/v1/admin/supplies/${id}`;
-    return this.http.put(url, { data: data }).toPromise();
+    return this.http.put(url, { data }).toPromise();
   }
 
   remove(id: any) {

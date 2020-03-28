@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { AlertService } from '../../help/alert.service';
 import * as findIndex from 'lodash/findIndex';
+import { ClrDatagridStateInterface } from '@clr/angular';
 
 @Component({
   selector: 'app-manage-user',
@@ -55,6 +56,31 @@ export class ManageUserComponent implements OnInit {
       this.loading = false;
       this.alertService.error(error.message);
     }
+  }
+
+  refresh(state: ClrDatagridStateInterface) {
+    console.log(state);
+    this.limit = +state.page.size;
+    this.offset = +state.page.from;
+    // this.loading = true;
+    // // We convert the filters from an array to a map,
+    // // because that's what our backend-calling service is expecting
+    // let filters:{[prop:string]: any[]} = {};
+    // if (state.filters) {
+    //     for (let filter of state.filters) {
+    //         let {property, value} = <{property: string, value: string}>filter;
+    //         filters[property] = [value];
+    //     }
+    // }
+    // this.inventory.filter(filters)
+    //     .sort(<{by: string, reverse: boolean}>state.sort)
+    //     .fetch(state.page.from, state.page.size)
+    //     .then((result: FetchResult) => {
+    //         this.users = result.users;
+    //         this.total = result.length;
+    //         this.loading = false;
+    //     });
+    this.getList();
   }
 
   async getList() {

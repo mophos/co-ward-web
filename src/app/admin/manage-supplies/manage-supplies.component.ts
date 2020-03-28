@@ -35,6 +35,7 @@ export class ManageSuppliesComponent implements OnInit {
 
   ngOnInit() {
     this.getList();
+    this.getTotal();
   }
 
   async getTotal() {
