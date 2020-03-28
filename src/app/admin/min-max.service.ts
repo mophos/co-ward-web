@@ -14,7 +14,8 @@ export class MinMaxService {
   }
 
   getListHosp(hcode, mcode, scode, query = '', limit, offset) {
-    const url = `${this.url}/v1/admin/hospital?hosptype_code=${hcode}&ministry_code=${mcode}&sub_ministry_code=${scode}&query=${query}&limit=${limit}&offset=${offset}`;
+    const url = `${this.url}/v1/admin/hospital?hosptype_code=${hcode}&ministry_code=${mcode}&
+    sub_ministry_code=${scode}&query=${query}&limit=${limit}&offset=${offset}`;
     return this.http.get(url).toPromise();
   }
 

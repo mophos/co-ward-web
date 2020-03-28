@@ -9,12 +9,14 @@ import { Router } from '@angular/router';
 export class LayoutComponent implements OnInit {
 
   fullname: any;
+  hospname: any;
   public jwtHelper = new JwtHelperService();
   constructor(
     private route: Router,
   ) {
     const decoded = this.jwtHelper.decodeToken(sessionStorage.getItem('token'));
-    this.fullname = decoded.hospname;
+    this.fullname = decoded.fullname;
+    this.hospname = decoded.hospname;
   }
 
   ngOnInit() {

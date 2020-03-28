@@ -26,7 +26,8 @@ export class ManageSuppliesComponent implements OnInit {
   loading: boolean = false;
   isUpdate = false;
   modal = false;
-
+  isLoadding = false;
+  isSave = false;
   constructor(
     private suppliesService: SuppliesService,
     private alertService: AlertService,
@@ -34,6 +35,7 @@ export class ManageSuppliesComponent implements OnInit {
 
   ngOnInit() {
     this.getList();
+    this.getTotal();
   }
 
   async getTotal() {
@@ -89,12 +91,13 @@ export class ManageSuppliesComponent implements OnInit {
 
   async save() {
     try {
+      this.isSave = true;
       const data = {
         code: this.code,
         name: this.name,
         unit: this.unit,
         remark: this.remark
-      }
+      };
 
       let rs: any;
       if (this.isUpdate) {
@@ -110,7 +113,9 @@ export class ManageSuppliesComponent implements OnInit {
       } else {
         this.alertService.error();
       }
+      this.isSave = false;
     } catch (error) {
+      this.isSave = false;
       this.alertService.error();
       this.modal = false;
     }

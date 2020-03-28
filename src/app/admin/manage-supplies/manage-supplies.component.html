@@ -1,5 +1,5 @@
 <div class="clr-row">
-  <div class="clr-col-1">
+  <div class="clr-col-2">
     <button class="btn btn-sm btn-success" (click)="onClickAdd()">
       <clr-icon shape="plus"></clr-icon> เพิ่มรายการ
     </button>
@@ -76,7 +76,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" [disabled]="!name || !code || !unit" (click)="save()">
+    <button type="button" class="btn btn-success" [disabled]="!name || !code || !unit" (click)="save()" [disabled]="isSave">
       บันทึก
     </button>
     <button type="button" class="btn btn-danger" (click)="modal = false">

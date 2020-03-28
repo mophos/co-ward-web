@@ -1,5 +1,5 @@
 <div class="clr-row">
-  <div class="clr-col-1">
+  <div class="clr-col-2">
     <button class="btn btn-sm btn-success" (click)="onClickAdd()">
       <clr-icon shape="plus"></clr-icon> เพิ่มรายการ
     </button>
@@ -12,20 +12,20 @@
   </div>
 </div>
 
-<clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
-  <clr-dg-column>#</clr-dg-column>
+<clr-datagrid  (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading" [style.height.px]="800">
+  <clr-dg-column>ชื่อผู้ใช้งาน</clr-dg-column>
+  <clr-dg-column>โรงพยาบาล</clr-dg-column>
   <clr-dg-column>ชื่อ</clr-dg-column>
   <clr-dg-column>นามสกุล</clr-dg-column>
   <clr-dg-column>ตำแหน่ง</clr-dg-column>
-  <clr-dg-column>ชื่อผู้ใช้งาน</clr-dg-column>
   <clr-dg-column></clr-dg-column>
 
-  <clr-dg-row *ngFor="let l of list; let idx=index;">
-    <clr-dg-cell>{{idx+1}}</clr-dg-cell>
+  <clr-dg-row *ngFor="let l of list;">
+    <clr-dg-cell>{{l.username}}</clr-dg-cell>
+    <clr-dg-cell>{{l.hospname}}</clr-dg-cell>
     <clr-dg-cell>{{l.prename}} {{l.fname}}</clr-dg-cell>
     <clr-dg-cell>{{l.lname}}</clr-dg-cell>
     <clr-dg-cell>{{l.position}}</clr-dg-cell>
-    <clr-dg-cell>{{l.username}}</clr-dg-cell>
     <clr-dg-cell style="text-align: center;">
       <div class="btn-group">
         <button class="btn btn-sm btn-success" (click)="onClickEdit(l)" title="แก้ไข">

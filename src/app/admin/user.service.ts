@@ -19,13 +19,13 @@ export class UserService {
   }
 
   save(data: any) {
-    const _url = `${this.url}/v1/admin/user`;
-    return this.http.post(_url, { data: data }).toPromise();
+    const url = `${this.url}/v1/admin/user`;
+    return this.http.post(url, { data }).toPromise();
   }
 
   update(data: any, id: any) {
-    const _url = `${this.url}/v1/admin/user/${id}`;
-    return this.http.put(_url, { data: data }).toPromise();
+    const url = `${this.url}/v1/admin/user/${id}`;
+    return this.http.put(url, { data }).toPromise();
   }
 
   remove(id: any) {
