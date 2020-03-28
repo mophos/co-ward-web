@@ -9,9 +9,10 @@ import { FormsModule } from '@angular/forms';
 import { InventoryComponent } from './inventory/inventory.component';
 import { LayoutComponent } from './layout/layout.component';
 import { InventoryAddComponent } from './inventory-add/inventory-add.component';
+import { InventoryEditComponent } from './inventory-edit/inventory-edit.component';
 
 @NgModule({
-  declarations: [InventoryComponent, LayoutComponent, InventoryAddComponent],
+  declarations: [InventoryComponent, LayoutComponent, InventoryAddComponent, InventoryEditComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

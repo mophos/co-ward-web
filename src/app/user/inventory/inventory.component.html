@@ -7,16 +7,16 @@
 </div>
 
 <clr-datagrid>
-  <clr-dg-column>User ID</clr-dg-column>
-  <clr-dg-column>Name</clr-dg-column>
-  <clr-dg-column>Creation date</clr-dg-column>
-  <clr-dg-column>Favorite color</clr-dg-column>
+  <clr-dg-column>ลำดับ</clr-dg-column>
+  <clr-dg-column>วันที่บันทึก</clr-dg-column>
+  <clr-dg-column></clr-dg-column>
 
-  <clr-dg-row *ngFor="let l of history">
-    <clr-dg-cell>{{l.id}}</clr-dg-cell>
-    <clr-dg-cell>{{l.name}}</clr-dg-cell>
-    <clr-dg-cell>{{l.creation | date}}</clr-dg-cell>
-    <clr-dg-cell>{{l.color}}</clr-dg-cell>
+  <clr-dg-row *ngFor="let l of history;let idx=index;">
+    <clr-dg-cell>{{idx+1}}</clr-dg-cell>
+    <clr-dg-cell>{{l.created_at | date}}</clr-dg-cell>
+    <clr-dg-cell>
+      <button class="btn btn-sm btn-primary" (click)="onClickEdit(l)"> แก้ไข </button>
+    </clr-dg-cell>
   </clr-dg-row>
 
   <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>

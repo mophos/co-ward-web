@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from '../../help/alert.service';
 import { InventoryService } from '../inventory.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-inventory-add',
@@ -15,14 +17,14 @@ export class InventoryAddComponent implements OnInit {
   constructor(
     private alertService: AlertService,
     private inventoryService: InventoryService,
+    private router: Router,
   ) { }
 
   async ngOnInit() {
-    await this.getList();
-    console.log(this.suppiles);
+    await this.getSuppiles();
   }
 
-  async getList() {
+  async getSuppiles() {
     try {
       const rs: any = await this.inventoryService.getSuppiles();
       if (rs.ok) {
@@ -37,17 +39,22 @@ export class InventoryAddComponent implements OnInit {
 
   async save() {
 
-    let objBalancedetails: any = [];
-    for (const i of this.suppiles) {
-      if (i.check) {
+    try {
+      let objBalancedetails: any = [];
+      for (const i of this.suppiles) {
         objBalancedetails.push({
           supplies_id: i.id,
           qty: i.qty,
         })
       }
+      let rs: any = await this.inventoryService.saveBalance(objBalancedetails)
+      if (rs.ok) {
+        this.alertService.success();
+        this.router.navigate(['staff/inventory']);
+      }
+    } catch (error) {
+      this.alertService.error();
     }
-
-    // console.log(this.hospcode, objBalancedetails);
   }
 
 }
