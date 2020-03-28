@@ -6,7 +6,7 @@
   </div>
 </div>
 
-<clr-datagrid>
+<clr-datagrid  [clrDgLoading]="isLoadding">
   <clr-dg-column>#</clr-dg-column>
   <clr-dg-column>รหัสเวชภัณฑ์</clr-dg-column>
   <clr-dg-column>รายการ</clr-dg-column>
@@ -65,7 +65,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" [disabled]="!name || !code || !unit" (click)="save()">
+    <button type="button" class="btn btn-success" [disabled]="!name || !code || !unit" (click)="save()" [disabled]="isSave">
       บันทึก
     </button>
     <button type="button" class="btn btn-danger" (click)="modal = false">

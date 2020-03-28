@@ -20,7 +20,8 @@ export class ManageSuppliesComponent implements OnInit {
 
   isUpdate = false;
   modal = false;
-
+  isLoadding = false;
+  isSave = false;
   constructor(
     private suppliesService: SuppliesService,
     private alertService: AlertService,
@@ -32,13 +33,16 @@ export class ManageSuppliesComponent implements OnInit {
 
   async getList() {
     try {
+      this.isLoadding = true;
       const rs: any = await this.suppliesService.getList();
       if (rs.ok) {
         this.list = rs.rows;
       } else {
         this.alertService.error();
       }
+      this.isLoadding = false;
     } catch (error) {
+      this.isLoadding = false;
       this.alertService.error(error);
     }
   }
@@ -58,12 +62,13 @@ export class ManageSuppliesComponent implements OnInit {
 
   async save() {
     try {
+      this.isSave = true;
       const data = {
         code: this.code,
         name: this.name,
         unit: this.unit,
         remark: this.remark
-      }
+      };
 
       let rs: any;
       if (this.isUpdate) {
@@ -79,7 +84,9 @@ export class ManageSuppliesComponent implements OnInit {
       } else {
         this.alertService.error();
       }
+      this.isSave = false;
     } catch (error) {
+      this.isSave = false;
       this.alertService.error();
       this.modal = false;
     }
