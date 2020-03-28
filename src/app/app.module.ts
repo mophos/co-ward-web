@@ -8,7 +8,6 @@ import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginModule } from './login/login.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { CustomersModule } from './customers/customers.module';
 import { AuthModule } from './auth/auth.module';
 import { AuthGuard } from './auth-guard.service';
 import { environment } from './../environments/environment';
@@ -32,7 +31,6 @@ export function tokenGetter() {
     BrowserAnimationsModule,
     AuthModule,
     LoginModule,
-    CustomersModule,
     AdminModule,
     ManagerModule,
     UserModule
