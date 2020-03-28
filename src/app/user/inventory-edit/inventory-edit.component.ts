@@ -1,24 +1,28 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService } from '../../help/alert.service';
 import { InventoryService } from '../inventory.service';
-import { Router } from '@angular/router';
 
 
 @Component({
-  selector: 'app-inventory-add',
-  templateUrl: './inventory-add.component.html',
+  selector: 'app-inventory-edit',
+  templateUrl: './inventory-edit.component.html',
   styles: []
 })
-export class InventoryAddComponent implements OnInit {
+export class InventoryEditComponent implements OnInit {
 
+  id: any
   suppiles: any
-  hospcode: any = '11283'
 
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private alertService: AlertService,
     private inventoryService: InventoryService,
-    private router: Router,
-  ) { }
+  ) {
+    const params = this.route.snapshot.params;
+    this.id = params.id;
+  }
 
   async ngOnInit() {
     await this.getSuppiles();
@@ -26,9 +30,12 @@ export class InventoryAddComponent implements OnInit {
 
   async getSuppiles() {
     try {
-      const rs: any = await this.inventoryService.getSuppiles();
+      const rs: any = await this.inventoryService.getBalanceEdit(this.id);
       if (rs.ok) {
         this.suppiles = rs.rows;
+        for (const i of this.suppiles) {
+          i.qtyOld = i.qty
+        }
       } else {
         this.alertService.error(rs.error);
       }
@@ -42,16 +49,21 @@ export class InventoryAddComponent implements OnInit {
     try {
       let objBalancedetails: any = [];
       for (const i of this.suppiles) {
-        objBalancedetails.push({
-          supplies_id: i.id,
-          qty: i.qty,
-        })
+        if (i.qty != i.qtyOld) {
+          objBalancedetails.push({
+            id: i.id,
+            qty: i.qty,
+            qty_old: i.qtyOld,
+          })
+        }
       }
-      let rs: any = await this.inventoryService.saveBalance(objBalancedetails)
+
+      let rs: any = await this.inventoryService.updateBalance(objBalancedetails)
       if (rs.ok) {
         this.alertService.success();
         this.router.navigate(['staff/inventory']);
       }
+
     } catch (error) {
       this.alertService.error();
     }

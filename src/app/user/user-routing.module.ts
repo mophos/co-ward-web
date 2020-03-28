@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { InventoryAddComponent } from './inventory-add/inventory-add.component';
+import { InventoryEditComponent } from './inventory-edit/inventory-edit.component';
 import { AuthGuard } from '../auth-guard.service';
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
         children: [
           { path: '', component: InventoryComponent },
           { path: 'add', component: InventoryAddComponent },
+          { path: 'edit', component: InventoryEditComponent },
         ]
       },
     ]
