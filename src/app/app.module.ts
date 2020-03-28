@@ -12,6 +12,9 @@ import { CustomersModule } from './customers/customers.module';
 import { AuthModule } from './auth/auth.module';
 import { AuthGuard } from './auth-guard.service';
 import { environment } from './../environments/environment';
+import { AdminModule } from './admin/admin.module';
+import { ManagerModule } from './manager/manager.module';
+import { UserModule } from './user/user.module';
 
 export function tokenGetter() {
   return sessionStorage.getItem('token');
@@ -23,13 +26,16 @@ export function tokenGetter() {
     PageNotFoundComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
     ClarityModule,
     BrowserAnimationsModule,
     AuthModule,
     LoginModule,
     CustomersModule,
+    AdminModule,
+    ManagerModule,
+    UserModule
   ],
   providers: [
     { provide: 'API_URL', useValue: environment.apiUrl },
