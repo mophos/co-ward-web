@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '../../../node_modules/@angular/router';
 import { LoginService } from './login.service';
 
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,37 +18,31 @@ export class LoginComponent implements OnInit {
   errorMessage: string = null;
   isError = false;
 
+  public jwtHelper = new JwtHelperService();
   constructor(private route: Router, private loginService: LoginService) { }
 
   ngOnInit() {
   }
 
-  doLogin() {
-    this.route.navigate(['/customers']);
-    // if (this.username && this.password) {
-    //   if (this.userTypeId == 1) {
-    //     this.loginService.doCustomerLogin(this.username, this.password)
-    //       .subscribe((data: any) => {
-    //         if (data.ok) {
-    //           sessionStorage.setItem('token', data.token);
-
-    //           this.route.navigate(['/customers']);
-
-    //         } else {
-    //           this.isError = true;
-    //           this.errorMessage = data.error;
-    //         }
-    //       }, error => {
-    //         this.isError = true;
-    //         this.errorMessage = 'เกิดปัญหาในการเชื่อมต่อ';
-    //       });
-    //   } else {
-    //     console.log('Admin login')
-    //   }
-    // } else {
-    //   this.isError = true;
-    //   this.errorMessage = 'กรุณาระบุชื่อผู้ใช้งาน หรือ รหัสผ่าน'
-    // }
+  async doLogin() {
+    if (this.username && this.password) {
+      let rs: any = await this.loginService.doLogin(this.username, this.password);
+      if (rs.ok) {
+        const decoded = this.jwtHelper.decodeToken(rs.token);
+        if (decoded.type === 'admin') {
+          this.route.navigate(['/admin']);
+        }
+        else if (decoded.type === 'staff') {
+          this.route.navigate(['/staff']);
+        }
+        else if (decoded.type === 'manager') {
+          this.route.navigate(['/manager']);
+        }
+      }
+    } else {
+      this.isError = true;
+      this.errorMessage = 'กรุณาระบุชื่อผู้ใช้งาน หรือ รหัสผ่าน'
+    }
 
   }
 
