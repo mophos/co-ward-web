@@ -16,8 +16,9 @@ export class InventoryAddComponent implements OnInit {
     private inventoryService: InventoryService,
   ) { }
 
-  ngOnInit() {
-    this.getList();
+  async ngOnInit() {
+    await this.getList();
+    console.log(this.suppiles);
   }
 
   async getList() {
@@ -31,6 +32,21 @@ export class InventoryAddComponent implements OnInit {
     } catch (error) {
       this.alertService.error(error);
     }
+  }
+
+  async save() {
+
+    let objBalancedetails: any = [];
+    for (const i of this.suppiles) {
+      if (i.check) {
+        objBalancedetails.push({
+          supplies_id: i.id,
+          qty: i.qty,
+        })
+      }
+    }
+
+    // console.log(this.hospcode, objBalancedetails);
   }
 
 }
