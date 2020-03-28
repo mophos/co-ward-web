@@ -10,14 +10,15 @@ import { InventoryService } from '../inventory.service';
 export class InventoryAddComponent implements OnInit {
 
   suppiles: any
+  hospcode: any = '11283'
 
   constructor(
     private alertService: AlertService,
     private inventoryService: InventoryService,
   ) { }
 
-  ngOnInit() {
-    this.getList();
+  async ngOnInit() {
+    await this.getList();
     console.log(this.suppiles);
   }
 
@@ -32,6 +33,21 @@ export class InventoryAddComponent implements OnInit {
     } catch (error) {
       this.alertService.error(error);
     }
+  }
+
+  async save() {
+
+    let objBalancedetails: any = [];
+    for (const i of this.suppiles) {
+      if (i.check) {
+        objBalancedetails.push({
+          supplies_id: i.id,
+          qty: i.qty,
+        })
+      }
+    }
+
+    console.log(this.hospcode, objBalancedetails);
   }
 
 }

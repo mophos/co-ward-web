@@ -1,12 +1,16 @@
 <clr-datagrid>
   <clr-dg-column>ลำดับ</clr-dg-column>
+  <clr-dg-column>รหัส</clr-dg-column>
   <clr-dg-column>ชื่อเวช</clr-dg-column>
+  <clr-dg-column>หน่วย</clr-dg-column>
   <clr-dg-column>คงคลังปัจจุบัน</clr-dg-column>
 
-  <clr-dg-row *ngFor="let l of history">
-    <clr-dg-cell>{{l.id}}</clr-dg-cell>
-    <clr-dg-cell> <input clrInput placeholder="My input" name="input" [(ngModel)]="input" /></clr-dg-cell>
-    <clr-dg-cell>{{l.creation | date}}</clr-dg-cell>
+  <clr-dg-row *ngFor="let l of suppiles;let idx=index;">
+    <clr-dg-cell>{{idx+1}}</clr-dg-cell>
+    <clr-dg-cell>{{l.code}}</clr-dg-cell>
+    <clr-dg-cell>{{l.name}}</clr-dg-cell>
+    <clr-dg-cell>{{l.unit}}</clr-dg-cell>
+    <clr-dg-cell><input type="text" id="qty" [(ngModel)]="l.qty" placeholder="คงคลังปัจจุบัน" class="clr-input"></clr-dg-cell>
   </clr-dg-row>
 
   <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
