@@ -15,18 +15,17 @@ export class InventoryEditComponent implements OnInit {
   suppiles: any
 
   constructor(
-    private router: ActivatedRoute,
+    private route: ActivatedRoute,
+    private router: Router,
     private alertService: AlertService,
     private inventoryService: InventoryService,
   ) {
-    const params = this.router.snapshot.params;
+    const params = this.route.snapshot.params;
     this.id = params.id;
   }
 
   async ngOnInit() {
     await this.getSuppiles();
-    console.log(this.id);
-    console.log(this.suppiles);
   }
 
   async getSuppiles() {
@@ -34,11 +33,39 @@ export class InventoryEditComponent implements OnInit {
       const rs: any = await this.inventoryService.getBalanceEdit(this.id);
       if (rs.ok) {
         this.suppiles = rs.rows;
+        for (const i of this.suppiles) {
+          i.qtyOld = i.qty
+        }
       } else {
         this.alertService.error(rs.error);
       }
     } catch (error) {
       this.alertService.error(error);
+    }
+  }
+
+  async save() {
+
+    try {
+      let objBalancedetails: any = [];
+      for (const i of this.suppiles) {
+        if (i.qty != i.qtyOld) {
+          objBalancedetails.push({
+            id: i.id,
+            qty: i.qty,
+            qty_old: i.qtyOld,
+          })
+        }
+      }
+
+      let rs: any = await this.inventoryService.updateBalance(objBalancedetails)
+      if (rs.ok) {
+        this.alertService.success();
+        this.router.navigate(['staff/inventory']);
+      }
+
+    } catch (error) {
+      this.alertService.error();
     }
   }
 
