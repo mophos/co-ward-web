@@ -10,11 +10,11 @@ export class LoginService {
 
   doLogin(username: string, password: string) {
     const params = {
-      username: username,
-      password: password
-    }
-    const _url = `${this.url}/login`;
-    return this.http.post(_url, params).toPromise();
+      username,
+      password
+    };
+    const url = `${this.url}/login`;
+    return this.http.post(url, params).toPromise();
   }
 
 }

@@ -3,12 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { InventoryAddComponent } from './inventory-add/inventory-add.component';
+import { AuthGuard } from '../auth-guard.service';
 
 const routes: Routes = [
   {
     path: 'staff',
     component: LayoutComponent,
-    // canActivate: [AdminGuard],
+    canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'inventory', pathMatch: 'full' },
       {

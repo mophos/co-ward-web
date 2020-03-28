@@ -9,7 +9,7 @@ import { InventoryService } from '../inventory.service';
 })
 export class InventoryAddComponent implements OnInit {
 
-  suppiles: any
+  suppiles: any;
 
   constructor(
     private alertService: AlertService,
@@ -18,7 +18,6 @@ export class InventoryAddComponent implements OnInit {
 
   ngOnInit() {
     this.getList();
-    console.log(this.suppiles);
   }
 
   async getList() {
