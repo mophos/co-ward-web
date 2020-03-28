@@ -6,9 +6,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { InventoryComponent } from './inventory/inventory.component';
+import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [InventoryComponent, LayoutComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
