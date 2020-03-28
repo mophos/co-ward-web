@@ -14,6 +14,7 @@ export class InventoryAddComponent implements OnInit {
   suppiles: any;
   isLoadding = false;
   isSave = false;
+  modalsAdd = false;
 
   constructor(
     private alertService: AlertService,
@@ -59,6 +60,7 @@ export class InventoryAddComponent implements OnInit {
           this.alertService.success();
           this.router.navigate(['staff/inventory']);
         }
+        this.modalsAdd = false;
         this.isLoadding = false;
       }
       this.isSave = false;
@@ -67,5 +69,9 @@ export class InventoryAddComponent implements OnInit {
       this.isLoadding = false;
       this.alertService.error();
     }
+  }
+
+  open(){
+    this.modalsAdd = true
   }
 }

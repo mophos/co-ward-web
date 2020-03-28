@@ -12,6 +12,7 @@ export class TrackingDetailComponent implements OnInit {
 
   id: any
   suppiles: any
+  modalsDetail: any
 
   constructor(
     private route: ActivatedRoute,
@@ -24,14 +25,10 @@ export class TrackingDetailComponent implements OnInit {
   }
 
   async ngOnInit() {
-    await this.getSuppiles();
-    console.log(this.suppiles);
   }
 
   async getSuppiles() {
     try {
-      console.log(this.id);
-
       const rs: any = await this.trackingService.getPayDetails(this.id);
       if (rs.ok) {
         this.suppiles = rs.rows;
@@ -41,6 +38,12 @@ export class TrackingDetailComponent implements OnInit {
     } catch (error) {
       this.alertService.error(error);
     }
+  }
+
+  open(id){
+    this.id = id
+    this.getSuppiles();
+    this.modalsDetail = true
   }
 
 }

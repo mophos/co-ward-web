@@ -1,32 +1,37 @@
-<clr-datagrid  [clrDgLoading]="isLoadding">
-  <clr-dg-column>ลำดับ</clr-dg-column>
-  <clr-dg-column>รหัส</clr-dg-column>
-  <clr-dg-column>ชื่อเวช</clr-dg-column>
-  <clr-dg-column>หน่วย</clr-dg-column>
-  <clr-dg-column>คงคลังปัจจุบัน</clr-dg-column>
+<clr-modal [(clrModalOpen)]="modalsEdit" [clrModalSize]="'xl'">
+  <h3 class="modal-title"></h3>
+  <div class="modal-body">
+    <clr-datagrid [clrDgLoading]="isLoadding">
+      <clr-dg-column>ลำดับ</clr-dg-column>
+      <clr-dg-column>รหัส</clr-dg-column>
+      <clr-dg-column>ชื่อเวช</clr-dg-column>
+      <clr-dg-column>หน่วย</clr-dg-column>
+      <clr-dg-column>คงคลังปัจจุบัน</clr-dg-column>
 
-  <clr-dg-row *ngFor="let l of suppiles;let idx=index;">
-    <clr-dg-cell>{{idx+1}}</clr-dg-cell>
-    <clr-dg-cell>{{l.code}}</clr-dg-cell>
-    <clr-dg-cell>{{l.name}}</clr-dg-cell>
-    <clr-dg-cell>{{l.unit}}</clr-dg-cell>
-    <clr-dg-cell><input type="text" [(ngModel)]="l.qty" placeholder="คงคลังปัจจุบัน" class="clr-input"></clr-dg-cell>
-  </clr-dg-row>
+      <clr-dg-row *ngFor="let l of suppiles;let idx=index;">
+        <clr-dg-cell>{{idx+1}}</clr-dg-cell>
+        <clr-dg-cell>{{l.code}}</clr-dg-cell>
+        <clr-dg-cell>{{l.name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.unit}}</clr-dg-cell>
+        <clr-dg-cell>{{l.qty}}</clr-dg-cell>
+      </clr-dg-row>
 
-  <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
-  <clr-dg-footer>
-    <clr-dg-pagination #pagination [clrDgPageSize]="50">
-      <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
-      {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
-      of {{pagination.totalItems}} รายการ
-    </clr-dg-pagination>
-  </clr-dg-footer>
-</clr-datagrid>
+      <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
+      <clr-dg-footer>
+        <clr-dg-pagination #pagination [clrDgPageSize]="50">
+          <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
+          {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+          of {{pagination.totalItems}} รายการ
+        </clr-dg-pagination>
+      </clr-dg-footer>
+    </clr-datagrid>
 
-<div class="clr-row">
-  <div class="clr-col-12  text-align-right">
-    <button class="btn btn-sm btn-success" (click)="save()" [disabled]="isSave">
-      <clr-icon shape="plus"></clr-icon> บันทึก
-    </button>
   </div>
-</div>
+  <div class="modal-footer">
+    <!-- <button type="button" class="btn btn-outline" (click)="modalsEdit = false">ยกเลิก</button>
+    <button type="button" class="btn btn-success" (click)="save()">
+      บันทึก
+    </button> -->
+  </div>
+
+</clr-modal>
