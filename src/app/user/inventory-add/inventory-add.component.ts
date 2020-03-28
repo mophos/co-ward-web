@@ -53,6 +53,7 @@ export class InventoryAddComponent implements OnInit {
           objBalancedetails.push({
             supplies_id: i.id,
             qty: i.qty,
+            usage_rate_day: i.usageRateDay,
           });
         }
         const rs: any = await this.inventoryService.saveBalance(objBalancedetails);
