@@ -5,12 +5,13 @@ import { ManageSuppliesComponent } from './manage-supplies/manage-supplies.compo
 import { ManageMinMaxComponent } from './manage-min-max/manage-min-max.component';
 import { ManageUserComponent } from './manage-user/manage-user.component';
 import { ManageRequestComponent } from './manage-request/manage-request.component';
+import { AuthGuard } from '../auth-guard.service';
 
 const routes: Routes = [
   {
     path: 'admin',
     component: LayoutComponent,
-    // canActivate: [AdminGuard],
+    canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'manage-request', pathMatch: 'full' },
       { path: 'manage-request', component: ManageRequestComponent },

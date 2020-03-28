@@ -35,9 +35,11 @@ export class ManageSuppliesComponent implements OnInit {
       const rs: any = await this.suppliesService.getList();
       if (rs.ok) {
         this.list = rs.rows;
+      } else {
+        this.alertService.error();
       }
     } catch (error) {
-
+      this.alertService.error(error);
     }
   }
 

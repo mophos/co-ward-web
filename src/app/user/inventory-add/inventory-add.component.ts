@@ -47,7 +47,7 @@ export class InventoryAddComponent implements OnInit {
       }
     }
 
-    console.log(this.hospcode, objBalancedetails);
+    // console.log(this.hospcode, objBalancedetails);
   }
 
 }
