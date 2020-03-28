@@ -11,9 +11,10 @@ import { InventoryService } from '../inventory.service';
 })
 export class InventoryEditComponent implements OnInit {
 
-  id: any
-  suppiles: any
-
+  id: any;
+  suppiles: any;
+  isLoadding = false;
+  isSave = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -22,6 +23,8 @@ export class InventoryEditComponent implements OnInit {
   ) {
     const params = this.route.snapshot.params;
     this.id = params.id;
+    console.log(this.id);
+    
   }
 
   async ngOnInit() {
@@ -30,41 +33,51 @@ export class InventoryEditComponent implements OnInit {
 
   async getSuppiles() {
     try {
+      this.isLoadding = true;
       const rs: any = await this.inventoryService.getBalanceEdit(this.id);
       if (rs.ok) {
         this.suppiles = rs.rows;
         for (const i of this.suppiles) {
-          i.qtyOld = i.qty
+          i.qtyOld = i.qty;
         }
       } else {
         this.alertService.error(rs.error);
       }
+      this.isLoadding = false;
     } catch (error) {
+      this.isLoadding = false;
       this.alertService.error(error);
     }
   }
 
   async save() {
-
     try {
-      let objBalancedetails: any = [];
-      for (const i of this.suppiles) {
-        if (i.qty != i.qtyOld) {
-          objBalancedetails.push({
-            id: i.id,
-            qty: i.qty,
-            qty_old: i.qtyOld,
-          })
+      this.isSave = true;
+      const confirm: any = await this.alertService.confirm();
+      if (confirm) {
+        this.isLoadding = true;
+        const objBalanceDetails: any = [];
+        for (const i of this.suppiles) {
+          if (+i.qty !== +i.qtyOld) {
+            objBalanceDetails.push({
+              id: i.id,
+              qty: i.qty,
+              qty_old: i.qtyOld,
+            });
+          }
         }
-      }
 
-      let rs: any = await this.inventoryService.updateBalance(this.id, objBalancedetails)
-      if (rs.ok) {
-        this.alertService.success();
-        this.router.navigate(['staff/inventory']);
+        const rs: any = await this.inventoryService.updateBalance(this.id, objBalanceDetails);
+        if (rs.ok) {
+          this.alertService.success();
+          this.router.navigate(['staff/inventory']);
+        }
+        this.isLoadding = false;
       }
-
+      this.isSave = false;
     } catch (error) {
+      this.isLoadding = false;
+      this.isSave = false;
       this.alertService.error();
     }
   }

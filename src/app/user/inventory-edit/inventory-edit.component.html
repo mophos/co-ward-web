@@ -1,4 +1,4 @@
-<clr-datagrid>
+<clr-datagrid  [clrDgLoading]="isLoadding">
   <clr-dg-column>ลำดับ</clr-dg-column>
   <clr-dg-column>รหัส</clr-dg-column>
   <clr-dg-column>ชื่อเวช</clr-dg-column>
@@ -25,7 +25,7 @@
 
 <div class="clr-row">
   <div class="clr-col-12  text-align-right">
-    <button class="btn btn-sm btn-success" (click)="save()">
+    <button class="btn btn-sm btn-success" (click)="save()" [disabled]="isSave">
       <clr-icon shape="plus"></clr-icon> บันทึก
     </button>
   </div>

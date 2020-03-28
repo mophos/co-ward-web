@@ -1,3 +1,4 @@
+import { HelpModule } from './../help/help.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -21,7 +22,8 @@ import { TrackingDetailComponent } from './tracking-detail/tracking-detail.compo
     BrowserModule,
     ClarityModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    HelpModule
   ]
 })
 export class UserModule { }

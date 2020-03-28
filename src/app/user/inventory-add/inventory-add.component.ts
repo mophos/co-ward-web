@@ -11,8 +11,9 @@ import { Router } from '@angular/router';
 })
 export class InventoryAddComponent implements OnInit {
 
-  suppiles: any
-  hospcode: any = '11283'
+  suppiles: any;
+  isLoadding = false;
+  isSave = false;
 
   constructor(
     private alertService: AlertService,
@@ -26,35 +27,45 @@ export class InventoryAddComponent implements OnInit {
 
   async getSuppiles() {
     try {
+      this.isLoadding = true;
       const rs: any = await this.inventoryService.getSuppiles();
       if (rs.ok) {
         this.suppiles = rs.rows;
       } else {
         this.alertService.error(rs.error);
       }
+      this.isLoadding = false;
     } catch (error) {
+      this.isLoadding = false;
       this.alertService.error(error);
     }
   }
 
   async save() {
-
     try {
-      let objBalancedetails: any = [];
-      for (const i of this.suppiles) {
-        objBalancedetails.push({
-          supplies_id: i.id,
-          qty: i.qty,
-        })
+      this.isSave = true;
+      const confirm: any = await this.alertService.confirm();
+      if (confirm) {
+        this.isLoadding = true;
+        const objBalancedetails: any = [];
+        for (const i of this.suppiles) {
+          objBalancedetails.push({
+            supplies_id: i.id,
+            qty: i.qty,
+          });
+        }
+        const rs: any = await this.inventoryService.saveBalance(objBalancedetails);
+        if (rs.ok) {
+          this.alertService.success();
+          this.router.navigate(['staff/inventory']);
+        }
+        this.isLoadding = false;
       }
-      let rs: any = await this.inventoryService.saveBalance(objBalancedetails)
-      if (rs.ok) {
-        this.alertService.success();
-        this.router.navigate(['staff/inventory']);
-      }
+      this.isSave = false;
     } catch (error) {
+      this.isSave = false;
+      this.isLoadding = false;
       this.alertService.error();
     }
   }
-
 }

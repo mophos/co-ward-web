@@ -15,7 +15,6 @@ import { AdminModule } from './admin/admin.module';
 import { ManagerModule } from './manager/manager.module';
 import { UserModule } from './user/user.module';
 import { AlertService } from './help/alert.service';
-import { DatePipe } from './help/date.pipe';
 
 export function tokenGetter() {
   return sessionStorage.getItem('token');
@@ -24,8 +23,7 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    PageNotFoundComponent,
-    DatePipe
+    PageNotFoundComponent
   ],
   imports: [
     AppRoutingModule,
@@ -43,9 +41,6 @@ export function tokenGetter() {
     AuthGuard,
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     AlertService,
-  ],
-  exports: [
-    DatePipe
   ],
   bootstrap: [AppComponent]
 })
