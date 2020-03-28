@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
 
-  constructor() { }
+  fullname: any;
+  public jwtHelper = new JwtHelperService();
+  constructor(
+    private route: Router,
+  ) {
+    const decoded = this.jwtHelper.decodeToken(sessionStorage.getItem('token'));
+    this.fullname = decoded.hospname;
+  }
 
   ngOnInit() {
   }
 
+  logout() {
+    sessionStorage.removeItem('token');
+    this.route.navigate(['/login']);
+  }
 }
