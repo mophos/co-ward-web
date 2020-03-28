@@ -7,6 +7,7 @@ import { ManageUserComponent } from './manage-user/manage-user.component';
 import { ManageRequestComponent } from './manage-request/manage-request.component';
 import { AuthGuard } from '../auth-guard.service';
 import { ManageMinMaxSubComponent } from './manage-min-max-sub/manage-min-max-sub.component';
+import { ManageRequestSubComponent } from './manage-request-sub/manage-request-sub.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'manage-request', pathMatch: 'full' },
       { path: 'manage-request', component: ManageRequestComponent },
+      { path: 'manage-request/sub', component: ManageRequestSubComponent },
       { path: 'manage-min-max', component: ManageMinMaxComponent },
       { path: 'manage-min-max/sub', component: ManageMinMaxSubComponent },
       { path: 'manage-user', component: ManageUserComponent },
