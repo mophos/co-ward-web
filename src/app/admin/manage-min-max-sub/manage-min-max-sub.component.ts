@@ -14,6 +14,8 @@ export class ManageMinMaxSubComponent implements OnInit {
   ministryCode: any;
   subMinistryCode: any;
 
+  modal: boolean = false;
+
   total: any;
   query: any;
   offset = 0;
@@ -26,8 +28,6 @@ export class ManageMinMaxSubComponent implements OnInit {
     private alertService: AlertService,
   ) {
     const params = this.route.snapshot.params;
-    console.log(params);
-    
     this.hosptypeCode = params.hosptypeCode;
     this.ministryCode = params.ministryCode;
     this.subMinistryCode = params.subMinistryCode;
@@ -40,8 +40,6 @@ export class ManageMinMaxSubComponent implements OnInit {
   async getList() {
     try {
       let rs: any = await this.minmaxTypeService.getListHosp(this.hosptypeCode, this.ministryCode, this.subMinistryCode, this.query, this.limit, this.offset);
-      console.log(rs);
-      
       if (rs.ok) {
         this.list = rs.rows;
       } else {
@@ -52,5 +50,22 @@ export class ManageMinMaxSubComponent implements OnInit {
     }
   }
 
+  async doEnter(e) {
+    if (e.keyCode === 13) {
+      this.offset = 0;
+      await this.getList();
+    }
+  }
 
+  async onClickEdit(hospcode) {
+    try {
+      this.modal = true;
+
+      let rs: any = await this.minmaxTypeService.getSupplies(hospcode);
+      console.log(rs);
+
+    } catch (error) {
+
+    }
+  }
 }

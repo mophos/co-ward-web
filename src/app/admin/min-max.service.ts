@@ -23,6 +23,11 @@ export class MinMaxService {
     return this.http.get(url).toPromise();
   }
 
+  getSupplies(hospcode) {
+    const url = `${this.url}/v1/admin/supplies-min-max?hospcode=${hospcode}`;
+    return this.http.get(url).toPromise();
+  }
+
   // getList(query = '', limit, offset) {
   //   const url = `${this.url}/v1/admin/supplies-min-max?query=${query}&limit=${limit}&offset=${offset}`;
   //   return this.http.get(url).toPromise();
