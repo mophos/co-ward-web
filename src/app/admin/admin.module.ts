@@ -7,13 +7,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutComponent } from './layout/layout.component';
-import { ManageSuppilesComponent } from './manage-suppiles/manage-suppiles.component';
+import { ManageSuppliesComponent } from './manage-supplies/manage-supplies.component';
 import { ManageMinMaxComponent } from './manage-min-max/manage-min-max.component';
 import { ManageUserComponent } from './manage-user/manage-user.component';
 import { ManageRequestComponent } from './manage-request/manage-request.component';
 
 @NgModule({
-  declarations: [LayoutComponent, ManageSuppilesComponent, ManageMinMaxComponent, ManageUserComponent, ManageRequestComponent],
+  declarations: [LayoutComponent, ManageSuppliesComponent, ManageMinMaxComponent, ManageUserComponent, ManageRequestComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

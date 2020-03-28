@@ -1,3 +1,37 @@
-<p>
-  layout works!
-</p>
+<div class="main-container">
+    <header class="header">
+        <div class="branding">
+            <a href="javascript://" class="nav-link">
+                <!-- <img src="./assets/images/tt.png" alt="logo" style="width: 200px; padding-right: 10px;"> -->
+                <span class="title">COVID-SUPPLIES (ADMIN)</span>
+            </a>
+        </div>
+        <div class="header-nav">
+        </div>
+        <div class="header-actions">
+        </div>
+    </header>
+    <div class="content-container">
+        <div class="content-area">
+            <router-outlet></router-outlet>
+        </div>
+        <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
+            <a clrVerticalNavLink routerLink="/admin/manage-request" title="กรอกคงคลัง" routerLinkActive="active">
+                <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+                จัดส่งเวชภัณฑ์
+            </a>
+            <a clrVerticalNavLink routerLink="/admin/manage-min-max" title="กรอกคงคลัง" routerLinkActive="active">
+                <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+                จัดการ Min-Max
+            </a>
+            <a clrVerticalNavLink routerLink="/admin/manage-user" title="กรอกคงคลัง" routerLinkActive="active">
+                <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+                จัดการผู้ใช้งาน
+            </a>
+            <a clrVerticalNavLink routerLink="/admin/manage-supplies" title="กรอกคงคลัง" routerLinkActive="active">
+                <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+                จัดการเวชภัณฑ์
+            </a>
+        </clr-vertical-nav>
+    </div>
+</div>
