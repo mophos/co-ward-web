@@ -3,7 +3,7 @@
   <span class="breadcrumb-item active">รายการโรงพยาบาล</span>
 </nav>
 
-<div class="row">
+<div class="clr-row">
   <div class="clr-col-1">
     ค้นหา :
   </div>
@@ -40,7 +40,7 @@
   </clr-dg-footer>
 </clr-datagrid>
 
-<clr-modal [(clrModalOpen)]="modal" [clrModalClosable]="false">
+<clr-modal [(clrModalOpen)]="modal" [clrModalClosable]="false" [clrModalSize]="'xl'">
   <h3 class="modal-title">เพิ่ม/แก้ไข MIN-MAX</h3>
   <div class="modal-body">
     <div class="clr-row">
@@ -51,23 +51,20 @@
           <clr-dg-column>รายการ</clr-dg-column>
           <clr-dg-column>หน่วย</clr-dg-column>
           <clr-dg-column>หมายเหตุ</clr-dg-column>
-          <clr-dg-column></clr-dg-column>
+          <clr-dg-column>MIN</clr-dg-column>
+          <clr-dg-column>MAX</clr-dg-column>
 
-          <clr-dg-row *ngFor="let l of list; let idx=index;">
+          <clr-dg-row *ngFor="let l of listDetail; let idx=index;">
             <clr-dg-cell>{{idx+1}}</clr-dg-cell>
             <clr-dg-cell>{{l.code}}</clr-dg-cell>
             <clr-dg-cell>{{l.name}}</clr-dg-cell>
             <clr-dg-cell>{{l.unit}}</clr-dg-cell>
             <clr-dg-cell>{{l.remark}}</clr-dg-cell>
-            <clr-dg-cell style="text-align: center;">
-              <div class="btn-group">
-                <button class="btn btn-sm btn-success" (click)="onClickEdit(l)" title="แก้ไข">
-                  <clr-icon shape="note"></clr-icon>
-                </button>
-                <button class="btn btn-sm btn-danger" (click)="onClickRemove(l)" title="ลบ">
-                  <clr-icon shape="trash"></clr-icon>
-                </button>
-              </div>
+            <clr-dg-cell>
+              <input type="number" name="min" [(ngModel)]="l.min" class="clr-col-9 clr-input width-fit" value="{{l.min}}">
+            </clr-dg-cell>
+            <clr-dg-cell>
+              <input type="number" name="max" [(ngModel)]="l.max" class="clr-col-9 clr-input width-fit" value="{{l.max}}">
             </clr-dg-cell>
           </clr-dg-row>
         </clr-datagrid>
@@ -75,7 +72,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" [disabled]="!name || !code || !unit" (click)="save()">
+    <button type="button" class="btn btn-success" (click)="save()">
       บันทึก
     </button>
     <button type="button" class="btn btn-danger" (click)="modal = false">
