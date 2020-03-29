@@ -7,6 +7,11 @@
       <clr-icon shape="add"></clr-icon> สร้างรายการเติมของ
     </button>
   </div>
+  <div class="clr-col-9">
+    <button style="float: right;" type="button" class="btn btn-primary btn-outline" (click)="openModal()">
+      Import
+    </button>
+  </div>
 </div>
 <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
   <clr-dg-column>#</clr-dg-column>
@@ -33,3 +38,23 @@
     </clr-dg-pagination>
   </clr-dg-footer>
 </clr-datagrid>
+
+<clr-modal [(clrModalOpen)]="modal" [clrModalClosable]="false" [clrModalSize]="'xl'">
+  <h3 class="modal-title">เลือกไฟล์</h3>
+  <div class="modal-body">
+    <div class="clr-row">
+      <div class="clr-col-12">
+        <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file"
+          accept=".xlsx">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="import()" [disabled]="isSave">
+      บันทึก
+    </button>
+    <button type="button" class="btn btn-danger" (click)="modal = false">
+      ปิด
+    </button>
+  </div>
+</clr-modal>

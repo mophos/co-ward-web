@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styles: []
 })
 export class ManageRestockComponent implements OnInit {
+  modal: boolean = false;
   total: any;
   offset = 0;
   limit = 20;
@@ -59,5 +60,14 @@ export class ManageRestockComponent implements OnInit {
 
     }
     this.loading = false;
+  }
+
+  incomingfile(e) {
+    console.log(e);
+    
+  }
+
+  openModal() {
+    this.modal = true;
   }
 }
