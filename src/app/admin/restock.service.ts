@@ -33,4 +33,9 @@ export class RestockService {
     return this.http.put(url, { data }).toPromise();
   }
 
+  removeRestock(id: any) {
+    const url = `${this.url}/v1/admin/restock/remove-restock/${id}`;
+    return this.http.put(url, {  }).toPromise();
+  }
+
 }
