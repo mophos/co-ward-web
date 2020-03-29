@@ -3,7 +3,7 @@
 </nav>
 <div class="clr-row">
   <div class="clr-col-3">
-    <button class="btn btn-sm btn-success" (click)="clickCreate(l)" title="สร้าง">
+    <button class="btn btn-sm btn-success" (click)="clickCreate()" title="สร้าง">
       <clr-icon shape="add"></clr-icon> สร้างรายการเติมของ
     </button>
   </div>
@@ -12,7 +12,7 @@
 <clr-tabs>
   <clr-tab>
     <button clrTabLink (click)="getRestock()">รายการเติม</button>
-    <ng-template [(clrIfActive)]="dashboardActive">
+    <ng-template>
       <clr-tab-content>
         <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
           <clr-dg-column>#</clr-dg-column>
@@ -51,7 +51,7 @@
 
   <!-- <clr-tab>
     <button clrTabLink>รายการค้างเติม</button>
-    <ng-template [(clrIfActive)]="managementActive">
+    <ng-template >
       <clr-tab-content>
         ...
       </clr-tab-content>
@@ -60,7 +60,7 @@
 
   <clr-tab>
     <button clrTabLink (click)="getRestockApproved()">รายการอนุมัติเติม</button>
-    <ng-template [(clrIfActive)]="cloudActive">
+    <ng-template>
       <clr-tab-content>
         <clr-tab-content>
           <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">

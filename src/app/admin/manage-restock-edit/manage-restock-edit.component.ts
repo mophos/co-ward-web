@@ -27,6 +27,7 @@ export class ManageRestockEditComponent implements OnInit {
   listSupplies: any
   loading = false
   modal = false
+  isSave = false
 
   constructor(
     private route: ActivatedRoute,
@@ -95,6 +96,7 @@ export class ManageRestockEditComponent implements OnInit {
   }
 
   async save() {
+    this.isSave = true
     const confirm = await this.alertService.confirm();
     if (confirm) {
       try {
@@ -117,8 +119,10 @@ export class ManageRestockEditComponent implements OnInit {
           this.alertService.error();
         }
         this.loading = false;
+        this.isSave = false;
       } catch (error) {
         this.loading = false;
+        this.isSave = false;
         this.alertService.error(error);
       }
     }
