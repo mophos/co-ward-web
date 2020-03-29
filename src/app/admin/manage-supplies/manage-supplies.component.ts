@@ -155,6 +155,7 @@ export class ManageSuppliesComponent implements OnInit {
 
   async onChangeActived(l) {
     this.id = l.id
+    this.loading = true;
     try {
       const data = {
         is_actived: l.toggle == true ? 'Y' : 'N',
@@ -166,7 +167,9 @@ export class ManageSuppliesComponent implements OnInit {
       } else {
         this.alertService.error();
       }
+      this.loading = false;
     } catch (error) {
+      this.loading = false;
       this.alertService.error(error);
     }
   }
