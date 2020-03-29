@@ -13,6 +13,11 @@ export class RestockService {
     return this.http.get(url).toPromise();
   }
 
+  getRestockApproved(limit, offset) {
+    const url = `${this.url}/v1/admin/restock/approved?&limit=${limit}&offset=${offset}`;
+    return this.http.get(url).toPromise();
+  }
+
   createRestock() {
     const url = `${this.url}/v1/admin/restock/create`;
     return this.http.get(url).toPromise();

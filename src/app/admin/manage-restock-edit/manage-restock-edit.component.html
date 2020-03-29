@@ -21,6 +21,7 @@
             <clr-dg-row *ngFor="let l of listTypes; let idx=index;">
               <clr-dg-cell (click)="getListHospital(l)">{{l.name}}</clr-dg-cell>
             </clr-dg-row>
+            <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
           </clr-datagrid>
         </div>
       </div>
@@ -32,7 +33,7 @@
 
     <div class="card">
       <div class="card-header">
-        รายการโรงพยาบาล 
+        รายการโรงพยาบาล
         <span *ngIf="typeName != ''">
           : {{typeName}}
         </span>
@@ -56,6 +57,7 @@
                 </button>
               </clr-dg-cell>
             </clr-dg-row>
+            <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
           </clr-datagrid>
         </div>
       </div>
@@ -85,6 +87,7 @@
             <input type="number" name="qty" [(ngModel)]="l.qty" class="clr-input width-fit" value="{{l.qty}}">
           </clr-dg-cell>
         </clr-dg-row>
+        <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
       </clr-datagrid>
     </div>
   </div>

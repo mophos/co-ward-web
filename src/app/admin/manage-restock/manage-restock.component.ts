@@ -14,6 +14,8 @@ export class ManageRestockComponent implements OnInit {
   offset = 0;
   limit = 20;
   list: any = [];
+  listApproved: any = [];
+  totalApproved: any;
   loading = false;
   constructor(
     private restockService: RestockService,
@@ -41,6 +43,7 @@ export class ManageRestockComponent implements OnInit {
       this.alertService.error(error);
     }
   }
+
   async clickCreate() {
     const confirm = await this.alertService.confirm();
     if (confirm) {
@@ -93,6 +96,23 @@ export class ManageRestockComponent implements OnInit {
         this.loading = false;
         this.alertService.error(error);
       }
+    }
+  }
+
+  async getRestockApproved() {
+    try {
+      this.loading = true;
+      const rs: any = await this.restockService.getRestockApproved(this.limit, this.offset);
+      if (rs.ok) {
+        this.listApproved = rs.rows;
+        this.totalApproved = rs.total;
+      } else {
+        this.alertService.error();
+      }
+      this.loading = false;
+    } catch (error) {
+      this.loading = false;
+      this.alertService.error(error);
     }
   }
 }
