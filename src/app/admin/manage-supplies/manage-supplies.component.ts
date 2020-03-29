@@ -59,6 +59,9 @@ export class ManageSuppliesComponent implements OnInit {
       const rs: any = await this.suppliesService.getList(this.query, this.limit, this.offset);
       if (rs.ok) {
         this.list = rs.rows;
+        for (const i of this.list) {
+          i.toggle = i.is_actived == 'Y' ? true : false
+        }
       } else {
         this.alertService.error(rs.error);
       }
@@ -146,6 +149,27 @@ export class ManageSuppliesComponent implements OnInit {
         }
       }
     } catch (error) {
+      this.alertService.error(error);
+    }
+  }
+
+  async onChangeActived(l) {
+    this.id = l.id
+    this.loading = true;
+    try {
+      const data = {
+        is_actived: l.toggle == true ? 'Y' : 'N',
+      };
+      
+      let rs: any = await this.suppliesService.update(data, this.id);
+      if (rs.ok) {
+        this.alertService.success();
+      } else {
+        this.alertService.error();
+      }
+      this.loading = false;
+    } catch (error) {
+      this.loading = false;
       this.alertService.error(error);
     }
   }
