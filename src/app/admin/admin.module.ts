@@ -15,6 +15,7 @@ import { ManageRequestComponent } from './manage-request/manage-request.componen
 import { ManageMinMaxSubComponent } from './manage-min-max-sub/manage-min-max-sub.component';
 import { ManageRequestSubComponent } from './manage-request-sub/manage-request-sub.component';
 import { ManageRestockComponent } from './manage-restock/manage-restock.component';
+import { ManageRestockEditComponent } from './manage-restock-edit/manage-restock-edit.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ManageRestockComponent } from './manage-restock/manage-restock.componen
     ManageRequestComponent,
     ManageMinMaxSubComponent,
     ManageRequestSubComponent,
-    ManageRestockComponent
+    ManageRestockComponent,
+    ManageRestockEditComponent
   ],
   imports: [
     HelpModule,

@@ -14,6 +14,8 @@ export class ManageRestockComponent implements OnInit {
   offset = 0;
   limit = 20;
   list: any = [];
+  listApproved: any = [];
+  totalApproved: any;
   loading = false;
   constructor(
     private restockService: RestockService,
@@ -41,6 +43,7 @@ export class ManageRestockComponent implements OnInit {
       this.alertService.error(error);
     }
   }
+
   async clickCreate() {
     const confirm = await this.alertService.confirm();
     if (confirm) {
@@ -64,10 +67,52 @@ export class ManageRestockComponent implements OnInit {
 
   incomingfile(e) {
     console.log(e);
-    
+
   }
 
   openModal() {
     this.modal = true;
+  }
+
+  async onClickEdit(l) {
+    this.router.navigate(['/admin/manage-restock/edit', { restockId: l.id }]);
+  }
+
+  async onClickDeleted(l) {    
+    const deleted = await this.alertService.deleted();
+    if (deleted) {
+      try {
+        this.loading = true;
+        const rs: any = await this.restockService.removeRestock(l.id);
+        if (rs.ok) {
+          this.getRestock();
+          this.loading = false;
+          this.alertService.success();
+        } else {
+          this.alertService.error();
+        }
+        this.loading = false;
+      } catch (error) {
+        this.loading = false;
+        this.alertService.error(error);
+      }
+    }
+  }
+
+  async getRestockApproved() {
+    try {
+      this.loading = true;
+      const rs: any = await this.restockService.getRestockApproved(this.limit, this.offset);
+      if (rs.ok) {
+        this.listApproved = rs.rows;
+        this.totalApproved = rs.total;
+      } else {
+        this.alertService.error();
+      }
+      this.loading = false;
+    } catch (error) {
+      this.loading = false;
+      this.alertService.error(error);
+    }
   }
 }
