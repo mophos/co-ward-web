@@ -18,4 +18,9 @@ export class RestockService {
     return this.http.get(url).toPromise();
   }
 
+  import(data) {
+    const url = `${this.url}/v1/admin/restock/import`;
+    return this.http.post(url, {data}).toPromise();
+  }
+
 }
