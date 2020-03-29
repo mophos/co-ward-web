@@ -8,7 +8,8 @@
     ค้นหา :
   </div>
   <div class="clr-col-3">
-    <input class="clr-input width-fit" (keyup)="doEnter($event)" name="query" [(ngModel)]="query" placeholder="Enter เพื่อค้นหา" />
+    <input class="clr-input width-fit" (keyup)="doEnter($event)" name="query" [(ngModel)]="query"
+      placeholder="Enter เพื่อค้นหา" />
   </div>
 </div>
 
@@ -47,24 +48,33 @@
       <div class="clr-col-12">
         <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
           <clr-dg-column>#</clr-dg-column>
+          <clr-dg-column>สถานะการใช้งาน</clr-dg-column>
           <clr-dg-column>รหัสเวชภัณฑ์</clr-dg-column>
           <clr-dg-column>รายการ</clr-dg-column>
           <clr-dg-column>หน่วย</clr-dg-column>
-          <clr-dg-column>หมายเหตุ</clr-dg-column>
           <clr-dg-column>MIN</clr-dg-column>
           <clr-dg-column>MAX</clr-dg-column>
+          <clr-dg-column>Safety Stock</clr-dg-column>
 
           <clr-dg-row *ngFor="let l of listDetail; let idx=index;">
             <clr-dg-cell>{{idx+1}}</clr-dg-cell>
+            <clr-dg-cell>
+              <input type="checkbox" clrToggle name="toggle" required value="l.toggle" [(ngModel)]="l.toggle" />
+            </clr-dg-cell>
             <clr-dg-cell>{{l.code}}</clr-dg-cell>
             <clr-dg-cell>{{l.name}}</clr-dg-cell>
-            <clr-dg-cell>{{l.unit}}</clr-dg-cell>
-            <clr-dg-cell>{{l.remark}}</clr-dg-cell>
+            <clr-dg-cell>{{l.unit_name}}</clr-dg-cell>
             <clr-dg-cell>
-              <input type="number" name="min" [(ngModel)]="l.min" class="clr-col-9 clr-input width-fit" value="{{l.min}}">
+              <input type="number" name="min" [(ngModel)]="l.min" class="clr-col-9 clr-input width-fit"
+                value="{{l.min}}">
             </clr-dg-cell>
             <clr-dg-cell>
-              <input type="number" name="max" [(ngModel)]="l.max" class="clr-col-9 clr-input width-fit" value="{{l.max}}">
+              <input type="number" name="max" [(ngModel)]="l.max" class="clr-col-9 clr-input width-fit"
+                value="{{l.max}}">
+            </clr-dg-cell>
+            <clr-dg-cell>
+              <input type="number" name="safety_stock" [(ngModel)]="l.safety_stock"
+                class="clr-col-9 clr-input width-fit" value="{{l.safety_stock}}">
             </clr-dg-cell>
           </clr-dg-row>
         </clr-datagrid>
@@ -72,7 +82,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="save()">
+    <button type="button" class="btn btn-success" (click)="save()" [disabled]="isSave">
       บันทึก
     </button>
     <button type="button" class="btn btn-danger" (click)="modal = false">
