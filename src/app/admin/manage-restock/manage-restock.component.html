@@ -1,0 +1,89 @@
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="javascript://" routerLink="/admin/manage-restock">เติม</a>
+</nav>
+<div class="clr-row">
+  <div class="clr-col-3">
+    <button class="btn btn-sm btn-success" (click)="clickCreate(l)" title="สร้าง">
+      <clr-icon shape="add"></clr-icon> สร้างรายการเติมของ
+    </button>
+  </div>
+  <div class="clr-col-9">
+    <button style="float: right;" type="button" class="btn btn-primary btn-outline" (click)="openModal()">
+      Import
+    </button>
+  </div>
+</div>
+
+<clr-tabs>
+  <clr-tab>
+    <button clrTabLink>รายการเติม</button>
+    <ng-template [(clrIfActive)]="dashboardActive">
+      <clr-tab-content>
+        <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
+          <clr-dg-column>#</clr-dg-column>
+          <clr-dg-column>วันที่สร้าง</clr-dg-column>
+          <clr-dg-column>สถานะการส่ง</clr-dg-column>
+          <clr-dg-column></clr-dg-column>
+
+          <clr-dg-row *ngFor="let l of list; let idx=index;">
+            <clr-dg-cell>{{idx+1}}</clr-dg-cell>
+            <clr-dg-cell>{{l.created_at | dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
+            <clr-dg-cell>{{l.status}}</clr-dg-cell>
+            <clr-dg-cell style="text-align: center;">
+              <div class="btn-group">
+                <button class="btn btn-sm btn-success" (click)="onClickEdit(l)" title="แก้ไข">
+                  <clr-icon shape="note"></clr-icon>
+                </button>
+              </div>
+            </clr-dg-cell>
+          </clr-dg-row>
+          <clr-dg-footer>
+            <clr-dg-pagination #pagination [clrDgTotalItems]="total" [clrDgPageSize]="limit">
+              <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
+              {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} จาก {{pagination.totalItems}} รายการ
+            </clr-dg-pagination>
+          </clr-dg-footer>
+        </clr-datagrid>
+      </clr-tab-content>
+    </ng-template>
+  </clr-tab>
+
+  <clr-tab>
+    <button clrTabLink>รายการค้างเติม</button>
+    <ng-template [(clrIfActive)]="managementActive">
+      <clr-tab-content>
+        ...
+      </clr-tab-content>
+    </ng-template>
+  </clr-tab>
+
+  <clr-tab>
+    <button clrTabLink>รายการอนุมัติเติม</button>
+    <ng-template [(clrIfActive)]="cloudActive">
+      <clr-tab-content>
+        ...
+      </clr-tab-content>
+    </ng-template>
+  </clr-tab>
+
+</clr-tabs>
+
+<clr-modal [(clrModalOpen)]="modal" [clrModalClosable]="false" [clrModalSize]="'xl'">
+  <h3 class="modal-title">เลือกไฟล์</h3>
+  <div class="modal-body">
+    <div class="clr-row">
+      <div class="clr-col-12">
+        <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file"
+          accept=".xlsx">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="import()" [disabled]="isSave">
+      บันทึก
+    </button>
+    <button type="button" class="btn btn-danger" (click)="modal = false">
+      ปิด
+    </button>
+  </div>
+</clr-modal>

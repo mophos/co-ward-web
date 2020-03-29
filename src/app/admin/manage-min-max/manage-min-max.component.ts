@@ -27,7 +27,7 @@ export class ManageMinMaxComponent implements OnInit {
       this.loading = true;
       const rs: any = await this.minmaxTypeService.getList();
       if (rs.ok) {
-        this.list = rs.rows;
+        this.list = rs.rows;        
       } else {
         this.alertService.error();
       }
@@ -39,7 +39,7 @@ export class ManageMinMaxComponent implements OnInit {
   }
 
   async onClickEdit(l) {
-    this.router.navigate(['/admin/manage-min-max/sub', { hosptypeCode: l.hosptype_code, ministryCode: l.ministry_code, subMinistryCode: l.sub_ministry_code }]);
+    this.router.navigate(['/admin/manage-min-max/sub', { chospitalTypesId: l.id }]);
   }
 
 }

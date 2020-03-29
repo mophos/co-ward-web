@@ -1,0 +1,104 @@
+<div class="clr-row">
+  <div class="clr-col-12">
+    <div class="card">
+      <div class="card-head">
+        <h3 style="padding-left: 1rem;">ข้อมูลโรงพยาบาล</h3>
+      </div>
+      <div class="card-body">
+        <div style="padding: 1rem;">
+          <div class="clr-row">
+            <div class="clr-col-1">
+              รหัสโรงพยาบาล
+            </div>
+            <div class="clr-col-4">
+              <input type="text" name="" id="" [disabled]="true" value="{{hospCode}}" style="width: 100%;">
+            </div>
+          </div>
+          <div class="clr-row">
+            <div class="clr-col-1">
+              ชื่อโรงพยาบาล
+            </div>
+            <div class="clr-col-4">
+              <input type="text" name="" id="" [disabled]="true" value="{{hospName}}" style="width: 100%;">
+            </div>
+          </div>
+          <div class="clr-row">
+            <div class="clr-col-1">
+              โทร (1)
+            </div>
+            <div class="clr-col-4">
+              <input type="text" name="" id="" [(ngModel)]="tel" style="width: 100%;">
+            </div>
+          </div>
+          <div class="clr-row">
+            <div class="clr-col-1">
+              โทร (2)
+            </div>
+            <div class="clr-col-4">
+              <input type="text" name="" id="" [(ngModel)]="telephone" style="width: 100%;">
+            </div>
+          </div>
+          <div class="clr-row">
+            <div class="clr-col-1">
+              โทร (ผู้อำนวยการ)
+            </div>
+            <div class="clr-col-4">
+              <input type="text" name="" id="" [(ngModel)]="telephoneManager" style="width: 100%;">
+            </div>
+          </div>
+          <div class="clr-row">
+            <div class="clr-col-1">
+              ที่อยู่
+            </div>
+            <div class="clr-col-4">
+              <input type="text" name="" id="" [(ngModel)]="address" style="width: 100%;">
+            </div>
+          </div>
+          <div class="clr-row">
+            <div class="clr-col-1">
+              ตำบล
+            </div>
+            <div class="clr-col-4">
+              <app-autocomplete-subdistrict style="padding: 0px" #tambon (onselect)="onSelectTambon($event)">
+              </app-autocomplete-subdistrict>
+            </div>
+          </div>
+          <div class="clr-row">
+            <div class="clr-col-1">
+              อำเภอ
+            </div>
+            <div class="clr-col-4">
+              <app-autocomplete-district style="padding: 0px" #ampur (onselect)="onSelectAmpur($event)">
+              </app-autocomplete-district>
+            </div>
+          </div>
+          <div class="clr-row">
+            <div class="clr-col-1">
+              จังหวัด
+            </div>
+            <div class="clr-col-4">
+              <app-autocomplete-province style="padding: 0px" #province (onselect)="onSelectProvince($event)">
+              </app-autocomplete-province>
+            </div>
+          </div>
+          <div class="clr-row">
+            <div class="clr-col-1">
+              รหัสไปรษณีย์
+            </div>
+            <div class="clr-col-4">
+              <app-autocomplete-zipcode style="padding: 0px" #zipcode (onselect)="onSelectZipcode($event)">
+              </app-autocomplete-zipcode>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="clr-row">
+  <div class="clr-col-12">
+    <button type="button" class="btn btn-success" (click)="save()">
+      บันทึก
+    </button>
+  </div>
+</div>

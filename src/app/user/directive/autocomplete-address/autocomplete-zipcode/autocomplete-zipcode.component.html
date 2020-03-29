@@ -1,0 +1,13 @@
+<div class="search-results">
+    <div class="clr-row">
+        <div class="clr-col-12">
+            <input type="text" autocomplete="off" [disabled]="disabled" [(ngModel)]="query" name="query" style="width: 100%;" placeholder="ค้นหา" agxTypeahead [taUrl]="searchUrl" taApi="http" [taItemTpl]="itemTpl" (taSelected)="handleResultSelected($event)">
+        </div>
+    </div>
+</div>
+
+<ng-template #itemTpl let-result>
+    <span> {{ result.result.tambon_name }} » {{ result.result.ampur_name }} »
+    {{ result.result.province_name }} »
+    <b><u>{{ result.result.zip_code }}</u></b></span>
+</ng-template>

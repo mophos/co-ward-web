@@ -10,9 +10,7 @@ import { AlertService } from '../../help/alert.service';
 })
 export class ManageMinMaxSubComponent implements OnInit {
 
-  hosptypeCode: any;
-  ministryCode: any;
-  subMinistryCode: any;
+  chospitalTypesId: any;
 
   hospcode: any;
 
@@ -26,15 +24,14 @@ export class ManageMinMaxSubComponent implements OnInit {
   list: any = [];
   listDetail: any = [];
   loading = false;
+  isSave = false;
   constructor(
     private route: ActivatedRoute,
     private minmaxTypeService: MinMaxService,
     private alertService: AlertService,
   ) {
     const params = this.route.snapshot.params;
-    this.hosptypeCode = params.hosptypeCode;
-    this.ministryCode = params.ministryCode;
-    this.subMinistryCode = params.subMinistryCode;
+    this.chospitalTypesId = params.chospitalTypesId;
   }
 
   ngOnInit() {
@@ -44,7 +41,7 @@ export class ManageMinMaxSubComponent implements OnInit {
   async getList() {
     try {
       this.loading = true;
-      let rs: any = await this.minmaxTypeService.getListHosp(this.hosptypeCode, this.ministryCode, this.subMinistryCode, this.query, this.limit, this.offset);
+      let rs: any = await this.minmaxTypeService.getListHosp(this.chospitalTypesId, this.query, this.limit, this.offset);
       if (rs.ok) {
         this.list = rs.rows;
       } else {
@@ -67,39 +64,54 @@ export class ManageMinMaxSubComponent implements OnInit {
   async onClickEdit(hospcode) {
     this.hospcode = hospcode;
     try {
+      this.loading = true;
       this.modal = true;
       let rs: any = await this.minmaxTypeService.getSupplies(hospcode);
       if (rs.ok) {
         this.listDetail = rs.rows;
+        for (const i of this.listDetail) {
+          i.toggle = i.is_active == 'N' ? false : true;
+        }
       } else {
         this.alertService.error();
       }
+      this.loading = false;
     } catch (error) {
+      this.loading = false;
       this.alertService.error(error);
     }
   }
 
   async save() {
-    try {
-      let data = [];
-      for (const v of this.listDetail) {
-        const obj: any = {};
-        obj.supplies_id = v.id;
-        obj.min = v.min === null ? 0 : v.min;
-        obj.max = v.max === null ? 0 : v.max;
-        data.push(obj);
-      }
-      let rs: any = await this.minmaxTypeService.save(data, this.hospcode);
-      if (rs.ok) {
-        this.alertService.success();
-        this.getList();
-        this.modal = false;
-      } else {
+    const confirm = await this.alertService.confirm();
+    if (confirm) {
+      try {
+        this.isSave = true;
+        let data = [];
+        for (const v of this.listDetail) {
+          const obj: any = {};
+          obj.supplies_id = v.supplies_id;
+          obj.min = v.min === null ? 0 : v.min;
+          obj.max = v.max === null ? 0 : v.max;
+          obj.safety_stock = v.safety_stock === null ? 0 : v.safety_stock;
+          obj.is_active = v.toggle === true ? 'Y' : 'N';
+          data.push(obj);
+        }
+
+        let rs: any = await this.minmaxTypeService.save(data, this.hospcode);
+        if (rs.ok) {
+          this.alertService.success();
+          this.getList();
+          this.modal = false;
+        } else {
+          this.alertService.error();
+        }
+        this.isSave = false;
+      } catch (error) {
+        this.isSave = false;
         this.alertService.error();
+        this.modal = false;
       }
-    } catch (error) {
-      this.alertService.error();
-      this.modal = false;
     }
   }
 }
