@@ -9,6 +9,8 @@ import { AlertService } from '../../help/alert.service';
 })
 export class BedComponent implements OnInit {
 
+  loading = false;
+
   list: any = [];
 
   constructor(
@@ -21,6 +23,7 @@ export class BedComponent implements OnInit {
   }
 
   async getList() {
+    this.loading = true;
     try {
       let rs: any = await this.bedService.getBeds();
       if (rs.ok) {
@@ -28,7 +31,9 @@ export class BedComponent implements OnInit {
       } else {
         this.alertService.error();
       }
+      this.loading = false;
     } catch (error) {
+      this.loading = false;
       this.alertService.error(error);
     }
   }
