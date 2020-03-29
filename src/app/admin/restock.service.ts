@@ -18,4 +18,19 @@ export class RestockService {
     return this.http.get(url).toPromise();
   }
 
+  getListHospital(restockId, typesId) {
+    const url = `${this.url}/v1/admin/restock/list-hospital?restockId=${restockId}&typesId=${typesId}`;
+    return this.http.get(url).toPromise();
+  }
+
+  getListSupplies(id) {
+    const url = `${this.url}/v1/admin/restock/list-supplies?restockDetailId=${id}`;
+    return this.http.get(url).toPromise();
+  }
+
+  updateSupplies(data: any, id: any) {
+    const url = `${this.url}/v1/admin/restock/update-supplies/${id}`;
+    return this.http.put(url, { data }).toPromise();
+  }
+
 }

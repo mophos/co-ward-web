@@ -31,7 +31,7 @@ export class ManageRestockComponent implements OnInit {
       const rs: any = await this.restockService.getRestock(this.limit, this.offset);
       if (rs.ok) {
         this.list = rs.rows;
-        this.total = rs.total;
+        this.total = rs.total;        
       } else {
         this.alertService.error();
       }
@@ -69,5 +69,9 @@ export class ManageRestockComponent implements OnInit {
 
   openModal() {
     this.modal = true;
+  }
+
+  async onClickEdit(l){
+    this.router.navigate(['/admin/manage-restock/edit', { restockId: l.id }]);
   }
 }
