@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HelpModule } from './../help/help.module';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { FormsModule } from '@angular/forms';
@@ -27,6 +28,7 @@ import { ManageRestockComponent } from './manage-restock/manage-restock.componen
     ManageRestockComponent
   ],
   imports: [
+    HelpModule,
     CommonModule,
     AdminRoutingModule,
     BrowserModule,

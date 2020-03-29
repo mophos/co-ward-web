@@ -11,11 +11,13 @@
 <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
   <clr-dg-column>#</clr-dg-column>
   <clr-dg-column>วันที่สร้าง</clr-dg-column>
+  <clr-dg-column>สถานะการส่ง</clr-dg-column>
   <clr-dg-column></clr-dg-column>
 
   <clr-dg-row *ngFor="let l of list; let idx=index;">
     <clr-dg-cell>{{idx+1}}</clr-dg-cell>
-    <clr-dg-cell>{{l.created_at}}</clr-dg-cell>
+    <clr-dg-cell>{{l.created_at | dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
+    <clr-dg-cell>{{l.status}}</clr-dg-cell>
     <clr-dg-cell style="text-align: center;">
       <div class="btn-group">
         <button class="btn btn-sm btn-success" (click)="onClickEdit(l)" title="แก้ไข">
