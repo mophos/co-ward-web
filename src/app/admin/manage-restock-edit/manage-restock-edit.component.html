@@ -1,0 +1,131 @@
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="javascript://" routerLink="/admin/manage-restock">เติมเวชภัณฑ์</a>
+  <a class="breadcrumb-item" href="javascript://">แก้ไขการเติมเวชภัณฑ์</a>
+</nav>
+
+<div class="clr-row">
+  <div class="clr-col-6">
+
+    <div class="card">
+      <div class="card-header">
+        รายการสังกัด
+      </div>
+      <div class="card-block">
+        <div class="card-title">
+
+        </div>
+        <div class="card-text">
+          <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
+            <clr-dg-column>รายการ</clr-dg-column>
+
+            <clr-dg-row *ngFor="let l of listTypes; let idx=index;">
+              <clr-dg-cell (click)="getListHospital(l)">{{l.name}}</clr-dg-cell>
+            </clr-dg-row>
+            <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
+          </clr-datagrid>
+        </div>
+      </div>
+      <div class="card-footer">
+      </div>
+    </div>
+  </div>
+  <div class="clr-col-6">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="clr-row">
+          <div class="clr-col-3">
+            รายการโรงพยาบาล
+            <span *ngIf="typeName != ''">
+              : {{typeName}}
+            </span>
+          </div>
+          <div class="clr-col-9">
+            <button style="float: right;" type="button" class="btn btn-sm btn-primary btn-outline" (click)="openModal()">
+              Import
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="card-block">
+        <div class="card-title">
+
+        </div>
+        <div class="card-text">
+          <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
+            <clr-dg-column>รหัส</clr-dg-column>
+            <clr-dg-column>รายการ</clr-dg-column>
+            <clr-dg-column></clr-dg-column>
+
+            <clr-dg-row *ngFor="let l of listHosp; let idx=index;">
+              <clr-dg-cell>{{l.hospcode}}</clr-dg-cell>
+              <clr-dg-cell>{{l.hospname}}</clr-dg-cell>
+              <clr-dg-cell>
+                <button class="btn btn-sm btn-success" (click)="onClickEdit(l)" title="แก้ไข">
+                  <clr-icon shape="note"></clr-icon>
+                </button>
+              </clr-dg-cell>
+            </clr-dg-row>
+            <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
+          </clr-datagrid>
+        </div>
+      </div>
+      <div class="card-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+<clr-modal [(clrModalOpen)]="modal" [clrModalClosable]="false" [clrModalSize]="'xl'">
+  <h3 class="modal-title">แก้ไข จำนวน : {{hospName}}</h3>
+  <div class="modal-body">
+    <div class="clr-col-12">
+      <clr-datagrid [clrDgLoading]="loading">
+        <clr-dg-column>#</clr-dg-column>
+        <clr-dg-column>รหัสเวชภัณฑ์</clr-dg-column>
+        <clr-dg-column>รายการ</clr-dg-column>
+        <clr-dg-column>หน่วย</clr-dg-column>
+        <clr-dg-column>จำนวน</clr-dg-column>
+
+        <clr-dg-row *ngFor="let l of listSupplies; let idx=index;">
+          <clr-dg-cell>{{idx+1}}</clr-dg-cell>
+          <clr-dg-cell>{{l.code}}</clr-dg-cell>
+          <clr-dg-cell>{{l.name}}</clr-dg-cell>
+          <clr-dg-cell>{{l.unit_name}}</clr-dg-cell>
+          <clr-dg-cell>
+            <input type="number" name="qty" [(ngModel)]="l.qty" class="clr-input width-fit" value="{{l.qty}}">
+          </clr-dg-cell>
+        </clr-dg-row>
+        <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
+      </clr-datagrid>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="save()" [disabled]="isSave">
+      บันทึก
+    </button>
+    <button type="button" class="btn btn-danger" (click)="modal = false">
+      ปิด
+    </button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="modalImport" [clrModalClosable]="false" [clrModalSize]="'xl'">
+    <h3 class="modal-title">เลือกไฟล์</h3>
+    <div class="modal-body">
+      <div class="clr-row">
+        <div class="clr-col-12">
+          <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file"
+            accept=".xlsx">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" (click)="import()">
+        บันทึก
+      </button>
+      <button type="button" class="btn btn-danger" (click)="modalImport = false">
+        ปิด
+      </button>
+    </div>
+  </clr-modal>

@@ -9,6 +9,7 @@ import { AuthGuard } from '../auth-guard.service';
 import { ManageMinMaxSubComponent } from './manage-min-max-sub/manage-min-max-sub.component';
 import { ManageRequestSubComponent } from './manage-request-sub/manage-request-sub.component';
 import { ManageRestockComponent } from './manage-restock/manage-restock.component';
+import { ManageRestockEditComponent } from './manage-restock-edit/manage-restock-edit.component';
 
 const routes: Routes = [
   {
@@ -17,7 +18,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'manage-restock', pathMatch: 'full' },
-      { path: 'manage-restock', component: ManageRestockComponent },
+      {
+        path: 'manage-restock',
+        children: [
+          { path: '', component: ManageRestockComponent },
+          { path: 'edit', component: ManageRestockEditComponent, }]
+      },
       { path: 'manage-request', component: ManageRequestComponent },
       { path: 'manage-request/sub', component: ManageRequestSubComponent },
       { path: 'manage-min-max', component: ManageMinMaxComponent },

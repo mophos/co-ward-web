@@ -10,9 +10,7 @@ import { AlertService } from '../../help/alert.service';
 })
 export class ManageMinMaxSubComponent implements OnInit {
 
-  hosptypeCode: any;
-  ministryCode: any;
-  subMinistryCode: any;
+  chospitalTypesId: any;
 
   hospcode: any;
 
@@ -33,9 +31,7 @@ export class ManageMinMaxSubComponent implements OnInit {
     private alertService: AlertService,
   ) {
     const params = this.route.snapshot.params;
-    this.hosptypeCode = params.hosptypeCode;
-    this.ministryCode = params.ministryCode;
-    this.subMinistryCode = params.subMinistryCode;
+    this.chospitalTypesId = params.chospitalTypesId;
   }
 
   ngOnInit() {
@@ -45,7 +41,7 @@ export class ManageMinMaxSubComponent implements OnInit {
   async getList() {
     try {
       this.loading = true;
-      let rs: any = await this.minmaxTypeService.getListHosp(this.hosptypeCode, this.ministryCode, this.subMinistryCode, this.query, this.limit, this.offset);
+      let rs: any = await this.minmaxTypeService.getListHosp(this.chospitalTypesId, this.query, this.limit, this.offset);
       if (rs.ok) {
         this.list = rs.rows;
       } else {
