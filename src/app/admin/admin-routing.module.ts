@@ -16,7 +16,7 @@ const routes: Routes = [
     component: LayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: '', redirectTo: 'manage-request', pathMatch: 'full' },
+      { path: '', redirectTo: 'manage-restock', pathMatch: 'full' },
       { path: 'manage-restock', component: ManageRestockComponent },
       { path: 'manage-request', component: ManageRequestComponent },
       { path: 'manage-request/sub', component: ManageRequestSubComponent },
