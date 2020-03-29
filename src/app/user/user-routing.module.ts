@@ -7,6 +7,8 @@ import { InventoryEditComponent } from './inventory-edit/inventory-edit.componen
 import { TrackingComponent } from './tracking/tracking.component';
 import { TrackingDetailComponent } from './tracking-detail/tracking-detail.component';
 import { AuthGuard } from '../auth-guard.service';
+import { BedComponent } from './bed/bed.component';
+import { SettingComponent } from './setting/setting.component';
 
 const routes: Routes = [
   {
@@ -30,6 +32,8 @@ const routes: Routes = [
           { path: 'details', component: TrackingDetailComponent },
         ]
       },
+      { path: 'bed', component: BedComponent },
+      { path: 'setting', component: SettingComponent },
     ]
   }
 ];

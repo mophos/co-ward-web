@@ -13,9 +13,21 @@ import { InventoryAddComponent } from './inventory-add/inventory-add.component';
 import { InventoryEditComponent } from './inventory-edit/inventory-edit.component';
 import { TrackingComponent } from './tracking/tracking.component';
 import { TrackingDetailComponent } from './tracking-detail/tracking-detail.component';
+import { BedComponent } from './bed/bed.component';
+import { SettingComponent } from './setting/setting.component';
+import { DirectiveModule } from './directive/directive.module';
 
 @NgModule({
-  declarations: [InventoryComponent, LayoutComponent, InventoryAddComponent, InventoryEditComponent, TrackingComponent, TrackingDetailComponent],
+  declarations: [
+    InventoryComponent, 
+    LayoutComponent, 
+    InventoryAddComponent, 
+    InventoryEditComponent, 
+    TrackingComponent, 
+    TrackingDetailComponent, 
+    BedComponent, 
+    SettingComponent
+  ],
   imports: [
     CommonModule,
     UserRoutingModule,
@@ -23,7 +35,8 @@ import { TrackingDetailComponent } from './tracking-detail/tracking-detail.compo
     ClarityModule,
     BrowserAnimationsModule,
     FormsModule,
-    HelpModule
+    HelpModule,
+    DirectiveModule
   ],
   exports:[
     InventoryAddComponent,
