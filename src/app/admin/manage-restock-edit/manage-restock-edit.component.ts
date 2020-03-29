@@ -16,6 +16,7 @@ export class ManageRestockEditComponent implements OnInit {
   listTypes: any
   listHosp: any
   typeName: any = ''
+  hospName: any = ''
   listSupplies: any
   loading = false
   modal = false
@@ -68,8 +69,8 @@ export class ManageRestockEditComponent implements OnInit {
   }
 
   async onClickEdit(l) {
+    this.hospName = l.hospname
     this.restockDetailId = l.id
-
     try {
       this.loading = true;
       const rs: any = await this.restockService.getListSupplies(this.restockDetailId)
