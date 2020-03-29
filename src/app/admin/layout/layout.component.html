@@ -26,6 +26,10 @@
             <router-outlet></router-outlet>
         </div>
         <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
+            <a clrVerticalNavLink routerLink="/admin/manage-restock" title="เติม" routerLinkActive="active">
+                <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+                จัดส่งเวชภัณฑ์
+            </a>
             <a clrVerticalNavLink routerLink="/admin/manage-request" title="กรอกคงคลัง" routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 จัดส่งเวชภัณฑ์

@@ -13,9 +13,19 @@ import { ManageUserComponent } from './manage-user/manage-user.component';
 import { ManageRequestComponent } from './manage-request/manage-request.component';
 import { ManageMinMaxSubComponent } from './manage-min-max-sub/manage-min-max-sub.component';
 import { ManageRequestSubComponent } from './manage-request-sub/manage-request-sub.component';
+import { ManageRestockComponent } from './manage-restock/manage-restock.component';
 
 @NgModule({
-  declarations: [LayoutComponent, ManageSuppliesComponent, ManageMinMaxComponent, ManageUserComponent, ManageRequestComponent, ManageMinMaxSubComponent, ManageRequestSubComponent],
+  declarations: [
+    LayoutComponent,
+    ManageSuppliesComponent,
+    ManageMinMaxComponent,
+    ManageUserComponent,
+    ManageRequestComponent,
+    ManageMinMaxSubComponent,
+    ManageRequestSubComponent,
+    ManageRestockComponent
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,
