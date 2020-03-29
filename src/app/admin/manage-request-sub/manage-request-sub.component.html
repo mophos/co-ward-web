@@ -70,10 +70,10 @@
             <clr-dg-cell>{{l.name}}</clr-dg-cell>
             <clr-dg-cell>{{l.unit}}</clr-dg-cell>
             <!-- <clr-dg-cell>{{l.remark}}</clr-dg-cell> -->
-            <clr-dg-cell style="color: red;">{{l.min}}</clr-dg-cell>
-            <clr-dg-cell style="color: blue;">{{l.max}}</clr-dg-cell>
-            <clr-dg-cell style="color: maroon;">{{l.qty}}</clr-dg-cell>
-            <clr-dg-cell style="color: green;">{{l.max - l.qty}}</clr-dg-cell>
+            <clr-dg-cell style="color: red; text-align: right;">{{l.min | number:'1.0-0'}}</clr-dg-cell>
+            <clr-dg-cell style="color: blue; text-align: right;">{{l.max | number:'1.0-0'}}</clr-dg-cell>
+            <clr-dg-cell style="color: maroon; text-align: right;">{{l.qty | number:'1.0-0'}}</clr-dg-cell>
+            <clr-dg-cell style="color: green; text-align: right;">{{l.max - l.qty | number:'1.0-0'}}</clr-dg-cell>
           </clr-dg-row>
         </clr-datagrid>
       </div>
