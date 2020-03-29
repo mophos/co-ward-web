@@ -11,6 +11,10 @@ export class RequestService {
     const url = `${this.url}/v1/admin/hospital/types`;
     return this.http.get(url).toPromise();
   }
+  export(id) {
+    const url = `${this.url}/v1/admin/restock/export/${id}`;
+    return this.http.get(url).toPromise();
+  }
 
   getListHosp(hcode, mcode, scode, query = '', limit, offset) {
     const url = `${this.url}/v1/admin/hospital?hosptype_code=${hcode}&ministry_code=${mcode}&
