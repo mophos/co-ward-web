@@ -14,6 +14,11 @@ export class BedService {
     return await this.http.get(url).toPromise();
   }
 
+  async getBedHospital() {
+    const url = `${this.apiUrl}/v1/staff/bed/check-bed`;
+    return await this.http.get(url).toPromise();
+  }
+
   async save(data) {
     const url = `${this.apiUrl}/v1/staff/bed`;
     return await this.http.post(url, { data }).toPromise();
