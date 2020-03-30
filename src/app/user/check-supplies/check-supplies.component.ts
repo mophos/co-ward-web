@@ -1,14 +1,15 @@
+
 import { Component, OnInit } from '@angular/core';
-import { BedService } from '../bed.service';
+import { SupplieService } from '../supplie.service';
 import { AlertService } from '../../help/alert.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
-  selector: 'app-check-bed',
-  templateUrl: './check-bed.component.html',
-  styleUrls: []
+  selector: 'app-check-supplies',
+  templateUrl: './check-supplies.component.html',
+  styles: []
 })
-export class CheckBedComponent implements OnInit {
+export class CheckSuppliesComponent implements OnInit {
   list: any;
 
   fullname: any;
@@ -16,7 +17,7 @@ export class CheckBedComponent implements OnInit {
   public jwtHelper = new JwtHelperService();
 
   constructor(
-    private bedService: BedService,
+    private supplieService: SupplieService,
     private alertService: AlertService
   ) {
     const decoded = this.jwtHelper.decodeToken(sessionStorage.getItem('token'));
@@ -30,7 +31,7 @@ export class CheckBedComponent implements OnInit {
 
   async getList() {
     try {
-      let rs: any = await this.bedService.getBedHospital();
+      let rs: any = await this.supplieService.getSupplieHospital();
       if (rs.ok) {
         this.list = rs.rows;
         for (const v of this.list) {

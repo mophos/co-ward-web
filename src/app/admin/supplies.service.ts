@@ -32,4 +32,9 @@ export class SuppliesService {
     const url = `${this.url}/v1/admin/supplies/${id}`;
     return this.http.delete(url).toPromise();
   }
+
+  async getSupplieHospital() {
+    const url = `${this.url}/v1/admin/supplies/check-supplie`;
+    return await this.http.get(url).toPromise();
+  }
 }

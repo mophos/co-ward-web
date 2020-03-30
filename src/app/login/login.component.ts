@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
           this.route.navigate(['/manager']);
         }
       } else {
-        this.isError = true;
+        this.isError = true; 
         this.errorMessage = 'ชื่อผู้ใช้งาน หรือ รหัสผ่าน ไม่ถูกต้อง';
 
       }
