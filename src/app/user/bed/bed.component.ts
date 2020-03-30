@@ -10,8 +10,8 @@ import { AlertService } from '../../help/alert.service';
 export class BedComponent implements OnInit {
 
   loading = false;
-
   list: any = [];
+  check = false;
 
   constructor(
     private bedService: BedService,
@@ -39,21 +39,29 @@ export class BedComponent implements OnInit {
   }
 
   async save() {
+    this.check = false;
     try {
       let data = [];
       for (const v of this.list) {
+        if ((v.total - v.usage_bed) < 0) {
+          this.check = true;
+        }
         const obj: any = {};
         obj.bed_id = v.id;
-        obj.qty = v.qty;
-        obj.usage = v.usage;
+        obj.usage_bed = v.usage_bed;
+        obj.total = v.total;
         data.push(obj);
       }
-      let rs: any = await this.bedService.save(data);
-      if (rs.ok) {
-        this.alertService.success();
-        this.getList();
+      if (this.check) {
+        this.alertService.error('จำนวนเตียงติดลบ');
       } else {
-        this.alertService.error();
+        let rs: any = await this.bedService.save(data);
+        if (rs.ok) {
+          this.alertService.success();
+          this.getList();
+        } else {
+          this.alertService.error();
+        }
       }
     } catch (error) {
       this.alertService.error();
