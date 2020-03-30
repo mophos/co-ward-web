@@ -9,6 +9,8 @@ import { TrackingDetailComponent } from './tracking-detail/tracking-detail.compo
 import { AuthGuard } from '../auth-guard.service';
 import { BedComponent } from './bed/bed.component';
 import { SettingComponent } from './setting/setting.component';
+import { CheckBedComponent } from './check-bed/check-bed.component';
+import { CheckSuppliesComponent } from './check-supplies/check-supplies.component';
 
 const routes: Routes = [
   {
@@ -34,6 +36,8 @@ const routes: Routes = [
       },
       { path: 'bed', component: BedComponent },
       { path: 'setting', component: SettingComponent },
+      { path: 'check-bed', component: CheckBedComponent },
+      { path: 'check-supplie', component: CheckSuppliesComponent },
     ]
   }
 ];

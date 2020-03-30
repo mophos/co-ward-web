@@ -1,0 +1,18 @@
+<nav class="breadcrumb">
+    <!-- <a class="breadcrumb-item" href="javascript://" routerLink="/admin/manage-min-max">รายการสังกัด</a> -->
+    <span class="breadcrumb-item active">ตรวจสอบการบันทึกข้อมูลเตียง</span>
+  </nav>
+<clr-stack-view>
+
+  <clr-stack-block [clrSbExpanded]="true">
+
+    <clr-stack-label>{{hospname}}</clr-stack-label>
+    <clr-stack-content>วันที่บันทึกล่าสุด</clr-stack-content>
+    <clr-stack-block *ngFor="let l of list;">
+      <clr-stack-label>{{l.hospname}}</clr-stack-label>
+      <clr-stack-content>{{l.created_at}}</clr-stack-content>
+    </clr-stack-block>
+
+  </clr-stack-block>
+
+</clr-stack-view>

@@ -1,0 +1,39 @@
+<div class="main-container">
+  <header class="header">
+    <div class="branding">
+      <a href="javascript://" class="nav-link">
+        <!-- <img src="./assets/images/tt.png" alt="logo" style="width: 200px; padding-right: 10px;"> -->
+        <span class="title">COVID-SUPPLIES (MANAGER)</span>
+      </a>
+    </div>
+    <div class="header-nav">
+    </div>
+    <div class="header-actions">
+      <clr-dropdown>
+        <button class="nav-text" clrDropdownTrigger>
+          {{fullname}}-{{hospname}}
+          <clr-icon shape="caret down"></clr-icon>
+        </button>
+        <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+          <!-- <a href="javascript://" clrDropdownItem>เปลี่ยนรหัสผ่าน</a> -->
+          <a href="javascript://" (click)="logout()" clrDropdownItem>ออกจากระบบ</a>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </div>
+  </header>
+  <div class="content-container">
+    <div class="content-area">
+      <router-outlet></router-outlet>
+    </div>
+    <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
+      <a clrVerticalNavLink routerLink="/manager/check-beds" title="ตรวจสอบการบันทึกข้อมูลเตียง" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        ตรวจสอบการบันทึกข้อมูลเตียง
+      </a>
+      <a clrVerticalNavLink routerLink="/manager/check-supplies" title="ตรวจสอบการบันทึกเวชภัณฑ์" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        ตรวจสอบการบันทึกเวชภัณฑ์
+      </a>
+    </clr-vertical-nav>
+  </div>
+</div>

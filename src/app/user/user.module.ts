@@ -16,6 +16,8 @@ import { TrackingDetailComponent } from './tracking-detail/tracking-detail.compo
 import { BedComponent } from './bed/bed.component';
 import { SettingComponent } from './setting/setting.component';
 import { DirectiveModule } from './directive/directive.module';
+import { CheckBedComponent } from './check-bed/check-bed.component';
+import { CheckSuppliesComponent } from './check-supplies/check-supplies.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,7 @@ import { DirectiveModule } from './directive/directive.module';
     TrackingComponent, 
     TrackingDetailComponent, 
     BedComponent, 
-    SettingComponent
+    SettingComponent, CheckBedComponent, CheckSuppliesComponent
   ],
   imports: [
     CommonModule,
