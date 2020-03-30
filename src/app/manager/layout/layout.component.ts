@@ -11,7 +11,7 @@ export class LayoutComponent implements OnInit {
 
   fullname: any;
   hospname: any;
-  collapsible = false;
+  collapsible = true;
   collapse = false;
   public jwtHelper = new JwtHelperService();
   constructor(

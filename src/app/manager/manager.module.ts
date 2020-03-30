@@ -9,9 +9,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { LayoutComponent } from './layout/layout.component';
 import { CheckBedsComponent } from './check-beds/check-beds.component';
+import { CheckSuppliesComponent } from './check-supplies/check-supplies.component';
 
 @NgModule({
-  declarations: [LayoutComponent, CheckBedsComponent],
+  declarations: [LayoutComponent, CheckBedsComponent, CheckSuppliesComponent],
   imports: [
     CommonModule,
     ManagerRoutingModule,
