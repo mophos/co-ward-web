@@ -1,3 +1,4 @@
+import { CheckSuppliesComponent } from './check-supplies/check-supplies.component';
 import { CheckBedsComponent } from './check-beds/check-beds.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -10,8 +11,9 @@ const routes: Routes = [
     component: LayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: '', redirectTo: 'check-bed', pathMatch: 'full' },
-      { path: 'check-bed', component: CheckBedsComponent },
+      { path: '', redirectTo: 'check-beds', pathMatch: 'full' },
+      { path: 'check-beds', component: CheckBedsComponent },
+      { path: 'check-supplies', component: CheckSuppliesComponent },
     ]
   }
 ];

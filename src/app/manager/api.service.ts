@@ -14,4 +14,9 @@ export class ApiService {
     return this.http.get(url).toPromise();
   }
 
+  checkSupplies() {
+    const url = `${this.url}/v1/manager/services/check-supplies`;
+    return this.http.get(url).toPromise();
+  }
+
 }
