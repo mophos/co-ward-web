@@ -26,6 +26,10 @@
       <router-outlet></router-outlet>
     </div>
     <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
+      <a clrVerticalNavLink routerLink="/staff/check-bed" title="สถานะเตียง" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        สถานะเตียง
+      </a>
       <a clrVerticalNavLink routerLink="/staff/inventory" title="รายการเวชภัณฑ์คงเหลือ" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         รายการเวชภัณฑ์คงเหลือ

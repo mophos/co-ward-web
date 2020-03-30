@@ -1,0 +1,13 @@
+<clr-stack-view>
+  <clr-stack-header>Angular stack view</clr-stack-header>
+
+  <clr-stack-block [clrSbExpanded]="true">
+
+    <clr-stack-label>{{hospname}}</clr-stack-label>
+    <clr-stack-block *ngFor="let l of list;">
+      <clr-stack-label>{{l.hospname}}</clr-stack-label>
+    </clr-stack-block>
+
+  </clr-stack-block>
+
+</clr-stack-view>
