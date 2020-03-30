@@ -10,14 +10,14 @@
     <clr-dg-cell>{{idx+1}}</clr-dg-cell>
     <clr-dg-cell>{{l.name}}</clr-dg-cell>
     <clr-dg-cell>
-      <input type="number" style="text-align: right;" name="qty" [(ngModel)]="l.qty" class="clr-col-9 clr-input width-fit"
-        value="{{l.qty}}">
+      <input type="number" style="text-align: right;" name="total" [(ngModel)]="l.total" class="clr-col-9 clr-input width-fit"
+        value="{{l.total}}">
     </clr-dg-cell>
     <clr-dg-cell>
-      <input type="number" style="text-align: right;" name="usage" [(ngModel)]="l.usage" class="clr-col-9 clr-input width-fit"
-        value="{{l.usage}}">
+      <input type="number" style="text-align: right;" name="usage_bed" [(ngModel)]="l.usage_bed" class="clr-col-9 clr-input width-fit"
+        value="{{l.usage_bed}}">
     </clr-dg-cell>
-    <clr-dg-cell>{{l.qty - l.usage}}</clr-dg-cell>
+    <clr-dg-cell>{{l.total - l.usage_bed}}</clr-dg-cell>
     <clr-dg-cell>{{l.unit}}</clr-dg-cell>
   </clr-dg-row>
   <!-- <clr-dg-footer>
