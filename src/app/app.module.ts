@@ -25,7 +25,7 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     AppRoutingModule,

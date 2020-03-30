@@ -36,9 +36,12 @@ export class LoginComponent implements OnInit {
           this.route.navigate(['/staff']);
         } else if (decoded.type === 'MANAGER') {
           this.route.navigate(['/manager']);
-        }
+        } 
+        // else if (decoded.type === 'ZONE') {
+        //   this.route.navigate(['/zone']);
+        // }
       } else {
-        this.isError = true; 
+        this.isError = true;
         this.errorMessage = 'ชื่อผู้ใช้งาน หรือ รหัสผ่าน ไม่ถูกต้อง';
 
       }
