@@ -1,0 +1,116 @@
+<br>
+<input type="date" name="date" [(ngModel)]="date" (change)="onChangeDate()">
+<clr-datagrid>
+  <clr-dg-column>เขตสุขภาพ</clr-dg-column>
+
+  <clr-dg-row *ngFor="let b of data">
+    <clr-dg-cell>{{b.zone_code}}</clr-dg-cell>
+    <clr-datagrid ngProjectAs="clr-dg-row-detail" *clrIfExpanded>
+      <clr-dg-column>จังหวัด</clr-dg-column>
+      <clr-dg-row *ngFor="let p of b.provinces">
+        <clr-dg-cell>{{p.province_name}}</clr-dg-cell>
+       
+        <clr-datagrid ngProjectAs="clr-dg-row-detail" *clrIfExpanded>
+          <clr-dg-column>โรงพยาบาล</clr-dg-column>
+          <clr-dg-column>AIIR(ทั้งหมด/ใช้)</clr-dg-column>
+          <clr-dg-column>Modified AIIR(ทั้งหมด/ใช้)</clr-dg-column>
+          <clr-dg-column>Isolation(ทั้งหมด/ใช้)</clr-dg-column>
+          <clr-dg-column>Cohort Ward(ทั้งหมด/ใช้)</clr-dg-column>
+          <clr-dg-column>วันที่อัพเดตล่าสุด</clr-dg-column>
+          <clr-dg-row *ngFor="let h of p.hospitals">
+            <clr-dg-cell>{{h.hospname}}</clr-dg-cell>
+            <clr-dg-cell>{{h.eoc_AIIR}}{{+h.eoc_AIIR >= 0 ? '/':'' }}{{h.eoc_AIIRUsed}}</clr-dg-cell>
+            <clr-dg-cell>{{h.eoc_ModifiedAIIR}}{{+h.eoc_ModifiedAIIR >= 0? '/':'' }}{{h.eoc_ModifiedAIIRUsed}}</clr-dg-cell>
+            <clr-dg-cell>{{h.eoc_IsolationRoom}}{{+h.eoc_IsolationRoom >= 0? '/':'' }}{{h.eoc_IsolationRoomUsed}}</clr-dg-cell>
+            <clr-dg-cell>{{h.eoc_cohortWard}}{{+h.eoc_cohortWard >= 0? '/':'' }}{{h.eoc_cohortWardUsed}}</clr-dg-cell>
+            <clr-dg-cell>{{h.last_update | dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
+             <!-- <clr-datagrid ngProjectAs="clr-dg-row-detail" *clrIfExpanded>
+              <clr-dg-column>aiir</clr-dg-column>
+              <clr-dg-column>จังหวัด</clr-dg-column>
+              <clr-dg-column>จังหวัด</clr-dg-column>
+              <clr-dg-column>จังหวัด</clr-dg-column>
+              <clr-dg-column>จังหวัด</clr-dg-column>
+              <clr-dg-row *ngFor="let p of p.hospitals">
+                <clr-dg-cell>{{h.hospname}}</clr-dg-cell>
+              </clr-dg-row>
+            </clr-datagrid>  -->
+          </clr-dg-row>
+          <!-- <clr-dg-footer>{{users.length}} users</clr-dg-footer> -->
+        </clr-datagrid>
+      </clr-dg-row>
+      <!-- <clr-dg-footer>{{users.length}} users</clr-dg-footer> -->
+    </clr-datagrid>
+  </clr-dg-row>
+
+  <!-- <clr-dg-footer>{{users.length}} users</clr-dg-footer> -->
+</clr-datagrid>
+
+<div *ngFor="let b of data">
+  เขต {{b.zone_code}}
+  <table class="table  table-hover table-sm">
+    <thead class="thead-light">
+
+      <tr>
+        <th rowspan="3">จังหวัด</th>
+        <th colspan="10" class="text-align-center">ประเภทเตียง</th>
+      </tr>
+      <tr>
+        <th colspan="2" class="text-align-right">(1) AIIR</th>
+        <th colspan="2" class="text-align-right">(2)Modified AIIR</th>
+        <th colspan="2" class="text-align-right">(2)Single room/Isolate room</th>
+        <th colspan="2" class="text-align-right">(3)Cohort ward</th>
+        <th colspan="2" class="text-align-right">(4)ICU</th>
+      </tr>
+      <tr>
+        <th class="text-align-right">ทั้งหมด</th>
+        <th class="text-align-right">ใช้อยู่</th>
+        <th class="text-align-right">ทั้งหมด</th>
+        <th class="text-align-right">ใช้อยู่</th>
+        <th class="text-align-right">ทั้งหมด</th>
+        <th class="text-align-right">ใช้อยู่</th>
+        <th class="text-align-right">ทั้งหมด</th>
+        <th class="text-align-right">ใช้อยู่</th>
+        <th class="text-align-right">ทั้งหมด</th>
+        <th class="text-align-right">ใช้อยู่</th>
+      </tr>
+
+    </thead>
+    <tbody *ngFor="let p of b.provinces">
+      <tr class="table-success">
+        <td colspan="11" class="text-align-left">{{p.province_name}}</td>
+      </tr>
+      <tr *ngFor="let h of p.hospitals">
+        <td width="20%">{{h.hospname}}</td>
+        <td class="text-align-right">{{h.mask_n95| number:'1.0-0'}}</td>
+        <td class="text-align-right">{{h.mask_n95_used_month| number:'1.0-0'}}</td>
+        <td class="text-align-right">{{h.sugical_mask| number:'1.0-0'}}</td>
+        <td class="text-align-right">{{h.sugical_mask_used_month| number:'1.0-0'}}</td>
+        <td class="text-align-right">{{h.water_resistance_gown| number:'1.0-0'}}</td>
+        <td class="text-align-right">{{h.water_resistance_gown_used_month| number:'1.0-0'}}</td>
+        <td class="text-align-right">{{h.cover_all| number:'1.0-0'}}</td>
+        <td class="text-align-right">{{h.cover_all_used_month| number:'1.0-0'}}</td>
+        <td class="text-align-right">{{h.med_flavipiravir_tab| number:'1.0-0'}}</td>
+        <td class="text-align-right">{{h.med_flavipiravir_tab_used_month| number:'1.0-0'}}</td>
+      </tr>
+    </tbody>
+    <!-- <tfoot>
+        <tr class="table-warning">
+            <th>รวม</th>
+            <th class="text-align-right">{{b.count| number:'1.0-0'}}</th>
+            <th class="text-align-right">{{b.mask_n95| number:'1.0-0'}}</th>
+            <th class="text-align-right">{{b.mask_n95_used_month| number:'1.0-0'}}</th>
+            <th class="text-align-right">{{b.sugical_mask| number:'1.0-0'}}</th>
+            <th class="text-align-right">{{b.sugical_mask_used_month| number:'1.0-0'}}</th>
+            <th class="text-align-right">{{b.water_resistance_gown| number:'1.0-0'}}</th>
+            <th class="text-align-right">{{b.water_resistance_gown_used_month| number:'1.0-0'}}</th>
+            <th class="text-align-right">{{b.cover_all| number:'1.0-0'}}</th>
+            <th class="text-align-right">{{b.cover_all_used_month| number:'1.0-0'}}</th>
+            <th class="text-align-right">{{b.med_flavipiravir_tab| number:'1.0-0'}}</th>
+            <th class="text-align-right">{{b.med_flavipiravir_tab_used_month| number:'1.0-0'}}</th>
+        </tr>
+    </tfoot> -->
+  </table>
+</div>
+
+
+<app-loadding #loadding></app-loadding>
