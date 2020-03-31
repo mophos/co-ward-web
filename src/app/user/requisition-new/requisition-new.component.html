@@ -1,0 +1,102 @@
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="javascript://" routerLink="/staff/requisition">เบิก</a>
+  <span class="breadcrumb-item active">สร้างใบเบิก</span>
+</nav>
+
+<div class="clr-row" style="padding-top: 1rem;">
+  <div class="clr-col-2">
+    ชื่อสถานบริการ
+  </div>
+  <div class="clr-col-5">
+    <app-autocomplete-hospital style="padding: 0px" #hospital (onselect)="onSelectHosp($event)">
+    </app-autocomplete-hospital>
+  </div>
+</div>
+<div class="clr-row">
+  <div class="clr-col-2">
+    HN
+  </div>
+  <div class="clr-col-5">
+    <input type="text" name="hn" [(ngModel)]="hn" value="" style="width: 100%;">
+  </div>
+</div>
+<div class="clr-row">
+  <div class="clr-col-2">
+    รหัสบัตรประจำตัวประชาชน
+  </div>
+  <div class="clr-col-5">
+    <input type="text" name="cid" [(ngModel)]="cid" value="" style="width: 100%;">
+  </div>
+</div>
+<div class="clr-row">
+  <div class="clr-col-2">
+    รหัสหนังสือเดินทาง
+  </div>
+  <div class="clr-col-5">
+    <input type="text" name="passport" [(ngModel)]="passport" value="" style="width: 100%;">
+  </div>
+</div>
+<div class="clr-row">
+  <div class="clr-col-2">
+    คำนำหน้าชื่อ
+  </div>
+  <div class="clr-col-5">
+    <select [(ngModel)]="titleId" name="titleId">
+      <option value="all">ทั้งหมด</option>
+      <option [value]="t.id" *ngFor="let t of title">{{t.name}}</option>
+    </select>
+  </div>
+</div>
+<div class="clr-row">
+  <div class="clr-col-2">
+    ชื่อ
+  </div>
+  <div class="clr-col-5">
+    <input type="text" name="fname" [(ngModel)]="fname" value="" style="width: 100%;">
+  </div>
+</div>
+<div class="clr-row">
+  <div class="clr-col-2">
+    นามสกุล
+  </div>
+  <div class="clr-col-5">
+    <input type="text" name="lname" [(ngModel)]="lname" value="" style="width: 100%;">
+  </div>
+</div>
+<div class="clr-row">
+  <div class="clr-col-2">
+    เหตุผล
+  </div>
+  <div class="clr-col-5">
+    <input type="text" name="reason" [(ngModel)]="reason" value="" style="width: 100%;">
+  </div>
+</div>
+<div class="clr-row">
+  <div class="clr-col-2">
+    โทร.
+  </div>
+  <div class="clr-col-5">
+    <input type="text" name="tel" [(ngModel)]="tel" value="" style="width: 100%;">
+  </div>
+  <div class="clr-col-1">
+    <button class="btn btn-sm btn-success" (click)="add()" title="เพิ่ม">
+      <clr-icon shape="add"></clr-icon> เพิ่ม
+    </button>
+  </div>
+</div>
+
+<clr-datagrid>
+  <clr-dg-column>ชื่อโรงพยาบาล</clr-dg-column>
+  <clr-dg-column>รหัสบัตรประจำตัวประชาชน</clr-dg-column>
+  <clr-dg-column>ชื่อผู้ป่วย</clr-dg-column>
+  <clr-dg-column>นามสกุล</clr-dg-column>
+  <clr-dg-column>เหตุผล</clr-dg-column>
+
+  <clr-dg-row *ngFor="let l of patient">
+    <clr-dg-cell>{{l.hospname}}</clr-dg-cell>
+    <clr-dg-cell>{{l.cid}}</clr-dg-cell>
+    <clr-dg-cell>{{l.fname}}</clr-dg-cell>
+    <clr-dg-cell>{{l.lname}}</clr-dg-cell>
+    <clr-dg-cell>{{l.reason}}</clr-dg-cell>
+  </clr-dg-row>
+</clr-datagrid>

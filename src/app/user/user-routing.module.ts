@@ -11,6 +11,9 @@ import { BedComponent } from './bed/bed.component';
 import { SettingComponent } from './setting/setting.component';
 import { CheckBedComponent } from './check-bed/check-bed.component';
 import { CheckSuppliesComponent } from './check-supplies/check-supplies.component';
+import { RequisitionComponent } from './requisition/requisition.component';
+import { RequisitionNewComponent } from './requisition-new/requisition-new.component';
+import { RequisitionEditComponent } from './requisition-edit/requisition-edit.component';
 
 const routes: Routes = [
   {
@@ -38,6 +41,14 @@ const routes: Routes = [
       { path: 'setting', component: SettingComponent },
       { path: 'check-bed', component: CheckBedComponent },
       { path: 'check-supplie', component: CheckSuppliesComponent },
+      {
+        path: 'requisition',
+        children: [
+          { path: '', component: RequisitionComponent },
+          { path: 'new', component: RequisitionNewComponent },
+          { path: 'edit', component: RequisitionEditComponent },
+        ]
+      }
     ]
   }
 ];

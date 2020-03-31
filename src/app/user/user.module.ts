@@ -17,6 +17,9 @@ import { BedComponent } from './bed/bed.component';
 import { SettingComponent } from './setting/setting.component';
 import { CheckBedComponent } from './check-bed/check-bed.component';
 import { CheckSuppliesComponent } from './check-supplies/check-supplies.component';
+import { RequisitionComponent } from './requisition/requisition.component';
+import { RequisitionNewComponent } from './requisition-new/requisition-new.component';
+import { RequisitionEditComponent } from './requisition-edit/requisition-edit.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,7 @@ import { CheckSuppliesComponent } from './check-supplies/check-supplies.componen
     TrackingComponent, 
     TrackingDetailComponent, 
     BedComponent, 
-    SettingComponent, CheckBedComponent, CheckSuppliesComponent
+    SettingComponent, CheckBedComponent, CheckSuppliesComponent, RequisitionComponent, RequisitionNewComponent, RequisitionEditComponent
   ],
   imports: [
     HelpModule,

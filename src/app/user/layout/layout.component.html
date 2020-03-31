@@ -26,11 +26,13 @@
       <router-outlet></router-outlet>
     </div>
     <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
-      <a *ngIf="hospTypeCode=='01'" clrVerticalNavLink routerLink="/staff/check-bed" title="ตรวจสอบการบันทึกข้อมูลเตียง" routerLinkActive="active">
+      <a *ngIf="hospTypeCode=='01'" clrVerticalNavLink routerLink="/staff/check-bed" title="ตรวจสอบการบันทึกข้อมูลเตียง"
+        routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         ตรวจสอบการบันทึกข้อมูลเตียง
       </a>
-      <a *ngIf="hospTypeCode=='01'" clrVerticalNavLink routerLink="/staff/check-supplie" title="ตรวจสอบการบันทึกข้อมูลเวชภัณฑ์" routerLinkActive="active">
+      <a *ngIf="hospTypeCode=='01'" clrVerticalNavLink routerLink="/staff/check-supplie" title="ตรวจสอบการบันทึกข้อมูลเวชภัณฑ์"
+        routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         ตรวจสอบการบันทึกข้อมูลเวชภัณฑ์
       </a>
@@ -53,6 +55,10 @@
       <a clrVerticalNavLink routerLink="/staff/setting" title="ตั้งค่าโรงพยาบาล" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         ตั้งค่าโรงพยาบาล
+      </a>
+      <a clrVerticalNavLink routerLink="/staff/requisition" title="เบิก" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        เบิก
       </a>
     </clr-vertical-nav>
   </div>
