@@ -48,4 +48,9 @@ export class RestockService {
     return this.http.put(url, {}).toPromise();
   }
 
+  getSupplies() {
+    const url = `${this.url}/v1/admin/restock/suppiles`;
+    return this.http.get(url).toPromise();
+  }
+
 }
