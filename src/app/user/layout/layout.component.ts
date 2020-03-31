@@ -10,6 +10,7 @@ export class LayoutComponent implements OnInit {
 
   fullname: any;
   hospname: any;
+  hospTypeCode: any;
   collapsible = true;
   collapse = false;
   public jwtHelper = new JwtHelperService();
@@ -19,6 +20,7 @@ export class LayoutComponent implements OnInit {
     const decoded = this.jwtHelper.decodeToken(sessionStorage.getItem('token'));
     this.fullname = decoded.fullname;
     this.hospname = decoded.hospname;
+    this.hospTypeCode = decoded.hospTypeCode;
   }
 
   ngOnInit() {

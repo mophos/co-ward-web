@@ -38,3 +38,24 @@
   .breadcrumb-item.active {
     color: #636c72;
   }
+
+  .isError {
+    background-color: #F8B7B6;
+  }
+  
+  .isSuccess {
+    background-color: #DFF0D0;
+  }
+  
+  .isWarning {
+    background-color: #FFFCE8;
+  }
+  
+  .isProblem {
+    background-color: #FFE5C9;
+  }
+  
+  .editLine {
+    border-bottom: 2px solid #E62700;
+    background-color: #FFF0EE;
+  }

@@ -24,6 +24,7 @@ export class RegisterComponent implements OnInit {
   passwordConfirm: any = ''
   email: any = ''
   phoneNumber: any
+  province: any
 
   checkHospCode: any
   checkCid: any
@@ -32,8 +33,11 @@ export class RegisterComponent implements OnInit {
   checkEmail: any
   checkPhone: any
 
+  isUploading: any = false;
   hospName: any = ''
 
+  fileName: any;
+  filesToUpload: File;
   @ViewChild('hospital') hosp: AutocompleteHospitalComponent;
 
   constructor(
@@ -52,6 +56,7 @@ export class RegisterComponent implements OnInit {
           if (rs.rows.length) {
             this.checkHospCode = true
             this.hospName = rs.rows[0].hospname
+            this.province = rs.rows[0].hosptype_id == '1' ? 'Y' : 'N'
           } else {
             this.hospName = ''
             this.checkHospCode = false
@@ -110,6 +115,7 @@ export class RegisterComponent implements OnInit {
           email: this.email,
           type: 'STAFF',
           telephone: this.phoneNumber,
+          is_province: this.province,
         }
         console.log(obj);
       }
@@ -117,6 +123,20 @@ export class RegisterComponent implements OnInit {
 
     }
   }
+
+  fileChangeEvent(fileInput: any) {
+    this.filesToUpload = null;
+    this.filesToUpload = <File>fileInput.target.files[0];
+    if (this.filesToUpload) {
+      this.fileName = fileInput.target.files[0].name;
+    }
+  }
+
+  // const rs = await this.uploadService.uploadFile(
+  //   this.userId,
+  //   this.filesToUpload
+  // );
+
 
   async onSelectHosp(e) {
     this.onSelectHospcode = e.hospcode;

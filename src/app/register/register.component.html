@@ -293,6 +293,23 @@
 
               </div>
             </div>
+            <div class="clr-row">
+              <div class="clr-col-3">
+                <label class="btn btn-sm btn-secondary" style="margin: 0px;">
+                  <input type="file" #file accept="image/*" style="display: none;" (change)="fileChangeEvent($event)">
+                  เลือกไฟล์...
+                </label>
+              </div>
+              <div class="clr-col-9">
+                <input type="text" style="width: 100%;" #file accept="image/*" class="form-control" id="fileName" aria-describedby="fileName"
+                  name="fileName" [(ngModel)]="fileName" placeholder="เลือกไฟล์ภาพที่ต้องการอัปโหลด..." readonly>
+                <p>
+                  <span class="spinner" *ngIf="isUploading">
+                    Loading...
+                  </span>
+                </p>
+              </div>
+            </div>
           </form>
         </div>
       </div>

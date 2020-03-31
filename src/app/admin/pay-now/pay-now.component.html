@@ -1,46 +1,109 @@
-<div class="clr-row">
-  <div class="clr-col-1">
-    ชื่อสถานบริการ :
-  </div>
-  <div class="clr-col-3">
-    <app-autocomplete-hospital style="padding: 0px" #hospital (onselect)="onSelectHosp($event)">
-    </app-autocomplete-hospital>
-  </div>
-</div>
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="javascript://" routerLink="/admin/manage-restock">เติมเวชภัณฑ์</a>
+  <a class="breadcrumb-item" href="javascript://">จ่ายด่วน</a>
+</nav>
 <div class="clr-row">
   <div class="clr-col-6">
-    <clr-datagrid [clrDgLoading]="loading" [style.height.px]="200">
-      <clr-dg-column>รหัส</clr-dg-column>
-      <clr-dg-column>รายการ</clr-dg-column>
-      <clr-dg-column></clr-dg-column>
-      <clr-dg-row *ngFor="let l of hospList; let idx=index;">
-        <clr-dg-cell>{{l.hospcode}}</clr-dg-cell>
-        <clr-dg-cell>{{l.hospname}}</clr-dg-cell>
-        <clr-dg-cell>
-          <button class="btn btn-sm btn-danger" (click)="remove(l)" title="ลบ">
-            <clr-icon shape="trash"></clr-icon>
-          </button>
-        </clr-dg-cell>
-      </clr-dg-row>
-    </clr-datagrid>
+    <div class="card">
+      <div class="card-header">
+        <div class="clr-row">
+          <div class="clr-col-3">
+            ชื่อสถานบริการ :
+          </div>
+          <div class="clr-col-7">
+            <app-autocomplete-hospital style="padding: 0px" #hospital (onselect)="onSelectHosp($event)">
+            </app-autocomplete-hospital>
+          </div>
+          <div class="clr-col-2">
+            <button class="btn btn-sm btn-success" [disabled]="!hosp" (click)="add()" title="เพิ่ม">
+              <clr-icon shape="plus"></clr-icon> เพิ่ม
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
+          <clr-dg-column>รหัส</clr-dg-column>
+          <clr-dg-column>รายการ</clr-dg-column>
+          <clr-dg-column></clr-dg-column>
+          <clr-dg-row *ngFor="let l of hospList; let idx=index;" [ngClass]="{ 'isSuccess': l.check == 'Y' }">
+            <clr-dg-cell>{{l.hospcode}}</clr-dg-cell>
+            <clr-dg-cell>{{l.hospname}}</clr-dg-cell>
+            <clr-dg-cell>
+              <button class="btn btn-sm btn-danger" (click)="remove(idx)" title="ลบ">
+                <clr-icon shape="trash"></clr-icon>
+              </button>
+              <button class="btn btn-sm btn-primary" [disabled]="l.check === undefined" (click)="copy(idx)" title="คัดลอก">
+                <clr-icon shape="copy"></clr-icon>
+              </button>
+              <button class="btn btn-sm btn-success" (click)="next(idx)" title="เพิ่มเวชภัณฑ์">
+                <clr-icon shape="fast-forward"></clr-icon>
+              </button>
+            </clr-dg-cell>
+          </clr-dg-row>
+        </clr-datagrid>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn btn-success" (click)="saveAll()" title="save">
+          บันทึก
+        </button>
+      </div>
+    </div>
   </div>
-  <div class="clr-col-6">
-    <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
-      <clr-dg-column>#</clr-dg-column>
-      <clr-dg-column>รหัสเวชภัณฑ์</clr-dg-column>
-      <clr-dg-column>รายการ</clr-dg-column>
-      <clr-dg-column>จำนวนเติม</clr-dg-column>
-      <clr-dg-column>หน่วย</clr-dg-column>
 
-      <clr-dg-row *ngFor="let l of list; let idx=index;">
-        <clr-dg-cell>{{idx+1}}</clr-dg-cell>
-        <clr-dg-cell>{{l.code}}</clr-dg-cell>
-        <clr-dg-cell>{{l.name}}</clr-dg-cell>
-        <clr-dg-cell>
-          <input style="text-align: right;" type="number" name="qty" [(ngModel)]="l.qty" class="clr-input width-fit">
-        </clr-dg-cell>
-        <clr-dg-cell>{{l.unit}}</clr-dg-cell>
-      </clr-dg-row>
-    </clr-datagrid>
+  <div class="clr-col-6">
+    <div class="card">
+      <div class="card-header">
+        <div class="clr-row">
+          <div class="clr-col-12">
+            <button class="btn btn-sm btn-success" [disabled]="!list.length" (click)="save()" title="save">
+              <clr-icon shape="rewind"></clr-icon> บันทึก
+            </button>
+            โรงพยาบาล : {{hospName}}
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
+          <clr-dg-column>#</clr-dg-column>
+          <clr-dg-column>รหัสเวชภัณฑ์</clr-dg-column>
+          <clr-dg-column>รายการ</clr-dg-column>
+          <clr-dg-column>จำนวนเติม</clr-dg-column>
+          <clr-dg-column>หน่วย</clr-dg-column>
+
+          <clr-dg-row *ngFor="let l of list; let idx=index;">
+            <clr-dg-cell>{{idx+1}}</clr-dg-cell>
+            <clr-dg-cell>{{l.code}}</clr-dg-cell>
+            <clr-dg-cell>{{l.name}}</clr-dg-cell>
+            <clr-dg-cell>
+              <input style="text-align: right;" type="number" name="qty" [(ngModel)]="l.qty" class="clr-input width-fit">
+            </clr-dg-cell>
+            <clr-dg-cell>{{l.unit}}</clr-dg-cell>
+          </clr-dg-row>
+        </clr-datagrid>
+      </div>
+    </div>
   </div>
 </div>
+
+<clr-modal [(clrModalOpen)]="modal" [clrModalClosable]="false" [clrModalSize]="'xl'">
+  <div class="modal-body">
+    <div class="clr-row">
+      <div class="clr-col-3">
+        ชื่อสถานบริการ :
+      </div>
+      <div class="clr-col-9">
+        <app-autocomplete-hospital style="padding: 0px" #hospital (onselect)="onSelectHosp($event)">
+        </app-autocomplete-hospital>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="copyHos()" [disabled]="isSave">
+      บันทึก
+    </button>
+    <button type="button" class="btn btn-danger" (click)="modal = false">
+      ปิด
+    </button>
+  </div>
+</clr-modal>
