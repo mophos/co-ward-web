@@ -21,6 +21,7 @@ export class RegisterComponent implements OnInit {
   passwordConfirm: any = ''
   email: any = ''
   phoneNumber: any
+  province: any
 
   checkHospCode: any
   checkCid: any
@@ -29,7 +30,11 @@ export class RegisterComponent implements OnInit {
   checkEmail: any
   checkPhone: any
 
+  isUploading: any = false;
   hospName: any = ''
+
+  fileName: any;
+  filesToUpload: File;
 
   constructor(
     private alertService: AlertService,
@@ -47,6 +52,7 @@ export class RegisterComponent implements OnInit {
           if (rs.rows.length) {
             this.checkHospCode = true
             this.hospName = rs.rows[0].hospname
+            this.province = rs.rows[0].hosptype_id == '1' ? 'Y' : 'N'
           } else {
             this.hospName = ''
             this.checkHospCode = false
@@ -66,7 +72,7 @@ export class RegisterComponent implements OnInit {
   async enterCid() {
     if (this.cid.length == 13) {
       this.checkCid = thaiIdCard.verify(this.cid);
-    }else{
+    } else {
       this.checkCid = false
     }
   }
@@ -80,7 +86,7 @@ export class RegisterComponent implements OnInit {
   }
 
   async enterEmail() {
-    this.checkEmail = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(this.email)    
+    this.checkEmail = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(this.email)
   }
 
   async enterPasswordConfirm() {
@@ -93,7 +99,7 @@ export class RegisterComponent implements OnInit {
 
   async save() {
     try {
-      if(this.checkHospCode && this.checkCid && this.position != '' && this.prename != '' && this.firstName != '' && this.lastName != '' && this.username != '' && this.checkPasswordConfirm && this.checkEmail && this.checkPhone){
+      if (this.checkHospCode && this.checkCid && this.position != '' && this.prename != '' && this.firstName != '' && this.lastName != '' && this.username != '' && this.checkPasswordConfirm && this.checkEmail && this.checkPhone) {
         let obj: any = {
           username: this.username,
           password: this.password,
@@ -105,6 +111,7 @@ export class RegisterComponent implements OnInit {
           email: this.email,
           type: 'STAFF',
           telephone: this.phoneNumber,
+          is_province: this.province,
         }
         console.log(obj);
       }
@@ -112,5 +119,19 @@ export class RegisterComponent implements OnInit {
 
     }
   }
+
+  fileChangeEvent(fileInput: any) {
+    this.filesToUpload = null;
+    this.filesToUpload = <File>fileInput.target.files[0];
+    if (this.filesToUpload) {
+      this.fileName = fileInput.target.files[0].name;
+    }
+  }
+
+  // const rs = await this.uploadService.uploadFile(
+  //   this.userId,
+  //   this.filesToUpload
+  // );
+
 
 }
