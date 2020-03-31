@@ -65,7 +65,7 @@ export class ManageRestockComponent implements OnInit {
     this.loading = false;
   }
 
-  
+
   async onClickEdit(l) {
     this.router.navigate(['/admin/manage-restock/edit', { restockId: l.id }]);
   }
@@ -106,5 +106,9 @@ export class ManageRestockComponent implements OnInit {
       this.loading = false;
       this.alertService.error(error);
     }
+  }
+
+  async payNow() {
+    this.router.navigate(['/admin/manage-restock/pay-now']);
   }
 }

@@ -10,6 +10,7 @@ import { ManageMinMaxSubComponent } from './manage-min-max-sub/manage-min-max-su
 import { ManageRequestSubComponent } from './manage-request-sub/manage-request-sub.component';
 import { ManageRestockComponent } from './manage-restock/manage-restock.component';
 import { ManageRestockEditComponent } from './manage-restock-edit/manage-restock-edit.component';
+import { PayNowComponent } from './pay-now/pay-now.component';
 
 const routes: Routes = [
   {
@@ -22,9 +23,10 @@ const routes: Routes = [
         path: 'manage-restock',
         children: [
           { path: '', component: ManageRestockComponent },
-          { path: 'edit', component: ManageRestockEditComponent, }]
+          { path: 'edit', component: ManageRestockEditComponent, },
+          { path: 'pay-now', component: PayNowComponent, }]
       },
-      { path: 'manage-request', component: ManageRequestComponent },
+      // { path: 'manage-request', component: ManageRequestComponent },
       { path: 'manage-request/sub', component: ManageRequestSubComponent },
       { path: 'manage-min-max', component: ManageMinMaxComponent },
       { path: 'manage-min-max/sub', component: ManageMinMaxSubComponent },

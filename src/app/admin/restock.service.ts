@@ -28,6 +28,11 @@ export class RestockService {
     return this.http.post(url, { data }).toPromise();
   }
 
+  save(data) {
+    const url = `${this.url}/v1/admin/restock/create/pay-now`;
+    return this.http.post(url, { data }).toPromise();
+  }
+
   getListHospital(restockId, typesId) {
     const url = `${this.url}/v1/admin/restock/list-hospital?restockId=${restockId}&typesId=${typesId}`;
     return this.http.get(url).toPromise();
@@ -46,6 +51,11 @@ export class RestockService {
   removeRestock(id: any) {
     const url = `${this.url}/v1/admin/restock/remove-restock/${id}`;
     return this.http.put(url, {}).toPromise();
+  }
+
+  getSupplies() {
+    const url = `${this.url}/v1/admin/restock/suppiles`;
+    return this.http.get(url).toPromise();
   }
 
 }
