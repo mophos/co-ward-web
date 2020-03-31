@@ -16,6 +16,8 @@ import { ManagerModule } from './manager/manager.module';
 import { UserModule } from './user/user.module';
 import { AlertService } from './help/alert.service';
 import { RegisterComponent } from './register/register.component';
+import { FormsModule } from '@angular/forms';
+import { HelpModule } from './help/help.module';
 
 export function tokenGetter() {
   return sessionStorage.getItem('token');
@@ -36,7 +38,9 @@ export function tokenGetter() {
     LoginModule,
     AdminModule,
     ManagerModule,
-    UserModule
+    UserModule,
+    FormsModule,
+    HelpModule
   ],
   providers: [
     { provide: 'API_URL', useValue: environment.apiUrl },

@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, Output, Input, EventEmitter } from '@angular/core';
-import { AlertService } from '../../../../help/alert.service';
+import { AlertService } from '../../../help/alert.service';
 
 @Component({
   selector: 'app-autocomplete-district',
