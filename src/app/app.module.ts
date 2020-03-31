@@ -17,6 +17,7 @@ import { UserModule } from './user/user.module';
 import { AlertService } from './help/alert.service';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
+import { HelpModule } from './help/help.module';
 
 export function tokenGetter() {
   return sessionStorage.getItem('token');
@@ -26,7 +27,7 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -38,7 +39,8 @@ export function tokenGetter() {
     AdminModule,
     ManagerModule,
     UserModule,
-    FormsModule
+    FormsModule,
+    HelpModule
   ],
   providers: [
     { provide: 'API_URL', useValue: environment.apiUrl },

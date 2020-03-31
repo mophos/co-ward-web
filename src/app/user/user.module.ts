@@ -15,7 +15,6 @@ import { TrackingComponent } from './tracking/tracking.component';
 import { TrackingDetailComponent } from './tracking-detail/tracking-detail.component';
 import { BedComponent } from './bed/bed.component';
 import { SettingComponent } from './setting/setting.component';
-import { DirectiveModule } from './directive/directive.module';
 import { CheckBedComponent } from './check-bed/check-bed.component';
 import { CheckSuppliesComponent } from './check-supplies/check-supplies.component';
 
@@ -31,14 +30,13 @@ import { CheckSuppliesComponent } from './check-supplies/check-supplies.componen
     SettingComponent, CheckBedComponent, CheckSuppliesComponent
   ],
   imports: [
+    HelpModule,
     CommonModule,
     UserRoutingModule,
     BrowserModule,
     ClarityModule,
     BrowserAnimationsModule,
     FormsModule,
-    HelpModule,
-    DirectiveModule
   ],
   exports:[
     InventoryAddComponent,

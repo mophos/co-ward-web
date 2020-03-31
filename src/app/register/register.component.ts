@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { RegisterService } from '../register/register.service';
 import { AlertService } from '../help/alert.service';
 import thaiIdCard from 'thai-id-card';
+import { AutocompleteHospitalComponent } from '../help/autocomplete-hospital/autocomplete-hospital.component';
 
 @Component({
   selector: 'app-register',
@@ -10,6 +11,8 @@ import thaiIdCard from 'thai-id-card';
 })
 export class RegisterComponent implements OnInit {
 
+  hospcodeConfirm: any = '';
+  onSelectHospcode: any = null;
   hospCode: any = ''
   cid: any = ''
   position: any
@@ -35,6 +38,7 @@ export class RegisterComponent implements OnInit {
 
   fileName: any;
   filesToUpload: File;
+  @ViewChild('hospital') hosp: AutocompleteHospitalComponent;
 
   constructor(
     private alertService: AlertService,
@@ -133,5 +137,9 @@ export class RegisterComponent implements OnInit {
   //   this.filesToUpload
   // );
 
+
+  async onSelectHosp(e) {
+    this.onSelectHospcode = e.hospcode;
+  }
 
 }
