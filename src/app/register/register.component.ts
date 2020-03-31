@@ -13,31 +13,32 @@ export class RegisterComponent implements OnInit {
 
   hospcodeConfirm: any = '';
   onSelectHospcode: any = null;
-  hospCode: any = ''
   cid: any = ''
-  position: any
-  prename: any
-  firstName: any
-  lastName: any
-  username: any
+  position: any = null;
+  title: any = null;
+  firstName: any = ''
+  lastName: any = ''
+  username: any = ''
   password: any = ''
   passwordConfirm: any = ''
   email: any = ''
-  phoneNumber: any
+  phoneNumber: any = ''
   province: any
 
-  checkHospCode: any
   checkCid: any
   checkPassword: any
   checkPasswordConfirm: any
   checkEmail: any
   checkPhone: any
 
+  titleList: any
+  positionList: any
+
   isUploading: any = false;
   hospName: any = ''
 
   fileName: any;
-  filesToUpload: File;
+  filesToUpload: File = null;
   @ViewChild('hospital') hosp: AutocompleteHospitalComponent;
 
   constructor(
@@ -46,31 +47,8 @@ export class RegisterComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-  }
-
-  async enterHopsCord() {
-    if (this.hospCode.length == 5) {
-      try {
-        const rs: any = await this.registerService.getHospCode(this.hospCode);
-        if (rs.ok) {
-          if (rs.rows.length) {
-            this.checkHospCode = true
-            this.hospName = rs.rows[0].hospname
-            this.province = rs.rows[0].hosptype_id == '1' ? 'Y' : 'N'
-          } else {
-            this.hospName = ''
-            this.checkHospCode = false
-          }
-        } else {
-          this.alertService.error();
-        }
-      } catch (error) {
-        this.alertService.error(error);
-      }
-    }
-    else {
-      this.checkHospCode = false
-    }
+    this.getTitle();
+    this.getPosition();
   }
 
   async enterCid() {
@@ -83,14 +61,11 @@ export class RegisterComponent implements OnInit {
 
   async enterPassword() {
     this.checkPassword = /^(?=.*[A-Za-z])(?=.*[0-9]).{8,}$/.test(this.password)
-  }
-
-  async enterPhone() {
-    this.checkPhone = /^([0-9]{10})$/.test(this.phoneNumber)
-  }
-
-  async enterEmail() {
-    this.checkEmail = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(this.email)
+    if (this.password == this.passwordConfirm && this.checkPassword) {
+      this.checkPasswordConfirm = true
+    } else if (this.password != this.passwordConfirm) {
+      this.checkPasswordConfirm = false
+    }
   }
 
   async enterPasswordConfirm() {
@@ -101,45 +76,83 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  async enterPhone() {
+    this.checkPhone = /^([0-9]{10})$/.test(this.phoneNumber)
+  }
+
+  async enterEmail() {
+    this.checkEmail = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(this.email)
+  }
+
   async save() {
     try {
-      if (this.checkHospCode && this.checkCid && this.position != '' && this.prename != '' && this.firstName != '' && this.lastName != '' && this.username != '' && this.checkPasswordConfirm && this.checkEmail && this.checkPhone) {
+      if (this.onSelectHospcode == this.hospcodeConfirm && this.checkCid && this.position && this.title && this.firstName != '' && this.lastName != '' && this.username != '' && this.checkPasswordConfirm && this.checkEmail && this.checkPhone && this.filesToUpload) {
         let obj: any = {
           username: this.username,
           password: this.password,
-          hospcode: this.hospCode,
-          prename: this.prename,
-          fname: this.prename,
-          lname: this.prename,
-          position: this.position,
+          hospcode: this.onSelectHospcode,
+          cid: this.cid,
+          titleId: this.title,
+          fname: this.firstName,
+          lname: this.lastName,
+          positionId: this.position,
           email: this.email,
           type: 'STAFF',
           telephone: this.phoneNumber,
-          is_province: this.province,
+          isProvince: this.province,
         }
-        console.log(obj);
+
+        const rs = await this.registerService.saveUser(obj);
+        console.log(rs);
       }
     } catch (error) {
 
     }
   }
 
-  fileChangeEvent(fileInput: any) {
+  async fileChangeEvent(fileInput: any) {
     this.filesToUpload = null;
     this.filesToUpload = <File>fileInput.target.files[0];
     if (this.filesToUpload) {
       this.fileName = fileInput.target.files[0].name;
     }
+
+    const rs = await this.registerService.upload(
+      this.filesToUpload,
+      this.cid,
+    );
+    console.log(rs);
   }
-
-  // const rs = await this.uploadService.uploadFile(
-  //   this.userId,
-  //   this.filesToUpload
-  // );
-
 
   async onSelectHosp(e) {
     this.onSelectHospcode = e.hospcode;
+    this.province = e.hosptype_id == '1' ? 'Y' : 'N'
+  }
+
+  async getTitle() {
+    try {
+      const rs: any = await this.registerService.getTitle();
+      if (rs.ok) {
+        this.titleList = rs.rows;
+      } else {
+        this.alertService.error(rs.error);
+      }
+    } catch (error) {
+      this.alertService.error(error.message);
+    }
+  }
+
+  async getPosition() {
+    try {
+      const rs: any = await this.registerService.getPosition();
+      if (rs.ok) {
+        this.positionList = rs.rows;
+      } else {
+        this.alertService.error(rs.error);
+      }
+    } catch (error) {
+      this.alertService.error(error.message);
+    }
   }
 
 }

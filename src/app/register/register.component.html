@@ -17,33 +17,8 @@
               <div class="clr-col-6">
                 <app-autocomplete-hospital style="padding: 0px" #hospital (onselect)="onSelectHosp($event)">
                 </app-autocomplete-hospital>
-                <!-- <input type="text" maxlength="5" (keyup)="enterHopsCord()" id="hospCode" placeholder="รหัสสถานบริการ" -->
-                <!-- name="hospCode" class="clr-input clr-col-12" [(ngModel)]="hospCode"> -->
               </div>
               <div class="clr-col-3">
-                <div *ngIf="!checkHospCode && hospCode.length == 5" class="alert alert-danger alert-sm" role="alert"
-                  style="margin: 0rem;">
-                  <div class="alert-items">
-                    <div class="alert-item static">
-                      <div class="alert-icon-wrapper">
-                        <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
-                      </div>
-                      <span class="alert-text">
-                        ไม่พบรหัสสถานบริการ
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div *ngIf="checkHospCode && hospCode.length == 5" class="alert alert-success alert-sm" role="alert">
-                  <div class="alert-items">
-                    <div class="alert-item static">
-                      <div class="alert-icon-wrapper">
-                        <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
-                      </div>
-                      <span class="alert-text">{{hospName}}</span>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
             <div class="clr-row">
@@ -55,8 +30,8 @@
                   name="hospcodeConfirm" class="clr-input clr-col-12" [(ngModel)]="hospcodeConfirm">
               </div>
               <div class="clr-col-3">
-                <div *ngIf="onSelectHospcode != hospcodeConfirm && hospcodeConfirm == 5" class="alert alert-danger alert-sm" role="alert"
-                  style="margin: 0rem;">
+                <div *ngIf="onSelectHospcode != hospcodeConfirm && hospcodeConfirm.length == 5"
+                  class="alert alert-danger alert-sm" role="alert" style="margin: 0rem;">
                   <div class="alert-items">
                     <div class="alert-item static">
                       <div class="alert-icon-wrapper">
@@ -68,7 +43,8 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf="onSelectHospcode == hospcodeConfirm" class="alert alert-success alert-sm" role="alert">
+                <div *ngIf="onSelectHospcode == hospcodeConfirm" class="alert alert-success alert-sm" role="alert"
+                  style="margin: 0rem;">
                   <div class="alert-items">
                     <div class="alert-item static">
                       <div class="alert-icon-wrapper">
@@ -102,7 +78,7 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf="checkCid" class="alert alert-success alert-sm" role="alert">
+                <div *ngIf="checkCid" class="alert alert-success alert-sm" role="alert" style="margin: 0rem;">
                   <div class="alert-items">
                     <div class="alert-item static">
                       <div class="alert-icon-wrapper">
@@ -119,8 +95,11 @@
                 ตำแหน่ง :
               </div>
               <div class="clr-col-6">
-                <input type="text" id="position" placeholder="ระบุตำแหน่ง" name="position" class="clr-input clr-col-12"
-                  [(ngModel)]="position">
+                <div class="clr-select-wrapper" style="width: 100%;">
+                  <select name="position" [(ngModel)]="position" class="clr-select" style="width: 100%;">
+                    <option *ngFor="let l of positionList" [value]="l.id">{{l.name}}</option>
+                  </select>
+                </div>
               </div>
               <div class="clr-col-3">
 
@@ -131,8 +110,11 @@
                 คำนำหน้า :
               </div>
               <div class="clr-col-6">
-                <input type="text" id="prename" placeholder="คำนำหน้า" name="prename" class="clr-input clr-col-12"
-                  [(ngModel)]="prename">
+                <div class="clr-select-wrapper" style="width: 100%;">
+                  <select name="title" [(ngModel)]="title" class="clr-select" style="width: 100%;">
+                    <option *ngFor="let l of titleList" [value]="l.id">{{l.name}}</option>
+                  </select>
+                </div>
               </div>
               <div class="clr-col-3">
 
@@ -183,7 +165,8 @@
                   class="clr-input clr-col-12" [(ngModel)]="password">
               </div>
               <div class="clr-col-3">
-                <div *ngIf="!checkPassword && password != ''" class="alert alert-danger alert-sm" role="alert" style="margin: 0rem;">
+                <div *ngIf="!checkPassword && password != ''" class="alert alert-danger alert-sm" role="alert"
+                  style="margin: 0rem;">
                   <div class="alert-items">
                     <div class="alert-item static">
                       <div class="alert-icon-wrapper">
@@ -195,7 +178,7 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf="checkPassword" class="alert alert-success alert-sm" role="alert">
+                <div *ngIf="checkPassword" class="alert alert-success alert-sm" role="alert" style="margin: 0rem;">
                   <div class="alert-items">
                     <div class="alert-item static">
                       <div class="alert-icon-wrapper">
@@ -214,8 +197,9 @@
                 Confirm Password :
               </div>
               <div class="clr-col-6">
-                <input type="password" (keyup)="enterPasswordConfirm()" id="passwordConfirm" placeholder="Confirm Password"
-                  name="passwordConfirm" class="clr-input clr-col-12" [(ngModel)]="passwordConfirm">
+                <input type="password" (keyup)="enterPasswordConfirm()" id="passwordConfirm"
+                  placeholder="Confirm Password" name="passwordConfirm" class="clr-input clr-col-12"
+                  [(ngModel)]="passwordConfirm">
               </div>
               <div class="clr-col-3">
                 <div *ngIf="!checkPasswordConfirm && this.passwordConfirm != ''" class="alert alert-danger alert-sm"
@@ -232,7 +216,7 @@
                   </div>
                 </div>
                 <div *ngIf="checkPasswordConfirm && this.passwordConfirm != ''" class="alert alert-success alert-sm"
-                  role="alert">
+                  role="alert" style="margin: 0rem;">
                   <div class="alert-items">
                     <div class="alert-item static">
                       <div class="alert-icon-wrapper">
@@ -251,11 +235,12 @@
                 Email :
               </div>
               <div class="clr-col-6">
-                <input type="email" (keyup)="enterEmail()" id="email" placeholder="Email" name="email" class="clr-input clr-col-12"
-                  [(ngModel)]="email">
+                <input type="email" (keyup)="enterEmail()" id="email" placeholder="Email" name="email"
+                  class="clr-input clr-col-12" [(ngModel)]="email">
               </div>
               <div class="clr-col-3">
-                <div *ngIf="!checkEmail && this.email != ''" class="alert alert-danger alert-sm" role="alert" style="margin: 0rem;">
+                <div *ngIf="!checkEmail && this.email != ''" class="alert alert-danger alert-sm" role="alert"
+                  style="margin: 0rem;">
                   <div class="alert-items">
                     <div class="alert-item static">
                       <div class="alert-icon-wrapper">
@@ -267,7 +252,8 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf="checkEmail && this.email != ''" class="alert alert-success alert-sm" role="alert">
+                <div *ngIf="checkEmail && this.email != ''" class="alert alert-success alert-sm" role="alert"
+                  style="margin: 0rem;">
                   <div class="alert-items">
                     <div class="alert-item static">
                       <div class="alert-icon-wrapper">
@@ -290,19 +276,52 @@
                   name="phoneNumber" class="clr-input clr-col-12" [(ngModel)]="phoneNumber">
               </div>
               <div class="clr-col-3">
-
+                <div *ngIf="!checkPhone && this.phoneNumber != ''" class="alert alert-danger alert-sm" role="alert"
+                  style="margin: 0rem;">
+                  <div class="alert-items">
+                    <div class="alert-item static">
+                      <div class="alert-icon-wrapper">
+                        <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+                      </div>
+                      <span class="alert-text">
+                        รูปแบบไม่ถูกต้อง
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="checkPhone && this.phoneNumber != ''" class="alert alert-success alert-sm" role="alert"
+                  style="margin: 0rem;">
+                  <div class="alert-items">
+                    <div class="alert-item static">
+                      <div class="alert-icon-wrapper">
+                        <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+                      </div>
+                      <span class="alert-text">
+                        รูปแบบถูกต้อง
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="clr-row">
-              <div class="clr-col-3">
-                <label class="btn btn-sm btn-secondary" style="margin: 0px;">
-                  <input type="file" #file accept="image/*" style="display: none;" (change)="fileChangeEvent($event)">
-                  เลือกไฟล์...
-                </label>
+            <div class="clr-row" style="margin-top: 0.5rem;">
+              <div class="clr-col-3" style="text-align: right;">
+                ภาพหน้าบัตรประชาชน :
               </div>
               <div class="clr-col-9">
-                <input type="text" style="width: 100%;" #file accept="image/*" class="form-control" id="fileName" aria-describedby="fileName"
-                  name="fileName" [(ngModel)]="fileName" placeholder="เลือกไฟล์ภาพที่ต้องการอัปโหลด..." readonly>
+                <button class="btn btn-sm btn-secondary" *ngIf="onSelectHospcode != hospcodeConfirm || !checkCid || !position || !title || firstName == '' || lastName == '' ||
+                username == '' || !checkPasswordConfirm || !checkEmail || !checkPhone" [disabled]="true">
+                  เลือกไฟล์...
+                </button>
+                <label class="btn btn-sm btn-secondary" style="margin: 0px;" *ngIf="!(onSelectHospcode != hospcodeConfirm || !checkCid || !position || !title || firstName == '' || lastName == '' ||
+                username == '' || !checkPasswordConfirm || !checkEmail || !checkPhone)">
+                  <input type="file" #file accept="image/jpg,image/png,image/jpeg" style="display: none;"
+                    (change)="fileChangeEvent($event)">
+                  เลือกไฟล์...
+                </label>
+                <input type="text" style="width: 100%;" #file accept="image/*" class="form-control" id="fileName"
+                  aria-describedby="fileName" name="fileName" [(ngModel)]="fileName"
+                  placeholder="เลือกไฟล์ภาพที่ต้องการอัปโหลด..." readonly>
                 <p>
                   <span class="spinner" *ngIf="isUploading">
                     Loading...
@@ -314,7 +333,9 @@
         </div>
       </div>
       <div class="card-footer">
-        <button class="btn btn-success" (click)="save()">บันทึก</button>
+        <button class="btn btn-success" (click)="save()" [disabled]="
+        onSelectHospcode != hospcodeConfirm || !checkCid || !position || !title || firstName == '' || lastName == '' ||
+        username == '' || !checkPasswordConfirm || !checkEmail || !checkPhone || !filesToUpload">บันทึก</button>
         <button class="btn btn-danger-outline">ยกเลิก</button>
       </div>
     </div>
