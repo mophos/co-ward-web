@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SettingService } from '../setting.service';
 import { AlertService } from '../../help/alert.service';
-import { AutocompleteProvinceComponent } from '../directive/autocomplete-address/autocomplete-province/autocomplete-province.component';
-import { AutocompleteDistrictComponent } from '../directive/autocomplete-address/autocomplete-district/autocomplete-district.component';
-import { AutocompleteSubdistrictComponent } from '../directive/autocomplete-address/autocomplete-subdistrict/autocomplete-subdistrict.component';
-import { AutocompleteZipcodeComponent } from '../directive/autocomplete-address/autocomplete-zipcode/autocomplete-zipcode.component';
+import { AutocompleteProvinceComponent } from '../../help/autocomplete-address/autocomplete-province/autocomplete-province.component';
+import { AutocompleteDistrictComponent } from '../../help/autocomplete-address/autocomplete-district/autocomplete-district.component';
+import { AutocompleteSubdistrictComponent } from '../../help/autocomplete-address/autocomplete-subdistrict/autocomplete-subdistrict.component';
+import { AutocompleteZipcodeComponent } from '../../help/autocomplete-address/autocomplete-zipcode/autocomplete-zipcode.component';
 
 @Component({
   selector: 'app-setting',
@@ -43,7 +43,7 @@ export class SettingComponent implements OnInit {
     try {
       let rs: any = await this.settingService.getInfo();
       console.log(rs);
-      
+
       if (rs.ok) {
         this.hospCode = rs.rows[0].hospcode;
         this.hospName = rs.rows[0].hospname;
