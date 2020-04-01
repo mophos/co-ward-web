@@ -18,8 +18,8 @@ export class MinMaxService {
     return this.http.get(url).toPromise();
   }
 
-  getListHospTotal(hcode, mcode, scode, query) {
-    const url = `${this.url}/v1/admin/hospital?hosptype_code=${hcode}&ministry_code=${mcode}&sub_ministry_code${scode}&query=${query}`;
+  getListHospTotal(chospitalTypesId, query = '') {
+    const url = `${this.url}/v1/admin/hospital/total?hosptype_id=${chospitalTypesId}&query=${query}`;
     return this.http.get(url).toPromise();
   }
 
