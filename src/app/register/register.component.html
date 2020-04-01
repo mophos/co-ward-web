@@ -12,7 +12,7 @@
           <form clrForm>
             <div class="clr-row">
               <div class="clr-col-3" style="text-align: right;">
-                ชื่อสถานบริการ :
+                ชื่อสถานบริการ<span class="required">*</span> :
               </div>
               <div class="clr-col-6">
                 <app-autocomplete-hospital style="padding: 0px" #hospital (onchange)="onSelectHosp($event)"
@@ -36,7 +36,7 @@
             </div>
             <div class="clr-row">
               <div class="clr-col-3" style="text-align: right;">
-                รหัสโรงพยาบาล :
+                รหัสโรงพยาบาล<span class="required">*</span> :
               </div>
               <div class="clr-col-6">
                 <input type="text" maxlength="5" id="hospcodeConfirm" placeholder="ระบุรหัสโรงพยาบาล"
@@ -71,7 +71,7 @@
             </div>
             <div class="clr-row">
               <div class="clr-col-3" style="text-align: right;">
-                เลขบัตรประชาชน :
+                เลขบัตรประชาชน<span class="required">*</span> :
               </div>
               <div class="clr-col-6">
                 <input type="text" (keyup)="enterCid()" maxlength="13" id="cid" placeholder="เลขบัตรประชาชน 13 หลัก"
@@ -105,7 +105,7 @@
             </div>
             <div class="clr-row">
               <div class="clr-col-3" style="text-align: right;">
-                ตำแหน่ง :
+                ตำแหน่ง<span class="required">*</span> :
               </div>
               <div class="clr-col-6">
                 <div class="clr-select-wrapper" style="width: 100%;">
@@ -120,7 +120,7 @@
             </div>
             <div class="clr-row">
               <div class="clr-col-3" style="text-align: right;">
-                คำนำหน้า :
+                คำนำหน้า<span class="required">*</span> :
               </div>
               <div class="clr-col-6">
                 <div class="clr-select-wrapper" style="width: 100%;">
@@ -135,7 +135,7 @@
             </div>
             <div class="clr-row">
               <div class="clr-col-3" style="text-align: right;">
-                ชื่อ :
+                ชื่อ<span class="required">*</span> :
               </div>
               <div class="clr-col-6">
                 <input type="text" id="firstName" placeholder="ชื่อ" name="firstName" class="clr-input clr-col-12"
@@ -147,7 +147,7 @@
             </div>
             <div class="clr-row">
               <div class="clr-col-3" style="text-align: right;">
-                นามสกุล :
+                นามสกุล<span class="required">*</span> :
               </div>
               <div class="clr-col-6">
                 <input type="text" id="lastName" placeholder="นามสกุล" name="lastName" class="clr-input clr-col-12"
@@ -159,7 +159,7 @@
             </div>
             <div class="clr-row">
               <div class="clr-col-3" style="text-align: right;">
-                Username :
+                Username<span class="required">*</span> :
               </div>
               <div class="clr-col-6">
                 <input type="text" id="username" placeholder="username" name="username" class="clr-input clr-col-12"
@@ -171,7 +171,7 @@
             </div>
             <div class="clr-row">
               <div class="clr-col-3" style="text-align: right;">
-                Password :
+                Password<span class="required">*</span> :
               </div>
               <div class="clr-col-6">
                 <input type="password" (keyup)="enterPassword()" id="password" placeholder="password" name="password"
@@ -207,7 +207,7 @@
             </div>
             <div class="clr-row">
               <div class="clr-col-3" style="text-align: right;">
-                Confirm Password :
+                Confirm Password<span class="required">*</span> :
               </div>
               <div class="clr-col-6">
                 <input type="password" (keyup)="enterPasswordConfirm()" id="passwordConfirm"
@@ -245,7 +245,7 @@
             </div>
             <div class="clr-row">
               <div class="clr-col-3" style="text-align: right;">
-                Email :
+                Email<span class="required">*</span> :
               </div>
               <div class="clr-col-6">
                 <input type="email" (keyup)="enterEmail()" id="email" placeholder="Email" name="email"
@@ -282,7 +282,7 @@
             </div>
             <div class="clr-row">
               <div class="clr-col-3" style="text-align: right;">
-                เบอร์มือถือ :
+                เบอร์มือถือ<span class="required">*</span> :
               </div>
               <div class="clr-col-6">
                 <input type="text" (keyup)="enterPhone()" maxlength="10" id="phoneNumber" placeholder="เบอร์มือถือ"
@@ -319,7 +319,7 @@
             </div>
             <div class="clr-row" style="margin-top: 0.5rem;">
               <div class="clr-col-3" style="text-align: right;">
-                ภาพหน้าบัตรประชาชน :
+                ภาพหน้าบัตรประชาชน<span class="required">*</span> :
               </div>
               <div class="clr-col-9">
                 <button class="btn btn-sm btn-secondary" *ngIf="onSelectHospcode != hospcodeConfirm || !checkCid || !position || !title || firstName == '' || lastName == '' ||
