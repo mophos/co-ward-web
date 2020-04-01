@@ -18,6 +18,7 @@ import { AlertService } from './help/alert.service';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { HelpModule } from './help/help.module';
+import { RegisterDrugComponent } from './register-drug/register-drug.component';
 
 export function tokenGetter() {
   return sessionStorage.getItem('token');
@@ -28,6 +29,7 @@ export function tokenGetter() {
     AppComponent,
     PageNotFoundComponent,
     RegisterComponent,
+    RegisterDrugComponent,
   ],
   imports: [
     AppRoutingModule,
