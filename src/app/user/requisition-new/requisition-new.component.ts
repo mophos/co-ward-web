@@ -115,12 +115,15 @@ export class RequisitionNewComponent implements OnInit {
     this.onSelectPatient = l;
   }
 
-  saveGenerics() {
-    let idx = findIndex(this.patient, { cid: this.onSelectPatient.cid });
-    if (idx > -1) {
-      this.patient[idx].generics = this.generics;
+  async saveGenerics() {
+    let confirm = await this.alertService.confirm();
+    if (confirm) {
+      let idx = findIndex(this.patient, { cid: this.onSelectPatient.cid });
+      if (idx > -1) {
+        this.patient[idx].generics = this.generics;
+      }
+      this.modal = false;
     }
-    this.modal = false;
   }
 
   async getGenerics() {
@@ -155,16 +158,19 @@ export class RequisitionNewComponent implements OnInit {
   }
 
   async saveAll() {
-    try {
-      let rs: any = await this.requisitionService.save(this.patient);
-      if (rs.ok) {
-        this.alertService.success();
-        this.router.navigate(['/staff/requisition']);
-      } else {
-        this.alertService.error();
+    let confirm = await this.alertService.confirm();
+    if (confirm) {
+      try {
+        let rs: any = await this.requisitionService.save(this.patient);
+        if (rs.ok) {
+          this.alertService.success();
+          this.router.navigate(['/staff/requisition']);
+        } else {
+          this.alertService.error();
+        }
+      } catch (error) {
+        this.alertService.error(error);
       }
-    } catch (error) {
-      this.alertService.error(error);
     }
   }
 }

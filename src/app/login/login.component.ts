@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
   async doLogin() {
     if (this.username && this.password) {
       const rs: any = await this.loginService.doLogin(this.username, this.password);
+
       if (rs.ok) {
         sessionStorage.setItem('token', rs.token);
         const decoded = this.jwtHelper.decodeToken(rs.token);
@@ -36,10 +37,7 @@ export class LoginComponent implements OnInit {
           this.route.navigate(['/staff']);
         } else if (decoded.type === 'MANAGER') {
           this.route.navigate(['/manager']);
-        } 
-        // else if (decoded.type === 'ZONE') {
-        //   this.route.navigate(['/zone']);
-        // }
+        }
       } else {
         this.isError = true;
         this.errorMessage = 'ชื่อผู้ใช้งาน หรือ รหัสผ่าน ไม่ถูกต้อง';
