@@ -27,7 +27,7 @@ export class ManageMinMaxComponent implements OnInit {
       this.loading = true;
       const rs: any = await this.minmaxTypeService.getList();
       if (rs.ok) {
-        this.list = rs.rows;        
+        this.list = rs.rows;
       } else {
         this.alertService.error();
       }

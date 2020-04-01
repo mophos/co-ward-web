@@ -23,7 +23,7 @@ export class ManageSuppliesComponent implements OnInit {
   offset = 0;
   limit = 20;
 
-  loading: boolean = false;
+  loading = false;
   isUpdate = false;
   modal = false;
   isLoadding = false;
@@ -60,7 +60,7 @@ export class ManageSuppliesComponent implements OnInit {
       if (rs.ok) {
         this.list = rs.rows;
         for (const i of this.list) {
-          i.toggle = i.is_actived == 'Y' ? true : false
+          i.toggle = i.is_actived === 'Y' ? true : false;
         }
       } else {
         this.alertService.error(rs.error);
@@ -154,14 +154,14 @@ export class ManageSuppliesComponent implements OnInit {
   }
 
   async onChangeActived(l) {
-    this.id = l.id
+    this.id = l.id;
     this.loading = true;
     try {
       const data = {
-        is_actived: l.toggle == true ? 'Y' : 'N',
+        is_actived: l.toggle === true ? 'Y' : 'N',
       };
-      
-      let rs: any = await this.suppliesService.update(data, this.id);
+
+      const rs: any = await this.suppliesService.update(data, this.id);
       if (rs.ok) {
         this.alertService.success();
       } else {
