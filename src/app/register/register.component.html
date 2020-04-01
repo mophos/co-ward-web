@@ -1,6 +1,6 @@
 <div class="clr-row">
   <div class="clr-col-lg-6 clr-col-md-6 clr-col-6 clr-offset-sm-3">
-    <div class="card">
+    <div class="card" style="background-color:inherit">
       <div class="card-header">
         ลงทะเบียนสำหรับเจ้าที่โรงพยาบาล
       </div>
@@ -15,10 +15,11 @@
                 ชื่อสถานบริการ :
               </div>
               <div class="clr-col-6">
-                <app-autocomplete-hospital style="padding: 0px" #hospital (onselect)="onSelectHosp($event)">
+                <app-autocomplete-hospital style="padding: 0px;background-color:inherit" #hospital (onselect)="onSelectHosp($event)">
                 </app-autocomplete-hospital>
               </div>
               <div class="clr-col-3">
+                
               </div>
             </div>
             <div class="clr-row">
@@ -321,7 +322,7 @@
                 </label>
                 <input type="text" style="width: 100%;" #file accept="image/*" class="form-control" id="fileName"
                   aria-describedby="fileName" name="fileName" [(ngModel)]="fileName"
-                  placeholder="เลือกไฟล์ภาพที่ต้องการอัปโหลด..." readonly>
+                  placeholder="เลือกไฟล์ภาพที่ต้องการอัปโหลดไม่เกิน 5 MB ..." readonly>
                 <p>
                   <span class="spinner" *ngIf="isUploading">
                     Loading...

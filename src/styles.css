@@ -1,61 +1,72 @@
 /* You can add global styles to this file, and also import other style files */
-.width-fit  {
-    width: 100%;
+
+.width-fit {
+  width: 100%;
 }
 
 .breadcrumb {
-    padding: 0.5rem 0.5rem;
-    list-style: none;
-    background-color: #eceeef;
-  }
-  
-  .breadcrumb::after {
-    display: block;
-    content: "";
-    clear: both;
-  }
-  
-  .breadcrumb-item {
-    float: left;
-  }
-  
-  .breadcrumb-item+.breadcrumb-item::before {
-    display: inline-block;
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
-    color: #636c72;
-    content: "/";
-  }
-  
-  .breadcrumb-item+.breadcrumb-item:hover::before {
-    text-decoration: underline;
-  }
-  
-  .breadcrumb-item+.breadcrumb-item:hover::before {
-    text-decoration: none;
-  }
-  
-  .breadcrumb-item.active {
-    color: #636c72;
-  }
+  padding: 0.5rem 0.5rem;
+  list-style: none;
+  background-color: #eceeef;
+}
 
-  .isError {
-    background-color: #F8B7B6;
-  }
-  
-  .isSuccess {
-    background-color: #DFF0D0;
-  }
-  
-  .isWarning {
-    background-color: #FFFCE8;
-  }
-  
-  .isProblem {
-    background-color: #FFE5C9;
-  }
-  
-  .editLine {
-    border-bottom: 2px solid #E62700;
-    background-color: #FFF0EE;
-  }
+.breadcrumb::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+
+.breadcrumb-item {
+  float: left;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+  display: inline-block;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  color: #636c72;
+  content: "/";
+}
+
+.breadcrumb-item+.breadcrumb-item:hover::before {
+  text-decoration: underline;
+}
+
+.breadcrumb-item+.breadcrumb-item:hover::before {
+  text-decoration: none;
+}
+
+.breadcrumb-item.active {
+  color: #636c72;
+}
+
+.isError {
+  background-color: #F8B7B6;
+}
+
+.isSuccess {
+  background-color: #DFF0D0;
+}
+
+.isWarning {
+  background-color: #FFFCE8;
+}
+
+.isProblem {
+  background-color: #FFE5C9;
+}
+
+.editLine {
+  border-bottom: 2px solid #E62700;
+  background-color: #FFF0EE;
+}
+
+.ta-item {
+  position: relative;
+  z-index: 20000;
+  display: block;
+  width: 12rem;
+  text-align: left;
+  padding: 5px;
+  border: 1px black solid !important; 
+}

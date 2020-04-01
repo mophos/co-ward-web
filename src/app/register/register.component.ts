@@ -153,6 +153,7 @@ export class RegisterComponent implements OnInit {
       const rs: any = await this.registerService.getTitle();
       if (rs.ok) {
         this.titleList = rs.rows;
+        this.title = rs.rows[0].id
       } else {
         this.alertService.error(rs.error);
       }
@@ -166,6 +167,7 @@ export class RegisterComponent implements OnInit {
       const rs: any = await this.registerService.getPosition();
       if (rs.ok) {
         this.positionList = rs.rows;
+        this.position = rs.rows[0].id
       } else {
         this.alertService.error(rs.error);
       }
