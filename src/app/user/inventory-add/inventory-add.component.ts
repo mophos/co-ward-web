@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { AlertService } from '../../help/alert.service';
 import { InventoryService } from '../inventory.service';
 import { Router } from '@angular/router';
@@ -16,6 +16,7 @@ export class InventoryAddComponent implements OnInit {
   isSave = false;
   modalsAdd = false;
 
+  @Output() onclose: EventEmitter<any> = new EventEmitter<any>();
   constructor(
     private alertService: AlertService,
     private inventoryService: InventoryService,
@@ -52,14 +53,14 @@ export class InventoryAddComponent implements OnInit {
         for (const i of this.suppiles) {
           objBalancedetails.push({
             supplies_id: i.id,
-            qty: i.qty,
+            qty: i.qty === undefined ? 0 : i.qty,
             usage_rate_day: i.usageRateDay,
           });
         }
         const rs: any = await this.inventoryService.saveBalance(objBalancedetails);
         if (rs.ok) {
+          this.onclose.emit(true);
           this.alertService.success();
-          this.router.navigate(['staff/inventory']);
         }
         this.modalsAdd = false;
         this.isLoadding = false;
@@ -72,7 +73,7 @@ export class InventoryAddComponent implements OnInit {
     }
   }
 
-  open(){
+  open() {
     this.modalsAdd = true
   }
 }

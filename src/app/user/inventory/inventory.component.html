@@ -35,5 +35,5 @@
   </clr-dg-footer>
 </clr-datagrid>
 
-<app-inventory-add #modalsAdd></app-inventory-add>
+<app-inventory-add (onclose)="getlist()" #modalsAdd></app-inventory-add>
 <app-inventory-edit #modalsEdit></app-inventory-edit>
