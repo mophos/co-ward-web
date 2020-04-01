@@ -20,7 +20,7 @@
   <clr-dg-column>รายการ</clr-dg-column>
   <clr-dg-column></clr-dg-column>
 
-  <clr-dg-row *ngFor="let l of list; let idx=index;">
+  <clr-dg-row *clrDgItems="let l of list; let idx=index;">
     <clr-dg-cell>{{idx+1}}</clr-dg-cell>
     <clr-dg-cell>{{l.hospcode}}</clr-dg-cell>
     <clr-dg-cell>{{l.hospcode_new}}</clr-dg-cell>
@@ -33,12 +33,13 @@
       </div>
     </clr-dg-cell>
   </clr-dg-row>
-  <clr-dg-footer>
+  <clr-dg-footer>{{list.length}} users</clr-dg-footer>
+  <!-- <clr-dg-footer>
     <clr-dg-pagination #pagination [clrDgTotalItems]="total" [clrDgPageSize]="limit">
       <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
       {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} จาก {{pagination.totalItems}} รายการ
     </clr-dg-pagination>
-  </clr-dg-footer>
+  </clr-dg-footer> -->
 </clr-datagrid>
 
 <clr-modal [(clrModalOpen)]="modal" [clrModalClosable]="false" [clrModalSize]="'xl'">

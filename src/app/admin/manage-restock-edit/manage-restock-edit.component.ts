@@ -27,6 +27,7 @@ export class ManageRestockEditComponent implements OnInit {
   listSupplies: any
   loading = false
   modal = false
+  modalExport = false
   isSave = false
 
   constructor(
@@ -60,7 +61,7 @@ export class ManageRestockEditComponent implements OnInit {
   }
 
   async getListHospital(l) {
-    this.typeName = l.name
+    this.typeName = l.name;
     try {
       this.loading = true;
       const rs: any = await this.restockService.getListHospital(this.restockId, l.id)
@@ -77,14 +78,14 @@ export class ManageRestockEditComponent implements OnInit {
   }
 
   async onClickEdit(l) {
-    this.hospName = l.hospname
-    this.restockDetailId = l.id
+    this.hospName = l.hospname;
+    this.restockDetailId = l.id;
     try {
       this.loading = true;
       const rs: any = await this.restockService.getListSupplies(this.restockDetailId)
       if (rs.ok) {
         this.listSupplies = rs.rows;
-        this.modal = true
+        this.modal = true;
       } else {
         this.alertService.error();
       }
@@ -96,25 +97,25 @@ export class ManageRestockEditComponent implements OnInit {
   }
 
   async save() {
-    this.isSave = true
+    this.isSave = true;
     const confirm = await this.alertService.confirm();
     if (confirm) {
       try {
-        let data: any = [];
-        let obj: any
+        const data: any = [];
+        let obj: any;
         for (const i of this.listSupplies) {
           obj = {
             supplies_id: i.supplies_id,
             qty: i.qty,
             restock_detail_id: i.restock_detail_id
-          }
-          data.push(obj)
+          };
+          data.push(obj);
         }
 
         const rs: any = await this.restockService.updateSupplies(data, this.restockDetailId)
         if (rs.ok) {
           this.alertService.success();
-          this.modal = false
+          this.modal = false;
         } else {
           this.alertService.error();
         }
@@ -136,22 +137,28 @@ export class ManageRestockEditComponent implements OnInit {
     this.modalImport = true;
   }
 
+  openModalExport() {
+    this.modalExport = true;
+  }
+
   async import() {
-    let fileReader = new FileReader();
+    const fileReader = new FileReader();
     fileReader.onload = async (e) => {
       this.arrayBuffer = fileReader.result;
-      let buffer = new Uint8Array(this.arrayBuffer);
-      let arr = new Array();
-      for (let i = 0; i != buffer.length; ++i) arr[i] = String.fromCharCode(buffer[i]);
-      let bstr = arr.join("");
-      let workbook = XLSX.read(bstr, { type: "binary" });
-      let first_sheet_name = workbook.SheetNames[0];
-      let worksheet = workbook.Sheets[first_sheet_name];
+      const buffer = new Uint8Array(this.arrayBuffer);
+      const arr = new Array();
+      for (let i = 0; i != buffer.length; ++i) {
+        arr[i] = String.fromCharCode(buffer[i]);
+      }
+      const bstr = arr.join('');
+      const workbook = XLSX.read(bstr, { type: 'binary' });
+      const firstSheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[firstSheetName];
 
-      let json: any = XLSX.utils.sheet_to_json(worksheet);
+      const json: any = XLSX.utils.sheet_to_json(worksheet);
       console.log(json[0]);
 
-      let data = [];
+      const data = [];
       let idx = 0;
       for (const v of json) {
         if (idx > 0) {
@@ -161,8 +168,8 @@ export class ManageRestockEditComponent implements OnInit {
                 restock_detail_id: v.id,
                 supplies_code: Object.keys(v)[i],
                 qty: Object.values(v)[i]
-              }
-              data.push(obj)
+              };
+              data.push(obj);
             }
           }
         }
@@ -182,6 +189,10 @@ export class ManageRestockEditComponent implements OnInit {
       }
     }
     fileReader.readAsArrayBuffer(this.file);
+  }
+
+  export() {
+
   }
 
 }

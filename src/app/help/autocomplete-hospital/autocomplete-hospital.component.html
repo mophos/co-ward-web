@@ -1,7 +1,7 @@
 <div class="search-results">
     <div class="clr-row">
         <div class="clr-col-12">
-            <input type="text" autocomplete="off" [disabled]="disabled" [(ngModel)]="query" name="query" style="width: 100%;"
+            <input type="text" autocomplete="off" (keyup)="onKey($event)" [disabled]="disabled" [(ngModel)]="query" name="query" style="width: 100%;"
                 placeholder="ชื่อสถานบริการ" agxTypeahead [taUrl]="searchUrl" taApi="http" [taItemTpl]="itemTpl" (taSelected)="handleResultSelected($event)">
         </div>
     </div>

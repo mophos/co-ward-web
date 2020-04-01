@@ -24,7 +24,7 @@ export class InventoryAddComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    await this.getSuppiles();
+    // await this.getSuppiles();
   }
 
   async getSuppiles() {
@@ -54,7 +54,7 @@ export class InventoryAddComponent implements OnInit {
           objBalancedetails.push({
             supplies_id: i.id,
             qty: i.qty === undefined ? 0 : i.qty,
-            usage_rate_day: i.usageRateDay,
+            usage_rate_day: i.usage_rate_day,
           });
         }
         const rs: any = await this.inventoryService.saveBalance(objBalancedetails);
