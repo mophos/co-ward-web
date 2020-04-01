@@ -11,17 +11,19 @@
 </div>
 
 <clr-datagrid [clrDgLoading]="isLoadding">
-  <clr-dg-column>ลำดับ</clr-dg-column>
+  <clr-dg-column [style.width.%]="5">ลำดับ</clr-dg-column>
   <clr-dg-column>วันที่บันทึก</clr-dg-column>
-  <clr-dg-column>วันที่อัปเดต</clr-dg-column>
+  <clr-dg-column>ผู้บันทึก</clr-dg-column>
   <clr-dg-column></clr-dg-column>
 
   <clr-dg-row *ngFor="let l of history;let idx=index;">
     <clr-dg-cell>{{idx+1}}</clr-dg-cell>
-    <clr-dg-cell>{{l.created_at | dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
-    <clr-dg-cell>{{l.updated_at| dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
+    <clr-dg-cell>{{l.created_at | dateTh:'D MMM YYYY hh:mm'}}</clr-dg-cell>
+    <clr-dg-cell>{{l.fullname}}</clr-dg-cell>
     <clr-dg-cell class="text-align-right">
-      <button class="btn btn-sm btn-primary" style="margin:0" (click)="onClickEdit(l)"><clr-icon shape="search"></clr-icon> รายละเอียด </button>
+      <button class="btn btn-sm btn-primary" style="margin:0" (click)="onClickEdit(l)">
+        <clr-icon shape="search"></clr-icon> รายละเอียด
+      </button>
     </clr-dg-cell>
   </clr-dg-row>
 

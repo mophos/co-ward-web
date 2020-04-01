@@ -2,7 +2,7 @@
   <div class="clr-col-lg-6 clr-col-md-6 clr-col-6 clr-offset-sm-3">
     <div class="card" style="background-color:inherit">
       <div class="card-header">
-        ลงทะเบียนสำหรับเจ้าที่โรงพยาบาล
+        ลงทะเบียนสำหรับเจ้าหน้าที่โรงพยาบาล
       </div>
       <div class="card-block">
         <div class="card-title">
@@ -15,11 +15,23 @@
                 ชื่อสถานบริการ :
               </div>
               <div class="clr-col-6">
-                <app-autocomplete-hospital style="padding: 0px;background-color:inherit" #hospital (onselect)="onSelectHosp($event)">
+                <app-autocomplete-hospital style="padding: 0px" #hospital (onchange)="onSelectHosp($event)"
+                  (onselect)="onSelectHosp($event)">
                 </app-autocomplete-hospital>
               </div>
               <div class="clr-col-3">
-                
+                <div *ngIf="!onSelectHospcode" class="alert alert-danger alert-sm" role="alert" style="margin: 0rem;">
+                  <div class="alert-items">
+                    <div class="alert-item static">
+                      <div class="alert-icon-wrapper">
+                        <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+                      </div>
+                      <span class="alert-text">
+                        กรุณาเลือกโรงพยาบาล
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="clr-row">

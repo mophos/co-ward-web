@@ -13,8 +13,8 @@ import { InventoryEditComponent } from '../inventory-edit/inventory-edit.compone
 export class InventoryComponent implements OnInit {
 
   history: any;
-  @ViewChild('modalsAdd') modalsAdd: InventoryAddComponent
-  @ViewChild('modalsEdit') modalsEdit: InventoryEditComponent
+  @ViewChild('modalsAdd') modalsAdd: InventoryAddComponent;
+  @ViewChild('modalsEdit') modalsEdit: InventoryEditComponent;
   isLoadding = false;
   constructor(
     private router: Router,
@@ -43,12 +43,12 @@ export class InventoryComponent implements OnInit {
     }
   }
 
-  async onClickAdd() {
-    this.modalsAdd.open()
+  onClickAdd() {
+    this.modalsAdd.open();
   }
 
   onClickEdit(l) {
-    this.modalsEdit.open(l.id)
+    this.modalsEdit.open(l.id);
   }
 
 }

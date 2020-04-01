@@ -24,6 +24,12 @@ export class AutocompleteHospitalComponent implements OnInit {
   ngOnInit() {
   }
 
+  onKey(e) {
+    if (e.keyCode === 8) {
+      this.onselect.emit({});
+    }
+
+  }
   handleResultSelected(event: any) {
     this.onselect.emit(event);
     this.query = event ? event.hospname : null;
