@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
   }
 
   register() {
-    this.route.navigate(['/register-drug']);
+    this.route.navigate(['/register']);
   }
 
 }

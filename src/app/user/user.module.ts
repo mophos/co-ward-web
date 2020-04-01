@@ -20,6 +20,8 @@ import { CheckSuppliesComponent } from './check-supplies/check-supplies.componen
 import { RequisitionComponent } from './requisition/requisition.component';
 import { RequisitionNewComponent } from './requisition-new/requisition-new.component';
 import { RequisitionEditComponent } from './requisition-edit/requisition-edit.component';
+import { ReceiveDrugComponent } from './receive-drug/receive-drug.component';
+
 import { AuthBalancesuppile } from '../auth-balancesuppile.service';
 import { AuthStatustracking } from '../auth-statustracking.service';
 import { AuthCheckbed } from '../auth-checkbed.service';
@@ -36,7 +38,13 @@ import { AuthRequisition } from '../auth-requisition.service';
     TrackingComponent,
     TrackingDetailComponent,
     BedComponent,
-    SettingComponent, CheckBedComponent, CheckSuppliesComponent, RequisitionComponent, RequisitionNewComponent, RequisitionEditComponent
+    SettingComponent, 
+    CheckBedComponent, 
+    CheckSuppliesComponent,
+    RequisitionComponent,
+    RequisitionNewComponent, 
+    RequisitionEditComponent,
+    ReceiveDrugComponent
   ],
   imports: [
     HelpModule,
