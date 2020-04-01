@@ -61,6 +61,7 @@ export class ManageSuppliesComponent implements OnInit {
         this.list = rs.rows;
         for (const i of this.list) {
           i.toggle = i.is_actived === 'Y' ? true : false;
+          i.toggle_pay = i.is_pay === 'Y' ? true : false;
         }
       } else {
         this.alertService.error(rs.error);
@@ -159,6 +160,7 @@ export class ManageSuppliesComponent implements OnInit {
     try {
       const data = {
         is_actived: l.toggle === true ? 'Y' : 'N',
+        is_pay: l.toggle_pay === true ? 'Y' : 'N',
       };
 
       const rs: any = await this.suppliesService.update(data, this.id);

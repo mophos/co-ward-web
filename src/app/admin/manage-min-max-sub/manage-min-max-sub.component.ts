@@ -36,14 +36,31 @@ export class ManageMinMaxSubComponent implements OnInit {
 
   ngOnInit() {
     this.getList();
+    // this.getTotal();
   }
 
   async getList() {
     try {
       this.loading = true;
-      let rs: any = await this.minmaxTypeService.getListHosp(this.chospitalTypesId, this.query, this.limit, this.offset);
+      const rs: any = await this.minmaxTypeService.getListHosp(this.chospitalTypesId, this.query, 100000, this.offset);
       if (rs.ok) {
         this.list = rs.rows;
+      } else {
+        this.alertService.error();
+      }
+      this.loading = false;
+    } catch (error) {
+      this.loading = false;
+      this.alertService.error(error);
+    }
+  }
+
+  async getTotal() {
+    try {
+      this.loading = true;
+      const rs: any = await this.minmaxTypeService.getListHospTotal(this.chospitalTypesId, this.query);
+      if (rs.ok) {
+        this.total = rs.rows;
       } else {
         this.alertService.error();
       }

@@ -18,6 +18,7 @@
   <clr-dg-column>รายการ</clr-dg-column>
   <clr-dg-column>หน่วย</clr-dg-column>
   <clr-dg-column>สถานะการใช้งาน</clr-dg-column>
+  <clr-dg-column>สถานะการจ่ายของ</clr-dg-column>
   <clr-dg-column></clr-dg-column>
 
   <clr-dg-row *ngFor="let l of list; let idx=index;">
@@ -26,6 +27,7 @@
     <clr-dg-cell>{{l.name}}</clr-dg-cell>
     <clr-dg-cell>{{l.unit_name}}</clr-dg-cell>
     <clr-dg-cell><input type="checkbox" clrToggle name="toggle" (change)="onChangeActived(l)" required value="l.toggle" [(ngModel)]="l.toggle" /></clr-dg-cell>
+    <clr-dg-cell><input type="checkbox" clrToggle name="toggle_pay" (change)="onChangeActived(l)" required value="l.toggle_pay" [(ngModel)]="l.toggle_pay" /></clr-dg-cell>
     <clr-dg-cell style="text-align: center;">
       <div class="btn-group">
         <button class="btn btn-sm btn-success" (click)="onClickEdit(l)" title="แก้ไข">
