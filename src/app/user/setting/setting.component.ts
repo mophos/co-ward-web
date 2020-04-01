@@ -24,6 +24,8 @@ export class SettingComponent implements OnInit {
   ampurName: any;
   provinceName: any;
   zipcode: any;
+  lat: any;
+  long: any;
 
   @ViewChild('province') province: AutocompleteProvinceComponent;
   @ViewChild('ampur') ampur: AutocompleteDistrictComponent;
@@ -54,6 +56,8 @@ export class SettingComponent implements OnInit {
         this.ampurName = rs.rows[0].ampur_name;
         this.provinceName = rs.rows[0].province_name;
         this.zipcode = rs.rows[0].zipcode;
+        this.lat = rs.rows[0].lat;
+        this.long = rs.rows[0].long;
 
         this.tambonId = rs.rows[0].province_code + rs.rows[0].ampur_code + rs.rows[0].tambon_code;
 
@@ -81,6 +85,8 @@ export class SettingComponent implements OnInit {
         obj.address = this.address;
         obj.province_name = this.provinceName;
         obj.ampur_name = this.ampurName;
+        obj.lat = this.lat;
+        obj.long = this.long;
         obj.tambon_name = this.tambonName;
         obj.province_code = this.tambonId.substring(0, 2);
         obj.ampur_code = this.tambonId.substring(2, 4);

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '../../../node_modules/@angular/router';
 import { LoginService } from './login.service';
-
+import * as findIndex from 'lodash/findIndex';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
@@ -43,10 +43,15 @@ export class LoginComponent implements OnInit {
       if (rs.ok) {
         sessionStorage.setItem('token', rs.token);
         const decoded = this.jwtHelper.decodeToken(rs.token);
+        const rights = decoded.rights;
         if (decoded.type === 'ADMIN') {
           this.route.navigate(['/admin']);
         } else if (decoded.type === 'STAFF') {
-          this.route.navigate(['/staff']);
+          if (findIndex(rights, { name: 'STAFF_REQUISITION' }) > -1) {
+            this.route.navigate(['/staff/requisition']);
+          } else {
+            this.route.navigate(['/staff/inventory']);
+          }
         } else if (decoded.type === 'MANAGER') {
           this.route.navigate(['/manager']);
         }
