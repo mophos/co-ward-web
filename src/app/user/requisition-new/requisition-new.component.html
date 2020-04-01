@@ -17,7 +17,7 @@
     HN
   </div>
   <div class="clr-col-5">
-    <input type="text" name="hn" [(ngModel)]="hn" value="" style="width: 100%;">
+    <input type="text" placeholder="รหัส HN" name="hn" maxlength="10" [(ngModel)]="hn" value="" style="width: 100%;">
   </div>
 </div>
 <div class="clr-row">
@@ -25,7 +25,31 @@
     รหัสบัตรประจำตัวประชาชน
   </div>
   <div class="clr-col-5">
-    <input type="text" name="cid" [(ngModel)]="cid" value="" style="width: 100%;">
+    <input type="text" placeholder="รหัสบัตรประจำตัวประชาชน" maxlength="13" name="cid" [(ngModel)]="cid" value="" style="width: 100%;">
+  </div>
+  <div class="clr-col-3">
+    <div *ngIf="checkCid == false && cid.length == 13" class="alert alert-danger alert-sm" role="alert" style="margin: 0rem;">
+      <div class="alert-items">
+        <div class="alert-item static">
+          <div class="alert-icon-wrapper">
+            <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+          </div>
+          <span class="alert-text">
+            เลขบัตรประชาชนไม่ถูกต้อง
+          </span>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="checkCid" class="alert alert-success alert-sm" role="alert">
+      <div class="alert-items">
+        <div class="alert-item static">
+          <div class="alert-icon-wrapper">
+            <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+          </div>
+          <span class="alert-text">เลขบัตรประชาชนถูกต้อง</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <div class="clr-row">
@@ -33,7 +57,8 @@
     รหัสหนังสือเดินทาง
   </div>
   <div class="clr-col-5">
-    <input type="text" name="passport" [(ngModel)]="passport" value="" style="width: 100%;">
+    <input type="text" placeholder="รหัสหนังสือเดินทาง" name="passport" maxlength="7" [(ngModel)]="passport" value=""
+      style="width: 100%;">
   </div>
 </div>
 <div class="clr-row">
@@ -41,7 +66,7 @@
     คำนำหน้าชื่อ
   </div>
   <div class="clr-col-5">
-    <select [(ngModel)]="titleId" name="titleId">
+    <select [(ngModel)]="titleId" name="titleId" class="clr-input width-fit">
       <option value="all">ทั้งหมด</option>
       <option [value]="t.id" *ngFor="let t of title">{{t.name}}</option>
     </select>
@@ -52,7 +77,7 @@
     ชื่อ
   </div>
   <div class="clr-col-5">
-    <input type="text" name="fname" [(ngModel)]="fname" value="" style="width: 100%;">
+    <input type="text" placeholder="ชื่อ" name="fname" [(ngModel)]="fname" value="" style="width: 100%;">
   </div>
 </div>
 <div class="clr-row">
@@ -60,7 +85,7 @@
     นามสกุล
   </div>
   <div class="clr-col-5">
-    <input type="text" name="lname" [(ngModel)]="lname" value="" style="width: 100%;">
+    <input type="text" placeholder="นามสกุล" name="lname" [(ngModel)]="lname" value="" style="width: 100%;">
   </div>
 </div>
 <div class="clr-row">
@@ -68,7 +93,7 @@
     เหตุผล
   </div>
   <div class="clr-col-5">
-    <input type="text" name="reason" [(ngModel)]="reason" value="" style="width: 100%;">
+    <input type="text" placeholder="เหตุผล" name="reason" [(ngModel)]="reason" value="" style="width: 100%;">
   </div>
 </div>
 <div class="clr-row">
@@ -76,27 +101,72 @@
     โทร.
   </div>
   <div class="clr-col-5">
-    <input type="text" name="tel" [(ngModel)]="tel" value="" style="width: 100%;">
+    <input type="number" placeholder="โทร" name="tel" [(ngModel)]="tel" maxlength="10" value="" style="width: 100%;">
   </div>
   <div class="clr-col-1">
-    <button class="btn btn-sm btn-success" (click)="add()" title="เพิ่ม">
+    <button class="btn btn-sm btn-success" (click)="add()" title="เพิ่ม" [disabled]="!fname || !lname || !hn || !cid || !hospCode">
       <clr-icon shape="add"></clr-icon> เพิ่ม
     </button>
   </div>
 </div>
 
 <clr-datagrid>
+  <clr-dg-column>#</clr-dg-column>
   <clr-dg-column>ชื่อโรงพยาบาล</clr-dg-column>
   <clr-dg-column>รหัสบัตรประจำตัวประชาชน</clr-dg-column>
   <clr-dg-column>ชื่อผู้ป่วย</clr-dg-column>
   <clr-dg-column>นามสกุล</clr-dg-column>
   <clr-dg-column>เหตุผล</clr-dg-column>
+  <clr-dg-column></clr-dg-column>
 
-  <clr-dg-row *ngFor="let l of patient">
+  <clr-dg-row *ngFor="let l of patient; let idx = index;">
+    <clr-dg-cell>{{idx+1}}</clr-dg-cell>
     <clr-dg-cell>{{l.hospname}}</clr-dg-cell>
     <clr-dg-cell>{{l.cid}}</clr-dg-cell>
     <clr-dg-cell>{{l.fname}}</clr-dg-cell>
     <clr-dg-cell>{{l.lname}}</clr-dg-cell>
     <clr-dg-cell>{{l.reason}}</clr-dg-cell>
+    <clr-dg-cell>
+      <button class="btn btn-sm btn-success" (click)="modalAdd(l)" title="เพิ่มรายการยา">
+        <clr-icon shape="add"></clr-icon> เพิ่มรายการยา
+      </button>
+      <button class="btn btn-sm btn-danger" (click)="remove(idx)" title="ลบ">
+        <clr-icon shape="trash"></clr-icon> ลบ
+      </button>
+    </clr-dg-cell>
   </clr-dg-row>
 </clr-datagrid>
+<div class="clr-row">
+  <div class="clr-col-12">
+    <button class="btn btn btn-success" (click)="saveAll()" title="save" [disabled]="!patient.length">
+      บันทึก
+    </button>
+  </div>
+</div>
+
+<clr-modal [(clrModalOpen)]="modal" [clrModalClosable]="false">
+  <h3 class="modal-title">ระบุจำนวนให้เบิก</h3>
+  <div class="modal-body">
+    <clr-datagrid>
+      <clr-dg-column>รหัสยา</clr-dg-column>
+      <clr-dg-column>ชื่อยา</clr-dg-column>
+      <clr-dg-column>จำนวน</clr-dg-column>
+
+      <clr-dg-row *ngFor="let l of generics">
+        <clr-dg-cell>{{l.code}}</clr-dg-cell>
+        <clr-dg-cell>{{l.name}}</clr-dg-cell>
+        <clr-dg-cell>
+          <input type="number" name="qty" [(ngModel)]="l.qty" class="clr-input width-fit" value="{{l.qty}}">
+        </clr-dg-cell>
+      </clr-dg-row>
+    </clr-datagrid>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="saveGenerics()">
+      บันทึก
+    </button>
+    <button type="button" class="btn btn-danger" (click)="modal = false">
+      ปิด
+    </button>
+  </div>
+</clr-modal>

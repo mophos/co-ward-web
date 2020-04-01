@@ -13,17 +13,17 @@
   <clr-dg-column>ลำดับ</clr-dg-column>
   <clr-dg-column>เลขที่ใบ</clr-dg-column>
   <clr-dg-column>วันที่บันทึก</clr-dg-column>
-  <clr-dg-column></clr-dg-column>
+  <!-- <clr-dg-column></clr-dg-column> -->
 
   <clr-dg-row *ngFor="let l of list;let idx=index;">
     <clr-dg-cell>{{idx+1}}</clr-dg-cell>
     <clr-dg-cell>{{l.code}}</clr-dg-cell>
     <clr-dg-cell>{{l.date | dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
-    <clr-dg-cell class="text-align-right">
+    <!-- <clr-dg-cell class="text-align-right">
       <button class="btn btn-sm btn-success" style="margin:0" (click)="onClickEdit(l)">
         <clr-icon shape="trash"></clr-icon> แก้ไข
       </button>
-    </clr-dg-cell>
+    </clr-dg-cell> -->
   </clr-dg-row>
 
   <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
