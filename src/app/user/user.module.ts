@@ -20,6 +20,7 @@ import { CheckSuppliesComponent } from './check-supplies/check-supplies.componen
 import { RequisitionComponent } from './requisition/requisition.component';
 import { RequisitionNewComponent } from './requisition-new/requisition-new.component';
 import { RequisitionEditComponent } from './requisition-edit/requisition-edit.component';
+import { ReceiveDrugComponent } from './receive-drug/receive-drug.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { RequisitionEditComponent } from './requisition-edit/requisition-edit.co
     TrackingComponent, 
     TrackingDetailComponent, 
     BedComponent, 
-    SettingComponent, CheckBedComponent, CheckSuppliesComponent, RequisitionComponent, RequisitionNewComponent, RequisitionEditComponent
+    SettingComponent, CheckBedComponent, CheckSuppliesComponent, RequisitionComponent, RequisitionNewComponent, RequisitionEditComponent, ReceiveDrugComponent
   ],
   imports: [
     HelpModule,
