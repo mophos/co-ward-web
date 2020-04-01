@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
   email: any = ''
   phoneNumber: any = ''
   province: any
-  
+
   checkCid: any
   checkPassword: any
   checkPasswordConfirm: any
@@ -126,6 +126,7 @@ export class RegisterComponent implements OnInit {
             type: 'STAFF',
             telephone: this.phoneNumber,
             isProvince: this.province,
+            right: this.province == 'N' ? ['STAFF_BALANCE_SUPPLIES', 'STAFF_STATUS_TRACKING', 'STAFF_SETTINGS'] : ['STAFF_BALANCE_SUPPLIES', 'STAFF_STATUS_TRACKING', 'STAFF_SETTINGS', 'STAFF_CHECK_SUPPLIES']
           }
 
           let rs: any = await this.registerService.saveUserSupplie(obj);
