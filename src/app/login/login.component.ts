@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
   }
 
   register() {
-    this.route.navigate(['/register']);
+    this.route.navigate(['/register-drug']);
   }
 
 }
