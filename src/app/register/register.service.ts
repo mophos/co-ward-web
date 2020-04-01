@@ -18,7 +18,7 @@ export class RegisterService {
     return this.http.get(url).toPromise();
   }
 
-  upload(files: File, cid) {
+  uploadUserSupplie(files: File, cid) {
     return new Promise((resolve, reject) => {
       const formData: any = new FormData();
       const xhr = new XMLHttpRequest();
@@ -38,14 +38,14 @@ export class RegisterService {
       };
 
       // const token = sessionStorage.getItem('token');
-      const url = `${this.url}/register/upload`;
+      const url = `${this.url}/register/upload-supplie`;
       xhr.open('POST', url, true);
       xhr.send(formData);
     });
   }
 
-  saveUser(data) {
-    const url = `${this.url}/register`;
+  saveUserSupplie(data) {
+    const url = `${this.url}/register/supplie`;
     return this.http.post(url, { data }).toPromise();
   }
 
