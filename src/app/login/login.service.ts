@@ -17,4 +17,9 @@ export class LoginService {
     return this.http.post(url, params).toPromise();
   }
 
+  getVersion() {
+    const url = `${this.url}/version`;
+    return this.http.get(url).toPromise();
+  }
+
 }

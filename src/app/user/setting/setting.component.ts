@@ -42,8 +42,6 @@ export class SettingComponent implements OnInit {
   async getInfo() {
     try {
       let rs: any = await this.settingService.getInfo();
-      console.log(rs);
-
       if (rs.ok) {
         this.hospCode = rs.rows[0].hospcode;
         this.hospName = rs.rows[0].hospname;

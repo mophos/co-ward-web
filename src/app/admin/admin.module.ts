@@ -17,6 +17,10 @@ import { ManageRequestSubComponent } from './manage-request-sub/manage-request-s
 import { ManageRestockComponent } from './manage-restock/manage-restock.component';
 import { ManageRestockEditComponent } from './manage-restock-edit/manage-restock-edit.component';
 import { PayNowComponent } from './pay-now/pay-now.component';
+import { AuthRestock } from '../auth-restock.service';
+import { AuthUsermanage } from '../auth-usermanage.service';
+import { AuthSuppliemanage } from '../auth-suppliemanage.service';
+import { AuthMinmax } from '../auth-minmax.service';
 
 @NgModule({
   declarations: [
@@ -39,6 +43,12 @@ import { PayNowComponent } from './pay-now/pay-now.component';
     ClarityModule,
     BrowserAnimationsModule,
     FormsModule
+  ], 
+  providers: [
+    AuthRestock,
+    AuthUsermanage,
+    AuthSuppliemanage,
+    AuthMinmax
   ]
 })
 export class AdminModule { }

@@ -104,8 +104,6 @@ export class RequisitionNewComponent implements OnInit {
   }
 
   modalAdd(l) {
-    console.log(l);
-
     this.modal = true;
     if (l.generics !== undefined) {
       this.generics = l.generics;

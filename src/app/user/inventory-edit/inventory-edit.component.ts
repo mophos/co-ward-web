@@ -82,7 +82,6 @@ export class InventoryEditComponent implements OnInit {
   }
 
   async open(id) {
-    console.log(id);
     this.id = id
     await this.getSuppiles();
     this.modalsEdit = true

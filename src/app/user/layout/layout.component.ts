@@ -15,13 +15,13 @@ export class LayoutComponent implements OnInit {
   collapsible = true;
   collapse = false;
   rights: any;
-  requisitionMenu;
-  checkBedMenu;
-  checkSuppliesMenu;
-  balanceSuppliesMenu;
-  balanceBedMeny;
-  statusTrackingMenu;
-  settingMenu;
+  requisitionMenu: any;
+  checkBedMenu: any;
+  checkSuppliesMenu: any;
+  balanceSuppliesMenu: any;
+  balanceBedMeny: any;
+  statusTrackingMenu: any;
+  settingMenu: any;
 
   public jwtHelper = new JwtHelperService();
   constructor(
@@ -31,16 +31,15 @@ export class LayoutComponent implements OnInit {
     this.fullname = decoded.fullname;
     this.hospname = decoded.hospname;
     this.rights = decoded.rights;
-    console.log(this.rights);
 
     this.requisitionMenu = findIndex(this.rights, { name: 'STAFF_REQUISITION' }) === -1 ? false : true;
-    this.checkBedMenu = findIndex(this.rights, { name: 'STAFF_CHECK_BED' }) === -1 ? false : true;
+    this.checkBedMenu = findIndex(this.rights, { name: 'STAFF_CHECK_BEDS' }) === -1 ? false : true;
     this.checkSuppliesMenu = findIndex(this.rights, { name: 'STAFF_CHECK_SUPPLIES' }) === -1 ? false : true;
-    this.balanceBedMeny = findIndex(this.rights, { name: 'STAFF_BALANCE_SUPPLIES' }) === -1 ? false : true;
-    this.balanceSuppliesMenu = findIndex(this.rights, { name: 'STAFF_BEDS' }) === -1 ? false : true;
+    this.balanceSuppliesMenu = findIndex(this.rights, { name: 'STAFF_BALANCE_SUPPLIES' }) === -1 ? false : true;
+    this.balanceBedMeny = findIndex(this.rights, { name: 'STAFF_BALANCE_BEDS' }) === -1 ? false : true;
     this.statusTrackingMenu = findIndex(this.rights, { name: 'STAFF_STATUS_TRACKING' }) === -1 ? false : true;
-    this.settingMenu = findIndex(this.rights, { name: 'STAFF_SETTING' }) === -1 ? false : true;
-    this.hospTypeCode = decoded.hospTypeCode;
+    this.settingMenu = findIndex(this.rights, { name: 'STAFF_SETTINGS' }) === -1 ? false : true;
+
   }
 
   ngOnInit() {
