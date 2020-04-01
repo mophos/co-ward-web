@@ -336,7 +336,7 @@
         <button class="btn btn-success" (click)="save()" [disabled]="
         onSelectHospcode != hospcodeConfirm || !checkCid || !position || !title || firstName == '' || lastName == '' ||
         username == '' || !checkPasswordConfirm || !checkEmail || !checkPhone || !checkImage">บันทึก</button>
-        <button class="btn btn-danger-outline">ยกเลิก</button>
+        <button class="btn btn-danger-outline" (click)="cancel()">ยกเลิก</button>
       </div>
     </div>
   </div>
