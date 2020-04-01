@@ -26,17 +26,17 @@
       <router-outlet></router-outlet>
     </div>
     <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
-      <a *ngIf="!checkbedMenu" clrVerticalNavLink routerLink="/staff/check-bed" title="ตรวจสอบการบันทึกข้อมูลเตียง"
+      <a *ngIf="checkbedMenu" clrVerticalNavLink routerLink="/staff/check-bed" title="ตรวจสอบการบันทึกข้อมูลเตียง"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         ตรวจสอบการบันทึกข้อมูลเตียง
       </a>
-      <a *ngIf="!checkSuppliesMenu" clrVerticalNavLink routerLink="/staff/check-supplie" title="ตรวจสอบการบันทึกข้อมูลเวชภัณฑ์"
+      <a *ngIf="checkSuppliesMenu" clrVerticalNavLink routerLink="/staff/check-supplie" title="ตรวจสอบการบันทึกข้อมูลเวชภัณฑ์"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         ตรวจสอบการบันทึกข้อมูลเวชภัณฑ์
       </a>
-      <a *ngIf="!balanceSuppliesMenu" clrVerticalNavLink routerLink="/staff/inventory" title="รายการเวชภัณฑ์คงเหลือ"
+      <a *ngIf="balanceSuppliesMenu" clrVerticalNavLink routerLink="/staff/inventory" title="รายการเวชภัณฑ์คงเหลือ"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         รายการเวชภัณฑ์คงเหลือ
@@ -45,19 +45,19 @@
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         รายการเตียง
       </a> -->
-      <a *ngIf="!statusTrackingMenu" clrVerticalNavLink routerLink="/staff/tracking" title="สถานะของ" routerLinkActive="active">
+      <a *ngIf="statusTrackingMenu" clrVerticalNavLink routerLink="/staff/tracking" title="สถานะของ" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         สถานะการส่งเวชภัณฑ์
       </a>
-      <a *ngIf="!checkBedMenu" clrVerticalNavLink routerLink="/staff/bed" title="เตียงผู้ป่วย" routerLinkActive="active">
+      <a *ngIf="checkBedMenu" clrVerticalNavLink routerLink="/staff/bed" title="เตียงผู้ป่วย" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         สถานะเตียงผู้ป่วย
       </a>
-      <a *ngIf="!settingMenu" clrVerticalNavLink routerLink="/staff/setting" title="ตั้งค่าโรงพยาบาล" routerLinkActive="active">
+      <a *ngIf="settingMenu" clrVerticalNavLink routerLink="/staff/setting" title="ตั้งค่าโรงพยาบาล" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         ตั้งค่าโรงพยาบาล
       </a>
-      <a *ngIf="!requisitionMenu" clrVerticalNavLink routerLink="/staff/requisition" title="เบิก" routerLinkActive="active">
+      <a *ngIf="requisitionMenu" clrVerticalNavLink routerLink="/staff/requisition" title="เบิก" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         เบิก
       </a>
