@@ -27,6 +27,7 @@ export class ManageRestockEditComponent implements OnInit {
   listSupplies: any
   loading = false
   modal = false
+  modalExport = false
   isSave = false
 
   constructor(
@@ -134,6 +135,10 @@ export class ManageRestockEditComponent implements OnInit {
 
   openModal() {
     this.modalImport = true;
+  }
+
+  openModalExport() {
+    this.modalExport = true;
   }
 
   async import() {

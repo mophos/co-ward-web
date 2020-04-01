@@ -1,6 +1,14 @@
 <nav class="breadcrumb">
   <a class="breadcrumb-item" href="javascript://" routerLink="/admin/manage-restock">เติมเวชภัณฑ์</a>
   <a class="breadcrumb-item" href="javascript://">แก้ไขการเติมเวชภัณฑ์</a>
+  <div class="clr-col-12">
+    <button style="float: right;" type="button" class="btn btn-sm btn-primary btn-outline" (click)="openModal()">
+      Import
+    </button>
+    <!-- <button style="float: right;" type="button" class="btn btn-sm btn-success" (click)="openModalExport()">
+      Export
+    </button> -->
+  </div>
 </nav>
 
 <div class="clr-row">
@@ -34,16 +42,11 @@
     <div class="card">
       <div class="card-header">
         <div class="clr-row">
-          <div class="clr-col-3">
+          <div class="clr-col-12">
             รายการโรงพยาบาล
             <span *ngIf="typeName != ''">
               : {{typeName}}
             </span>
-          </div>
-          <div class="clr-col-9">
-            <button style="float: right;" type="button" class="btn btn-sm btn-primary btn-outline" (click)="openModal()">
-              Import
-            </button>
           </div>
         </div>
       </div>
@@ -111,21 +114,41 @@
 </clr-modal>
 
 <clr-modal [(clrModalOpen)]="modalImport" [clrModalClosable]="false" [clrModalSize]="'xl'">
-    <h3 class="modal-title">เลือกไฟล์</h3>
-    <div class="modal-body">
-      <div class="clr-row">
-        <div class="clr-col-12">
-          <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file"
-            accept=".xlsx">
-        </div>
+  <h3 class="modal-title">เลือกไฟล์</h3>
+  <div class="modal-body">
+    <div class="clr-row">
+      <div class="clr-col-12">
+        <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file"
+          accept=".xlsx">
       </div>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-success" (click)="import()">
-        บันทึก
-      </button>
-      <button type="button" class="btn btn-danger" (click)="modalImport = false">
-        ปิด
-      </button>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="import()">
+      บันทึก
+    </button>
+    <button type="button" class="btn btn-danger" (click)="modalImport = false">
+      ปิด
+    </button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="modalExport" [clrModalClosable]="false" [clrModalSize]="'xl'">
+  <h3 class="modal-title">เลือกไฟล์</h3>
+  <div class="modal-body">
+    <div class="clr-row">
+      <div class="clr-col-12">
+        <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file"
+          accept=".xlsx">
+      </div>
     </div>
-  </clr-modal>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="export()">
+      บันทึก
+    </button>
+    <button type="button" class="btn btn-danger" (click)="modalExport = false">
+      ปิด
+    </button>
+  </div>
+</clr-modal>
