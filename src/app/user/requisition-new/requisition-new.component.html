@@ -66,10 +66,12 @@
     คำนำหน้าชื่อ
   </div>
   <div class="clr-col-5">
-    <select [(ngModel)]="titleId" name="titleId" class="clr-input width-fit">
-      <option value="all">ทั้งหมด</option>
-      <option [value]="t.id" *ngFor="let t of title">{{t.name}}</option>
-    </select>
+    <div class="clr-select-wrapper" style="width: 100%;">
+      <select [(ngModel)]="titleId" name="titleId" class="clr-select" style="width: 100%;">
+        <option value="all">กรุณาเลือกคำนำหน้าชื่อ</option>
+        <option [value]="t.id" *ngFor="let t of title">{{t.name}}</option>
+      </select>
+    </div>
   </div>
 </div>
 <div class="clr-row">

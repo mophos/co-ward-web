@@ -23,7 +23,7 @@ export class RequisitionNewComponent implements OnInit {
 
   onSelectPatient: any;
 
-  titleId: any;
+  titleId: any = 'all';
   hospCode: any;
   hospName: any;
   hn: any;
