@@ -19,6 +19,7 @@ export class PayNowComponent implements OnInit {
   hospName: any;
 
   modal = false;
+  loading = false;
 
   @ViewChild('hospital') hospitals: AutocompleteHospitalComponent;
   constructor(
