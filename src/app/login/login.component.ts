@@ -14,14 +14,26 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
   userTypeId: any;
-  userTypes: any = [{ type: 'ผู้ใช้งานทั่วไป', id: 1 }, { type: 'ผู้ดูแลระบบ', id: 2 }];
   errorMessage: string = null;
   isError = false;
+  version: any;
 
   public jwtHelper = new JwtHelperService();
   constructor(private route: Router, private loginService: LoginService) { }
 
   ngOnInit() {
+    this.getVersion();
+  }
+
+  async getVersion() {
+    try {
+      let rs: any = await this.loginService.getVersion();
+      if (rs.ok) {
+        this.version = rs.message;
+      }
+    } catch (error) {
+
+    }
   }
 
   async doLogin() {

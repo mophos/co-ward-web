@@ -136,8 +136,7 @@ export class ManageUserComponent implements OnInit {
         position: this.position,
         email: this.email,
         type: this.level
-      }
-
+      };
       let rs: any;
       if (this.isUpdate) {
         rs = await this.userService.update(data, this.id);

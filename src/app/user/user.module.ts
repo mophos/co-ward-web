@@ -22,16 +22,29 @@ import { RequisitionNewComponent } from './requisition-new/requisition-new.compo
 import { RequisitionEditComponent } from './requisition-edit/requisition-edit.component';
 import { ReceiveDrugComponent } from './receive-drug/receive-drug.component';
 
+import { AuthBalancesuppile } from '../auth-balancesuppile.service';
+import { AuthStatustracking } from '../auth-statustracking.service';
+import { AuthCheckbed } from '../auth-checkbed.service';
+import { AuthChecksupplie } from '../auth-checksupplie.service';
+import { AuthSetting } from '../auth-setting.service';
+import { AuthRequisition } from '../auth-requisition.service';
+
 @NgModule({
   declarations: [
-    InventoryComponent, 
-    LayoutComponent, 
-    InventoryAddComponent, 
-    InventoryEditComponent, 
-    TrackingComponent, 
-    TrackingDetailComponent, 
-    BedComponent, 
-    SettingComponent, CheckBedComponent, CheckSuppliesComponent, RequisitionComponent, RequisitionNewComponent, RequisitionEditComponent, ReceiveDrugComponent
+    InventoryComponent,
+    LayoutComponent,
+    InventoryAddComponent,
+    InventoryEditComponent,
+    TrackingComponent,
+    TrackingDetailComponent,
+    BedComponent,
+    SettingComponent, 
+    CheckBedComponent, 
+    CheckSuppliesComponent,
+    RequisitionComponent,
+    RequisitionNewComponent, 
+    RequisitionEditComponent,
+    ReceiveDrugComponent
   ],
   imports: [
     HelpModule,
@@ -42,10 +55,18 @@ import { ReceiveDrugComponent } from './receive-drug/receive-drug.component';
     BrowserAnimationsModule,
     FormsModule,
   ],
-  exports:[
+  exports: [
     InventoryAddComponent,
     InventoryEditComponent,
     TrackingDetailComponent
+  ],
+  providers: [
+    AuthBalancesuppile,
+    AuthStatustracking,
+    AuthCheckbed,
+    AuthChecksupplie,
+    AuthSetting,
+    AuthRequisition,
   ]
 })
 export class UserModule { }

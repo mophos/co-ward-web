@@ -26,26 +26,26 @@
             <router-outlet></router-outlet>
         </div>
         <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
-            <a *ngIf="!restockMenu" clrVerticalNavLink routerLink="/admin/manage-restock" title="เติมเวชภัณฑ์"
+            <a *ngIf="restockMenu" clrVerticalNavLink routerLink="/admin/manage-restock" title="เติมเวชภัณฑ์"
                 routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 เติมเวชภัณฑ์
             </a>
-            <!-- <a *ngIf="!" clrVerticalNavLink routerLink="/admin/manage-request" title="กรอกคงคลัง" routerLinkActive="active">
+            <!-- <a *ngIf="" clrVerticalNavLink routerLink="/admin/manage-request" title="กรอกคงคลัง" routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 จัดส่งเวชภัณฑ์
             </a> -->
-            <a *ngIf="!minMaxMenu" clrVerticalNavLink routerLink="/admin/manage-min-max" title="จัดการ Min-Max"
+            <a *ngIf="minMaxMenu" clrVerticalNavLink routerLink="/admin/manage-min-max" title="จัดการ Min-Max"
                 routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 จัดการ Min-Max
             </a>
-            <a *ngIf="!userManageMenu" clrVerticalNavLink routerLink="/admin/manage-user" title="จัดการผู้ใช้งาน"
+            <a *ngIf="userManageMenu" clrVerticalNavLink routerLink="/admin/manage-user" title="จัดการผู้ใช้งาน"
                 routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 จัดการผู้ใช้งาน
             </a>
-            <a *ngIf="!suppliesManageMenu" clrVerticalNavLink routerLink="/admin/manage-supplies" title="จัดการเวชภัณฑ์"
+            <a *ngIf="suppliesManageMenu" clrVerticalNavLink routerLink="/admin/manage-supplies" title="จัดการเวชภัณฑ์"
                 routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 จัดการเวชภัณฑ์
