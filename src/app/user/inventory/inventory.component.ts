@@ -42,8 +42,9 @@ export class InventoryComponent implements OnInit {
     }
   }
 
-  onClickAdd() {
+  async onClickAdd() {
     this.modalsAdd.open()
+    await this.modalsAdd.getSuppiles()
   }
 
   onClickEdit(l) {
