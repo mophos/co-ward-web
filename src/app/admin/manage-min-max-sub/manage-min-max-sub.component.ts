@@ -70,7 +70,7 @@ export class ManageMinMaxSubComponent implements OnInit {
       if (rs.ok) {
         this.listDetail = rs.rows;
         for (const i of this.listDetail) {
-          i.toggle = i.is_active == 'N' ? false : true;
+          i.toggle = i.is_active === 'Y' ? true : false;
         }
       } else {
         this.alertService.error();
