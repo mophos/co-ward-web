@@ -32,6 +32,7 @@ export class InventoryComponent implements OnInit {
       const rs: any = await this.inventoryService.getBalanceList();
       if (rs.ok) {
         this.history = rs.rows;
+        await this.modalsAdd.getSuppiles()
       } else {
         this.alertService.error(rs.error);
       }

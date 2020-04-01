@@ -10,7 +10,7 @@ export class InventoryService {
     @Inject('API_URL') private apiUrl: string) { }
 
   async getSuppiles() {
-    const url = `${this.apiUrl}/v1/staff/supplies`;
+    const url = `${this.apiUrl}/v1/staff/balance/supplies`;
     return await this.http.get(url).toPromise();
   }
 
