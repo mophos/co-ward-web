@@ -58,4 +58,9 @@ export class RestockService {
     return this.http.get(url).toPromise();
   }
 
+  approved(data) {
+    const url = `${this.url}/v1/admin/restock/approved-all?data=${data}`;
+    return this.http.get(url).toPromise();
+  }
+
 }

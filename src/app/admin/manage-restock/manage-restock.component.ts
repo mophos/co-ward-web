@@ -16,6 +16,7 @@ export class ManageRestockComponent implements OnInit {
   listApproved: any = [];
   totalApproved: any;
   loading = false;
+  selected: any = [];
 
   constructor(
     private restockService: RestockService,
@@ -112,7 +113,32 @@ export class ManageRestockComponent implements OnInit {
     this.router.navigate(['/admin/manage-restock/pay-now']);
   }
 
-  async export(){
-    
+  async export() {
+
+  }
+
+  async approved() {
+    let comfirm = await this.alertService.confirm();
+    if (comfirm) {
+      this.loading = true;
+      try {
+        let data: any = [];
+        for (const v of this.selected) {
+          data.push(v.id);
+        }
+        let rs: any = await this.restockService.approved(data);
+        console.log(rs.rows);
+
+        if (rs.ok) {
+          this.alertService.success();
+        } else {
+          this.alertService.error();
+        }
+        this.loading = false;
+      } catch (error) {
+        this.loading = false;
+        this.alertService.error();
+      }
+    }
   }
 }
