@@ -70,3 +70,13 @@
   padding: 5px;
   border: 1px black solid !important; 
 }
+
+.text-register {
+  text-align: right;
+}
+
+@media screen and (max-width: 599px) {
+  .text-register {
+    text-align: left;
+  }
+}
