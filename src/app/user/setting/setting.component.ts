@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SettingService } from '../setting.service';
+import { RegisterService } from '../../register/register.service';
 import { AlertService } from '../../help/alert.service';
+import * as findIndex from 'lodash/findIndex';
 import { AutocompleteProvinceComponent } from '../../help/autocomplete-address/autocomplete-province/autocomplete-province.component';
 import { AutocompleteDistrictComponent } from '../../help/autocomplete-address/autocomplete-district/autocomplete-district.component';
 import { AutocompleteSubdistrictComponent } from '../../help/autocomplete-address/autocomplete-subdistrict/autocomplete-subdistrict.component';
@@ -18,6 +20,24 @@ export class SettingComponent implements OnInit {
   tel: any;
   telephone: any;
   telephoneManager: any;
+  positionList: any;
+  position: any;
+  titleList: any;
+  title: any;
+  user: any;
+
+  fname: any;
+  lname: any;
+  email: any;
+  username: any;
+  password: any;
+
+  checkPassword: any;
+  phoneNumber: any;
+  checkPhone: any;
+  checkEmail: any;
+  checkPasswordConfirm: any;
+  passwordConfirm: any = '';
 
   tambonId: any;
   tambonName: any;
@@ -34,11 +54,15 @@ export class SettingComponent implements OnInit {
 
   constructor(
     private settingService: SettingService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private registerService: RegisterService
   ) { }
 
   ngOnInit() {
     this.getInfo();
+    this.getPosition();
+    this.getTitle();
+    this.getUserInfo();
   }
 
   async getInfo() {
@@ -73,12 +97,88 @@ export class SettingComponent implements OnInit {
     }
   }
 
+  async getUserInfo() {
+    try {
+      let rs: any = await this.settingService.getUserInfo();
+      if (rs.ok) {
+        this.user = rs.rows;
+        let idxPosition = findIndex(this.positionList, { id: this.user[0].position_id });
+        let idxTitle = findIndex(this.titleList, { id: this.user[0].title_id });
+        this.position = this.positionList[idxPosition].id;
+        this.title = this.titleList[idxTitle].id;
+        this.fname = this.user[0].fname;
+        this.lname = this.user[0].lname;
+        this.email = this.user[0].email;
+        this.phoneNumber = this.user[0].telephone;
+        this.checkEmail = true;
+        this.checkPhone = true;
+        this.checkPassword = true;
+      } else {
+        this.alertService.error();
+      }
+    } catch (error) {
+      this.alertService.error(error);
+    }
+  }
+
+  async getPosition() {
+    try {
+      const rs: any = await this.registerService.getPosition();
+      if (rs.ok) {
+        this.positionList = rs.rows;
+      } else {
+        this.alertService.error(rs.error);
+      }
+    } catch (error) {
+      this.alertService.error(error.message);
+    }
+  }
+
+  async enterEmail() {
+    this.checkEmail = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(this.email)
+  }
+
+  async enterPhone() {
+    this.checkPhone = /^([0-9]{10})$/.test(this.phoneNumber);
+  }
+
+  async enterPassword() {
+    this.checkPassword = /^(?=.*[A-Za-z])(?=.*[0-9]).{8,}$/.test(this.password);
+    if (this.password == this.passwordConfirm && this.checkPassword) {
+      this.checkPasswordConfirm = true
+    } else if (this.password != this.passwordConfirm) {
+      this.checkPasswordConfirm = false
+    }
+  }
+
+  async enterPasswordConfirm() {
+    if (this.password == this.passwordConfirm && this.checkPassword) {
+      this.checkPasswordConfirm = true
+    } else if (this.password != this.passwordConfirm) {
+      this.checkPasswordConfirm = false
+    }
+  }
+
+  async getTitle() {
+    try {
+      const rs: any = await this.registerService.getTitle();
+      if (rs.ok) {
+        this.titleList = rs.rows;
+      } else {
+        this.alertService.error(rs.error);
+      }
+    } catch (error) {
+      this.alertService.error(error.message);
+    }
+  }
+
   async save() {
     let confirm = await this.alertService.confirm();
     if (confirm) {
       try {
         let data: any = [];
         const obj: any = {};
+
         obj.tel = this.tel;
         obj.telephone = this.telephone;
         obj.telephone_manager = this.telephoneManager;
@@ -94,10 +194,28 @@ export class SettingComponent implements OnInit {
         obj.zipcode = this.zipcode;
         data.push(obj);
 
+        let dataUser: any = [];
+        const objUser: any = {};
+        objUser.position_id = this.position;
+        objUser.title_id = this.title;
+        objUser.fname = this.fname;
+        objUser.lname = this.lname;
+        if (this.password != '') {
+          objUser.password = this.password;
+        }
+        objUser.email = this.email;
+        objUser.telephone = this.phoneNumber;
+        dataUser.push(objUser);
+
         let rs: any = await this.settingService.save(data);
-        if (rs.ok) {
+        let rsUser: any = await this.settingService.updateUser(dataUser);
+
+        if (rs.ok && rsUser.ok) {
           this.alertService.success();
           this.getInfo();
+          this.getUserInfo();
+          this.password = '';
+          this.passwordConfirm = '';
         } else {
           this.alertService.error();
         }

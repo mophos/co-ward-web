@@ -13,6 +13,16 @@ export class SettingService {
     return await this.http.get(url).toPromise();
   }
 
+  async getUserInfo() {
+    const url = `${this.apiUrl}/v1/staff/setting/user`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async updateUser(data: any) {
+    const url = `${this.apiUrl}/v1/staff/setting/user`;
+    return await this.http.put(url, { data }).toPromise();
+  }
+
   async save(data) {
     const url = `${this.apiUrl}/v1/staff/setting`;
     return await this.http.post(url, { data }).toPromise();
