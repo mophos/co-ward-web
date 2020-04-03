@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { NgSelect2Module } from 'ng-select2';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -43,8 +42,7 @@ export function tokenGetter() {
     ManagerModule,
     UserModule,
     FormsModule,
-    HelpModule,
-    NgSelect2Module
+    HelpModule
   ],
   providers: [
     { provide: 'API_URL', useValue: environment.apiUrl },
