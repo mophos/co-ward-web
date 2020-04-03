@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertService } from '../../help/alert.service';
 import { MinMaxService } from '../min-max.service';
@@ -30,6 +30,7 @@ export class ManageRestockEditComponent implements OnInit {
   modalExport = false
   isSave = false
 
+  @ViewChild('loadding') loadding: any;
   constructor(
     private route: ActivatedRoute,
     private alertService: AlertService,
@@ -142,6 +143,7 @@ export class ManageRestockEditComponent implements OnInit {
   }
 
   async import() {
+    this.loadding.show();
     const fileReader = new FileReader();
     fileReader.onload = async (e) => {
       this.arrayBuffer = fileReader.result;
@@ -183,7 +185,7 @@ export class ManageRestockEditComponent implements OnInit {
           this.alertService.success();
         } else {
           console.log(rs.error);
-          
+
           this.alertService.error();
         }
       } catch (error) {
@@ -192,15 +194,18 @@ export class ManageRestockEditComponent implements OnInit {
       }
     }
     fileReader.readAsArrayBuffer(this.file);
+    this.loadding.hide();
   }
 
   async export() {
+    this.loadding.show();
     const rs: any = await this.restockService.exportExcel(this.restockId);
     console.log(rs);
-    
+
     if (!rs) {
-      // this.loading.hide();
+      this.loadding.hide();
     } else {
+      this.loadding.hide();
       this.downloadFile('แบบสอบถาม', 'xlsx', rs);
     }
   }
