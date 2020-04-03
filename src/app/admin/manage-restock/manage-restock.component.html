@@ -11,7 +11,7 @@
     </button>
   </div>
   <div class="clr-col-9">
-    <button style="float: right;" class="btn btn-lg btn-success btn-outline" (click)="approved()" [disabled]="!selected.length" title="อนุมัติ">
+    <button style="float: right;" class="btn btn-lg btn-success btn-outline" (click)="approved()" [disabled]="!selected.length || isSave" title="อนุมัติ">
       <clr-icon shape="check"></clr-icon> อนุมัติ
     </button>
   </div>
