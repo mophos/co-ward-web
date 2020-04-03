@@ -130,12 +130,15 @@ export class ManageRestockComponent implements OnInit {
         console.log(rs.rows);
 
         if (rs.ok) {
+          this.selected = [];
           this.alertService.success();
         } else {
+          this.selected = [];
           this.alertService.error();
         }
         this.loading = false;
       } catch (error) {
+        this.selected = [];
         this.loading = false;
         this.alertService.error();
       }
