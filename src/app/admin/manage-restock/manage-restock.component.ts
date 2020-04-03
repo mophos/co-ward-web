@@ -17,6 +17,7 @@ export class ManageRestockComponent implements OnInit {
   totalApproved: any;
   loading = false;
   selected: any = [];
+  isSave = false;
 
   constructor(
     private restockService: RestockService,
@@ -120,6 +121,7 @@ export class ManageRestockComponent implements OnInit {
   async approved() {
     let comfirm = await this.alertService.confirm();
     if (comfirm) {
+      this.isSave = true;
       this.loading = true;
       try {
         let data: any = [];
@@ -130,14 +132,17 @@ export class ManageRestockComponent implements OnInit {
         console.log(rs.rows);
 
         if (rs.ok) {
+          this.isSave = false;
           this.selected = [];
           this.alertService.success();
         } else {
+          this.isSave = false;
           this.selected = [];
           this.alertService.error();
         }
         this.loading = false;
       } catch (error) {
+        this.isSave = false;
         this.selected = [];
         this.loading = false;
         this.alertService.error();

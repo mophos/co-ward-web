@@ -177,18 +177,18 @@ export class ManageRestockEditComponent implements OnInit {
         }
         idx++;
       }
-      // console.log(data);
-
       try {
         let rs: any = await this.restockService.import(data);
         if (rs.ok) {
           this.alertService.success();
+          this.modalImport = false;
         } else {
           console.log(rs.error);
-
+          this.modalImport = false;
           this.alertService.error();
         }
       } catch (error) {
+        this.modalImport = false;
         console.log(error);
         this.alertService.error(error);
       }
