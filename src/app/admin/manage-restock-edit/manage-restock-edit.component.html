@@ -2,6 +2,10 @@
   <a class="breadcrumb-item" href="javascript://" routerLink="/admin/manage-restock">เติมเวชภัณฑ์</a>
   <a class="breadcrumb-item" href="javascript://">แก้ไขการเติมเวชภัณฑ์</a>
   <div class="clr-col-12">
+    <button style="float: right;" class="btn btn-sm btn-success btn-outline" (click)="approved()" [disabled]="isSave"
+      title="อนุมัติ">
+      <clr-icon shape="check"></clr-icon> อนุมัติ
+    </button>
     <button style="float: right;" type="button" class="btn btn-sm btn-primary btn-outline" (click)="openModal()">
       Import
     </button>

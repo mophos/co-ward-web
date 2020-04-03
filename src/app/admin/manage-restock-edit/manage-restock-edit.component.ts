@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { AlertService } from '../../help/alert.service';
 import { MinMaxService } from '../min-max.service';
 import { RestockService } from '../restock.service';
@@ -31,6 +32,7 @@ export class ManageRestockEditComponent implements OnInit {
   isSave = false
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private alertService: AlertService,
     private minmaxTypeService: MinMaxService,
@@ -195,8 +197,6 @@ export class ManageRestockEditComponent implements OnInit {
 
   async export() {
     const rs: any = await this.restockService.exportExcel(this.restockId);
-    console.log(rs);
-
     if (!rs) {
       // this.loading.hide();
     } else {
@@ -218,6 +218,30 @@ export class ManageRestockEditComponent implements OnInit {
       a.remove(); // remove the element
     } catch (error) {
       this.alertService.error();
+    }
+  }
+
+  async approved() {
+    let comfirm = await this.alertService.confirm();
+    if (comfirm) {
+      this.isSave = true;
+      this.loading = true;
+      try {
+        let rs: any = await this.restockService.approved(this.restockId);
+        if (rs.ok) {
+          this.isSave = false;
+          this.alertService.success();
+          this.router.navigate(['admin/manage-restock']);
+        } else {
+          this.isSave = false;
+          this.alertService.error();
+        }
+        this.loading = false;
+      } catch (error) {
+        this.isSave = false;
+        this.loading = false;
+        this.alertService.error();
+      }
     }
   }
 
