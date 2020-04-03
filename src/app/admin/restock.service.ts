@@ -65,14 +65,15 @@ export class RestockService {
   }
 
   async exportExcel(id) {
-    const url = `${this.url}/v1/admin/restock/export/${id}`; 
-    const headers = new HttpHeaders();
-    headers.append('timeout', '20000000');
+    const url = `${this.url}/v1/admin/restock/export/${id}`;
+    // const headers = new HttpHeaders();
+    // headers.append('timeout', '20000000');
     const resp: any = await this.http.get(url, {
-      headers: headers,
+      // headers: headers,
       responseType: 'blob'
     }).toPromise();
-    return resp._body;
+    console.log(resp);
+    return resp;
   }
 
 }
