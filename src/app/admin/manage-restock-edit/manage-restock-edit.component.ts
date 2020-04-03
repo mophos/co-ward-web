@@ -182,17 +182,44 @@ export class ManageRestockEditComponent implements OnInit {
         if (rs.ok) {
           this.alertService.success();
         } else {
+          console.log(rs.error);
+          
           this.alertService.error();
         }
       } catch (error) {
+        console.log(error);
         this.alertService.error(error);
       }
     }
     fileReader.readAsArrayBuffer(this.file);
   }
 
-  export() {
-
+  async export() {
+    const rs: any = await this.restockService.exportExcel(this.restockId);
+    console.log(rs);
+    
+    if (!rs) {
+      // this.loading.hide();
+    } else {
+      this.downloadFile('แบบสอบถาม', 'xlsx', rs);
+    }
+  }
+  downloadFile(name, type, data: any) {
+    try {
+      const url = window.URL.createObjectURL(new Blob([data]));
+      const fileName = `${name}.${type}`;
+      // Debe haber una manera mejor de hacer esto...
+      const a = document.createElement('a');
+      document.body.appendChild(a);
+      a.setAttribute('style', 'display: none');
+      a.href = url;
+      a.download = fileName;
+      a.click();
+      window.URL.revokeObjectURL(url);
+      a.remove(); // remove the element
+    } catch (error) {
+      this.alertService.error();
+    }
   }
 
 }

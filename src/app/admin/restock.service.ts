@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpResponse,HttpHeaders } from '@angular/common/http';
+// import { ResponseContentType, Headers } from '@angular/http';
 
 @Injectable({
   providedIn: 'root'
@@ -61,6 +62,17 @@ export class RestockService {
   approved(data) {
     const url = `${this.url}/v1/admin/restock/approved-all?data=${data}`;
     return this.http.get(url).toPromise();
+  }
+
+  async exportExcel(id) {
+    const url = `${this.url}/v1/admin/restock/export/${id}`; 
+    const headers = new HttpHeaders();
+    headers.append('timeout', '20000000');
+    const resp: any = await this.http.get(url, {
+      headers: headers,
+      responseType: 'blob'
+    }).toPromise();
+    return resp._body;
   }
 
 }
