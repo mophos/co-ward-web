@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SuppliesService } from '../supplies.service';
 import { AlertService } from '../../help/alert.service';
 import * as findIndex from 'lodash/findIndex';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-manage-supplies',
@@ -23,15 +24,28 @@ export class ManageSuppliesComponent implements OnInit {
   offset = 0;
   limit = 20;
 
+  insertRight: any;
+  updateRight: any;
+  deleteRight: any;
+  rights: any;
+
   loading = false;
   isUpdate = false;
   modal = false;
   isLoadding = false;
   isSave = false;
+  public jwtHelper = new JwtHelperService();
   constructor(
     private suppliesService: SuppliesService,
     private alertService: AlertService,
-  ) { }
+  ) {
+    const decoded = this.jwtHelper.decodeToken(sessionStorage.getItem('token'));
+    this.rights = decoded.rights;
+    this.insertRight = findIndex(this.rights, { name: 'ADMIN_ADD_SUPPLIES' }) === -1 ? false : true;
+    this.updateRight = findIndex(this.rights, { name: 'ADMIN_EDIT_SUPPLIES' }) === -1 ? false : true;
+    this.deleteRight = findIndex(this.rights, { name: 'ADMIN_DELETE_SUPPLIES' }) === -1 ? false : true;
+
+  }
 
   ngOnInit() {
     this.getList();

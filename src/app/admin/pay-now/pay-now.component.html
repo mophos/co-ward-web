@@ -118,4 +118,24 @@
   </div>
 </clr-modal>
 
+<clr-modal [(clrModalOpen)]="modalImport" [clrModalClosable]="false" [clrModalSize]="'xl'">
+    <h3 class="modal-title">เลือกไฟล์</h3>
+    <div class="modal-body">
+      <div class="clr-row">
+        <div class="clr-col-12">
+          <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file"
+            accept=".xlsx">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" (click)="import()">
+        บันทึก
+      </button>
+      <button type="button" class="btn btn-danger" (click)="modalImport = false">
+        ปิด
+      </button>
+    </div>
+  </clr-modal>
+  
 <app-loadding #loadding></app-loadding>

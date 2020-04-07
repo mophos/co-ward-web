@@ -155,6 +155,7 @@ export class PayNowComponent implements OnInit {
 
   async import() {
     this.loadding.show();
+    await this.getList();
     const fileReader = new FileReader();
     fileReader.onload = async (e) => {
       this.arrayBuffer = fileReader.result;
@@ -169,27 +170,22 @@ export class PayNowComponent implements OnInit {
       const worksheet = workbook.Sheets[firstSheetName];
 
       const json: any = XLSX.utils.sheet_to_json(worksheet);
-      console.log(json[0]);
 
       const data = [];
-      let idx = 0;
       for (const v of json) {
-        if (idx > 0) {
-          for (let i = 0; i < Object.values(v).length; i++) {
-            if (Object.keys(v)[i] != 'id' && Object.keys(v)[i] != 'โรงพยาบาล') {
-              const obj = {
-                restock_detail_id: v.id,
-                supplies_code: Object.keys(v)[i],
-                qty: Object.values(v)[i]
-              };
-              data.push(obj);
-            }
-          }
-        }
-        idx++;
+        const obj: any = {};
+        obj.hospcode = v.HOSPCODE;
+        obj.items = [{
+          id: 1,
+          qty: v.QTY
+        }]
+        data.push(obj);
       }
+      console.log(data);
+
+
       try {
-        let rs: any = await this.restockService.import(data);
+        let rs: any = await this.restockService.importTemplete(data);
         if (rs.ok) {
           this.alertService.success();
           this.modalImport = false;
@@ -224,7 +220,7 @@ export class PayNowComponent implements OnInit {
       this.loadding.hide();
     } else {
       console.log(rs);
-      
+
       this.loadding.hide();
       this.downloadFile('Templete_จ่ายด่วน', 'xlsx', rs);
     }

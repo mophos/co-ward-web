@@ -113,11 +113,7 @@ export class ManageRestockComponent implements OnInit {
   async payNow() {
     this.router.navigate(['/admin/manage-restock/pay-now']);
   }
-
-  async export() {
-
-  }
-
+  
   async approved() {
     let comfirm = await this.alertService.confirm();
     if (comfirm) {
