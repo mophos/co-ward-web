@@ -132,7 +132,7 @@ export class ManageRestockComponent implements OnInit {
         this.isSave = false;
         this.selected = [];
         this.getRestock();
-        this.alertService.error();
+        this.alertService.success();
         this.loading = false;
       } catch (error) {
         this.isSave = false;
