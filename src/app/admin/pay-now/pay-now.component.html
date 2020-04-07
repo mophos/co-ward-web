@@ -3,6 +3,16 @@
   <a class="breadcrumb-item" href="javascript://">จ่ายด่วน</a>
 </nav>
 <div class="clr-row">
+  <div class="clr-col-12">
+    <button class="btn btn-lg btn-success btn-outline" (click)="exportTemplete()" title="ส่งออก Templete">
+      <clr-icon shape="export"></clr-icon> ส่งออก Templete
+    </button>
+    <button class="btn btn-lg btn-success btn-outline" (click)="openModal()" title="นำเข้ารายการ">
+      <clr-icon shape="import"></clr-icon> นำเข้ารายการ
+    </button>
+  </div>
+</div>
+<div class="clr-row">
   <div class="clr-col-6">
     <div class="card">
       <div class="card-header">
@@ -107,3 +117,5 @@
     </button>
   </div>
 </clr-modal>
+
+<app-loadding #loadding></app-loadding>

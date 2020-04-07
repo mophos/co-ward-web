@@ -129,17 +129,10 @@ export class ManageRestockComponent implements OnInit {
           data.push(v.id);
         }
         let rs: any = await this.restockService.approved(data);
-        console.log(rs.rows);
-
-        if (rs.ok) {
-          this.isSave = false;
-          this.selected = [];
-          this.alertService.success();
-        } else {
-          this.isSave = false;
-          this.selected = [];
-          this.alertService.error();
-        }
+        this.isSave = false;
+        this.selected = [];
+        this.getRestock();
+        this.alertService.error();
         this.loading = false;
       } catch (error) {
         this.isSave = false;

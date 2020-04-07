@@ -7,8 +7,7 @@
   <clr-dg-row *ngFor="let l of list;let idx=index;">
     <clr-dg-cell>{{idx+1}}</clr-dg-cell>
     <clr-dg-cell>{{l.created_at |  dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
-    <clr-dg-cell><a href="https://track.thailandpost.co.th/?trackNumber={{l.tracking}}" target="_BLANK">{{l.tracking}}</a>
-    </clr-dg-cell>
+    <clr-dg-cell>{{l.con_no}}</clr-dg-cell>
     <clr-dg-cell>
       <button class="btn btn-sm btn-primary" (click)="onOpenDetails(l)"><clr-icon shape="search"></clr-icon> รายละเอียด</button>
     </clr-dg-cell>

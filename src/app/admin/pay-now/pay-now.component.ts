@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { RestockService } from '../restock.service';
-import { AlertService } from '../../help/alert.service';
-import * as findIndex from 'lodash/findIndex';
 import { AutocompleteHospitalComponent } from 'src/app/help/autocomplete-hospital/autocomplete-hospital.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AlertService } from '../../help/alert.service';
+import { RestockService } from '../restock.service';
 import { Router } from '@angular/router';
+
+import * as findIndex from 'lodash/findIndex';
+import * as XLSX from 'ts-xlsx';
 @Component({
   selector: 'app-pay-now',
   templateUrl: './pay-now.component.html',
@@ -17,10 +19,15 @@ export class PayNowComponent implements OnInit {
   forwardHosp: any;
   data: any = [];
   hospName: any;
+  file: any;
+  arrayBuffer: any;
 
   modal = false;
+  modalImport = false;
+  modalExport = false;
   loading = false;
 
+  @ViewChild('loadding') loadding: any;
   @ViewChild('hospital') hospitals: AutocompleteHospitalComponent;
   constructor(
     private restockService: RestockService,
@@ -139,6 +146,105 @@ export class PayNowComponent implements OnInit {
       }
     } catch (error) {
       this.alertService.error(error);
+    }
+  }
+
+  incomingfile(e) {
+    this.file = e.target.files[0];
+  }
+
+  async import() {
+    this.loadding.show();
+    const fileReader = new FileReader();
+    fileReader.onload = async (e) => {
+      this.arrayBuffer = fileReader.result;
+      const buffer = new Uint8Array(this.arrayBuffer);
+      const arr = new Array();
+      for (let i = 0; i != buffer.length; ++i) {
+        arr[i] = String.fromCharCode(buffer[i]);
+      }
+      const bstr = arr.join('');
+      const workbook = XLSX.read(bstr, { type: 'binary' });
+      const firstSheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[firstSheetName];
+
+      const json: any = XLSX.utils.sheet_to_json(worksheet);
+      console.log(json[0]);
+
+      const data = [];
+      let idx = 0;
+      for (const v of json) {
+        if (idx > 0) {
+          for (let i = 0; i < Object.values(v).length; i++) {
+            if (Object.keys(v)[i] != 'id' && Object.keys(v)[i] != 'โรงพยาบาล') {
+              const obj = {
+                restock_detail_id: v.id,
+                supplies_code: Object.keys(v)[i],
+                qty: Object.values(v)[i]
+              };
+              data.push(obj);
+            }
+          }
+        }
+        idx++;
+      }
+      try {
+        let rs: any = await this.restockService.import(data);
+        if (rs.ok) {
+          this.alertService.success();
+          this.modalImport = false;
+        } else {
+          console.log(rs.error);
+          this.modalImport = false;
+          this.alertService.error();
+        }
+        this.loadding.hide();
+      } catch (error) {
+        this.modalImport = false;
+        console.log(error);
+        this.alertService.error(error);
+        this.loadding.hide();
+      }
+    }
+    fileReader.readAsArrayBuffer(this.file);
+  }
+
+  openModal() {
+    this.modalImport = true;
+  }
+
+  export() {
+    this.modalExport = true;
+  }
+
+  async exportTemplete() {
+    this.loadding.show();
+    const rs: any = await this.restockService.exportTemplete();
+    if (!rs) {
+      this.loadding.hide();
+    } else {
+      console.log(rs);
+      
+      this.loadding.hide();
+      this.downloadFile('Templete_จ่ายด่วน', 'xlsx', rs);
+    }
+  }
+
+  downloadFile(name, type, data: any) {
+    try {
+      const url = window.URL.createObjectURL(new Blob([data]));
+      const fileName = `${name}.${type}`;
+      // Debe haber una manera mejor de hacer esto...
+      const a = document.createElement('a');
+      document.body.appendChild(a);
+      a.setAttribute('style', 'display: none');
+      a.href = url;
+      a.download = fileName;
+      a.click();
+      window.URL.revokeObjectURL(url);
+      a.remove(); // remove the element
+    } catch (error) {
+      this.alertService.error();
     }
   }
 

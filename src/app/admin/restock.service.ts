@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient,HttpResponse,HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 // import { ResponseContentType, Headers } from '@angular/http';
 
 @Injectable({
@@ -73,6 +73,14 @@ export class RestockService {
       responseType: 'blob'
     }).toPromise();
     console.log(resp);
+    return resp;
+  }
+
+  async exportTemplete() {
+    const url = `${this.url}/v1/admin/restock/export/pay/now/`;
+    const resp: any = await this.http.get(url, {
+      responseType: 'blob'
+    }).toPromise();
     return resp;
   }
 

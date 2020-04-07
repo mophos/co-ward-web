@@ -16,8 +16,8 @@ export class TrackingService {
     return await this.http.get(url).toPromise();
   }
 
-  async getPayDetails(id) {
-    const url = `${this.apiUrl}/v1/staff/pay/${id}`;
+  async getPayDetails(id, con_no) {
+    const url = `${this.apiUrl}/v1/staff/pay/${id}/${con_no}`;
     return await this.http.get(url).toPromise();
   }
 
