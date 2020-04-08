@@ -113,7 +113,7 @@ export class ManageRestockComponent implements OnInit {
   async payNow() {
     this.router.navigate(['/admin/manage-restock/pay-now']);
   }
-  
+
   async approved() {
     const comfirm = await this.alertService.confirm();
     if (comfirm) {
@@ -141,6 +141,35 @@ export class ManageRestockComponent implements OnInit {
         this.loading = false;
         this.alertService.error();
       }
+    }
+  }
+
+  async export(restockId) {
+    // this.loadding.show();
+    const rs: any = await this.restockService.exportExcelStatus(restockId);
+    if (!rs) {
+      // this.loadding.hide();
+    } else {
+      // this.loadding.hide();
+      this.downloadFile('รายการเติมเวชภัณฑ์', 'xlsx', rs);
+    }
+  }
+
+  downloadFile(name, type, data: any) {
+    try {
+      const url = window.URL.createObjectURL(new Blob([data]));
+      const fileName = `${name}.${type}`;
+      // Debe haber una manera mejor de hacer esto...
+      const a = document.createElement('a');
+      document.body.appendChild(a);
+      a.setAttribute('style', 'display: none');
+      a.href = url;
+      a.download = fileName;
+      a.click();
+      window.URL.revokeObjectURL(url);
+      a.remove(); // remove the element
+    } catch (error) {
+      this.alertService.error();
     }
   }
 }
