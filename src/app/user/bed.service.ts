@@ -14,14 +14,24 @@ export class BedService {
     return await this.http.get(url).toPromise();
   }
 
+  async getBedDetails(id) {
+    const url = `${this.apiUrl}/v1/staff/bed/${id}`;
+    return await this.http.get(url).toPromise();
+  }
+
   async getBedHospital() {
     const url = `${this.apiUrl}/v1/staff/bed/check-bed`;
     return await this.http.get(url).toPromise();
   }
 
-  async save(data) {
+  async saveBed() {
+    const url = `${this.apiUrl}/v1/staff/bed/save/bed`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async saveDetail(id, data) {
     const url = `${this.apiUrl}/v1/staff/bed`;
-    return await this.http.post(url, { data }).toPromise();
+    return await this.http.post(url, { id, data }).toPromise();
   }
 
   async getBalanceList() {

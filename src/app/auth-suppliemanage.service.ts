@@ -20,7 +20,6 @@ export class AuthSuppliemanage implements CanActivate {
       const decodedToken = this.jwtHelper.decodeToken(token);
       const rights = decodedToken.rights;
       console.log(rights);
-      
 
       if (rights) {
         if (this.jwtHelper.isTokenExpired(token)) {
@@ -28,7 +27,7 @@ export class AuthSuppliemanage implements CanActivate {
           return false;
         } else {
           let isAccess = false;
-          if (_.findIndex(rights, { name: 'ADMIN_SUPPLIES_MANAGE' }) > -1) {
+          if (_.findIndex(rights, { name: 'ADMIN_MANAGE_SUPPLIES' }) > -1) {
             isAccess = true;
           } else {
             isAccess = false;

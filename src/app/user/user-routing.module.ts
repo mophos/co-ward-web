@@ -21,6 +21,7 @@ import { AuthSetting } from '../auth-setting.service';
 import { AuthCheckbed } from '../auth-checkbed.service';
 import { AuthChecksupplie } from '../auth-checksupplie.service';
 import { AuthRequisition } from '../auth-requisition.service';
+import { DrugComponent } from '../user/drug/drug.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,7 @@ const routes: Routes = [
       { path: 'setting', canActivate: [AuthSetting], component: SettingComponent },
       { path: 'check-bed', canActivate: [AuthCheckbed], component: CheckBedComponent },
       { path: 'check-supplie', canActivate: [AuthChecksupplie], component: CheckSuppliesComponent },
+      { path: 'drug', component: DrugComponent },
       {
         path: 'requisition',
         canActivate: [AuthRequisition],

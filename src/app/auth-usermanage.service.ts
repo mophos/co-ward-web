@@ -25,7 +25,7 @@ export class AuthUsermanage implements CanActivate {
           return false;
         } else {
           let isAccess = false;
-          if (_.findIndex(rights, { name: 'ADMIN_USER_MANAGE' }) > -1) {
+          if (_.findIndex(rights, { name: 'ADMIN_MANAGE_USERS' }) > -1) {
             isAccess = true;
           } else {
             isAccess = false;
