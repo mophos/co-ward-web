@@ -35,8 +35,8 @@ export class LayoutComponent implements OnInit {
     this.requisitionMenu = findIndex(this.rights, { name: 'STAFF_REQUISITION' }) === -1 ? false : true;
     this.checkBedMenu = findIndex(this.rights, { name: 'STAFF_CHECK_BEDS' }) === -1 ? false : true;
     this.checkSuppliesMenu = findIndex(this.rights, { name: 'STAFF_CHECK_SUPPLIES' }) === -1 ? false : true;
-    this.balanceSuppliesMenu = findIndex(this.rights, { name: 'STAFF_BALANCE_SUPPLIES' }) === -1 ? false : true;
-    this.balanceBedMeny = findIndex(this.rights, { name: 'STAFF_BED_STOCKS' }) === -1 ? false : true;
+    this.balanceSuppliesMenu = findIndex(this.rights, { name: 'STAFF_STOCK_SUPPLIES' }) === -1 ? false : true;
+    this.balanceBedMeny = findIndex(this.rights, { name: 'STAFF_STOCK_BEDS' }) === -1 ? false : true;
     this.statusTrackingMenu = findIndex(this.rights, { name: 'STAFF_STATUS_TRACKING' }) === -1 ? false : true;
     this.settingMenu = findIndex(this.rights, { name: 'STAFF_SETTINGS' }) === -1 ? false : true;
 

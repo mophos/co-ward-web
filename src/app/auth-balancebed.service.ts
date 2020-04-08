@@ -26,7 +26,7 @@ export class AuthBalancebed implements CanActivate {
           return false;
         } else {
           let isAccess = false;
-          if (_.findIndex(rights, { name: 'STAFF_BED_STOCKS' }) > -1) {
+          if (_.findIndex(rights, { name: 'STAFF_STOCK_BEDS' }) > -1) {
             isAccess = true;
           } else {
             isAccess = false;
