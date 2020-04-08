@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CanActivate } from '@angular/router';
@@ -8,7 +7,8 @@ import * as _ from 'lodash';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthSuppliemanage implements CanActivate {
+
+export class AuthHospitalmanage implements CanActivate  {
   public token: string;
   public jwtHelper = new JwtHelperService();
 
@@ -19,7 +19,6 @@ export class AuthSuppliemanage implements CanActivate {
     if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
       const rights = decodedToken.rights;
-      console.log(rights);
 
       if (rights) {
         if (this.jwtHelper.isTokenExpired(token)) {
@@ -27,7 +26,7 @@ export class AuthSuppliemanage implements CanActivate {
           return false;
         } else {
           let isAccess = false;
-          if (_.findIndex(rights, { name: 'ADMIN_MANAGE_SUPPLIES' }) > -1) {
+          if (_.findIndex(rights, { name: 'ADMIN_MANAGE_HOSPITALS' }) > -1) {
             isAccess = true;
           } else {
             isAccess = false;

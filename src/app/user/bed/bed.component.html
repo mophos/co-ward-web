@@ -1,23 +1,30 @@
 <div class="clr-row">
   <div class="clr-col-3">
-    <button class="btn btn-sm btn-success" (click)="onClickAdd()">
-      <clr-icon shape="plus"></clr-icon> เพิ่มรายการ
-    </button>
+    <div class="clr-row">
+      <div class="clr-col-9">
+        <my-date-picker-th name="dateset" [options]="myDatePickerOptions" [(ngModel)]="dateset" required></my-date-picker-th>
+      </div>
+      <div class="clr-col-3">
+        <button class="btn btn-sm btn-success" (click)="onClickAdd()">
+          <clr-icon shape="plus"></clr-icon> เพิ่มรายการ
+        </button>
+      </div>
+    </div>
   </div>
   <div class="clr-col-9">
-    <h4 *ngIf="date != null">บันทึกข้อมูลประจำวันที่ {{date | dateTh:'DD/MM/YYYY hh:mm'}}</h4>
+    <h4 *ngIf="date != null">บันทึกข้อมูลประจำวันที่ {{date | dateTh:'DD/MM/YYYY'}}</h4>
   </div>
 </div>
 <div class="clr-row">
   <div class="clr-col-3">
     <div class="clr-row">
       <div class="clr-col-12">
-        <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
+        <clr-datagrid [clrDgLoading]="loading" [style.height.px]="700">
           <clr-dg-column>วันที่</clr-dg-column>
           <clr-dg-column>ชื่อผู้บันทึก</clr-dg-column>
 
           <clr-dg-row *ngFor="let l of list; let idx=index;" (click)="getListDetail(l.id)" [ngClass]="{ 'isSuccess': l.updated_by != null }">
-            <clr-dg-cell>{{l.created_at | dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
+            <clr-dg-cell>{{l.created_at | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
             <clr-dg-cell>{{l.name}}{{l.fname}} {{l.lname}}</clr-dg-cell>
           </clr-dg-row>
         </clr-datagrid>
@@ -32,7 +39,7 @@
     </div>
   </div>
   <div class="clr-col-9">
-    <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
+    <clr-datagrid [clrDgLoading]="loading" [style.height.px]="700">
       <clr-dg-column>#</clr-dg-column>
       <clr-dg-column>รายการ</clr-dg-column>
       <clr-dg-column>จำนวนเตียง</clr-dg-column>

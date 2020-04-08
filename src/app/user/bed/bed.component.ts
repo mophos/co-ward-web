@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BedService } from '../bed.service';
 import { AlertService } from '../../help/alert.service';
+import { IMyOptions } from 'mydatepicker-th';
 import * as findIndex from 'lodash/findIndex';
 @Component({
   selector: 'app-bed',
@@ -9,35 +10,60 @@ import * as findIndex from 'lodash/findIndex';
 })
 export class BedComponent implements OnInit {
 
-  listId: any;
+  listId: any = null;
   list: any = [];
   listDetail: any = [];
   date: any = null;
-
+  dateset: any;
   loading = false;
   check = false;
 
+  myDatePickerOptions: IMyOptions = {
+    inline: false,
+    dateFormat: 'dd mmm yyyy',
+    editableDateField: false,
+    showClearDateBtn: false
+  };
+
   constructor(
     private bedService: BedService,
-    private alertService: AlertService
+    private alertService: AlertService,
   ) { }
 
   ngOnInit() {
     this.getList();
+    let date = new Date();
+    this.dateset = {
+      date: {
+        year: date.getFullYear(),
+        month: date.getMonth() + 1,
+        day: date.getDate()
+      }
+    };
   }
 
   async onClickAdd() {
-    let confirm = await this.alertService.confirm();
-    if (confirm) {
-      try {
-        let rs: any = await this.bedService.saveBed();
-        if (rs.ok) {
-          this.getList();
-          this.alertService.success();
-        }
-      } catch (error) {
+    this.getListBeds();
+  }
+
+  onDateChanged(e) {
+    this.dateset = e.date;
+  }
+
+  async getListBeds() {
+    this.date = this.dateset.date.year + '-' + this.dateset.date.month + '-' + this.dateset.date.day;
+    this.loading = true;
+    try {
+      let rs: any = await this.bedService.getListBeds();
+      if (rs.ok) {
+        this.listDetail = rs.rows;
+      } else {
         this.alertService.error();
       }
+      this.loading = false;
+    } catch (error) {
+      this.loading = false;
+      this.alertService.error(error);
     }
   }
 
@@ -47,9 +73,11 @@ export class BedComponent implements OnInit {
       let rs: any = await this.bedService.getBeds();
       if (rs.ok) {
         this.list = rs.rows;
-        if (this.list.length) {
-          this.getListDetail(this.list[0].id);
-        }
+        // if (this.listId > 0) {
+        //   this.getListDetail(this.listId);
+        // } else if (this.list.length) {
+        //   this.getListDetail(this.list[0].id);
+        // }
       } else {
         this.alertService.error();
       }
@@ -80,32 +108,39 @@ export class BedComponent implements OnInit {
   }
 
   async save() {
-    this.check = false;
-    try {
-      let data = [];
-      for (const v of this.listDetail) {
-        if ((v.qty - v.usage) < 0) {
-          this.check = true;
+    let confirm = await this.alertService.confirm();
+    if (confirm) {
+      this.check = false;
+      try {
+        let data = [];
+        const objH: any = {};
+        objH.created_at = this.date;
+
+        for (const v of this.listDetail) {
+          if ((v.qty - v.usage) < 0) {
+            this.check = true;
+          }
+          const obj: any = {};
+          obj.id = v.id;
+          obj.usage = v.usage;
+          obj.qty = v.qty;
+          data.push(obj);
         }
-        const obj: any = {};
-        obj.id = v.id;
-        obj.usage = v.usage;
-        obj.qty = v.qty;
-        data.push(obj);
-      }
-      if (this.check) {
-        this.alertService.error('จำนวนเตียงติดลบ');
-      } else {
-        let rs: any = await this.bedService.saveDetail(this.listId, data);
-        if (rs.ok) {
-          this.alertService.success();
-          this.getListDetail(this.listId);
+        objH.items = data;
+        if (this.check) {
+          this.alertService.error('จำนวนเตียงติดลบ');
         } else {
-          this.alertService.error();
+          let rs: any = await this.bedService.save(objH);
+          if (rs.ok) {
+            this.alertService.success();
+            this.getList()
+          } else {
+            this.alertService.error();
+          }
         }
+      } catch (error) {
+        this.alertService.error();
       }
-    } catch (error) {
-      this.alertService.error();
     }
   }
 }
