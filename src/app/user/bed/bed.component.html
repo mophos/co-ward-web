@@ -1,10 +1,11 @@
 <div class="clr-row">
-  <div class="clr-col-12">
-    <div class="clr-col-12">
-      <button class="btn btn-sm btn-success" (click)="onClickAdd()">
-        <clr-icon shape="plus"></clr-icon> เพิ่มรายการ
-      </button>
-    </div>
+  <div class="clr-col-3">
+    <button class="btn btn-sm btn-success" (click)="onClickAdd()">
+      <clr-icon shape="plus"></clr-icon> เพิ่มรายการ
+    </button>
+  </div>
+  <div class="clr-col-9">
+    <h4 *ngIf="date != null">บันทึกข้อมูลประจำวันที่ {{date | dateTh:'DD/MM/YYYY hh:mm'}}</h4>
   </div>
 </div>
 <div class="clr-row">
@@ -12,16 +13,12 @@
     <div class="clr-row">
       <div class="clr-col-12">
         <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
-          <clr-dg-column style="text-align: center;">วันที่</clr-dg-column>
-          <clr-dg-column></clr-dg-column>
+          <clr-dg-column>วันที่</clr-dg-column>
+          <clr-dg-column>ชื่อผู้บันทึก</clr-dg-column>
 
-          <clr-dg-row *ngFor="let l of list; let idx=index;">
-            <clr-dg-cell style="text-align: center;">9 เมษายน 2563</clr-dg-cell>
-            <clr-dg-cell style="text-align: center;">
-              <button class="btn btn-sm btn-success" (click)="onClickEdit()">
-                <clr-icon shape="note"></clr-icon> แก้ไข
-              </button>
-            </clr-dg-cell>
+          <clr-dg-row *ngFor="let l of list; let idx=index;" (click)="getListDetail(l.id)" [ngClass]="{ 'isSuccess': l.updated_by != null }">
+            <clr-dg-cell>{{l.created_at | dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
+            <clr-dg-cell>{{l.name}}{{l.fname}} {{l.lname}}</clr-dg-cell>
           </clr-dg-row>
         </clr-datagrid>
       </div>
@@ -43,18 +40,18 @@
       <clr-dg-column>คงเหลือ</clr-dg-column>
       <clr-dg-column>หน่วย</clr-dg-column>
 
-      <clr-dg-row *ngFor="let l of list; let idx=index;">
+      <clr-dg-row *ngFor="let l of listDetail; let idx=index;">
         <clr-dg-cell>{{idx+1}}</clr-dg-cell>
         <clr-dg-cell>{{l.name}}</clr-dg-cell>
         <clr-dg-cell>
-          <input type="number" style="text-align: right;" name="total" [(ngModel)]="l.total" class="clr-col-9 clr-input width-fit"
-            value="{{l.total}}">
+          <input type="number" style="text-align: right;" name="qty" [(ngModel)]="l.qty" class="clr-col-9 clr-input width-fit"
+            value="{{l.qty}}">
         </clr-dg-cell>
         <clr-dg-cell>
-          <input type="number" style="text-align: right;" name="usage_bed" [(ngModel)]="l.usage_bed" class="clr-col-9 clr-input width-fit"
-            value="{{l.usage_bed}}">
+          <input type="number" style="text-align: right;" name="usage" [(ngModel)]="l.usage" class="clr-col-9 clr-input width-fit"
+            value="{{l.usage}}">
         </clr-dg-cell>
-        <clr-dg-cell>{{l.total - l.usage_bed}}</clr-dg-cell>
+        <clr-dg-cell>{{l.qty - l.usage}}</clr-dg-cell>
         <clr-dg-cell>{{l.unit_name}}</clr-dg-cell>
       </clr-dg-row>
     </clr-datagrid>
