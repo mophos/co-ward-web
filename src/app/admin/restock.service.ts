@@ -77,7 +77,14 @@ export class RestockService {
       // headers: headers,
       responseType: 'blob'
     }).toPromise();
-    console.log(resp);
+    return resp;
+  }
+
+  async exportExcelStatus(id) {
+    const url = `${this.url}/v1/admin/restock/export-status/${id}`;
+    const resp: any = await this.http.get(url, {
+      responseType: 'blob'
+    }).toPromise();
     return resp;
   }
 
