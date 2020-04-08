@@ -21,6 +21,8 @@ import { AuthRestock } from '../auth-restock.service';
 import { AuthUsermanage } from '../auth-usermanage.service';
 import { AuthSuppliemanage } from '../auth-suppliemanage.service';
 import { AuthMinmax } from '../auth-minmax.service';
+import { ManageHospitalComponent } from './manage-hospital/manage-hospital.component';
+import { AuthHospitalmanage } from '../auth-hospitalmanage.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { AuthMinmax } from '../auth-minmax.service';
     ManageRequestSubComponent,
     ManageRestockComponent,
     ManageRestockEditComponent,
-    PayNowComponent
+    PayNowComponent,
+    ManageHospitalComponent
   ],
   imports: [
     HelpModule,
@@ -43,12 +46,13 @@ import { AuthMinmax } from '../auth-minmax.service';
     ClarityModule,
     BrowserAnimationsModule,
     FormsModule
-  ], 
+  ],
   providers: [
     AuthRestock,
     AuthUsermanage,
     AuthSuppliemanage,
-    AuthMinmax
+    AuthMinmax,
+    AuthHospitalmanage
   ]
 })
 export class AdminModule { }

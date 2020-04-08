@@ -17,7 +17,7 @@ export class AutocompleteDistrictComponent implements OnInit {
   constructor(
     @Inject('API_URL') private apiUrl: string,
     private alertService: AlertService) {
-    this.searchUrl = `${this.apiUrl}/setting/staff/autocomplete/ampur`;
+    this.searchUrl = `${this.apiUrl}/basic/autocomplete/ampur`;
   }
 
   ngOnInit() {
