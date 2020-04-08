@@ -26,7 +26,7 @@ export class AuthHospitalmanage implements CanActivate  {
           return false;
         } else {
           let isAccess = false;
-          if (_.findIndex(rights, { name: 'ADMIN_HOSPITAL_MANAGE' }) > -1) {
+          if (_.findIndex(rights, { name: 'ADMIN_MANAGE_HOSPITALS' }) > -1) {
             isAccess = true;
           } else {
             isAccess = false;

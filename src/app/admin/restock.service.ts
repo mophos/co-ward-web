@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient,HttpResponse,HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 // import { ResponseContentType, Headers } from '@angular/http';
 
 @Injectable({
@@ -26,6 +26,11 @@ export class RestockService {
 
   import(data) {
     const url = `${this.url}/v1/admin/restock/import`;
+    return this.http.post(url, { data }).toPromise();
+  }
+
+  importTemplete(data) {
+    const url = `${this.url}/v1/admin/restock/import/templete/pay/now`;
     return this.http.post(url, { data }).toPromise();
   }
 
@@ -73,6 +78,14 @@ export class RestockService {
       responseType: 'blob'
     }).toPromise();
     console.log(resp);
+    return resp;
+  }
+
+  async exportTemplete() {
+    const url = `${this.url}/v1/admin/restock/export/pay/now/`;
+    const resp: any = await this.http.get(url, {
+      responseType: 'blob'
+    }).toPromise();
     return resp;
   }
 

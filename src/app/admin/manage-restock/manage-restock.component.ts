@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestockService } from '../restock.service';
 import { AlertService } from '../../help/alert.service';
 import { Router } from '@angular/router';
-
+import { findIndex } from 'lodash';
 @Component({
   selector: 'app-manage-restock',
   templateUrl: './manage-restock.component.html',
@@ -113,33 +113,27 @@ export class ManageRestockComponent implements OnInit {
   async payNow() {
     this.router.navigate(['/admin/manage-restock/pay-now']);
   }
-
-  async export() {
-
-  }
-
+  
   async approved() {
-    let comfirm = await this.alertService.confirm();
+    const comfirm = await this.alertService.confirm();
     if (comfirm) {
       this.isSave = true;
       this.loading = true;
       try {
-        let data: any = [];
+        const data: any = [];
         for (const v of this.selected) {
           data.push(v.id);
+          const idx = findIndex(this.list, { id: v.id });
+          if (idx > -1) {
+            this.listApproved.push(this.list[idx]);
+            this.list.splice(idx, 1);
+          }
         }
-        let rs: any = await this.restockService.approved(data);
-        console.log(rs.rows);
-
-        if (rs.ok) {
-          this.isSave = false;
-          this.selected = [];
-          this.alertService.success();
-        } else {
-          this.isSave = false;
-          this.selected = [];
-          this.alertService.error();
-        }
+        const rs: any = await this.restockService.approved(data);
+        this.isSave = false;
+        this.selected = [];
+        // this.getRestock();
+        this.alertService.success();
         this.loading = false;
       } catch (error) {
         this.isSave = false;

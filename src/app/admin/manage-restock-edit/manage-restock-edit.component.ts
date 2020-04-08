@@ -160,7 +160,6 @@ export class ManageRestockEditComponent implements OnInit {
       const worksheet = workbook.Sheets[firstSheetName];
 
       const json: any = XLSX.utils.sheet_to_json(worksheet);
-      console.log(json[0]);
 
       const data = [];
       let idx = 0;
@@ -206,9 +205,10 @@ export class ManageRestockEditComponent implements OnInit {
       this.loadding.hide();
     } else {
       this.loadding.hide();
-      this.downloadFile('แบบสอบถาม', 'xlsx', rs);
+      this.downloadFile('รายการเติมเวชภัณฑ์', 'xlsx', rs);
     }
   }
+  
   downloadFile(name, type, data: any) {
     try {
       const url = window.URL.createObjectURL(new Blob([data]));

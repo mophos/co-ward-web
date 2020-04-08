@@ -41,6 +41,10 @@
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         รายการเวชภัณฑ์คงเหลือ
       </a>
+      <a *ngIf="balanceBedMeny" clrVerticalNavLink routerLink="/staff/drug" title="รายการยาคงเหลือ" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        รายการยาคงเหลือ
+      </a>
       <!-- <a clrVerticalNavLink routerLink="/staff/beds" title="รายการเตียง" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         รายการเตียง
@@ -57,10 +61,10 @@
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         ตั้งค่าโรงพยาบาล
       </a>
-      <a *ngIf="requisitionMenu" clrVerticalNavLink routerLink="/staff/requisition" title="เบิก" routerLinkActive="active">
+      <!-- <a *ngIf="requisitionMenu" clrVerticalNavLink routerLink="/staff/requisition" title="เบิก" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         เบิก
-      </a>
+      </a> -->
     </clr-vertical-nav>
   </div>
 </div>

@@ -10,26 +10,20 @@ import { TrackingService } from '../tracking.service';
 })
 export class TrackingDetailComponent implements OnInit {
 
-  id: any
   suppiles: any
   modalsDetail: any
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
     private alertService: AlertService,
     private trackingService: TrackingService,
-  ) {
-    const params = this.route.snapshot.params;
-    this.id = params.id;
-  }
+  ) { }
 
   async ngOnInit() {
   }
 
-  async getSuppiles() {
+  async getSuppiles(id, con_no) {
     try {
-      const rs: any = await this.trackingService.getPayDetails(this.id);
+      const rs: any = await this.trackingService.getPayDetails(id, con_no);
       if (rs.ok) {
         this.suppiles = rs.rows;
       } else {
@@ -40,9 +34,8 @@ export class TrackingDetailComponent implements OnInit {
     }
   }
 
-  open(id){
-    this.id = id
-    this.getSuppiles();
+  open(id, con_no) {
+    this.getSuppiles(id, con_no);
     this.modalsDetail = true
   }
 

@@ -39,7 +39,7 @@ export class TrackingComponent implements OnInit {
   }
 
   onOpenDetails(l) {
-    this.modalsDetail.open(l.id)
+    this.modalsDetail.open(l.id, l.con_no)
   }
 
 }

@@ -23,6 +23,7 @@ import { AuthSuppliemanage } from '../auth-suppliemanage.service';
 import { AuthMinmax } from '../auth-minmax.service';
 import { ManageHospitalComponent } from './manage-hospital/manage-hospital.component';
 import { AuthHospitalmanage } from '../auth-hospitalmanage.service';
+import { ManageDrugComponent } from './manage-drug/manage-drug.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { AuthHospitalmanage } from '../auth-hospitalmanage.service';
     ManageRestockComponent,
     ManageRestockEditComponent,
     PayNowComponent,
-    ManageHospitalComponent
+    ManageHospitalComponent,
+    ManageDrugComponent
   ],
   imports: [
     HelpModule,

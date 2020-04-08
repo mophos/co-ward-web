@@ -16,6 +16,7 @@ import { AuthUsermanage } from '../auth-usermanage.service';
 import { AuthSuppliemanage } from '../auth-suppliemanage.service';
 import { AuthHospitalmanage } from '../auth-hospitalmanage.service';
 import { ManageHospitalComponent } from './manage-hospital/manage-hospital.component';
+import { ManageDrugComponent } from '../admin/manage-drug/manage-drug.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,7 @@ const routes: Routes = [
       { path: 'manage-user', canActivate: [AuthUsermanage], component: ManageUserComponent },
       { path: 'manage-supplies', canActivate: [AuthSuppliemanage], component: ManageSuppliesComponent },
       { path: 'manage-hospital', canActivate: [AuthHospitalmanage], component: ManageHospitalComponent },
+      { path: 'manage-drug', component: ManageDrugComponent },
     ]
   }
 ];

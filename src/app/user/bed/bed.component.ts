@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BedService } from '../bed.service';
 import { AlertService } from '../../help/alert.service';
-
+import * as findIndex from 'lodash/findIndex';
 @Component({
   selector: 'app-bed',
   templateUrl: './bed.component.html',
@@ -9,8 +9,12 @@ import { AlertService } from '../../help/alert.service';
 })
 export class BedComponent implements OnInit {
 
-  loading = false;
+  listId: any;
   list: any = [];
+  listDetail: any = [];
+  date: any = null;
+
+  loading = false;
   check = false;
 
   constructor(
@@ -22,12 +26,49 @@ export class BedComponent implements OnInit {
     this.getList();
   }
 
+  async onClickAdd() {
+    let confirm = await this.alertService.confirm();
+    if (confirm) {
+      try {
+        let rs: any = await this.bedService.saveBed();
+        if (rs.ok) {
+          this.getList();
+          this.alertService.success();
+        }
+      } catch (error) {
+        this.alertService.error();
+      }
+    }
+  }
+
   async getList() {
     this.loading = true;
     try {
       let rs: any = await this.bedService.getBeds();
       if (rs.ok) {
         this.list = rs.rows;
+        if (this.list.length) {
+          this.getListDetail(this.list[0].id);
+        }
+      } else {
+        this.alertService.error();
+      }
+      this.loading = false;
+    } catch (error) {
+      this.loading = false;
+      this.alertService.error(error);
+    }
+  }
+
+  async getListDetail(id) {
+    this.listId = id;
+    let idx = findIndex(this.list, { id: this.listId });
+    this.date = this.list[idx].created_at;
+    this.loading = true;
+    try {
+      let rs: any = await this.bedService.getBedDetails(id);
+      if (rs.ok) {
+        this.listDetail = rs.rows;
       } else {
         this.alertService.error();
       }
@@ -42,23 +83,23 @@ export class BedComponent implements OnInit {
     this.check = false;
     try {
       let data = [];
-      for (const v of this.list) {
-        if ((v.total - v.usage_bed) < 0) {
+      for (const v of this.listDetail) {
+        if ((v.qty - v.usage) < 0) {
           this.check = true;
         }
         const obj: any = {};
-        obj.bed_id = v.id;
-        obj.usage_bed = v.usage_bed;
-        obj.total = v.total;
+        obj.id = v.id;
+        obj.usage = v.usage;
+        obj.qty = v.qty;
         data.push(obj);
       }
       if (this.check) {
         this.alertService.error('จำนวนเตียงติดลบ');
       } else {
-        let rs: any = await this.bedService.save(data);
+        let rs: any = await this.bedService.saveDetail(this.listId, data);
         if (rs.ok) {
           this.alertService.success();
-          this.getList();
+          this.getListDetail(this.listId);
         } else {
           this.alertService.error();
         }

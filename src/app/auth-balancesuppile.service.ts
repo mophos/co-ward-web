@@ -26,7 +26,7 @@ export class AuthBalancesuppile implements CanActivate {
           return false;
         } else {
           let isAccess = false;
-          if (_.findIndex(rights, { name: 'STAFF_BALANCE_SUPPLIES' }) > -1) {
+          if (_.findIndex(rights, { name: 'STAFF_STOCK_SUPPLIES' }) > -1) {
             isAccess = true;
           } else {
             isAccess = false;

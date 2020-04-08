@@ -32,9 +32,9 @@ export class LayoutComponent implements OnInit {
     this.hospname = decoded.hospname;
     this.restockMenu = findIndex(this.rights, { name: 'ADMIN_RESTOCK' }) === -1 ? false : true;
     this.minMaxMenu = findIndex(this.rights, { name: 'ADMIN_MIN_MAX' }) === -1 ? false : true;
-    this.userManageMenu = findIndex(this.rights, { name: 'ADMIN_USER_MANAGE' }) === -1 ? false : true;
-    this.suppliesManageMenu = findIndex(this.rights, { name: 'ADMIN_SUPPLIES_MANAGE' }) === -1 ? false : true;
-    this.hospitalManageMenu = findIndex(this.rights, { name: 'ADMIN_HOSPITAL_MANAGE' }) === -1 ? false : true;
+    this.hospitalManageMenu = findIndex(this.rights, { name: 'ADMIN_MANAGE_HOSPITALS' }) === -1 ? false : true;
+    this.userManageMenu = findIndex(this.rights, { name: 'ADMIN_MANAGE_USERS' }) === -1 ? false : true;
+    this.suppliesManageMenu = findIndex(this.rights, { name: 'ADMIN_MANAGE_SUPPLIES' }) === -1 ? false : true;
   }
 
   ngOnInit() {
