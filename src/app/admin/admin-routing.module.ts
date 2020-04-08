@@ -14,6 +14,7 @@ import { AuthRestock } from '../auth-restock.service';
 import { AuthMinmax } from '../auth-minmax.service';
 import { AuthUsermanage } from '../auth-usermanage.service';
 import { AuthSuppliemanage } from '../auth-suppliemanage.service';
+import { ManageDrugComponent } from '../admin/manage-drug/manage-drug.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,7 @@ const routes: Routes = [
       },
       { path: 'manage-user', canActivate: [AuthUsermanage], component: ManageUserComponent },
       { path: 'manage-supplies', canActivate: [AuthSuppliemanage], component: ManageSuppliesComponent },
+      { path: 'manage-drug',component: ManageDrugComponent },
     ]
   }
 ];

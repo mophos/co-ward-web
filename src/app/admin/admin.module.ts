@@ -21,6 +21,7 @@ import { AuthRestock } from '../auth-restock.service';
 import { AuthUsermanage } from '../auth-usermanage.service';
 import { AuthSuppliemanage } from '../auth-suppliemanage.service';
 import { AuthMinmax } from '../auth-minmax.service';
+import { ManageDrugComponent } from './manage-drug/manage-drug.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { AuthMinmax } from '../auth-minmax.service';
     ManageRequestSubComponent,
     ManageRestockComponent,
     ManageRestockEditComponent,
-    PayNowComponent
+    PayNowComponent,
+    ManageDrugComponent
   ],
   imports: [
     HelpModule,
