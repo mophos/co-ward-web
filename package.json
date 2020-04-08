@@ -29,6 +29,7 @@
     "exceljs": "^3.8.2",
     "jquery": "^3.4.1",
     "moment": "^2.24.0",
+    "mydatepicker-th": "^0.1.1",
     "rxjs": "~6.3.3",
     "select2": "^4.0.13",
     "sweetalert2": "^9.10.7",

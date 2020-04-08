@@ -29,6 +29,7 @@ import { AuthChecksupplie } from '../auth-checksupplie.service';
 import { AuthSetting } from '../auth-setting.service';
 import { AuthRequisition } from '../auth-requisition.service';
 import { DrugComponent } from './drug/drug.component';
+import { MyDatePickerTHModule } from 'mydatepicker-th';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { DrugComponent } from './drug/drug.component';
     ClarityModule,
     BrowserAnimationsModule,
     FormsModule,
+    MyDatePickerTHModule
   ],
   exports: [
     InventoryAddComponent,
