@@ -28,6 +28,7 @@ import { AuthCheckbed } from '../auth-checkbed.service';
 import { AuthChecksupplie } from '../auth-checksupplie.service';
 import { AuthSetting } from '../auth-setting.service';
 import { AuthRequisition } from '../auth-requisition.service';
+import { DrugComponent } from './drug/drug.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { AuthRequisition } from '../auth-requisition.service';
     RequisitionComponent,
     RequisitionNewComponent, 
     RequisitionEditComponent,
-    ReceiveDrugComponent
+    ReceiveDrugComponent,
+    DrugComponent
   ],
   imports: [
     HelpModule,
