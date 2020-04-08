@@ -41,9 +41,9 @@ export class ManageDrugComponent implements OnInit {
   ) {
     const decoded = this.jwtHelper.decodeToken(sessionStorage.getItem('token'));
     this.rights = decoded.rights;
-    this.insertRight = findIndex(this.rights, { name: 'ADMIN_ADD_DRUG' }) === -1 ? false : true;
-    this.updateRight = findIndex(this.rights, { name: 'ADMIN_EDIT_DRUG' }) === -1 ? false : true;
-    this.deleteRight = findIndex(this.rights, { name: 'ADMIN_DELETE_DRUG' }) === -1 ? false : true;
+    this.insertRight = findIndex(this.rights, { name: 'ADMIN_ADD_DRUGS' }) === -1 ? false : true;
+    this.updateRight = findIndex(this.rights, { name: 'ADMIN_EDIT_DRUGS' }) === -1 ? false : true;
+    this.deleteRight = findIndex(this.rights, { name: 'ADMIN_DELETE_DRUGS' }) === -1 ? false : true;
   }
 
   ngOnInit() {
