@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertService } from '../../../help/alert.service';
 import { RequisitionService } from '../../requisition.service';
-
+import { IMyOptions } from 'mydatepicker-th';
 
 @Component({
   selector: 'app-requisition-supplies',
@@ -13,6 +13,15 @@ export class RequisitionSuppliesComponent implements OnInit {
 
   isLoadding = false;
   list: any;
+  startDate: any;
+  endDate: any;
+
+  myDatePickerOptions: IMyOptions = {
+    inline: false,
+    dateFormat: 'dd mmm yyyy',
+    editableDateField: false,
+    showClearDateBtn: false
+  };
 
   constructor(
     private router: Router,
@@ -22,6 +31,21 @@ export class RequisitionSuppliesComponent implements OnInit {
 
   ngOnInit() {
     this.getList();
+    let date = new Date();
+    this.startDate = {
+      date: {
+        year: date.getFullYear(),
+        month: date.getMonth() + 1,
+        day: date.getDate()
+      }
+    };
+    this.endDate = {
+      date: {
+        year: date.getFullYear(),
+        month: date.getMonth() + 1,
+        day: date.getDate()
+      }
+    };
   }
 
   async getList() {
