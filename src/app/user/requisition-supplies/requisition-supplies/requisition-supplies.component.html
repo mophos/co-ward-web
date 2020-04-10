@@ -1,10 +1,30 @@
 <nav class="breadcrumb">
   <span class="breadcrumb-item active">รายการใช้เวชภัณฑ์</span>
 </nav>
-<div class="clr-row">
-  <div class="clr-col-2  text-align-right">
+<div class="clr-row" style="margin-top: 1rem;">
+  <div class="clr-col-2">
     <button class="btn btn-sm btn-success" (click)="onClickAdd()">
       <clr-icon shape="plus"></clr-icon> บันทึกการใช้เวชภัณฑ์
+    </button>
+  </div>
+  <div class="clr-col-1">
+    ค้นหา :
+  </div>
+  <div class="clr-col-3">
+    <input class="clr-input width-fit" (keyup)="doEnter($event)" name="query" [(ngModel)]="query"
+      placeholder="Enter เพื่อค้นหา" />
+  </div>
+  <div class="clr-col-2">
+    <my-date-picker-th name="startDate" [options]="myDatePickerOptions" [(ngModel)]="startDate" required>
+    </my-date-picker-th>
+  </div>
+  <div class="clr-col-2">
+    <my-date-picker-th name="endDate"  [options]="myDatePickerOptions" [(ngModel)]="endDate" required>
+    </my-date-picker-th>
+  </div>
+  <div class="clr-col-2">
+    <button class="btn btn-sm btn-primary">
+      <clr-icon shape="search"></clr-icon> ค้นหา
     </button>
   </div>
 </div>
@@ -19,11 +39,11 @@
     <clr-dg-cell>{{idx+1}}</clr-dg-cell>
     <clr-dg-cell>{{l.code}}</clr-dg-cell>
     <clr-dg-cell>{{l.date | dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
-    <!-- <clr-dg-cell class="text-align-right">
+    <clr-dg-cell class="text-align-right">
       <button class="btn btn-sm btn-success" style="margin:0" (click)="onClickEdit(l)">
         <clr-icon shape="trash"></clr-icon> แก้ไข
       </button>
-    </clr-dg-cell> -->
+    </clr-dg-cell>
   </clr-dg-row>
 
   <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
