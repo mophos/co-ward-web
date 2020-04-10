@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { AuthGuard } from '../auth-guard.service';
+import { CheckHospitalSuppliesComponent } from './check-hospital-supplies/check-hospital-supplies.component';
 
 const routes: Routes = [
   {
@@ -13,11 +14,12 @@ const routes: Routes = [
     component: LayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: '', redirectTo: 'check-bed-eoc2', pathMatch: 'full' },
-      { path: 'check-beds', component: CheckBedsComponent },
-      { path: 'check-bed-eoc', component: CheckBedEocComponent },
-      { path: 'check-bed-eoc2', component: CheckBedEoc2Component },
-      { path: 'check-supplies', component: CheckSuppliesComponent },
+      { path: '', redirectTo: 'check-hospital-supplies', pathMatch: 'full' },
+      // { path: 'check-beds', component: CheckBedsComponent },
+      // { path: 'check-bed-eoc', component: CheckBedEocComponent },
+      // { path: 'check-bed-eoc2', component: CheckBedEoc2Component },
+      // { path: 'check-supplies', component: CheckSuppliesComponent },
+      { path: 'check-hospital-supplies', component: CheckHospitalSuppliesComponent },
     ]
   }
 ];

@@ -12,9 +12,10 @@ import { CheckBedsComponent } from './check-beds/check-beds.component';
 import { CheckSuppliesComponent } from './check-supplies/check-supplies.component';
 import { CheckBedEocComponent } from './check-bed-eoc/check-bed-eoc.component';
 import { CheckBedEoc2Component } from './check-bed-eoc2/check-bed-eoc2.component';
+import { CheckHospitalSuppliesComponent } from './check-hospital-supplies/check-hospital-supplies.component';
 
 @NgModule({
-  declarations: [LayoutComponent, CheckBedsComponent, CheckSuppliesComponent, CheckBedEocComponent, CheckBedEoc2Component],
+  declarations: [LayoutComponent, CheckBedsComponent, CheckSuppliesComponent, CheckBedEocComponent, CheckBedEoc2Component, CheckHospitalSuppliesComponent],
   imports: [
     CommonModule,
     ManagerRoutingModule,
