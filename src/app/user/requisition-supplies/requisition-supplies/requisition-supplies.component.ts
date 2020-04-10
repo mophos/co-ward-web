@@ -43,4 +43,8 @@ export class RequisitionSuppliesComponent implements OnInit {
   onClickAdd() {
     this.router.navigate(['/staff/requisition-supplies/new']);
   }
+
+  onClickEdit(l) {
+    this.router.navigate(['/staff/requisition-supplies/new', { id: l.id }]);
+  }
 }

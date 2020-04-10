@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService } from '../../../help/alert.service';
 import { RequisitionService } from '../../requisition.service';
 import * as findIndex from 'lodash/findIndex';
@@ -47,16 +47,40 @@ export class RequisitionSuppliesNewComponent implements OnInit {
   errorLname = false;
   errorTel = false;
   errorReason = false;
+  reqId: any;
   @ViewChild('hospital') hospitals: AutocompleteHospitalRequisitionComponent;
   constructor(
     private router: Router,
     private alertService: AlertService,
-    private requisitionService: RequisitionService
-  ) { }
+    private requisitionService: RequisitionService,
+    private route: ActivatedRoute
+  ) {
+    const params = this.route.snapshot.params;
+    console.log(params);
+
+    this.reqId = params.id;
+  }
 
   ngOnInit() {
+    if (this.reqId) {
+      this.getInfo();
+    } else {
+      this.getGenerics();
+    }
     this.getTitle();
-    this.getGenerics();
+  }
+
+  async getInfo() {
+    try {
+      const rs: any = await this.requisitionService.getInfoRequisitionSupplies(this.reqId);
+      console.log(rs);
+      this.hospCode = rs.head.hospcode_req;
+      this.hospitals.setQuery(rs.head.hospname_req);
+      this.patient = rs.rows;
+
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async getTitle() {
@@ -136,8 +160,6 @@ export class RequisitionSuppliesNewComponent implements OnInit {
 
   async onClickAdd() {
     if (await this.verifyInput()) {
-
-
       const obj: any = {};
       obj.hn = this.hn;
       obj.cid = this.cid;
@@ -147,7 +169,7 @@ export class RequisitionSuppliesNewComponent implements OnInit {
       obj.title_id = this.titleId;
       obj.reason = this.reason;
       obj.tel = this.tel;
-      obj.genercs = this.generics;
+      obj.generics = this.generics;
       const idx = findIndex(this.patient, { cid: this.cid });
       if (idx > -1) {
         this.alertService.error('รายการซ้ำ');
@@ -190,7 +212,7 @@ export class RequisitionSuppliesNewComponent implements OnInit {
     this.modal = true;
   }
 
-  onClickSaveGeneric(){
+  onClickSaveGeneric() {
 
   }
 
