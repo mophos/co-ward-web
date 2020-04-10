@@ -1,0 +1,18 @@
+<nav class="breadcrumb">
+  <!-- <a class="breadcrumb-item" href="javascript://" routerLink="/admin/manage-min-max">รายการสังกัด</a> -->
+  <span class="breadcrumb-item active">รายการโรงพยาบาล</span>
+</nav>
+
+<clr-datagrid [style.height.px]="800">
+  <clr-dg-column>โรงพยาบาล</clr-dg-column>
+  <clr-dg-column>รายการ</clr-dg-column>
+  <clr-dg-column style="text-align: right;">คงเหลือ</clr-dg-column>
+  <clr-dg-column>หน่วย</clr-dg-column>
+
+  <clr-dg-row *ngFor="let l of list; let idx=index;">
+    <clr-dg-cell>{{l.hospcode}}</clr-dg-cell>
+    <clr-dg-cell>{{l.generic_name}}</clr-dg-cell>
+    <clr-dg-cell style="text-align: right;">{{l.qty}}</clr-dg-cell>
+    <clr-dg-cell>{{l.unit_name}}</clr-dg-cell>
+  </clr-dg-row>
+</clr-datagrid>

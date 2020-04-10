@@ -13,8 +13,14 @@ export class ApiService {
     const url = `${this.url}/v1/manager/eoc/beds?date=${date}`;
     return this.http.get(url).toPromise();
   }
+
   checkBed() {
     const url = `${this.url}/v1/manager/services/check-bed`;
+    return this.http.get(url).toPromise();
+  }
+
+  checkRemainHosp() {
+    const url = `${this.url}/v1/manager/services/remain/hosp/qty`;
     return this.http.get(url).toPromise();
   }
 
