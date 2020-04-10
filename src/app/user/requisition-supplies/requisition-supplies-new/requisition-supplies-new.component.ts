@@ -4,7 +4,7 @@ import { AlertService } from '../../../help/alert.service';
 import { RequisitionService } from '../../requisition.service';
 import * as findIndex from 'lodash/findIndex';
 import thaiIdCard from 'thai-id-card';
-import { AutocompleteHospitalComponent } from 'src/app/help/autocomplete-hospital/autocomplete-hospital.component';
+import { AutocompleteHospitalRequisitionComponent } from '../../../help/autocomplete-hospital-requisition/autocomplete-hospital-requisition.component';
 
 @Component({
   selector: 'app-requisition-supplies-new',
@@ -47,7 +47,7 @@ export class RequisitionSuppliesNewComponent implements OnInit {
   errorLname = false;
   errorTel = false;
   errorReason = false;
-  @ViewChild('hospital') hospitals: AutocompleteHospitalComponent;
+  @ViewChild('hospital') hospitals: AutocompleteHospitalRequisitionComponent;
   constructor(
     private router: Router,
     private alertService: AlertService,
@@ -193,7 +193,7 @@ export class RequisitionSuppliesNewComponent implements OnInit {
   onClickSaveGeneric(){
 
   }
-  
+
   async getGenerics() {
     try {
       this.isLoadding = true;

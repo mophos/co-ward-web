@@ -3,7 +3,16 @@
   <span class="breadcrumb-item active">สร้างใบเบิก</span>
 </nav>
 <div class="clr-row">
-  <div class="clr-col-11"></div>
+  <div class="clr-col-4">
+    <label for="example" class="clr-control-label">ชื่อสถานบริการ</label>
+    <div class="clr-control-container clr-error  width-fit">
+        <app-autocomplete-hospital-requisition style="padding: 0px;" #hospital (onselect)="onSelectHosp($event)">
+        </app-autocomplete-hospital-requisition>
+        <!-- <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="!hn.length"></clr-icon> -->
+      <!-- <span class="clr-subtext" *ngIf="!hn.length">กรุณาระบบ HN</span> -->
+    </div>
+  </div>
+  <div class="clr-col-7"></div>
   <div class="clr-col-1">
     <button class="btn btn btn-success btn-block" (click)="onClickSave()" title="save" [disabled]="!patient.length">
       บันทึก
@@ -14,25 +23,6 @@
 <div class="clr-row">
   <div class="clr-col-4">
     <div class="card" style="margin-top: 0;">
-      <div class="card-header">
-        <!-- <div class="clr-row">
-            <div class="clr-col-12"> -->
-        <form class="clr-form">
-          <div class="clr-form-control">
-            <label for="example" class="clr-control-label">ชื่อสถานบริการ</label>
-            <div class="clr-control-container clr-error  width-fit">
-              <div class="clr-input-wrapper">
-                <app-autocomplete-hospital style="padding: 0px" #hospital (onselect)="onSelectHosp($event)">
-                </app-autocomplete-hospital>
-                <!-- <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="!hn.length"></clr-icon> -->
-              </div>
-              <!-- <span class="clr-subtext" *ngIf="!hn.length">กรุณาระบบ HN</span> -->
-            </div>
-          </div>
-        </form>
-        <!-- </div>
-          </div> -->
-      </div>
       <div class="card-block">
         <div class="card-text">
           <div class="clr-row">

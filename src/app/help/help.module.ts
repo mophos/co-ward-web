@@ -12,6 +12,7 @@ import { AutocompleteZipcodeComponent } from './autocomplete-address/autocomplet
 import { AutocompleteProvinceComponent } from './autocomplete-address/autocomplete-province/autocomplete-province.component';
 import { AutocompleteHospitalComponent } from './autocomplete-hospital/autocomplete-hospital.component';
 import { NumberOnlyDirective } from './number-only.directive';
+import { AutocompleteHospitalRequisitionComponent } from './autocomplete-hospital-requisition/autocomplete-hospital-requisition.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NumberOnlyDirective } from './number-only.directive';
     AutocompleteZipcodeComponent,
     AutocompleteProvinceComponent,
     AutocompleteHospitalComponent,
-    NumberOnlyDirective
+    NumberOnlyDirective,
+    AutocompleteHospitalRequisitionComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +44,8 @@ import { NumberOnlyDirective } from './number-only.directive';
     AutocompleteZipcodeComponent,
     AutocompleteProvinceComponent,
     AutocompleteHospitalComponent,
-    NumberOnlyDirective
+    NumberOnlyDirective,
+    AutocompleteHospitalRequisitionComponent
   ]
 })
 export class HelpModule { }
