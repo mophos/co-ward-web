@@ -30,6 +30,8 @@ import { AuthSetting } from '../auth-setting.service';
 import { AuthRequisition } from '../auth-requisition.service';
 import { DrugComponent } from './drug/drug.component';
 import { MyDatePickerTHModule } from 'mydatepicker-th';
+import { RequisitionSuppliesComponent } from './requisition-supplies/requisition-supplies/requisition-supplies.component';
+import { RequisitionSuppliesNewComponent } from './requisition-supplies/requisition-supplies-new/requisition-supplies-new.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { MyDatePickerTHModule } from 'mydatepicker-th';
     RequisitionNewComponent, 
     RequisitionEditComponent,
     ReceiveDrugComponent,
-    DrugComponent
+    DrugComponent,
+    RequisitionSuppliesComponent,
+    RequisitionSuppliesNewComponent
   ],
   imports: [
     HelpModule,

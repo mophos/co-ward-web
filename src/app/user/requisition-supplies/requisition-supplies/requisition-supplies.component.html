@@ -1,0 +1,40 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">เบิกเวชภัณฑ์</span>
+</nav>
+<div class="clr-row">
+  <div class="clr-col-2  text-align-right">
+    <button class="btn btn-sm btn-success" (click)="onClickAdd()">
+      <clr-icon shape="plus"></clr-icon> บันทึกเบิกเวชภัณฑ์
+    </button>
+  </div>
+</div>
+
+<clr-datagrid [clrDgLoading]="isLoadding">
+  <clr-dg-column>ลำดับ</clr-dg-column>
+  <clr-dg-column>เลขที่ใบ</clr-dg-column>
+  <clr-dg-column>วันที่บันทึก</clr-dg-column>
+  <!-- <clr-dg-column></clr-dg-column> -->
+
+  <clr-dg-row *ngFor="let l of list;let idx=index;">
+    <clr-dg-cell>{{idx+1}}</clr-dg-cell>
+    <clr-dg-cell>{{l.code}}</clr-dg-cell>
+    <clr-dg-cell>{{l.date | dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
+    <!-- <clr-dg-cell class="text-align-right">
+      <button class="btn btn-sm btn-success" style="margin:0" (click)="onClickEdit(l)">
+        <clr-icon shape="trash"></clr-icon> แก้ไข
+      </button>
+    </clr-dg-cell> -->
+  </clr-dg-row>
+
+  <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="50">
+      <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
+      {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+      of {{pagination.totalItems}} รายการ
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>
+
+<app-inventory-add #modalsAdd></app-inventory-add>
+<app-inventory-edit #modalsEdit></app-inventory-edit>
