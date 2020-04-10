@@ -17,6 +17,7 @@ import { AuthSuppliemanage } from '../auth-suppliemanage.service';
 import { AuthHospitalmanage } from '../auth-hospitalmanage.service';
 import { ManageHospitalComponent } from './manage-hospital/manage-hospital.component';
 import { ManageDrugComponent } from '../admin/manage-drug/manage-drug.component';
+import { RequisitionMinMaxComponent } from './requisition-min-max/requisition-min-max.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,7 @@ const routes: Routes = [
       { path: 'manage-supplies', canActivate: [AuthSuppliemanage], component: ManageSuppliesComponent },
       { path: 'manage-hospital', canActivate: [AuthHospitalmanage], component: ManageHospitalComponent },
       { path: 'manage-drug', component: ManageDrugComponent },
+      { path: 'requisition-min-max', component: RequisitionMinMaxComponent },
     ]
   }
 ];

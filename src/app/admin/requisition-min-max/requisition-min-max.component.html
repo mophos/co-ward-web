@@ -1,0 +1,66 @@
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="javascript://" routerLink="/admin/requisition-min-max">ตั้งค่า MIN-MAX</a>
+</nav>
+
+<clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
+  <clr-dg-column>#</clr-dg-column>
+  <clr-dg-column>รายการ</clr-dg-column>
+  <clr-dg-column></clr-dg-column>
+
+  <clr-dg-row *ngFor="let l of list; let idx=index;">
+    <clr-dg-cell>{{idx+1}}</clr-dg-cell>
+    <clr-dg-cell>{{l.hospname}}</clr-dg-cell>
+    <clr-dg-cell style="text-align: center;">
+      <div class="btn-group">
+        <button class="btn btn-sm btn-success" (click)="onClickEdit(l)" title="แก้ไข">
+          <clr-icon shape="note"></clr-icon>
+        </button>
+      </div>
+    </clr-dg-cell>
+  </clr-dg-row>
+</clr-datagrid>
+
+
+<clr-modal [(clrModalOpen)]="modal" [clrModalClosable]="false" [clrModalSize]="'lg'">
+  <h3 class="modal-title">กำหนด MIN-MAX</h3>
+  <div class="modal-body">
+    <div class="clr-row">
+      <div class="clr-col-12">
+        <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
+          <clr-dg-column>รหัส</clr-dg-column>
+          <clr-dg-column>รายการ</clr-dg-column>
+          <clr-dg-column>MIN</clr-dg-column>
+          <clr-dg-column>MAX</clr-dg-column>
+          <clr-dg-column>Safety Stock</clr-dg-column>
+          <clr-dg-column>หน่วย</clr-dg-column>
+
+          <clr-dg-row *ngFor="let l of listSupplies; let idx=index;">
+            <clr-dg-cell>{{l.code}}</clr-dg-cell>
+            <clr-dg-cell>{{l.name}}</clr-dg-cell>
+            <clr-dg-cell>
+              <input style="text-align: right;" type="number" name="min" [(ngModel)]="l.min" class="clr-input width-fit"
+                value="{{l.min}}">
+            </clr-dg-cell>
+            <clr-dg-cell>
+              <input style="text-align: right;" type="number" name="max" [(ngModel)]="l.max" class="clr-input width-fit"
+                value="{{l.max}}">
+            </clr-dg-cell>
+            <clr-dg-cell>
+              <input style="text-align: right;" type="number" name="safety_stock" [(ngModel)]="l.safety_stock" class="clr-input width-fit"
+                value="{{l.safety_stock}}">
+            </clr-dg-cell>
+            <clr-dg-cell>{{l.unit_name}}</clr-dg-cell>
+          </clr-dg-row>
+        </clr-datagrid>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="save()">
+      บันทึก
+    </button>
+    <button type="button" class="btn btn-danger" (click)="modal = false">
+      ปิด
+    </button>
+  </div>
+</clr-modal>
