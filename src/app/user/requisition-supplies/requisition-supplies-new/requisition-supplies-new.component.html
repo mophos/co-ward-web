@@ -5,25 +5,20 @@
 <form class="clr-form">
   <div class="clr-row">
     <div class="clr-col-4">
+      <div style="margin-top: 1rem;">
+        <label for="example" class="clr-control-label">ชื่อสถานบริการ</label>
+        <div class="clr-control-container clr-error  width-fit">
+            <app-autocomplete-hospital-requisition style="padding: 0px;" #hospital (onselect)="onSelectHosp($event)">
+            </app-autocomplete-hospital-requisition>
+            <!-- <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="!hn.length"></clr-icon> -->
+          <!-- <span class="clr-subtext" *ngIf="!hn.length">กรุณาระบบ HN</span> -->
+        </div>
+      </div>
       <div class="card">
         <div class="card-block">
           <div class="card-header" style="padding: 0;">
             <!-- <div class="clr-row">
               <div class="clr-col-12"> -->
-            <form class="clr-form">
-              <div class="clr-form-control">
-                <label for="example" class="clr-control-label">ชื่อสถานบริการ</label>
-                <div class="clr-control-container clr-error  width-fit">
-                  <div class="clr-input-wrapper">
-                    <app-autocomplete-hospital-requisition style="padding: 0px" #hospital
-                      (onselect)="onSelectHosp($event)">
-                    </app-autocomplete-hospital-requisition>
-                    <!-- <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="!hn.length"></clr-icon> -->
-                  </div>
-                  <!-- <span class="clr-subtext" *ngIf="!hn.length">กรุณาระบบ HN</span> -->
-                </div>
-              </div>
-            </form>
             <!-- </div>
             </div> -->
           </div>
