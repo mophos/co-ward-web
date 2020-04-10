@@ -6,11 +6,13 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class RequisitionService {
-  constructor(private http: HttpClient,
-    @Inject('API_URL') private apiUrl: string) { }
+  constructor(
+    private http: HttpClient,
+    @Inject('API_URL') private apiUrl: string
+  ) { }
 
   async getList() {
-    const url = `${this.apiUrl}/v1/staff/requisition`;
+    const url = `${this.apiUrl}/v1/staff/requisition-supplies`;
     return await this.http.get(url).toPromise();
   }
 
@@ -20,11 +22,15 @@ export class RequisitionService {
   }
 
   async getGenerics() {
-    const url = `${this.apiUrl}/basic/generics`;
+    const url = `${this.apiUrl}/v1/staff/requisition-supplies/generics`;
     return await this.http.get(url).toPromise();
   }
 
-  async save(data) {
+  async saveRequisitionSupplies(head, detail) {
+    const url = `${this.apiUrl}/v1/staff/requisition-supplies`;
+    return await this.http.post(url, { head, detail }).toPromise();
+  }
+  async save( data) {
     const url = `${this.apiUrl}/v1/staff/requisition`;
     return await this.http.post(url, { data }).toPromise();
   }

@@ -2,215 +2,211 @@
   <a class="breadcrumb-item" href="javascript://" routerLink="/staff/requisition">เบิก</a>
   <span class="breadcrumb-item active">สร้างใบเบิก</span>
 </nav>
-<form class="clr-form">
-  <div class="clr-row">
-    <div class="clr-col-4">
-      <div class="card">
-        <div class="card-block">
-          <div class="card-header" style="padding: 0;">
-            <!-- <div class="clr-row">
-              <div class="clr-col-12"> -->
-            <form class="clr-form">
-              <div class="clr-form-control">
-                <label for="example" class="clr-control-label">ชื่อสถานบริการ</label>
-                <div class="clr-control-container clr-error  width-fit">
-                  <div class="clr-input-wrapper">
-                    <app-autocomplete-hospital style="padding: 0px" #hospital (onselect)="onSelectHosp($event)">
-                    </app-autocomplete-hospital>
-                    <!-- <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="!hn.length"></clr-icon> -->
-                  </div>
-                  <!-- <span class="clr-subtext" *ngIf="!hn.length">กรุณาระบบ HN</span> -->
-                </div>
-              </div>
-            </form>
-            <!-- </div>
-            </div> -->
-          </div>
-          <div class="card-text">
-            <div class="clr-row">
-
-             
-              <div class="clr-col-6">
-                <form class="clr-form">
-                  <div class="clr-form-control">
-                    <label for="example" class="clr-control-label">บัตรประจำตัวประชาชน</label>
-                    <div class="clr-control-container clr-error width-fit">
-                      <div class="clr-input-wrapper ">
-                        <input type="text" id="example" name="cid" (keyup)="enterCid()" maxlength="13" [(ngModel)]="cid"
-                          class="clr-input width-fit">
-                        <!-- <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="!checkCid && cid.length == 13"> </clr-icon>-->
-                      </div>
-                      <!-- <span class="clr-subtext" *ngIf="!checkCid && cid.length == 13">เลขบัตรประชาชนไม่ถูกต้อง</span> -->
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="clr-col-6">
-                <form class="clr-form">
-                  <div class="clr-form-control">
-                    <label for="example" class="clr-control-label">เลขที่หนังสือเดินทาง</label>
-                    <div class="clr-control-container clr-error width-fit">
-                      <div class="clr-input-wrapper">
-                        <input type="text" id="example" name="passport" [(ngModel)]="passport"
-                          class="clr-input  width-fit">
-                        <!-- <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="!passport.length"> </clr-icon> -->
-                      </div>
-                      <!-- <span class="clr-subtext" *ngIf="!passport.length">กรุณาระบุเลขท่ีหนังสือเดินทาง</span> -->
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="clr-col-6">
-                <form class="clr-form">
-                  <div class="clr-form-control">
-                    <label for="example" class="clr-control-label">HN</label>
-                    <div class="clr-control-container clr-error  width-fit">
-                      <div class="clr-input-wrapper">
-                        <input type="text" id="example" name="hn" [(ngModel)]="hn" class="clr-input  width-fit">
-                        <!-- <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="!hn.length"></clr-icon> -->
-                      </div>
-                      <!-- <span class="clr-subtext" *ngIf="!hn.length">กรุณาระบบ HN</span> -->
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="clr-col-6">
-                <form class="clr-form">
-                  <div class="clr-form-control">
-                    <label for="example" class="clr-control-label">คำนำหน้าชื่อ</label>
-                    <div class="clr-control-container clr-error width-fit">
-                      <div class="clr-select-wrapper width-fit">
-                        <select [(ngModel)]="titleId" name="titleId" class="clr-select width-fit">
-                          <option [value]="null">กรุณาเลือกคำนำหน้าชื่อ</option>
-                          <option [value]="t.id" *ngFor="let t of title">{{t.name}}</option>
-                        </select>
-                        <!-- <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="!titleId"></clr-icon> -->
-                      </div>
-                      <!-- <span class="clr-subtext" *ngIf="!titleId">กรุณาเลือกคำนำหน้าชื่อ</span> -->
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="clr-col-6">
-                <form class="clr-form">
-                  <div class="clr-form-control">
-                    <label for="example" class="clr-control-label">ชื่อ</label>
-                    <div class="clr-control-container clr-error width-fit">
-                      <div class="clr-input-wrapper">
-                        <input type="text" id="example" name="fname" [(ngModel)]="fname" class="clr-input  width-fit">
-                        <!-- <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="!fname.length"></clr-icon> -->
-                      </div>
-                      <!-- <span class="clr-subtext" *ngIf="!fname.length">กรุณาระบุชื่อ</span> -->
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="clr-col-6">
-                <form class="clr-form">
-                  <div class="clr-form-control">
-                    <label for="example" class="clr-control-label">นามสกุล</label>
-                    <div class="clr-control-container clr-error width-fit">
-                      <div class="clr-input-wrapper">
-                        <input type="text" id="example" name="lname" [(ngModel)]="lname" class="clr-input  width-fit">
-                        <!-- <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="!lname.length"></clr-icon> -->
-                      </div>
-                      <!-- <span class="clr-subtext" *ngIf="!lname.length">กรุณาระบุนามสกุล</span> -->
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="clr-col-6">
-                <form class="clr-form">
-                  <div class="clr-form-control">
-                    <label for="example" class="clr-control-label">เบอร์โทรศัพท์</label>
-                    <div class="clr-control-container clr-error width-fit">
-                      <div class="clr-input-wrapper">
-                        <input type="text" id="example" name="tel" maxlength="10" [(ngModel)]="tel"
-                          class="clr-input  width-fit">
-                        <!-- <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="!tel.length"></clr-icon> -->
-                      </div>
-                      <!-- <span class="clr-subtext" *ngIf="!tel.length">กรุณาระบุเบอร์โทรศัพท์</span> -->
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="clr-col-6">
-                <form class="clr-form">
-                  <div class="clr-form-control">
-                    <label for="example" class="clr-control-label">หมายเหตุ</label>
-                    <div class="clr-control-container clr-error width-fit">
-                      <div class="clr-input-wrapper">
-                        <input type="text" id="example" name="reason" maxlength="10" [(ngModel)]="reason"
-                          class="clr-input  width-fit">
-                        <!-- <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="!reason.length">  </clr-icon>-->
-                      </div>
-                      <!-- <span class="clr-subtext" *ngIf="!reason.length">กรุณาระบุเหตุผล</span> -->
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="clr-col-8">
-      <div class="card">
-        <div class="card-block">
-          <div class="card-text">
-            <clr-datagrid>
-              <clr-dg-column>#</clr-dg-column>
-              <clr-dg-column>ชื่อโรงพยาบาล</clr-dg-column>
-              <clr-dg-column>รหัสบัตรประจำตัวประชาชน</clr-dg-column>
-              <clr-dg-column>ชื่อผู้ป่วย</clr-dg-column>
-              <clr-dg-column>นามสกุล</clr-dg-column>
-              <clr-dg-column>เหตุผล</clr-dg-column>
-              <clr-dg-column></clr-dg-column>
-            
-              <clr-dg-row *ngFor="let l of patient; let idx = index;">
-                <clr-dg-cell>{{idx+1}}</clr-dg-cell>
-                <clr-dg-cell>{{l.hospname}}</clr-dg-cell>
-                <clr-dg-cell>{{l.cid}}</clr-dg-cell>
-                <clr-dg-cell>{{l.fname}}</clr-dg-cell>
-                <clr-dg-cell>{{l.lname}}</clr-dg-cell>
-                <clr-dg-cell>{{l.reason}}</clr-dg-cell>
-                <clr-dg-cell>
-                  <button class="btn btn-sm btn-success" (click)="modalAdd(l)" title="เพิ่มรายการยา">
-                    <clr-icon shape="add"></clr-icon> เพิ่มรายการยา
-                  </button>
-                  <button class="btn btn-sm btn-danger" (click)="remove(idx)" title="ลบ">
-                    <clr-icon shape="trash"></clr-icon> ลบ
-                  </button>
-                </clr-dg-cell>
-              </clr-dg-row>
-            </clr-datagrid>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-
-  <div class="clr-row">
-
-    <div class="clr-col-1">
-      <button class="btn btn-sm btn-success" (click)="add()" title="เพิ่ม"
-        [disabled]="!fname || !lname || !hn || !cid || !hospCode">
-        <clr-icon shape="add"></clr-icon> เพิ่ม
-      </button>
-    </div>
-  </div>
-</form>
-
 <div class="clr-row">
-  <div class="clr-col-12">
-    <button class="btn btn btn-success" (click)="saveAll()" title="save" [disabled]="!patient.length">
+  <div class="clr-col-4">
+    <label for="example" class="clr-control-label">ชื่อสถานบริการ</label>
+    <div class="clr-control-container clr-error  width-fit">
+        <app-autocomplete-hospital-requisition style="padding: 0px;" #hospital (onselect)="onSelectHosp($event)">
+        </app-autocomplete-hospital-requisition>
+        <!-- <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="!hn.length"></clr-icon> -->
+      <!-- <span class="clr-subtext" *ngIf="!hn.length">กรุณาระบบ HN</span> -->
+    </div>
+  </div>
+  <div class="clr-col-7"></div>
+  <div class="clr-col-1">
+    <button class="btn btn btn-success btn-block" (click)="onClickSave()" title="save" [disabled]="!patient.length">
       บันทึก
     </button>
   </div>
 </div>
+<!-- <form class="clr-form"> -->
+<div class="clr-row">
+  <div class="clr-col-4">
+    <div class="card" style="margin-top: 0;">
+      <div class="card-block">
+        <div class="card-text">
+          <div class="clr-row">
+            <div class="clr-col-6">
+              <form class="clr-form">
+                <div class="clr-form-control" style="margin-top: 0;">
+                  <label for="example" class="clr-control-label">บัตรประจำตัวประชาชน</label>
+                  <div class="clr-control-container clr-error width-fit">
+                    <div class="clr-input-wrapper ">
+                      <input type="text"  id="example" name="cid" maxlength="13"
+                        [(ngModel)]="cid" class="clr-input width-fit">
+                      <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="errorCid"> </clr-icon>
+                    </div>
+                    <span class="clr-subtext" *ngIf="errorCid">เลขบัตรประชาชนไม่ถูกต้อง</span>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="clr-col-6">
+              <form class="clr-form">
+                <div class="clr-form-control" style="margin-top: 0;">
+                  <label for="example" class="clr-control-label">เลขที่หนังสือเดินทาง</label>
+                  <div class="clr-control-container clr-error width-fit">
+                    <div class="clr-input-wrapper">
+                      <input type="text"  id="example" name="passport" [(ngModel)]="passport"
+                        class="clr-input  width-fit">
+                      <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="errorPassport"> </clr-icon>
+                    </div>
+                    <span class="clr-subtext" *ngIf="errorPassport">กรุณาระบุเลขท่ีหนังสือเดินทาง</span>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="clr-col-6">
+              <form class="clr-form">
+                <div class="clr-form-control" style="margin-top: 0;">
+                  <label for="example" class="clr-control-label">HN</label>
+                  <div class="clr-control-container clr-error  width-fit">
+                    <div class="clr-input-wrapper">
+                      <input type="text" id="example" name="hn" [(ngModel)]="hn" class="clr-input  width-fit">
+                      <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="errorHN"></clr-icon>
+                    </div>
+                    <span class="clr-subtext" *ngIf="errorHN">กรุณาระบบ HN</span>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="clr-col-6">
+              <form class="clr-form">
+                <div class="clr-form-control" style="margin-top: 0;">
+                  <label for="example" class="clr-control-label">คำนำหน้าชื่อ</label>
+                  <div class="clr-control-container clr-error width-fit">
+                    <div class="clr-select-wrapper width-fit">
+                      <select [(ngModel)]="titleId" name="titleId" class="clr-select width-fit">
+                        <option [value]="null">กรุณาเลือกคำนำหน้าชื่อ</option>
+                        <option [value]="t.id" *ngFor="let t of title">{{t.name}}</option>
+                      </select>
+                      <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="errorTitleName"></clr-icon>
+                    </div>
+                    <span class="clr-subtext" *ngIf="errorTitleName">กรุณาเลือกคำนำหน้าชื่อ</span>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="clr-col-6">
+              <form class="clr-form">
+                <div class="clr-form-control" style="margin-top: 0;">
+                  <label for="example" class="clr-control-label">ชื่อ</label>
+                  <div class="clr-control-container clr-error width-fit">
+                    <div class="clr-input-wrapper">
+                      <input type="text" id="example" name="fname" [(ngModel)]="fname" class="clr-input  width-fit">
+                      <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="errorFname"></clr-icon>
+                    </div>
+                    <span class="clr-subtext" *ngIf="errorFname">กรุณาระบุชื่อ</span>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="clr-col-6">
+              <form class="clr-form">
+                <div class="clr-form-control" style="margin-top: 0;">
+                  <label for="example" class="clr-control-label">นามสกุล</label>
+                  <div class="clr-control-container clr-error width-fit">
+                    <div class="clr-input-wrapper">
+                      <input type="text" id="example" name="lname" [(ngModel)]="lname" class="clr-input  width-fit">
+                      <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="errorLname"></clr-icon>
+                    </div>
+                    <span class="clr-subtext" *ngIf="errorLname">กรุณาระบุนามสกุล</span>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="clr-col-6">
+              <form class="clr-form">
+                <div class="clr-form-control" style="margin-top: 0;">
+                  <label for="example" class="clr-control-label">เบอร์โทรศัพท์</label>
+                  <div class="clr-control-container clr-error width-fit">
+                    <div class="clr-input-wrapper">
+                      <input type="text" id="example" name="tel" maxlength="10" [(ngModel)]="tel"
+                        class="clr-input  width-fit">
+                      <!-- <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="!tel.length"></clr-icon> -->
+                    </div>
+                    <!-- <span class="clr-subtext" *ngIf="!tel.length">กรุณาระบุเบอร์โทรศัพท์</span> -->
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="clr-col-6">
+              <form class="clr-form">
+                <div class="clr-form-control" style="margin-top: 0;">
+                  <label for="example" class="clr-control-label">หมายเหตุ</label>
+                  <div class="clr-control-container clr-error width-fit">
+                    <div class="clr-input-wrapper">
+                      <input type="text" id="example" name="reason" maxlength="10" [(ngModel)]="reason"
+                        class="clr-input  width-fit">
+                      <!-- <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="!reason.length">  </clr-icon>-->
+                    </div>
+                    <!-- <span class="clr-subtext" *ngIf="!reason.length">กรุณาระบุเหตุผล</span> -->
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <clr-datagrid>
+          <clr-dg-column>รายการ</clr-dg-column>
+          <clr-dg-column style="text-align: right;">จำนวน</clr-dg-column>
+
+          <clr-dg-row *ngFor="let i of generics; let idx = index;">
+            <clr-dg-cell>[{{i.code}}] {{i.name}}</clr-dg-cell>
+            <clr-dg-cell><input style="text-align: right;" type="number" name="qty" [(ngModel)]="i.qty"
+                class="clr-input width-fit" value="{{i.qty}}"></clr-dg-cell>
+          </clr-dg-row>
+        </clr-datagrid>
+        <br>
+        <button class="btn btn-primary btn-block" (click)="onClickAdd()" title="เพิ่ม">
+          <clr-icon shape="add"></clr-icon> เพิ่มรายการ
+        </button>
+        <!-- <div class="clr-col-6">
+          </div> -->
+      </div>
+    </div>
+  </div>
+  <div class="clr-col-8">
+    <div class="card" style="margin-top: 0;">
+      <div class="card-block">
+        <div class="card-text">
+          <clr-datagrid>
+            <clr-dg-column>#</clr-dg-column>
+            <clr-dg-column>CID/Passport</clr-dg-column>
+            <clr-dg-column>HN</clr-dg-column>
+            <clr-dg-column>ชื่อ</clr-dg-column>
+            <clr-dg-column>เบอร์โทรศัพท์</clr-dg-column>
+            <clr-dg-column>เหตุผล</clr-dg-column>
+            <clr-dg-column></clr-dg-column>
+
+            <clr-dg-row *ngFor="let l of patient; let idx = index;">
+              <clr-dg-cell>{{idx+1}}</clr-dg-cell>
+              <clr-dg-cell>{{l.cid}} {{l.passport}}</clr-dg-cell>
+              <clr-dg-cell>{{l.hn}}</clr-dg-cell>
+              <clr-dg-cell>{{l.fname}} {{l.lname}}</clr-dg-cell>
+              <clr-dg-cell>{{l.tel}}</clr-dg-cell>
+              <clr-dg-cell>{{l.reason}}</clr-dg-cell>
+              <clr-dg-cell>
+                <button class="btn btn-sm btn-success" (click)="onClickOpenModal(l)" title="เพิ่มรายการยา">
+                  <clr-icon shape="note"></clr-icon>
+                </button>
+                <button class="btn btn-sm btn-danger" (click)="remove(idx)" title="ลบ">
+                  <clr-icon shape="trash"></clr-icon> ลบ
+                </button>
+              </clr-dg-cell>
+            </clr-dg-row>
+          </clr-datagrid>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- </form> -->
+
 
 <clr-modal [(clrModalOpen)]="modal" [clrModalClosable]="false">
   <h3 class="modal-title">ระบุจำนวนให้เบิก</h3>
@@ -220,7 +216,7 @@
       <clr-dg-column>ชื่อยา</clr-dg-column>
       <clr-dg-column>จำนวน</clr-dg-column>
 
-      <clr-dg-row *ngFor="let l of generics">
+      <clr-dg-row *ngFor="let l of genericsEdit">
         <clr-dg-cell>{{l.code}}</clr-dg-cell>
         <clr-dg-cell>{{l.name}}</clr-dg-cell>
         <clr-dg-cell>
@@ -230,7 +226,7 @@
     </clr-datagrid>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="saveGenerics()">
+    <button type="button" class="btn btn-success" (click)="onClickSaveGeneric()">
       บันทึก
     </button>
     <button type="button" class="btn btn-danger" (click)="modal = false">
