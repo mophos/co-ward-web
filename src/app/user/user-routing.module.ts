@@ -1,3 +1,5 @@
+import { RequisitionSuppliesNewComponent } from './requisition-supplies/requisition-supplies-new/requisition-supplies-new.component';
+import { RequisitionSuppliesComponent } from './requisition-supplies/requisition-supplies/requisition-supplies.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
@@ -59,6 +61,15 @@ const routes: Routes = [
           { path: '', component: RequisitionComponent },
           { path: 'new', component: RequisitionNewComponent },
           { path: 'edit', component: RequisitionEditComponent },
+        ]
+      },
+      {
+        path: 'requisition-supplies',
+        canActivate: [AuthRequisition],
+        children: [
+          { path: '', component: RequisitionSuppliesComponent },
+          { path: 'new', component: RequisitionSuppliesNewComponent },
+          // { path: 'edit', component: RequisitionEditComponent },
         ]
       }
     ]

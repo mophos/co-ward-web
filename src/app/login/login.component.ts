@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
           this.route.navigate(['/admin']);
         } else if (decoded.type === 'STAFF') {
           if (findIndex(rights, { name: 'STAFF_REQUISITION' }) > -1) {
-            this.route.navigate(['/staff/requisition']);
+            this.route.navigate(['/staff/requisition-supplies']);
           } else {
             this.route.navigate(['/staff/inventory']);
           }
