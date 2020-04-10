@@ -16,6 +16,7 @@ export class LayoutComponent implements OnInit {
   collapse = true;
   rights: any;
   requisitionMenu: any;
+  requisitionSuppliesMenu: any;
   checkBedMenu: any;
   checkSuppliesMenu: any;
   balanceSuppliesMenu: any;
@@ -33,6 +34,7 @@ export class LayoutComponent implements OnInit {
     this.rights = decoded.rights;
 
     this.requisitionMenu = findIndex(this.rights, { name: 'STAFF_REQUISITION' }) === -1 ? false : true;
+    this.requisitionSuppliesMenu = findIndex(this.rights, { name: 'STAFF_REQUISITION_SUPPLIES' }) === -1 ? false : true;
     this.checkBedMenu = findIndex(this.rights, { name: 'STAFF_CHECK_BEDS' }) === -1 ? false : true;
     this.checkSuppliesMenu = findIndex(this.rights, { name: 'STAFF_CHECK_SUPPLIES' }) === -1 ? false : true;
     this.balanceSuppliesMenu = findIndex(this.rights, { name: 'STAFF_STOCK_SUPPLIES' }) === -1 ? false : true;

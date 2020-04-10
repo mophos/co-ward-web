@@ -1,3 +1,4 @@
+import { AuthRequisitionSupplies } from './../auth-requisition-supplies.service';
 import { RequisitionSuppliesNewComponent } from './requisition-supplies/requisition-supplies-new/requisition-supplies-new.component';
 import { RequisitionSuppliesComponent } from './requisition-supplies/requisition-supplies/requisition-supplies.component';
 import { NgModule } from '@angular/core';
@@ -65,7 +66,7 @@ const routes: Routes = [
       },
       {
         path: 'requisition-supplies',
-        canActivate: [AuthRequisition],
+        canActivate: [AuthRequisitionSupplies],
         children: [
           { path: '', component: RequisitionSuppliesComponent },
           { path: 'new', component: RequisitionSuppliesNewComponent },

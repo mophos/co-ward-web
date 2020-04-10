@@ -30,8 +30,13 @@ export class RequisitionService {
     const url = `${this.apiUrl}/v1/staff/requisition-supplies`;
     return await this.http.post(url, { head, detail }).toPromise();
   }
-  async save( data) {
+  async save(data) {
     const url = `${this.apiUrl}/v1/staff/requisition`;
     return await this.http.post(url, { data }).toPromise();
+  }
+
+  async getInfoRequisitionSupplies(id) {
+    const url = `${this.apiUrl}/v1/staff/requisition-supplies/info?id=${id}`;
+    return await this.http.get(url).toPromise();
   }
 }

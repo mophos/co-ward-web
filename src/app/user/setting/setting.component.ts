@@ -58,16 +58,16 @@ export class SettingComponent implements OnInit {
     private registerService: RegisterService
   ) { }
 
-  ngOnInit() {
-    this.getInfo();
-    this.getPosition();
-    this.getTitle();
-    this.getUserInfo();
+  async ngOnInit() {
+    await this.getPosition();
+    await this.getTitle();
+    await this.getInfo();
+    await this.getUserInfo();
   }
 
   async getInfo() {
     try {
-      let rs: any = await this.settingService.getInfo();
+      const rs: any = await this.settingService.getInfo();
       if (rs.ok) {
         this.hospCode = rs.rows[0].hospcode;
         this.hospName = rs.rows[0].hospname;
@@ -93,17 +93,19 @@ export class SettingComponent implements OnInit {
         this.alertService.error();
       }
     } catch (error) {
+      console.log(error);
+      
       this.alertService.error(error);
     }
   }
 
   async getUserInfo() {
     try {
-      let rs: any = await this.settingService.getUserInfo();
+      const rs: any = await this.settingService.getUserInfo();
       if (rs.ok) {
         this.user = rs.rows;
-        let idxPosition = findIndex(this.positionList, { id: this.user[0].position_id });
-        let idxTitle = findIndex(this.titleList, { id: this.user[0].title_id });
+        const idxPosition = findIndex(this.positionList, { id: this.user[0].position_id });
+        const idxTitle = findIndex(this.titleList, { id: this.user[0].title_id });
         this.position = this.positionList[idxPosition].id;
         this.title = this.titleList[idxTitle].id;
         this.fname = this.user[0].fname;
@@ -117,6 +119,8 @@ export class SettingComponent implements OnInit {
         this.alertService.error();
       }
     } catch (error) {
+      console.log(error);
+      
       this.alertService.error(error);
     }
   }

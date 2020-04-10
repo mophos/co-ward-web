@@ -1,6 +1,6 @@
 <nav class="breadcrumb">
-  <a class="breadcrumb-item" href="javascript://" routerLink="/staff/requisition">เบิก</a>
-  <span class="breadcrumb-item active">สร้างใบเบิก</span>
+  <a class="breadcrumb-item" href="javascript://" routerLink="/staff/requisition-supplies">การใช้เวชภัณฑ์</a>
+  <span class="breadcrumb-item active">บันทึกการใช้เวชภัณฑ์</span>
 </nav>
 <div class="clr-row">
   <div class="clr-col-4">
@@ -29,10 +29,10 @@
             <div class="clr-col-6">
               <form class="clr-form">
                 <div class="clr-form-control" style="margin-top: 0;">
-                  <label for="example" class="clr-control-label">บัตรประจำตัวประชาชน</label>
+                  <label for="example" class="clr-control-label">บัตรประจำตัวประชาชน <span class="required">*</span></label>
                   <div class="clr-control-container clr-error width-fit">
                     <div class="clr-input-wrapper ">
-                      <input type="text"  id="example" name="cid" maxlength="13"
+                      <input type="text"   *ngIf="passport.length== 0"  id="example" name="cid" maxlength="13"
                         [(ngModel)]="cid" class="clr-input width-fit">
                       <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="errorCid"> </clr-icon>
                     </div>
@@ -47,7 +47,7 @@
                   <label for="example" class="clr-control-label">เลขที่หนังสือเดินทาง</label>
                   <div class="clr-control-container clr-error width-fit">
                     <div class="clr-input-wrapper">
-                      <input type="text"  id="example" name="passport" [(ngModel)]="passport"
+                      <input type="text" *ngIf="cid.length== 0" id="example" name="passport" [(ngModel)]="passport"
                         class="clr-input  width-fit">
                       <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="errorPassport"> </clr-icon>
                     </div>
@@ -59,7 +59,7 @@
             <div class="clr-col-6">
               <form class="clr-form">
                 <div class="clr-form-control" style="margin-top: 0;">
-                  <label for="example" class="clr-control-label">HN</label>
+                  <label for="example" class="clr-control-label">HN <span class="required">*</span></label>
                   <div class="clr-control-container clr-error  width-fit">
                     <div class="clr-input-wrapper">
                       <input type="text" id="example" name="hn" [(ngModel)]="hn" class="clr-input  width-fit">
@@ -73,7 +73,7 @@
             <div class="clr-col-6">
               <form class="clr-form">
                 <div class="clr-form-control" style="margin-top: 0;">
-                  <label for="example" class="clr-control-label">คำนำหน้าชื่อ</label>
+                  <label for="example" class="clr-control-label">คำนำหน้าชื่อ <span class="required">*</span></label>
                   <div class="clr-control-container clr-error width-fit">
                     <div class="clr-select-wrapper width-fit">
                       <select [(ngModel)]="titleId" name="titleId" class="clr-select width-fit">
@@ -90,7 +90,7 @@
             <div class="clr-col-6">
               <form class="clr-form">
                 <div class="clr-form-control" style="margin-top: 0;">
-                  <label for="example" class="clr-control-label">ชื่อ</label>
+                  <label for="example" class="clr-control-label">ชื่อ <span class="required">*</span></label>
                   <div class="clr-control-container clr-error width-fit">
                     <div class="clr-input-wrapper">
                       <input type="text" id="example" name="fname" [(ngModel)]="fname" class="clr-input  width-fit">
@@ -104,7 +104,7 @@
             <div class="clr-col-6">
               <form class="clr-form">
                 <div class="clr-form-control" style="margin-top: 0;">
-                  <label for="example" class="clr-control-label">นามสกุล</label>
+                  <label for="example" class="clr-control-label">นามสกุล <span class="required">*</span></label>
                   <div class="clr-control-container clr-error width-fit">
                     <div class="clr-input-wrapper">
                       <input type="text" id="example" name="lname" [(ngModel)]="lname" class="clr-input  width-fit">
