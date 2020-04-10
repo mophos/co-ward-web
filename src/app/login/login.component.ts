@@ -44,10 +44,12 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem('token', rs.token);
         const decoded = this.jwtHelper.decodeToken(rs.token);
         const rights = decoded.rights;
+        console.log(decoded);
+        
         if (decoded.type === 'ADMIN') {
           this.route.navigate(['/admin']);
         } else if (decoded.type === 'STAFF') {
-          if (findIndex(rights, { name: 'STAFF_REQUISITION' }) > -1) {
+          if (findIndex(rights, { name: 'STAFF_REQUISITION_SUPPLIES' }) > -1) {
             this.route.navigate(['/staff/requisition-supplies']);
           } else {
             this.route.navigate(['/staff/inventory']);
