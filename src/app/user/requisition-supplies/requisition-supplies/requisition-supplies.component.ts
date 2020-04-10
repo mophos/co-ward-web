@@ -15,7 +15,7 @@ export class RequisitionSuppliesComponent implements OnInit {
   list: any;
   startDate: any;
   endDate: any;
-
+  query: any;
   myDatePickerOptions: IMyOptions = {
     inline: false,
     dateFormat: 'dd mmm yyyy',
@@ -70,5 +70,9 @@ export class RequisitionSuppliesComponent implements OnInit {
 
   onClickEdit(l) {
     this.router.navigate(['/staff/requisition-supplies/new', { id: l.id }]);
+  }
+
+  doEnter(e) {
+
   }
 }

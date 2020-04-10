@@ -32,7 +32,7 @@ export class ManageHospitalComponent implements OnInit {
   loading = false;
   modal = false;
   hospTypeId: any;
-  hospCode = '';
+  hospCode: any = '';
   hospName: any;
   address: any;
   tel: any;
@@ -236,12 +236,12 @@ export class ManageHospitalComponent implements OnInit {
       if (confirm) {
         const idx = findIndex(this.list, { id: +l.id });
         if (idx > -1) {
-            const rs: any = await this.hospitalService.remove(l.id);
-            if (rs.ok) {
-              this.list.splice(idx, 1);
-            } else {
-              this.alertService.error();
-            }
+          const rs: any = await this.hospitalService.remove(l.id);
+          if (rs.ok) {
+            this.list.splice(idx, 1);
+          } else {
+            this.alertService.error();
+          }
         }
       }
     } catch (error) {

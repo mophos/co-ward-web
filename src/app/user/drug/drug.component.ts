@@ -81,4 +81,7 @@ export class DrugComponent implements OnInit {
     }
   }
 
+  save(){
+    
+  }
 }

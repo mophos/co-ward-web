@@ -169,7 +169,7 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-success"
-      [disabled]="!tambonName || !ampurName || !provinceName || !zipcode || !hospCode.length == 5 || !hospName || !address || !telephone"
+      [disabled]="!tambonName || !ampurName || !provinceName || !zipcode || hospCode.length != 5 || !hospName || !address || !telephone"
       (click)="save()">
       บันทึก
     </button>
