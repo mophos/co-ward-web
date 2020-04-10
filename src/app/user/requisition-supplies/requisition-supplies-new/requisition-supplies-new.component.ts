@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService } from '../../../help/alert.service';
 import { RequisitionService } from '../../requisition.service';
-import * as findIndex from 'lodash/findIndex';
+import { findIndex, sumBy } from 'lodash';
 import thaiIdCard from 'thai-id-card';
 import { AutocompleteHospitalRequisitionComponent } from '../../../help/autocomplete-hospital-requisition/autocomplete-hospital-requisition.component';
 
@@ -37,6 +37,8 @@ export class RequisitionSuppliesNewComponent implements OnInit {
   lname = '';
   reason = '';
   tel = '';
+  level: any = {};
+  admitDate: any;
 
   errorHospcode = false;
   errorCid = false;
@@ -48,6 +50,8 @@ export class RequisitionSuppliesNewComponent implements OnInit {
   errorTel = false;
   errorReason = false;
   reqId: any;
+  isUpdate = false;
+  sum = 0;
   @ViewChild('hospital') hospitals: AutocompleteHospitalRequisitionComponent;
   constructor(
     private router: Router,
@@ -64,6 +68,8 @@ export class RequisitionSuppliesNewComponent implements OnInit {
   ngOnInit() {
     if (this.reqId) {
       this.getInfo();
+      this.isUpdate = true;
+
     } else {
       this.getGenerics();
     }
@@ -159,27 +165,41 @@ export class RequisitionSuppliesNewComponent implements OnInit {
   }
 
   async onClickAdd() {
-    if (await this.verifyInput()) {
-      const obj: any = {};
-      obj.hn = this.hn;
-      obj.cid = this.cid;
-      obj.passport = this.passport;
-      obj.fname = this.fname;
-      obj.lname = this.lname;
-      obj.title_id = this.titleId;
-      obj.reason = this.reason;
-      obj.tel = this.tel;
-      obj.generics = this.generics;
-      const idx = findIndex(this.patient, { cid: this.cid });
-      if (idx > -1) {
-        this.alertService.error('รายการซ้ำ');
-      } else {
-        this.patient.push(obj);
-        this.clearForm();
+    try {
+
+      if (await this.verifyInput()) {
+        const obj: any = {};
+        obj.hn = this.hn;
+        obj.cid = this.cid;
+        obj.passport = this.passport;
+        obj.fname = this.fname;
+        obj.lname = this.lname;
+        obj.title_id = this.titleId;
+        obj.reason = this.reason;
+        obj.tel = this.tel;
+        obj.generics = this.generics;
+        obj.admit_date = this.admitDate;
+        obj.level = this.level.name;
+        obj.qty = +this.level.qty;
+        const idx = findIndex(this.patient, { cid: this.cid });
+        if (idx > -1) {
+          this.alertService.error('รายการซ้ำ');
+        } else {
+          this.patient.push(obj);
+          await this.cal();
+          this.clearForm();
+        }
       }
+    } catch (error) {
+      console.log(error);
     }
   }
 
+  cal() {
+    console.log(this.patient);
+
+    this.sum = sumBy(this.patient, 'qty');
+  }
   clearError() {
     this.errorHospcode = false;
     this.errorCid = false;

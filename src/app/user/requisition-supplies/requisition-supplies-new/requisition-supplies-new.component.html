@@ -6,15 +6,16 @@
   <div class="clr-col-4">
     <label for="example" class="clr-control-label">ชื่อสถานบริการ</label>
     <div class="clr-control-container clr-error  width-fit">
-        <app-autocomplete-hospital-requisition style="padding: 0px;" #hospital (onselect)="onSelectHosp($event)">
-        </app-autocomplete-hospital-requisition>
-        <!-- <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="!hn.length"></clr-icon> -->
+      <app-autocomplete-hospital-requisition style="padding: 0px;" #hospital (onselect)="onSelectHosp($event)">
+      </app-autocomplete-hospital-requisition>
+      <!-- <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="!hn.length"></clr-icon> -->
       <!-- <span class="clr-subtext" *ngIf="!hn.length">กรุณาระบบ HN</span> -->
     </div>
   </div>
   <div class="clr-col-7"></div>
   <div class="clr-col-1">
-    <button class="btn btn btn-success btn-block" (click)="onClickSave()" title="save" [disabled]="!patient.length">
+    <button class="btn btn btn-success btn-block" (click)="onClickSave()" title="save"
+      [disabled]="!patient.length || isUpdate  || !hospCode">
       บันทึก
     </button>
   </div>
@@ -29,11 +30,12 @@
             <div class="clr-col-6">
               <form class="clr-form">
                 <div class="clr-form-control" style="margin-top: 0;">
-                  <label for="example" class="clr-control-label">บัตรประจำตัวประชาชน <span class="required">*</span></label>
+                  <label for="example" class="clr-control-label">บัตรประจำตัวประชาชน <span
+                      class="required">*</span></label>
                   <div class="clr-control-container clr-error width-fit">
                     <div class="clr-input-wrapper ">
-                      <input type="text"   *ngIf="passport.length== 0"  id="example" name="cid" maxlength="13"
-                        [(ngModel)]="cid" class="clr-input width-fit">
+                      <input type="text" id="example" name="cid" maxlength="13" [(ngModel)]="cid"
+                        class="clr-input width-fit">
                       <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="errorCid"> </clr-icon>
                     </div>
                     <span class="clr-subtext" *ngIf="errorCid">เลขบัตรประชาชนไม่ถูกต้อง</span>
@@ -47,7 +49,7 @@
                   <label for="example" class="clr-control-label">เลขที่หนังสือเดินทาง</label>
                   <div class="clr-control-container clr-error width-fit">
                     <div class="clr-input-wrapper">
-                      <input type="text" *ngIf="cid.length== 0" id="example" name="passport" [(ngModel)]="passport"
+                      <input type="text" id="example" name="passport" [(ngModel)]="passport"
                         class="clr-input  width-fit">
                       <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="errorPassport"> </clr-icon>
                     </div>
@@ -133,11 +135,10 @@
             <div class="clr-col-6">
               <form class="clr-form">
                 <div class="clr-form-control" style="margin-top: 0;">
-                  <label for="example" class="clr-control-label">หมายเหตุ</label>
+                  <label for="example" class="clr-control-label">วันที่ Admit</label>
                   <div class="clr-control-container clr-error width-fit">
                     <div class="clr-input-wrapper">
-                      <input type="text" id="example" name="reason" maxlength="10" [(ngModel)]="reason"
-                        class="clr-input  width-fit">
+                      <input type="date" name="admitDate" [(ngModel)]="admitDate" class="clr-input  width-fit">
                       <!-- <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="!reason.length">  </clr-icon>-->
                     </div>
                     <!-- <span class="clr-subtext" *ngIf="!reason.length">กรุณาระบุเหตุผล</span> -->
@@ -149,18 +150,29 @@
         </div>
       </div>
       <div class="card-footer">
-        <clr-datagrid>
+        <!-- ระดับความรุนแรง -->
+        <div class="clr-row">
+          <div class="clr-col-1"></div>
+          <div class="clr-col-7">ระดับความรุนแรง</div>
+          <div class="clr-col-4">PPE+N95</div>
+        </div>
+        <div class="clr-row" *ngFor="let i of generics">
+          <div class="clr-col-1"><input type="radio" name="level" [(ngModel)]="level" [value]="i"></div>
+          <div class="clr-col-7">{{i.name}}</div>
+          <div class="clr-col-4">{{i.qty == level.qty ? i.qty+' ชุด' : ''}}</div>
+        </div>
+        <!-- <clr-datagrid>
           <clr-dg-column>รายการ</clr-dg-column>
-          <clr-dg-column style="text-align: right;">จำนวน</clr-dg-column>
+          <clr-dg-column style="text-align: right;">จำนวน PPE+N95</clr-dg-column>
 
           <clr-dg-row *ngFor="let i of generics; let idx = index;">
             <clr-dg-cell>[{{i.code}}] {{i.name}}</clr-dg-cell>
             <clr-dg-cell><input style="text-align: right;" type="number" name="qty" [(ngModel)]="i.qty"
                 class="clr-input width-fit" value="{{i.qty}}"></clr-dg-cell>
           </clr-dg-row>
-        </clr-datagrid>
+        </clr-datagrid> -->
         <br>
-        <button class="btn btn-primary btn-block" (click)="onClickAdd()" title="เพิ่ม">
+        <button class="btn btn-primary btn-block" (click)="onClickAdd()" title="เพิ่ม" [disabled]="isUpdate">
           <clr-icon shape="add"></clr-icon> เพิ่มรายการ
         </button>
         <!-- <div class="clr-col-6">
@@ -168,33 +180,50 @@
       </div>
     </div>
   </div>
-  <div class="clr-col-8">
+  <div class="clr-col-8" style="padding: 0;">
     <div class="card" style="margin-top: 0;">
-      <div class="card-block">
+      <div class="card-block" style="padding: 0;">
         <div class="card-text">
-          <clr-datagrid>
-            <clr-dg-column>#</clr-dg-column>
+          <clr-datagrid class="datagrid">
+            <!-- <clr-dg-column>#</clr-dg-column> -->
             <clr-dg-column>CID/Passport</clr-dg-column>
             <clr-dg-column>HN</clr-dg-column>
             <clr-dg-column>ชื่อ</clr-dg-column>
             <clr-dg-column>เบอร์โทรศัพท์</clr-dg-column>
-            <clr-dg-column>เหตุผล</clr-dg-column>
+            <clr-dg-column>วันที่ Admit</clr-dg-column>
+            <clr-dg-column>ระดับ</clr-dg-column>
+            <clr-dg-column>จำนวน</clr-dg-column>
             <clr-dg-column></clr-dg-column>
 
             <clr-dg-row *ngFor="let l of patient; let idx = index;">
-              <clr-dg-cell>{{idx+1}}</clr-dg-cell>
               <clr-dg-cell>{{l.cid}} {{l.passport}}</clr-dg-cell>
               <clr-dg-cell>{{l.hn}}</clr-dg-cell>
               <clr-dg-cell>{{l.fname}} {{l.lname}}</clr-dg-cell>
               <clr-dg-cell>{{l.tel}}</clr-dg-cell>
-              <clr-dg-cell>{{l.reason}}</clr-dg-cell>
+              <clr-dg-cell>{{l.admit_date }}</clr-dg-cell>
+              <clr-dg-cell>{{l.level }}</clr-dg-cell>
+              <clr-dg-cell>{{l.qty }} ชุด</clr-dg-cell>
               <clr-dg-cell>
-                <button class="btn btn-sm btn-success" (click)="onClickOpenModal(l)" title="เพิ่มรายการยา">
-                  <clr-icon shape="note"></clr-icon>
-                </button>
-                <button class="btn btn-sm btn-danger" (click)="remove(idx)" title="ลบ">
-                  <clr-icon shape="trash"></clr-icon> ลบ
-                </button>
+                <div class="btn-group">
+                  <!-- <button class="btn btn-sm btn-success" (click)="onClickOpenModal(l)" title="เพิ่มรายการยา">
+                    <clr-icon shape="note"></clr-icon>
+                  </button> -->
+                  <button class="btn btn-sm btn-danger" (click)="remove(idx)" title="ลบ">
+                    <clr-icon shape="trash"></clr-icon>
+                  </button>
+                </div>
+              </clr-dg-cell>
+            </clr-dg-row>
+            <clr-dg-row>
+              <clr-dg-cell>รวม</clr-dg-cell>
+              <clr-dg-cell></clr-dg-cell>
+              <clr-dg-cell></clr-dg-cell>
+              <clr-dg-cell></clr-dg-cell>
+              <clr-dg-cell></clr-dg-cell>
+              <clr-dg-cell></clr-dg-cell>
+              <clr-dg-cell>{{sum }} ชุด</clr-dg-cell>
+              <clr-dg-cell>
+
               </clr-dg-cell>
             </clr-dg-row>
           </clr-datagrid>
@@ -226,7 +255,7 @@
     </clr-datagrid>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="onClickSaveGeneric()">
+    <button type="button" class="btn btn-success" (click)="onClickSaveGeneric()" [disabled]="isUpdate">
       บันทึก
     </button>
     <button type="button" class="btn btn-danger" (click)="modal = false">
