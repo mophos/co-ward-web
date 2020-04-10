@@ -15,8 +15,9 @@
                 <label for="example" class="clr-control-label">ชื่อสถานบริการ</label>
                 <div class="clr-control-container clr-error  width-fit">
                   <div class="clr-input-wrapper">
-                    <app-autocomplete-hospital style="padding: 0px" #hospital (onselect)="onSelectHosp($event)">
-                    </app-autocomplete-hospital>
+                    <app-autocomplete-hospital-requisition style="padding: 0px" #hospital
+                      (onselect)="onSelectHosp($event)">
+                    </app-autocomplete-hospital-requisition>
                     <!-- <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="!hn.length"></clr-icon> -->
                   </div>
                   <!-- <span class="clr-subtext" *ngIf="!hn.length">กรุณาระบบ HN</span> -->
@@ -29,7 +30,7 @@
           <div class="card-text">
             <div class="clr-row">
 
-             
+
               <div class="clr-col-6">
                 <form class="clr-form">
                   <div class="clr-form-control">
@@ -166,7 +167,7 @@
               <clr-dg-column>นามสกุล</clr-dg-column>
               <clr-dg-column>เหตุผล</clr-dg-column>
               <clr-dg-column></clr-dg-column>
-            
+
               <clr-dg-row *ngFor="let l of patient; let idx = index;">
                 <clr-dg-cell>{{idx+1}}</clr-dg-cell>
                 <clr-dg-cell>{{l.hospname}}</clr-dg-cell>
