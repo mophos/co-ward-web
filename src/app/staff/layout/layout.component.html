@@ -1,0 +1,92 @@
+<div class="main-container">
+  <header class="header">
+    <div class="branding">
+      <a href="javascript://" class="nav-link">
+        <!-- <img src="./assets/images/tt.png" alt="logo" style="width: 200px; padding-right: 10px;"> -->
+        <span class="title">Covid Order Management (COM) </span>
+      </a>
+    </div>
+    <div class="header-nav">
+    </div>
+    <div class="header-actions">
+      <clr-dropdown>
+        <button class="nav-text" clrDropdownTrigger>
+          {{fullname}}-{{hospname}}
+          <clr-icon shape="caret down"></clr-icon>
+        </button>
+        <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+          <!-- <a href="javascript://" clrDropdownItem>เปลี่ยนรหัสผ่าน</a> -->
+          <a href="javascript://" (click)="logout()" clrDropdownItem>ออกจากระบบ</a>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </div>
+  </header>
+  <div class="content-container">
+    <div class="content-area">
+      <router-outlet></router-outlet>
+    </div>
+    <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
+      <a clrVerticalNavLink routerLink="/staff/covid-case" title="Case COVID" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="helix"></clr-icon>
+        Case COVID
+      </a>
+      <a clrVerticalNavLink routerLink="/staff/covid-case-status" title="Case COVID" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="wand"></clr-icon>
+        สถานะ Case COVID
+      </a>
+      <a clrVerticalNavLink routerLink="/staff/covid-case-approved" title="อนุมัติรายการยาและเวชภัณฑ์ให้รพ.ลูกข่าย" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
+        อนุมัติรายการยาและเวชภัณฑ์
+      </a>
+      <!-- ****************************************************************************** -->
+      <a *ngIf="checkBedMenu" clrVerticalNavLink routerLink="/staff/check-bed" title="ตรวจสอบการบันทึกข้อมูลเตียง"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        ตรวจสอบการบันทึกข้อมูลเตียง
+      </a>
+      <a *ngIf="checkSuppliesMenu" clrVerticalNavLink routerLink="/staff/check-supplie"
+        title="ตรวจสอบการบันทึกข้อมูลเวชภัณฑ์" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        ตรวจสอบการบันทึกข้อมูลเวชภัณฑ์
+      </a>
+      <a *ngIf="statusTrackingMenu" clrVerticalNavLink routerLink="/staff/tracking" title="สถานะของ"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        สถานะการส่งเวชภัณฑ์
+      </a>
+      <a *ngIf="balanceBedMeny" clrVerticalNavLink routerLink="/staff/drug" title="สถานะยา" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="flask"></clr-icon>
+        สถานะยา
+      </a>
+
+      <a *ngIf="balanceBedMeny" clrVerticalNavLink routerLink="/staff/beds" title="เตียงผู้ป่วย"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="accessibility-2"></clr-icon>
+        สถานะเตียงผู้ป่วย
+      </a>
+      <a *ngIf="balanceSuppliesMenu" clrVerticalNavLink routerLink="/staff/supplies" title="สถานะเวชภัณฑ์"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="cursor-hand-open"></clr-icon>
+        สถานะเวชภัณฑ์
+      </a>
+      <a *ngIf="settingMenu" clrVerticalNavLink routerLink="/staff/setting" title="ตั้งค่าโรงพยาบาล"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="cog"></clr-icon>
+        ตั้งค่าโรงพยาบาล
+      </a>
+
+      <clr-vertical-nav-group routerLinkActive="active">
+        <clr-icon shape="cog" clrVerticalNavIcon></clr-icon>
+        ตั้งค่า
+        <clr-vertical-nav-group-children>
+          <a clrVerticalNavLink routerLink="/staff/setting/basic" routerLinkActive="active">
+            ตั้งค่าพื้นฐาน
+          </a>
+          <a clrVerticalNavLink routerLink="/staff/setting/beds" routerLinkActive="active">
+            ตั้งค่าเตียง
+          </a>
+        </clr-vertical-nav-group-children>
+      </clr-vertical-nav-group>
+    </clr-vertical-nav>
+  </div>
+</div>

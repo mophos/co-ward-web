@@ -1,0 +1,44 @@
+<nav class="breadcrumb">
+  <!-- <a class="breadcrumb-item" href="javascript://" routerLink="/staff/requisition-supplies">การใช้เวชภัณฑ์</a> -->
+  <span class="breadcrumb-item active">อนุมัติรายการยาและเวชภัณฑ์ให้รพ.ลูกข่าย</span>
+</nav>
+
+<div class="clr-row">
+  <div class="clr-col-7">
+
+    <clr-datagrid [clrDgLoading]="isLoading">
+      <clr-dg-column>วันที่</clr-dg-column>
+      <!-- <clr-dg-column>โรงพยาบาลแม่ข่าย</clr-dg-column> -->
+      <clr-dg-column>โรงพยาบาลลูกข่าย</clr-dg-column>
+      <clr-dg-column>สถานะ</clr-dg-column>
+      <clr-dg-column></clr-dg-column>
+
+      <clr-dg-row *ngFor="let l of list; let idx=index;" (click)="onClickRow(l)"
+        [ngClass]="{ 'isSuccess': l.id == listId }">
+        <clr-dg-cell>{{l.create_date | dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.hospital_name_node}}</clr-dg-cell> -->
+        <clr-dg-cell>{{l.hospital_name_client}}</clr-dg-cell>
+        <clr-dg-cell>{{l.is_approved == 'N' ? 'รออนุมัติ' : 'อนุมัติแล้ว'}}</clr-dg-cell>
+        <clr-dg-cell><button class="btn btn-sm btn-success" (click)="onClickApproved(l)" style="margin: 0;"
+            [disabled]="l.is_approved=='Y'">อนุมัติ</button></clr-dg-cell>
+
+      </clr-dg-row>
+
+    </clr-datagrid>
+
+  </div>
+  <div class="clr-col-5">
+    <clr-datagrid [clrDgLoading]="isLoading">
+      <clr-dg-column>ชื่อสินค้า</clr-dg-column>
+      <clr-dg-column style="text-align: right;">จำนวน</clr-dg-column>
+
+      <clr-dg-row *ngFor="let l of details; let idx=index;">
+        <clr-dg-cell>{{l.generic_name}}</clr-dg-cell>
+        <clr-dg-cell style="text-align: right;">{{l.qty  | number:'1.0-0'}} {{l.unit_name}}</clr-dg-cell>
+
+      </clr-dg-row>
+
+    </clr-datagrid>
+
+  </div>
+</div>

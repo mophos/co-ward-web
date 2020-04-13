@@ -13,7 +13,7 @@ import { AuthGuard } from './auth-guard.service';
 import { environment } from './../environments/environment';
 import { AdminModule } from './admin/admin.module';
 import { ManagerModule } from './manager/manager.module';
-import { UserModule } from './user/user.module';
+import { StaffModule } from './staff/staff.module';
 import { AlertService } from './help/alert.service';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
@@ -40,7 +40,7 @@ export function tokenGetter() {
     LoginModule,
     AdminModule,
     ManagerModule,
-    UserModule,
+    StaffModule,
     FormsModule,
     HelpModule
   ],

@@ -1,0 +1,161 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">Case COVID</span>
+</nav>
+<div class="clr-row">
+  <div class="clr-col-2">
+    <button class="btn btn-sm btn-success" (click)="onClickOpenModalCid()" style="padding-top: 0;">
+      <clr-icon shape="plus"></clr-icon> บันทึก Case Covid
+    </button>
+  </div>
+  <!-- <div class="clr-col-1">
+    ค้นหา :
+  </div>
+  <div class="clr-col-3">
+    <input class="clr-input width-fit" (keyup)="doEnter($event)" name="query" [(ngModel)]="query"
+      placeholder="Enter เพื่อค้นหา" />
+  </div>
+  <div class="clr-col-2">
+    <my-date-picker-th name="startDate" [options]="myDatePickerOptions" [(ngModel)]="startDate" required>
+    </my-date-picker-th>
+  </div>
+  <div class="clr-col-2">
+    <my-date-picker-th name="endDate"  [options]="myDatePickerOptions" [(ngModel)]="endDate" required>
+    </my-date-picker-th>
+  </div>
+  <div class="clr-col-2">
+    <button class="btn btn-sm btn-primary">
+      <clr-icon shape="search"></clr-icon> ค้นหา
+    </button>
+  </div> -->
+</div>
+
+<div class="clr-row">
+  <div class="clr-col-5">
+    <clr-datagrid [clrDgLoading]="isLoadding">
+      <clr-dg-column>HN</clr-dg-column>
+      <clr-dg-column>ชื่อ-นามสกุล</clr-dg-column>
+      <clr-dg-column>วันที่ Admit</clr-dg-column>
+      <clr-dg-column>สถานะ</clr-dg-column>
+      <!-- <clr-dg-column></clr-dg-column> -->
+
+      <clr-dg-row *clrDgItems="let l of list;let idx=index;" (click)="getData(l)">
+        <clr-dg-cell>{{l.hn}}</clr-dg-cell>
+        <clr-dg-cell>{{l.title_name}}{{l.first_name}} {{l.last_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.date_admit | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
+        <clr-dg-cell>{{l.status }}</clr-dg-cell>
+        <!-- <clr-dg-cell >
+          <button class="btn btn-sm btn-success" style="margin:0" (click)="onClickEdit(l)">
+            <clr-icon shape="search"></clr-icon> 
+          </button>
+        </clr-dg-cell> -->
+      </clr-dg-row>
+
+      <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
+      <clr-dg-footer>
+        <clr-dg-pagination #pagination [clrDgPageSize]="50">
+          <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
+          {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+          of {{pagination.totalItems}} รายการ
+        </clr-dg-pagination>
+      </clr-dg-footer>
+    </clr-datagrid>
+
+  </div>
+  <div class="clr-col-7">
+    <div class="card">
+      <div class="card-header">
+        <div class="clr-row">
+          <div class="clr-col-3">
+            HN: {{data.hn || '-'}}
+          </div>
+          <div class="clr-col-6">
+            ชื่อ: {{data.title_name || ''}}{{data.first_name || ''}} {{data.last_name || ''}} [{{data.gender_id == 1 ? 'ชาย' : data.gender_id == 2 ? 'หญิง' : '-'|| '-'}}]
+          </div>
+          <div class="clr-col-3" style="text-align: right;">
+            สถานะ: {{data.status|| '-'}}
+          </div>
+        </div>
+      </div>
+      <div class="card-block">
+        <div class="card-text">
+          <div class="clr-row">
+            <div class="clr-col-4">
+              CID/PASSPORT: {{data.cid ? data.cid : data.passport || '-'}}
+            </div>
+            <div class="clr-col-4">
+              วันเดือนปีเกิด:  {{data.birth_date| dateTh:'DD/MM/YYYY' }}
+            </div>
+            <div class="clr-col-4">
+              เบอร์โทรศัพท์:  {{data.telephone || '-' }}
+            </div>
+          </div>
+          <br>
+          ประวัติการรักษา
+          <clr-datagrid [clrDgLoading]="isLoadding">
+            <clr-dg-column>วันที่ Admit</clr-dg-column>
+            <clr-dg-column>โรงพยาบาล</clr-dg-column>
+            <clr-dg-column>สถานะ</clr-dg-column>
+            <clr-dg-row *ngFor="let l of historys;let idx=index;">
+              <clr-dg-cell>{{l.date_admit | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
+              <clr-dg-cell>{{l.hospname }}</clr-dg-cell>
+              <clr-dg-cell>{{l.status }}</clr-dg-cell>
+            </clr-dg-row>
+            <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
+          </clr-datagrid>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<clr-modal [(clrModalOpen)]="modalCID">
+  <!-- <h3 class="modal-title">กรุณาระบุ CID</h3> -->
+  <div class="modal-body">
+    <clr-radio-container clrInline>
+      <label>กรุณาเลือกประเภท</label>
+      <clr-radio-wrapper>
+        <input type="radio" clrRadio value="CID" name="modalCIDType" [(ngModel)]="modalCIDType" />
+        <label>เลขที่บัตรประชาชน</label>
+      </clr-radio-wrapper>
+      <clr-radio-wrapper>
+        <input type="radio" clrRadio value="PASSPORT" name="modalCIDType" [(ngModel)]="modalCIDType" />
+        <label>เลขที่หนังสือเดินทาง</label>
+      </clr-radio-wrapper>
+      <clr-radio-wrapper>
+        <input type="radio" clrRadio value="NO" name="modalCIDType" [(ngModel)]="modalCIDType" />
+        <label>ไม่มี (ไม่แนะนำ)</label>
+      </clr-radio-wrapper>
+    </clr-radio-container>
+
+    <!-- <form class="clr-form"> -->
+    <div class="clr-form-control" *ngIf="modalCIDType == 'CID'">
+      <label for="basic" class="clr-control-label">เลขที่บัตรประชาชน</label>
+      <div class="clr-control-container">
+        <div class="clr-input-wrapper" style="max-height: 3rem !important;">
+          <input type="text" id="basic" class="clr-input" maxlength="13"
+            style="height:3rem !important;font-size: 1.3rem;" name="modalCIDCid" [(ngModel)]="modalCIDCid">
+          <clr-icon shape="exclamation-circle" size="36" *ngIf="modalCIDCidError"></clr-icon>
+        </div>
+        <span *ngIf="modalCIDCidError" class="clr-subtext">เลขที่บัตรประชาชนผิด</span>
+      </div>
+    </div>
+    <div class="clr-form-control" *ngIf="modalCIDType == 'PASSPORT'">
+      <label for="basic" class="clr-control-label">เลขที่หนังสือเดินทาง</label>
+      <div class="clr-control-container">
+        <div class="clr-input-wrapper" style="max-height: 3rem;">
+          <input type="text" id="basic" class="clr-input" style="height:3rem;font-size: 1.3rem;" name="modalCIDPassport"
+            [(ngModel)]="modalCIDPassport">
+          <clr-icon size="36" shape="exclamation-circle" *ngIf="!modalCIDPassport"></clr-icon>
+        </div>
+        <!-- <span class="clr-subtext">Helper Text</span> -->
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success btn-block" (click)="onSearchModal()" [disabled]="isModelSearch">ตรวจสอบ
+      <span class="spinner spinner-inline" *ngIf="modalCidLoading">
+        Loading...
+      </span></button>
+  </div>
+</clr-modal>

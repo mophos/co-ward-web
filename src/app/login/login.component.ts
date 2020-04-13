@@ -49,11 +49,12 @@ export class LoginComponent implements OnInit {
         if (decoded.type === 'ADMIN') {
           this.route.navigate(['/admin']);
         } else if (decoded.type === 'STAFF') {
-          if (findIndex(rights, { name: 'STAFF_REQUISITION_SUPPLIES' }) > -1) {
-            this.route.navigate(['/staff/requisition-supplies']);
-          } else {
-            this.route.navigate(['/staff/inventory']);
-          }
+          // if (findIndex(rights, { name: 'STAFF_REQUISITION_SUPPLIES' }) > -1) {
+          //   this.route.navigate(['/staff/requisition-supplies']);
+          // } else {
+          //   this.route.navigate(['/staff/inventory']);
+          // }
+            this.route.navigate(['/staff/covid-case']);
         } else if (decoded.type === 'MANAGER') {
           this.route.navigate(['/manager']);
         }

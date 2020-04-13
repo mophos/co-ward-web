@@ -9,12 +9,12 @@ export class RegisterService {
   constructor(private http: HttpClient, @Inject('API_URL') private url: string) { }
 
   getTitle() {
-    const url = `${this.url}/basic/title`;
+    const url = `${this.url}/v1/basic/title`;
     return this.http.get(url).toPromise();
   }
 
   getPosition() {
-    const url = `${this.url}/basic/position`;
+    const url = `${this.url}/v1/basic/position`;
     return this.http.get(url).toPromise();
   }
 
@@ -38,14 +38,14 @@ export class RegisterService {
       };
 
       // const token = sessionStorage.getItem('token');
-      const url = `${this.url}/register/upload-supplie`;
+      const url = `${this.url}/v1/register/upload-supplie`;
       xhr.open('POST', url, true);
       xhr.send(formData);
     });
   }
 
   saveUserSupplie(data) {
-    const url = `${this.url}/register/supplie`;
+    const url = `${this.url}/v1/register/supplie`;
     return this.http.post(url, { data }).toPromise();
   }
 

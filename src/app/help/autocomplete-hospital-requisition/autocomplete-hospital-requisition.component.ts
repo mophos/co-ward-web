@@ -20,7 +20,7 @@ export class AutocompleteHospitalRequisitionComponent implements OnInit {
     @Inject('API_URL') private apiUrl: string,
     private alertService: AlertService
   ) {
-    this.searchUrl = `${this.apiUrl}/basic/hospcode-requisition/autocomplete/search`;
+    this.searchUrl = `${this.apiUrl}/v1/basic-auth/hospcode-requisition/autocomplete/search`;
   }
 
   ngOnInit() {

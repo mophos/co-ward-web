@@ -9,7 +9,7 @@ export class RequisitionMinMaxService {
   constructor(private http: HttpClient, @Inject('API_URL') private url: string) { }
 
   getList() {
-    const url = `${this.url}/basic/hospital`;
+    const url = `${this.url}/v1/basic/hospital`;
     return this.http.get(url).toPromise();
   }
 

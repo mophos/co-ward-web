@@ -26,7 +26,7 @@ export class AutocompleteZipcodeComponent implements OnInit {
   constructor(
     @Inject('API_URL') private apiUrl: string,
     private alertService: AlertService) {
-    this.searchUrl = `${this.apiUrl}/basic/autocomplete/zipcode`;
+    this.searchUrl = `${this.apiUrl}/v1/basic/autocomplete/zipcode`;
   }
 
   ngOnInit() {
@@ -44,7 +44,7 @@ export class AutocompleteZipcodeComponent implements OnInit {
   }
 
   setApi() {
-    this.searchUrl = `${this.apiUrl}/basic/autocomplete/zipcode?length=${this.length}`;
+    this.searchUrl = `${this.apiUrl}/v1/basic/autocomplete/zipcode?length=${this.length}`;
   }
 
   setQuery(q: string) {

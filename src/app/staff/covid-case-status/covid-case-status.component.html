@@ -1,0 +1,86 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">สถานะ Case COVID</span>
+</nav>
+
+<h3 style="float: left;">วันที่ {{date  | dateTh:'DD/MM/YYYY'}} </h3>
+<h5>&nbsp;สถานะจะต้องบันทึกทุกวัน (ไม่สามารถบันทึกย้อนหลังได้)</h5>
+<table class="table">
+  <thead>
+    <tr>
+      <th class="left">HN</th>
+      <th class="left">ชื่อ-นามสกุล</th>
+      <th class="left">ความรุนแรง</th>
+      <th class="left">เตียง</th>
+      <th class="left">เครื่องข่วยหายใจ</th>
+      <th class="left">วันท่ียาจะหมด</th>
+      <th class="left"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let l of list;let idx=index;" [ngClass]="{isWarning: idx%2==0}">
+      <td class="left">{{l.hn}}</td>
+      <td class="left">{{l.title_name}}{{l.first_name}} {{l.last_name}}</td>
+      <td class="left">
+        <span *ngFor="let i of gcs">
+          <input type="radio" name="gcs-{{l.id}}" id="gcs-{{l.id}}" [(ngModel)]="l.gcs_id" [value]="i.id"> {{i.name}}
+        </span>
+      </td>
+      <td class="left">
+        <span *ngFor="let i of beds">
+          <input type="radio" name="bed-{{l.id}}" id="bed-{{l.id}}" [(ngModel)]="l.bed_id" [value]="i.id"> {{i.name}}
+        </span>
+      </td>
+      <td class="left">
+        <span *ngFor="let i of respirators">
+          <input type="radio" name="respirator-{{l.id}}" id="respirator-{{l.id}}" [(ngModel)]="l.respirator_id"
+            [value]="i.id"> {{i.name}}
+        </span>
+      </td>
+      <td class="left"></td>
+      <td class="left">
+        <div class="btn-group">
+          <button class="btn btn-sm btn-success" (click)="onClickSave(l.id)"
+            [disabled]="l.create_date == date">บันทึก</button>
+          <button class="btn btn-sm btn-primary" >เบิกยา</button>
+          <button class="btn btn-sm btn-danger" (click)="onClickOpenModalDischarge()">จำหน่าย</button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<clr-modal [(clrModalOpen)]="modalDischarge">
+  <h3 class="modal-title">กรุณาเลือกสาเหตุ</h3>
+  <div class="modal-body">
+    <clr-radio-container clrInline>
+      <!-- <label>กรุณาเลือกประเภท</label> -->
+      <clr-radio-wrapper>
+        <input type="radio" clrRadio value="HOME" name="modalDischargeType" [(ngModel)]="modalDischargeType" />
+        <label>รักษาหาย กลับบ้าน</label>
+      </clr-radio-wrapper>
+      <clr-radio-wrapper>
+        <input type="radio" clrRadio value="DEATH" name="modalDischargeType" [(ngModel)]="modalDischargeType" />
+        <label>เสียชีวิต</label>
+      </clr-radio-wrapper>
+      <clr-radio-wrapper>
+        <input type="radio" clrRadio value="REFER" name="modalDischargeType" [(ngModel)]="modalDischargeType" />
+        <label>ส่งต่อรพ.</label>
+      </clr-radio-wrapper>
+    </clr-radio-container>
+
+    <!-- <form class="clr-form"> -->
+    <div class="clr-form-control" *ngIf="modalDischargeType == 'DEATH'">
+      <label for="basic" class="clr-control-label">วันเวลาที่เสียชีวิต</label>
+      <input type="date">
+    </div>
+    <div class="clr-form-control" *ngIf="modalDischargeType == 'REFER'">
+      <label for="basic" class="clr-control-label">โรงพยาบาลที่ส่งต่อ</label>
+      <input type="text" name="" id="">
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success btn-block" >บันทึก
+    </button>
+  </div>
+</clr-modal>

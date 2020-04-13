@@ -1,0 +1,22 @@
+<nav class="breadcrumb">
+  <!-- <a class="breadcrumb-item" href="javascript://" routerLink="/staff/requisition-supplies">การใช้เวชภัณฑ์</a> -->
+  <span class="breadcrumb-item active">ตั้งค่าเตียง</span>
+</nav>
+
+<clr-datagrid [clrDgLoading]="isLoading" >
+  <clr-dg-column>ประเภทเตียง</clr-dg-column>
+  <clr-dg-column>จำนวนเตียงทั้งหมด</clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let l of list; let idx=index;">
+    <clr-dg-cell>{{l.name}}</clr-dg-cell>
+    <clr-dg-cell><input class="clr-input width-fit" type="text" appNumberOnly name="{{l.qty}}" [(ngModel)]="l.qty"></clr-dg-cell>
+  </clr-dg-row>
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination  >
+      <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
+      {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} จาก {{pagination.totalItems}} รายการ
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>
+<br>
+<button class="btn btn-success btn-block" (click)="onClickSave()" [disabled]="isSave">บันทึก</button>
