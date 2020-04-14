@@ -15,30 +15,30 @@ export class RegisterComponent implements OnInit {
 
   hospcodeConfirm: any = '';
   onSelectHospcode: any = null;
-  cid: any = ''
+  cid: any = '';
   position: any = null;
   title: any = null;
-  firstName: any = ''
-  lastName: any = ''
-  username: any = ''
-  password: any = ''
-  passwordConfirm: any = ''
-  email: any = ''
-  phoneNumber: any = ''
-  province: any
+  firstName: any = '';
+  lastName: any = '';
+  username: any = '';
+  password: any = '';
+  passwordConfirm: any = '';
+  email: any = '';
+  phoneNumber: any = '';
+  province: any;
 
-  checkCid: any
-  checkPassword: any
-  checkPasswordConfirm: any
-  checkEmail: any
-  checkPhone: any
-  checkImage: any
+  checkCid: any;
+  checkPassword: any;
+  checkPasswordConfirm: any;
+  checkEmail: any;
+  checkPhone: any;
+  checkImage: any;
 
-  titleList: any
-  positionList: any
+  titleList: any;
+  positionList: any;
 
   isUploading: any = false;
-  hospName: any = ''
+  hospName: any = '';
 
   fileName: any;
   filesToUpload: File = null;
@@ -56,51 +56,51 @@ export class RegisterComponent implements OnInit {
   }
 
   async enterCid() {
-    if (this.cid.length == 13) {
+    if (this.cid.length === 13) {
       this.checkCid = thaiIdCard.verify(this.cid);
     } else {
-      this.checkCid = false
+      this.checkCid = false;
     }
   }
 
   async enterPassword() {
-    this.checkPassword = /^(?=.*[A-Za-z])(?=.*[0-9]).{8,}$/.test(this.password)
-    if (this.password == this.passwordConfirm && this.checkPassword) {
-      this.checkPasswordConfirm = true
-    } else if (this.password != this.passwordConfirm) {
-      this.checkPasswordConfirm = false
+    this.checkPassword = /^(?=.*[A-Za-z])(?=.*[0-9]).{8,}$/.test(this.password);
+    if (this.password === this.passwordConfirm && this.checkPassword) {
+      this.checkPasswordConfirm = true;
+    } else if (this.password !== this.passwordConfirm) {
+      this.checkPasswordConfirm = false;
     }
   }
 
   async enterPasswordConfirm() {
-    if (this.password == this.passwordConfirm && this.checkPassword) {
-      this.checkPasswordConfirm = true
-    } else if (this.password != this.passwordConfirm) {
-      this.checkPasswordConfirm = false
+    if (this.password === this.passwordConfirm && this.checkPassword) {
+      this.checkPasswordConfirm = true;
+    } else if (this.password !== this.passwordConfirm) {
+      this.checkPasswordConfirm = false;
     }
   }
 
   async enterPhone() {
-    this.checkPhone = /^([0-9]{10})$/.test(this.phoneNumber)
+    this.checkPhone = /^([0-9]{10})$/.test(this.phoneNumber);
   }
 
   async enterEmail() {
-    this.checkEmail = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(this.email)
+    this.checkEmail = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(this.email);
   }
 
   async fileChangeEvent(fileInput: any) {
     this.filesToUpload = null;
-    this.filesToUpload = <File>fileInput.target.files[0];
+    this.filesToUpload = fileInput.target.files[0] as File;
     if (this.filesToUpload) {
       this.fileName = fileInput.target.files[0].name;
     }
     try {
-      let rs: any = await this.registerService.uploadUserSupplie(
+      const rs: any = await this.registerService.uploadUserSupplie(
         this.filesToUpload,
         this.cid,
       );
       if (rs.ok) {
-        this.checkImage = true
+        this.checkImage = true;
       }
     } catch (error) {
       this.alertService.error(error);
@@ -112,8 +112,8 @@ export class RegisterComponent implements OnInit {
     const confirm = await this.alertService.confirm();
     if (confirm) {
       try {
-        if (this.onSelectHospcode == this.hospcodeConfirm && this.checkCid && this.position && this.title && this.firstName != '' && this.lastName != '' && this.username != '' && this.checkPasswordConfirm && this.checkEmail && this.checkPhone && this.checkImage) {
-          let obj: any = {
+        if (this.onSelectHospcode === this.hospcodeConfirm && this.checkCid && this.position && this.title && this.firstName !== '' && this.lastName !== '' && this.username !== '' && this.checkPasswordConfirm && this.checkEmail && this.checkPhone && this.checkImage) {
+          const obj: any = {
             username: this.username,
             password: this.password,
             hospcode: this.onSelectHospcode,
@@ -126,10 +126,10 @@ export class RegisterComponent implements OnInit {
             type: 'STAFF',
             telephone: this.phoneNumber,
             isProvince: this.province,
-            right: this.province == 'N' ? ['STAFF_COVID_CASE', 'STAFF_COVID_CASE_STATUS', 'STAFF_COVID_CASE_APPROVED', 'STAFF_STOCK_DRUGS', 'STAFF_STOCK_BEDS', 'STAFF_STOCK_SUPPLIES', 'STAFF_SETTING_BASIC', 'STAFF_SETTING_BEDS'] : ['STAFF_CHECK_DRUGS', 'STAFF_CHECK_SUPPLIES', 'STAFF_CHECK_BEDS', 'STAFF_SETTING_BASIC']
-          }
+            right: this.province === 'N' ? ['STAFF_COVID_CASE', 'STAFF_COVID_CASE_STATUS', 'STAFF_COVID_CASE_APPROVED', 'STAFF_STOCK_DRUGS', 'STAFF_STOCK_BEDS', 'STAFF_STOCK_SUPPLIES', 'STAFF_SETTING_BASIC', 'STAFF_SETTING_BEDS'] : ['STAFF_CHECK_DRUGS', 'STAFF_CHECK_SUPPLIES', 'STAFF_CHECK_BEDS', 'STAFF_SETTING_BASIC']
+          };
 
-          let rs: any = await this.registerService.saveUserSupplie(obj);
+          const rs: any = await this.registerService.saveUserSupplie(obj);
           if (rs.ok) {
             this.alertService.success();
             this.router.navigate(['/login']);
@@ -145,7 +145,7 @@ export class RegisterComponent implements OnInit {
 
   async onSelectHosp(e) {
     this.onSelectHospcode = e.hospcode;
-    this.province = e.hosptype_id == '1' ? 'Y' : 'N'
+    this.province = e.hosptype_id === '1' ? 'Y' : 'N';
   }
 
   async getTitle() {
@@ -153,7 +153,7 @@ export class RegisterComponent implements OnInit {
       const rs: any = await this.registerService.getTitle();
       if (rs.ok) {
         this.titleList = rs.rows;
-        this.title = rs.rows[0].id
+        this.title = rs.rows[0].id;
       } else {
         this.alertService.error(rs.error);
       }
@@ -167,7 +167,7 @@ export class RegisterComponent implements OnInit {
       const rs: any = await this.registerService.getPosition();
       if (rs.ok) {
         this.positionList = rs.rows;
-        this.position = rs.rows[0].id
+        this.position = rs.rows[0].id;
       } else {
         this.alertService.error(rs.error);
       }
