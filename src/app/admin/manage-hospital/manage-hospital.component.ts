@@ -6,7 +6,6 @@ import { ClrDatagridStateInterface } from '@clr/angular';
 
 import { AutocompleteProvinceComponent } from '../../help/autocomplete-address/autocomplete-province/autocomplete-province.component';
 import { AutocompleteDistrictComponent } from '../../help/autocomplete-address/autocomplete-district/autocomplete-district.component';
-// tslint:disable-next-line:max-line-length
 import { AutocompleteSubdistrictComponent } from '../../help/autocomplete-address/autocomplete-subdistrict/autocomplete-subdistrict.component';
 import { AutocompleteZipcodeComponent } from 'src/app/help/autocomplete-address/autocomplete-zipcode/autocomplete-zipcode.component';
 

@@ -142,7 +142,7 @@
                 <label for="example" class="clr-control-label">เบอร์โทรศัพท์</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <input type="text" id="example" name="tel" appNumberOnly maxlength="10" [(ngModel)]="tel"
+                    <input type="text" name="tel" appNumberOnly maxlength="10" [(ngModel)]="tel"
                       class="clr-input  width-fit">
                     <!-- <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="!tel.length"></clr-icon> -->
                   </div>
@@ -155,7 +155,7 @@
                 <label class="clr-control-label">ประเภท</label>
                 <div class="clr-control-container clr-error">
                   <div class="clr-select-wrapper">
-                    <select class="clr-select">
+                    <select class="clr-select" name="peopleType" [(ngModel)]="peopleType">
                       <option value="1">Thai</option>
                       <option value="2">Stateless</option>
                       <option value="3">Forient Passport</option>
@@ -185,7 +185,7 @@
                 <label for="example" class="clr-control-label">บ้านเลขที่</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <input type="text" id="example" name="houseno" [(ngModel)]="houseno" class="clr-input  width-fit">
+                    <input type="text" id="example" name="houseNo" [(ngModel)]="houseNo" class="clr-input  width-fit">
                   </div>
                 </div>
               </div>
@@ -196,7 +196,7 @@
                 <label class="clr-control-label">หมายเลขห้อง</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <input type="text" name="roomno" [(ngModel)]="roomno" class="clr-input  width-fit">
+                    <input type="text" name="roomNo" [(ngModel)]="roomNo" class="clr-input  width-fit">
                   </div>
                 </div>
               </div>
@@ -231,12 +231,14 @@
                 </div>
               </div>
             </div>
+            <div class="clr-col-2"></div>
             <div class="clr-col-2 form">
               <div class="clr-form-control" style="margin-top: 0;">
                 <label class="clr-control-label">ตำบล</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <!-- <input type="text"  name="road" [(ngModel)]="road" class="clr-input  width-fit"> -->
+                    <app-autocomplete-subdistrict style="padding: 0px" #tambon (onselect)="onSelectTambon($event)">
+                    </app-autocomplete-subdistrict>
                   </div>
                 </div>
               </div>
@@ -246,7 +248,8 @@
                 <label class="clr-control-label">อำเภอ</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <!-- <input type="text"  name="road" [(ngModel)]="road" class="clr-input  width-fit"> -->
+                    <app-autocomplete-district style="padding: 0px" #ampur (onselect)="onSelectAmpur($event)">
+                    </app-autocomplete-district>
                   </div>
                 </div>
               </div>
@@ -256,7 +259,19 @@
                 <label class="clr-control-label">จังหวัด</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <!-- <input type="text"  name="road" [(ngModel)]="road" class="clr-input  width-fit"> -->
+                    <app-autocomplete-province style="padding: 0px" #province (onselect)="onSelectProvince($event)">
+                    </app-autocomplete-province>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clr-col-2 form">
+              <div class="clr-form-control" style="margin-top: 0;">
+                <label class="clr-control-label">รหัสไปรษณีย์</label>
+                <div class="clr-control-container clr-error width-fit">
+                  <div class="clr-input-wrapper">
+                    <app-autocomplete-zipcode style="padding: 0px" #zipcode (onselect)="onSelectZipcode($event)">
+                    </app-autocomplete-zipcode>
                   </div>
                 </div>
               </div>
@@ -271,17 +286,6 @@
                 </div>
               </div>
             </div>
-            <div class="clr-col-2 form">
-              <div class="clr-form-control" style="margin-top: 0;">
-                <label class="clr-control-label">รหัสไปรษณีย์</label>
-                <div class="clr-control-container clr-error width-fit">
-                  <div class="clr-input-wrapper">
-                    <!-- <input type="text"  name="road" [(ngModel)]="road" class="clr-input  width-fit"> -->
-                  </div>
-                </div>
-              </div>
-            </div>
-
           </div>
         </div>
       </div>
@@ -336,34 +340,34 @@
           <div class="clr-row">
             <div class="clr-col-4">
               <div class="clr-row isProblem">
-                <div class="clr-col-1"></div>
-                <div class="clr-col-11">ระดับความรุนแรง</div>
+                <div class="clr-col-2"></div>
+                <div class="clr-col-10">ระดับความรุนแรง</div>
               </div>
               <div class="clr-row" *ngFor="let i of gcs;let idx = index" [ngClass]="{isWarning: idx%2==0}">
-                <div class="clr-col-1"><input type="radio" name="gcsId" [(ngModel)]="gcsId" [value]="i.id"></div>
-                <div class="clr-col-11">{{i.name}}</div>
+                <div class="clr-col-2"><input type="radio" name="gcsId" [(ngModel)]="gcsId" [value]="i.id"></div>
+                <div class="clr-col-10">{{i.name}}</div>
               </div>
             </div>
             <div class="clr-col-4">
               <div class="clr-row isProblem">
-                <div class="clr-col-1"></div>
-                <div class="clr-col-11">ประเภทเตียงที่ใช้</div>
+                <div class="clr-col-2"></div>
+                <div class="clr-col-10">ประเภทเตียงที่ใช้</div>
               </div>
               <div class="clr-row" *ngFor="let i of beds;let idx = index" [ngClass]="{isWarning: idx%2==0}">
-                <div class="clr-col-1"><input type="radio" name="bedId" [(ngModel)]="bedId" [value]="i.id"></div>
-                <div class="clr-col-11">{{i.name}}</div>
+                <div class="clr-col-2"><input type="radio" name="bedId" [(ngModel)]="bedId" [value]="i.id"></div>
+                <div class="clr-col-10">{{i.name}}</div>
               </div>
             </div>
             <div class="clr-col-4">
               <div class="clr-row isProblem">
-                <div class="clr-col-1"></div>
-                <div class="clr-col-11">เครื่องช่วยหายใจ</div>
+                <div class="clr-col-2"></div>
+                <div class="clr-col-10">เครื่องช่วยหายใจ</div>
               </div>
               <div class="clr-row" *ngFor="let i of respirators;let idx = index" [ngClass]="{isWarning: idx%2==0}">
-                <div class="clr-col-1"><input type="radio" name="respiratorId" [(ngModel)]="respiratorId"
+                <div class="clr-col-2"><input type="radio" name="respiratorId" [(ngModel)]="respiratorId"
                     [value]="i.id">
                 </div>
-                <div class="clr-col-11">{{i.name}}</div>
+                <div class="clr-col-10">{{i.name}}</div>
               </div>
             </div>
 
@@ -380,14 +384,15 @@
               <div class="clr-row ">
                 <div class="clr-col-6">
                   <div class="clr-row">
-                    <div class="clr-col-3  isProblem" style="padding: 0;">จำนวน (เม็ด)</div>
+                    <div class="clr-col-3  isProblem" style="padding: 0;">เลือก</div>
                     <div class="clr-col-9  isProblem">ชื่อยา</div>
-                    <div class="clr-col-3 isWarning" style="padding: 0;"><input [disabled]="s1_2.length > 0" type="text"
-                        appNumberOnly name="s1_1" [(ngModel)]="s1_1" class="clr-input width-fit"></div>
+                    <div class="clr-col-3 isWarning" style="padding: 0;">
+                        <input type="radio" name="s1" [(ngModel)]="s1" value="1">
+                      </div>
                     <div class="clr-col-9 isWarning" style="padding-left: 0.2rem;padding-left: 0.2rem;">
                       Hydroxychloroquine 200 mg.</div>
-                    <div class="clr-col-3" style="padding: 0;"><input type="text" [disabled]="s2_2.length > 0"
-                        appNumberOnly name="s2_1" [(ngModel)]="s2_1" class="clr-input width-fit"></div>
+                    <div class="clr-col-3" style="padding: 0;">
+                      <input type="radio" name="s2" [(ngModel)]="s2" value="1"></div>
                     <div class="clr-col-9" style="padding-left: 0.2rem;padding-left: 0.2rem;">Darunavir 600mg+Ritonavir
                       100mg</div>
                     <div class="clr-col-3 isWarning" style="padding: 0;"><input type="text" appNumberOnly name="s3"
@@ -398,10 +403,10 @@
                 </div>
                 <div class="clr-col-6">
                   <div class="clr-row">
-                    <div class="clr-col-3 isProblem" style="padding: 0;">จำนวน (เม็ด)</div>
+                    <div class="clr-col-3 isProblem" style="padding: 0;">เลือก</div>
                     <div class="clr-col-9 isProblem" style="padding-left: 0.2rem;padding-left: 0.2rem;">ชื่อยา</div>
-                    <div class="clr-col-3 isWarning" style="padding: 0;"><input [disabled]="s1_1.length > 0" type="text"
-                        appNumberOnly name="s1_2" [(ngModel)]="s1_2" class="clr-input width-fit"></div>
+                    <div class="clr-col-3 isWarning" style="padding: 0;">
+                      <input type="radio" name="s1" [(ngModel)]="s1" value="2"></div>
                     <div class="clr-col-9 isWarning" style="padding-left: 0.2rem;padding-left: 0.2rem;">Chloroquine 250
                       mg.</div>
                     <div class="clr-col-3" style="padding: 0;"><input type="text" [disabled]="s2_1.length > 0"
