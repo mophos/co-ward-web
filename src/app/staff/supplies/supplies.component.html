@@ -1,3 +1,65 @@
-<p>
-  supplies works!
-</p>
+<nav class="breadcrumb">
+  <!-- <a class="breadcrumb-item" href="javascript://" routerLink="/staff/requisition-supplies">การใช้เวชภัณฑ์</a> -->
+  <span class="breadcrumb-item active">สถานะเวชภัณฑ์</span>
+</nav>
+<div class="clr-row">
+  <div class="clr-col-3">
+    <div class="clr-row">
+      <div class="clr-col-9">
+        <my-date-picker-th name="dateset" [options]="myDatePickerOptions" [(ngModel)]="dateset" required>
+        </my-date-picker-th>
+      </div>
+      <div class="clr-col-3">
+        <button class="btn btn-sm btn-success" (click)="onClickAdd()">
+          <clr-icon shape="plus"></clr-icon> เพิ่มรายการ
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="clr-col-9">
+    <h4 *ngIf="date != null">บันทึกข้อมูลประจำวันที่ {{date | dateTh:'DD/MM/YYYY'}}</h4>
+  </div>
+</div>
+<div class="clr-row">
+  <div class="clr-col-3">
+    <div class="clr-row">
+      <div class="clr-col-12">
+        <clr-datagrid [clrDgLoading]="loading" [style.height.px]="700">
+          <clr-dg-column>วันที่</clr-dg-column>
+          <clr-dg-column>ชื่อผู้บันทึก</clr-dg-column>
+
+          <clr-dg-row *ngFor="let l of list; let idx=index;" (click)="getListDetail(l.id);listId=l.id;"
+            [ngClass]="{ 'isSuccess': l.id == listId }">
+            <clr-dg-cell>{{l.date | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
+            <clr-dg-cell>{{l.name}}{{l.fname}} {{l.lname}}</clr-dg-cell>
+          </clr-dg-row>
+       
+        </clr-datagrid>
+      </div>
+    </div>
+
+  </div>
+  <div class="clr-col-9">
+    <clr-datagrid [clrDgLoading]="loading" [style.height.px]="700">
+      <clr-dg-column>#</clr-dg-column>
+      <clr-dg-column>รายการ</clr-dg-column>
+      <clr-dg-column>จำนวนยาคงคลัง</clr-dg-column>
+
+      <clr-dg-row *ngFor="let l of listDetail; let idx=index;">
+        <clr-dg-cell>{{idx+1}}</clr-dg-cell>
+        <clr-dg-cell>{{l.name}}</clr-dg-cell>
+        <clr-dg-cell>
+          <input type="number" style="text-align: right;" name="qty" [(ngModel)]="l.qty"
+            class="clr-col-9 clr-input width-fit" value="{{l.qty}}">
+        </clr-dg-cell>
+      </clr-dg-row>
+      <clr-dg-row *ngIf="listDetail.length">
+        <clr-dg-cell>
+          <button type="button" class="btn btn-success  btn-block" (click)="save()">
+            บันทึก
+          </button>
+        </clr-dg-cell>
+      </clr-dg-row>
+    </clr-datagrid>
+  </div>
+</div>
