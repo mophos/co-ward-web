@@ -4,6 +4,44 @@
 
 <h3 style="float: left;">วันที่ {{date  | dateTh:'DD/MM/YYYY'}} </h3>
 <h5>&nbsp;สถานะจะต้องบันทึกทุกวัน (ไม่สามารถบันทึกย้อนหลังได้)</h5>
+
+<div class="clr-row">
+  <div class="clr-col-4">
+    <table class="table">
+      <tr>
+        <td *ngFor="let i of gcsSum">
+          {{i.name}}
+          <br>
+          {{i.count}}
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="clr-col-4">
+    <table class="table">
+      <tr>
+        <td *ngFor="let i of beds">
+          {{i.name}}
+          <br>
+          ใช้ {{i.qty_usage}} จาก {{i.qty_total}}
+        </td>
+      </tr>
+
+    </table>
+  </div>
+  <div class="clr-col-4">
+    <table class="table">
+      <tr>
+        <td *ngFor="let i of respiratorSum">
+          {{i.name}}
+          <br>
+          {{i.count}}
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
 <table class="table">
   <thead>
     <tr>
@@ -41,7 +79,7 @@
         <div class="btn-group">
           <button class="btn btn-sm btn-success" (click)="onClickSave(l.id)"
             [disabled]="l.create_date == date">บันทึก</button>
-          <button class="btn btn-sm btn-primary" >เบิกยา</button>
+          <button class="btn btn-sm btn-primary">เบิกยา</button>
           <button class="btn btn-sm btn-danger" (click)="onClickOpenModalDischarge()">จำหน่าย</button>
         </div>
       </td>
@@ -80,7 +118,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success btn-block" >บันทึก
+    <button type="button" class="btn btn-success btn-block">บันทึก
     </button>
   </div>
 </clr-modal>

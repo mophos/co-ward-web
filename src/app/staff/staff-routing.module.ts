@@ -1,3 +1,4 @@
+import { SuppliesComponent } from './supplies/supplies.component';
 import { CovidCaseApprovedComponent } from './covid-case-approved/covid-case-approved.component';
 import { SettingBedsComponent } from './setting/setting-beds/setting-beds.component';
 import { CovidCaseStatusComponent } from './covid-case-status/covid-case-status.component';
@@ -37,6 +38,7 @@ const routes: Routes = [
         ]
       },
       { path: 'covid-case-status', component: CovidCaseStatusComponent },
+      { path: 'supplies', component: SuppliesComponent },
       { path: 'covid-case-approved', component: CovidCaseApprovedComponent },
       // {
       //   path: 'inventory',

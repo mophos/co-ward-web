@@ -16,12 +16,14 @@ export class CovidCaseStatusComponent implements OnInit {
   list = [];
   date: any;
 
+  gcsSum = [];
   gcs: any = [];
   gcsId: any;
 
   beds: any = [];
   bedId: any;
 
+  respiratorSum: any = [];
   respirators: any = [];
   respiratorId: any;
 
@@ -38,7 +40,9 @@ export class CovidCaseStatusComponent implements OnInit {
     await this.getDate();
     await this.getList();
     await this.getGCS();
+    await this.getGCSSum();
     await this.getBeds();
+    await this.getRespiratorSum();
     await this.getRespirators();
   }
 
@@ -81,11 +85,25 @@ export class CovidCaseStatusComponent implements OnInit {
       console.log(error);
       this.alertService.serverError();
     }
+
+  }
+  async getGCSSum() {
+    try {
+      const rs: any = await this.covidCaseService.getGCS();
+      if (rs.ok) {
+        this.gcsSum = rs.rows;
+      } else {
+        this.alertService.serverError();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.serverError();
+    }
   }
 
   async getBeds() {
     try {
-      const rs: any = await this.basicAuthService.getBeds();
+      const rs: any = await this.covidCaseService.getBeds();
       if (rs.ok) {
         this.beds = rs.rows;
       } else {
@@ -102,6 +120,19 @@ export class CovidCaseStatusComponent implements OnInit {
       const rs: any = await this.basicAuthService.getRespirators();
       if (rs.ok) {
         this.respirators = rs.rows;
+      } else {
+        this.alertService.serverError();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.serverError();
+    }
+  }
+  async getRespiratorSum() {
+    try {
+      const rs: any = await this.covidCaseService.getRespirators();
+      if (rs.ok) {
+        this.respiratorSum = rs.rows;
       } else {
         this.alertService.serverError();
       }
@@ -149,4 +180,9 @@ export class CovidCaseStatusComponent implements OnInit {
     }
 
   }
+
+  counter(i: number) {
+    return new Array(i);
+  }
+
 }

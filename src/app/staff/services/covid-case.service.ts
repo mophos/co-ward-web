@@ -55,4 +55,18 @@ export class CovidCaseService {
     const url = `${this.apiUrl}/v1/staff/covid-case/approved-detail?id=${id}`;
     return await this.http.get(url).toPromise();
   }
+
+  async getBeds() {
+    const url = `${this.apiUrl}/v1/staff/covid-case/beds`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async getGCS() {
+    const url = `${this.apiUrl}/v1/staff/covid-case/gcs`;
+    return await this.http.get(url).toPromise();
+  }
+  async getRespirators() {
+    const url = `${this.apiUrl}/v1/staff/covid-case/respirators`;
+    return await this.http.get(url).toPromise();
+  }
 }
