@@ -28,11 +28,11 @@
     <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
       <a clrVerticalNavLink routerLink="/staff/covid-case" title="Case COVID" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="helix"></clr-icon>
-        Case COVID
+        ผู้ป่วย COVID
       </a>
       <a clrVerticalNavLink routerLink="/staff/covid-case-status" title="Case COVID" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="wand"></clr-icon>
-        สถานะ Case COVID
+        สถานะผู้ป่วย COVID
       </a>
       <a clrVerticalNavLink routerLink="/staff/covid-case-approved" title="อนุมัติรายการยาและเวชภัณฑ์ให้รพ.ลูกข่าย" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
@@ -54,7 +54,7 @@
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         สถานะการส่งเวชภัณฑ์
       </a>
-      <a *ngIf="balanceBedMeny" clrVerticalNavLink routerLink="/staff/drug" title="สถานะยา" routerLinkActive="active">
+      <a *ngIf="balanceBedMeny" clrVerticalNavLink routerLink="/staff/drugs" title="สถานะยา" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="flask"></clr-icon>
         สถานะยา
       </a>

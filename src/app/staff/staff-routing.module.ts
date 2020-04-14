@@ -68,7 +68,7 @@ const routes: Routes = [
       { path: 'setting', canActivate: [AuthSetting], component: SettingComponent },
       { path: 'check-bed', canActivate: [AuthCheckbed], component: CheckBedComponent },
       { path: 'check-supplie', canActivate: [AuthChecksupplie], component: CheckSuppliesComponent },
-      { path: 'drug', component: DrugComponent },
+      { path: 'drugs', component: DrugComponent },
     ]
   }
 ];
