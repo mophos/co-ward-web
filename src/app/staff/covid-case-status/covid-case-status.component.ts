@@ -29,6 +29,11 @@ export class CovidCaseStatusComponent implements OnInit {
 
   modalDischarge = false;
   modalDischargeType = 'HOME';
+  s1 = [{ generic: 1, name: 'Hydroxychloroquine 200 mg.' }, { generic: 2, name: 'Chloroquine 250 mg.' }];
+  s2 = [{ generic: 3, name: 'Darunavir 600mg+Ritonavir100 mg' }, { generic: 5, name: 'Lopinavir 200 mg+Ritonavir 50 mg.' }];
+  s3 = [{ generic: 7, name: 'Azithromycin 250 mg.' }];
+  s4 = [{ generic: 8, name: 'Favipiravir (เบิกจาก AntiDost) คลิก' }];
+
   constructor(
     private covidCaseService: CovidCaseService,
     private alertService: AlertService,
@@ -51,6 +56,7 @@ export class CovidCaseStatusComponent implements OnInit {
       const rs: any = await this.covidCaseService.getCovidCasePresent();
       if (rs.ok) {
         this.list = rs.rows;
+        console.log(this.list);
       } else {
         this.alertService.error(rs.error);
       }
@@ -166,13 +172,14 @@ export class CovidCaseStatusComponent implements OnInit {
       if (confirm) {
         const idx = findIndex(this.list, { id });
         if (idx > -1) {
-          this.list[idx].create_date = this.date;
-          const rs: any = await this.covidCaseService.updateStatus(this.list[idx]);
-          if (rs.ok) {
-            this.alertService.success();
-          } else {
-            this.alertService.error(rs.error);
-          }
+          // this.list[idx].create_date = this.date;
+          console.log(this.list[idx]);
+          // const rs: any = await this.covidCaseService.updateStatus(this.list[idx]);
+          // if (rs.ok) {
+          //   this.alertService.success();
+          // } else {
+          //   this.alertService.error(rs.error);
+          // }
         }
       }
     } catch (error) {
@@ -183,6 +190,13 @@ export class CovidCaseStatusComponent implements OnInit {
 
   counter(i: number) {
     return new Array(i);
+  }
+
+  async onClickRadioDrge(e, idx) {
+    console.log(e, idx);
+    if (e === 1) {
+      this.list[idx].set1 = this.date;
+    }
   }
 
 }

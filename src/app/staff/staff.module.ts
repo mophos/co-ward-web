@@ -38,6 +38,7 @@ import { SettingBedsComponent } from './setting/setting-beds/setting-beds.compon
 import { SuppliesComponent } from './supplies/supplies.component';
 import { CovidCaseApprovedComponent } from './covid-case-approved/covid-case-approved.component';
 import { HomeComponent } from './home/home.component';
+import { CovidCaseRequisitionComponent } from './covid-case-requisition/covid-case-requisition.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { HomeComponent } from './home/home.component';
     SettingBedsComponent,
     SuppliesComponent,
     CovidCaseApprovedComponent,
-    HomeComponent
+    HomeComponent,
+    CovidCaseRequisitionComponent
   ],
   imports: [
     HelpModule,

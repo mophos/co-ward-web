@@ -28,6 +28,7 @@ import { AuthCheckBedsService } from '../auth-staff/auth-check-beds.service';
 import { AuthSettingBasicService } from '../auth-staff/auth-setting-basic.service';
 import { AuthSettingBedsService } from '../auth-staff/auth-setting-beds.service';
 import { HomeComponent } from '../staff/home/home.component';
+import { CovidCaseRequisitionComponent } from './covid-case-requisition/covid-case-requisition.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,7 @@ const routes: Routes = [
       },
       { path: 'covid-case-status', canActivate: [AuthCovidCaseStatusService], component: CovidCaseStatusComponent },
       { path: 'covid-case-approved', canActivate: [AuthCovidCaseApprovedService], component: CovidCaseApprovedComponent },
+      { path: 'covid-case-requisition', canActivate: [AuthCovidCaseApprovedService], component: CovidCaseRequisitionComponent },
 
       { path: 'drugs', canActivate: [AuthStockDrugsService], component: DrugComponent },
       { path: 'beds', canActivate: [AuthStockBedsService], component: BedComponent },
