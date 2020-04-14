@@ -20,6 +20,7 @@ export class DrugService {
     const url = `${this.apiUrl}/v1/staff/drugs/details/${id}`;
     return await this.http.get(url).toPromise();
   }
+  
   async save(data) {
     const url = `${this.apiUrl}/v1/staff/drugs`;
     return await this.http.post(url, { data }).toPromise();
