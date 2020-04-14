@@ -38,8 +38,6 @@ export class SettingBedsComponent implements OnInit {
   }
 
   async onClickSave() {
-    console.log(this.list);
-    
     try {
       this.isSave = true;
       const rs: any = await this.settingService.saveBeds(this.list);
