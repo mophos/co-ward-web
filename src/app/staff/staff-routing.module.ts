@@ -14,14 +14,20 @@ import { SettingComponent } from './setting/setting.component';
 import { CheckBedComponent } from './check-bed/check-bed.component';
 import { CheckSuppliesComponent } from './check-supplies/check-supplies.component';
 import { StaffGuard } from '../staff-guard.service';
-import { AuthBalancebed } from '../auth-balancebed.service';
-import { AuthBalancesuppile } from '../auth-balancesuppile.service';
-import { AuthStatustracking } from '../auth-statustracking.service';
-import { AuthSetting } from '../auth-setting.service';
-import { AuthCheckbed } from '../auth-checkbed.service';
-import { AuthChecksupplie } from '../auth-checksupplie.service';
-import { AuthRequisition } from '../auth-requisition.service';
 import { DrugComponent } from './drug/drug.component';
+import { AuthCovidCaseService } from '../auth-staff/auth-covid-case.service';
+import { AuthCovidCaseStatusService } from '../auth-staff/auth-covid-case-status.service';
+import { AuthCovidCaseApprovedService } from '../auth-staff/auth-covid-case-approved.service';
+import { AuthStockDrugsService } from '../auth-staff/auth-stock-drugs.service';
+import { AuthStockBedsService } from '../auth-staff/auth-stock-beds.service';
+import { AuthStockSuppliesService } from '../auth-staff/auth-stock-supplies.service';
+import { AuthTrackingService } from '../auth-staff/auth-tracking.service';
+import { AuthCheckDrugsService } from '../auth-staff/auth-check-drugs.service';
+import { AuthCheckSuppliesService } from '../auth-staff/auth-check-supplies.service';
+import { AuthCheckBedsService } from '../auth-staff/auth-check-beds.service';
+import { AuthSettingBasicService } from '../auth-staff/auth-setting-basic.service';
+import { AuthSettingBedsService } from '../auth-staff/auth-setting-beds.service';
+import { HomeComponent } from '../staff/home/home.component';
 
 const routes: Routes = [
   {
@@ -30,45 +36,41 @@ const routes: Routes = [
     canActivate: [StaffGuard],
     children: [
       { path: '', redirectTo: 'covid-case', pathMatch: 'full' },
+      { path: 'home', component: HomeComponent },
       {
         path: 'covid-case',
+        canActivate: [AuthCovidCaseService],
         children: [
           { path: '', component: CovidCaseComponent },
           { path: 'new', component: CovidCaseNewComponent },
         ]
       },
-      { path: 'covid-case-status', component: CovidCaseStatusComponent },
-      { path: 'supplies', component: SuppliesComponent },
-      { path: 'covid-case-approved', component: CovidCaseApprovedComponent },
-      // {
-      //   path: 'inventory',
-      //   canActivate: [AuthBalancesuppile],
-      //   children: [
-      //     { path: '', component: InventoryComponent },
-      //     { path: 'add', component: InventoryAddComponent },
-      //     { path: 'edit', component: InventoryEditComponent },
-      //   ]
-      // },
+      { path: 'covid-case-status', canActivate: [AuthCovidCaseStatusService], component: CovidCaseStatusComponent },
+      { path: 'covid-case-approved', canActivate: [AuthCovidCaseApprovedService], component: CovidCaseApprovedComponent },
+
+      { path: 'drugs', canActivate: [AuthStockDrugsService], component: DrugComponent },
+      { path: 'beds', canActivate: [AuthStockBedsService], component: BedComponent },
+      { path: 'supplies', canActivate: [AuthStockSuppliesService], component: SuppliesComponent },
+
       {
         path: 'tracking',
-        canActivate: [AuthStatustracking],
+        canActivate: [AuthTrackingService],
         children: [
           { path: '', component: TrackingComponent },
           { path: 'details', component: TrackingDetailComponent },
         ]
       },
+
+      { path: 'check-bed', canActivate: [AuthCheckBedsService], component: CheckBedComponent },
+      { path: 'check-supplie', canActivate: [AuthCheckSuppliesService], component: CheckSuppliesComponent },
+
       {
         path: 'setting',
         children: [
-          { path: 'basic', component: SettingComponent },
-          { path: 'beds', component: SettingBedsComponent },
+          { path: 'basic', canActivate: [AuthSettingBasicService], component: SettingComponent },
+          { path: 'beds', canActivate: [AuthSettingBedsService], component: SettingBedsComponent },
         ]
       },
-      { path: 'beds', canActivate: [AuthBalancebed], component: BedComponent },
-      { path: 'setting', canActivate: [AuthSetting], component: SettingComponent },
-      { path: 'check-bed', canActivate: [AuthCheckbed], component: CheckBedComponent },
-      { path: 'check-supplie', canActivate: [AuthChecksupplie], component: CheckSuppliesComponent },
-      { path: 'drugs', component: DrugComponent },
     ]
   }
 ];

@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CanActivate } from '@angular/router';
@@ -8,7 +7,7 @@ import * as _ from 'lodash';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthCheckbed implements CanActivate {
+export class AuthCovidCaseApprovedService implements CanActivate{
   public token: string;
   public jwtHelper = new JwtHelperService();
 
@@ -26,7 +25,7 @@ export class AuthCheckbed implements CanActivate {
           return false;
         } else {
           let isAccess = false;
-          if (_.findIndex(rights, { name: 'STAFF_CHECK_BEDS' }) > -1) {
+          if (_.findIndex(rights, { name: 'STAFF_COVID_CASE_APPROVED' }) > -1) {
             isAccess = true;
           } else {
             isAccess = false;

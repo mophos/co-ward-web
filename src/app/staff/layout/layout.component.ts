@@ -15,10 +15,23 @@ export class LayoutComponent implements OnInit {
   collapsible = true;
   collapse = true;
   rights: any;
+
+  covidCaseMenu: any;
+  covidCaseStatusMenu: any;
+  covidCaseApprovedMenu: any;
+  stockDrugsMenu: any;
+  stockBedsMenu: any;
+  stockSuppliesMenu: any;
+  trackingMenu: any;
+  checkDrugsMenu: any;
+  checkSuppliesMenu: any;
+  checkBedsMenu: any;
+  settingBasicMenu: any;
+  settingBedsMenu: any;
+
   requisitionMenu: any;
   requisitionSuppliesMenu: any;
   checkBedMenu: any;
-  checkSuppliesMenu: any;
   balanceSuppliesMenu: any;
   balanceBedMeny: any;
   statusTrackingMenu: any;
@@ -33,15 +46,18 @@ export class LayoutComponent implements OnInit {
     this.hospname = decoded.hospname;
     this.rights = decoded.rights;
 
-    this.requisitionMenu = findIndex(this.rights, { name: 'STAFF_REQUISITION' }) === -1 ? false : true;
-    this.requisitionSuppliesMenu = findIndex(this.rights, { name: 'STAFF_REQUISITION_SUPPLIES' }) === -1 ? false : true;
-    this.checkBedMenu = findIndex(this.rights, { name: 'STAFF_CHECK_BEDS' }) === -1 ? false : true;
+    this.covidCaseMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE' }) === -1 ? false : true;
+    this.covidCaseStatusMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE_STATUS' }) === -1 ? false : true;
+    this.covidCaseApprovedMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE_APPROVED' }) === -1 ? false : true;
+    this.stockDrugsMenu = findIndex(this.rights, { name: 'STAFF_STOCK_DRUGS' }) === -1 ? false : true;
+    this.stockBedsMenu = findIndex(this.rights, { name: 'STAFF_STOCK_BEDS' }) === -1 ? false : true;
+    this.stockSuppliesMenu = findIndex(this.rights, { name: 'STAFF_STOCK_SUPPLIES' }) === -1 ? false : true;
+    this.trackingMenu = findIndex(this.rights, { name: 'STAFF_TRACKING' }) === -1 ? false : true;
+    this.checkDrugsMenu = findIndex(this.rights, { name: 'STAFF_CHECK_DRUGS' }) === -1 ? false : true;
     this.checkSuppliesMenu = findIndex(this.rights, { name: 'STAFF_CHECK_SUPPLIES' }) === -1 ? false : true;
-    this.balanceSuppliesMenu = findIndex(this.rights, { name: 'STAFF_STOCK_SUPPLIES' }) === -1 ? false : true;
-    this.balanceBedMeny = findIndex(this.rights, { name: 'STAFF_STOCK_BEDS' }) === -1 ? false : true;
-    this.statusTrackingMenu = findIndex(this.rights, { name: 'STAFF_STATUS_TRACKING' }) === -1 ? false : true;
-    this.settingMenu = findIndex(this.rights, { name: 'STAFF_SETTINGS' }) === -1 ? false : true;
-
+    this.checkBedsMenu = findIndex(this.rights, { name: 'STAFF_CHECK_BEDS' }) === -1 ? false : true;
+    this.settingBasicMenu = findIndex(this.rights, { name: 'STAFF_SETTING_BASIC' }) === -1 ? false : true;
+    this.settingBedsMenu = findIndex(this.rights, { name: 'STAFF_SETTING_BEDS' }) === -1 ? false : true;
   }
 
   ngOnInit() {
