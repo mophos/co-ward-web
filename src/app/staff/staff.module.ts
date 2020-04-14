@@ -16,12 +16,19 @@ import { CheckBedComponent } from './check-bed/check-bed.component';
 import { CheckSuppliesComponent } from './check-supplies/check-supplies.component';
 import { ReceiveDrugComponent } from './receive-drug/receive-drug.component';
 
-import { AuthBalancesuppile } from '../auth-balancesuppile.service';
-import { AuthStatustracking } from '../auth-statustracking.service';
-import { AuthCheckbed } from '../auth-checkbed.service';
-import { AuthChecksupplie } from '../auth-checksupplie.service';
-import { AuthSetting } from '../auth-setting.service';
-import { AuthRequisition } from '../auth-requisition.service';
+import { AuthCovidCaseService } from '../auth-staff/auth-covid-case.service';
+import { AuthCovidCaseStatusService } from '../auth-staff/auth-covid-case-status.service';
+import { AuthCovidCaseApprovedService } from '../auth-staff/auth-covid-case-approved.service';
+import { AuthStockDrugsService } from '../auth-staff/auth-stock-drugs.service';
+import { AuthStockBedsService } from '../auth-staff/auth-stock-beds.service';
+import { AuthStockSuppliesService } from '../auth-staff/auth-stock-supplies.service';
+import { AuthTrackingService } from '../auth-staff/auth-tracking.service';
+import { AuthCheckDrugsService } from '../auth-staff/auth-check-drugs.service';
+import { AuthCheckSuppliesService } from '../auth-staff/auth-check-supplies.service';
+import { AuthCheckBedsService } from '../auth-staff/auth-check-beds.service';
+import { AuthSettingBasicService } from '../auth-staff/auth-setting-basic.service';
+import { AuthSettingBedsService } from '../auth-staff/auth-setting-beds.service';
+
 import { DrugComponent } from './drug/drug.component';
 import { MyDatePickerTHModule } from 'mydatepicker-th';
 import { CovidCaseComponent } from './covid-case/covid-case.component';
@@ -30,6 +37,7 @@ import { CovidCaseStatusComponent } from './covid-case-status/covid-case-status.
 import { SettingBedsComponent } from './setting/setting-beds/setting-beds.component';
 import { SuppliesComponent } from './supplies/supplies.component';
 import { CovidCaseApprovedComponent } from './covid-case-approved/covid-case-approved.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +55,8 @@ import { CovidCaseApprovedComponent } from './covid-case-approved/covid-case-app
     CovidCaseStatusComponent,
     SettingBedsComponent,
     SuppliesComponent,
-    CovidCaseApprovedComponent
+    CovidCaseApprovedComponent,
+    HomeComponent
   ],
   imports: [
     HelpModule,
@@ -63,12 +72,18 @@ import { CovidCaseApprovedComponent } from './covid-case-approved/covid-case-app
     TrackingDetailComponent
   ],
   providers: [
-    AuthBalancesuppile,
-    AuthStatustracking,
-    AuthCheckbed,
-    AuthChecksupplie,
-    AuthSetting,
-    AuthRequisition,
+    AuthCovidCaseService,
+    AuthCovidCaseStatusService,
+    AuthCovidCaseApprovedService,
+    AuthStockDrugsService,
+    AuthStockBedsService,
+    AuthStockSuppliesService,
+    AuthTrackingService,
+    AuthCheckDrugsService,
+    AuthCheckSuppliesService,
+    AuthCheckBedsService,
+    AuthSettingBasicService,
+    AuthSettingBedsService
   ]
 })
 export class StaffModule { }

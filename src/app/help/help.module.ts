@@ -13,6 +13,7 @@ import { AutocompleteProvinceComponent } from './autocomplete-address/autocomple
 import { AutocompleteHospitalComponent } from './autocomplete-hospital/autocomplete-hospital.component';
 import { NumberOnlyDirective } from './number-only.directive';
 import { AutocompleteHospitalRequisitionComponent } from './autocomplete-hospital-requisition/autocomplete-hospital-requisition.component';
+import { SafePipe } from './safe.pipe';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AutocompleteHospitalRequisitionComponent } from './autocomplete-hospita
     AutocompleteProvinceComponent,
     AutocompleteHospitalComponent,
     NumberOnlyDirective,
-    AutocompleteHospitalRequisitionComponent
+    AutocompleteHospitalRequisitionComponent,
+    SafePipe
   ],
   imports: [
     CommonModule,

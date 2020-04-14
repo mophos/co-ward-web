@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CanActivate } from '@angular/router';
@@ -8,7 +7,7 @@ import * as _ from 'lodash';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthRequisition implements CanActivate {
+export class AuthSettingBasicService implements CanActivate{
   public token: string;
   public jwtHelper = new JwtHelperService();
 
@@ -19,14 +18,14 @@ export class AuthRequisition implements CanActivate {
     if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
       const rights = decodedToken.rights;
-      
+
       if (rights) {
         if (this.jwtHelper.isTokenExpired(token)) {
           this.router.navigate(['login']);
           return false;
         } else {
           let isAccess = false;
-          if (_.findIndex(rights, { name: 'STAFF_REQUISITION' }) > -1) {
+          if (_.findIndex(rights, { name: 'STAFF_SETTING_BASIC' }) > -1) {
             isAccess = true;
           } else {
             isAccess = false;

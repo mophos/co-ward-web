@@ -126,7 +126,7 @@ export class RegisterComponent implements OnInit {
             type: 'STAFF',
             telephone: this.phoneNumber,
             isProvince: this.province,
-            right: this.province == 'N' ? ['STAFF_STOCK_SUPPLIES', 'STAFF_STATUS_TRACKING', 'STAFF_SETTINGS'] : ['STAFF_STOCK_SUPPLIES', 'STAFF_STATUS_TRACKING', 'STAFF_SETTINGS', 'STAFF_CHECK_SUPPLIES']
+            right: this.province == 'N' ? ['STAFF_COVID_CASE', 'STAFF_COVID_CASE_STATUS', 'STAFF_COVID_CASE_APPROVED', 'STAFF_STOCK_DRUGS', 'STAFF_STOCK_BEDS', 'STAFF_STOCK_SUPPLIES', 'STAFF_SETTING_BASIC', 'STAFF_SETTING_BEDS'] : ['STAFF_CHECK_DRUGS', 'STAFF_CHECK_SUPPLIES', 'STAFF_CHECK_BEDS', 'STAFF_SETTING_BASIC']
           }
 
           let rs: any = await this.registerService.saveUserSupplie(obj);
@@ -176,7 +176,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  cancel(){
+  cancel() {
     this.router.navigate(['/login']);
   }
 
