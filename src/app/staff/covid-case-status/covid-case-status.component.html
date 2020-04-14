@@ -50,7 +50,7 @@
       <th class="left">ความรุนแรง</th>
       <th class="left">เตียง</th>
       <th class="left">เครื่องข่วยหายใจ</th>
-      <th class="left">วันท่ียาจะหมด</th>
+      <th class="left">ยา</th>
       <th class="left"></th>
     </tr>
   </thead>
@@ -59,27 +59,37 @@
       <td class="left">{{l.hn}}</td>
       <td class="left">{{l.title_name}}{{l.first_name}} {{l.last_name}}</td>
       <td class="left">
-        <span *ngFor="let i of gcs">
-          <input type="radio" name="gcs-{{l.id}}" id="gcs-{{l.id}}" [(ngModel)]="l.gcs_id" [value]="i.id"> {{i.name}}
-        </span>
+        <div *ngFor="let i of gcs">
+          <input type="radio" name="gcs-{{l.id}}" id="gcs-{{l.id}}" [(ngModel)]="l.gcs_id" [value]="i.id">
+          <span [title]="i.name" class="pointer">
+            {{i.name}}
+          </span>
+        </div>
       </td>
       <td class="left">
-        <span *ngFor="let i of beds">
-          <input type="radio" name="bed-{{l.id}}" id="bed-{{l.id}}" [(ngModel)]="l.bed_id" [value]="i.id"> {{i.name}}
-        </span>
+        <div *ngFor="let i of beds">
+          <input type="radio" name="bed-{{l.id}}" id="bed-{{l.id}}" [(ngModel)]="l.bed_id" [value]="i.id">
+          <span [title]="i.name" class="pointer">
+            {{i.name}}
+          </span>
+        </div>
       </td>
       <td class="left">
-        <span *ngFor="let i of respirators">
+        <div *ngFor="let i of respirators">
           <input type="radio" name="respirator-{{l.id}}" id="respirator-{{l.id}}" [(ngModel)]="l.respirator_id"
-            [value]="i.id"> {{i.name}}
-        </span>
+            [value]="i.id">
+          <span [title]="i.name" class="pointer">
+            {{i.name}}
+          </span>
+        </div>
       </td>
-      <td class="left"></td>
       <td class="left">
+        
+      </td>
+      <td style="text-align: right;">
         <div class="btn-group">
           <button class="btn btn-sm btn-success" (click)="onClickSave(l.id)"
             [disabled]="l.create_date == date">บันทึก</button>
-          <button class="btn btn-sm btn-primary">เบิกยา</button>
           <button class="btn btn-sm btn-danger" (click)="onClickOpenModalDischarge()">จำหน่าย</button>
         </div>
       </td>

@@ -68,11 +68,15 @@
   width: 20rem;
   text-align: left;
   padding: 5px;
-  border: 1px black solid !important; 
+  border: 1px black solid !important;
 }
 
 .text-register {
   text-align: right;
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 @media screen and (max-width: 599px) {
