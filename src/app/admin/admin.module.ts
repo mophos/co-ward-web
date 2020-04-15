@@ -25,6 +25,8 @@ import { ManageHospitalComponent } from './manage-hospital/manage-hospital.compo
 import { AuthHospitalmanage } from '../auth-hospitalmanage.service';
 import { ManageDrugComponent } from './manage-drug/manage-drug.component';
 import { RequisitionMinMaxComponent } from './requisition-min-max/requisition-min-max.component';
+import { ManageRestockCollectionComponent } from './manage-restock-collection/manage-restock-collection.component';
+import { AuthRestockCollection } from '../auth-restock-collection.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { RequisitionMinMaxComponent } from './requisition-min-max/requisition-mi
     PayNowComponent,
     ManageHospitalComponent,
     ManageDrugComponent,
-    RequisitionMinMaxComponent
+    RequisitionMinMaxComponent,
+    ManageRestockCollectionComponent
   ],
   imports: [
     HelpModule,
@@ -56,7 +59,8 @@ import { RequisitionMinMaxComponent } from './requisition-min-max/requisition-mi
     AuthUsermanage,
     AuthSuppliemanage,
     AuthMinmax,
-    AuthHospitalmanage
+    AuthHospitalmanage,
+    AuthRestockCollection
   ]
 })
 export class AdminModule { }
