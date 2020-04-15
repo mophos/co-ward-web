@@ -26,6 +26,11 @@
             <router-outlet></router-outlet>
         </div>
         <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
+            <a *ngIf="restockCollectionMenu" clrVerticalNavLink routerLink="/admin/manage-restock-collection" title="เติมกลุ่มสินค้า"
+                routerLinkActive="active">
+                <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+                เติมกลุ่มสินค้า
+            </a>
             <a *ngIf="restockMenu" clrVerticalNavLink routerLink="/admin/manage-restock" title="เติมเวชภัณฑ์"
                 routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
@@ -51,7 +56,7 @@
                 จัดการสถานบริการ
             </a>
 
-            <a clrVerticalNavLink routerLink="/admin/manage-drug" title="จัดการยา" routerLinkActive="active">
+            <!-- <a clrVerticalNavLink routerLink="/admin/manage-drug" title="จัดการยา" routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 จัดการยา
             </a>
@@ -59,7 +64,7 @@
             <a clrVerticalNavLink routerLink="/admin/requisition-min-max" title="ตั้งค่า MIN-MAX การเบิก" routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 ตั้งค่า MIN-MAX การเบิก
-            </a>
+            </a> -->
         </clr-vertical-nav>
     </div>
 </div>
