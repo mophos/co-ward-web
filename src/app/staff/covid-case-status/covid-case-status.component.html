@@ -2,7 +2,7 @@
   <span class="breadcrumb-item active">สถานะ Case COVID</span>
 </nav>
 
-<h3 style="float: left;">วันที่ {{date  | dateTh:'DD/MM/YYYY'}} </h3>
+<h3 style="float: left;">วันที่ {{date | dateTh:'DD/MM/YYYY'}} </h3>
 <h5>&nbsp;สถานะจะต้องบันทึกทุกวัน (ไม่สามารถบันทึกย้อนหลังได้)</h5>
 
 <div class="clr-row">
@@ -74,8 +74,7 @@
       </td>
       <td class="left">
         <div *ngFor="let i of respirators">
-          <input type="radio" name="respirator-{{l.id}}" id="respirator-{{i.id}}" [(ngModel)]="l.respirator_id"
-            [value]="i.id">
+          <input type="radio" name="respirator-{{l.id}}" id="respirator-{{i.id}}" [(ngModel)]="l.respirator_id" [value]="i.id">
           <label [title]="i.name" class="pointer" for="respirator-{{i.id}}">
             {{i.name}}
           </label>
@@ -113,11 +112,10 @@
       </td>
       <td style="text-align: right;">
         <div>
-          <button class="btn btn-sm btn-success" (click)="onClickSave(l.id)"
-            [disabled]="l.create_date == date">บันทึก</button>
+          <button class="btn btn-sm btn-success" (click)="onClickSave(l.id)" [disabled]="l.create_date == date">บันทึก</button>
         </div>
         <div>
-          <button class="btn btn-sm btn-danger" (click)="onClickOpenModalDischarge()">จำหน่าย</button>
+          <button class="btn btn-sm btn-danger" (click)="onClickOpenModalDischarge(l)">จำหน่าย</button>
         </div>
       </td>
     </tr>
@@ -125,7 +123,7 @@
 </table>
 
 
-<clr-modal [(clrModalOpen)]="modalDischarge">
+<clr-modal [(clrModalOpen)]="modalDischarge" [clrModalSize]="'md'">
   <h3 class="modal-title">กรุณาเลือกสาเหตุ</h3>
   <div class="modal-body">
     <clr-radio-container clrInline>
@@ -145,17 +143,60 @@
     </clr-radio-container>
 
     <!-- <form class="clr-form"> -->
+    <div class="clr-form-control" *ngIf="modalDischargeType == 'HOME'">
+      <label for="basic" class="clr-control-label">วันเวลาที่กลับบ้าน</label>
+      <div class="clr-row" style="padding-bottom: 10rem;">
+        <div class="clr-col-6">
+          <my-date-picker-th name="dateDischarge" [options]="myDatePickerOptions" [(ngModel)]="dateDischarge" required>
+          </my-date-picker-th>
+        </div>
+        <div class="clr-col-6">
+          <select name="hour" class="clr-select width-fit" [(ngModel)]="hour" name="hour" style="width: 30%;">
+            <option *ngFor="let i of hours" [value]="i">
+              <span *ngIf="i < 10">0</span>{{ i }}
+            </option>
+          </select>
+          <span style="padding-right: 1em;padding-left: 1em;"> : </span>
+          <select name="minute" class="clr-select width-fit" [(ngModel)]="minute" name="minute" style="width: 30%;">
+            <option *ngFor="let i of minutes" [value]="i">
+              <span *ngIf="i < 10">0</span>{{ i }}
+            </option>
+          </select>
+          <span style="padding-left: 1em;"> น. </span>
+        </div>
+      </div>
+    </div>
     <div class="clr-form-control" *ngIf="modalDischargeType == 'DEATH'">
       <label for="basic" class="clr-control-label">วันเวลาที่เสียชีวิต</label>
-      <input type="date">
+      <div class="clr-row" style="padding-bottom: 10rem;">
+        <div class="clr-col-6">
+          <my-date-picker-th style="padding-bottom: 10rem;" name="dateDischarge" [options]="myDatePickerOptions"
+            [(ngModel)]="dateDischarge" required>
+          </my-date-picker-th>
+        </div>
+        <div class="clr-col-6">
+          <select name="hour" class="clr-select width-fit" [(ngModel)]="hour" name="hour" style="width: 30%;">
+            <option *ngFor="let i of hours" [value]="i">
+              <span *ngIf="i < 10">0</span>{{ i }}
+            </option>
+          </select>
+          <span style="padding-right: 1em;padding-left: 1em;"> : </span>
+          <select name="minute" class="clr-select width-fit" [(ngModel)]="minute" name="minute" style="width: 30%;">
+            <option *ngFor="let i of minutes" [value]="i">
+              <span *ngIf="i < 10">0</span>{{ i }}
+            </option>
+          </select>
+          <span style="padding-left: 1em;"> น. </span>
+        </div>
+      </div>
     </div>
     <div class="clr-form-control" *ngIf="modalDischargeType == 'REFER'">
       <label for="basic" class="clr-control-label">โรงพยาบาลที่ส่งต่อ</label>
-      <input type="text" name="" id="">
+      <app-autocomplete-hospital style="padding: 0px; width: 100%;" #hospital (onchange)="onSelectHosp($event)" (onselect)="onSelectHosp($event)">
+      </app-autocomplete-hospital>
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success btn-block">บันทึก
-    </button>
+    <button type="button" class="btn btn-success btn-block" (click)="save()">บันทึก</button>
   </div>
 </clr-modal>
