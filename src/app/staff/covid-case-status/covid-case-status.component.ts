@@ -19,6 +19,7 @@ export class CovidCaseStatusComponent implements OnInit {
   date: any;
 
   gcsSum = [];
+  BedsSum = [];
   gcs: any = [];
   gcsId: any;
 
@@ -32,6 +33,11 @@ export class CovidCaseStatusComponent implements OnInit {
 
   hour: any;
   minute: any;
+
+  bed1: any = 0;
+  bed2: any = 0;
+  bed3: any = 0;
+  bed4: any = 0;
 
   hours: any = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
   minutes: any = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
@@ -75,6 +81,7 @@ export class CovidCaseStatusComponent implements OnInit {
     await this.getGCS();
     await this.getGCSSum();
     await this.getBeds();
+    // await this.getBedSum();
     await this.getRespiratorSum();
     await this.getRespirators();
 
@@ -96,6 +103,7 @@ export class CovidCaseStatusComponent implements OnInit {
       const rs: any = await this.covidCaseService.getCovidCasePresent();
       if (rs.ok) {
         this.list = rs.rows;
+        console.log(this.list);
       } else {
         this.alertService.error(rs.error);
       }
@@ -148,9 +156,38 @@ export class CovidCaseStatusComponent implements OnInit {
 
   async getBeds() {
     try {
-      const rs: any = await this.covidCaseService.getBeds();
+      const rs: any = await this.basicAuthService.getBeds();
       if (rs.ok) {
         this.beds = rs.rows;
+        for (const i of this.beds) {
+          i.usage = 0;
+        }
+        for (const i of this.list) {
+          if (+i.bed_id === 1) {
+            this.beds[0].usage += 1;
+          } else if (+i.bed_id === 2) {
+            this.beds[1].usage += 1;
+          } else if (+i.bed_id === 3) {
+            this.beds[2].usage += 1;
+          } else if (+i.bed_id === 4) {
+            this.beds[3].usage += 1;
+          }
+        }
+      } else {
+        this.alertService.serverError();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.serverError();
+    }
+  }
+
+  async getBedSum() {
+    try {
+      const rs: any = await this.covidCaseService.getBeds();
+      if (rs.ok) {
+        this.BedsSum = rs.rows;
+        console.log(this.BedsSum);
       } else {
         this.alertService.serverError();
       }
