@@ -375,16 +375,20 @@ export class CovidCaseNewComponent implements OnInit {
         if (this.birthDate) {
           obj.birthDate = `${this.birthDate.date.year}-${this.birthDate.date.month}-${this.birthDate.date.day}`;
         }
-        // const rs: any = await this.covidCaseService.saveNewCase(obj);
-        // if (rs.ok) {
-        //   this.clear();
-        //   this.isKey = false;
-        //   this.isSave = false;
-        //   this.onClickOpenModalCid();
-        // } else {
-        //   this.isSave = false;
-        //   this.alertService.error(rs.error);
-        // }
+
+        const rs: any = await this.covidCaseService.saveNewCase(obj);
+        if (rs.ok) {
+          this.clear();
+          this.isKey = false;
+          this.isSave = false;
+          this.onClickOpenModalCid();
+        } else {
+          this.isSave = false;
+          this.alertService.error(rs.error);
+        }
+      } else {
+        this.isSave = false;
+        this.alertService.error('กรอกข้อมูลไม่ครบ\nกรุณาตรวจสอบข้อมูล');
       }
     } catch (error) {
       this.isSave = false;
