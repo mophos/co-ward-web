@@ -7,7 +7,7 @@ import * as _ from 'lodash';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthCovidCaseApprovedService implements CanActivate{
+export class AuthCovidCaseApprovedService implements CanActivate {
   public token: string;
   public jwtHelper = new JwtHelperService();
 

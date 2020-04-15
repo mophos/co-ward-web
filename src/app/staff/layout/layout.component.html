@@ -40,10 +40,15 @@
         <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
         อนุมัติรายการยาและเวชภัณฑ์
       </a>
-      <a *ngIf="covidCaseApprovedMenu" clrVerticalNavLink routerLink="/staff/covid-case-requisition" title="อนุมัติรายการยาและเวชภัณฑ์ให้รพ.ลูกข่าย"
+      <a *ngIf="covidCaseRequisitionMenu" clrVerticalNavLink routerLink="/staff/covid-case-requisition" title="รายการยาและเวชภัณฑ์"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
         รายการยาและเวชภัณฑ์
+      </a>
+      <a *ngIf="covidPayMenu" clrVerticalNavLink routerLink="/staff/pay" title="บันทึกการจ่าย"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
+        บันทึกการจ่าย
       </a>
       <a *ngIf="stockDrugsMenu" clrVerticalNavLink routerLink="/staff/drugs" title="สถานะยา" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="flask"></clr-icon>
