@@ -375,17 +375,16 @@ export class CovidCaseNewComponent implements OnInit {
         if (this.birthDate) {
           obj.birthDate = `${this.birthDate.date.year}-${this.birthDate.date.month}-${this.birthDate.date.day}`;
         }
-
-        const rs: any = await this.covidCaseService.saveNewCase(obj);
-        if (rs.ok) {
-          this.clear();
-          this.isKey = false;
-          this.isSave = false;
-          this.onClickOpenModalCid();
-        } else {
-          this.isSave = false;
-          this.alertService.error(rs.error);
-        }
+        // const rs: any = await this.covidCaseService.saveNewCase(obj);
+        // if (rs.ok) {
+        //   this.clear();
+        //   this.isKey = false;
+        //   this.isSave = false;
+        //   this.onClickOpenModalCid();
+        // } else {
+        //   this.isSave = false;
+        //   this.alertService.error(rs.error);
+        // }
       }
     } catch (error) {
       this.isSave = false;
@@ -518,9 +517,9 @@ export class CovidCaseNewComponent implements OnInit {
           const rs: any = await this.covidCaseService.checkNo(this.modalCIDType, this.modalCIDCid, this.modalCIDPassport);
           if (rs.ok) {
             if (rs.case === 'NEW') {
+              this.cid = this.modalCIDCid;
               this.isKey = true;
               this.modalCID = false;
-              // this.router.navigate(['/staff/covid-case-new', { type: this.modalCIDType, cid: this.modalCIDCid, passport: this.modalCIDPassport }]);
             } else if (rs.case === 'REFER') {
               const confirm = await this.alertService.confirm(`คุณรับผู้ป่วย Refer มาจาก ${rs.rows.hospname} ใช่หรือไม่ ?`);
               if (confirm) {
@@ -528,7 +527,6 @@ export class CovidCaseNewComponent implements OnInit {
                 this.modalCID = false;
                 this.data = rs.rows;
                 this.setData();
-                // this.router.navigate(['/staff/covid-case-new', { isRefer: 'Y', type: this.modalCIDType, cid: this.modalCIDCid, passport: this.modalCIDPassport, data: JSON.stringify(rs.rows) }]);
               }
             }
           } else {
@@ -538,7 +536,6 @@ export class CovidCaseNewComponent implements OnInit {
       } else {
         this.isKey = true;
         this.modalCID = false;
-        // this.router.navigate(['/staff/covid-case-new', { type: this.modalCIDType }]);
       }
       this.isModelSearch = false;
     } catch (error) {
