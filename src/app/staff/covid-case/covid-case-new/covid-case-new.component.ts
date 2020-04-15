@@ -148,6 +148,15 @@ export class CovidCaseNewComponent implements OnInit {
     this.roomNo = this.data.room_no;
     this.village = this.data.village;
     this.villageName = this.data.village_name;
+    this.road = this.data.road;
+    this.ampurId = this.data.ampur_code;
+    this.tambonId  = this.data.tambon_code;
+    this.provinceId  = this.data.province_code;
+    this.zipcode =   this.data.zipcode;
+    this.ampur.setQuery(this.data.ampur_name);
+    this.tambon.setQuery(this.data.tambon_name);
+    this.province.setQuery(this.data.province_name);
+    this.zipc.setQuery(this.data.zipcode);
   }
 
   async getTitle() {
