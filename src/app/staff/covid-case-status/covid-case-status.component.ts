@@ -46,7 +46,7 @@ export class CovidCaseStatusComponent implements OnInit {
   modalDischarge = false;
   modalDischargeType = 'HOME';
   s1 = [{ generic: 1, name: 'Hydroxychloroquine 200 mg.' }, { generic: 2, name: 'Chloroquine 250 mg.' }];
-  s2 = [{ generic: 3, name: 'Darunavir 600mg+Ritonavir100 mg' }, { generic: 5, name: 'Lopinavir 200 mg+Ritonavir 50 mg.' }];
+  s2 = [{ generic: 3, name: 'Darunavir 600mg+Ritonavir100 mg' }, { generic: 4, name: 'Lopinavir 200 mg+Ritonavir 50 mg.' }];
   s3 = [{ generic: 7, name: 'Azithromycin 250 mg.' }];
   s4 = [{ generic: 8, name: 'Favipiravir (เบิกจาก AntiDost) คลิก' }];
 
@@ -212,14 +212,15 @@ export class CovidCaseStatusComponent implements OnInit {
       if (confirm) {
         const idx = findIndex(this.list, { id });
         if (idx > -1) {
-          // this.list[idx].create_date = this.date;
+          this.list[idx].create_date = this.date;
+          this.list[idx].drugs = await this.setGenericSave(this.list[idx]);
           console.log(this.list[idx]);
-          // const rs: any = await this.covidCaseService.updateStatus(this.list[idx]);
-          // if (rs.ok) {
-          //   this.alertService.success();
-          // } else {
-          //   this.alertService.error(rs.error);
-          // }
+          const rs: any = await this.covidCaseService.updateStatus(this.list[idx]);
+          if (rs.ok) {
+            this.alertService.success();
+          } else {
+            this.alertService.error(rs.error);
+          }
         }
       }
     } catch (error) {
@@ -232,11 +233,35 @@ export class CovidCaseStatusComponent implements OnInit {
     return new Array(i);
   }
 
-  async onClickRadioDrge(e, idx) {
-    console.log(e, idx);
-    if (e === 1) {
-      this.list[idx].set1 = this.date;
+  async setGenericSave(e: any) {
+    const drugs = [];
+
+    // set1
+    if (+e.set1 === 1) {
+      drugs.push({ genericId: 1 });
+    } else if (+e.set1 === 2) {
+      drugs.push({ genericId: 2 });
     }
+
+    // set2
+    if (+e.set2 === 3) {
+      drugs.push({ genericId: 3 });
+      drugs.push({ genericId: 5 });
+    } else if (+e.set2 === 4) {
+      drugs.push({ genericId: 4 });
+      drugs.push({ genericId: 6 });
+    }
+
+    // set3
+    if (+e.set3 === 7) {
+      drugs.push({ genericId: 7 });
+    }
+
+    // set4
+    if (+e.set4 === 8) {
+      drugs.push({ genericId: 8 });
+    }
+    return drugs;
   }
 
   onSelectHosp(e) {

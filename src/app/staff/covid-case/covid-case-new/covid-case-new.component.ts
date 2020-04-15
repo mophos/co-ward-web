@@ -10,7 +10,7 @@ import { AutocompleteProvinceComponent } from '../../../help/autocomplete-addres
 import { AutocompleteDistrictComponent } from '../../../help/autocomplete-address/autocomplete-district/autocomplete-district.component';
 import { AutocompleteSubdistrictComponent } from '../../../help/autocomplete-address/autocomplete-subdistrict/autocomplete-subdistrict.component';
 import { AutocompleteZipcodeComponent } from '../../../help/autocomplete-address/autocomplete-zipcode/autocomplete-zipcode.component';
-
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-covid-case-new',
@@ -88,7 +88,7 @@ export class CovidCaseNewComponent implements OnInit {
   s2 = '';
   s3 = '';
   s4 = '';
-
+  data: any;
   drugDay = '5';
   @ViewChild('hospital') hospitals: AutocompleteHospitalComponent;
 
@@ -109,6 +109,7 @@ export class CovidCaseNewComponent implements OnInit {
     this.typeRegister = params.type;
     this.cid = params.cid;
     this.passport = params.passport;
+    this.data = params.data ? JSON.parse(params.data) : null;
   }
 
   async ngOnInit() {
@@ -116,8 +117,37 @@ export class CovidCaseNewComponent implements OnInit {
     await this.getGCS();
     await this.getBeds();
     await this.getRespirators();
+    await this.setData();
+
     // await this.getGenericSet();
     // await this.setDrugs();
+  }
+
+  setData() {
+    this.hn = this.data.hn;
+    this.an = this.data.an;
+    this.titleId = this.data.title_id;
+    this.fname = this.data.first_name;
+    this.lname = this.data.last_name;
+    this.genderId = this.data.gender_id;
+    console.log(this.data.birth_date);
+
+    if (this.data.birth_date) {
+      this.birthDate = {
+        date: {
+          year: moment(this.data.birth_date).format('YYYY'),
+          month: moment(this.data.birth_date).format('MM'),
+          day: moment(this.data.birth_date).format('DD'),
+        }
+      };
+    }
+    this.tel = this.data.telephone;
+    this.peopleType = this.data.people_type;
+
+    this.houseNo = this.data.house_no;
+    this.roomNo = this.data.room_no;
+    this.village = this.data.village;
+    this.villageName = this.data.village_name;
   }
 
   async getTitle() {
@@ -251,25 +281,25 @@ export class CovidCaseNewComponent implements OnInit {
 
       if (await this.verifyInput()) {
         const drugs = [];
-        if (this.s1 === '1') {
+        if (+this.s1 === 1) {
           drugs.push({ genericId: 1 });
-        } else if (this.s1 === '2') {
+        } else if (+this.s1 === 2) {
           drugs.push({ genericId: 2 });
         }
 
-        if (this.s2 === '1') {
+        if (+this.s2 === 1) {
           drugs.push({ genericId: 3 });
           drugs.push({ genericId: 5 });
-        } else if (this.s2 === '2') {
+        } else if (+this.s2 === 2) {
           drugs.push({ genericId: 4 });
           drugs.push({ genericId: 6 });
         }
 
-        if (this.s3 === '1') {
+        if (+this.s3 === 1) {
           drugs.push({ genericId: 7 });
         }
 
-        if (this.s4 === '1') {
+        if (+this.s4 === 1) {
           drugs.push({ genericId: 7 });
         }
 
