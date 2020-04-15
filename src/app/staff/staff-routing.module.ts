@@ -29,6 +29,9 @@ import { AuthSettingBasicService } from '../auth-staff/auth-setting-basic.servic
 import { AuthSettingBedsService } from '../auth-staff/auth-setting-beds.service';
 import { HomeComponent } from '../staff/home/home.component';
 import { CovidCaseRequisitionComponent } from './covid-case-requisition/covid-case-requisition.component';
+import { PayComponent } from './pay/pay.component';
+import { AuthCovidCaseRequisitionService } from '../auth-staff/auth-covid-case-requisition.service';
+import { AuthPayService } from '../auth-staff/auth-pay.service';
 
 const routes: Routes = [
   {
@@ -48,11 +51,12 @@ const routes: Routes = [
       },
       { path: 'covid-case-status', canActivate: [AuthCovidCaseStatusService], component: CovidCaseStatusComponent },
       { path: 'covid-case-approved', canActivate: [AuthCovidCaseApprovedService], component: CovidCaseApprovedComponent },
-      { path: 'covid-case-requisition', canActivate: [AuthCovidCaseApprovedService], component: CovidCaseRequisitionComponent },
+      { path: 'covid-case-requisition', canActivate: [AuthCovidCaseRequisitionService], component: CovidCaseRequisitionComponent },
 
       { path: 'drugs', canActivate: [AuthStockDrugsService], component: DrugComponent },
       { path: 'beds', canActivate: [AuthStockBedsService], component: BedComponent },
       { path: 'supplies', canActivate: [AuthStockSuppliesService], component: SuppliesComponent },
+      { path: 'pay', canActivate: [AuthPayService], component: PayComponent },
 
       {
         path: 'tracking',

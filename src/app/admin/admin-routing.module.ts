@@ -18,6 +18,8 @@ import { AuthHospitalmanage } from '../auth-hospitalmanage.service';
 import { ManageHospitalComponent } from './manage-hospital/manage-hospital.component';
 import { ManageDrugComponent } from '../admin/manage-drug/manage-drug.component';
 import { RequisitionMinMaxComponent } from './requisition-min-max/requisition-min-max.component';
+import { AuthRestockCollection } from '../auth-restock-collection.service';
+import { ManageRestockCollectionComponent } from './manage-restock-collection/manage-restock-collection.component';
 
 const routes: Routes = [
   {
@@ -25,7 +27,18 @@ const routes: Routes = [
     component: LayoutComponent,
     canActivate: [AdminGuard],
     children: [
-      { path: '', redirectTo: 'manage-restock', pathMatch: 'full' },
+      { path: '', redirectTo: 'manage-restock-collection', pathMatch: 'full' },
+      {
+        path: 'manage-restock-collection',
+        canActivate: [AuthRestockCollection],
+        // children: [
+          // { path: '',
+          component: ManageRestockCollectionComponent
+        // },
+          // { path: 'edit', component: ManageUserComponent, },
+          // { path: 'pay-now', component: PayNowComponent, }
+        // ]
+      },
       {
         path: 'manage-restock',
         canActivate: [AuthRestock],
