@@ -100,9 +100,9 @@ export class CovidCaseComponent implements OnInit {
             if (rs.case === 'NEW') {
               this.router.navigate(['/staff/covid-case/new', { type: this.modalCIDType, cid: this.modalCIDCid, passport: this.modalCIDPassport }]);
             } else if (rs.case === 'REFER') {
-              const confirm = this.alertService.confirm('คุณรับผู้ป่วย Refer มาจาก รพ. ใช่หรือไม่ ?');
+              const confirm = await this.alertService.confirm(`คุณรับผู้ป่วย Refer มาจาก ${rs.rows.hospname} ใช่หรือไม่ ?`);
               if (confirm) {
-                this.router.navigate(['/staff/covid-case/new', { isRefer: 'Y', type: this.modalCIDType, cid: this.modalCIDCid, passport: this.modalCIDPassport }]);
+                this.router.navigate(['/staff/covid-case/new', { isRefer: 'Y', type: this.modalCIDType, cid: this.modalCIDCid, passport: this.modalCIDPassport, data: JSON.stringify(rs.rows) }]);
               }
             }
           } else {
@@ -117,5 +117,9 @@ export class CovidCaseComponent implements OnInit {
       this.isModelSearch = false;
       this.alertService.error(error);
     }
+  }
+
+  setData(data) {
+
   }
 }
