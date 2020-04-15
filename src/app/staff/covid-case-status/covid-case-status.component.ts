@@ -335,4 +335,19 @@ export class CovidCaseStatusComponent implements OnInit {
       }
     }
   }
+
+  uncheckRadio(listId, generic, type = '') {
+    const idx = findIndex(this.list, { id: listId });
+    if (idx > -1) {
+      if (type === 's1' && this.list[idx].set1 === generic) {
+        this.list[idx].set1 = null;
+      } else if (type === 's2' && this.list[idx].set2 === generic) {
+        this.list[idx].set2 = null;
+      } else if (type === 's3' && this.list[idx].set3 === generic) {
+        this.list[idx].set3 = null;
+      } else if (type === 's4' && this.list[idx].set4 === generic) {
+        this.list[idx].set4 = null;
+      }
+    }
+  }
 }
