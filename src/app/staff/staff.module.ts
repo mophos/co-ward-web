@@ -39,7 +39,6 @@ import { SuppliesComponent } from './supplies/supplies.component';
 import { CovidCaseApprovedComponent } from './covid-case-approved/covid-case-approved.component';
 import { HomeComponent } from './home/home.component';
 import { CovidCaseRequisitionComponent } from './covid-case-requisition/covid-case-requisition.component';
-
 @NgModule({
   declarations: [
     LayoutComponent,
