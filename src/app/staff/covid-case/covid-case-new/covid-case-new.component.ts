@@ -84,11 +84,10 @@ export class CovidCaseNewComponent implements OnInit {
   };
 
 
-  s1_1 = '';
-  s1_2 = '';
-  s2_1 = '';
-  s2_2 = '';
+  s1 = '';
+  s2 = '';
   s3 = '';
+  s4 = '';
 
   drugDay = '5';
   @ViewChild('hospital') hospitals: AutocompleteHospitalComponent;
@@ -121,31 +120,6 @@ export class CovidCaseNewComponent implements OnInit {
     // await this.setDrugs();
   }
 
-  setDrugs() {
-    this.drugs = [
-      {
-        set: 1,
-        id1: 1,
-        name1: 'Hydroxychloroquine 200 mg.',
-        id2: 2,
-        name2: 'Chloroquine 250 mg.'
-      },
-      {
-        set: 2,
-        id1: 3,
-        id2: 5,
-        name1: 'Darunavir 600 mg. + Ritonavir 100 mg.',
-        id3: 4,
-        id4: 6,
-        name2: 'Lopinavir 200 mg. + Ritonavir 50 mg.'
-      },
-      {
-        set: 3,
-        id1: 7,
-        name1: 'Azithromycin 250 mg.',
-      },
-    ];
-  }
   async getTitle() {
     try {
       const rs: any = await this.basicService.getTitle();
@@ -277,37 +251,54 @@ export class CovidCaseNewComponent implements OnInit {
 
       if (await this.verifyInput()) {
         const drugs = [];
-        if (this.s1_1) {
-          drugs.push({ genericIid: 1, qty: this.s1_1 });
-        } else if (this.s1_2) {
-          drugs.push({ genericIid: 2, qty: this.s1_2 });
+        if (this.s1 === '1') {
+          drugs.push({ genericId: 1 });
+        } else if (this.s1 === '2') {
+          drugs.push({ genericId: 2 });
         }
 
-        if (this.s2_1) {
-          drugs.push({ genericIid: 3, qty: this.s2_1 });
-          drugs.push({ genericIid: 5, qty: this.s2_1 });
-        } else if (this.s2_2) {
-          drugs.push({ genericIid: 4, qty: this.s2_2 });
-          drugs.push({ genericIid: 6, qty: this.s2_2 });
+        if (this.s2 === '1') {
+          drugs.push({ genericId: 3 });
+          drugs.push({ genericId: 5 });
+        } else if (this.s2 === '2') {
+          drugs.push({ genericId: 4 });
+          drugs.push({ genericId: 6 });
         }
 
-        if (this.s3) {
-          drugs.push({ genericIid: 7, qty: this.s3 });
+        if (this.s3 === '1') {
+          drugs.push({ genericId: 7 });
+        }
+
+        if (this.s4 === '1') {
+          drugs.push({ genericId: 7 });
         }
 
         const obj = {
           type: this.typeRegister,
           cid: this.cid,
           passport: this.passport,
-          titleId: this.titleId,
           hn: this.hn,
+          an: this.an,
+          titleId: this.titleId,
           fname: this.fname,
           lname: this.lname,
           tel: this.tel,
+          birthDate: `${this.birthDate.date.year}-${this.birthDate.date.month}-${this.birthDate.date.day}`,
           admitDate: `${this.admitDate.date.year}-${this.admitDate.date.month}-${this.admitDate.date.day}`,
+          confirmDate: `${this.confirmDate.date.year}-${this.confirmDate.date.month}-${this.confirmDate.date.day}`,
           gcsId: this.gcsId,
           bedId: this.bedId,
           respiratorId: this.respiratorId,
+          houseNo: this.houseNo,
+          roomNo: this.roomNo,
+          village: this.village,
+          villageName: this.villageName,
+          road: this.road,
+          tambonCode: this.tambonId,
+          ampurCode: this.ampurId,
+          provinceCode: this.provinceId,
+          zipcode: this.zipcode,
+          countryId: this.countryId,
           drugs
         };
 
@@ -330,47 +321,68 @@ export class CovidCaseNewComponent implements OnInit {
     this.lname = '';
     this.tel = '';
     this.admitDate = null;
+    this.confirmDate = null;
+    this.birthDate = null;
     this.gcsId = null;
     this.bedId = null;
     this.respiratorId = null;
-    this.s1_1 = null;
-    this.s1_2 = null;
-    this.s2_1 = null;
-    this.s2_2 = null;
+    this.s1 = null;
+    this.s2 = null;
     this.s3 = null;
+    this.s4 = null;
+    this.houseNo = '';
+    this.roomNo = '';
+    this.village = '';
+    this.villageName = '';
+    this.road = '';
+    this.tambonId = null;
+    this.ampurId = null;
+    this.provinceId = null;
+    this.tambon.setQuery('');
+    this.ampur.setQuery('');
+    this.province.setQuery('');
     this.drugDay = null;
   }
+
   onSelectProvince(e) {
-    this.tambonId = e.tambon_id;
+    this.tambonId = e.tambon_code;
     this.tambonName = e.tambon_name;
+    this.ampurId = e.ampur_code;
     this.ampurName = e.ampur_name;
+    this.provinceId = e.province_id;
     this.provinceName = e.province_name;
     this.zipcode = e.zip_code;
     this.setValue();
   }
 
   onSelectAmpur(e) {
-    this.tambonId = e.tambon_id;
+    this.tambonId = e.tambon_code;
     this.tambonName = e.tambon_name;
+    this.ampurId = e.ampur_code;
     this.ampurName = e.ampur_name;
+    this.provinceId = e.province_id;
     this.provinceName = e.province_name;
     this.zipcode = e.zip_code;
     this.setValue();
   }
 
   onSelectTambon(e) {
-    this.tambonId = e.tambon_id;
+    this.tambonId = e.tambon_code;
     this.tambonName = e.tambon_name;
+    this.ampurId = e.ampur_code;
     this.ampurName = e.ampur_name;
+    this.provinceId = e.province_id;
     this.provinceName = e.province_name;
     this.zipcode = e.zip_code;
     this.setValue();
   }
 
   onSelectZipcode(e) {
-    this.tambonId = e.tambon_id;
+    this.tambonId = e.tambon_code;
     this.tambonName = e.tambon_name;
+    this.ampurId = e.ampur_code;
     this.ampurName = e.ampur_name;
+    this.provinceId = e.province_id;
     this.provinceName = e.province_name;
     this.zipcode = e.zip_code;
     this.setValue();
