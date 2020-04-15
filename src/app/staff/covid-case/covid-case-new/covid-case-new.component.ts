@@ -6,6 +6,11 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AutocompleteHospitalComponent } from 'src/app/help/autocomplete-hospital/autocomplete-hospital.component';
 import { IMyOptions } from 'mydatepicker-th';
+import { AutocompleteProvinceComponent } from '../../../help/autocomplete-address/autocomplete-province/autocomplete-province.component';
+import { AutocompleteDistrictComponent } from '../../../help/autocomplete-address/autocomplete-district/autocomplete-district.component';
+import { AutocompleteSubdistrictComponent } from '../../../help/autocomplete-address/autocomplete-subdistrict/autocomplete-subdistrict.component';
+import { AutocompleteZipcodeComponent } from '../../../help/autocomplete-address/autocomplete-zipcode/autocomplete-zipcode.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-covid-case-new',
@@ -16,17 +21,40 @@ export class CovidCaseNewComponent implements OnInit {
 
   isRefer: any;
   typeRegister: any;
-  hn = '';
-  genderId: any;
+  // profile ----------------
   passport = '';
   cid = '';
+  hn = '';
+  an = '';
+  titleId = null;
   fname = '';
   lname = '';
+  genderId: any;
+  birthDate: any;
   tel = '';
+  peopleType: any;
+
   admitDate: any;
+  confirmDate: any;
+  // address ----------------
+  houseNo: any;
+  roomNo: any;
+  village: any;
+  villageName: any;
+  road: any;
+  tambonId: any;
+  tambonName: any;
+  ampurId: any;
+  ampurName: any;
+  provinceId: any;
+  provinceName: any;
+  zipcode: any;
+  countryId: any;
+  countryName: any;
+  // -------------------
 
   titles: any = [];
-  titleId = null;
+
 
   gcs: any = [];
   gcsId: any;
@@ -56,14 +84,18 @@ export class CovidCaseNewComponent implements OnInit {
   };
 
 
-  s1_1 = '';
-  s1_2 = '';
-  s2_1 = '';
-  s2_2 = '';
+  s1 = '';
+  s2 = '';
   s3 = '';
-
+  s4 = '';
+  data: any;
   drugDay = '5';
   @ViewChild('hospital') hospitals: AutocompleteHospitalComponent;
+
+  @ViewChild('province') province: AutocompleteProvinceComponent;
+  @ViewChild('ampur') ampur: AutocompleteDistrictComponent;
+  @ViewChild('tambon') tambon: AutocompleteSubdistrictComponent;
+  @ViewChild('zipcode') zipc: AutocompleteZipcodeComponent;
 
   constructor(
     private route: ActivatedRoute,
@@ -77,6 +109,7 @@ export class CovidCaseNewComponent implements OnInit {
     this.typeRegister = params.type;
     this.cid = params.cid;
     this.passport = params.passport;
+    this.data = params.data ? JSON.parse(params.data) : null;
   }
 
   async ngOnInit() {
@@ -84,35 +117,48 @@ export class CovidCaseNewComponent implements OnInit {
     await this.getGCS();
     await this.getBeds();
     await this.getRespirators();
-    await this.getGenericSet();
+    await this.setData();
+
+    // await this.getGenericSet();
     // await this.setDrugs();
   }
 
-  setDrugs() {
-    this.drugs = [
-      {
-        set: 1,
-        id1: 1,
-        name1: 'Hydroxychloroquine 200 mg.',
-        id2: 2,
-        name2: 'Chloroquine 250 mg.'
-      },
-      {
-        set: 2,
-        id1: 3,
-        id2: 5,
-        name1: 'Darunavir 600 mg. + Ritonavir 100 mg.',
-        id3: 4,
-        id4: 6,
-        name2: 'Lopinavir 200 mg. + Ritonavir 50 mg.'
-      },
-      {
-        set: 3,
-        id1: 7,
-        name1: 'Azithromycin 250 mg.',
-      },
-    ];
+  setData() {
+    this.hn = this.data.hn;
+    this.an = this.data.an;
+    this.titleId = this.data.title_id;
+    this.fname = this.data.first_name;
+    this.lname = this.data.last_name;
+    this.genderId = this.data.gender_id;
+    console.log(this.data.birth_date);
+
+    if (this.data.birth_date) {
+      this.birthDate = {
+        date: {
+          year: moment(this.data.birth_date).format('YYYY'),
+          month: moment(this.data.birth_date).format('MM'),
+          day: moment(this.data.birth_date).format('DD'),
+        }
+      };
+    }
+    this.tel = this.data.telephone;
+    this.peopleType = this.data.people_type;
+
+    this.houseNo = this.data.house_no;
+    this.roomNo = this.data.room_no;
+    this.village = this.data.village;
+    this.villageName = this.data.village_name;
+    this.road = this.data.road;
+    this.ampurId = this.data.ampur_code;
+    this.tambonId  = this.data.tambon_code;
+    this.provinceId  = this.data.province_code;
+    this.zipcode =   this.data.zipcode;
+    this.ampur.setQuery(this.data.ampur_name);
+    this.tambon.setQuery(this.data.tambon_name);
+    this.province.setQuery(this.data.province_name);
+    this.zipc.setQuery(this.data.zipcode);
   }
+
   async getTitle() {
     try {
       const rs: any = await this.basicService.getTitle();
@@ -244,37 +290,54 @@ export class CovidCaseNewComponent implements OnInit {
 
       if (await this.verifyInput()) {
         const drugs = [];
-        if (this.s1_1) {
-          drugs.push({ genericIid: 1, qty: this.s1_1 });
-        } else if (this.s1_2) {
-          drugs.push({ genericIid: 2, qty: this.s1_2 });
+        if (+this.s1 === 1) {
+          drugs.push({ genericId: 1 });
+        } else if (+this.s1 === 2) {
+          drugs.push({ genericId: 2 });
         }
 
-        if (this.s2_1) {
-          drugs.push({ genericIid: 3, qty: this.s2_1 });
-          drugs.push({ genericIid: 5, qty: this.s2_1 });
-        } else if (this.s2_2) {
-          drugs.push({ genericIid: 4, qty: this.s2_2 });
-          drugs.push({ genericIid: 6, qty: this.s2_2 });
+        if (+this.s2 === 1) {
+          drugs.push({ genericId: 3 });
+          drugs.push({ genericId: 5 });
+        } else if (+this.s2 === 2) {
+          drugs.push({ genericId: 4 });
+          drugs.push({ genericId: 6 });
         }
 
-        if (this.s3) {
-          drugs.push({ genericIid: 7, qty: this.s3 });
+        if (+this.s3 === 1) {
+          drugs.push({ genericId: 7 });
+        }
+
+        if (+this.s4 === 1) {
+          drugs.push({ genericId: 7 });
         }
 
         const obj = {
           type: this.typeRegister,
           cid: this.cid,
           passport: this.passport,
-          titleId: this.titleId,
           hn: this.hn,
+          an: this.an,
+          titleId: this.titleId,
           fname: this.fname,
           lname: this.lname,
           tel: this.tel,
+          birthDate: `${this.birthDate.date.year}-${this.birthDate.date.month}-${this.birthDate.date.day}`,
           admitDate: `${this.admitDate.date.year}-${this.admitDate.date.month}-${this.admitDate.date.day}`,
+          confirmDate: `${this.confirmDate.date.year}-${this.confirmDate.date.month}-${this.confirmDate.date.day}`,
           gcsId: this.gcsId,
           bedId: this.bedId,
           respiratorId: this.respiratorId,
+          houseNo: this.houseNo,
+          roomNo: this.roomNo,
+          village: this.village,
+          villageName: this.villageName,
+          road: this.road,
+          tambonCode: this.tambonId,
+          ampurCode: this.ampurId,
+          provinceCode: this.provinceId,
+          zipcode: this.zipcode,
+          countryId: this.countryId,
           drugs
         };
 
@@ -297,15 +360,78 @@ export class CovidCaseNewComponent implements OnInit {
     this.lname = '';
     this.tel = '';
     this.admitDate = null;
+    this.confirmDate = null;
+    this.birthDate = null;
     this.gcsId = null;
     this.bedId = null;
     this.respiratorId = null;
-    this.s1_1 = null;
-    this.s1_2 = null;
-    this.s2_1 = null;
-    this.s2_2 = null;
+    this.s1 = null;
+    this.s2 = null;
     this.s3 = null;
+    this.s4 = null;
+    this.houseNo = '';
+    this.roomNo = '';
+    this.village = '';
+    this.villageName = '';
+    this.road = '';
+    this.tambonId = null;
+    this.ampurId = null;
+    this.provinceId = null;
+    this.tambon.setQuery('');
+    this.ampur.setQuery('');
+    this.province.setQuery('');
     this.drugDay = null;
+  }
+
+  onSelectProvince(e) {
+    this.tambonId = e.tambon_code;
+    this.tambonName = e.tambon_name;
+    this.ampurId = e.ampur_code;
+    this.ampurName = e.ampur_name;
+    this.provinceId = e.province_id;
+    this.provinceName = e.province_name;
+    this.zipcode = e.zip_code;
+    this.setValue();
+  }
+
+  onSelectAmpur(e) {
+    this.tambonId = e.tambon_code;
+    this.tambonName = e.tambon_name;
+    this.ampurId = e.ampur_code;
+    this.ampurName = e.ampur_name;
+    this.provinceId = e.province_id;
+    this.provinceName = e.province_name;
+    this.zipcode = e.zip_code;
+    this.setValue();
+  }
+
+  onSelectTambon(e) {
+    this.tambonId = e.tambon_code;
+    this.tambonName = e.tambon_name;
+    this.ampurId = e.ampur_code;
+    this.ampurName = e.ampur_name;
+    this.provinceId = e.province_id;
+    this.provinceName = e.province_name;
+    this.zipcode = e.zip_code;
+    this.setValue();
+  }
+
+  onSelectZipcode(e) {
+    this.tambonId = e.tambon_code;
+    this.tambonName = e.tambon_name;
+    this.ampurId = e.ampur_code;
+    this.ampurName = e.ampur_name;
+    this.provinceId = e.province_id;
+    this.provinceName = e.province_name;
+    this.zipcode = e.zip_code;
+    this.setValue();
+  }
+
+  setValue() {
+    this.province.setQuery(this.provinceName);
+    this.ampur.setQuery(this.ampurName);
+    this.tambon.setQuery(this.tambonName);
+    this.zipc.setQuery(this.zipcode);
   }
 
 }

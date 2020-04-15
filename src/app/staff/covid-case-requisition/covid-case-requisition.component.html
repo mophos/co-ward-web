@@ -1,0 +1,33 @@
+<nav class="breadcrumb">
+  <!-- <a class="breadcrumb-item" href="javascript://" routerLink="/staff/requisition-supplies">การใช้เวชภัณฑ์</a> -->
+  <span class="breadcrumb-item active">อนุมัติรายการยาและเวชภัณฑ์ให้รพ.ลูกข่าย</span>
+</nav>
+<div class="clr-row">
+  <div class="clr-col-6">
+    <clr-datagrid [clrDgLoading]="isLoading">
+      <clr-dg-column>เลขที่ใบเบิก</clr-dg-column>
+      <clr-dg-column>วันที่เบิก</clr-dg-column>
+      <clr-dg-column>สถานะ</clr-dg-column>
+
+      <clr-dg-row *ngFor="let l of details; let idx=index;" (click)="onClickDetail(l)" [ngClass]="{ 'isSuccess': l.is_approved == 'Y' }">
+        <clr-dg-cell>{{l.code}}</clr-dg-cell>
+        <clr-dg-cell>{{l.create_date | dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
+        <clr-dg-cell>
+          <label for="" *ngIf="l.is_approved == 'Y'">อนุมัติแล้ว</label>
+          <label for="" *ngIf="l.is_approved == 'N'">รออนุมัติ</label>
+        </clr-dg-cell>
+      </clr-dg-row>
+    </clr-datagrid>
+  </div>
+  <div class="clr-col-6">
+    <clr-datagrid [clrDgLoading]="isLoading">
+      <clr-dg-column>รายการ</clr-dg-column>
+      <clr-dg-column></clr-dg-column>
+
+      <clr-dg-row *ngFor="let l of drugs; let idx=index;">
+        <clr-dg-cell>{{l.name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.qty}} {{l.unit_name}}</clr-dg-cell>
+      </clr-dg-row>
+    </clr-datagrid>
+  </div>
+</div>

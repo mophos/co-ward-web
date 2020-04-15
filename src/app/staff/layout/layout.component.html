@@ -3,7 +3,7 @@
     <div class="branding">
       <a href="javascript://" class="nav-link">
         <!-- <img src="./assets/images/tt.png" alt="logo" style="width: 200px; padding-right: 10px;"> -->
-        <span class="title">Covid Order Management (COM) </span>
+        <span class="title">Co-Ward </span>
       </a>
     </div>
     <div class="header-nav">
@@ -30,7 +30,8 @@
         <clr-icon clrVerticalNavIcon shape="helix"></clr-icon>
         ผู้ป่วย COVID
       </a>
-      <a *ngIf="covidCaseStatusMenu" clrVerticalNavLink routerLink="/staff/covid-case-status" title="Case COVID" routerLinkActive="active">
+      <a *ngIf="covidCaseStatusMenu" clrVerticalNavLink routerLink="/staff/covid-case-status" title="Case COVID"
+        routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="wand"></clr-icon>
         สถานะผู้ป่วย COVID
       </a>
@@ -38,6 +39,16 @@
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
         อนุมัติรายการยาและเวชภัณฑ์
+      </a>
+      <a *ngIf="covidCaseRequisitionMenu" clrVerticalNavLink routerLink="/staff/covid-case-requisition" title="รายการยาและเวชภัณฑ์"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
+        รายการยาและเวชภัณฑ์
+      </a>
+      <a *ngIf="covidPayMenu" clrVerticalNavLink routerLink="/staff/pay" title="บันทึกการจ่าย"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
+        บันทึกการจ่าย
       </a>
       <a *ngIf="stockDrugsMenu" clrVerticalNavLink routerLink="/staff/drugs" title="สถานะยา" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="flask"></clr-icon>
@@ -47,7 +58,8 @@
         <clr-icon clrVerticalNavIcon shape="accessibility-2"></clr-icon>
         สถานะเตียงผู้ป่วย
       </a>
-      <a *ngIf="stockSuppliesMenu" clrVerticalNavLink routerLink="/staff/supplies" title="สถานะเวชภัณฑ์" routerLinkActive="active">
+      <a *ngIf="stockSuppliesMenu" clrVerticalNavLink routerLink="/staff/supplies" title="สถานะเวชภัณฑ์"
+        routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="cursor-hand-open"></clr-icon>
         สถานะเวชภัณฑ์
       </a>
@@ -60,10 +72,10 @@
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         ตรวจสอบเวชภัณฑ์
       </a>
-      <a *ngIf="checkBedsMenu" clrVerticalNavLink routerLink="/staff/check-bed" title="ตรวจสอบการบันทึกข้อมูลเตียง" routerLinkActive="active">
+      <!-- <a *ngIf="checkBedsMenu" clrVerticalNavLink routerLink="/staff/check-bed" title="ตรวจสอบการบันทึกข้อมูลเตียง" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         ตรวจสอบเตียง
-      </a>
+      </a> -->
       <clr-vertical-nav-group routerLinkActive="active">
         <clr-icon shape="cog" clrVerticalNavIcon></clr-icon>
         ตั้งค่า
