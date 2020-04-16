@@ -117,7 +117,11 @@ export class CovidCaseNewComponent implements OnInit {
     await this.getGCS();
     await this.getBeds();
     await this.getMedicalSupplies();
-    await this.setData();
+    console.log(this.data);
+    
+    if (this.data) {
+      await this.setData();
+    }
 
     // await this.getGenericSet();
     // await this.setDrugs();
@@ -300,7 +304,6 @@ export class CovidCaseNewComponent implements OnInit {
           drugs.push({ genericId: 5 });
         } else if (+this.s2 === 2) {
           drugs.push({ genericId: 4 });
-          drugs.push({ genericId: 6 });
         }
 
         if (+this.s3 === 1) {
@@ -434,11 +437,22 @@ export class CovidCaseNewComponent implements OnInit {
   }
 
   uncheckRadio(type, id) {
-    if ('GCS' == type && this.gcsId == id) {
+    if ('GCS' === type && this.gcsId === id) {
       this.gcsId = null;
-    } else if ('BED' == type && this.bedId == id) {
+    } else if ('BED' === type && this.bedId === id) {
       this.bedId = null;
+
+    } else if ('S1' === type && this.s1 === id) {
+      this.s1 = null;
+    } else if ('S2' === type && this.s2 === id) {
+      this.s2 = null;
+    } else if ('S3' === type && this.s3 === id) {
+      this.s3 = null;
+    } else if ('S4' === type && this.s4 === id) {
+      this.s4 = null;
     }
+
+
   }
 
 }
