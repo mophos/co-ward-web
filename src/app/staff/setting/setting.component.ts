@@ -34,6 +34,8 @@ export class SettingComponent implements OnInit {
   password: any;
 
   checkPassword: any;
+  contactName: any;
+  contactTel: any;
   phoneNumber: any;
   checkPhone: any;
   checkEmail: any;
@@ -76,6 +78,8 @@ export class SettingComponent implements OnInit {
         this.hospCode = rs.rows[0].hospcode;
         this.hospName = rs.rows[0].hospname;
         this.address = rs.rows[0].address;
+        this.contactName = rs.rows[0].contact_name;
+        this.contactTel = rs.rows[0].contact_tel;
         this.tel = rs.rows[0].tel;
         this.telephone = rs.rows[0].telephone;
         this.telephoneManager = rs.rows[0].telephone_manager;
@@ -147,7 +151,7 @@ export class SettingComponent implements OnInit {
   }
 
   async enterEmail() {
-    this.checkEmail = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(this.email)
+    this.checkEmail = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(this.email);
   }
 
   async enterPhone() {
@@ -156,18 +160,18 @@ export class SettingComponent implements OnInit {
 
   async enterPassword() {
     this.checkPassword = /^(?=.*[A-Za-z])(?=.*[0-9]).{8,}$/.test(this.password);
-    if (this.password == this.passwordConfirm && this.checkPassword) {
-      this.checkPasswordConfirm = true
-    } else if (this.password != this.passwordConfirm) {
-      this.checkPasswordConfirm = false
+    if (this.password === this.passwordConfirm && this.checkPassword) {
+      this.checkPasswordConfirm = true;
+    } else if (this.password !== this.passwordConfirm) {
+      this.checkPasswordConfirm = false;
     }
   }
 
   async enterPasswordConfirm() {
-    if (this.password == this.passwordConfirm && this.checkPassword) {
-      this.checkPasswordConfirm = true
-    } else if (this.password != this.passwordConfirm) {
-      this.checkPasswordConfirm = false
+    if (this.password === this.passwordConfirm && this.checkPassword) {
+      this.checkPasswordConfirm = true;
+    } else if (this.password !== this.passwordConfirm) {
+      this.checkPasswordConfirm = false;
     }
   }
 
@@ -185,10 +189,10 @@ export class SettingComponent implements OnInit {
   }
 
   async save() {
-    let confirm = await this.alertService.confirm();
+    const confirm = await this.alertService.confirm();
     if (confirm) {
       try {
-        let data: any = [];
+        const data: any = [];
         const obj: any = {};
 
         obj.tel = this.tel;
@@ -197,6 +201,8 @@ export class SettingComponent implements OnInit {
         obj.address = this.address;
         obj.province_name = this.provinceName;
         obj.ampur_name = this.ampurName;
+        obj.contact_name = this.contactName;
+        obj.contact_tel = this.contactTel;
         obj.lat = this.lat;
         obj.long = this.long;
         obj.tambon_name = this.tambonName;
@@ -206,21 +212,21 @@ export class SettingComponent implements OnInit {
         obj.zipcode = this.zipcode;
         data.push(obj);
 
-        let dataUser: any = [];
+        const dataUser: any = [];
         const objUser: any = {};
         objUser.position_id = this.position;
         objUser.title_id = this.title;
         objUser.fname = this.fname;
         objUser.lname = this.lname;
-        if (this.password != '') {
+        if (this.password !== '') {
           objUser.password = this.password;
         }
         objUser.email = this.email;
         objUser.telephone = this.phoneNumber;
         dataUser.push(objUser);
 
-        let rs: any = await this.settingService.save(data);
-        let rsUser: any = await this.settingService.updateUser(dataUser);
+        const rs: any = await this.settingService.save(data);
+        const rsUser: any = await this.settingService.updateUser(dataUser);
 
         if (rs.ok && rsUser.ok) {
           this.alertService.success();
