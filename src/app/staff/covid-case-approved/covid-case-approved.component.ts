@@ -134,6 +134,7 @@ export class CovidCaseApprovedComponent implements OnInit {
   }
 
   clear() {
+    this.modal = false;
     this.drugs = [];
     this.reqCode = null;
     this.drugStock = [];

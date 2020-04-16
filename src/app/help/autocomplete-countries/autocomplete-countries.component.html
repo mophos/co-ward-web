@@ -1,0 +1,13 @@
+<!-- <div class="search-results"> -->
+<!-- <div class="clr-row"> -->
+<!-- <div class="clr-col-12" class="clr-form"> -->
+<input class="clr-input" type="text" autocomplete="off" (keyup)="onKey($event)" [disabled]="disabled" [(ngModel)]="query"
+  name="query" style="width: 100%; padding:0" placeholder="ค้นหาประเทศ" agxTypeahead [taUrl]="searchUrl" taApi="http"
+  [taItemTpl]="itemTpl" (taSelected)="handleResultSelected($event)">
+<!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->
+
+<ng-template #itemTpl let-result>
+  <span>{{ result.result.name }}</span>
+</ng-template>
