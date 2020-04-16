@@ -63,7 +63,7 @@ export class CovidCaseNewComponent implements OnInit {
   bedId: any;
 
   medicalSupplies: any = [];
-  respiratorId: any;
+  medicalSupplieId: any;
 
   drugs: any = [];
   drugId: any;
@@ -326,7 +326,7 @@ export class CovidCaseNewComponent implements OnInit {
           confirmDate: `${this.confirmDate.date.year}-${this.confirmDate.date.month}-${this.confirmDate.date.day}`,
           gcsId: this.gcsId,
           bedId: this.bedId,
-          respiratorId: this.respiratorId,
+          medicalSupplieId: this.medicalSupplieId,
           houseNo: this.houseNo,
           roomNo: this.roomNo,
           village: this.village,
@@ -363,7 +363,7 @@ export class CovidCaseNewComponent implements OnInit {
     this.birthDate = null;
     this.gcsId = null;
     this.bedId = null;
-    this.respiratorId = null;
+    this.medicalSupplieId = null;
     this.s1 = null;
     this.s2 = null;
     this.s3 = null;

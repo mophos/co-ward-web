@@ -32,7 +32,7 @@
   <div class="clr-col-4">
     <table class="table">
       <tr>
-        <td *ngFor="let i of respiratorSum">
+        <td *ngFor="let i of medicalSupplieSum">
           {{i.name}}
           <br>
           {{i.count}}
@@ -55,7 +55,16 @@
   </thead>
   <tbody>
     <tr *ngFor="let l of list;let idx=index;" [ngClass]="{isWarning: idx%2==0}">
-      <td class="left">{{l.hn}}<br>{{l.title_name}}{{l.first_name}} {{l.last_name}}</td>
+      <td class="left">{{l.hn}}<br>
+        <div>
+          {{l.title_name}}{{l.first_name}} {{l.last_name}}
+        </div>
+        <div style="margin-top: 0.2rem;">
+          <span style="background-color: yellow;">
+            อัพเดทล่าสุด : {{l.create_date | dateTh:'DD/MM/YYYY'}}
+          </span>
+        </div>
+      </td>
       <td class="left">
         <div *ngFor="let i of gcs">
           <input [disabled]="l.create_date == date" type="radio" name="gcs-{{l.id}}" id="gcs-{{i.id}}-{{l.id}}"
@@ -76,9 +85,9 @@
       </td>
       <td class="left">
         <div *ngFor="let i of medicalSupplies">
-          <input [disabled]="l.create_date == date" type="radio" name="respirator-{{l.id}}" id="respirator-{{i.id}}-{{l.id}}"
-            [(ngModel)]="l.respirator_id" [value]="i.id">
-          <label [title]="i.name" class="pointer" for="respirator-{{i.id}}-{{l.id}}">
+          <input [disabled]="l.create_date == date" type="radio" name="medicalSupplie-id-{{l.id}}" id="medicalSupplie-{{i.id}}-{{l.id}}"
+            [(ngModel)]="l.medical_supplie_id" [value]="i.id">
+          <label [title]="i.name" class="pointer" for="medicalSupplie-{{i.id}}-{{l.id}}">
             {{i.name}}
           </label>
         </div>
@@ -115,7 +124,8 @@
       </td>
       <td style="text-align: right;">
         <div>
-          <button class="btn btn-sm btn-success" (click)="onClickSave(l.id)" [disabled]="l.create_date == date">บันทึก</button>
+          <button class="btn btn-sm btn-success" (click)="confirm(l.id)"
+            [disabled]="l.create_date == date">บันทึก</button>
         </div>
         <div>
           <button class="btn btn-sm btn-danger" (click)="onClickOpenModalDischarge(l)">จำหน่าย</button>
@@ -205,5 +215,16 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-success btn-block" (click)="save()" [disabled]="!hospitalId">บันทึก</button>
+  </div>
+</clr-modal>
+
+
+<clr-modal [(clrModalOpen)]="confirmDetail" [clrModalSize]="'xl'">
+  <h3 class="modal-title">กรุณาตรวจสอบรายการให้ถูกต้อง</h3>
+  <div class="modal-body">
+    
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success btn-block" (click)="save()">บันทึก</button>
   </div>
 </clr-modal>

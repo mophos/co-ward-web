@@ -27,13 +27,17 @@ export class CovidCaseStatusComponent implements OnInit {
   beds: any = [];
   bedId: any;
 
-  respiratorSum: any = [];
+  medicalSupplieSum: any = [];
   medicalSupplies: any = [];
-  respiratorId: any;
+  medicalSuppliesSum: any = [];
+  medicalSupplieId: any;
   hospitalId: any;
 
   hour: any;
   minute: any;
+
+  confirmDetail: any = false;
+  showDetail: any;
 
   bed1: any = 0;
   bed2: any = 0;
@@ -82,8 +86,6 @@ export class CovidCaseStatusComponent implements OnInit {
     await this.getGCS();
     await this.getGCSSum();
     await this.getBeds();
-    // await this.getBedSum();
-    await this.getRespiratorSum();
     await this.getMedicalSupplies();
 
     const date = new Date();
@@ -211,11 +213,11 @@ export class CovidCaseStatusComponent implements OnInit {
       this.alertService.serverError();
     }
   }
-  async getRespiratorSum() {
+  async getgetVentilatorSum() {
     try {
       const rs: any = await this.covidCaseService.getMedicalSupplies();
       if (rs.ok) {
-        this.respiratorSum = rs.rows;
+        this.medicalSuppliesSum = rs.rows;
       } else {
         this.alertService.serverError();
       }
@@ -242,6 +244,68 @@ export class CovidCaseStatusComponent implements OnInit {
   onClickOpenModalDischarge(l) {
     this.selected = l;
     this.modalDischarge = true;
+  }
+
+  async confirm(id) {
+    this.showDetail = {};
+
+    const idx = findIndex(this.list, { id });
+    let gcsId: any;
+    let bedId: any;
+    let msId: any;
+    let set1: any;
+    let set2: any;
+    let set3: any;
+    let set4: any;
+    if (idx > -1) {
+      gcsId = this.list[idx].gcs_id;
+      bedId = this.list[idx].bed_id;
+      msId = this.list[idx].medical_supplie_id;
+      console.log(msId);
+      set1 = this.list[idx].set1;
+      set2 = this.list[idx].set2;
+      set3 = this.list[idx].set3;
+      set4 = this.list[idx].set4;
+    }
+
+    const idxGcs = findIndex(this.gcs, { id: gcsId });
+    if (idxGcs > -1) {
+      this.showDetail.gcsId = this.gcs[idxGcs].id;
+      this.showDetail.gcsName = this.gcs[idxGcs].name;
+    }
+    const idxBed = findIndex(this.beds, { id: bedId });
+    if (idxGcs > -1) {
+      this.showDetail.bedId = this.beds[idxBed].id;
+      this.showDetail.bedName = this.beds[idxBed].name;
+    }
+
+    const idxMs = findIndex(this.medicalSupplies, { id: msId });
+    if (idxMs > -1) {
+      this.showDetail.medicalSupplieId = this.medicalSupplies[idxMs].id;
+      this.showDetail.medicalSupplieName = this.medicalSupplies[idxMs].name;
+    }
+    if (this.list[idx].set1 === 1) {
+      this.showDetail.set1Name = 'Hydroxychloroquine 200 mg.';
+    } else if (this.list[idx].set1 === 1) {
+      this.showDetail.set1Name = 'Chloroquine 250 mg.';
+    }
+
+    if (this.list[idx].set2 === 3) {
+      this.showDetail.set2Name = 'Darunavir 600mg+Ritonavir100 mg.';
+    } else if (this.list[idx].set2 === 4) {
+      this.showDetail.set2Name = 'Lopinavir 200 mg+Ritonavir 50 mg.';
+    }
+
+    if (this.list[idx].set3 === 7) {
+      this.showDetail.set3Name = 'Azithromycin 250 mg.';
+    }
+
+    if (this.list[idx].set4 === 8) {
+      this.showDetail.set4Name = 'Favipiravir (เบิกจาก AntiDost) คลิก';
+    }
+
+    console.log(this.showDetail);
+    this.confirmDetail = true;
   }
 
   async onClickSave(id) {
