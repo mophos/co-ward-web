@@ -164,20 +164,6 @@ export class CovidCaseStatusComponent implements OnInit {
       const rs: any = await this.basicAuthService.getBeds();
       if (rs.ok) {
         this.beds = rs.rows;
-        for (const i of this.beds) {
-          i.usage = 0;
-        }
-        for (const i of this.list) {
-          if (+i.bed_id === 1) {
-            this.beds[0].usage += 1;
-          } else if (+i.bed_id === 2) {
-            this.beds[1].usage += 1;
-          } else if (+i.bed_id === 3) {
-            this.beds[2].usage += 1;
-          } else if (+i.bed_id === 4) {
-            this.beds[3].usage += 1;
-          }
-        }
       } else {
         this.alertService.serverError();
       }
@@ -192,7 +178,6 @@ export class CovidCaseStatusComponent implements OnInit {
       const rs: any = await this.covidCaseService.getBeds();
       if (rs.ok) {
         this.BedsSum = rs.rows;
-        console.log(this.BedsSum);
       } else {
         this.alertService.serverError();
       }
@@ -215,7 +200,8 @@ export class CovidCaseStatusComponent implements OnInit {
       this.alertService.serverError();
     }
   }
-  async getgetVentilatorSum() {
+
+  async getMedicalSuppliesSum() {
     try {
       const rs: any = await this.covidCaseService.getMedicalSupplies();
       if (rs.ok) {
@@ -264,7 +250,6 @@ export class CovidCaseStatusComponent implements OnInit {
       gcsId = this.list[idx].gcs_id;
       bedId = this.list[idx].bed_id;
       msId = this.list[idx].medical_supplie_id;
-      console.log(msId);
       set1 = this.list[idx].set1;
       set2 = this.list[idx].set2;
       set3 = this.list[idx].set3;
@@ -354,7 +339,6 @@ export class CovidCaseStatusComponent implements OnInit {
       drugs.push({ genericId: 5 });
     } else if (+e.set2 === 4) {
       drugs.push({ genericId: 4 });
-      drugs.push({ genericId: 6 });
     }
 
     // set3
