@@ -26,8 +26,9 @@
       <router-outlet></router-outlet>
     </div>
     <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
-      <a *ngIf="covidCaseMenu" clrVerticalNavLink routerLink="/staff/covid-case-new" title="Case COVID" routerLinkActive="active">
-        <clr-icon clrVerticalNavIcon shape="helix"  class="is-solid"></clr-icon>
+      <a *ngIf="covidCaseMenu" clrVerticalNavLink routerLink="/staff/covid-case-new" title="Case COVID"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="helix" class="is-solid"></clr-icon>
         บันทึกผู้ป่วยใหม่
       </a>
       <a *ngIf="covidCaseMenu" clrVerticalNavLink routerLink="/staff/covid-case" title="Case COVID" routerLinkActive="active">
@@ -44,7 +45,7 @@
         <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
         จ่ายยาและเวชภัณฑ์
       </a>
-      <div clrVerticalNavLink routerLinkActive="active">
+      <div clrVerticalNavLink routerLinkActive="active" style="background-color: rgb(88, 88, 88);">
 
       </div>
       <a *ngIf="covidCaseRequisitionMenu" clrVerticalNavLink routerLink="/staff/covid-case-requisition" title="รายการจ่ายยาและเวชภัณฑ์"
@@ -87,7 +88,7 @@
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         ตรวจสอบเตียง
       </a> -->
-      <div clrVerticalNavLink routerLinkActive="active">
+      <div clrVerticalNavLink routerLinkActive="active" style="background-color: rgb(88, 88, 88);">
 
       </div>
       <clr-vertical-nav-group routerLinkActive="active">
