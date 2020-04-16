@@ -53,7 +53,7 @@
         <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
         รายการจ่ายยาและเวชภัณฑ์
       </a>
-      <a clrVerticalNavLink routerLink="/staff/inventory-status" title="รายการคงคลัง" routerLinkActive="active">
+      <a clrVerticalNavLink *ngIf="covidCaseApprovedMenu" routerLink="/staff/inventory-status" title="รายการคงคลัง" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="store"></clr-icon>
         รายการคงคลัง
       </a>
@@ -106,7 +106,7 @@
           </a>
           <a *ngIf="settingMedicalSuppliesMenu" clrVerticalNavLink routerLink="/staff/setting/professional"
             routerLinkActive="active">
-            ตั้งค่าบุลคลากร
+            ตั้งค่าบุคลากร
           </a>
         </clr-vertical-nav-group-children>
       </clr-vertical-nav-group>

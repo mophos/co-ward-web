@@ -38,6 +38,9 @@ export class RegisterComponent implements OnInit {
   positionList: any;
 
   isUploading: any = false;
+  isNode: any;
+  isDRUGS: any = false;
+  isSupplies: any = false;
   hospName: any = '';
 
   fileName: any;
@@ -131,7 +134,9 @@ export class RegisterComponent implements OnInit {
             type: 'STAFF',
             telephone: this.phoneNumber,
             isProvince: this.province,
-            right: this.province === 'N' ? ['STAFF_COVID_CASE', 'STAFF_COVID_CASE_STATUS', 'STAFF_COVID_CASE_DRUGS_APPROVED', 'STAFF_STOCK_DRUGS', 'STAFF_STOCK_BEDS', 'STAFF_STOCK_SUPPLIES', 'STAFF_SETTING_BASIC', 'STAFF_SETTING_BEDS'] : ['STAFF_CHECK_DRUGS', 'STAFF_CHECK_SUPPLIES', 'STAFF_CHECK_BEDS', 'STAFF_SETTING_BASIC']
+            isNode: this.isNode,
+            isDRUGS: this.isDRUGS,
+            isSupplies: this.isSupplies
           };
 
           const rs: any = await this.registerService.saveUserSupplie(obj);
@@ -151,6 +156,21 @@ export class RegisterComponent implements OnInit {
   async onSelectHosp(e) {
     this.onSelectHospcode = e.hospcode;
     this.province = e.hosptype_id === '1' ? 'Y' : 'N';
+    const id = e.id;
+    try {
+      const rs: any = await this.registerService.getNodes(id);
+      if (rs.ok) {
+        if (rs.rows.length) {
+          this.isNode = true;
+        } else {
+          this.isNode = false;
+        }
+      } else {
+        this.alertService.error(rs.error);
+      }
+    } catch (error) {
+      this.alertService.error(error.message);
+    }
   }
 
   async getTitle() {
