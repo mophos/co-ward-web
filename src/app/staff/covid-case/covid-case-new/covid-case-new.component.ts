@@ -177,10 +177,16 @@ export class CovidCaseNewComponent implements OnInit {
       this.tambonId = this.data.tambon_code;
       this.provinceId = this.data.province_code;
       this.zipcode = this.data.zipcode;
-      this.ampur.setQuery(this.data.ampur_name);
-      this.tambon.setQuery(this.data.tambon_name);
-      this.province.setQuery(this.data.province_name);
-      this.zipc.setQuery(this.data.zipcode);
+      this.countryId = this.data.country_code;
+      if (this.data.country_name) {
+        this.countries.setQuery(this.data.country_name);
+        if (this.data.country_name === 'ไทย') {
+          this.ampur.setQuery(this.data.ampur_name);
+          this.tambon.setQuery(this.data.tambon_name);
+          this.province.setQuery(this.data.province_name);
+          this.zipc.setQuery(this.data.zipcode);
+        }
+      }
     } catch (error) {
       console.log(error);
 
@@ -371,8 +377,9 @@ export class CovidCaseNewComponent implements OnInit {
 
         const rs: any = await this.covidCaseService.saveNewCase(obj);
         if (rs.ok) {
-          this.alertService.success();
           this.clear();
+          this.isKey = false;
+          this.onClickOpenModalCid();
         } else {
           this.alertService.error(rs.error);
         }
@@ -383,36 +390,43 @@ export class CovidCaseNewComponent implements OnInit {
   }
 
   clear() {
-    this.an = '';
-    this.hn = '';
-    this.fname = '';
-    this.lname = '';
-    this.tel = '';
-    this.genderId = null;
-    this.admitDate = null;
-    this.confirmDate = null;
-    this.birthDate = null;
-    this.gcsId = null;
-    this.bedId = null;
-    this.medicalSupplieId = null;
-    this.s1 = null;
-    this.s2 = null;
-    this.s3 = null;
-    this.s4 = null;
-    this.houseNo = '';
-    this.roomNo = '';
-    this.village = '';
-    this.villageName = '';
-    this.road = '';
-    this.tambonId = null;
-    this.ampurId = null;
-    this.provinceId = null;
-    this.tambon.setQuery('');
-    this.ampur.setQuery('');
-    this.province.setQuery('');
-    this.zipc.setQuery('');
-    this.countries.setQuery('');
-    this.drugDay = null;
+    try {
+      this.an = '';
+      this.hn = '';
+      this.fname = '';
+      this.mname = '';
+      this.lname = '';
+      this.tel = '';
+      this.peopleType = null;
+      this.genderId = null;
+      this.admitDate = null;
+      this.confirmDate = null;
+      this.birthDate = null;
+      this.gcsId = null;
+      this.bedId = null;
+      this.medicalSupplieId = null;
+      this.s1 = null;
+      this.s2 = null;
+      this.s3 = null;
+      this.s4 = null;
+      this.houseNo = '';
+      this.roomNo = '';
+      this.village = '';
+      this.villageName = '';
+      this.road = '';
+      this.tambonId = null;
+      this.ampurId = null;
+      this.provinceId = null;
+      this.countryId = 20;
+      this.tambon.setQuery('');
+      this.ampur.setQuery('');
+      this.province.setQuery('');
+      this.zipc.setQuery('');
+      this.countries.setQuery('ไทย');
+      this.drugDay = null;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   onSelectProvince(e) {
@@ -471,6 +485,8 @@ export class CovidCaseNewComponent implements OnInit {
       this.gcsId = null;
     } else if ('BED' === type && this.bedId === id) {
       this.bedId = null;
+    } else if ('MEDSUP' === type && this.medicalSupplieId === id) {
+      this.medicalSupplieId = null;
 
     } else if ('S1' === type && this.s1 === id) {
       this.s1 = null;
