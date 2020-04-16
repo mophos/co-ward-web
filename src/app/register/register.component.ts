@@ -154,22 +154,24 @@ export class RegisterComponent implements OnInit {
   }
 
   async onSelectHosp(e) {
-    this.onSelectHospcode = e.hospcode;
-    this.province = e.hosptype_id === '1' ? 'Y' : 'N';
-    const id = e.id;
-    try {
-      const rs: any = await this.registerService.getNodes(id);
-      if (rs.ok) {
-        if (rs.rows.length) {
-          this.isNode = true;
+    if (Object.values(e).length) {
+      this.onSelectHospcode = e.hospcode;
+      this.province = e.hosptype_id === '1' ? 'Y' : 'N';
+      const id = e.id;
+      try {
+        const rs: any = await this.registerService.getNodes(id);
+        if (rs.ok) {
+          if (rs.rows.length) {
+            this.isNode = true;
+          } else {
+            this.isNode = false;
+          }
         } else {
-          this.isNode = false;
+          this.alertService.error(rs.error);
         }
-      } else {
-        this.alertService.error(rs.error);
+      } catch (error) {
+        this.alertService.error(error.message);
       }
-    } catch (error) {
-      this.alertService.error(error.message);
     }
   }
 
