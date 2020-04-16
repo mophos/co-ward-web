@@ -58,7 +58,6 @@ export class CovidCaseNewComponent implements OnInit {
 
   titles: any = [];
 
-
   gcs: any = [];
   gcsId: any;
 
@@ -78,6 +77,7 @@ export class CovidCaseNewComponent implements OnInit {
   errorTel = false;
   errorAdmit = false;
   errorGender = false;
+  isSave = false;
   myDatePickerOptions: IMyOptions = {
     inline: false,
     dateFormat: 'dd mmm yyyy',
@@ -86,15 +86,12 @@ export class CovidCaseNewComponent implements OnInit {
     height: '25px'
   };
 
-
   s1 = '';
   s2 = '';
   s3 = '';
   s4 = '';
   data: any;
   drugDay = '5';
-
-
 
   modalCID = false;
   modalCIDType = 'CID';
@@ -112,10 +109,10 @@ export class CovidCaseNewComponent implements OnInit {
   @ViewChild('ampur') ampur: AutocompleteDistrictComponent;
   @ViewChild('tambon') tambon: AutocompleteSubdistrictComponent;
   @ViewChild('zipcode') zipc: AutocompleteZipcodeComponent;
+  @ViewChild('loading') loading: any;
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private alertService: AlertService,
     private basicService: BasicService,
     private basicAuthService: BasicAuthService,
@@ -131,15 +128,18 @@ export class CovidCaseNewComponent implements OnInit {
 
   async ngOnInit() {
     // this.countries.setQuery('ไทย');
+    this.loading.show();
     await this.getTitle();
     await this.getGCS();
     await this.getBeds();
     await this.getMedicalSupplies();
-    this.modalCID = true;
+    // console.log(this.data);
 
     if (this.data) {
       await this.setData();
     }
+    this.loading.hide();
+    this.modalCID = true;
 
     // await this.getGenericSet();
     // await this.setDrugs();
@@ -321,8 +321,8 @@ export class CovidCaseNewComponent implements OnInit {
   }
 
   async onClickSave() {
+    this.isSave = true;
     try {
-
       if (await this.verifyInput()) {
         const drugs = [];
         if (+this.s1 === 1) {
@@ -380,12 +380,15 @@ export class CovidCaseNewComponent implements OnInit {
         if (rs.ok) {
           this.clear();
           this.isKey = false;
+          this.isSave = false;
           this.onClickOpenModalCid();
         } else {
+          this.isSave = false;
           this.alertService.error(rs.error);
         }
       }
     } catch (error) {
+      this.isSave = false;
       this.alertService.error(error);
     }
   }

@@ -21,7 +21,7 @@ export class CovidCaseApprovedComponent implements OnInit {
   hospIdClient: any;
   hospName: any;
   reqId: any;
-
+  isSave: any = false;
 
   modalCID = false;
   modalCIDType = 'CID';
@@ -112,6 +112,7 @@ export class CovidCaseApprovedComponent implements OnInit {
   }
 
   async approved() {
+    this.isSave = true;
     try {
       const confirm = await this.alertService.confirm();
       if (confirm) {
@@ -133,15 +134,18 @@ export class CovidCaseApprovedComponent implements OnInit {
         }
         const rs: any = await this.covidCaseService.approved(data, dataReqId);
         if (rs.ok) {
+          this.isSave = false;
           this.clear();
           this.getDetails();
           this.getList();
           this.alertService.success();
         } else {
+          this.isSave = false;
           this.alertService.error();
         }
       }
     } catch (error) {
+      this.isSave = false;
       this.alertService.error(error);
     }
   }
