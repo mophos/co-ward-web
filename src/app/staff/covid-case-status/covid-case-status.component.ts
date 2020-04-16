@@ -404,4 +404,12 @@ export class CovidCaseStatusComponent implements OnInit {
       await this.getList();
     }
   }
+
+  uncheckRadioMedicalSupplies(listId, ms) {
+    const idx = findIndex(this.list, { id: listId });
+    if (idx > -1) {
+      this.list[idx].medical_supplie_id = this.list[idx].medical_supplie_id === ms ? null : ms;
+    }
+  }
+
 }
