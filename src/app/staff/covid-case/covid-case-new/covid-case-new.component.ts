@@ -28,6 +28,7 @@ export class CovidCaseNewComponent implements OnInit {
   an = '';
   titleId = null;
   fname = '';
+  mname = '';
   lname = '';
   genderId: any;
   birthDate: any;
