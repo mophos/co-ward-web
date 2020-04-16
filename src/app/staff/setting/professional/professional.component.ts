@@ -1,14 +1,12 @@
-
 import { SettingService } from '../../setting.service';
 import { AlertService } from '../../../help/alert.service';
 import { Component, OnInit } from '@angular/core';
-
 @Component({
-  selector: 'app-setting-medical-supplies',
-  templateUrl: './setting-medical-supplies.component.html',
+  selector: 'app-professional',
+  templateUrl: './professional.component.html',
   styles: []
 })
-export class SettingMedicalSuppliesComponent implements OnInit {
+export class ProfessionalComponent implements OnInit {
   list = [];
   isLoading = false;
   isSave = false;
@@ -24,7 +22,7 @@ export class SettingMedicalSuppliesComponent implements OnInit {
   async getList() {
     try {
       this.isLoading = true;
-      const rs: any = await this.settingService.getMedicalSupplies();
+      const rs: any = await this.settingService.getProfessional();
       if (rs.ok) {
         this.list = rs.rows;
       } else {

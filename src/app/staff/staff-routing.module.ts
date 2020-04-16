@@ -34,6 +34,7 @@ import { PayComponent } from './pay/pay.component';
 import { AuthCovidCaseRequisitionService } from '../auth-staff/auth-covid-case-requisition.service';
 import { AuthPayService } from '../auth-staff/auth-pay.service';
 import { SettingMedicalSuppliesComponent } from './setting/setting-medical-supplies/setting-medical-supplies.component';
+import { ProfessionalComponent } from './setting/professional/professional.component';
 
 const routes: Routes = [
   {
@@ -80,6 +81,7 @@ const routes: Routes = [
           { path: 'basic', canActivate: [AuthSettingBasicService], component: SettingComponent },
           { path: 'beds', canActivate: [AuthSettingBedsService], component: SettingBedsComponent },
           { path: 'medical-supplies', canActivate: [AuthSettingBedsService], component: SettingMedicalSuppliesComponent },
+          { path: 'professional', canActivate: [AuthSettingBedsService], component: ProfessionalComponent },
         ]
       },
     ]
