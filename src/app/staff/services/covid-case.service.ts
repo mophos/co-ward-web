@@ -13,8 +13,8 @@ export class CovidCaseService {
     return await this.http.get(url).toPromise();
   }
 
-  async getCovidCasePresent() {
-    const url = `${this.apiUrl}/v1/staff/covid-case/present`;
+  async getCovidCasePresent(query) {
+    const url = `${this.apiUrl}/v1/staff/covid-case/present?query=${query}`;
     return await this.http.get(url).toPromise();
   }
 
