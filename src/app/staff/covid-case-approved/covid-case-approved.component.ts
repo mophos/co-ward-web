@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class CovidCaseApprovedComponent implements OnInit {
 
   isLoading = false;
+  modal = false;
   list = [];
   details = [];
   drugs = [];
@@ -17,6 +18,7 @@ export class CovidCaseApprovedComponent implements OnInit {
 
   reqCode: any;
   hospIdClient: any;
+  hospName: any;
   reqId: any;
   constructor(
     private alertService: AlertService,
@@ -42,6 +44,7 @@ export class CovidCaseApprovedComponent implements OnInit {
 
   onClickRow(e) {
     this.hospIdClient = e.hospital_id_client;
+    this.hospName = e.hospname;
     this.getDetails();
   }
 
@@ -134,5 +137,9 @@ export class CovidCaseApprovedComponent implements OnInit {
     this.drugs = [];
     this.reqCode = null;
     this.drugStock = [];
+  }
+
+  checkApproved() {
+    this.modal = true;
   }
 }

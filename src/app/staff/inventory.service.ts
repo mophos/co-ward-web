@@ -6,8 +6,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class InventoryService {
 
-  constructor(private http: HttpClient,
-    @Inject('API_URL') private apiUrl: string) { }
+  constructor(
+    private http: HttpClient,
+    @Inject('API_URL') private apiUrl: string
+  ) { }
 
   async getSuppiles() {
     const url = `${this.apiUrl}/v1/staff/balance/supplies`;
@@ -32,5 +34,10 @@ export class InventoryService {
   async updateBalance(id, data) {
     const url = `${this.apiUrl}/v1/staff/balance/${id}`;
     return await this.http.put(url, { data }).toPromise();
+  }
+
+  async getInventoryStatus(limit = 20, offset = 0) {
+    const url = `${this.apiUrl}/v1/staff/balance/inventory-status?limit=${limit}&offset=${offset}`;
+    return await this.http.get(url).toPromise();
   }
 }

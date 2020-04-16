@@ -22,13 +22,15 @@ export class CovidCaseStatusComponent implements OnInit {
   BedsSum = [];
   gcs: any = [];
   gcsId: any;
+  reason: any;
 
   beds: any = [];
   bedId: any;
 
-  ventilatorSum: any = [];
-  ventilators: any = [];
-  ventilatorId: any;
+  respiratorSum: any = [];
+  medicalSupplies: any = [];
+  medicalSuppliesSum: any = [];
+  respiratorId: any;
   hospitalId: any;
 
   hour: any;
@@ -85,8 +87,8 @@ export class CovidCaseStatusComponent implements OnInit {
     await this.getGCSSum();
     await this.getBeds();
     // await this.getBedSum();
-    await this.getVentilatorSum();
-    await this.getVentilators();
+    // await this.getRespiratorSum();
+    await this.getMedicalSupplies();
 
     const date = new Date();
     this.dateDischarge = {
@@ -200,11 +202,11 @@ export class CovidCaseStatusComponent implements OnInit {
     }
   }
 
-  async getVentilators() {
+  async getMedicalSupplies() {
     try {
-      const rs: any = await this.basicAuthService.getVentilators();
+      const rs: any = await this.basicAuthService.getMedicalSupplies();
       if (rs.ok) {
-        this.ventilators = rs.rows;
+        this.medicalSupplies = rs.rows;
       } else {
         this.alertService.serverError();
       }
@@ -213,11 +215,11 @@ export class CovidCaseStatusComponent implements OnInit {
       this.alertService.serverError();
     }
   }
-  async getVentilatorSum() {
+  async getgetVentilatorSum() {
     try {
-      const rs: any = await this.covidCaseService.getVentilators();
+      const rs: any = await this.covidCaseService.getMedicalSupplies();
       if (rs.ok) {
-        this.ventilatorSum = rs.rows;
+        this.medicalSuppliesSum = rs.rows;
       } else {
         this.alertService.serverError();
       }
@@ -275,10 +277,10 @@ export class CovidCaseStatusComponent implements OnInit {
       this.showDetail.bedId = this.beds[idxBed].id;
       this.showDetail.bedName = this.beds[idxBed].name;
     }
-    const idxVId = findIndex(this.ventilators, { id: venId });
+    const idxVId = findIndex(this.medicalSupplies, { id: venId });
     if (idxGcs > -1) {
-      this.showDetail.bedId = this.ventilators[idxVId].id;
-      this.showDetail.bedName = this.ventilators[idxVId].name;
+      this.showDetail.bedId = this.medicalSupplies[idxVId].id;
+      this.showDetail.bedName = this.medicalSupplies[idxVId].name;
     }
     if (this.list[idx].set1 === 1) {
       this.showDetail.set1Name = 'Hydroxychloroquine 200 mg.';
@@ -380,6 +382,7 @@ export class CovidCaseStatusComponent implements OnInit {
           } else if (this.modalDischargeType === 'REFER') {
             status = 'REFER';
             obj.hospitalId = this.hospitalId;
+            obj.reason = this.reason;
           }
           obj.dateDischarge = this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day + ' ' + this.hour + ':' + this.minute + ':00';
           obj.covidCaseId = this.selected.covid_case_id;

@@ -106,6 +106,22 @@
               <input type="text" name="" id="" [(ngModel)]="long" style="width: 100%;">
             </div>
           </div>
+          <div class="clr-row">
+            <div class="clr-col-2">
+              ชื่อผู้ติดต่อ<span class="required">*</span>
+            </div>
+            <div class="clr-col-4">
+              <input type="text" name="" id="" [(ngModel)]="contactName" style="width: 100%;">
+            </div>
+          </div>
+          <div class="clr-row">
+            <div class="clr-col-2">
+              เบอร์ผู้ติดต่อ<span class="required">*</span>
+            </div>
+            <div class="clr-col-4">
+              <input type="text" name="" id="" [(ngModel)]="contactTel" style="width: 100%;">
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -205,8 +221,8 @@
                   name="passwordConfirm" class="clr-input clr-col-12" [(ngModel)]="passwordConfirm">
               </div>
               <div class="clr-col-2">
-                <div *ngIf="!checkPasswordConfirm && passwordConfirm != ''" class="alert alert-danger alert-sm"
-                  role="alert" style="margin: 0rem;">
+                <div *ngIf="!checkPasswordConfirm && passwordConfirm != ''" class="alert alert-danger alert-sm" role="alert"
+                  style="margin: 0rem;">
                   <div class="alert-items">
                     <div class="alert-item static">
                       <div class="alert-icon-wrapper">
@@ -218,8 +234,7 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf="checkPasswordConfirm" class="alert alert-success alert-sm"
-                  role="alert" style="margin: 0rem;">
+                <div *ngIf="checkPasswordConfirm" class="alert alert-success alert-sm" role="alert" style="margin: 0rem;">
                   <div class="alert-items">
                     <div class="alert-item static">
                       <div class="alert-icon-wrapper">
@@ -277,8 +292,7 @@
                   name="phoneNumber" class="clr-input clr-col-12" [(ngModel)]="phoneNumber">
               </div>
               <div class="clr-col-2">
-                <div *ngIf="!checkPhone" class="alert alert-danger alert-sm" role="alert"
-                  style="margin: 0rem;">
+                <div *ngIf="!checkPhone" class="alert alert-danger alert-sm" role="alert" style="margin: 0rem;">
                   <div class="alert-items">
                     <div class="alert-item static">
                       <div class="alert-icon-wrapper">
@@ -290,8 +304,7 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf="checkPhone" class="alert alert-success alert-sm" role="alert"
-                  style="margin: 0rem;">
+                <div *ngIf="checkPhone" class="alert alert-success alert-sm" role="alert" style="margin: 0rem;">
                   <div class="alert-items">
                     <div class="alert-item static">
                       <div class="alert-icon-wrapper">

@@ -374,8 +374,8 @@
                 <div class="clr-col-2"></div>
                 <div class="clr-col-10">เครื่องช่วยหายใจ</div>
               </div>
-              <div class="clr-row" *ngFor="let i of ventilators;let idx = index" [ngClass]="{isWarning: idx%2==0}">
-                <div class="clr-col-2"><input type="radio" name="ventilatorId" [(ngModel)]="ventilatorId"
+              <div class="clr-row" *ngFor="let i of medicalSupplies;let idx = index" [ngClass]="{isWarning: idx%2==0}">
+                <div class="clr-col-2"><input type="radio" name="respiratorId" [(ngModel)]="respiratorId"
                     [value]="i.id">
                 </div>
                 <div class="clr-col-10">{{i.name}}</div>

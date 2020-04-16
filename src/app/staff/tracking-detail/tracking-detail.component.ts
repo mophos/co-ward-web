@@ -10,8 +10,8 @@ import { TrackingService } from '../tracking.service';
 })
 export class TrackingDetailComponent implements OnInit {
 
-  suppiles: any
-  modalsDetail: any
+  suppiles: any;
+  modalsDetail: any;
 
   constructor(
     private alertService: AlertService,

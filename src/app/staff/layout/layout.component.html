@@ -26,8 +26,7 @@
       <router-outlet></router-outlet>
     </div>
     <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
-      <a *ngIf="covidCaseMenu" clrVerticalNavLink routerLink="/staff/covid-case" title="Case COVID"
-        routerLinkActive="active">
+      <a *ngIf="covidCaseMenu" clrVerticalNavLink routerLink="/staff/covid-case" title="Case COVID" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="helix"></clr-icon>
         ผู้ป่วย COVID
       </a>
@@ -36,13 +35,13 @@
         <clr-icon clrVerticalNavIcon shape="wand"></clr-icon>
         สถานะผู้ป่วย COVID
       </a>
-      <a *ngIf="covidCaseApprovedMenu" clrVerticalNavLink routerLink="/staff/covid-case-approved"
-        title="จ่ายยาและเวชภัณฑ์" routerLinkActive="active">
+      <a *ngIf="covidCaseApprovedMenu" clrVerticalNavLink routerLink="/staff/covid-case-approved" title="จ่ายยาและเวชภัณฑ์"
+        routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
         จ่ายยาและเวชภัณฑ์
       </a>
-      <a *ngIf="covidCaseRequisitionMenu" clrVerticalNavLink routerLink="/staff/covid-case-requisition"
-        title="รายการจ่ายยาและเวชภัณฑ์" routerLinkActive="active">
+      <a *ngIf="covidCaseRequisitionMenu" clrVerticalNavLink routerLink="/staff/covid-case-requisition" title="รายการจ่ายยาและเวชภัณฑ์"
+        routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
         รายการจ่ายยาและเวชภัณฑ์
       </a>
@@ -68,14 +67,13 @@
         <clr-icon clrVerticalNavIcon shape="cursor-hand-open"></clr-icon>
         สถานะเวชภัณฑ์
       </a>
-      <!-- <a *ngIf="trackingMenu" clrVerticalNavLink routerLink="/staff/tracking" title="สถานะของ"
-        routerLinkActive="active">
+      <a *ngIf="trackingMenu" clrVerticalNavLink routerLink="/staff/tracking" title="สถานะของ" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         ติดตามสถานะสินค้า
       </a> -->
       <!-- <a *ngIf="checkSuppliesMenu" clrVerticalNavLink routerLink="/staff/check-supplie" title="ตรวจสอบการบันทึกข้อมูลเวชภัณฑ์"
         routerLinkActive="active">
-        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        <clr-icon clrVerticalNavIcon shape="briefcase"></cslr-icon>
         ตรวจสอบเวชภัณฑ์
       </a> -->
       <!-- <a *ngIf="checkBedsMenu" clrVerticalNavLink routerLink="/staff/check-bed" title="ตรวจสอบการบันทึกข้อมูลเตียง" routerLinkActive="active">
@@ -92,8 +90,7 @@
           <a *ngIf="settingBedsMenu" clrVerticalNavLink routerLink="/staff/setting/beds" routerLinkActive="active">
             ตั้งค่าเตียง
           </a>
-          <a *ngIf="settingBedsMenu" clrVerticalNavLink routerLink="/staff/setting/ventilators"
-            routerLinkActive="active">
+          <a *ngIf="settingMedicalSuppliesMenu" clrVerticalNavLink routerLink="/staff/setting/medical-supplies" routerLinkActive="active">
             ตั้งค่าเครื่องช่วยหายใจ
           </a>
         </clr-vertical-nav-group-children>

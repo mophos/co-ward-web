@@ -3,7 +3,7 @@
 </nav>
 
 <h3 style="float: left;">วันที่ {{date | dateTh:'DD/MM/YYYY'}} </h3>
-<h5>&nbsp;สถานะจะต้องบันทึกทุกวัน (ไม่สามารถบันทึกย้อนหลังได้)</h5>
+<h5>&nbsp;สถานะจะต้องบันทึกทุกวัน ก่อนเวลา 16:00 (ไม่สามารถบันทึกย้อนหลังได้)</h5>
 
 <div class="clr-row">
   <div class="clr-col-4">
@@ -84,10 +84,10 @@
         </div>
       </td>
       <td class="left">
-        <div *ngFor="let i of ventilators">
-          <input [disabled]="l.create_date == date" type="radio" name="ventilator-{{l.id}}"
-            id="ventilator-{{i.id}}-{{l.id}}" [(ngModel)]="l.ventilator_id" [value]="i.id">
-          <label [title]="i.name" class="pointer" for="ventilator-{{i.id}}-{{l.id}}">
+        <div *ngFor="let i of medicalSupplies">
+          <input [disabled]="l.create_date == date" type="radio" name="respirator-{{l.id}}" id="respirator-{{i.id}}-{{l.id}}"
+            [(ngModel)]="l.respirator_id" [value]="i.id">
+          <label [title]="i.name" class="pointer" for="respirator-{{i.id}}-{{l.id}}">
             {{i.name}}
           </label>
         </div>
@@ -95,29 +95,29 @@
       <td class="left">
         <div class="clr-control-inline">
           <div *ngFor="let i of s1" class="clr-col-6" style="padding: 0rem;">
-            <input [disabled]="l.create_date == date" (click)='uncheckRadio(l.id,i.generic,"set1")' type="radio"
-              name="s1-{{l.id}}" id="s1-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set1">
+            <input [disabled]="l.create_date == date" (click)='uncheckRadio(l.id,i.generic,"set1")' type="radio" name="s1-{{l.id}}"
+              id="s1-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set1">
             <label [title]="i.name" class="pointer" for="s1-{{i.generic}}-{{l.id}}"> {{i.name}}</label>
           </div>
         </div>
         <div class="clr-control-inline">
           <div *ngFor="let i of s2" class="clr-col-6" style="padding: 0rem;">
-            <input [disabled]="l.create_date == date" (click)='uncheckRadio(l.id,i.generic,"set2")' type="radio"
-              name="s2-{{l.id}}" id="s2-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set2">
+            <input [disabled]="l.create_date == date" (click)='uncheckRadio(l.id,i.generic,"set2")' type="radio" name="s2-{{l.id}}"
+              id="s2-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set2">
             <label [title]="i.name" class="pointer" for="s2-{{i.generic}}-{{l.id}}"> {{i.name}}</label>
           </div>
         </div>
         <div class="clr-control-inline">
           <div *ngFor="let i of s3" class="clr-col-6" style="padding: 0rem;">
-            <input [disabled]="l.create_date == date" (click)='uncheckRadio(l.id,i.generic,"set3")' type="radio"
-              name="s3-{{l.id}}" id="s3-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set3">
+            <input [disabled]="l.create_date == date" (click)='uncheckRadio(l.id,i.generic,"set3")' type="radio" name="s3-{{l.id}}"
+              id="s3-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set3">
             <label [title]="i.name" class="pointer" for="s3-{{i.generic}}-{{l.id}}"> {{i.name}}</label>
           </div>
         </div>
         <div class="clr-control-inline">
           <div *ngFor="let i of s4" class="clr-col-6" style="padding: 0rem;">
-            <input [disabled]="l.create_date == date" (click)='uncheckRadio(l.id,i.generic,"set4")' type="radio"
-              name="s4-{{l.id}}" id="s4-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set4">
+            <input [disabled]="l.create_date == date" (click)='uncheckRadio(l.id,i.generic,"set4")' type="radio" name="s4-{{l.id}}"
+              id="s4-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set4">
             <label [title]="i.name" class="pointer" for="s4-{{i.generic}}-{{l.id}}"> {{i.name}}</label>
           </div>
         </div>
@@ -208,10 +208,13 @@
       <app-autocomplete-hospital style="padding: 0px; width: 100%;" #hospital (onchange)="onSelectHosp($event)"
         (onselect)="onSelectHosp($event)">
       </app-autocomplete-hospital>
+      <label for="basic" class="clr-control-label" style="padding-top: 1rem; padding-bottom: 0.2rem;">สาเหตุที่ส่งต่อ</label>
+      <input type="text" name="reason" style="padding: 0px; width: 100%;" [(ngModel)]="reason" class="clr-col-9 clr-input width-fit" placeholder="สาเหตุที่ส่งต่อ">
+
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success btn-block" (click)="save()">บันทึก</button>
+    <button type="button" class="btn btn-success btn-block" (click)="save()" [disabled]="!hospitalId">บันทึก</button>
   </div>
 </clr-modal>
 
