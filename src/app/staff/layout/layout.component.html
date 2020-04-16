@@ -45,6 +45,11 @@
         <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
         รายการยาและเวชภัณฑ์
       </a>
+      <a  clrVerticalNavLink routerLink="/staff/covid-case-requisition" title="รายการยาและเวชภัณฑ์"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
+        รายการคงคลัง
+      </a>
       <a *ngIf="covidPayMenu" clrVerticalNavLink routerLink="/staff/pay" title="บันทึกการจ่าย Surgical Mask"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
@@ -85,6 +90,9 @@
           </a>
           <a *ngIf="settingBedsMenu" clrVerticalNavLink routerLink="/staff/setting/beds" routerLinkActive="active">
             ตั้งค่าเตียง
+          </a>
+          <a *ngIf="settingBedsMenu" clrVerticalNavLink routerLink="/staff/setting/ventilators" routerLinkActive="active">
+            ตั้งค่าเครื่องช่วยหายใจ
           </a>
         </clr-vertical-nav-group-children>
       </clr-vertical-nav-group>
