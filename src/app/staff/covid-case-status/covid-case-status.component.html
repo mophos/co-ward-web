@@ -32,7 +32,7 @@
   <div class="clr-col-4">
     <table class="table">
       <tr>
-        <td *ngFor="let i of respiratorSum">
+        <td *ngFor="let i of ventilatorSum">
           {{i.name}}
           <br>
           {{i.count}}
@@ -55,10 +55,20 @@
   </thead>
   <tbody>
     <tr *ngFor="let l of list;let idx=index;" [ngClass]="{isWarning: idx%2==0}">
-      <td class="left">{{l.hn}}<br>{{l.title_name}}{{l.first_name}} {{l.last_name}}</td>
+      <td class="left">{{l.hn}}<br>
+        <div>
+          {{l.title_name}}{{l.first_name}} {{l.last_name}}
+        </div>
+        <div style="margin-top: 0.2rem;">
+          <span style="background-color: yellow;">
+            อัพเดทล่าสุด : {{l.create_date | dateTh:'DD/MM/YYYY'}}
+          </span>
+        </div>
+      </td>
       <td class="left">
-        <div  *ngFor="let i of gcs">
-          <input [disabled]="l.create_date == date" type="radio" name="gcs-{{l.id}}" id="gcs-{{i.id}}-{{l.id}}" [(ngModel)]="l.gcs_id" [value]="i.id">
+        <div *ngFor="let i of gcs">
+          <input [disabled]="l.create_date == date" type="radio" name="gcs-{{l.id}}" id="gcs-{{i.id}}-{{l.id}}"
+            [(ngModel)]="l.gcs_id" [value]="i.id">
           <label [title]="i.name" class="pointer" for="gcs-{{i.id}}-{{l.id}}">
             {{i.name}}
           </label>
@@ -66,7 +76,8 @@
       </td>
       <td class="left">
         <div *ngFor="let i of beds">
-          <input [disabled]="l.create_date == date" type="radio" name="bed-{{l.id}}" id="bed-{{i.id}}-{{l.id}}" [(ngModel)]="l.bed_id" [value]="i.id">
+          <input [disabled]="l.create_date == date" type="radio" name="bed-{{l.id}}" id="bed-{{i.id}}-{{l.id}}"
+            [(ngModel)]="l.bed_id" [value]="i.id">
           <label [title]="i.name" class="pointer" for="bed-{{i.id}}-{{l.id}}">
             {{i.name}}
           </label>
@@ -74,45 +85,47 @@
       </td>
       <td class="left">
         <div *ngFor="let i of ventilators">
-          <input [disabled]="l.create_date == date" type="radio" name="respirator-{{l.id}}" id="respirator-{{i.id}}-{{l.id}}" [(ngModel)]="l.respirator_id" [value]="i.id">
-          <label [title]="i.name" class="pointer" for="respirator-{{i.id}}-{{l.id}}">
+          <input [disabled]="l.create_date == date" type="radio" name="ventilator-{{l.id}}"
+            id="ventilator-{{i.id}}-{{l.id}}" [(ngModel)]="l.ventilator_id" [value]="i.id">
+          <label [title]="i.name" class="pointer" for="ventilator-{{i.id}}-{{l.id}}">
             {{i.name}}
           </label>
         </div>
       </td>
       <td class="left">
         <div class="clr-control-inline">
-          <div  *ngFor="let i of s1" class="clr-col-6" style="padding: 0rem;">
-            <input [disabled]="l.create_date == date" (click)='uncheckRadio(l.id,i.generic,"set1")' type="radio" name="s1-{{l.id}}" id="s1-{{i.generic}}-{{l.id}}" [value]="i.generic"
-              [(ngModel)]="l.set1">
+          <div *ngFor="let i of s1" class="clr-col-6" style="padding: 0rem;">
+            <input [disabled]="l.create_date == date" (click)='uncheckRadio(l.id,i.generic,"set1")' type="radio"
+              name="s1-{{l.id}}" id="s1-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set1">
             <label [title]="i.name" class="pointer" for="s1-{{i.generic}}-{{l.id}}"> {{i.name}}</label>
           </div>
         </div>
         <div class="clr-control-inline">
           <div *ngFor="let i of s2" class="clr-col-6" style="padding: 0rem;">
-            <input [disabled]="l.create_date == date"  (click)='uncheckRadio(l.id,i.generic,"set2")' type="radio" name="s2-{{l.id}}" id="s2-{{i.generic}}-{{l.id}}" [value]="i.generic"
-              [(ngModel)]="l.set2">
+            <input [disabled]="l.create_date == date" (click)='uncheckRadio(l.id,i.generic,"set2")' type="radio"
+              name="s2-{{l.id}}" id="s2-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set2">
             <label [title]="i.name" class="pointer" for="s2-{{i.generic}}-{{l.id}}"> {{i.name}}</label>
           </div>
         </div>
         <div class="clr-control-inline">
-          <div  *ngFor="let i of s3" class="clr-col-6" style="padding: 0rem;">
-            <input [disabled]="l.create_date == date" (click)='uncheckRadio(l.id,i.generic,"set3")' type="radio" name="s3-{{l.id}}" id="s3-{{i.generic}}-{{l.id}}" [value]="i.generic"
-              [(ngModel)]="l.set3">
+          <div *ngFor="let i of s3" class="clr-col-6" style="padding: 0rem;">
+            <input [disabled]="l.create_date == date" (click)='uncheckRadio(l.id,i.generic,"set3")' type="radio"
+              name="s3-{{l.id}}" id="s3-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set3">
             <label [title]="i.name" class="pointer" for="s3-{{i.generic}}-{{l.id}}"> {{i.name}}</label>
           </div>
         </div>
         <div class="clr-control-inline">
           <div *ngFor="let i of s4" class="clr-col-6" style="padding: 0rem;">
-            <input [disabled]="l.create_date == date"  (click)='uncheckRadio(l.id,i.generic,"set4")' type="radio" name="s4-{{l.id}}" id="s4-{{i.generic}}-{{l.id}}" [value]="i.generic"
-              [(ngModel)]="l.set4">
+            <input [disabled]="l.create_date == date" (click)='uncheckRadio(l.id,i.generic,"set4")' type="radio"
+              name="s4-{{l.id}}" id="s4-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set4">
             <label [title]="i.name" class="pointer" for="s4-{{i.generic}}-{{l.id}}"> {{i.name}}</label>
           </div>
         </div>
       </td>
       <td style="text-align: right;">
         <div>
-          <button class="btn btn-sm btn-success" (click)="onClickSave(l.id)" [disabled]="l.create_date == date">บันทึก</button>
+          <button class="btn btn-sm btn-success" (click)="confirm(l.id)"
+            [disabled]="l.create_date == date">บันทึก</button>
         </div>
         <div>
           <button class="btn btn-sm btn-danger" (click)="onClickOpenModalDischarge(l)">จำหน่าย</button>
@@ -192,9 +205,20 @@
     </div>
     <div class="clr-form-control" *ngIf="modalDischargeType == 'REFER'">
       <label for="basic" class="clr-control-label">โรงพยาบาลที่ส่งต่อ</label>
-      <app-autocomplete-hospital style="padding: 0px; width: 100%;" #hospital (onchange)="onSelectHosp($event)" (onselect)="onSelectHosp($event)">
+      <app-autocomplete-hospital style="padding: 0px; width: 100%;" #hospital (onchange)="onSelectHosp($event)"
+        (onselect)="onSelectHosp($event)">
       </app-autocomplete-hospital>
     </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success btn-block" (click)="save()">บันทึก</button>
+  </div>
+</clr-modal>
+
+
+<clr-modal [(clrModalOpen)]="confirmDetail" [clrModalSize]="'xl'">
+  <h3 class="modal-title">กรุณาเลือกสาเหตุ</h3>
+  <div class="modal-body">
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-success btn-block" (click)="save()">บันทึก</button>
