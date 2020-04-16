@@ -54,13 +54,13 @@
       <div class="clr-col-12">
         <div class="clr-form clr-form-compact clr-row">
           <label class="clr-control-label clr-col-7">ผ้าปิดจมูกใยสังเคราะห์ 3 ชั้น (Surgical Mask)</label>
-          <input type="number" name="qty" [(ngModel)]="qty" class="clr-col-5 clr-input width-fit">
+          <input type="text" appNumberOnly name="qty" [(ngModel)]="qty" class="clr-col-5 clr-input width-fit">
         </div>
       </div>
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="save()">
+    <button type="button" class="btn btn-success" (click)="save()" [disabled]="!hospitalId">
       บันทึก
     </button>
     <button type="button" class="btn btn-danger" (click)="modal = false">

@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem('token', rs.token);
         const decoded = this.jwtHelper.decodeToken(rs.token);
         const rights = decoded.rights;
-        console.log(decoded);
         
         if (decoded.type === 'ADMIN') {
           this.route.navigate(['/admin']);

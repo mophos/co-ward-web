@@ -44,7 +44,8 @@
   <div class="card-body">
     <div class="clr-row" style="padding-top: 0.5rem; padding-bottom: -5rem; padding-left: 1rem;">
       <div class="clr-col-3">
-        <input class="clr-input width-fit" (keyup)="doEnter($event)" name="query" [(ngModel)]="query" placeholder="ระบุ HN,ชื่อ,นามสกุล เพื่อค้นหา" />
+        <input class="clr-input width-fit" (keyup)="doEnter($event)" name="query" [(ngModel)]="query"
+          placeholder="ระบุ HN,ชื่อ,นามสกุล เพื่อค้นหา" />
       </div>
       <div class="clr-col-1">
         <button class="btn btn-sm btn-primary" (click)="doEnter($event)">
@@ -70,7 +71,7 @@
               {{l.title_name}}{{l.first_name}} {{l.last_name}}
             </div>
             <div style="margin-top: 0.2rem;">
-              <span style="background-color: yellow;">
+              <span>
                 อัพเดทล่าสุด : {{l.create_date | dateTh:'DD/MM/YYYY'}}
               </span>
             </div>
@@ -95,7 +96,8 @@
           </td>
           <td class="left">
             <div *ngFor="let i of medicalSupplies">
-              <input [disabled]="l.create_date == date" type="radio" (click)='uncheckRadioMedicalSupplies(l.id,i.id)' name="medicalSupplie-id-{{l.id}}" id="medicalSupplie-{{i.id}}-{{l.id}}"
+              <input [disabled]="l.create_date == date" type="radio" (click)='uncheckRadioMedicalSupplies(l.id,i.id)'
+                name="medicalSupplie-id-{{l.id}}" id="medicalSupplie-{{i.id}}-{{l.id}}"
                 [(ngModel)]="l.medical_supplie_id" [value]="i.id">
               <label [title]="i.name" class="pointer" for="medicalSupplie-{{i.id}}-{{l.id}}">
                 {{i.name}}
@@ -128,13 +130,15 @@
               <div *ngFor="let i of s4" class="clr-col-6" style="padding: 0rem;">
                 <input [disabled]="l.create_date == date" (click)='uncheckRadio(l.id,i.generic,"set4")' type="radio"
                   name="s4-{{l.id}}" id="s4-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set4">
-                <label [title]="i.name" class="pointer" for="s4-{{i.generic}}-{{l.id}}"> <span [innerHTML]="i.name"></span></label>
+                <label [title]="i.name" class="pointer" for="s4-{{i.generic}}-{{l.id}}"> <span
+                    [innerHTML]="i.name"></span></label>
               </div>
             </div>
           </td>
           <td style="text-align: right;">
             <div>
-              <button class="btn btn-sm btn-success" (click)="onClickSave(l.id)" [disabled]="l.create_date == date">บันทึก</button>
+              <button class="btn btn-sm btn-success" (click)="onClickSave(l.id)"
+                [disabled]="l.create_date == date">บันทึก</button>
             </div>
             <div>
               <button class="btn btn-sm btn-danger" (click)="onClickOpenModalDischarge(l)">จำหน่าย</button>
@@ -218,13 +222,15 @@
       <app-autocomplete-hospital style="padding: 0px; width: 100%;" #hospital (onchange)="onSelectHosp($event)"
         (onselect)="onSelectHosp($event)">
       </app-autocomplete-hospital>
-      <label for="basic" class="clr-control-label" style="padding-top: 1rem; padding-bottom: 0.2rem;">สาเหตุที่ส่งต่อ</label>
-      <input type="text" name="reason" style="padding: 0px; width: 100%;" [(ngModel)]="reason" class="clr-col-9 clr-input width-fit"
-        placeholder="สาเหตุที่ส่งต่อ">
+      <label for="basic" class="clr-control-label"
+        style="padding-top: 1rem; padding-bottom: 0.2rem;">สาเหตุที่ส่งต่อ</label>
+      <input type="text" name="reason" style="padding: 0px; width: 100%;" [(ngModel)]="reason"
+        class="clr-col-9 clr-input width-fit" placeholder="สาเหตุที่ส่งต่อ">
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success btn-block" (click)="save()" [disabled]="!hospitalId">บันทึก</button>
+    <button type="button" class="btn btn-success btn-block" (click)="save()"
+      [disabled]="(!hospitalId && modalDischargeType=='REFER') || ((!hour || !minute )&& modalDischargeType!='REFER') ">บันทึก</button>
   </div>
 </clr-modal>
 

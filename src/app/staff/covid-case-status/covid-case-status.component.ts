@@ -295,7 +295,6 @@ export class CovidCaseStatusComponent implements OnInit {
       this.showDetail.set4Name = 'Favipiravir (เบิกจาก AntiDost) คลิก';
     }
 
-    console.log(this.showDetail);
     this.confirmDetail = true;
   }
 
@@ -307,7 +306,6 @@ export class CovidCaseStatusComponent implements OnInit {
         if (idx > -1) {
           this.list[idx].create_date = this.date;
           this.list[idx].drugs = await this.setGenericSave(this.list[idx]);
-          console.log(this.list[idx]);
           const rs: any = await this.covidCaseService.updateStatus(this.list[idx]);
           if (rs.ok) {
             this.alertService.success();
@@ -363,32 +361,36 @@ export class CovidCaseStatusComponent implements OnInit {
   async save() {
     const confirm = await this.alertService.confirm();
     if (confirm) {
-      if (this.hour !== undefined && this.minute !== undefined) {
-        try {
-          const obj: any = {};
-          let status = null;
-          if (this.modalDischargeType === 'HOME') {
-            status = 'RECOVERY';
-          } else if (this.modalDischargeType === 'DEATH') {
-            status = 'DISCHARGE';
-          } else if (this.modalDischargeType === 'REFER') {
-            status = 'REFER';
-            obj.hospitalId = this.hospitalId;
-            obj.reason = this.reason;
-          }
-          obj.dateDischarge = this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day + ' ' + this.hour + ':' + this.minute + ':00';
-          obj.covidCaseId = this.selected.covid_case_id;
-          obj.status = status;
-          const rs: any = await this.covidCaseService.updateDischarge(obj);
-          if (rs.ok) {
-            this.modalDischarge = false;
-            this.getList();
-            this.alertService.success();
-          }
-        } catch (error) {
-
+      // if (this.hour !== undefined && this.minute !== undefined) {
+      try {
+        const obj: any = {};
+        let status = null;
+        if (this.modalDischargeType === 'HOME') {
+          status = 'DISCHARGE';
+        } else if (this.modalDischargeType === 'DEATH') {
+          status = 'DEATH';
+        } else if (this.modalDischargeType === 'REFER') {
+          status = 'REFER';
+          obj.hospitalId = this.hospitalId;
+          obj.reason = this.reason;
         }
+        obj.dateDischarge = this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day + ' ' + this.hour + ':' + this.minute + ':00';
+        obj.covidCaseId = this.selected.covid_case_id;
+        obj.status = status;
+        const rs: any = await this.covidCaseService.updateDischarge(obj);
+        if (rs.ok) {
+          this.modalDischarge = false;
+          this.getList();
+          this.alertService.success();
+        } else {
+          console.log(rs.error);
+          this.alertService.serverError();
+        }
+      } catch (error) {
+        console.log(error);
+        this.alertService.serverError();
       }
+      // }
     }
   }
 

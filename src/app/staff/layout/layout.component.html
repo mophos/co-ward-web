@@ -26,8 +26,9 @@
       <router-outlet></router-outlet>
     </div>
     <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
-      <a *ngIf="covidCaseMenu" clrVerticalNavLink routerLink="/staff/covid-case-new" title="Case COVID" routerLinkActive="active">
-        <clr-icon clrVerticalNavIcon shape="helix"  class="is-solid"></clr-icon>
+      <a *ngIf="covidCaseMenu" clrVerticalNavLink routerLink="/staff/covid-case-new" title="Case COVID"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="helix" class="is-solid"></clr-icon>
         บันทึกผู้ป่วยใหม่
       </a>
       <a *ngIf="covidCaseMenu" clrVerticalNavLink routerLink="/staff/covid-case" title="Case COVID" routerLinkActive="active">
@@ -87,8 +88,13 @@
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         ตรวจสอบเตียง
       </a> -->
+<<<<<<< HEAD
       <div clrVerticalNavLink  routerLinkActive="active" style="background-color: rgb(165, 165, 165);">
        
+=======
+      <div clrVerticalNavLink routerLinkActive="active" style="background-color: rgb(88, 88, 88);">
+
+>>>>>>> 55bc8c13f3440c1930705c9dcc91ad83a104e163
       </div>
       <clr-vertical-nav-group routerLinkActive="active">
         <clr-icon shape="cog" clrVerticalNavIcon></clr-icon>
@@ -100,8 +106,13 @@
           <a *ngIf="settingBedsMenu" clrVerticalNavLink routerLink="/staff/setting/beds" routerLinkActive="active">
             ตั้งค่าเตียง
           </a>
-          <a *ngIf="settingMedicalSuppliesMenu" clrVerticalNavLink routerLink="/staff/setting/medical-supplies" routerLinkActive="active">
+          <a *ngIf="settingMedicalSuppliesMenu" clrVerticalNavLink routerLink="/staff/setting/medical-supplies"
+            routerLinkActive="active">
             ตั้งค่าเครื่องช่วยหายใจ
+          </a>
+          <a *ngIf="settingMedicalSuppliesMenu" clrVerticalNavLink routerLink="/staff/setting/professional"
+            routerLinkActive="active">
+            ตั้งค่าบุลคลากร
           </a>
         </clr-vertical-nav-group-children>
       </clr-vertical-nav-group>

@@ -205,7 +205,7 @@
               </div>
             </div>
           </div>
-          <div class="clr-row" *ngIf="countryId == 20">
+          <div class="clr-row" [ngClass]="{hidden: countryId != 20}">
             <div class="clr-col-2 form">
               <div class="clr-form-control" style="margin-top: 0;">
                 <label for="example" class="clr-control-label">บ้านเลขที่</label>
@@ -474,7 +474,7 @@
       </div>
 
       <div class="card-footer">
-        <button class="btn btn-success btn-block" (click)="onClickSave()" title="บันทึก" [disabled]="!medicalSupplieId || !bedId || !gcsId || !confirmDate || !admitDate">
+        <button class="btn btn-success btn-block" (click)="onClickSave()" title="บันทึก" [disabled]="  !bedId || !gcsId || !confirmDate || !admitDate">
           <clr-icon shape="floppy"></clr-icon> บันทึก
         </button>
 
@@ -509,7 +509,7 @@
       <label for="basic" class="clr-control-label">เลขที่บัตรประชาชน</label>
       <div class="clr-control-container">
         <div class="clr-input-wrapper" style="max-height: 3rem !important;">
-          <input type="text" id="basic" class="clr-input" maxlength="13"
+          <input type="text" id="basic" class="clr-input" appNumberOnly maxlength="13"
             style="height:3rem !important;font-size: 1.3rem;" name="modalCIDCid" [(ngModel)]="modalCIDCid">
           <clr-icon shape="exclamation-circle" size="36" *ngIf="modalCIDCidError"></clr-icon>
         </div>

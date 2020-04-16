@@ -59,7 +59,6 @@ export class ManageUserComponent implements OnInit {
   }
 
   refresh(state: ClrDatagridStateInterface) {
-    console.log(state);
     this.limit = +state.page.size;
     this.offset = +state.page.from;
     // this.loading = true;
