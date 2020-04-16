@@ -295,7 +295,6 @@ export class CovidCaseNewComponent implements OnInit {
         } else if (+this.s1 === 2) {
           drugs.push({ genericId: 2 });
         }
-
         if (+this.s2 === 1) {
           drugs.push({ genericId: 3 });
           drugs.push({ genericId: 5 });
