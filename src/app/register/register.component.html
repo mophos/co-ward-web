@@ -38,8 +38,8 @@
         รหัสโรงพยาบาล (5 หลัก)<span class="required">*</span> :
       </div>
       <div class="clr-col-md-8">
-        <input type="text" maxlength="5" id="hospcodeConfirm" placeholder="ระบุรหัสโรงพยาบาล" name="hospcodeConfirm"
-          class="clr-input clr-col-md-12" [(ngModel)]="hospcodeConfirm">
+        <input type="text" maxlength="5" appNumberOnly id="hospcodeConfirm" placeholder="ระบุรหัสโรงพยาบาล"
+          name="hospcodeConfirm" class="clr-input clr-col-md-12" [(ngModel)]="hospcodeConfirm">
       </div>
       <div class="clr-col-md-4">
       </div>
@@ -75,8 +75,8 @@
         เลขบัตรประชาชน<span class="required">*</span> :
       </div>
       <div class="clr-col-md-8">
-        <input type="text" (keyup)="enterCid()" maxlength="13" id="cid" placeholder="เลขบัตรประชาชน 13 หลัก" name="cid"
-          class="clr-input clr-col-md-12" [(ngModel)]="cid">
+        <input type="text" (keyup)="enterCid()" appNumberOnly maxlength="13" id="cid"
+          placeholder="เลขบัตรประชาชน 13 หลัก" name="cid" class="clr-input clr-col-md-12" [(ngModel)]="cid">
       </div>
       <div class="clr-col-md-4">
       </div>
@@ -153,8 +153,8 @@
         Username<span class="required">*</span> :
       </div>
       <div class="clr-col-md-8">
-        <input type="text" id="username" placeholder="username" name="username" class="clr-input clr-col-md-12"
-          [(ngModel)]="username">
+        <input type="text" id="username" appEnNoSpace placeholder="username" name="username"
+          class="clr-input clr-col-md-12" [(ngModel)]="username">
       </div>
     </div>
     <div class="clr-row" style="margin-top: 0.5rem;">
@@ -162,8 +162,10 @@
         Password<span class="required">*</span> :
       </div>
       <div class="clr-col-md-8">
-        <input type="password" (keyup)="enterPassword()" id="password" placeholder="password" name="password"
-          class="clr-input clr-col-md-12" [(ngModel)]="password">
+        <clr-password-container style="width:100%;margin-top: 0;">
+        <input type="password" clrPassword (keyup)="enterPassword()" id="password" placeholder="password"
+          name="password" class="clr-input clr-col-md-12 width-fit" [(ngModel)]="password">
+        </clr-password-container>
       </div>
       <div class="clr-col-md-4">
       </div>
@@ -278,8 +280,8 @@
         เบอร์มือถือ<span class="required">*</span> :
       </div>
       <div class="clr-col-md-8">
-        <input type="text" (keyup)="enterPhone()" maxlength="10" id="phoneNumber" placeholder="เบอร์มือถือ"
-          name="phoneNumber" class="clr-input clr-col-md-12" [(ngModel)]="phoneNumber">
+        <input type="text" (keyup)="enterPhone()" appNumberOnly maxlength="10" id="phoneNumber"
+          placeholder="เบอร์มือถือ" name="phoneNumber" class="clr-input clr-col-md-12" [(ngModel)]="phoneNumber">
       </div>
       <div class="clr-col-md-4">
       </div>
@@ -339,11 +341,32 @@
     </div>
     <div class="clr-row">
       <div class="clr-col-md-12" style="text-align: right;">
+        <button class="btn btn-primary" (click)="onClickRequestOTP()" [disabled]="
+        onSelectHospcode != hospcodeConfirm || !checkCid || !position || !title || firstName == '' || lastName == '' ||
+        username == '' || !checkPasswordConfirm || !checkEmail || !checkPhone || !checkImage || isVerify">ขอ
+          OTP</button>
+
         <button class="btn btn-success" (click)="save()" [disabled]="
     onSelectHospcode != hospcodeConfirm || !checkCid || !position || !title || firstName == '' || lastName == '' ||
-    username == '' || !checkPasswordConfirm || !checkEmail || !checkPhone || !checkImage">บันทึก</button>
+    username == '' || !checkPasswordConfirm || !checkEmail || !checkPhone || !checkImage || !isVerify">บันทึก</button>
         <button class="btn btn-danger-outline" (click)="cancel()">ยกเลิก</button>
       </div>
     </div>
   </div>
 </div>
+
+
+
+
+
+<clr-modal [(clrModalOpen)]="modalOTP">
+  <h3 class="modal-title">กรุณาระบุ OTP</h3>
+  <div class="modal-body">
+    <p>Ref Code: {{refCode}}</p>
+    <input type="text" name="otp" [(ngModel)]="otp" class="clr-input" placeholder="OTP">
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="verifyOTP()">ยืนยัน</button>
+    <button type="button" class="btn btn-primary" (click)="sendRequestOTP()">ขอ OTP ใหม่</button>
+  </div>
+</clr-modal>

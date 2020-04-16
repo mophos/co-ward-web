@@ -87,3 +87,7 @@
     text-align: left;
   }
 }
+
+.clr-input-group{
+  width: 100% !important;
+}

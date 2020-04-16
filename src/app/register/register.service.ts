@@ -49,4 +49,14 @@ export class RegisterService {
     return this.http.post(url, { data }).toPromise();
   }
 
+  requestOTP(tel) {
+    const url = `${this.url}/v1/register/req-otp`;
+    return this.http.post(url, { tel }).toPromise();
+  }
+
+  verifyOTP(refCode, otp) {
+    const url = `${this.url}/v1/register/verify-otp`;
+    return this.http.post(url, { refCode, otp }).toPromise();
+  }
+
 }

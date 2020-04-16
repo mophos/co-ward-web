@@ -4,7 +4,7 @@ import { AlertService } from '../help/alert.service';
 import thaiIdCard from 'thai-id-card';
 import { AutocompleteHospitalComponent } from '../help/autocomplete-hospital/autocomplete-hospital.component';
 import { Router } from '@angular/router';
-
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-register',
@@ -42,8 +42,13 @@ export class RegisterComponent implements OnInit {
 
   fileName: any;
   filesToUpload: File = null;
-  @ViewChild('hospital') hosp: AutocompleteHospitalComponent;
+  isVerify = false;
+  modalOTP = false;
 
+  refCode = false;
+  dateOtp: any = 0;
+  otp = '';
+  @ViewChild('hospital') hosp: AutocompleteHospitalComponent;
   constructor(
     private alertService: AlertService,
     private registerService: RegisterService,
@@ -180,4 +185,41 @@ export class RegisterComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  onClickRequestOTP() {
+    this.modalOTP = true;
+    this.sendRequestOTP();
+  }
+
+  async sendRequestOTP() {
+    try {
+      const date = (+moment().format('h') * 60) + +moment().format('m');
+      console.log(this.dateOtp, date);
+
+      if (this.dateOtp < date) {
+        this.dateOtp = date + 5;
+        const rs: any = await this.registerService.requestOTP(this.phoneNumber);
+        if (rs.ok) {
+          this.refCode = rs.ref_code;
+        }
+      } else {
+        this.alertService.error('กรุณารอ 5 นาที');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async verifyOTP() {
+    try {
+      const rs: any = await this.registerService.verifyOTP(this.refCode, this.otp);
+      if (rs.ok) {
+        this.modalOTP = false;
+        this.isVerify = true;
+      } else {
+        this.alertService.error('OTP ไม่ถูกต้อง');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
