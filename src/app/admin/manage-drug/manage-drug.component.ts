@@ -49,8 +49,6 @@ export class ManageDrugComponent implements OnInit {
   ngOnInit() {
     this.getList();
     this.getTotal();
-    console.log(this.insertRight, this.updateRight, this.deleteRight);
-
   }
 
   async getList() {

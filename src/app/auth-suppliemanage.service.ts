@@ -19,7 +19,6 @@ export class AuthSuppliemanage implements CanActivate {
     if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
       const rights = decodedToken.rights;
-      console.log(rights);
 
       if (rights) {
         if (this.jwtHelper.isTokenExpired(token)) {

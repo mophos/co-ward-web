@@ -126,7 +126,7 @@ export class RegisterComponent implements OnInit {
             type: 'STAFF',
             telephone: this.phoneNumber,
             isProvince: this.province,
-            right: this.province === 'N' ? ['STAFF_COVID_CASE', 'STAFF_COVID_CASE_STATUS', 'STAFF_COVID_CASE_APPROVED', 'STAFF_STOCK_DRUGS', 'STAFF_STOCK_BEDS', 'STAFF_STOCK_SUPPLIES', 'STAFF_SETTING_BASIC', 'STAFF_SETTING_BEDS'] : ['STAFF_CHECK_DRUGS', 'STAFF_CHECK_SUPPLIES', 'STAFF_CHECK_BEDS', 'STAFF_SETTING_BASIC']
+            right: this.province === 'N' ? ['STAFF_COVID_CASE', 'STAFF_COVID_CASE_STATUS', 'STAFF_COVID_CASE_DRUGS_APPROVED', 'STAFF_STOCK_DRUGS', 'STAFF_STOCK_BEDS', 'STAFF_STOCK_SUPPLIES', 'STAFF_SETTING_BASIC', 'STAFF_SETTING_BEDS'] : ['STAFF_CHECK_DRUGS', 'STAFF_CHECK_SUPPLIES', 'STAFF_CHECK_BEDS', 'STAFF_SETTING_BASIC']
           };
 
           const rs: any = await this.registerService.saveUserSupplie(obj);

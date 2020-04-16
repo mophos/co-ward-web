@@ -40,7 +40,7 @@ export class SettingMedicalSuppliesComponent implements OnInit {
   async onClickSave() {
     try {
       this.isSave = true;
-      const rs: any = await this.settingService.saveProfessional(this.list);
+      const rs: any = await this.settingService.saveMedicalSupplies(this.list);
       if (rs.ok) {
         this.getList();
         this.alertService.success();

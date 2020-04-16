@@ -21,8 +21,6 @@ export class CheckHospitalSuppliesComponent implements OnInit {
       const rs: any = await this.apiService.checkRemainHosp();
       if (rs.ok) {
         this.list = rs.rows;
-        console.log(this.list);
-        
       }
     } catch (error) {
 
