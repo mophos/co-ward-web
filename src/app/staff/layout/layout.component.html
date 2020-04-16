@@ -35,24 +35,23 @@
         <clr-icon clrVerticalNavIcon shape="wand"></clr-icon>
         สถานะผู้ป่วย COVID
       </a>
-      <a *ngIf="covidCaseApprovedMenu" clrVerticalNavLink routerLink="/staff/covid-case-approved" title="อนุมัติรายการยาและเวชภัณฑ์ให้รพ.ลูกข่าย"
+      <a *ngIf="covidCaseApprovedMenu" clrVerticalNavLink routerLink="/staff/covid-case-approved" title="จ่ายยาและเวชภัณฑ์"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
-        อนุมัติรายการยาและเวชภัณฑ์
+        จ่ายยาและเวชภัณฑ์
       </a>
-      <a *ngIf="covidCaseRequisitionMenu" clrVerticalNavLink routerLink="/staff/covid-case-requisition" title="รายการยาและเวชภัณฑ์"
+      <a *ngIf="covidCaseRequisitionMenu" clrVerticalNavLink routerLink="/staff/covid-case-requisition" title="รายการจ่ายยาและเวชภัณฑ์"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
-        รายการยาและเวชภัณฑ์
+        รายการจ่ายยาและเวชภัณฑ์
       </a>
-      <a  clrVerticalNavLink routerLink="/staff/covid-case-requisition" title="รายการยาและเวชภัณฑ์"
-        routerLinkActive="active">
-        <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
+      <a clrVerticalNavLink routerLink="/staff/inventory-status" title="รายการคงคลัง" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="store"></clr-icon>
         รายการคงคลัง
       </a>
       <a *ngIf="covidPayMenu" clrVerticalNavLink routerLink="/staff/pay" title="บันทึกการจ่าย Surgical Mask"
         routerLinkActive="active">
-        <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
+        <clr-icon clrVerticalNavIcon shape="users"></clr-icon>
         บันทึกการจ่าย Surgical Mask
       </a>
       <!-- <a *ngIf="stockDrugsMenu" clrVerticalNavLink routerLink="/staff/drugs" title="สถานะยา" routerLinkActive="active">
