@@ -6,13 +6,15 @@ import { LoginComponent } from './login.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from './login.service';
+import { HelpModule } from '../help/help.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     HttpClientModule,
-    LoginRoutingModule
+    LoginRoutingModule,
+    HelpModule
   ],
   declarations: [LoginComponent],
   providers: [LoginService]

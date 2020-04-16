@@ -20,9 +20,10 @@
       <div class="error active" *ngIf="isError">
         {{ errorMessage || 'เกิดข้อผิดพลาด'}}
       </div>
-      <button type="button" [disabled]="!username || !password" (click)="doLogin()"
-        class="btn btn-primary">เข้าใช้งานระบบ</button>
+      <button type="button" [disabled]="!username || !password || isLogin" (click)="doLogin()" class="btn btn-primary">เข้าใช้งานระบบ</button>
       <!-- <a href="javascript://" (click)="register()" class="signup">ลงทะเบียนเข้าใช้งาน</a> -->
     </div>
   </form>
 </div>
+
+<app-loadding #loading></app-loadding>
