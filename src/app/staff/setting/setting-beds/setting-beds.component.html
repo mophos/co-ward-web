@@ -20,8 +20,9 @@
         [(ngModel)]="l.covid_qty">
     </clr-dg-cell>
     <clr-dg-cell>
-      <input class="clr-input width-fit" style="text-align: right;" type="text" appNumberOnly name="{{l.qty}}"
-        [(ngModel)]="l.qty">
+      <label for="" style="float: right;">{{l.use_covid_qty}}</label>
+      <!-- <input class="clr-input width-fit" style="text-align: right;" type="text" appNumberOnly name="{{l.covid_qty}}" -->
+        <!-- [(ngModel)]="l.covid_qty" [disabled]="true"> -->
     </clr-dg-cell>
   </clr-dg-row>
   <clr-dg-footer>
