@@ -3,7 +3,7 @@
     <div class="branding">
       <a href="javascript://" class="nav-link">
         <!-- <img src="./assets/images/tt.png" alt="logo" style="width: 200px; padding-right: 10px;"> -->
-        <span class="title">Co-Ward </span>
+        <span class="title">CO-ward </span>
       </a>
     </div>
     <div class="header-nav">
@@ -40,6 +40,9 @@
         <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
         จ่ายยาและเวชภัณฑ์
       </a>
+      <div clrVerticalNavLink  routerLinkActive="active">
+       
+      </div>
       <a *ngIf="covidCaseRequisitionMenu" clrVerticalNavLink routerLink="/staff/covid-case-requisition" title="รายการจ่ายยาและเวชภัณฑ์"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
@@ -67,7 +70,7 @@
         <clr-icon clrVerticalNavIcon shape="cursor-hand-open"></clr-icon>
         สถานะเวชภัณฑ์
       </a>
-      <a *ngIf="trackingMenu" clrVerticalNavLink routerLink="/staff/tracking" title="สถานะของ" routerLinkActive="active">
+      <!-- <a *ngIf="trackingMenu" clrVerticalNavLink routerLink="/staff/tracking" title="สถานะของ" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         ติดตามสถานะสินค้า
       </a> -->
@@ -80,6 +83,9 @@
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         ตรวจสอบเตียง
       </a> -->
+      <div clrVerticalNavLink  routerLinkActive="active">
+       
+      </div>
       <clr-vertical-nav-group routerLinkActive="active">
         <clr-icon shape="cog" clrVerticalNavIcon></clr-icon>
         ตั้งค่า
