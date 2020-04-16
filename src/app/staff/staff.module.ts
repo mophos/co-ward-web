@@ -42,6 +42,7 @@ import { CovidCaseRequisitionComponent } from './covid-case-requisition/covid-ca
 import { PayComponent } from './pay/pay.component';
 import { SettingMedicalSuppliesComponent } from './setting/setting-medical-supplies/setting-medical-supplies.component';
 import { InventoryStatusComponent } from './inventory-status/inventory-status.component';
+import { ProfessionalComponent } from './setting/professional/professional.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -63,7 +64,8 @@ import { InventoryStatusComponent } from './inventory-status/inventory-status.co
     CovidCaseRequisitionComponent,
     PayComponent,
     SettingMedicalSuppliesComponent,
-    InventoryStatusComponent
+    InventoryStatusComponent,
+    ProfessionalComponent
   ],
   imports: [
     HelpModule,

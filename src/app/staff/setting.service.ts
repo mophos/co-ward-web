@@ -43,13 +43,18 @@ export class SettingService {
     return await this.http.get(url).toPromise();
   }
 
+  async getProfessional() {
+    const url = `${this.apiUrl}/v1/staff/setting/professional`;
+    return await this.http.get(url).toPromise();
+  }
+
   async saveBeds(data) {
     const url = `${this.apiUrl}/v1/staff/setting/beds`;
     return await this.http.post(url, { data }).toPromise();
   }
 
-  async saveMedicalSupplies(data) {
-    const url = `${this.apiUrl}/v1/staff/setting/medical-supplies`;
+  async saveProfessional(data) {
+    const url = `${this.apiUrl}/v1/staff/setting/professional`;
     return await this.http.post(url, { data }).toPromise();
   }
 
