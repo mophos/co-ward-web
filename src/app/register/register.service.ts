@@ -49,4 +49,9 @@ export class RegisterService {
     return this.http.post(url, { data }).toPromise();
   }
 
+  getNodes(id) {
+    const url = `${this.url}/v1/register/get-nodes?id=${id}`;
+    return this.http.get(url).toPromise();
+  }
+
 }
