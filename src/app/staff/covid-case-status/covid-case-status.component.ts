@@ -22,12 +22,13 @@ export class CovidCaseStatusComponent implements OnInit {
   BedsSum = [];
   gcs: any = [];
   gcsId: any;
+  reason: any;
 
   beds: any = [];
   bedId: any;
 
   respiratorSum: any = [];
-  ventilators: any = [];
+  medicalSupplies: any = [];
   respiratorId: any;
   hospitalId: any;
 
@@ -83,7 +84,7 @@ export class CovidCaseStatusComponent implements OnInit {
     await this.getBeds();
     // await this.getBedSum();
     await this.getRespiratorSum();
-    await this.getVentilators();
+    await this.getMedicalSupplies();
 
     const date = new Date();
     this.dateDischarge = {
@@ -197,11 +198,11 @@ export class CovidCaseStatusComponent implements OnInit {
     }
   }
 
-  async getVentilators() {
+  async getMedicalSupplies() {
     try {
-      const rs: any = await this.basicAuthService.getVentilators();
+      const rs: any = await this.basicAuthService.getMedicalSupplies();
       if (rs.ok) {
-        this.ventilators = rs.rows;
+        this.medicalSupplies = rs.rows;
       } else {
         this.alertService.serverError();
       }
@@ -212,7 +213,7 @@ export class CovidCaseStatusComponent implements OnInit {
   }
   async getRespiratorSum() {
     try {
-      const rs: any = await this.covidCaseService.getVentilators();
+      const rs: any = await this.covidCaseService.getMedicalSupplies();
       if (rs.ok) {
         this.respiratorSum = rs.rows;
       } else {
@@ -319,6 +320,7 @@ export class CovidCaseStatusComponent implements OnInit {
           } else if (this.modalDischargeType === 'REFER') {
             status = 'REFER';
             obj.hospitalId = this.hospitalId;
+            obj.reason = this.reason;
           }
           obj.dateDischarge = this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day + ' ' + this.hour + ':' + this.minute + ':00';
           obj.covidCaseId = this.selected.covid_case_id;

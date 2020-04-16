@@ -33,6 +33,7 @@ import { CovidCaseRequisitionComponent } from './covid-case-requisition/covid-ca
 import { PayComponent } from './pay/pay.component';
 import { AuthCovidCaseRequisitionService } from '../auth-staff/auth-covid-case-requisition.service';
 import { AuthPayService } from '../auth-staff/auth-pay.service';
+import { SettingMedicalSuppliesComponent } from './setting/setting-medical-supplies/setting-medical-supplies.component';
 
 const routes: Routes = [
   {
@@ -77,6 +78,7 @@ const routes: Routes = [
         children: [
           { path: 'basic', canActivate: [AuthSettingBasicService], component: SettingComponent },
           { path: 'beds', canActivate: [AuthSettingBedsService], component: SettingBedsComponent },
+          { path: 'medical-supplies', canActivate: [AuthSettingBedsService], component: SettingMedicalSuppliesComponent },
         ]
       },
     ]

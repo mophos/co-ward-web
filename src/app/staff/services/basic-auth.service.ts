@@ -18,8 +18,8 @@ export class BasicAuthService {
     return await this.http.get(url).toPromise();
   }
 
-  async getVentilators() {
-    const url = `${this.apiUrl}/v1/basic-auth/ventilators`;
+  async getMedicalSupplies() {
+    const url = `${this.apiUrl}/v1/basic-auth/medical-supplies`;
     return await this.http.get(url).toPromise();
   }
 

@@ -62,7 +62,7 @@ export class CovidCaseNewComponent implements OnInit {
   beds: any = [];
   bedId: any;
 
-  ventilators: any = [];
+  medicalSupplies: any = [];
   respiratorId: any;
 
   drugs: any = [];
@@ -116,7 +116,7 @@ export class CovidCaseNewComponent implements OnInit {
     await this.getTitle();
     await this.getGCS();
     await this.getBeds();
-    await this.getVentilators();
+    await this.getMedicalSupplies();
     await this.setData();
 
     // await this.getGenericSet();
@@ -214,11 +214,11 @@ export class CovidCaseNewComponent implements OnInit {
     }
   }
 
-  async getVentilators() {
+  async getMedicalSupplies() {
     try {
-      const rs: any = await this.basicAuthService.getVentilators();
+      const rs: any = await this.basicAuthService.getMedicalSupplies();
       if (rs.ok) {
-        this.ventilators = rs.rows;
+        this.medicalSupplies = rs.rows;
       } else {
         this.alertService.serverError();
       }
@@ -295,7 +295,6 @@ export class CovidCaseNewComponent implements OnInit {
         } else if (+this.s1 === 2) {
           drugs.push({ genericId: 2 });
         }
-
         if (+this.s2 === 1) {
           drugs.push({ genericId: 3 });
           drugs.push({ genericId: 5 });
