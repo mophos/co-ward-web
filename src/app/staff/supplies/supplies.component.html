@@ -28,12 +28,11 @@
           <clr-dg-column>วันที่</clr-dg-column>
           <clr-dg-column>ชื่อผู้บันทึก</clr-dg-column>
 
-          <clr-dg-row *ngFor="let l of list; let idx=index;" (click)="getListDetail(l.id);listId=l.id;"
-            [ngClass]="{ 'isSuccess': l.id == listId }">
+          <clr-dg-row *ngFor="let l of list; let idx=index;" (click)="getListDetail(l.id);listId=l.id;" [ngClass]="{ 'isSuccess': l.id == listId }">
             <clr-dg-cell>{{l.date | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
             <clr-dg-cell>{{l.name}}{{l.fname}} {{l.lname}}</clr-dg-cell>
           </clr-dg-row>
-       
+
         </clr-datagrid>
       </div>
     </div>
@@ -44,14 +43,16 @@
       <clr-dg-column>#</clr-dg-column>
       <clr-dg-column>รายการ</clr-dg-column>
       <clr-dg-column>จำนวนยาคงคลัง</clr-dg-column>
+      <clr-dg-column>หน่วย</clr-dg-column>
 
       <clr-dg-row *ngFor="let l of listDetail; let idx=index;">
         <clr-dg-cell>{{idx+1}}</clr-dg-cell>
         <clr-dg-cell>{{l.name}}</clr-dg-cell>
         <clr-dg-cell>
-          <input type="number" style="text-align: right;" name="qty" [(ngModel)]="l.qty"
-            class="clr-col-9 clr-input width-fit" value="{{l.qty}}">
+          <input type="number" style="text-align: right;" name="qty" [(ngModel)]="l.qty" class="clr-col-9 clr-input width-fit"
+          value="{{l.qty}}">
         </clr-dg-cell>
+        <clr-dg-cell>{{l.unit_name}}</clr-dg-cell>
       </clr-dg-row>
       <clr-dg-row *ngIf="listDetail.length">
         <clr-dg-cell>
