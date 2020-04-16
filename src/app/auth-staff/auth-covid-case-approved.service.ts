@@ -25,7 +25,9 @@ export class AuthCovidCaseApprovedService implements CanActivate {
           return false;
         } else {
           let isAccess = false;
-          if (_.findIndex(rights, { name: 'STAFF_COVID_CASE_APPROVED' }) > -1) {
+          if (_.findIndex(rights, { name: 'STAFF_COVID_CASE_DRUGS_APPROVED' }) > -1) {
+            isAccess = true;
+          } else if (_.findIndex(rights, { name: 'STAFF_COVID_CASE_SUPPLIES_APPROVED' }) > -1) {
             isAccess = true;
           } else {
             isAccess = false;

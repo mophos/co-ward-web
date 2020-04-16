@@ -51,7 +51,13 @@ export class LayoutComponent implements OnInit {
 
     this.covidCaseMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE' }) === -1 ? false : true;
     this.covidCaseStatusMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE_STATUS' }) === -1 ? false : true;
-    this.covidCaseApprovedMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE_APPROVED' }) === -1 ? false : true;
+    if (findIndex(this.rights, { name: 'STAFF_COVID_CASE_DRUGS_APPROVED' }) === -1) {
+      this.covidCaseApprovedMenu = false;
+    } else if (findIndex(this.rights, { name: 'STAFF_COVID_CASE_DRUGS_APPROVED' }) === -1) {
+      this.covidCaseApprovedMenu = false;
+    } else {
+      this.covidCaseApprovedMenu = true;
+    }
     this.covidCaseRequisitionMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE_REQUISITION' }) === -1 ? false : true;
     this.covidPayMenu = findIndex(this.rights, { name: 'STAFF_PAY' }) === -1 ? false : true;
     this.stockDrugsMenu = findIndex(this.rights, { name: 'STAFF_STOCK_DRUGS' }) === -1 ? false : true;
