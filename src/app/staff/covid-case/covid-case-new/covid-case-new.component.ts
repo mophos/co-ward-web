@@ -136,7 +136,6 @@ export class CovidCaseNewComponent implements OnInit {
     await this.getBeds();
     await this.getMedicalSupplies();
     this.modalCID = true;
-    // console.log(this.data);
 
     if (this.data) {
       await this.setData();
@@ -346,7 +345,7 @@ export class CovidCaseNewComponent implements OnInit {
           drugs.push({ genericId: 7 });
         }
 
-        const obj = {
+        const obj: any = {
           type: this.typeRegister,
           cid: this.cid,
           passport: this.passport,
@@ -356,7 +355,6 @@ export class CovidCaseNewComponent implements OnInit {
           fname: this.fname,
           lname: this.lname,
           tel: this.tel,
-          birthDate: `${this.birthDate.date.year}-${this.birthDate.date.month}-${this.birthDate.date.day}`,
           admitDate: `${this.admitDate.date.year}-${this.admitDate.date.month}-${this.admitDate.date.day}`,
           confirmDate: `${this.confirmDate.date.year}-${this.confirmDate.date.month}-${this.confirmDate.date.day}`,
           gcsId: this.gcsId,
@@ -374,6 +372,9 @@ export class CovidCaseNewComponent implements OnInit {
           countryId: this.countryId,
           drugs
         };
+        if (this.birthDate) {
+          obj.birthDate = `${this.birthDate.date.year}-${this.birthDate.date.month}-${this.birthDate.date.day}`;
+        }
 
         const rs: any = await this.covidCaseService.saveNewCase(obj);
         if (rs.ok) {
@@ -399,6 +400,7 @@ export class CovidCaseNewComponent implements OnInit {
       this.tel = '';
       this.peopleType = null;
       this.genderId = null;
+      this.titleId = null;
       this.admitDate = null;
       this.confirmDate = null;
       this.birthDate = null;
@@ -418,6 +420,9 @@ export class CovidCaseNewComponent implements OnInit {
       this.ampurId = null;
       this.provinceId = null;
       this.countryId = 20;
+      this.modalCIDCid = '';
+      this.modalCIDPassport = '';
+      this.modalCIDType = 'CID';
       this.tambon.setQuery('');
       this.ampur.setQuery('');
       this.province.setQuery('');

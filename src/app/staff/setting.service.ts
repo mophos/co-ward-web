@@ -57,5 +57,9 @@ export class SettingService {
     const url = `${this.apiUrl}/v1/staff/setting/professional`;
     return await this.http.post(url, { data }).toPromise();
   }
+  async saveMedicalSupplies(data) {
+    const url = `${this.apiUrl}/v1/staff/setting/medical-supplies`;
+    return await this.http.post(url, { data }).toPromise();
+  }
 
 }

@@ -91,7 +91,6 @@ export class CovidCaseComponent implements OnInit {
     try {
       this.isModelSearch = true;
       this.modalCIDCidError = !thaiIdCard.verify(this.modalCIDCid);
-      console.log(this.modalCIDType);
 
       if (this.modalCIDType !== 'NO') {
         if ((!this.modalCIDCidError && this.modalCIDType === 'CID') || this.modalCIDType === 'PASSPORT') {

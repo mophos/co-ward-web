@@ -178,14 +178,13 @@ export class PayNowComponent implements OnInit {
         obj.items = [{
           id: 1,
           qty: v.QTY
-        }]
+        }];
         data.push(obj);
       }
-      console.log(data);
 
 
       try {
-        let rs: any = await this.restockService.importTemplete(data);
+        const rs: any = await this.restockService.importTemplete(data);
         if (rs.ok) {
           this.alertService.success();
           this.modalImport = false;
@@ -201,7 +200,7 @@ export class PayNowComponent implements OnInit {
         this.alertService.error(error);
         this.loadding.hide();
       }
-    }
+    };
     fileReader.readAsArrayBuffer(this.file);
   }
 
@@ -219,7 +218,6 @@ export class PayNowComponent implements OnInit {
     if (!rs) {
       this.loadding.hide();
     } else {
-      console.log(rs);
 
       this.loadding.hide();
       this.downloadFile('Templete_จ่ายด่วน', 'xlsx', rs);

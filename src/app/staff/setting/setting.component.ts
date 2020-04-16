@@ -123,6 +123,7 @@ export class SettingComponent implements OnInit {
         this.fname = this.user[0].fname;
         this.lname = this.user[0].lname;
         this.email = this.user[0].email;
+        this.username = this.user[0].username;
         this.phoneNumber = this.user[0].telephone;
         this.checkEmail = true;
         this.checkPhone = true;

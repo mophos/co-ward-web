@@ -1,5 +1,6 @@
+import { AutocompleteHospitalComponent } from 'src/app/help/autocomplete-hospital/autocomplete-hospital.component';
 import { AlertService } from '../../help/alert.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PayService } from '../pay.service';
 import { IMyOptions } from 'mydatepicker-th';
 
@@ -23,7 +24,7 @@ export class PayComponent implements OnInit {
     height: '25px',
     width: '200px'
   };
-
+  @ViewChild('hospital') hospital: AutocompleteHospitalComponent
   constructor(
     private payService: PayService,
     private alertService: AlertService,
@@ -46,7 +47,6 @@ export class PayComponent implements OnInit {
       const rs: any = await this.payService.getList();
       if (rs.ok) {
         this.list = rs.rows;
-        console.log(this.list);
       } else {
         this.alertService.error(rs.error);
       }
@@ -75,6 +75,7 @@ export class PayComponent implements OnInit {
         if (rs.ok) {
           this.alertService.success();
           this.modal = false;
+          this.clear();
           this.getList();
         } else {
           this.alertService.error();
@@ -83,6 +84,12 @@ export class PayComponent implements OnInit {
         this.alertService.error();
       }
     }
+  }
+
+  clear() {
+    this.qty = null;
+    this.hospitalId = null;
+    this.hospital.setQuery('');
   }
 
 }

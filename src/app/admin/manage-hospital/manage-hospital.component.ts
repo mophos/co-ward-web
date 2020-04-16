@@ -83,7 +83,6 @@ export class ManageHospitalComponent implements OnInit {
   }
 
   refresh(state: ClrDatagridStateInterface) {
-    console.log(state);
     this.limit = +state.page.size;
     this.offset = +state.page.from;
     this.getList();
@@ -170,7 +169,6 @@ export class ManageHospitalComponent implements OnInit {
 
 
   async save() {
-    console.log(this.hospTypeId);
     try {
       const data = {
         hosptype_id: this.hospTypeId,
