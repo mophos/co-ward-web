@@ -12,7 +12,7 @@
         <td *ngFor="let i of gcsSum">
           {{i.name}}
           <br>
-          {{i.usage}}/{{i.qty}}
+          {{i.qty}}
         </td>
       </tr>
     </table>
@@ -23,10 +23,9 @@
         <td *ngFor="let i of BedsSum">
           {{i.name}}
           <br>
-          {{i.usage}}/{{i.qty}}
+          {{i.usage_qty}}/{{i.covid_qty}}
         </td>
       </tr>
-
     </table>
   </div>
   <div class="clr-col-4">
@@ -35,7 +34,7 @@
         <td *ngFor="let i of medicalSuppliesSum">
           {{i.name}}
           <br>
-          {{i.usage}}/{{i.qty}}
+          {{i.usage_qty}}/{{i.covid_qty}}
         </td>
       </tr>
     </table>
@@ -85,8 +84,8 @@
       </td>
       <td class="left">
         <div *ngFor="let i of medicalSupplies">
-          <input [disabled]="l.create_date == date" type="radio" name="medicalSupplie-id-{{l.id}}" id="medicalSupplie-{{i.id}}-{{l.id}}"
-            [(ngModel)]="l.medical_supplie_id" [value]="i.id">
+          <input [disabled]="l.create_date == date" type="radio" name="medicalSupplie-id-{{l.id}}"
+            id="medicalSupplie-{{i.id}}-{{l.id}}" [(ngModel)]="l.medical_supplie_id" [value]="i.id">
           <label [title]="i.name" class="pointer" for="medicalSupplie-{{i.id}}-{{l.id}}">
             {{i.name}}
           </label>
@@ -95,29 +94,29 @@
       <td class="left">
         <div class="clr-control-inline">
           <div *ngFor="let i of s1" class="clr-col-6" style="padding: 0rem;">
-            <input [disabled]="l.create_date == date" (click)='uncheckRadio(l.id,i.generic,"set1")' type="radio" name="s1-{{l.id}}"
-              id="s1-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set1">
+            <input [disabled]="l.create_date == date" (click)='uncheckRadio(l.id,i.generic,"set1")' type="radio"
+              name="s1-{{l.id}}" id="s1-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set1">
             <label [title]="i.name" class="pointer" for="s1-{{i.generic}}-{{l.id}}"> {{i.name}}</label>
           </div>
         </div>
         <div class="clr-control-inline">
           <div *ngFor="let i of s2" class="clr-col-6" style="padding: 0rem;">
-            <input [disabled]="l.create_date == date" (click)='uncheckRadio(l.id,i.generic,"set2")' type="radio" name="s2-{{l.id}}"
-              id="s2-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set2">
+            <input [disabled]="l.create_date == date" (click)='uncheckRadio(l.id,i.generic,"set2")' type="radio"
+              name="s2-{{l.id}}" id="s2-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set2">
             <label [title]="i.name" class="pointer" for="s2-{{i.generic}}-{{l.id}}"> {{i.name}}</label>
           </div>
         </div>
         <div class="clr-control-inline">
           <div *ngFor="let i of s3" class="clr-col-6" style="padding: 0rem;">
-            <input [disabled]="l.create_date == date" (click)='uncheckRadio(l.id,i.generic,"set3")' type="radio" name="s3-{{l.id}}"
-              id="s3-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set3">
+            <input [disabled]="l.create_date == date" (click)='uncheckRadio(l.id,i.generic,"set3")' type="radio"
+              name="s3-{{l.id}}" id="s3-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set3">
             <label [title]="i.name" class="pointer" for="s3-{{i.generic}}-{{l.id}}"> {{i.name}}</label>
           </div>
         </div>
         <div class="clr-control-inline">
           <div *ngFor="let i of s4" class="clr-col-6" style="padding: 0rem;">
-            <input [disabled]="l.create_date == date" (click)='uncheckRadio(l.id,i.generic,"set4")' type="radio" name="s4-{{l.id}}"
-              id="s4-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set4">
+            <input [disabled]="l.create_date == date" (click)='uncheckRadio(l.id,i.generic,"set4")' type="radio"
+              name="s4-{{l.id}}" id="s4-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set4">
             <label [title]="i.name" class="pointer" for="s4-{{i.generic}}-{{l.id}}"> {{i.name}}</label>
           </div>
         </div>
@@ -208,8 +207,10 @@
       <app-autocomplete-hospital style="padding: 0px; width: 100%;" #hospital (onchange)="onSelectHosp($event)"
         (onselect)="onSelectHosp($event)">
       </app-autocomplete-hospital>
-      <label for="basic" class="clr-control-label" style="padding-top: 1rem; padding-bottom: 0.2rem;">สาเหตุที่ส่งต่อ</label>
-      <input type="text" name="reason" style="padding: 0px; width: 100%;" [(ngModel)]="reason" class="clr-col-9 clr-input width-fit" placeholder="สาเหตุที่ส่งต่อ">
+      <label for="basic" class="clr-control-label"
+        style="padding-top: 1rem; padding-bottom: 0.2rem;">สาเหตุที่ส่งต่อ</label>
+      <input type="text" name="reason" style="padding: 0px; width: 100%;" [(ngModel)]="reason"
+        class="clr-col-9 clr-input width-fit" placeholder="สาเหตุที่ส่งต่อ">
 
     </div>
   </div>
