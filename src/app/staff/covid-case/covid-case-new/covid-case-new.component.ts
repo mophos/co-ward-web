@@ -10,6 +10,7 @@ import { AutocompleteProvinceComponent } from '../../../help/autocomplete-addres
 import { AutocompleteDistrictComponent } from '../../../help/autocomplete-address/autocomplete-district/autocomplete-district.component';
 import { AutocompleteSubdistrictComponent } from '../../../help/autocomplete-address/autocomplete-subdistrict/autocomplete-subdistrict.component';
 import { AutocompleteZipcodeComponent } from '../../../help/autocomplete-address/autocomplete-zipcode/autocomplete-zipcode.component';
+import { AutocompleteCountriesComponent } from 'src/app/help/autocomplete-countries/autocomplete-countries.component';
 import * as moment from 'moment';
 import thaiIdCard from 'thai-id-card';
 
@@ -29,6 +30,7 @@ export class CovidCaseNewComponent implements OnInit {
   an = '';
   titleId = null;
   fname = '';
+  mname = '';
   lname = '';
   genderId: any;
   birthDate: any;
@@ -49,8 +51,8 @@ export class CovidCaseNewComponent implements OnInit {
   ampurName: any;
   provinceId: any;
   provinceName: any;
+  countryId: any = 20;
   zipcode: any;
-  countryId: any;
   countryName: any;
   // -------------------
 
@@ -105,7 +107,7 @@ export class CovidCaseNewComponent implements OnInit {
   modalCIDPassport: any;
   isKey = false;
   @ViewChild('hospital') hospitals: AutocompleteHospitalComponent;
-
+  @ViewChild('countries') countries: AutocompleteCountriesComponent;
   @ViewChild('province') province: AutocompleteProvinceComponent;
   @ViewChild('ampur') ampur: AutocompleteDistrictComponent;
   @ViewChild('tambon') tambon: AutocompleteSubdistrictComponent;
@@ -128,6 +130,7 @@ export class CovidCaseNewComponent implements OnInit {
   }
 
   async ngOnInit() {
+    // this.countries.setQuery('ไทย');
     await this.getTitle();
     await this.getGCS();
     await this.getBeds();
@@ -145,7 +148,7 @@ export class CovidCaseNewComponent implements OnInit {
 
   setData() {
     try {
-      
+
       this.hn = this.data.hn;
       this.an = this.data.an;
       this.titleId = this.data.title_id;
@@ -153,7 +156,7 @@ export class CovidCaseNewComponent implements OnInit {
       this.mname = this.data.middle_name;
       this.lname = this.data.last_name;
       this.genderId = this.data.gender_id;
-      
+
       if (this.data.birth_date) {
         this.birthDate = {
           date: {
@@ -165,7 +168,6 @@ export class CovidCaseNewComponent implements OnInit {
       }
       this.tel = this.data.telephone;
       this.peopleType = this.data.people_type;
-  
       this.houseNo = this.data.house_no;
       this.roomNo = this.data.room_no;
       this.village = this.data.village;
@@ -174,14 +176,14 @@ export class CovidCaseNewComponent implements OnInit {
       this.ampurId = this.data.ampur_code;
       this.tambonId = this.data.tambon_code;
       this.provinceId = this.data.province_code;
-      this.zipcode = this.data.zipcode;  
+      this.zipcode = this.data.zipcode;
       this.ampur.setQuery(this.data.ampur_name);
       this.tambon.setQuery(this.data.tambon_name);
       this.province.setQuery(this.data.province_name);
       this.zipc.setQuery(this.data.zipcode);
     } catch (error) {
       console.log(error);
-      
+
     }
   }
 
@@ -254,6 +256,9 @@ export class CovidCaseNewComponent implements OnInit {
     }
   }
 
+  async onSelectCountry(e) {
+    this.countryId = e.id;
+  }
 
   clearError() {
     this.errorHN = false;
@@ -272,7 +277,6 @@ export class CovidCaseNewComponent implements OnInit {
       if (!this.hn.length) {
         this.errorHN = true;
       }
-
 
       if (!this.titleId) {
         this.errorTitleName = true;
@@ -379,10 +383,12 @@ export class CovidCaseNewComponent implements OnInit {
   }
 
   clear() {
+    this.an = '';
     this.hn = '';
     this.fname = '';
     this.lname = '';
     this.tel = '';
+    this.genderId = null;
     this.admitDate = null;
     this.confirmDate = null;
     this.birthDate = null;
@@ -404,6 +410,8 @@ export class CovidCaseNewComponent implements OnInit {
     this.tambon.setQuery('');
     this.ampur.setQuery('');
     this.province.setQuery('');
+    this.zipc.setQuery('');
+    this.countries.setQuery('');
     this.drugDay = null;
   }
 

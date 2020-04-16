@@ -118,7 +118,7 @@
           <div *ngFor="let i of s4" class="clr-col-6" style="padding: 0rem;">
             <input [disabled]="l.create_date == date" (click)='uncheckRadio(l.id,i.generic,"set4")' type="radio" name="s4-{{l.id}}"
               id="s4-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set4">
-            <label [title]="i.name" class="pointer" for="s4-{{i.generic}}-{{l.id}}"> {{i.name}}</label>
+            <label [title]="i.name" class="pointer" for="s4-{{i.generic}}-{{l.id}}"> <span [innerHTML]="i.name"></span></label>
           </div>
         </div>
       </td>
