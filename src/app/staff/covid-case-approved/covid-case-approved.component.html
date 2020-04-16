@@ -19,7 +19,7 @@
     </div>
   </div>
   <div class="clr-col-3">
-    <button class="btn btn-lg btn-success" (click)="checkApproved()" style="float: right;" [disabled]="!selected.length">จ่ายยา</button>
+    <button class="btn btn-lg btn-success" (click)="checkApproved()" style="float: right;" [disabled]="!selected.length">จ่ายของ</button>
   </div>
 </div>
 <div class="clr-row">
@@ -58,7 +58,7 @@
     <clr-datagrid [clrDgLoading]="isLoading" style="height: 20rem;">
       <clr-dg-column>รายการ</clr-dg-column>
       <clr-dg-column>จำนวนเบิกรวม</clr-dg-column>
-      <clr-dg-column>คงเหลือ</clr-dg-column>
+      <clr-dg-column>Stock คงเหลือ</clr-dg-column>
 
       <clr-dg-row *ngFor="let l of drugStock; let idx=index;" [ngClass]="{ 'isError': l.requisition_qty > stock_qty }">
         <clr-dg-cell>{{l.name}}</clr-dg-cell>
