@@ -12,7 +12,7 @@
         <td *ngFor="let i of gcsSum">
           {{i.name}}
           <br>
-          {{i.count}}
+          {{i.usage}}/{{i.qty}}
         </td>
       </tr>
     </table>
@@ -20,10 +20,10 @@
   <div class="clr-col-4">
     <table class="table">
       <tr>
-        <td *ngFor="let i of beds">
+        <td *ngFor="let i of BedsSum">
           {{i.name}}
           <br>
-          ใช้ {{i.usage}} จาก {{i.qty}}
+          {{i.usage}}/{{i.qty}}
         </td>
       </tr>
 
@@ -32,10 +32,10 @@
   <div class="clr-col-4">
     <table class="table">
       <tr>
-        <td *ngFor="let i of medicalSupplieSum">
+        <td *ngFor="let i of medicalSuppliesSum">
           {{i.name}}
           <br>
-          {{i.count}}
+          {{i.usage}}/{{i.qty}}
         </td>
       </tr>
     </table>
