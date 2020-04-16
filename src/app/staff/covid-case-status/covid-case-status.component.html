@@ -3,7 +3,7 @@
 </nav>
 
 <h3 style="float: left;">วันที่ {{date | dateTh:'DD/MM/YYYY'}} </h3>
-<h5>&nbsp;สถานะจะต้องบันทึกทุกวัน (ไม่สามารถบันทึกย้อนหลังได้)</h5>
+<h5>&nbsp;สถานะจะต้องบันทึกทุกวัน ก่อนเวลา 16:00 (ไม่สามารถบันทึกย้อนหลังได้)</h5>
 
 <div class="clr-row">
   <div class="clr-col-4">
@@ -73,7 +73,7 @@
         </div>
       </td>
       <td class="left">
-        <div *ngFor="let i of respirators">
+        <div *ngFor="let i of ventilators">
           <input [disabled]="l.create_date == date" type="radio" name="respirator-{{l.id}}" id="respirator-{{i.id}}-{{l.id}}" [(ngModel)]="l.respirator_id" [value]="i.id">
           <label [title]="i.name" class="pointer" for="respirator-{{i.id}}-{{l.id}}">
             {{i.name}}

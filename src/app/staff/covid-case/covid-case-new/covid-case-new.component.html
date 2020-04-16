@@ -61,7 +61,7 @@
 
           </div>
           <div class="clr-row">
-            <div class="clr-col-3 clr-form">
+            <div class="clr-col-2 clr-form">
               <div class="clr-form-control" style="margin-top: 0;">
                 <label for="example" class="clr-control-label">คำนำหน้าชื่อ <span class="required">*</span></label>
                 <div class="clr-control-container clr-error width-fit">
@@ -88,6 +88,16 @@
                 </div>
               </div>
             </div>
+            <div class="clr-col-2 clr-form">
+              <div class="clr-form-control" style="margin-top: 0;">
+                <label for="example" class="clr-control-label">ชื่อกลาง</label>
+                <div class="clr-control-container clr-error width-fit">
+                  <div class="clr-input-wrapper">
+                    <input type="text" id="example" name="mname" [(ngModel)]="mname" class="clr-input  width-fit">
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="clr-col-3 clr-form">
               <div class="clr-form-control" style="margin-top: 0;">
                 <label for="example" class="clr-control-label">นามสกุล <span class="required">*</span></label>
@@ -100,7 +110,7 @@
                 </div>
               </div>
             </div>
-            <div class="clr-col-3 clr-form">
+            <div class="clr-col-2 clr-form">
               <div class="clr-form-control" style="margin-top: 0;">
                 <label for="example" class="clr-control-label">เพศ <span class="required">*</span></label>
                 <clr-radio-container clrInline style="margin-top: 0;">
@@ -364,7 +374,7 @@
                 <div class="clr-col-2"></div>
                 <div class="clr-col-10">เครื่องช่วยหายใจ</div>
               </div>
-              <div class="clr-row" *ngFor="let i of respirators;let idx = index" [ngClass]="{isWarning: idx%2==0}">
+              <div class="clr-row" *ngFor="let i of ventilators;let idx = index" [ngClass]="{isWarning: idx%2==0}">
                 <div class="clr-col-2"><input type="radio" name="respiratorId" [(ngModel)]="respiratorId"
                     [value]="i.id">
                 </div>
@@ -376,7 +386,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="card">
       <div class="card-block">
         <div class="card-text">
@@ -388,8 +398,8 @@
                     <div class="clr-col-3  isProblem" style="padding: 0;"></div>
                     <div class="clr-col-9  isProblem">ชื่อยา</div>
                     <div class="clr-col-3 isWarning" style="text-align: right;">
-                        <input type="radio" name="s1" [(ngModel)]="s1" value="1">
-                      </div>
+                      <input type="radio" name="s1" [(ngModel)]="s1" value="1">
+                    </div>
                     <div class="clr-col-9 isWarning" style="padding-left: 0.2rem;padding-left: 0.2rem;">
                       Hydroxychloroquine 200 mg.</div>
                     <div class="clr-col-3" style="text-align: right;">
@@ -397,7 +407,7 @@
                     <div class="clr-col-9" style="padding-left: 0.2rem;padding-left: 0.2rem;">Darunavir 600mg+Ritonavir
                       100mg</div>
                     <div class="clr-col-3 isWarning" style="text-align: right;">
-                      <input type="radio" name="s3" [(ngModel)]="s3" value="1">  
+                      <input type="radio" name="s3" [(ngModel)]="s3" value="1">
                     </div>
                     <div class="clr-col-9 isWarning" style="padding-left: 0.2rem;padding-left: 0.2rem;">Azithromycin 250
                       mg.</div>
@@ -416,7 +426,7 @@
                     <div class="clr-col-9 isWarning" style="padding-left: 0.2rem;padding-left: 0.2rem;">Chloroquine 250
                       mg.</div>
                     <div class="clr-col-3" style="text-align: right;">
-                      <input type="radio" name="s2" [(ngModel)]="s2" value="2">  
+                      <input type="radio" name="s2" [(ngModel)]="s2" value="2">
                     </div>
                     <div class="clr-col-9" style="padding-left: 0.2rem;padding-left: 0.2rem;">Lopinavir 200 mg+Ritonavir
                       50 mg.</div>
@@ -445,12 +455,13 @@
                 <div class="clr-col-6">
                   <div class="clr-row">
                     <div class="clr-col-3" style="text-align: right;">
-                      <input type="radio" name="s4" [(ngModel)]="s4" value="1">  
+                      <input type="radio" name="s4" [(ngModel)]="s4" value="1">
                     </div>
-                    <div class="clr-col-9" style="padding-left: 0.2rem;padding-left: 0.2rem;">Favipiravir (เบิกจาก Antidotes) คลิก</div>
+                    <div class="clr-col-9" style="padding-left: 0.2rem;padding-left: 0.2rem;">Favipiravir (เบิกจาก
+                      Antidotes) คลิก</div>
                   </div>
                 </div>
-              
+
               </div>
             </div>
           </div>

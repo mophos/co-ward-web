@@ -18,8 +18,8 @@ export class BasicAuthService {
     return await this.http.get(url).toPromise();
   }
 
-  async getRespirators() {
-    const url = `${this.apiUrl}/v1/basic-auth/respirators`;
+  async getVentilators() {
+    const url = `${this.apiUrl}/v1/basic-auth/ventilators`;
     return await this.http.get(url).toPromise();
   }
 
