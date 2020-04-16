@@ -61,9 +61,9 @@ export class CovidCaseStatusComponent implements OnInit {
   modalDischarge = false;
   modalDischargeType = 'HOME';
   s1 = [{ generic: 1, name: 'Hydroxychloroquine 200 mg.' }, { generic: 2, name: 'Chloroquine 250 mg.' }];
-  s2 = [{ generic: 3, name: 'Darunavir 600mg+Ritonavir100 mg' }, { generic: 4, name: 'Lopinavir 200 mg+Ritonavir 50 mg.' }];
+  s2 = [{ generic: 3, name: 'Darunavir 600mg+Ritonavir100 mg.' }, { generic: 4, name: 'Lopinavir 200 mg/Ritonavir 50 mg.' }];
   s3 = [{ generic: 7, name: 'Azithromycin 250 mg.' }];
-  s4 = [{ generic: 8, name: 'Favipiravir (เบิกจาก AntiDost) คลิก' }];
+  s4 = [{ generic: 8, name: 'Favipiravir (เบิกจาก AntiDost) <a target="_BLANK" href="http://drug.nhso.go.th/Antidotes/index.jsp">คลิก</a>' }];
 
   dateDischarge: any;
   myDatePickerOptions: IMyOptions = {
@@ -90,7 +90,9 @@ export class CovidCaseStatusComponent implements OnInit {
     await this.getGCS();
     await this.getGCSSum();
     await this.getBeds();
+    await this.getBedSum();
     await this.getMedicalSupplies();
+    await this.getMedicalSuppliesSum();
 
     const date = new Date();
     this.dateDischarge = {
@@ -110,7 +112,6 @@ export class CovidCaseStatusComponent implements OnInit {
       const rs: any = await this.covidCaseService.getCovidCasePresent(this.query);
       if (rs.ok) {
         this.list = rs.rows;
-        console.log(this.list);
       } else {
         this.alertService.error(rs.error);
       }
@@ -403,4 +404,12 @@ export class CovidCaseStatusComponent implements OnInit {
       await this.getList();
     }
   }
+
+  uncheckRadioMedicalSupplies(listId, ms) {
+    const idx = findIndex(this.list, { id: listId });
+    if (idx > -1) {
+      this.list[idx].medical_supplie_id = this.list[idx].medical_supplie_id === ms ? null : ms;
+    }
+  }
+
 }

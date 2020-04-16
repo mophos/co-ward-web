@@ -2,7 +2,7 @@ import { CovidCaseService } from './../../services/covid-case.service';
 import { BasicAuthService } from './../../services/basic-auth.service';
 import { BasicService } from './../../services/basic.service';
 import { AlertService } from './../../../help/alert.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AutocompleteHospitalComponent } from 'src/app/help/autocomplete-hospital/autocomplete-hospital.component';
 import { IMyOptions } from 'mydatepicker-th';
@@ -12,6 +12,7 @@ import { AutocompleteSubdistrictComponent } from '../../../help/autocomplete-add
 import { AutocompleteZipcodeComponent } from '../../../help/autocomplete-address/autocomplete-zipcode/autocomplete-zipcode.component';
 import { AutocompleteCountriesComponent } from 'src/app/help/autocomplete-countries/autocomplete-countries.component';
 import * as moment from 'moment';
+import thaiIdCard from 'thai-id-card';
 
 @Component({
   selector: 'app-covid-case-new',
@@ -92,6 +93,19 @@ export class CovidCaseNewComponent implements OnInit {
   s4 = '';
   data: any;
   drugDay = '5';
+
+
+
+  modalCID = false;
+  modalCIDType = 'CID';
+  modalCidLoading = false;
+  isModelSearch = false;
+
+  modalCIDCid: any;
+  modalCIDCidError = false;
+
+  modalCIDPassport: any;
+  isKey = false;
   @ViewChild('hospital') hospitals: AutocompleteHospitalComponent;
   @ViewChild('countries') countries: AutocompleteCountriesComponent;
   @ViewChild('province') province: AutocompleteProvinceComponent;
@@ -101,6 +115,7 @@ export class CovidCaseNewComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private alertService: AlertService,
     private basicService: BasicService,
     private basicAuthService: BasicAuthService,
@@ -120,7 +135,8 @@ export class CovidCaseNewComponent implements OnInit {
     await this.getGCS();
     await this.getBeds();
     await this.getMedicalSupplies();
-    console.log(this.data);
+    this.modalCID = true;
+    // console.log(this.data);
 
     if (this.data) {
       await this.setData();
@@ -131,39 +147,44 @@ export class CovidCaseNewComponent implements OnInit {
   }
 
   setData() {
-    this.hn = this.data.hn;
-    this.an = this.data.an;
-    this.titleId = this.data.title_id;
-    this.fname = this.data.first_name;
-    this.lname = this.data.last_name;
-    this.genderId = this.data.gender_id;
-    this.countryId = this.data.country_id;
+    try {
 
-    if (this.data.birth_date) {
-      this.birthDate = {
-        date: {
-          year: moment(this.data.birth_date).format('YYYY'),
-          month: moment(this.data.birth_date).format('MM'),
-          day: moment(this.data.birth_date).format('DD'),
-        }
-      };
+      this.hn = this.data.hn;
+      this.an = this.data.an;
+      this.titleId = this.data.title_id;
+      this.fname = this.data.first_name;
+      this.mname = this.data.middle_name;
+      this.lname = this.data.last_name;
+      this.genderId = this.data.gender_id;
+
+      if (this.data.birth_date) {
+        this.birthDate = {
+          date: {
+            year: +moment(this.data.birth_date).format('YYYY'),
+            month: +moment(this.data.birth_date).format('M'),
+            day: +moment(this.data.birth_date).format('D'),
+          }
+        };
+      }
+      this.tel = this.data.telephone;
+      this.peopleType = this.data.people_type;
+      this.houseNo = this.data.house_no;
+      this.roomNo = this.data.room_no;
+      this.village = this.data.village;
+      this.villageName = this.data.village_name;
+      this.road = this.data.road;
+      this.ampurId = this.data.ampur_code;
+      this.tambonId = this.data.tambon_code;
+      this.provinceId = this.data.province_code;
+      this.zipcode = this.data.zipcode;
+      this.ampur.setQuery(this.data.ampur_name);
+      this.tambon.setQuery(this.data.tambon_name);
+      this.province.setQuery(this.data.province_name);
+      this.zipc.setQuery(this.data.zipcode);
+    } catch (error) {
+      console.log(error);
+
     }
-    this.tel = this.data.telephone;
-    this.peopleType = this.data.people_type;
-
-    this.houseNo = this.data.house_no;
-    this.roomNo = this.data.room_no;
-    this.village = this.data.village;
-    this.villageName = this.data.village_name;
-    this.road = this.data.road;
-    this.ampurId = this.data.ampur_code;
-    this.tambonId = this.data.tambon_code;
-    this.provinceId = this.data.province_code;
-    this.zipcode = this.data.zipcode;
-    this.ampur.setQuery(this.data.ampur_name);
-    this.tambon.setQuery(this.data.tambon_name);
-    this.province.setQuery(this.data.province_name);
-    this.zipc.setQuery(this.data.zipcode);
   }
 
   async getTitle() {
@@ -362,10 +383,12 @@ export class CovidCaseNewComponent implements OnInit {
   }
 
   clear() {
+    this.an = '';
     this.hn = '';
     this.fname = '';
     this.lname = '';
     this.tel = '';
+    this.genderId = null;
     this.admitDate = null;
     this.confirmDate = null;
     this.birthDate = null;
@@ -387,6 +410,7 @@ export class CovidCaseNewComponent implements OnInit {
     this.tambon.setQuery('');
     this.ampur.setQuery('');
     this.province.setQuery('');
+    this.zipc.setQuery('');
     this.countries.setQuery('');
     this.drugDay = null;
   }
@@ -459,6 +483,48 @@ export class CovidCaseNewComponent implements OnInit {
     }
 
 
+  }
+
+  async onSearchModal() {
+    try {
+      this.isModelSearch = true;
+      this.modalCIDCidError = !thaiIdCard.verify(this.modalCIDCid);
+      if (this.modalCIDType !== 'NO') {
+        if ((!this.modalCIDCidError && this.modalCIDType === 'CID') || this.modalCIDType === 'PASSPORT') {
+          const rs: any = await this.covidCaseService.checkNo(this.modalCIDType, this.modalCIDCid, this.modalCIDPassport);
+          if (rs.ok) {
+            if (rs.case === 'NEW') {
+              this.isKey = true;
+              this.modalCID = false;
+              // this.router.navigate(['/staff/covid-case-new', { type: this.modalCIDType, cid: this.modalCIDCid, passport: this.modalCIDPassport }]);
+            } else if (rs.case === 'REFER') {
+              const confirm = await this.alertService.confirm(`คุณรับผู้ป่วย Refer มาจาก ${rs.rows.hospname} ใช่หรือไม่ ?`);
+              if (confirm) {
+                this.isKey = true;
+                this.modalCID = false;
+                this.data = rs.rows;
+                this.setData();
+                // this.router.navigate(['/staff/covid-case-new', { isRefer: 'Y', type: this.modalCIDType, cid: this.modalCIDCid, passport: this.modalCIDPassport, data: JSON.stringify(rs.rows) }]);
+              }
+            }
+          } else {
+            this.alertService.error(rs.error);
+          }
+        }
+      } else {
+        this.isKey = true;
+        this.modalCID = false;
+        // this.router.navigate(['/staff/covid-case-new', { type: this.modalCIDType }]);
+      }
+      this.isModelSearch = false;
+    } catch (error) {
+      this.isModelSearch = false;
+      this.alertService.error(error);
+    }
+  }
+
+  onClickOpenModalCid() {
+    this.modalCID = true;
   }
 
 }
