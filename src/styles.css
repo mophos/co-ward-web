@@ -87,3 +87,10 @@
     text-align: left;
   }
 }
+
+.login-bg {
+  background-color: #25333D;
+  display: inline-block;
+  width: 100vw;
+  height: 100vh;
+}
