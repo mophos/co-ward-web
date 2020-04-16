@@ -150,9 +150,9 @@ export class CovidCaseNewComponent implements OnInit {
     this.villageName = this.data.village_name;
     this.road = this.data.road;
     this.ampurId = this.data.ampur_code;
-    this.tambonId  = this.data.tambon_code;
-    this.provinceId  = this.data.province_code;
-    this.zipcode =   this.data.zipcode;
+    this.tambonId = this.data.tambon_code;
+    this.provinceId = this.data.province_code;
+    this.zipcode = this.data.zipcode;
     this.ampur.setQuery(this.data.ampur_name);
     this.tambon.setQuery(this.data.tambon_name);
     this.province.setQuery(this.data.province_name);
@@ -431,6 +431,14 @@ export class CovidCaseNewComponent implements OnInit {
     this.ampur.setQuery(this.ampurName);
     this.tambon.setQuery(this.tambonName);
     this.zipc.setQuery(this.zipcode);
+  }
+
+  uncheckRadio(type, id) {
+    if ('GCS' == type && this.gcsId == id) {
+      this.gcsId = null;
+    } else if ('BED' == type && this.bedId == id) {
+      this.bedId = null;
+    }
   }
 
 }
