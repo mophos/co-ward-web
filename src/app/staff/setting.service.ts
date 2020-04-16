@@ -33,6 +33,11 @@ export class SettingService {
     return await this.http.get(url).toPromise();
   }
 
+  async getRemain() {
+    const url = `${this.apiUrl}/v1/staff/setting/beds/remain`;
+    return await this.http.get(url).toPromise();
+  }
+
   async getVentilators() {
     const url = `${this.apiUrl}/v1/staff/setting/ventilators`;
     return await this.http.get(url).toPromise();

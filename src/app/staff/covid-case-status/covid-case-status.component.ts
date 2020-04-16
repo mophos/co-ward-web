@@ -22,6 +22,7 @@ export class CovidCaseStatusComponent implements OnInit {
   BedsSum = [];
   gcs: any = [];
   gcsId: any;
+  reason: any;
 
   beds: any = [];
   bedId: any;
@@ -319,6 +320,7 @@ export class CovidCaseStatusComponent implements OnInit {
           } else if (this.modalDischargeType === 'REFER') {
             status = 'REFER';
             obj.hospitalId = this.hospitalId;
+            obj.reason = this.reason;
           }
           obj.dateDischarge = this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day + ' ' + this.hour + ':' + this.minute + ':00';
           obj.covidCaseId = this.selected.covid_case_id;

@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class SettingBedsComponent implements OnInit {
 
   list = [];
+  remain = [];
   isLoading = false;
   isSave = false;
   constructor(
@@ -27,6 +28,22 @@ export class SettingBedsComponent implements OnInit {
       const rs: any = await this.settingService.getBeds();
       if (rs.ok) {
         this.list = rs.rows;
+      } else {
+        this.alertService.error(rs.error);
+      }
+      this.isLoading = false;
+    } catch (error) {
+      this.isLoading = false;
+      this.alertService.error(error);
+    }
+  }
+
+  async getRemain() {
+    try {
+      this.isLoading = true;
+      const rs: any = await this.settingService.getRemain();
+      if (rs.ok) {
+        this.remain = rs.rows;
       } else {
         this.alertService.error(rs.error);
       }
