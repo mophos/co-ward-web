@@ -40,7 +40,7 @@ import { CovidCaseApprovedComponent } from './covid-case-approved/covid-case-app
 import { HomeComponent } from './home/home.component';
 import { CovidCaseRequisitionComponent } from './covid-case-requisition/covid-case-requisition.component';
 import { PayComponent } from './pay/pay.component';
-import { SettingVentilatorsComponent } from './setting/setting-ventilators/setting-ventilators.component';
+import { SettingMedicalSuppliesComponent } from './setting/setting-medical-supplies/setting-medical-supplies.component';
 import { InventoryStatusComponent } from './inventory-status/inventory-status.component';
 @NgModule({
   declarations: [
@@ -62,7 +62,7 @@ import { InventoryStatusComponent } from './inventory-status/inventory-status.co
     HomeComponent,
     CovidCaseRequisitionComponent,
     PayComponent,
-    SettingVentilatorsComponent,
+    SettingMedicalSuppliesComponent,
     InventoryStatusComponent
   ],
   imports: [

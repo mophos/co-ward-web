@@ -1,14 +1,14 @@
 
-import { SettingService } from './../../setting.service';
-import { AlertService } from './../../../help/alert.service';
+import { SettingService } from '../../setting.service';
+import { AlertService } from '../../../help/alert.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-setting-ventilators',
-  templateUrl: './setting-ventilators.component.html',
+  selector: 'app-setting-medical-supplies',
+  templateUrl: './setting-medical-supplies.component.html',
   styles: []
 })
-export class SettingVentilatorsComponent implements OnInit {
+export class SettingMedicalSuppliesComponent implements OnInit {
   list = [];
   isLoading = false;
   isSave = false;
@@ -24,7 +24,7 @@ export class SettingVentilatorsComponent implements OnInit {
   async getList() {
     try {
       this.isLoading = true;
-      const rs: any = await this.settingService.getVentilators();
+      const rs: any = await this.settingService.getMedicalSupplies();
       if (rs.ok) {
         this.list = rs.rows;
       } else {
@@ -40,7 +40,7 @@ export class SettingVentilatorsComponent implements OnInit {
   async onClickSave() {
     try {
       this.isSave = true;
-      const rs: any = await this.settingService.saveVentilator(this.list);
+      const rs: any = await this.settingService.saveMedicalSupplies(this.list);
       if (rs.ok) {
         this.getList();
         this.alertService.success();

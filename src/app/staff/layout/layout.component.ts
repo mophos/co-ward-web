@@ -38,7 +38,7 @@ export class LayoutComponent implements OnInit {
   balanceBedMeny: any;
   statusTrackingMenu: any;
   settingMenu: any;
-  settingVentilatorsMenu: any;
+  settingMedicalSuppliesMenu: any;
 
   public jwtHelper = new JwtHelperService();
   constructor(
@@ -63,7 +63,7 @@ export class LayoutComponent implements OnInit {
     this.checkBedsMenu = findIndex(this.rights, { name: 'STAFF_CHECK_BEDS' }) === -1 ? false : true;
     this.settingBasicMenu = findIndex(this.rights, { name: 'STAFF_SETTING_BASIC' }) === -1 ? false : true;
     this.settingBedsMenu = findIndex(this.rights, { name: 'STAFF_SETTING_BEDS' }) === -1 ? false : true;
-    this.settingVentilatorsMenu = findIndex(this.rights, { name: 'STAFF_SETTING_VENTILATORS' }) === -1 ? false : true;
+    this.settingMedicalSuppliesMenu = findIndex(this.rights, { name: 'STAFF_SETTING_VENTILATORS' }) === -1 ? false : true;
   }
 
   ngOnInit() {

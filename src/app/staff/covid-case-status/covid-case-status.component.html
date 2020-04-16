@@ -75,7 +75,7 @@
         </div>
       </td>
       <td class="left">
-        <div *ngFor="let i of ventilators">
+        <div *ngFor="let i of medicalSupplies">
           <input [disabled]="l.create_date == date" type="radio" name="respirator-{{l.id}}" id="respirator-{{i.id}}-{{l.id}}"
             [(ngModel)]="l.respirator_id" [value]="i.id">
           <label [title]="i.name" class="pointer" for="respirator-{{i.id}}-{{l.id}}">
