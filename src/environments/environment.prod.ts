@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: '/co-ward/api'
+  apiUrl: '/CO-ward/api'
 };

@@ -10,6 +10,7 @@ import { AutocompleteProvinceComponent } from '../../../help/autocomplete-addres
 import { AutocompleteDistrictComponent } from '../../../help/autocomplete-address/autocomplete-district/autocomplete-district.component';
 import { AutocompleteSubdistrictComponent } from '../../../help/autocomplete-address/autocomplete-subdistrict/autocomplete-subdistrict.component';
 import { AutocompleteZipcodeComponent } from '../../../help/autocomplete-address/autocomplete-zipcode/autocomplete-zipcode.component';
+import { AutocompleteCountriesComponent } from 'src/app/help/autocomplete-countries/autocomplete-countries.component';
 import * as moment from 'moment';
 
 @Component({
@@ -49,8 +50,8 @@ export class CovidCaseNewComponent implements OnInit {
   ampurName: any;
   provinceId: any;
   provinceName: any;
+  countryId: any = 20;
   zipcode: any;
-  countryId: any;
   countryName: any;
   // -------------------
 
@@ -92,7 +93,7 @@ export class CovidCaseNewComponent implements OnInit {
   data: any;
   drugDay = '5';
   @ViewChild('hospital') hospitals: AutocompleteHospitalComponent;
-
+  @ViewChild('countries') countries: AutocompleteCountriesComponent;
   @ViewChild('province') province: AutocompleteProvinceComponent;
   @ViewChild('ampur') ampur: AutocompleteDistrictComponent;
   @ViewChild('tambon') tambon: AutocompleteSubdistrictComponent;
@@ -114,11 +115,16 @@ export class CovidCaseNewComponent implements OnInit {
   }
 
   async ngOnInit() {
+    // this.countries.setQuery('ไทย');
     await this.getTitle();
     await this.getGCS();
     await this.getBeds();
     await this.getMedicalSupplies();
-    await this.setData();
+    console.log(this.data);
+
+    if (this.data) {
+      await this.setData();
+    }
 
     // await this.getGenericSet();
     // await this.setDrugs();
@@ -131,7 +137,7 @@ export class CovidCaseNewComponent implements OnInit {
     this.fname = this.data.first_name;
     this.lname = this.data.last_name;
     this.genderId = this.data.gender_id;
-    console.log(this.data.birth_date);
+    this.countryId = this.data.country_id;
 
     if (this.data.birth_date) {
       this.birthDate = {
@@ -229,6 +235,9 @@ export class CovidCaseNewComponent implements OnInit {
     }
   }
 
+  async onSelectCountry(e) {
+    this.countryId = e.id;
+  }
 
   clearError() {
     this.errorHN = false;
@@ -247,7 +256,6 @@ export class CovidCaseNewComponent implements OnInit {
       if (!this.hn.length) {
         this.errorHN = true;
       }
-
 
       if (!this.titleId) {
         this.errorTitleName = true;
@@ -301,7 +309,6 @@ export class CovidCaseNewComponent implements OnInit {
           drugs.push({ genericId: 5 });
         } else if (+this.s2 === 2) {
           drugs.push({ genericId: 4 });
-          drugs.push({ genericId: 6 });
         }
 
         if (+this.s3 === 1) {
@@ -380,6 +387,7 @@ export class CovidCaseNewComponent implements OnInit {
     this.tambon.setQuery('');
     this.ampur.setQuery('');
     this.province.setQuery('');
+    this.countries.setQuery('');
     this.drugDay = null;
   }
 
@@ -435,11 +443,22 @@ export class CovidCaseNewComponent implements OnInit {
   }
 
   uncheckRadio(type, id) {
-    if ('GCS' == type && this.gcsId == id) {
+    if ('GCS' === type && this.gcsId === id) {
       this.gcsId = null;
-    } else if ('BED' == type && this.bedId == id) {
+    } else if ('BED' === type && this.bedId === id) {
       this.bedId = null;
+
+    } else if ('S1' === type && this.s1 === id) {
+      this.s1 = null;
+    } else if ('S2' === type && this.s2 === id) {
+      this.s2 = null;
+    } else if ('S3' === type && this.s3 === id) {
+      this.s3 = null;
+    } else if ('S4' === type && this.s4 === id) {
+      this.s4 = null;
     }
+
+
   }
 
 }

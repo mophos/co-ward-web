@@ -41,8 +41,8 @@
                 <label for="example" class="clr-control-label">เลขที่บัตรประชาชน <span class="required">*</span></label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper ">
-                    <input type="text" id="example" name="cid" maxlength="13" [(ngModel)]="cid"
-                      class="clr-input width-fit" readonly>
+                    <input type="text" id="example" name="cid" maxlength="13" [(ngModel)]="cid" class="clr-input width-fit"
+                      readonly>
                   </div>
                 </div>
               </div>
@@ -152,8 +152,7 @@
                 <label for="example" class="clr-control-label">เบอร์โทรศัพท์</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <input type="text" name="tel" appNumberOnly maxlength="10" [(ngModel)]="tel"
-                      class="clr-input  width-fit">
+                    <input type="text" name="tel" appNumberOnly maxlength="10" [(ngModel)]="tel" class="clr-input  width-fit">
                     <!-- <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="!tel.length"></clr-icon> -->
                   </div>
                   <!-- <span class="clr-subtext" *ngIf="!tel.length">กรุณาระบุเบอร์โทรศัพท์</span> -->
@@ -193,6 +192,19 @@
           <div class="clr-row">
             <div class="clr-col-2 form">
               <div class="clr-form-control" style="margin-top: 0;">
+                <label class="clr-control-label">ประเทศ</label>
+                <div class="clr-control-container clr-error width-fit">
+                  <div class="clr-input-wrapper">
+                    <app-autocomplete-countries style="padding: 0px" #countries [query]="'ไทย'" (onselect)="onSelectCountry($event)">
+                    </app-autocomplete-countries>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="clr-row" *ngIf="countryId == 20">
+            <div class="clr-col-2 form">
+              <div class="clr-form-control" style="margin-top: 0;">
                 <label for="example" class="clr-control-label">บ้านเลขที่</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
@@ -201,7 +213,6 @@
                 </div>
               </div>
             </div>
-
             <div class="clr-col-2 form">
               <div class="clr-form-control" style="margin-top: 0;">
                 <label class="clr-control-label">หมายเลขห้อง</label>
@@ -287,16 +298,6 @@
                 </div>
               </div>
             </div>
-            <div class="clr-col-2 form">
-              <div class="clr-form-control" style="margin-top: 0;">
-                <label class="clr-control-label">ประเทศ</label>
-                <div class="clr-control-container clr-error width-fit">
-                  <div class="clr-input-wrapper">
-                    <!-- <input type="text"  name="road" [(ngModel)]="road" class="clr-input  width-fit"> -->
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -375,7 +376,7 @@
                 <div class="clr-col-10">เครื่องช่วยหายใจ</div>
               </div>
               <div class="clr-row" *ngFor="let i of medicalSupplies;let idx = index" [ngClass]="{isWarning: idx%2==0}">
-                <div class="clr-col-2"><input type="radio" name="medicalSupplieId" [(ngModel)]="medicalSupplieId"
+                <div class="clr-col-2"><input type="radio" name="medicalSupplieId" [(ngModel)]="medicalSupplieId" (click)="uncheckRadio('MEDSUP',i.id)"
                     [value]="i.id">
                 </div>
                 <div class="clr-col-10">{{i.name}}</div>
@@ -398,18 +399,19 @@
                     <div class="clr-col-3  isProblem" style="padding: 0;"></div>
                     <div class="clr-col-9  isProblem">ชื่อยา</div>
                     <div class="clr-col-3 isWarning" style="text-align: right;">
-                      <input type="radio" name="s1" [(ngModel)]="s1" value="1">
+                      <input type="radio" name="s1" [(ngModel)]="s1" value="1"  (click)="uncheckRadio('S1','1')">
                     </div>
                     <div class="clr-col-9 isWarning" style="padding-left: 0.2rem;padding-left: 0.2rem;">
                       Hydroxychloroquine 200 mg.</div>
                     <div class="clr-col-3" style="text-align: right;">
-                      <input type="radio" name="s2" [(ngModel)]="s2" value="1"></div>
+                      <input type="radio" name="s2" [(ngModel)]="s2" value="1" (click)="uncheckRadio('S2','1')"></div>
                     <div class="clr-col-9" style="padding-left: 0.2rem;padding-left: 0.2rem;">Darunavir 600mg+Ritonavir
                       100mg</div>
                     <div class="clr-col-3 isWarning" style="text-align: right;">
-                      <input type="radio" name="s3" [(ngModel)]="s3" value="1">
+                      <input type="radio" name="s3" [(ngModel)]="s3" value="1" (click)="uncheckRadio('S3','1')">
                     </div>
-                    <div class="clr-col-9 isWarning" style="padding-left: 0.2rem;padding-left: 0.2rem;">Azithromycin 250
+                    <div class="clr-col-9 isWarning" style="padding-left: 0.2rem;padding-left: 0.2rem;">Azithromycin
+                      250
                       mg.</div>
                     <!-- <div class="clr-col-3" style="text-align: right;">
                       <input type="radio" name="s4" [(ngModel)]="s4" value="1">  
@@ -422,13 +424,13 @@
                     <div class="clr-col-3 isProblem" style="text-align: right;"></div>
                     <div class="clr-col-9 isProblem" style="padding-left: 0.2rem;padding-left: 0.2rem;">ชื่อยา</div>
                     <div class="clr-col-3 isWarning" style="text-align: right;">
-                      <input type="radio" name="s1" [(ngModel)]="s1" value="2"></div>
+                      <input type="radio" name="s1" [(ngModel)]="s1" value="2" (click)="uncheckRadio('S1','2')"></div>
                     <div class="clr-col-9 isWarning" style="padding-left: 0.2rem;padding-left: 0.2rem;">Chloroquine 250
                       mg.</div>
                     <div class="clr-col-3" style="text-align: right;">
-                      <input type="radio" name="s2" [(ngModel)]="s2" value="2">
+                      <input type="radio" name="s2" [(ngModel)]="s2" value="2" (click)="uncheckRadio('S2','2')">
                     </div>
-                    <div class="clr-col-9" style="padding-left: 0.2rem;padding-left: 0.2rem;">Lopinavir 200 mg+Ritonavir
+                    <div class="clr-col-9" style="padding-left: 0.2rem;padding-left: 0.2rem;">Lopinavir 200 mg/Ritonavir
                       50 mg.</div>
                   </div>
                 </div>
@@ -455,10 +457,10 @@
                 <div class="clr-col-6">
                   <div class="clr-row">
                     <div class="clr-col-3" style="text-align: right;">
-                      <input type="radio" name="s4" [(ngModel)]="s4" value="1">
+                      <input type="radio" name="s4" [(ngModel)]="s4" value="1" (click)="uncheckRadio('S4','1')">
                     </div>
                     <div class="clr-col-9" style="padding-left: 0.2rem;padding-left: 0.2rem;">Favipiravir (เบิกจาก
-                      Antidotes) คลิก</div>
+                      Antidote) คลิก</div>
                   </div>
                 </div>
 
@@ -469,8 +471,7 @@
       </div>
 
       <div class="card-footer">
-        <button class="btn btn-success btn-block" (click)="onClickSave()" title="บันทึก"
-          [disabled]="!medicalSupplieId || !bedId || !gcsId">
+        <button class="btn btn-success btn-block" (click)="onClickSave()" title="บันทึก" [disabled]="!medicalSupplieId || !bedId || !gcsId || !confirmDate || !admitDate">
           <clr-icon shape="floppy"></clr-icon> บันทึก
         </button>
 
