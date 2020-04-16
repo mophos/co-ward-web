@@ -48,9 +48,10 @@ const routes: Routes = [
         canActivate: [AuthCovidCaseService],
         children: [
           { path: '', component: CovidCaseComponent },
-          { path: 'new', component: CovidCaseNewComponent },
+          // { path: 'new', component: CovidCaseNewComponent },
         ]
       },
+      { path: 'covid-case-new', canActivate: [AuthCovidCaseService], component: CovidCaseNewComponent },
       { path: 'covid-case-status', canActivate: [AuthCovidCaseStatusService], component: CovidCaseStatusComponent },
       { path: 'covid-case-approved', canActivate: [AuthCovidCaseApprovedService], component: CovidCaseApprovedComponent },
       { path: 'covid-case-requisition', canActivate: [AuthCovidCaseRequisitionService], component: CovidCaseRequisitionComponent },

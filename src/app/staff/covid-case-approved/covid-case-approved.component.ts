@@ -1,6 +1,7 @@
 import { CovidCaseService } from './../services/covid-case.service';
 import { AlertService } from './../../help/alert.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-covid-case-approved',
   templateUrl: './covid-case-approved.component.html',
@@ -20,9 +21,21 @@ export class CovidCaseApprovedComponent implements OnInit {
   hospIdClient: any;
   hospName: any;
   reqId: any;
+
+
+  modalCID = false;
+  modalCIDType = 'CID';
+  modalCidLoading = false;
+  isModelSearch = false;
+
+  modalCIDCid: any;
+  modalCIDCidError = false;
+
+  modalCIDPassport: any;
   constructor(
     private alertService: AlertService,
-    private covidCaseService: CovidCaseService
+    private covidCaseService: CovidCaseService,
+    private router: Router
   ) { }
 
   ngOnInit() {
