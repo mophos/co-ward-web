@@ -375,7 +375,7 @@
                 <div class="clr-col-10">เครื่องช่วยหายใจ</div>
               </div>
               <div class="clr-row" *ngFor="let i of medicalSupplies;let idx = index" [ngClass]="{isWarning: idx%2==0}">
-                <div class="clr-col-2"><input type="radio" name="respiratorId" [(ngModel)]="respiratorId"
+                <div class="clr-col-2"><input type="radio" name="medicalSupplieId" [(ngModel)]="medicalSupplieId"
                     [value]="i.id">
                 </div>
                 <div class="clr-col-10">{{i.name}}</div>
@@ -440,7 +440,7 @@
 
       <!-- <div class="card-footer">
         <button class="btn btn-success btn-block" (click)="onClickSave()" title="บันทึก"
-          [disabled]="!ventilatorId || !bedId || !gcsId">
+          [disabled]="!medicalSupplieId || !bedId || !gcsId">
           <clr-icon shape="floppy"></clr-icon> บันทึก
         </button>
 
@@ -470,7 +470,7 @@
 
       <div class="card-footer">
         <button class="btn btn-success btn-block" (click)="onClickSave()" title="บันทึก"
-          [disabled]="!ventilatorId || !bedId || !gcsId">
+          [disabled]="!medicalSupplieId || !bedId || !gcsId">
           <clr-icon shape="floppy"></clr-icon> บันทึก
         </button>
 

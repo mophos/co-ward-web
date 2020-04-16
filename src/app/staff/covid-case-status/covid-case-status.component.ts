@@ -27,10 +27,10 @@ export class CovidCaseStatusComponent implements OnInit {
   beds: any = [];
   bedId: any;
 
-  respiratorSum: any = [];
+  medicalSupplieSum: any = [];
   medicalSupplies: any = [];
   medicalSuppliesSum: any = [];
-  respiratorId: any;
+  medicalSupplieId: any;
   hospitalId: any;
 
   hour: any;
@@ -86,8 +86,6 @@ export class CovidCaseStatusComponent implements OnInit {
     await this.getGCS();
     await this.getGCSSum();
     await this.getBeds();
-    // await this.getBedSum();
-    // await this.getRespiratorSum();
     await this.getMedicalSupplies();
 
     const date = new Date();
@@ -249,10 +247,12 @@ export class CovidCaseStatusComponent implements OnInit {
   }
 
   async confirm(id) {
+    this.showDetail = {};
+
     const idx = findIndex(this.list, { id });
     let gcsId: any;
     let bedId: any;
-    let venId: any;
+    let msId: any;
     let set1: any;
     let set2: any;
     let set3: any;
@@ -260,7 +260,8 @@ export class CovidCaseStatusComponent implements OnInit {
     if (idx > -1) {
       gcsId = this.list[idx].gcs_id;
       bedId = this.list[idx].bed_id;
-      venId = this.list[idx].ventilator_id;
+      msId = this.list[idx].medical_supplie_id;
+      console.log(msId);
       set1 = this.list[idx].set1;
       set2 = this.list[idx].set2;
       set3 = this.list[idx].set3;
@@ -277,10 +278,11 @@ export class CovidCaseStatusComponent implements OnInit {
       this.showDetail.bedId = this.beds[idxBed].id;
       this.showDetail.bedName = this.beds[idxBed].name;
     }
-    const idxVId = findIndex(this.medicalSupplies, { id: venId });
-    if (idxGcs > -1) {
-      this.showDetail.bedId = this.medicalSupplies[idxVId].id;
-      this.showDetail.bedName = this.medicalSupplies[idxVId].name;
+
+    const idxMs = findIndex(this.medicalSupplies, { id: msId });
+    if (idxMs > -1) {
+      this.showDetail.medicalSupplieId = this.medicalSupplies[idxMs].id;
+      this.showDetail.medicalSupplieName = this.medicalSupplies[idxMs].name;
     }
     if (this.list[idx].set1 === 1) {
       this.showDetail.set1Name = 'Hydroxychloroquine 200 mg.';
@@ -295,11 +297,11 @@ export class CovidCaseStatusComponent implements OnInit {
     }
 
     if (this.list[idx].set3 === 7) {
-      this.showDetail.set2Name = 'Azithromycin 250 mg.';
+      this.showDetail.set3Name = 'Azithromycin 250 mg.';
     }
 
     if (this.list[idx].set4 === 8) {
-      this.showDetail.set2Name = 'Favipiravir (เบิกจาก AntiDost) คลิก';
+      this.showDetail.set4Name = 'Favipiravir (เบิกจาก AntiDost) คลิก';
     }
 
     console.log(this.showDetail);

@@ -32,7 +32,7 @@
   <div class="clr-col-4">
     <table class="table">
       <tr>
-        <td *ngFor="let i of ventilatorSum">
+        <td *ngFor="let i of medicalSupplieSum">
           {{i.name}}
           <br>
           {{i.count}}
@@ -85,9 +85,9 @@
       </td>
       <td class="left">
         <div *ngFor="let i of medicalSupplies">
-          <input [disabled]="l.create_date == date" type="radio" name="respirator-{{l.id}}" id="respirator-{{i.id}}-{{l.id}}"
-            [(ngModel)]="l.respirator_id" [value]="i.id">
-          <label [title]="i.name" class="pointer" for="respirator-{{i.id}}-{{l.id}}">
+          <input [disabled]="l.create_date == date" type="radio" name="medicalSupplie-id-{{l.id}}" id="medicalSupplie-{{i.id}}-{{l.id}}"
+            [(ngModel)]="l.medical_supplie_id" [value]="i.id">
+          <label [title]="i.name" class="pointer" for="medicalSupplie-{{i.id}}-{{l.id}}">
             {{i.name}}
           </label>
         </div>
@@ -220,8 +220,9 @@
 
 
 <clr-modal [(clrModalOpen)]="confirmDetail" [clrModalSize]="'xl'">
-  <h3 class="modal-title">กรุณาเลือกสาเหตุ</h3>
+  <h3 class="modal-title">กรุณาตรวจสอบรายการให้ถูกต้อง</h3>
   <div class="modal-body">
+    
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-success btn-block" (click)="save()">บันทึก</button>
