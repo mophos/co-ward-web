@@ -15,6 +15,7 @@ import { NumberOnlyDirective } from './number-only.directive';
 import { AutocompleteHospitalRequisitionComponent } from './autocomplete-hospital-requisition/autocomplete-hospital-requisition.component';
 import { SafePipe } from './safe.pipe';
 import { AutocompleteCountriesComponent } from './autocomplete-countries/autocomplete-countries.component';
+import { EnNoSpaceDirective } from './en-no-space.directive';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AutocompleteCountriesComponent } from './autocomplete-countries/autocom
     NumberOnlyDirective,
     AutocompleteHospitalRequisitionComponent,
     SafePipe,
-    AutocompleteCountriesComponent
+    AutocompleteCountriesComponent,
+    EnNoSpaceDirective
   ],
   imports: [
     CommonModule,
@@ -50,7 +52,8 @@ import { AutocompleteCountriesComponent } from './autocomplete-countries/autocom
     AutocompleteHospitalComponent,
     NumberOnlyDirective,
     AutocompleteHospitalRequisitionComponent,
-    AutocompleteCountriesComponent
+    AutocompleteCountriesComponent,
+    EnNoSpaceDirective
   ]
 })
 export class HelpModule { }
