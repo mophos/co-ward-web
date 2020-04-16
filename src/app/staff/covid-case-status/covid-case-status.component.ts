@@ -24,6 +24,8 @@ export class CovidCaseStatusComponent implements OnInit {
   gcsId: any;
   reason: any;
 
+  query: any = '';
+
   saveId: any;
 
   beds: any = [];
@@ -105,7 +107,7 @@ export class CovidCaseStatusComponent implements OnInit {
 
   async getList() {
     try {
-      const rs: any = await this.covidCaseService.getCovidCasePresent();
+      const rs: any = await this.covidCaseService.getCovidCasePresent(this.query);
       if (rs.ok) {
         this.list = rs.rows;
         console.log(this.list);
@@ -393,6 +395,12 @@ export class CovidCaseStatusComponent implements OnInit {
     const idx = findIndex(this.list, { id: listId });
     if (idx > -1 && type) {
       this.list[idx][type] = this.list[idx][type] === generic ? null : generic;
+    }
+  }
+
+  async doEnter(e) {
+    if (e.keyCode === 13) {
+      await this.getList();
     }
   }
 }
