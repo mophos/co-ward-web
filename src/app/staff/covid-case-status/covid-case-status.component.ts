@@ -24,6 +24,8 @@ export class CovidCaseStatusComponent implements OnInit {
   gcsId: any;
   reason: any;
 
+  saveId: any;
+
   beds: any = [];
   bedId: any;
 
@@ -257,6 +259,7 @@ export class CovidCaseStatusComponent implements OnInit {
     let set2: any;
     let set3: any;
     let set4: any;
+    this.saveId = idx;
     if (idx > -1) {
       gcsId = this.list[idx].gcs_id;
       bedId = this.list[idx].bed_id;

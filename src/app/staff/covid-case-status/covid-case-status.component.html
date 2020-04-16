@@ -124,7 +124,7 @@
       </td>
       <td style="text-align: right;">
         <div>
-          <button class="btn btn-sm btn-success" (click)="confirm(l.id)"
+          <button class="btn btn-sm btn-success" (click)="onClickSave(l.id)"
             [disabled]="l.create_date == date">บันทึก</button>
         </div>
         <div>
@@ -222,9 +222,9 @@
 <clr-modal [(clrModalOpen)]="confirmDetail" [clrModalSize]="'xl'">
   <h3 class="modal-title">กรุณาตรวจสอบรายการให้ถูกต้อง</h3>
   <div class="modal-body">
-    
+    <div></div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success btn-block" (click)="save()">บันทึก</button>
+    <button type="button" class="btn btn-success btn-block" (click)="onClickSave(saveId)">บันทึก</button>
   </div>
 </clr-modal>
