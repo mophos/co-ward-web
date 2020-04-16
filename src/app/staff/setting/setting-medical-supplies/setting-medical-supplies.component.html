@@ -11,11 +11,14 @@
 
   <clr-dg-row *clrDgItems="let l of list; let idx=index;">
     <clr-dg-cell>{{l.name}}</clr-dg-cell>
-    <clr-dg-cell><input class="clr-input width-fit" type="text" appNumberOnly name="{{l.qty}}" [(ngModel)]="l.qty">
+    <clr-dg-cell><input class="clr-input width-fit" style="text-align: right;" type="text" appNumberOnly
+        name="{{l.qty}}" [(ngModel)]="l.qty">
     </clr-dg-cell>
-    <clr-dg-cell><input class="clr-input width-fit" type="text" appNumberOnly name="{{l.covid_qty}}"
-        [(ngModel)]="l.covid_qty"></clr-dg-cell>
-    <clr-dg-cell>{{l.usage_qty}}</clr-dg-cell>
+    <clr-dg-cell><input class="clr-input width-fit" style="text-align: right;" type="text" appNumberOnly
+        name="{{l.qty}}" [(ngModel)]="l.covid_qty"></clr-dg-cell>
+    <clr-dg-cell style="float: right;">
+      <label for="" style="float: right;">{{l.usage_qty}}</label>
+    </clr-dg-cell>
   </clr-dg-row>
   <clr-dg-footer>
     <clr-dg-pagination #pagination>

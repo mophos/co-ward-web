@@ -1,28 +1,65 @@
-<div class="login-wrapper">
+<!-- <div class="login-wrapper">
   <form class="login">
     <section class="title">
+      <img src="../../assets/moph.png" alt="" width="50%;" style="text-align:center;">
       <h3 class="welcome">Welcome to</h3>
       CO-ward
-      <!-- <h5 class="hint">ระบบจัดสรรเวชภัณฑ์มิใช่ยาสำหรับสถานการณ์ COVID-19</h5> -->
       <h5 class="hint">Version : {{version}}</h5>
     </section>
     <div class="login-group">
-      <!-- <div class="auth-source select">
-        <select [(ngModel)]="userTypeId" name="slUserType">
-          <option *ngFor="let item of userTypes" [value]="item.id">{{item.type}}</option>
-        </select>
-      </div> -->
       <input class="username" type="text" [(ngModel)]="username" name="login_username" (keyup)="onKeyEnter($event)"
         placeholder="ชื่อผู้ใช้งาน">
       <input class="password" type="password" [(ngModel)]="password" name="login_password" (keyup)="onKeyEnter($event)"
         placeholder="รหัสผ่าน">
-
       <div class="error active" *ngIf="isError">
         {{ errorMessage || 'เกิดข้อผิดพลาด'}}
       </div>
-      <button type="button" [disabled]="!username || !password" (click)="doLogin()"
-        class="btn btn-primary">เข้าใช้งานระบบ</button>
-      <!-- <a href="javascript://" (click)="register()" class="signup">ลงทะเบียนเข้าใช้งาน</a> -->
+      <button type="button" [disabled]="!username || !password || isLogin" (click)="doLogin()" class="btn btn-primary">เข้าใช้งานระบบ</button>
     </div>
   </form>
+</div> -->
+<div class="login-bg">
+  <div class="clr-row">
+    <div class="clr-col-4"></div>
+    <div class="clr-col-4">
+      <div class="card" style="width: 90%; text-align: center; border-radius: 1%; margin-top: 30%;">
+        <div class="card-body">
+          <div class="clr-row">
+            <div class="clr-col-12">
+              <img src="../../assets/moph.png" alt="" width="30%;" style="text-align:center; padding-top: 2rem;">
+              <h2 class="welcome">Welcome to CO-ward</h2>
+              <h4 class="hint">Version : {{version}}</h4>
+            </div>
+          </div>
+          <br>
+          <div class="clr-row">
+            <div class="clr-col-12">
+              <input style="text-align:center; width: 60%;" type="text" [(ngModel)]="username" name="login_username"
+                (keyup)="onKeyEnter($event)" placeholder="ชื่อผู้ใช้งาน">
+            </div>
+          </div>
+          <br>
+          <div class="clr-row">
+            <div class="clr-col-12">
+              <input style="text-align:center; width: 60%;" type="password" [(ngModel)]="password"
+                name="login_password" (keyup)="onKeyEnter($event)" placeholder="รหัสผ่าน">
+            </div>
+          </div>
+          <br>
+          <div class="clr-row">
+            <div class="clr-col-12">
+              <div class="error active" *ngIf="isError">
+                {{ errorMessage || 'เกิดข้อผิดพลาด'}}
+              </div>
+              <button style="width: 100%" type="button" [disabled]="!username || !password || isLogin" (click)="doLogin()" class="btn btn-primary">เข้าใช้งานระบบ</button>
+            </div>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+    <div class="clr-col-4"></div>
+  </div>
 </div>
+
+<app-loadding #loading></app-loadding>
