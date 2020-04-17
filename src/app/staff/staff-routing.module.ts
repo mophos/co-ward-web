@@ -35,6 +35,8 @@ import { AuthCovidCaseRequisitionService } from '../auth-staff/auth-covid-case-r
 import { AuthPayService } from '../auth-staff/auth-pay.service';
 import { SettingMedicalSuppliesComponent } from './setting/setting-medical-supplies/setting-medical-supplies.component';
 import { ProfessionalComponent } from './setting/professional/professional.component';
+import { AuthProvinceSetSupUserService } from '../auth-staff/auth-province-set-sup-user.service';
+import { ManageProvinceSetSupUserComponent } from './manage-province-set-sup-user/manage-province-set-sup-user.component';
 
 const routes: Routes = [
   {
@@ -82,6 +84,7 @@ const routes: Routes = [
           { path: 'beds', canActivate: [AuthSettingBedsService], component: SettingBedsComponent },
           { path: 'medical-supplies', canActivate: [AuthSettingBedsService], component: SettingMedicalSuppliesComponent },
           { path: 'professional', canActivate: [AuthSettingBedsService], component: ProfessionalComponent },
+          { path: 'province-set-sup-user', canActivate: [AuthProvinceSetSupUserService], component: ManageProvinceSetSupUserComponent },
         ]
       },
     ]

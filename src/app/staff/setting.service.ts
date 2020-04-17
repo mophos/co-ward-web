@@ -62,4 +62,24 @@ export class SettingService {
     return await this.http.post(url, { data }).toPromise();
   }
 
+  async getProvinceUserList(limit = 20, offset = 0) {
+    const url = `${this.apiUrl}/v1/staff/setting/province-user?limit=${limit}&offset=${offset}`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async changeRightSupUser(id, status) {
+    const url = `${this.apiUrl}/v1/staff/setting/change-right-sup-user`;
+    return await this.http.put(url, {
+      id: id,
+      status: status
+    }).toPromise();
+  }
+
+  async changeApproved(id, status) {
+    const url = `${this.apiUrl}/v1/staff/setting/change-approve-user`;
+    return await this.http.put(url, {
+      id: id,
+      status: status
+    }).toPromise();
+  }
 }

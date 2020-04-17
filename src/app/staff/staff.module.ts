@@ -43,6 +43,8 @@ import { PayComponent } from './pay/pay.component';
 import { SettingMedicalSuppliesComponent } from './setting/setting-medical-supplies/setting-medical-supplies.component';
 import { InventoryStatusComponent } from './inventory-status/inventory-status.component';
 import { ProfessionalComponent } from './setting/professional/professional.component';
+import { AuthProvinceSetSupUserService } from '../auth-staff/auth-province-set-sup-user.service';
+import { ManageProvinceSetSupUserComponent } from './manage-province-set-sup-user/manage-province-set-sup-user.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -65,7 +67,8 @@ import { ProfessionalComponent } from './setting/professional/professional.compo
     PayComponent,
     SettingMedicalSuppliesComponent,
     InventoryStatusComponent,
-    ProfessionalComponent
+    ProfessionalComponent,
+    ManageProvinceSetSupUserComponent
   ],
   imports: [
     HelpModule,
@@ -92,7 +95,8 @@ import { ProfessionalComponent } from './setting/professional/professional.compo
     AuthCheckSuppliesService,
     AuthCheckBedsService,
     AuthSettingBasicService,
-    AuthSettingBedsService
+    AuthSettingBedsService,
+    AuthProvinceSetSupUserService
   ]
 })
 export class StaffModule { }
