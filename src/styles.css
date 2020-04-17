@@ -96,8 +96,8 @@
 .login-bg {
     background-color: #25333D;
     display: inline-block;
-    width: 105vw;
-    height: 110vh;
+    width: 100vw;
+    height: 100vh;
     -webkit-background-size: cover;
     background-size: cover;
 }
