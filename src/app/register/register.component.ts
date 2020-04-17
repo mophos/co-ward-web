@@ -4,7 +4,7 @@ import { AlertService } from '../help/alert.service';
 import thaiIdCard from 'thai-id-card';
 import { AutocompleteHospitalComponent } from '../help/autocomplete-hospital/autocomplete-hospital.component';
 import { Router } from '@angular/router';
-
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-register',
@@ -38,12 +38,21 @@ export class RegisterComponent implements OnInit {
   positionList: any;
 
   isUploading: any = false;
+  isNodeDrugs: any;
+  isNodeSupplies: any;
+  isDRUGS: any = false;
+  isSupplies: any = false;
   hospName: any = '';
 
   fileName: any;
   filesToUpload: File = null;
-  @ViewChild('hospital') hosp: AutocompleteHospitalComponent;
+  isVerify = false;
+  modalOTP = false;
 
+  refCode = false;
+  dateOtp: any = 0;
+  otp = '';
+  @ViewChild('hospital') hosp: AutocompleteHospitalComponent;
   constructor(
     private alertService: AlertService,
     private registerService: RegisterService,
@@ -126,7 +135,10 @@ export class RegisterComponent implements OnInit {
             type: 'STAFF',
             telephone: this.phoneNumber,
             isProvince: this.province,
-            right: this.province === 'N' ? ['STAFF_COVID_CASE', 'STAFF_COVID_CASE_STATUS', 'STAFF_COVID_CASE_DRUGS_APPROVED', 'STAFF_STOCK_DRUGS', 'STAFF_STOCK_BEDS', 'STAFF_STOCK_SUPPLIES', 'STAFF_SETTING_BASIC', 'STAFF_SETTING_BEDS'] : ['STAFF_CHECK_DRUGS', 'STAFF_CHECK_SUPPLIES', 'STAFF_CHECK_BEDS', 'STAFF_SETTING_BASIC']
+            isNodeDrugs: this.isNodeDrugs,
+            isNodeSupplies: this.isNodeSupplies,
+            isDRUGS: this.isDRUGS,
+            isSupplies: this.isSupplies
           };
 
           const rs: any = await this.registerService.saveUserSupplie(obj);
@@ -144,8 +156,36 @@ export class RegisterComponent implements OnInit {
   }
 
   async onSelectHosp(e) {
-    this.onSelectHospcode = e.hospcode;
-    this.province = e.hosptype_id === '1' ? 'Y' : 'N';
+    if (Object.values(e).length) {
+      this.onSelectHospcode = e.hospcode;
+      this.province = e.hosptype_id === '1' ? 'Y' : 'N';
+      const id = e.id;
+      try {
+        const rs: any = await this.registerService.getNodeDrugs(id);
+        if (rs.ok) {
+          if (rs.rows.length) {
+            this.isNodeDrugs = true;
+          } else {
+            this.isNodeDrugs = false;
+          }
+        } else {
+          this.alertService.error(rs.error);
+        }
+
+        const rs2: any = await this.registerService.getNodeSupplies(id);
+        if (rs2.ok) {
+          if (rs2.rows.length) {
+            this.isNodeSupplies = true;
+          } else {
+            this.isNodeSupplies = false;
+          }
+        } else {
+          this.alertService.error(rs.error);
+        }
+      } catch (error) {
+        this.alertService.error(error.message);
+      }
+    }
   }
 
   async getTitle() {
@@ -180,4 +220,41 @@ export class RegisterComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  onClickRequestOTP() {
+    this.modalOTP = true;
+    this.sendRequestOTP();
+  }
+
+  async sendRequestOTP() {
+    try {
+      const date = (+moment().format('h') * 60) + +moment().format('m');
+      console.log(this.dateOtp, date);
+
+      if (this.dateOtp < date) {
+        this.dateOtp = date + 5;
+        const rs: any = await this.registerService.requestOTP(this.phoneNumber);
+        if (rs.ok) {
+          this.refCode = rs.ref_code;
+        }
+      } else {
+        this.alertService.error('กรุณารอ 5 นาที');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async verifyOTP() {
+    try {
+      const rs: any = await this.registerService.verifyOTP(this.refCode, this.otp);
+      if (rs.ok) {
+        this.modalOTP = false;
+        this.isVerify = true;
+      } else {
+        this.alertService.error('OTP ไม่ถูกต้อง');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
