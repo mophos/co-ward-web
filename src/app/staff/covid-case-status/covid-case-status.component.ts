@@ -206,7 +206,7 @@ export class CovidCaseStatusComponent implements OnInit {
 
   async getMedicalSuppliesSum() {
     try {
-      const rs: any = await this.covidCaseService.getMedicalSupplies();
+      const rs: any = await this.covidCaseService.getVentilators();
       if (rs.ok) {
         this.medicalSuppliesSum = rs.rows;
       } else {

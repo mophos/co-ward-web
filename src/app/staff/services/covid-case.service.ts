@@ -96,6 +96,10 @@ export class CovidCaseService {
     const url = `${this.apiUrl}/v1/staff/covid-case/gcs`;
     return await this.http.get(url).toPromise();
   }
+  async getVentilators() {
+    const url = `${this.apiUrl}/v1/staff/covid-case/ventilators`;
+    return await this.http.get(url).toPromise();
+  }
   async getMedicalSupplies() {
     const url = `${this.apiUrl}/v1/staff/covid-case/medical-supplies`;
     return await this.http.get(url).toPromise();
