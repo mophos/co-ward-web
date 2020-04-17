@@ -63,7 +63,7 @@ export class CovidCaseStatusComponent implements OnInit {
   s1 = [{ generic: 1, name: 'Hydroxychloroquine 200 mg.' }, { generic: 2, name: 'Chloroquine 250 mg.' }];
   s2 = [{ generic: 3, name: 'Darunavir 600mg+Ritonavir100 mg.' }, { generic: 4, name: 'Lopinavir 200 mg/Ritonavir 50 mg.' }];
   s3 = [{ generic: 7, name: 'Azithromycin 250 mg.' }];
-  s4 = [{ generic: 8, name: 'Favipiravir (เบิกจาก AntiDost) <a target="_BLANK" href="http://drug.nhso.go.th/Antidotes/index.jsp">คลิก</a>' }];
+  s4 = [{ generic: 8, name: 'Favipiravir (เบิกจาก AntiDote) <a target="_BLANK" href="http://drug.nhso.go.th/Antidotes/index.jsp">คลิก</a>' }];
 
   dateDischarge: any;
   myDatePickerOptions: IMyOptions = {
@@ -292,7 +292,7 @@ export class CovidCaseStatusComponent implements OnInit {
     }
 
     if (this.list[idx].set4 === 8) {
-      this.showDetail.set4Name = 'Favipiravir (เบิกจาก AntiDost) คลิก';
+      this.showDetail.set4Name = 'Favipiravir (เบิกจาก AntiDote) คลิก';
     }
 
     this.confirmDetail = true;
