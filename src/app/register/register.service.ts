@@ -49,8 +49,12 @@ export class RegisterService {
     return this.http.post(url, { data }).toPromise();
   }
 
-  getNodes(id) {
-    const url = `${this.url}/v1/register/get-nodes?id=${id}`;
+  getNodeDrugs(id) {
+    const url = `${this.url}/v1/register/get-node-drugs?id=${id}`;
+    return this.http.get(url).toPromise();
+  }
+  getNodeSupplies(id) {
+    const url = `${this.url}/v1/register/get-node-supplies?id=${id}`;
     return this.http.get(url).toPromise();
   }
 
