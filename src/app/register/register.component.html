@@ -1,0 +1,382 @@
+<div class="login-bg">
+  <div class="clr-row">
+    <div class="clr-col-md-12" style="text-align: center;margin-top: 2rem;margin-bottom: 1rem;">
+      <span style="font-size: 20px;color: white;">ลงทะเบียนสำหรับเจ้าหน้าที่โรงพยาบาล</span>
+    </div>
+  </div>
+
+  <div class="clr-row">
+    <div class="clr-col-md-3"></div>
+    <div class="clr-col-md-6" style="background-color: rgb(238, 238, 238);padding: 1.5rem;">
+      <div class="clr-row">
+        <div class="clr-col-md-4" style="text-align: right;">
+          ชื่อสถานบริการ<span class="required">*</span> :
+        </div>
+        <div class="clr-col-md-8">
+          <app-autocomplete-hospital style="padding: 0px" #hospital (onchange)="onSelectHosp($event)" (onselect)="onSelectHosp($event)">
+          </app-autocomplete-hospital>
+        </div>
+        <div class="clr-col-md-4" style="text-align: right;">
+        </div>
+        <div class="clr-col-md-8">
+          <div *ngIf="!onSelectHospcode" class="alert alert-danger alert-sm" role="alert" style="margin: 0rem;">
+            <div class="alert-items">
+              <div class="alert-item static">
+                <div class="alert-icon-wrapper">
+                  <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+                </div>
+                <span class="alert-text">
+                  กรุณาเลือกโรงพยาบาล
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clr-row" style="margin-top: 0.5rem;">
+        <div class="clr-col-md-4" style="text-align: right;">
+          รหัสโรงพยาบาล (5 หลัก)<span class="required">*</span> :
+        </div>
+        <div class="clr-col-md-8">
+          <input type="text" maxlength="5" appNumberOnly id="hospcodeConfirm" placeholder="ระบุรหัสโรงพยาบาล" name="hospcodeConfirm"
+            class="clr-input clr-col-md-12" [(ngModel)]="hospcodeConfirm">
+        </div>
+        <div class="clr-col-md-4">
+        </div>
+        <div class="clr-col-md-8">
+          <div *ngIf="onSelectHospcode != hospcodeConfirm && hospcodeConfirm.length == 5" class="alert alert-danger alert-sm"
+            role="alert" style="margin: 0rem;">
+            <div class="alert-items">
+              <div class="alert-item static">
+                <div class="alert-icon-wrapper">
+                  <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+                </div>
+                <span class="alert-text">
+                  รหัสโรงพยาบาลไม่ถูกต้อง
+                </span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="onSelectHospcode == hospcodeConfirm" class="alert alert-success alert-sm" role="alert" style="margin: 0rem;">
+            <div class="alert-items">
+              <div class="alert-item static">
+                <div class="alert-icon-wrapper">
+                  <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+                </div>
+                <span class="alert-text">รหัสโรงพยาบาลถูกต้อง</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clr-row" style="margin-top: 0.5rem;">
+        <div class="clr-col-md-4" style="text-align: right;">
+          เลขบัตรประชาชน<span class="required">*</span> :
+        </div>
+        <div class="clr-col-md-8">
+          <input type="text" (keyup)="enterCid()" appNumberOnly maxlength="13" id="cid" placeholder="เลขบัตรประชาชน 13 หลัก"
+            name="cid" class="clr-input clr-col-md-12" [(ngModel)]="cid">
+        </div>
+        <div class="clr-col-md-4">
+        </div>
+        <div class="clr-col-md-8">
+          <div *ngIf="checkCid == false && cid.length == 13" class="alert alert-danger alert-sm" role="alert" style="margin: 0rem;">
+            <div class="alert-items">
+              <div class="alert-item static">
+                <div class="alert-icon-wrapper">
+                  <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+                </div>
+                <span class="alert-text">
+                  เลขบัตรประชาชนไม่ถูกต้อง
+                </span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="checkCid" class="alert alert-success alert-sm" role="alert" style="margin: 0rem;">
+            <div class="alert-items">
+              <div class="alert-item static">
+                <div class="alert-icon-wrapper">
+                  <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+                </div>
+                <span class="alert-text">เลขบัตรประชาชนถูกต้อง</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clr-row" style="margin-top: 0.5rem;">
+        <div class="clr-col-md-4" style="text-align: right;">
+          ตำแหน่ง<span class="required">*</span> :
+        </div>
+        <div class="clr-col-md-8">
+          <div class="clr-select-wrapper" style="width: 100%;">
+            <select name="position" [(ngModel)]="position" class="clr-select" style="width: 100%;">
+              <option *ngFor="let l of positionList" [value]="l.id">{{l.name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="clr-row" style="margin-top: 0.5rem;">
+        <div class="clr-col-md-4" style="text-align: right;">
+          คำนำหน้า<span class="required">*</span> :
+        </div>
+        <div class="clr-col-md-8">
+          <div class="clr-select-wrapper" style="width: 100%;">
+            <select name="title" [(ngModel)]="title" class="clr-select" style="width: 100%;">
+              <option *ngFor="let l of titleList" [value]="l.id">{{l.name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="clr-row" style="margin-top: 0.5rem;">
+        <div class="clr-col-md-4" style="text-align: right;">
+          ชื่อ<span class="required">*</span> :
+        </div>
+        <div class="clr-col-md-8">
+          <input type="text" id="firstName" placeholder="ชื่อ" name="firstName" class="clr-input clr-col-md-12"
+            [(ngModel)]="firstName">
+        </div>
+      </div>
+      <div class="clr-row" style="margin-top: 0.5rem;">
+        <div class="clr-col-md-4" style="text-align: right;">
+          นามสกุล<span class="required">*</span> :
+        </div>
+        <div class="clr-col-md-8">
+          <input type="text" id="lastName" placeholder="นามสกุล" name="lastName" class="clr-input clr-col-md-12"
+            [(ngModel)]="lastName">
+        </div>
+      </div>
+      <div class="clr-row" style="margin-top: 0.5rem;">
+        <div class="clr-col-md-4" style="text-align: right;">
+          Username<span class="required">*</span> :
+        </div>
+        <div class="clr-col-md-8">
+          <input type="text" id="username" appEnNoSpace placeholder="username" name="username" class="clr-input clr-col-md-12"
+            [(ngModel)]="username">
+        </div>
+      </div>
+      <div class="clr-row" style="margin-top: 0.5rem;">
+        <div class="clr-col-md-4" style="text-align: right;">
+          Password<span class="required">*</span> :
+        </div>
+        <div class="clr-col-md-8">
+          <clr-password-container style="width:100%;margin-top: 0;">
+            <input type="password" clrPassword (keyup)="enterPassword()" id="password" placeholder="password" name="password"
+              class="clr-input clr-col-md-12 width-fit" [(ngModel)]="password">
+          </clr-password-container>
+        </div>
+        <div class="clr-col-md-4">
+        </div>
+        <div class="clr-col-md-6">
+          <div *ngIf="!checkPassword && password != ''" class="alert alert-danger alert-sm" role="alert" style="margin: 0rem;">
+            <div class="alert-items">
+              <div class="alert-item static">
+                <div class="alert-icon-wrapper">
+                  <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+                </div>
+                <span class="alert-text">
+                  8 หลักขึ้นไป มี a-z และ 0-9
+                </span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="checkPassword" class="alert alert-success alert-sm" role="alert" style="margin: 0rem;">
+            <div class="alert-items">
+              <div class="alert-item static">
+                <div class="alert-icon-wrapper">
+                  <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+                </div>
+                <span class="alert-text">
+                  รูปแบบถูกต้อง
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clr-row" style="margin-top: 0.5rem;">
+        <div class="clr-col-md-4" style="text-align: right;">
+          Confirm Password<span class="required">*</span> :
+        </div>
+        <div class="clr-col-md-8">
+          <input type="password" (keyup)="enterPasswordConfirm()" id="passwordConfirm" placeholder="Confirm Password"
+            name="passwordConfirm" class="clr-input clr-col-md-12" [(ngModel)]="passwordConfirm">
+        </div>
+        <div class="clr-col-md-4" style="text-align: right;">
+        </div>
+        <div class="clr-col-md-8">
+          <div *ngIf="!checkPasswordConfirm && this.passwordConfirm != ''" class="alert alert-danger alert-sm" role="alert"
+            style="margin: 0rem;">
+            <div class="alert-items">
+              <div class="alert-item static">
+                <div class="alert-icon-wrapper">
+                  <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+                </div>
+                <span class="alert-text">
+                  รหัสไม่ตรงกัน
+                </span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="checkPasswordConfirm && this.passwordConfirm != ''" class="alert alert-success alert-sm" role="alert"
+            style="margin: 0rem;">
+            <div class="alert-items">
+              <div class="alert-item static">
+                <div class="alert-icon-wrapper">
+                  <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+                </div>
+                <span class="alert-text">
+                  ยืนยันสำเร็จ
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clr-row" style="margin-top: 0.5rem;">
+        <div class="clr-col-md-4" style="text-align: right;">
+          Email<span class="required">*</span> :
+        </div>
+        <div class="clr-col-md-8">
+          <input type="email" (keyup)="enterEmail()" id="email" placeholder="Email" name="email" class="clr-input clr-col-md-12"
+            [(ngModel)]="email">
+        </div>
+        <div class="clr-col-md-4">
+        </div>
+        <div class="clr-col-md-8">
+          <div *ngIf="!checkEmail && this.email != ''" class="alert alert-danger alert-sm" role="alert" style="margin: 0rem;">
+            <div class="alert-items">
+              <div class="alert-item static">
+                <div class="alert-icon-wrapper">
+                  <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+                </div>
+                <span class="alert-text">
+                  รูปแบบไม่ถูกต้อง
+                </span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="checkEmail && this.email != ''" class="alert alert-success alert-sm" role="alert" style="margin: 0rem;">
+            <div class="alert-items">
+              <div class="alert-item static">
+                <div class="alert-icon-wrapper">
+                  <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+                </div>
+                <span class="alert-text">
+                  รูปแบบถูกต้อง
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clr-row" style="margin-top: 0.5rem;">
+        <div class="clr-col-md-4" style="text-align: right;">
+          เบอร์มือถือ<span class="required">*</span> :
+        </div>
+        <div class="clr-col-md-8">
+          <input type="text" (keyup)="enterPhone()" appNumberOnly maxlength="10" id="phoneNumber" placeholder="เบอร์มือถือ"
+            name="phoneNumber" class="clr-input clr-col-md-12" [(ngModel)]="phoneNumber">
+        </div>
+        <div class="clr-col-md-4">
+        </div>
+        <div class="clr-col-md-8">
+          <div *ngIf="!checkPhone && this.phoneNumber != ''" class="alert alert-danger alert-sm" role="alert" style="margin: 0rem;">
+            <div class="alert-items">
+              <div class="alert-item static">
+                <div class="alert-icon-wrapper">
+                  <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+                </div>
+                <span class="alert-text">
+                  รูปแบบไม่ถูกต้อง
+                </span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="checkPhone && this.phoneNumber != ''" class="alert alert-success alert-sm" role="alert" style="margin: 0rem;">
+            <div class="alert-items">
+              <div class="alert-item static">
+                <div class="alert-icon-wrapper">
+                  <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+                </div>
+                <span class="alert-text">
+                  รูปแบบถูกต้อง
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clr-row" style="margin-top: 0.5rem;">
+        <div class="clr-col-md-4" style="text-align: right;">
+          ภาพหน้าบัตรประชาชน<span class="required">*</span> :
+        </div>
+        <div class="clr-col-md-8">
+          <button class="btn btn-sm btn-secondary" *ngIf="onSelectHospcode != hospcodeConfirm || !checkCid || !position || !title || firstName == '' || lastName == '' ||
+          username == '' || !checkPasswordConfirm || !checkEmail || !checkPhone"
+            [disabled]="true">
+            เลือกไฟล์...
+          </button>
+          <label class="btn btn-sm btn-secondary" style="margin: 0px;" *ngIf="!(onSelectHospcode != hospcodeConfirm || !checkCid || !position || !title || firstName == '' || lastName == '' ||
+          username == '' || !checkPasswordConfirm || !checkEmail || !checkPhone)">
+            <input type="file" #file accept="image/jpg,image/png,image/jpeg" style="display: none;" (change)="fileChangeEvent($event)">
+            เลือกไฟล์...
+          </label>
+          <input type="text" style="width: 100%;" #file accept="image/*" class="form-control" id="fileName"
+            aria-describedby="fileName" name="fileName" [(ngModel)]="fileName" placeholder="เลือกไฟล์ภาพที่ต้องการอัปโหลดไม่เกิน 5 MB ..."
+            readonly>
+          <p>
+            <span class="spinner" *ngIf="isUploading">
+              Loading...
+            </span>
+          </p>
+        </div>
+      </div>
+      <div class="clr-row" style="margin-top: 0.5rem;" *ngIf="isNodeDrugs || isNodeSupplies">
+        <div class="clr-col-md-4" style="text-align: right;">
+          สิทธิ์การใช้งานการจ่ายของ<span class="required">*</span> :
+        </div>
+        <div class="clr-col-md-8">
+          <clr-checkbox-container style="margin-top: 0rem;">
+            <clr-checkbox-wrapper *ngIf="isNodeDrugs">
+              <input type="checkbox" [(ngModel)]="isDRUGS" clrCheckbox value="option1" name="options1" />
+              <label>ยา</label>
+            </clr-checkbox-wrapper>
+            <clr-checkbox-wrapper *ngIf="isNodeSupplies">
+              <input type="checkbox" [(ngModel)]="isSupplies" clrCheckbox value="option2" name="options2" />
+              <label>เวชภัณฑ์</label>
+            </clr-checkbox-wrapper>
+          </clr-checkbox-container>
+        </div>
+      </div>
+      <div class="clr-row">
+        <div class="clr-col-md-12" style="text-align: right;">
+          <button class="btn btn-primary" (click)="onClickRequestOTP()" [disabled]="
+        onSelectHospcode != hospcodeConfirm || !checkCid || !position || !title || firstName == '' || lastName == '' ||
+        username == '' || !checkPasswordConfirm || !checkEmail || !checkPhone || !checkImage || isVerify">ขอ
+            OTP</button>
+
+          <button class="btn btn-success" (click)="save()" [disabled]="
+    onSelectHospcode != hospcodeConfirm || !checkCid || !position || !title || firstName == '' || lastName == '' ||
+    username == '' || !checkPasswordConfirm || !checkEmail || !checkPhone || !checkImage || !isVerify">บันทึก</button>
+          <button class="btn btn-danger-outline" (click)="cancel()">ยกเลิก</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+<clr-modal [(clrModalOpen)]="modalOTP">
+  <h3 class="modal-title">กรุณาระบุ OTP</h3>
+  <div class="modal-body">
+    <p>Ref Code: {{refCode}}</p>
+    <input type="text" name="otp" [(ngModel)]="otp" class="clr-input" placeholder="OTP">
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="verifyOTP()">ยืนยัน</button>
+    <button type="button" class="btn btn-primary" (click)="sendRequestOTP()">ขอ OTP ใหม่</button>
+  </div>
+</clr-modal>
