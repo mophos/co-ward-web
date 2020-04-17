@@ -13,7 +13,7 @@ export class ManageProvinceSetSupUserComponent implements OnInit {
   total = 0;
   limit = 20;
   offset = 0;
-
+  selected: any;
   constructor(
     private settingService: SettingService,
     private alertService: AlertService
