@@ -41,8 +41,8 @@
           <br>
           <div class="clr-row">
             <div class="clr-col-12">
-              <input style="text-align:center; width: 60%;" type="password" [(ngModel)]="password"
-                name="login_password" (keyup)="onKeyEnter($event)" placeholder="รหัสผ่าน">
+              <input style="text-align:center; width: 60%;" type="password" [(ngModel)]="password" name="login_password"
+                (keyup)="onKeyEnter($event)" placeholder="รหัสผ่าน">
             </div>
           </div>
           <br>
@@ -51,7 +51,9 @@
               <div class="error active" *ngIf="isError">
                 {{ errorMessage || 'เกิดข้อผิดพลาด'}}
               </div>
-              <button style="width: 100%" type="button" [disabled]="!username || !password || isLogin" (click)="doLogin()" class="btn btn-primary">เข้าใช้งานระบบ</button>
+              <button style="width: 100%" type="button" [disabled]="!username || !password || isLogin" (click)="doLogin()"
+                class="btn btn-primary">เข้าใช้งานระบบ</button>
+              <button style="width: 100%" type="button" (click)="doRegister()" class="btn btn-primary">ลงทะเบียน</button>
             </div>
           </div>
           <br>
