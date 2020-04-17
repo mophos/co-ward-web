@@ -38,7 +38,8 @@ export class RegisterComponent implements OnInit {
   positionList: any;
 
   isUploading: any = false;
-  isNode: any;
+  isNodeDrugs: any;
+  isNodeSupplies: any;
   isDRUGS: any = false;
   isSupplies: any = false;
   hospName: any = '';
@@ -134,7 +135,8 @@ export class RegisterComponent implements OnInit {
             type: 'STAFF',
             telephone: this.phoneNumber,
             isProvince: this.province,
-            isNode: this.isNode,
+            isNodeDrugs: this.isNodeDrugs,
+            isNodeSupplies: this.isNodeSupplies,
             isDRUGS: this.isDRUGS,
             isSupplies: this.isSupplies
           };
@@ -159,12 +161,23 @@ export class RegisterComponent implements OnInit {
       this.province = e.hosptype_id === '1' ? 'Y' : 'N';
       const id = e.id;
       try {
-        const rs: any = await this.registerService.getNodes(id);
+        const rs: any = await this.registerService.getNodeDrugs(id);
         if (rs.ok) {
           if (rs.rows.length) {
-            this.isNode = true;
+            this.isNodeDrugs = true;
           } else {
-            this.isNode = false;
+            this.isNodeDrugs = false;
+          }
+        } else {
+          this.alertService.error(rs.error);
+        }
+
+        const rs2: any = await this.registerService.getNodeSupplies(id);
+        if (rs2.ok) {
+          if (rs2.rows.length) {
+            this.isNodeSupplies = true;
+          } else {
+            this.isNodeSupplies = false;
           }
         } else {
           this.alertService.error(rs.error);

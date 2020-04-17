@@ -339,17 +339,17 @@
         </p>
       </div>
     </div>
-    <div class="clr-row" style="margin-top: 0.5rem;" *ngIf="isNode">
+    <div class="clr-row" style="margin-top: 0.5rem;" *ngIf="isNodeDrugs || isNodeSupplies">
       <div class="clr-col-md-4" style="text-align: right;">
         สิทธิ์การใช้งานการจ่ายของ<span class="required">*</span> :
       </div>
       <div class="clr-col-md-8">
         <clr-checkbox-container style="margin-top: 0rem;">
-          <clr-checkbox-wrapper>
+          <clr-checkbox-wrapper *ngIf="isNodeDrugs">
             <input type="checkbox" [(ngModel)]="isDRUGS" clrCheckbox value="option1" name="options1" />
             <label>ยา</label>
           </clr-checkbox-wrapper>
-          <clr-checkbox-wrapper>
+          <clr-checkbox-wrapper *ngIf="isNodeSupplies">
             <input type="checkbox" [(ngModel)]="isSupplies" clrCheckbox value="option2" name="options2" />
             <label>เวชภัณฑ์</label>
           </clr-checkbox-wrapper>
