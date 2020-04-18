@@ -45,6 +45,7 @@ import { InventoryStatusComponent } from './inventory-status/inventory-status.co
 import { ProfessionalComponent } from './setting/professional/professional.component';
 import { AuthProvinceSetSupUserService } from '../auth-staff/auth-province-set-sup-user.service';
 import { ManageProvinceSetSupUserComponent } from './manage-province-set-sup-user/manage-province-set-sup-user.component';
+import { SettingUsersComponent } from './setting/setting-users/setting-users.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -68,7 +69,8 @@ import { ManageProvinceSetSupUserComponent } from './manage-province-set-sup-use
     SettingMedicalSuppliesComponent,
     InventoryStatusComponent,
     ProfessionalComponent,
-    ManageProvinceSetSupUserComponent
+    ManageProvinceSetSupUserComponent,
+    SettingUsersComponent
   ],
   imports: [
     HelpModule,
