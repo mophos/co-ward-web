@@ -24,7 +24,7 @@ export class SuppliesComponent implements OnInit {
     editableDateField: false,
     showClearDateBtn: false
   };
-
+  isSave = false;
   constructor(
     private supplieService: SupplieService,
     private alertService: AlertService
@@ -94,6 +94,7 @@ export class SuppliesComponent implements OnInit {
   }
 
   async save() {
+    this.isSave = true;
     const confirm = await this.alertService.confirm();
     if (confirm) {
       try {
@@ -114,11 +115,12 @@ export class SuppliesComponent implements OnInit {
           this.listDetail = [];
           this.getList();
         } else {
-          this.alertService.error();
+          this.alertService.error(rs.error);
         }
-
+        this.isSave = false;
       } catch (error) {
-        this.alertService.error();
+        this.isSave = false;
+        this.alertService.error(error);
       }
     }
   }

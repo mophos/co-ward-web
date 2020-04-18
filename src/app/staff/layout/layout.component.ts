@@ -12,7 +12,7 @@ export class LayoutComponent implements OnInit {
   fullname: any;
   hospname: any;
   hospTypeCode: any;
-  collapsible = true;
+  collapsible = false;
   collapse = true;
   rights: any;
 

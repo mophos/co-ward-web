@@ -5,10 +5,6 @@
 <div class="clr-row">
   <div class="clr-col-3">
     <div class="clr-row">
-      <div class="clr-col-9">
-        <my-date-picker-th name="dateset" [options]="myDatePickerOptions" [(ngModel)]="dateset" required>
-        </my-date-picker-th>
-      </div>
       <div class="clr-col-3">
         <button class="btn btn-sm btn-success" (click)="onClickAdd()">
           <clr-icon shape="plus"></clr-icon> เพิ่มรายการ
@@ -29,7 +25,7 @@
           <clr-dg-column>ชื่อผู้บันทึก</clr-dg-column>
 
           <clr-dg-row *ngFor="let l of list; let idx=index;" (click)="getListDetail(l.id);listId=l.id;" [ngClass]="{ 'isSuccess': l.id == listId }">
-            <clr-dg-cell>{{l.date | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
+            <clr-dg-cell>{{l.create_date | dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
             <clr-dg-cell>{{l.name}}{{l.fname}} {{l.lname}}</clr-dg-cell>
           </clr-dg-row>
 
@@ -56,7 +52,7 @@
       </clr-dg-row>
       <clr-dg-row *ngIf="listDetail.length">
         <clr-dg-cell>
-          <button type="button" class="btn btn-success  btn-block" (click)="save()">
+          <button type="button" class="btn btn-success  btn-block" (click)="save()" [disabled]="isSave">
             บันทึก
           </button>
         </clr-dg-cell>
