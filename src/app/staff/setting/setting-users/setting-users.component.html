@@ -1,0 +1,50 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">ตั้งค่าสิทธิ์ผู้ใช้งาน</span>
+</nav>
+
+<div class="clr-row">
+  <div class="clr-col-5">
+    <div class="clr-form clr-form-compact clr-row">
+      <label class="clr-control-label clr-col-3">ค้นหา : </label>
+      <input type="text" name="query" (keyup)="doEnter($event)" [(ngModel)]="query"
+        class="clr-col-9 clr-input width-fit" placeholder="Enter เพื่อค้นหา">
+    </div>
+  </div>
+</div>
+
+<div class="clr-row">
+  <div class="clr-col-12">
+    <clr-datagrid>
+      <clr-dg-column>username</clr-dg-column>
+      <clr-dg-column>ชื่อ</clr-dg-column>
+      <clr-dg-column>ตำแหน่ง</clr-dg-column>
+      <clr-dg-column>เบอร์มือถือ</clr-dg-column>
+      <clr-dg-column></clr-dg-column>
+
+      <clr-dg-row *ngFor="let l of list">
+        <clr-dg-cell>{{l.username}}</clr-dg-cell>
+        <clr-dg-cell>{{l.title_name}} {{l.fname}} {{l.lname}}</clr-dg-cell>
+        <clr-dg-cell>{{l.position_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.telephone}}</clr-dg-cell>
+        <clr-dg-cell>
+          <div class="btn-group" style="float: right;">
+            <button class="btn btn-sm btn-primary" (click)="editRights(l)">
+              <clr-icon shape="note"></clr-icon> จัดการสิทธิ์
+            </button>
+            <button class="btn btn-sm btn-danger" (click)="removeUser(l)">
+              <clr-icon shape="trash"></clr-icon> ลบ
+            </button>
+          </div>
+        </clr-dg-cell>
+      </clr-dg-row>
+
+      <clr-dg-footer>
+        <clr-dg-pagination #pagination [clrDgPageSize]="10">
+          <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">list per page</clr-dg-page-size>
+          {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+          of {{pagination.totalItems}} list
+        </clr-dg-pagination>
+      </clr-dg-footer>
+    </clr-datagrid>
+  </div>
+</div>

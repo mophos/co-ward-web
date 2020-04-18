@@ -28,15 +28,19 @@ import { AuthCheckSuppliesService } from '../auth-staff/auth-check-supplies.serv
 import { AuthCheckBedsService } from '../auth-staff/auth-check-beds.service';
 import { AuthSettingBasicService } from '../auth-staff/auth-setting-basic.service';
 import { AuthSettingBedsService } from '../auth-staff/auth-setting-beds.service';
+import { AuthSettingMedicalSuppliesService } from '../auth-staff/auth-setting-medical-supplies.service';
+import { AuthCovidCaseRequisitionService } from '../auth-staff/auth-covid-case-requisition.service';
+import { AuthSettingProfessionalService } from '../auth-staff/auth-setting-professional.service';
+import { AuthPayService } from '../auth-staff/auth-pay.service';
+import { AuthSettinUserService } from '../auth-staff/auth-settin-user.service';
 import { HomeComponent } from '../staff/home/home.component';
 import { CovidCaseRequisitionComponent } from './covid-case-requisition/covid-case-requisition.component';
 import { PayComponent } from './pay/pay.component';
-import { AuthCovidCaseRequisitionService } from '../auth-staff/auth-covid-case-requisition.service';
-import { AuthPayService } from '../auth-staff/auth-pay.service';
 import { SettingMedicalSuppliesComponent } from './setting/setting-medical-supplies/setting-medical-supplies.component';
 import { ProfessionalComponent } from './setting/professional/professional.component';
 import { AuthProvinceSetSupUserService } from '../auth-staff/auth-province-set-sup-user.service';
 import { ManageProvinceSetSupUserComponent } from './manage-province-set-sup-user/manage-province-set-sup-user.component';
+import { SettingUsersComponent } from '../staff/setting/setting-users/setting-users.component';
 
 const routes: Routes = [
   {
@@ -82,8 +86,9 @@ const routes: Routes = [
         children: [
           { path: 'basic', canActivate: [AuthSettingBasicService], component: SettingComponent },
           { path: 'beds', canActivate: [AuthSettingBedsService], component: SettingBedsComponent },
-          { path: 'medical-supplies', canActivate: [AuthSettingBedsService], component: SettingMedicalSuppliesComponent },
-          { path: 'professional', canActivate: [AuthSettingBedsService], component: ProfessionalComponent },
+          { path: 'medical-supplies', canActivate: [AuthSettingMedicalSuppliesService], component: SettingMedicalSuppliesComponent },
+          { path: 'professional', canActivate: [AuthSettingProfessionalService], component: ProfessionalComponent },
+          { path: 'users', canActivate: [AuthSettinUserService], component: SettingUsersComponent },
           { path: 'province-set-sup-user', canActivate: [AuthProvinceSetSupUserService], component: ManageProvinceSetSupUserComponent },
         ]
       },

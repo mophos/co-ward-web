@@ -3,7 +3,7 @@
     <div class="branding">
       <a href="javascript://" class="nav-link">
         <!-- <img src="./assets/logo-co-ward.png" alt="logo" style="width: 200px; padding-right: 10px;"> -->
-        <span class="title">CO-ward </span>
+        <span class="title" routerLink="/staff/home">CO-WARD</span>
       </a>
     </div>
     <div class="header-nav">
@@ -31,7 +31,8 @@
         <clr-icon clrVerticalNavIcon shape="helix" class="is-solid"></clr-icon>
         บันทึกผู้ป่วยใหม่
       </a>
-      <a *ngIf="covidCaseMenu" clrVerticalNavLink routerLink="/staff/covid-case" title="Case COVID" routerLinkActive="active">
+      <a *ngIf="covidCaseMenu" clrVerticalNavLink routerLink="/staff/covid-case" title="Case COVID"
+        routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="helix"></clr-icon>
         ผู้ป่วยทั้งหมด
       </a>
@@ -40,20 +41,21 @@
         <clr-icon clrVerticalNavIcon shape="wand"></clr-icon>
         สถานะผู้ป่วยรายวัน
       </a>
-      <a *ngIf="covidCaseApprovedMenu" clrVerticalNavLink routerLink="/staff/covid-case-approved" title="จ่ายยาและเวชภัณฑ์"
-        routerLinkActive="active">
+      <a *ngIf="covidCaseApprovedMenu" clrVerticalNavLink routerLink="/staff/covid-case-approved"
+        title="จ่ายยาและเวชภัณฑ์" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
         จ่ายยาและเวชภัณฑ์
       </a>
       <div clrVerticalNavLink routerLinkActive="active" style="background-color: rgba(165, 165, 165,0.2);">
 
       </div>
-      <a *ngIf="covidCaseRequisitionMenu" clrVerticalNavLink routerLink="/staff/covid-case-requisition" title="รายการจ่ายยาและเวชภัณฑ์"
-        routerLinkActive="active">
+      <a *ngIf="covidCaseRequisitionMenu" clrVerticalNavLink routerLink="/staff/covid-case-requisition"
+        title="รายการจ่ายยาและเวชภัณฑ์" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
         รายการจ่ายยาและเวชภัณฑ์
       </a>
-      <a clrVerticalNavLink *ngIf="covidCaseApprovedMenu" routerLink="/staff/inventory-status" title="รายการคงคลัง" routerLinkActive="active">
+      <a clrVerticalNavLink *ngIf="covidCaseApprovedMenu" routerLink="/staff/inventory-status" title="รายการคงคลัง"
+        routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="store"></clr-icon>
         รายการคงคลัง
       </a>
@@ -104,9 +106,13 @@
             routerLinkActive="active">
             ตั้งค่าเครื่องช่วยหายใจ
           </a>
-          <a *ngIf="settingMedicalSuppliesMenu" clrVerticalNavLink routerLink="/staff/setting/professional"
+          <a *ngIf="settingProfessionalMenu" clrVerticalNavLink routerLink="/staff/setting/professional"
             routerLinkActive="active">
             ตั้งค่าบุคลากร
+          </a>
+          <a *ngIf="settingUserMenu" clrVerticalNavLink routerLink="/staff/setting/users"
+            routerLinkActive="active">
+            ตั้งค่าสิทธิ์ผู้ใช้งาน
           </a>
           <a *ngIf="settingProvinceSubUserMenu" clrVerticalNavLink routerLink="/staff/setting/province-set-sup-user"
             routerLinkActive="active">
