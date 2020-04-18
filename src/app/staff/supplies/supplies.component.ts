@@ -1,3 +1,4 @@
+import { BasicService } from './../services/basic.service';
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from '../../help/alert.service';
 import { IMyOptions } from 'mydatepicker-th';
@@ -25,26 +26,30 @@ export class SuppliesComponent implements OnInit {
     showClearDateBtn: false
   };
   isSave = false;
+  isUpdate = false;
   constructor(
     private supplieService: SupplieService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private basicService: BasicService
   ) { }
 
   ngOnInit() {
     this.getList();
-    const date = new Date();
-    this.dateset = {
-      date: {
-        year: date.getFullYear(),
-        month: date.getMonth() + 1,
-        day: date.getDate()
-      }
-    };
+    this.checkTimeCut();
   }
 
 
+  async checkTimeCut() {
+    try {
+      const rs: any = await this.basicService.checkTimeCut();
+      this.isSave = !rs;
+    } catch (error) {
+
+    }
+  }
   async onClickAdd() {
     try {
+      this.isUpdate = false;
       const rs: any = await this.supplieService.getSupplies();
       if (rs.ok) {
         this.listDetail = rs.rows;
@@ -75,11 +80,12 @@ export class SuppliesComponent implements OnInit {
   }
 
   async getListDetail(id) {
-    this.listId = id;
-    const idx = findIndex(this.list, { id: this.listId });
-    this.date = this.list[idx].created_at;
-    this.loading = true;
     try {
+      this.isUpdate = true;
+      this.listId = id;
+      const idx = findIndex(this.list, { id: this.listId });
+      this.date = this.list[idx].created_at;
+      this.loading = true;
       const rs: any = await this.supplieService.getSupplieDetails(id);
       if (rs.ok) {
         this.listDetail = rs.rows;
@@ -99,17 +105,13 @@ export class SuppliesComponent implements OnInit {
     if (confirm) {
       try {
         const data = [];
-        const objH: any = {};
-        objH.date = this.dateset.date.year + '-' + this.dateset.date.month + '-' + this.dateset.date.day;
-
         for (const v of this.listDetail) {
           const obj: any = {};
           obj.generic_id = v.id;
           obj.qty = v.qty;
           data.push(obj);
         }
-        objH.items = data;
-        const rs: any = await this.supplieService.save(objH);
+        const rs: any = await this.supplieService.save(data);
         if (rs.ok) {
           this.alertService.success();
           this.listDetail = [];

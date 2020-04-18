@@ -12,8 +12,14 @@ export class BasicService {
     const url = `${this.apiUrl}/v1/basic/title`;
     return await this.http.get(url).toPromise();
   }
+  
   async getDate() {
     const url = `${this.apiUrl}/date`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async checkTimeCut() {
+    const url = `${this.apiUrl}/time-cut`;
     return await this.http.get(url).toPromise();
   }
 
