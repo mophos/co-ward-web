@@ -6,10 +6,10 @@ import { IMyOptions } from 'mydatepicker-th';
 
 @Component({
   selector: 'app-pay',
-  templateUrl: './pay.component.html',
+  templateUrl: './surgical-mask-shph.component.html',
   styles: []
 })
-export class PayComponent implements OnInit {
+export class SurgicalMaskShphComponent implements OnInit {
   list: any;
   modal: any;
   hospitalId: any;
@@ -24,7 +24,7 @@ export class PayComponent implements OnInit {
     height: '25px',
     width: '200px'
   };
-  @ViewChild('hospital') hospital: AutocompleteHospitalComponent
+  @ViewChild('hospital') hospital: AutocompleteHospitalComponent;
   constructor(
     private payService: PayService,
     private alertService: AlertService,
