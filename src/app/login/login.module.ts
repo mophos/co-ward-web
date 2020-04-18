@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { ClarityModule } from '@clr/angular';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { FormsModule } from '@angular/forms';
@@ -14,7 +15,8 @@ import { HelpModule } from '../help/help.module';
     FormsModule,
     HttpClientModule,
     LoginRoutingModule,
-    HelpModule
+    HelpModule,
+    ClarityModule
   ],
   declarations: [LoginComponent],
   providers: [LoginService]

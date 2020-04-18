@@ -20,8 +20,8 @@
 </div> -->
 <div class="login-bg">
   <div class="clr-row">
-    <div class="clr-col-4"></div>
-    <div class="clr-col-4">
+    <div class="clr-col-4" style="padding: 0rem;margin: 0rem;"></div>
+    <div class="clr-col-4" style="padding: 0rem;margin: 0rem;">
       <div class="card" style="width: 100%; text-align: center; border-radius: 1%; margin-top: 20%;">
         <div class="card-body">
           <div class="clr-row">
@@ -51,9 +51,10 @@
               <div class="error active" *ngIf="isError">
                 {{ errorMessage || 'เกิดข้อผิดพลาด'}}
               </div>
-              <button style="width: 100%" type="button" [disabled]="!username || !password || isLogin" (click)="doLogin()"
-                class="btn btn-primary">เข้าใช้งานระบบ</button>
-              <button style="width: 100%" type="button" (click)="doRegister()" class="btn btn-primary">ลงทะเบียน</button>
+              <button style="width: 100%" type="button" [disabled]="!username || !password || isLogin"
+                (click)="doLogin()" class="btn btn-success">เข้าใช้งานระบบ</button>
+              <button style="width: 100%" type="button" (click)="doRegister()"
+                class="btn btn-primary">ลงทะเบียน</button>
             </div>
             <!-- 
             <div class="clr-col-12">
@@ -62,11 +63,207 @@
             </div> -->
           </div>
           <br>
+          <div>
+            <a style="text-align:center;cursor: pointer;" (click)="forgotpPassword()">ลืมรหัสผ่าน</a>
+          </div>
+          <br>
         </div>
       </div>
     </div>
-    <div class="clr-col-4"></div>
+    <div class="clr-col-4" style="padding: 0rem;margin: 0rem;"></div>
   </div>
 </div>
 
+
+
 <app-loadding #loading></app-loadding>
+
+<clr-modal [(clrModalOpen)]="modalCheck">
+  <h3 class="modal-title">เปลี่ยนรหัสผ่าน</h3>
+  <div class="modal-body">
+    <p>กรุณากรอกเลขบัตรประชาชน และ เบอร์มือถือที่ใช้สมัคร เพื่อขอ OTP</p>
+    <div class="clr-row" style="margin-top: 0.5rem;">
+      <div class="clr-col-md-4" style="text-align: right;">
+        เลขบัตรประชาชน<span class="required">*</span> :
+      </div>
+      <div class="clr-col-md-8">
+        <input type="text" (keyup)="enterCid()" appNumberOnly maxlength="13" id="cid"
+          placeholder="เลขบัตรประชาชน 13 หลัก" name="cid" class="clr-input clr-col-md-12" [(ngModel)]="cid">
+      </div>
+      <div class="clr-col-md-4">
+      </div>
+      <div class="clr-col-md-8">
+        <div *ngIf="checkCid == false && cid.length == 13" class="alert alert-danger alert-sm" role="alert"
+          style="margin: 0rem;">
+          <div class="alert-items">
+            <div class="alert-item static">
+              <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+              </div>
+              <span class="alert-text">
+                เลขบัตรประชาชนไม่ถูกต้อง
+              </span>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="checkCid" class="alert alert-success alert-sm" role="alert" style="margin: 0rem;">
+          <div class="alert-items">
+            <div class="alert-item static">
+              <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+              </div>
+              <span class="alert-text">เลขบัตรประชาชนถูกต้อง</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clr-row" style="margin-top: 0.5rem;">
+      <div class="clr-col-md-4" style="text-align: right;">
+        เบอร์มือถือ<span class="required">*</span> :
+      </div>
+      <div class="clr-col-md-8">
+        <input type="text" (keyup)="enterPhone()" appNumberOnly maxlength="10" id="phoneNumber"
+          placeholder="เบอร์มือถือ" name="phoneNumber" class="clr-input clr-col-md-12" [(ngModel)]="phoneNumber">
+      </div>
+      <div class="clr-col-md-4">
+      </div>
+      <div class="clr-col-md-8">
+        <div *ngIf="!checkPhone && this.phoneNumber != ''" class="alert alert-danger alert-sm" role="alert"
+          style="margin: 0rem;">
+          <div class="alert-items">
+            <div class="alert-item static">
+              <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+              </div>
+              <span class="alert-text">
+                รูปแบบไม่ถูกต้อง
+              </span>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="checkPhone && this.phoneNumber != ''" class="alert alert-success alert-sm" role="alert"
+          style="margin: 0rem;">
+          <div class="alert-items">
+            <div class="alert-item static">
+              <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+              </div>
+              <span class="alert-text">
+                รูปแบบถูกต้อง
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="onClickRequestOTP()"
+      [disabled]="!this.checkCid || !this.checkPhone">ขอ OTP</button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="modalOTP">
+  <h3 class="modal-title" *ngIf="!isVerify">กรุณาระบุ OTP</h3>
+  <h3 class="modal-title" *ngIf="isVerify"> ตั้งรหัสผ่านใหม่</h3>
+  <div class="modal-body">
+    <p *ngIf="!isVerify">Ref Code: {{refCode}}</p>
+    <input *ngIf="!isVerify" type="text" name="otp" [(ngModel)]="otp" class="clr-input" placeholder="OTP">
+    <div *ngIf="isVerify">
+      <div class="clr-row" style="margin-top: 0.5rem;">
+        <div class="clr-col-md-4" style="text-align: right;">
+          Username<span class="required">*</span> :
+        </div>
+        <div class="clr-col-md-8">
+          <input type="text" id="usernameShow" appEnNoSpace name="usernameShow" class="clr-input clr-col-md-12"
+            [disabled]="isVerify" [(ngModel)]="usernameShow">
+        </div>
+      </div>
+      <div class="clr-row" style="margin-top: 0.5rem;">
+        <div class="clr-col-md-4" style="text-align: right;">
+          Password<span class="required">*</span> :
+        </div>
+        <div class="clr-col-md-8">
+          <clr-password-container style="width:100%;margin-top: 0;">
+            <input type="password" clrPassword (keyup)="enterPassword()" id="passwordNew" placeholder="password"
+              name="passwordNew" class="clr-input clr-col-md-12 width-fit" [(ngModel)]="passwordNew">
+          </clr-password-container>
+        </div>
+        <div class="clr-col-md-4">
+        </div>
+        <div class="clr-col-md-6">
+          <div *ngIf="!checkPassword && passwordNew != ''" class="alert alert-danger alert-sm" role="alert"
+            style="margin: 0rem;">
+            <div class="alert-items">
+              <div class="alert-item static">
+                <div class="alert-icon-wrapper">
+                  <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+                </div>
+                <span class="alert-text">
+                  8 หลักขึ้นไป มี a-z และ 0-9
+                </span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="checkPassword" class="alert alert-success alert-sm" role="alert" style="margin: 0rem;">
+            <div class="alert-items">
+              <div class="alert-item static">
+                <div class="alert-icon-wrapper">
+                  <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+                </div>
+                <span class="alert-text">
+                  รูปแบบถูกต้อง
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clr-row" style="margin-top: 0.5rem;">
+        <div class="clr-col-md-4" style="text-align: right;">
+          Confirm Password<span class="required">*</span> :
+        </div>
+        <div class="clr-col-md-8">
+          <input type="password" (keyup)="enterPasswordConfirm()" id="passwordConfirm" placeholder="Confirm Password"
+            name="passwordConfirm" class="clr-input clr-col-md-12" [(ngModel)]="passwordConfirm">
+        </div>
+        <div class="clr-col-md-4" style="text-align: right;">
+        </div>
+        <div class="clr-col-md-8">
+          <div *ngIf="!checkPasswordConfirm && this.passwordConfirm != ''" class="alert alert-danger alert-sm"
+            role="alert" style="margin: 0rem;">
+            <div class="alert-items">
+              <div class="alert-item static">
+                <div class="alert-icon-wrapper">
+                  <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+                </div>
+                <span class="alert-text">
+                  รหัสไม่ตรงกัน
+                </span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="checkPasswordConfirm && this.passwordConfirm != ''" class="alert alert-success alert-sm"
+            role="alert" style="margin: 0rem;">
+            <div class="alert-items">
+              <div class="alert-item static">
+                <div class="alert-icon-wrapper">
+                  <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+                </div>
+                <span class="alert-text">
+                  ยืนยันสำเร็จ
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button *ngIf="!isVerify" type="button" class="btn btn-primary" (click)="verifyOTP()">ยืนยัน</button>
+    <button *ngIf="isVerify" type="button" class="btn btn-primary" [disabled]="!checkPasswordConfirm"
+      (click)="updatePassword()">บันทึกรหัสผ่านใหม่</button>
+  </div>
+</clr-modal>
