@@ -48,3 +48,46 @@
     </clr-datagrid>
   </div>
 </div>
+
+<clr-modal [(clrModalOpen)]="modal" [clrModalSize]="'xl'">
+  <h3 class="modal-title">สิทธิ์การใช้งาน</h3>
+  <div class="modal-body">
+    <div class="clr-col-12">
+      <clr-stack-view>
+        <clr-stack-header></clr-stack-header>
+        <clr-stack-block [clrSbExpanded]="true">
+          <clr-stack-label>ข้อมูลพื้นฐาน</clr-stack-label>
+          <clr-stack-content></clr-stack-content>
+          <clr-stack-block>
+            <clr-stack-label>
+              <clr-checkbox-wrapper>
+                <input type="checkbox" name="all" clrCheckbox [(ngModel)]="all" (click)="checkAll($event)">
+                <label>เลือกทั้งหมด</label>
+              </clr-checkbox-wrapper>
+            </clr-stack-label>
+            <clr-stack-content>
+              <div class="clr-row" *ngFor="let item of rights;let idx = index">
+                <div class="clr-col-1" style="padding:0em;">
+                  <div style="float: right;">
+                    <input type="checkbox" clrCheckbox name="index{{idx}}" [(ngModel)]="item.check"
+                      (change)="onChange($event,item)" /></div>
+                </div>
+                <div class="clr-col-11" style="padding:0em">
+                  {{item.name_menu}}
+                </div>
+              </div>
+            </clr-stack-content>
+          </clr-stack-block>
+        </clr-stack-block>
+      </clr-stack-view>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" [disabled]="!isSave" (click)="saveRights()">
+      บันทึก
+    </button>
+    <button type="button" class="btn btn-danger" (click)="modal = false">
+      ปิด
+    </button>
+  </div>
+</clr-modal>
