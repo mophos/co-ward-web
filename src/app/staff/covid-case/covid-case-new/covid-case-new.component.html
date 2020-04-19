@@ -44,8 +44,8 @@
                 <label for="example" class="clr-control-label">เลขที่บัตรประชาชน <span class="required">*</span></label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper ">
-                    <input type="text" id="example" name="cid" maxlength="13" [(ngModel)]="cid"
-                      class="clr-input width-fit" readonly>
+                    <input type="text" id="example" name="cid" maxlength="13" [(ngModel)]="cid" class="clr-input width-fit"
+                      readonly>
                   </div>
                 </div>
               </div>
@@ -155,8 +155,7 @@
                 <label for="example" class="clr-control-label">เบอร์โทรศัพท์</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <input type="text" name="tel" appNumberOnly maxlength="10" [(ngModel)]="tel"
-                      class="clr-input  width-fit">
+                    <input type="text" name="tel" appNumberOnly maxlength="10" [(ngModel)]="tel" class="clr-input  width-fit">
                     <!-- <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="!tel.length"></clr-icon> -->
                   </div>
                   <!-- <span class="clr-subtext" *ngIf="!tel.length">กรุณาระบุเบอร์โทรศัพท์</span> -->
@@ -199,8 +198,7 @@
                 <label class="clr-control-label">ประเทศ</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <app-autocomplete-countries style="padding: 0px" #countries [query]="'ไทย'"
-                      (onselect)="onSelectCountry($event)">
+                    <app-autocomplete-countries style="padding: 0px" #countries [query]="'ไทย'" (onselect)="onSelectCountry($event)">
                     </app-autocomplete-countries>
                   </div>
                 </div>
@@ -361,8 +359,8 @@
                 <div class="clr-col-10">ระดับความรุนแรง</div>
               </div>
               <div class="clr-row" *ngFor="let i of gcs;let idx = index" [ngClass]="{isWarning: idx%2==0}">
-                <div class="clr-col-2"><input id="gcs-{{i.id}}" type="radio" name="gcsId" [(ngModel)]="gcsId"
-                    [value]="i.id" (click)="uncheckRadio('GCS',i.id)"></div>
+                <div class="clr-col-2"><input id="gcs-{{i.id}}" type="radio" name="gcsId" [(ngModel)]="gcsId" [value]="i.id"
+                    (click)="uncheckRadio('GCS',i.id)"></div>
                 <div class="clr-col-10"><label for="gcs-{{i.id}}">{{i.name}}</label></div>
               </div>
             </div>
@@ -372,8 +370,8 @@
                 <div class="clr-col-10">ประเภทเตียงที่ใช้</div>
               </div>
               <div class="clr-row" *ngFor="let i of beds;let idx = index" [ngClass]="{isWarning: idx%2==0}">
-                <div class="clr-col-2"><input id="beds-{{i.id}}" type="radio" name="bedId" [(ngModel)]="bedId"
-                    [value]="i.id" (click)="uncheckRadio('BED',i.id)"></div>
+                <div class="clr-col-2"><input id="beds-{{i.id}}" type="radio" name="bedId" [(ngModel)]="bedId" [value]="i.id"
+                    (click)="uncheckRadio('BED',i.id)"></div>
                 <div class="clr-col-10"><label for="beds-{{i.id}}">{{i.name}}</label></div>
               </div>
             </div>
@@ -406,22 +404,17 @@
                     <div class="clr-col-3  isProblem" style="padding: 0;"></div>
                     <div class="clr-col-9  isProblem">ชื่อยา</div>
                     <div class="clr-col-3 isWarning" style="text-align: right;">
-                      <input id="s1-1" type="radio" name="s1" [(ngModel)]="s1" value="1"
-                        (click)="uncheckRadio('S1','1')">
+                      <input id="s1-1" type="radio" name="s1" [(ngModel)]="s1" value="1" (click)="uncheckRadio('S1','1')">
                     </div>
                     <div class="clr-col-9 isWarning" style="padding-left: 0.2rem;padding-left: 0.2rem;">
                       <label for="s1-1">Hydroxychloroquine 200 mg.</label> </div>
                     <div class="clr-col-3" style="text-align: right;">
-
-                      <input id="s2-1" type="radio" name="s2" [(ngModel)]="s2" value="1"
-                        (click)="uncheckRadio('S2','1')"></div>
+                      <input id="s2-1" type="radio" name="s2" [(ngModel)]="s2" value="1" (click)="uncheckRadio('S2','1')"></div>
                     <div class="clr-col-9" style="padding-left: 0.2rem;padding-left: 0.2rem;">
                       <label for="s2-1">Darunavir 600mg+Ritonavir</label>
                       100mg</div>
                     <div class="clr-col-3 isWarning" style="text-align: right;">
-
-                      <input id="s3-1" type="radio" name="s3" [(ngModel)]="s3" value="1"
-                        (click)="uncheckRadio('S3','1')">
+                      <input id="s3-1" type="radio" name="s3" [(ngModel)]="s3" value="1" (click)="uncheckRadio('S3','1')">
                     </div>
                     <div class="clr-col-9 isWarning" style="padding-left: 0.2rem;padding-left: 0.2rem;">
                       <label for="s3-1">Azithromycin 250 mg.</label></div>
@@ -432,13 +425,11 @@
                     <div class="clr-col-3 isProblem" style="text-align: right;"></div>
                     <div class="clr-col-9 isProblem" style="padding-left: 0.2rem;padding-left: 0.2rem;">ชื่อยา</div>
                     <div class="clr-col-3 isWarning" style="text-align: right;">
-                      <input id="s1-2" type="radio" name="s1" [(ngModel)]="s1" value="2"
-                        (click)="uncheckRadio('S1','2')"></div>
+                      <input id="s1-2" type="radio" name="s1" [(ngModel)]="s1" value="2" (click)="uncheckRadio('S1','2')"></div>
                     <div class="clr-col-9 isWarning" style="padding-left: 0.2rem;padding-left: 0.2rem;">
                       <label for="s1-2">Chloroquine 250 mg.</label></div>
                     <div class="clr-col-3" style="text-align: right;">
-                      <input id="s2-2" type="radio" name="s2" [(ngModel)]="s2" value="2"
-                        (click)="uncheckRadio('S2','2')">
+                      <input id="s2-2" type="radio" name="s2" [(ngModel)]="s2" value="2" (click)="uncheckRadio('S2','2')">
                     </div>
                     <div class="clr-col-9" style="padding-left: 0.2rem;padding-left: 0.2rem;">
                       <label for="s2-2">Lopinavir 200 mg/Ritonavir 50 mg.</label></div>
@@ -450,13 +441,6 @@
         </div>
       </div>
 
-      <!-- <div class="card-footer">
-        <button class="btn btn-success btn-block" (click)="onClickSave()" title="บันทึก"
-          [disabled]="!medicalSupplieId || !bedId || !gcsId">
-          <clr-icon shape="floppy"></clr-icon> บันทึก
-        </button>
-
-      </div> -->
     </div>
     <div class="card">
       <div class="card-block">
@@ -482,11 +466,9 @@
       </div>
 
       <div class="card-footer">
-        <button class="btn btn-success btn-block" (click)="onClickSave()" title="บันทึก"
-          [disabled]="  !bedId || !gcsId || !admitDate || isSave">
+        <button class="btn btn-success btn-block" (click)="onClickSave()" title="บันทึก" [disabled]="  !bedId || !gcsId || !confirmDate || !admitDate || isSave">
           <clr-icon shape="floppy"></clr-icon> บันทึก
         </button>
-
       </div>
     </div>
   </div>
@@ -518,8 +500,8 @@
       <label for="basic" class="clr-control-label">เลขที่บัตรประชาชน</label>
       <div class="clr-control-container">
         <div class="clr-input-wrapper" style="max-height: 3rem !important;">
-          <input type="text" id="basic" class="clr-input" appNumberOnly maxlength="13"
-            style="height:3rem !important;font-size: 1.3rem;" name="modalCIDCid" [(ngModel)]="modalCIDCid">
+          <input type="text" id="basic" class="clr-input" appNumberOnly maxlength="13" style="height:3rem !important;font-size: 1.3rem;"
+            name="modalCIDCid" [(ngModel)]="modalCIDCid">
           <clr-icon shape="exclamation-circle" size="36" *ngIf="modalCIDCidError"></clr-icon>
         </div>
         <span *ngIf="modalCIDCidError" class="clr-subtext">เลขที่บัตรประชาชนผิด</span>
