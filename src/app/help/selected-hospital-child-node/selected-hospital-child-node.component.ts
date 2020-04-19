@@ -11,7 +11,7 @@ import { findIndex } from 'lodash';
 export class SelectedHospitalChildNodeComponent implements OnInit {
 
   list: any;
-  hospId = null;
+  hosp = null;
   @Output() onselect: EventEmitter<any> = new EventEmitter<any>();
   constructor(
     private helpService: HelpService,
@@ -35,20 +35,15 @@ export class SelectedHospitalChildNodeComponent implements OnInit {
     }
   }
 
-  onSelected(l) {
-    console.log(l);
-    
-    if (l) {
-      const idx: any = findIndex(this.list, { id: +l });
-      if (idx > -1) {
-        this.onselect.emit(this.list[idx]);
-      } else {
-        this.alertService.error();
-      }
+  onSelected() {
+    if (typeof this.hosp === 'object') {
+      this.onselect.emit(this.hosp);
+    } else {
+      this.onselect.emit(null);
     }
-  }
+}
 
-  clear() {
-    this.hospId = null;
-  }
+clear() {
+  this.hosp = null;
+}
 }
