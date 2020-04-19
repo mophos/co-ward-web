@@ -38,7 +38,6 @@
         </clr-datagrid>
       </div>
     </div>
-
   </div>
   <div class="clr-col-9">
     <clr-datagrid [clrDgLoading]="loading" [style.height.px]="700">
@@ -52,12 +51,12 @@
         <clr-dg-cell>{{idx+1}}</clr-dg-cell>
         <clr-dg-cell>{{l.name}}</clr-dg-cell>
         <clr-dg-cell>
-          <input type="number" style="text-align: right;" name="qty" [(ngModel)]="l.qty" class="clr-col-9 clr-input width-fit"
+          <input [disabled]="isUpdate" type="number" style="text-align: right;" name="qty" [(ngModel)]="l.qty" class="clr-col-9 clr-input width-fit"
             value="{{l.qty}}">
         </clr-dg-cell>
         <clr-dg-cell>
-          <input type="number" style="text-align: right;" name="month_usage_qty" [(ngModel)]="l.month_usage_qty" class="clr-col-9 clr-input width-fit"
-            value="{{l.month_usage_qty}}">
+          <input [disabled]="isUpdate" type="number" style="text-align: right;" name="month_usage_qty" [(ngModel)]="l.month_usage_qty"
+            class="clr-col-9 clr-input width-fit" value="{{l.month_usage_qty}}">
         </clr-dg-cell>
         <clr-dg-cell>{{l.unit_name}}</clr-dg-cell>
       </clr-dg-row>
