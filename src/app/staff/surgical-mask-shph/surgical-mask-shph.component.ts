@@ -4,6 +4,8 @@ import { PayService } from '../pay.service';
 import { IMyOptions } from 'mydatepicker-th';
 import { SelectedHospitalChildNodeComponent } from 'src/app/help/selected-hospital-child-node/selected-hospital-child-node.component';
 import * as findIndex from 'lodash/findIndex';
+import { BasicService } from '../services/basic.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-pay',
@@ -16,10 +18,10 @@ export class SurgicalMaskShphComponent implements OnInit {
   modalEdit: any;
   hospitalId: any;
   hospitalName: any;
-  date: any;
   qty: any;
   isUpdate: any;
   id: any;
+  checkDate: any;
 
   myDatePickerOptions: IMyOptions = {
     inline: false,
@@ -33,18 +35,19 @@ export class SurgicalMaskShphComponent implements OnInit {
   constructor(
     private payService: PayService,
     private alertService: AlertService,
+    private basicService: BasicService,
   ) { }
 
-  ngOnInit() {
-    this.getList();
-    const date = new Date();
-    this.date = {
-      date: {
-        year: date.getFullYear(),
-        month: date.getMonth() + 1,
-        day: date.getDate()
-      }
-    };
+  async ngOnInit() {
+    await this.getCutTime();
+    await this.getList();
+  }
+
+  async getCutTime() {
+    const rs: any = await this.basicService.getDateCut();
+    if (rs.ok) {
+      this.checkDate = moment(rs.rows).format('YYYY-MM-DD');
+    }
   }
 
   async getList() {
@@ -69,36 +72,31 @@ export class SurgicalMaskShphComponent implements OnInit {
   }
 
   async save() {
-    const time: any = await this.payService.getTimeCut();
-    if (time.ok) {
-      const confirm = await this.alertService.confirm();
-      if (confirm) {
-        try {
-          const obj: any = {};
-          let rs: any;
-          obj.qty = this.qty;
-          obj.hospitalId = this.hospitalId;
+    const confirm = await this.alertService.confirm();
+    if (confirm) {
+      try {
+        const obj: any = {};
+        let rs: any;
+        obj.qty = this.qty;
+        obj.hospitalId = this.hospitalId;
 
-          if (this.isUpdate) {
-            rs = await this.payService.update(obj, this.id);
-          } else {
-            rs = await this.payService.save(obj);
-          }
-          if (rs.ok) {
-            this.alertService.success();
-            this.modal = false;
-            this.modalEdit = false;
-            this.clear();
-            this.getList();
-          } else {
-            this.alertService.error();
-          }
-        } catch (error) {
+        if (this.isUpdate) {
+          rs = await this.payService.update(obj, this.id);
+        } else {
+          rs = await this.payService.save(obj);
+        }
+        if (rs.ok) {
+          this.alertService.success();
+          this.modal = false;
+          this.modalEdit = false;
+          this.clear();
+          this.getList();
+        } else {
           this.alertService.error();
         }
+      } catch (error) {
+        this.alertService.error();
       }
-    } else {
-      this.alertService.error('ขณะนี้เกินเวลาบันทึกข้อมูล');
     }
   }
 
@@ -126,26 +124,21 @@ export class SurgicalMaskShphComponent implements OnInit {
   }
 
   async onClickRemove(l) {
-    const time: any = await this.payService.getTimeCut();
-    if (time.ok) {
-      try {
-        const confirm = await this.alertService.confirm();
-        if (confirm) {
-          const idx = findIndex(this.list, { id: +l.id });
-          if (idx > -1) {
-            const rs: any = await this.payService.remove(l.id);
-            if (rs.ok) {
-              this.list.splice(idx, 1);
-            } else {
-              this.alertService.error();
-            }
+    try {
+      const confirm = await this.alertService.confirm();
+      if (confirm) {
+        const idx = findIndex(this.list, { id: +l.id });
+        if (idx > -1) {
+          const rs: any = await this.payService.remove(l.id);
+          if (rs.ok) {
+            this.list.splice(idx, 1);
+          } else {
+            this.alertService.error();
           }
         }
-      } catch (error) {
-        this.alertService.error(error);
       }
-    } else {
-      this.alertService.error('ขณะนี้เกินเวลาบันทึกข้อมูล');
+    } catch (error) {
+      this.alertService.error(error);
     }
   }
 

@@ -373,6 +373,8 @@ export class CovidCaseStatusComponent implements OnInit {
           status = 'REFER';
           obj.hospitalId = this.hospitalId;
           obj.reason = this.reason;
+        } else if (this.modalDischargeType === 'NEGATIVE') {
+          status = 'NEGATIVE';
         }
         obj.dateDischarge = this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day + ' ' + this.hour + ':' + this.minute + ':00';
         obj.covidCaseId = this.selected.covid_case_id;

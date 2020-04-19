@@ -119,4 +119,28 @@ export class CovidCaseComponent implements OnInit {
   }
 
 
+  onEdit() {
+    try {
+
+    } catch (error) {
+
+    }
+  }
+
+  async onDelete(l) {
+    try {
+      const confirm = await this.alertService.deleted();
+      if (confirm) {
+        const rs: any = await this.covidCaseService.removeCase(l.covid_case_id);
+        if (rs.ok) {
+          this.alertService.success();
+        } else {
+          this.alertService.error(rs.error);
+        }
+      }
+    } catch (error) {
+      this.alertService.error(error);
+
+    }
+  }
 }
