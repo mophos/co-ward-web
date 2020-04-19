@@ -38,7 +38,11 @@
       <clr-dg-column>สถานะ</clr-dg-column>
       <!-- <clr-dg-column></clr-dg-column> -->
 
-      <clr-dg-row *clrDgItems="let l of list;let idx=index;" (click)="getData(l)">
+      <clr-dg-row *clrDgItems="let l of list;let idx=index;"  [clrDgItem]="l" (click)="getData(l)">
+        <clr-dg-action-overflow>
+          <button class="action-item" (click)="onEdit(l)">Edit</button>
+          <button class="action-item" (click)="onDelete(l)">Delete</button>
+      </clr-dg-action-overflow>
         <clr-dg-cell>{{l.hn}}</clr-dg-cell>
         <clr-dg-cell>{{l.title_name}}{{l.first_name}} {{l.last_name}}</clr-dg-cell>
         <clr-dg-cell>{{l.date_admit | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
