@@ -27,12 +27,12 @@
         <!-- <clr-dg-cell>{{l.entry_date | dateTh:'DD/MM/YYYY'}}</clr-dg-cell> -->
         <clr-dg-cell>
           <div class="btn-group">
-            <button class="btn btn-sm btn-success" [disabled]="l.entry_date != checkDate" (click)="onClickEdit(l)"
-              title="แก้ไข">
+            <button class="btn btn-sm btn-success" [disabled]="(l.entry_date | dateTh:'YYYY-MM-DD') != checkDate"
+              (click)="onClickEdit(l)" title="แก้ไข">
               <clr-icon shape="note"></clr-icon>
             </button>
-            <button class="btn btn-sm btn-danger" [disabled]="l.entry_date != checkDate" (click)="onClickRemove(l)"
-              title="ลบ">
+            <button class="btn btn-sm btn-danger" [disabled]="(l.entry_date | dateTh:'YYYY-MM-DD') != checkDate"
+              (click)="onClickRemove(l)" title="ลบ">
               <clr-icon shape="trash"></clr-icon>
             </button>
           </div>
