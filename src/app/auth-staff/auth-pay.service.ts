@@ -25,7 +25,7 @@ export class AuthPayService implements CanActivate {
           return false;
         } else {
           let isAccess = false;
-          if (_.findIndex(rights, { name: 'STAFF_PAY' }) > -1) {
+          if (_.findIndex(rights, { name: 'STAFF_SURGICAL_SPHP' }) > -1) {
             isAccess = true;
           } else {
             isAccess = false;

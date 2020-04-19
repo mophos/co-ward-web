@@ -7,7 +7,7 @@ import * as _ from 'lodash';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthCovidCaseApprovedService implements CanActivate {
+export class AuthApprovedDrugsService implements CanActivate {
   public token: string;
   public jwtHelper = new JwtHelperService();
 
@@ -25,9 +25,7 @@ export class AuthCovidCaseApprovedService implements CanActivate {
           return false;
         } else {
           let isAccess = false;
-          if (_.findIndex(rights, { name: 'STAFF_COVID_CASE_DRUGS_APPROVED' }) > -1) {
-            isAccess = true;
-          } else if (_.findIndex(rights, { name: 'STAFF_COVID_CASE_SUPPLIES_APPROVED' }) > -1) {
+          if (_.findIndex(rights, { name: 'STAFF_APPROVED_DRUGS' }) > -1) {
             isAccess = true;
           } else {
             isAccess = false;

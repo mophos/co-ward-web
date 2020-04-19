@@ -31,6 +31,11 @@
         <clr-icon clrVerticalNavIcon shape="helix" class="is-solid"></clr-icon>
         บันทึกผู้ป่วยใหม่
       </a>
+      <a *ngIf="covidCaseMenu" clrVerticalNavLink routerLink="/staff/covid-case-old" title="Case COVID"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="helix" class="is-solid"></clr-icon>
+        บันทึกผู้ป่วยเก่า
+      </a>
       <a *ngIf="covidCaseMenu" clrVerticalNavLink routerLink="/staff/covid-case" title="Case COVID"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="helix"></clr-icon>
@@ -41,41 +46,44 @@
         <clr-icon clrVerticalNavIcon shape="wand"></clr-icon>
         สถานะผู้ป่วยรายวัน
       </a>
-      <a *ngIf="covidCaseApprovedMenu" clrVerticalNavLink routerLink="/staff/covid-case-approved"
-        title="จ่ายยาและเวชภัณฑ์" routerLinkActive="active">
+      <a *ngIf="covidApproveDrugsMenu" clrVerticalNavLink routerLink="/staff/covid-case-approved-drugs" title="จ่ายยา"
+        routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
-        จ่ายยาและเวชภัณฑ์
+        จ่ายยา
       </a>
+      <a *ngIf="covidApproveSuppliesMenu" clrVerticalNavLink routerLink="/staff/covid-case-approved-supplies"
+        title="จ่ายเวชภัณฑ์" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
+        จ่ายเวชภัณฑ์
+      </a>
+
+      <a *ngIf="settingProvinceSubUserMenu" clrVerticalNavLink routerLink="/staff/province-set-sup-user"
+        routerLinkActive="active"><clr-icon clrVerticalNavIcon shape="cog"></clr-icon>
+        ตั้งค่า admin ภายในจังหวัด
+      </a>
+
       <div clrVerticalNavLink routerLinkActive="active" style="background-color: rgba(165, 165, 165,0.2);">
 
       </div>
       <a *ngIf="covidCaseRequisitionMenu" clrVerticalNavLink routerLink="/staff/covid-case-requisition"
-        title="รายการจ่ายยาและเวชภัณฑ์" routerLinkActive="active">
+        title="รายการเบิก" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
-        รายการจ่ายยาและเวชภัณฑ์
+        รายการเบิก
       </a>
-      <a clrVerticalNavLink *ngIf="covidCaseApprovedMenu" routerLink="/staff/inventory-status" title="รายการคงคลัง"
+      <a clrVerticalNavLink *ngIf="covidProductStock" routerLink="/staff/stock-products" title="รายการคงคลัง"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="store"></clr-icon>
         รายการคงคลัง
       </a>
-      <a *ngIf="covidPayMenu" clrVerticalNavLink routerLink="/staff/pay" title="บันทึกการจ่าย Surgical Mask"
+      <a *ngIf="surgicalSPHP" clrVerticalNavLink routerLink="/staff/surgical-sphp" title="จ่าย Surgical Mask ให้รพสต."
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="users"></clr-icon>
         จ่าย Surgical Mask ให้รพสต.
       </a>
-      <!-- <a *ngIf="stockDrugsMenu" clrVerticalNavLink routerLink="/staff/drugs" title="สถานะยา" routerLinkActive="active">
-        <clr-icon clrVerticalNavIcon shape="flask"></clr-icon>
-        สถานะยา
-      </a>
-      <a *ngIf="stockBedsMenu" clrVerticalNavLink routerLink="/staff/beds" title="เตียงผู้ป่วย" routerLinkActive="active">
-        <clr-icon clrVerticalNavIcon shape="accessibility-2"></clr-icon>
-        สถานะเตียงผู้ป่วย
-      </a> -->
-      <a *ngIf="stockSuppliesMenu" clrVerticalNavLink routerLink="/staff/supplies" title="สถานะเวชภัณฑ์"
+      <a *ngIf="stockSuppliesMenu" clrVerticalNavLink routerLink="/staff/supplies" title="บันทึกเวชภัณฑ์คงคลัง"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="cursor-hand-open"></clr-icon>
-        สถานะเวชภัณฑ์
+        บันทึกเวชภัณฑ์คงคลัง
       </a>
       <!-- <a *ngIf="trackingMenu" clrVerticalNavLink routerLink="/staff/tracking" title="สถานะของ" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
@@ -92,6 +100,7 @@
       </a> -->
       <div clrVerticalNavLink routerLinkActive="active" style="background-color: rgba(165, 165, 165,0.2);">
       </div>
+
       <clr-vertical-nav-group routerLinkActive="active">
         <clr-icon shape="cog" clrVerticalNavIcon></clr-icon>
         ตั้งค่า
@@ -110,13 +119,8 @@
             routerLinkActive="active">
             ตั้งค่าบุคลากร
           </a>
-          <a *ngIf="settingUserMenu" clrVerticalNavLink routerLink="/staff/setting/users"
-            routerLinkActive="active">
+          <a *ngIf="settingUserMenu" clrVerticalNavLink routerLink="/staff/setting/users" routerLinkActive="active">
             ตั้งค่าสิทธิ์ผู้ใช้งาน
-          </a>
-          <a *ngIf="settingProvinceSubUserMenu" clrVerticalNavLink routerLink="/staff/setting/province-set-sup-user"
-            routerLinkActive="active">
-            ตั้งค่า admin ภายในจังหวัด
           </a>
         </clr-vertical-nav-group-children>
       </clr-vertical-nav-group>

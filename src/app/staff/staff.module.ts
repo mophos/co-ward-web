@@ -18,7 +18,11 @@ import { ReceiveDrugComponent } from './receive-drug/receive-drug.component';
 
 import { AuthCovidCaseService } from '../auth-staff/auth-covid-case.service';
 import { AuthCovidCaseStatusService } from '../auth-staff/auth-covid-case-status.service';
-import { AuthCovidCaseApprovedService } from '../auth-staff/auth-covid-case-approved.service';
+import { AuthApprovedDrugsService } from '../auth-staff/auth-approved-drugs.service';
+import { AuthApprovedSuppliesService } from '../auth-staff/auth-approved-supplies.service';
+// -----------------------------------------------------------------------------------
+import { AuthStockProductsService } from '../auth-staff/auth-stock-products.service';
+
 import { AuthStockDrugsService } from '../auth-staff/auth-stock-drugs.service';
 import { AuthStockBedsService } from '../auth-staff/auth-stock-beds.service';
 import { AuthStockSuppliesService } from '../auth-staff/auth-stock-supplies.service';
@@ -92,7 +96,9 @@ import { CovidCaseEditComponent } from './covid-case/covid-case-edit/covid-case-
   providers: [
     AuthCovidCaseService,
     AuthCovidCaseStatusService,
-    AuthCovidCaseApprovedService,
+    AuthApprovedDrugsService,
+    AuthApprovedSuppliesService,
+    AuthStockProductsService,
     AuthStockDrugsService,
     AuthStockBedsService,
     AuthStockSuppliesService,

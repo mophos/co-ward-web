@@ -15,7 +15,8 @@
       <clr-dg-column>สถานบริการ</clr-dg-column>
       <clr-dg-column>รายการ</clr-dg-column>
       <clr-dg-column>จำนวน</clr-dg-column>
-      <clr-dg-column>วันที่จ่าย</clr-dg-column>
+      <clr-dg-column>วันที่บันทึก</clr-dg-column>
+      <!-- <clr-dg-column>วันที่ตัดรอบ</clr-dg-column> -->
       <clr-dg-column></clr-dg-column>
 
       <clr-dg-row *ngFor="let l of list">
@@ -23,12 +24,15 @@
         <clr-dg-cell>ผ้าปิดจมูกใยสังเคราะห์ 3 ชั้น (Surgical Mask)</clr-dg-cell>
         <clr-dg-cell>{{l.qty}} ชิ้น</clr-dg-cell>
         <clr-dg-cell>{{l.created_at | dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.entry_date | dateTh:'DD/MM/YYYY'}}</clr-dg-cell> -->
         <clr-dg-cell>
           <div class="btn-group">
-            <button class="btn btn-sm btn-success" (click)="onClickEdit(l)" title="แก้ไข">
+            <button class="btn btn-sm btn-success" [disabled]="(l.entry_date | dateTh:'YYYY-MM-DD') != checkDate"
+              (click)="onClickEdit(l)" title="แก้ไข">
               <clr-icon shape="note"></clr-icon>
             </button>
-            <button class="btn btn-sm btn-danger" (click)="onClickRemove(l)" title="ลบ">
+            <button class="btn btn-sm btn-danger" [disabled]="(l.entry_date | dateTh:'YYYY-MM-DD') != checkDate"
+              (click)="onClickRemove(l)" title="ลบ">
               <clr-icon shape="trash"></clr-icon>
             </button>
           </div>
