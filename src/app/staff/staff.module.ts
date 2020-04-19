@@ -51,6 +51,8 @@ import { AuthProvinceSetSupUserService } from '../auth-staff/auth-province-set-s
 import { ManageProvinceSetSupUserComponent } from './manage-province-set-sup-user/manage-province-set-sup-user.component';
 import { SettingUsersComponent } from './setting/setting-users/setting-users.component';
 import { SettingProfilesComponent } from './setting/setting-profiles/setting-profiles.component';
+import { CovidCaseEditComponent } from './covid-case/covid-case-edit/covid-case-edit.component';
+import { ApproveDrugsComponent } from './approve-drugs/approve-drugs.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -76,7 +78,9 @@ import { SettingProfilesComponent } from './setting/setting-profiles/setting-pro
     ProfessionalComponent,
     ManageProvinceSetSupUserComponent,
     SettingUsersComponent,
-    SettingProfilesComponent
+    SettingProfilesComponent,
+    CovidCaseEditComponent,
+    ApproveDrugsComponent
   ],
   imports: [
     HelpModule,

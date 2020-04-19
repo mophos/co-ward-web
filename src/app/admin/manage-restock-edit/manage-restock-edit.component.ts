@@ -19,17 +19,17 @@ export class ManageRestockEditComponent implements OnInit {
   modalImport = false;
 
 
-  restockId: any
-  restockDetailId: any
-  listTypes: any
-  listHosp: any
-  typeName: any = ''
-  hospName: any = ''
-  listSupplies: any
-  loading = false
-  modal = false
-  modalExport = false
-  isSave = false
+  restockId: any;
+  restockDetailId: any;
+  listTypes: any;
+  listHosp: any;
+  typeName: any = '';
+  hospName: any = '';
+  listSupplies: any;
+  loading = false;
+  modal = false;
+  modalExport = false;
+  isSave = false;
 
   @ViewChild('loadding') loadding: any;
   constructor(
@@ -67,7 +67,7 @@ export class ManageRestockEditComponent implements OnInit {
     this.typeName = l.name;
     try {
       this.loading = true;
-      const rs: any = await this.restockService.getListHospital(this.restockId, l.id)
+      const rs: any = await this.restockService.getListHospital(this.restockId, l.id);
       if (rs.ok) {
         this.listHosp = rs.rows;
       } else {
@@ -85,7 +85,7 @@ export class ManageRestockEditComponent implements OnInit {
     this.restockDetailId = l.id;
     try {
       this.loading = true;
-      const rs: any = await this.restockService.getListSupplies(this.restockDetailId)
+      const rs: any = await this.restockService.getListSupplies(this.restockDetailId);
       if (rs.ok) {
         this.listSupplies = rs.rows;
         this.modal = true;
@@ -115,7 +115,7 @@ export class ManageRestockEditComponent implements OnInit {
           data.push(obj);
         }
 
-        const rs: any = await this.restockService.updateSupplies(data, this.restockDetailId)
+        const rs: any = await this.restockService.updateSupplies(data, this.restockDetailId);
         if (rs.ok) {
           this.alertService.success();
           this.modal = false;
@@ -151,7 +151,7 @@ export class ManageRestockEditComponent implements OnInit {
       this.arrayBuffer = fileReader.result;
       const buffer = new Uint8Array(this.arrayBuffer);
       const arr = new Array();
-      for (let i = 0; i != buffer.length; ++i) {
+      for (let i = 0; i !== buffer.length; ++i) {
         arr[i] = String.fromCharCode(buffer[i]);
       }
       const bstr = arr.join('');
@@ -166,7 +166,7 @@ export class ManageRestockEditComponent implements OnInit {
       for (const v of json) {
         if (idx > 0) {
           for (let i = 0; i < Object.values(v).length; i++) {
-            if (Object.keys(v)[i] != 'id' && Object.keys(v)[i] != 'โรงพยาบาล') {
+            if (Object.keys(v)[i] !== 'id' && Object.keys(v)[i] !== 'โรงพยาบาล') {
               const obj = {
                 restock_detail_id: v.id,
                 supplies_code: Object.keys(v)[i],
@@ -179,7 +179,7 @@ export class ManageRestockEditComponent implements OnInit {
         idx++;
       }
       try {
-        let rs: any = await this.restockService.import(data);
+        const rs: any = await this.restockService.import(data);
         if (rs.ok) {
           this.alertService.success();
           this.modalImport = false;
@@ -193,7 +193,7 @@ export class ManageRestockEditComponent implements OnInit {
         console.log(error);
         this.alertService.error(error);
       }
-    }
+    };
     fileReader.readAsArrayBuffer(this.file);
     this.loadding.hide();
   }
@@ -208,7 +208,7 @@ export class ManageRestockEditComponent implements OnInit {
       this.downloadFile('รายการเติมเวชภัณฑ์', 'xlsx', rs);
     }
   }
-  
+
   downloadFile(name, type, data: any) {
     try {
       const url = window.URL.createObjectURL(new Blob([data]));
@@ -228,12 +228,12 @@ export class ManageRestockEditComponent implements OnInit {
   }
 
   async approved() {
-    let comfirm = await this.alertService.confirm();
+    const comfirm = await this.alertService.confirm();
     if (comfirm) {
       this.isSave = true;
       this.loading = true;
       try {
-        let rs: any = await this.restockService.approved(this.restockId);
+        const rs: any = await this.restockService.approved(this.restockId);
         if (rs.ok) {
           this.isSave = false;
           this.alertService.success();
