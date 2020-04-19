@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
   passwordConfirm: any = '';
   checkPassword: any;
   checkPasswordConfirm: any;
-
+  demo = '';
   @ViewChild('loading') loading: any;
 
   public jwtHelper = new JwtHelperService();
@@ -55,6 +55,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.getVersion();
+    this.getDemo();
   }
 
   async getVersion() {
@@ -62,6 +63,17 @@ export class LoginComponent implements OnInit {
       const rs: any = await this.loginService.getVersion();
       if (rs.ok) {
         this.version = rs.message;
+      }
+    } catch (error) {
+
+    }
+  }
+
+  async getDemo() {
+    try {
+      const rs: any = await this.loginService.getDemo();
+      if (rs.ok) {
+        this.demo = 'Demo';
       }
     } catch (error) {
 
