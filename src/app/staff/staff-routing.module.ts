@@ -35,7 +35,7 @@ import { AuthPayService } from '../auth-staff/auth-pay.service';
 import { AuthSettinUserService } from '../auth-staff/auth-settin-user.service';
 import { HomeComponent } from '../staff/home/home.component';
 import { CovidCaseRequisitionComponent } from './covid-case-requisition/covid-case-requisition.component';
-import { PayComponent } from './pay/pay.component';
+import { SurgicalMaskShphComponent } from './surgical-mask-shph/surgical-mask-shph.component';
 import { SettingMedicalSuppliesComponent } from './setting/setting-medical-supplies/setting-medical-supplies.component';
 import { ProfessionalComponent } from './setting/professional/professional.component';
 import { AuthProvinceSetSupUserService } from '../auth-staff/auth-province-set-sup-user.service';
@@ -67,7 +67,7 @@ const routes: Routes = [
       { path: 'drugs', canActivate: [AuthStockDrugsService], component: DrugComponent },
       { path: 'beds', canActivate: [AuthStockBedsService], component: BedComponent },
       { path: 'supplies', canActivate: [AuthStockSuppliesService], component: SuppliesComponent },
-      { path: 'pay', canActivate: [AuthPayService], component: PayComponent },
+      { path: 'pay', canActivate: [AuthPayService], component: SurgicalMaskShphComponent },
 
       {
         path: 'tracking',

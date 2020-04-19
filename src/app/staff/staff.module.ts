@@ -39,13 +39,14 @@ import { SuppliesComponent } from './supplies/supplies.component';
 import { CovidCaseApprovedComponent } from './covid-case-approved/covid-case-approved.component';
 import { HomeComponent } from './home/home.component';
 import { CovidCaseRequisitionComponent } from './covid-case-requisition/covid-case-requisition.component';
-import { PayComponent } from './pay/pay.component';
+import { SurgicalMaskShphComponent } from './surgical-mask-shph/surgical-mask-shph.component';
 import { SettingMedicalSuppliesComponent } from './setting/setting-medical-supplies/setting-medical-supplies.component';
 import { InventoryStatusComponent } from './inventory-status/inventory-status.component';
 import { ProfessionalComponent } from './setting/professional/professional.component';
 import { AuthProvinceSetSupUserService } from '../auth-staff/auth-province-set-sup-user.service';
 import { ManageProvinceSetSupUserComponent } from './manage-province-set-sup-user/manage-province-set-sup-user.component';
 import { SettingUsersComponent } from './setting/setting-users/setting-users.component';
+import { SettingProfilesComponent } from './setting/setting-profiles/setting-profiles.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -65,12 +66,13 @@ import { SettingUsersComponent } from './setting/setting-users/setting-users.com
     CovidCaseApprovedComponent,
     HomeComponent,
     CovidCaseRequisitionComponent,
-    PayComponent,
+    SurgicalMaskShphComponent,
     SettingMedicalSuppliesComponent,
     InventoryStatusComponent,
     ProfessionalComponent,
     ManageProvinceSetSupUserComponent,
-    SettingUsersComponent
+    SettingUsersComponent,
+    SettingProfilesComponent
   ],
   imports: [
     HelpModule,

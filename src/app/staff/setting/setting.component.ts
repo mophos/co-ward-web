@@ -20,6 +20,8 @@ export class SettingComponent implements OnInit {
   address: any;
   tel: any;
   telephone: any;
+  nameManager: any;
+  emailManager: any;
   telephoneManager: any;
   positionList: any;
   position: any;
@@ -83,6 +85,8 @@ export class SettingComponent implements OnInit {
         this.tel = rs.rows[0].tel;
         this.telephone = rs.rows[0].telephone;
         this.telephoneManager = rs.rows[0].telephone_manager;
+        this.nameManager = rs.rows[0].name_manager;
+        this.emailManager = rs.rows[0].email_manager;
 
         this.tambonName = rs.rows[0].tambon_name;
         this.ampurName = rs.rows[0].ampur_name;
@@ -199,6 +203,8 @@ export class SettingComponent implements OnInit {
         obj.tel = this.tel;
         obj.telephone = this.telephone;
         obj.telephone_manager = this.telephoneManager;
+        obj.name_manager = this.nameManager;
+        obj.email_manager = this.emailManager;
         obj.address = this.address;
         obj.province_name = this.provinceName;
         obj.ampur_name = this.ampurName;
@@ -213,26 +219,13 @@ export class SettingComponent implements OnInit {
         obj.zipcode = this.zipcode;
         data.push(obj);
 
-        const dataUser: any = [];
-        const objUser: any = {};
-        objUser.position_id = this.position;
-        objUser.title_id = this.title;
-        objUser.fname = this.fname;
-        objUser.lname = this.lname;
-        if (this.password !== '') {
-          objUser.password = this.password;
-        }
-        objUser.email = this.email;
-        objUser.telephone = this.phoneNumber;
-        dataUser.push(objUser);
+
 
         const rs: any = await this.settingService.save(data);
-        const rsUser: any = await this.settingService.updateUser(dataUser);
 
-        if (rs.ok && rsUser.ok) {
+        if (rs.ok) {
           this.alertService.success();
           this.getInfo();
-          this.getUserInfo();
           this.password = '';
           this.passwordConfirm = '';
         } else {
