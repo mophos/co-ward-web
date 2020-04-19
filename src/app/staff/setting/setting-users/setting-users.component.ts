@@ -29,7 +29,7 @@ export class SettingUsersComponent implements OnInit {
 
   async getListUser() {
     try {
-      let rs: any = await this.userService.getUser(this.query);
+      const rs: any = await this.userService.getUser(this.query);
       if (rs.ok) {
         this.list = rs.rows;
       }
@@ -48,7 +48,7 @@ export class SettingUsersComponent implements OnInit {
     try {
       const confirm = await this.alertService.confirm();
       if (confirm) {
-        let rs: any = await this.userService.removeUser(e.id);
+        const rs: any = await this.userService.removeUser(e.id);
         if (rs.ok) {
           this.getListUser();
           this.alertService.success();
@@ -93,7 +93,5 @@ export class SettingUsersComponent implements OnInit {
     console.log(this.province);
     console.log(this.isNodeDrugs);
     console.log(this.isNodeSupplies);
-
   }
-  // this.province = e.hosptype_id === '1' ? 'Y' : 'N';
 }

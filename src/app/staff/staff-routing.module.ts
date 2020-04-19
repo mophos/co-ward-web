@@ -68,7 +68,7 @@ const routes: Routes = [
       // ----------------------------------------------------------------------------------------------------------
       { path: 'covid-case-requisition', canActivate: [AuthCovidCaseRequisitionService], component: CovidCaseRequisitionComponent },
       { path: 'stock-products', canActivate: [AuthStockProductsService], component: InventoryStatusComponent },
-      { path: 'pay', canActivate: [AuthPayService], component: SurgicalMaskShphComponent },
+      { path: 'surgical-sphp', canActivate: [AuthPayService], component: SurgicalMaskShphComponent },
       { path: 'supplies', canActivate: [AuthStockSuppliesService], component: SuppliesComponent },
       {
         path: 'tracking',
