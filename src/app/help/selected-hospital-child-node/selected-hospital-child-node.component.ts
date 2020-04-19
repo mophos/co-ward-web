@@ -41,9 +41,9 @@ export class SelectedHospitalChildNodeComponent implements OnInit {
     } else {
       this.onselect.emit(null);
     }
-}
+  }
 
-clear() {
-  this.hosp = null;
-}
+  clear() {
+    this.hosp = null;
+  }
 }
