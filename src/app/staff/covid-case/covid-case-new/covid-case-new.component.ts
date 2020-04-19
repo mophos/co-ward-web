@@ -356,7 +356,6 @@ export class CovidCaseNewComponent implements OnInit {
           lname: this.lname,
           tel: this.tel,
           admitDate: `${this.admitDate.date.year}-${this.admitDate.date.month}-${this.admitDate.date.day}`,
-          confirmDate: `${this.confirmDate.date.year}-${this.confirmDate.date.month}-${this.confirmDate.date.day}`,
           gcsId: this.gcsId,
           bedId: this.bedId,
           medicalSupplieId: this.medicalSupplieId,
@@ -372,6 +371,10 @@ export class CovidCaseNewComponent implements OnInit {
           countryId: this.countryId,
           drugs
         };
+        
+        if (this.confirmDate) {
+          obj.confirmDate = `${this.confirmDate.date.year}-${this.confirmDate.date.month}-${this.confirmDate.date.day}`;
+        }
         if (this.birthDate) {
           obj.birthDate = `${this.birthDate.date.year}-${this.birthDate.date.month}-${this.birthDate.date.day}`;
         }
@@ -386,6 +389,9 @@ export class CovidCaseNewComponent implements OnInit {
           this.isSave = false;
           this.alertService.error(rs.error);
         }
+      } else {
+        this.isSave = false;
+        this.alertService.error('กรอกข้อมูลไม่ครบ\nกรุณาตรวจสอบข้อมูล');
       }
     } catch (error) {
       this.isSave = false;

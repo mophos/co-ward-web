@@ -3,7 +3,7 @@
     <span class="breadcrumb-item active">ตั้งค่าบุคลากร</span>
   </nav>
   
-  <clr-datagrid [clrDgLoading]="isLoading" >
+  <clr-datagrid [clrDgLoading]="isLoading" style="height: 30rem;">
     <clr-dg-column>ประเภทบุคลากร</clr-dg-column>
     <clr-dg-column>จำนวนบุคลากรทั้งหมด</clr-dg-column>
   
@@ -11,12 +11,12 @@
       <clr-dg-cell>{{l.name}}</clr-dg-cell>
       <clr-dg-cell><input class="clr-input width-fit" type="text" appNumberOnly name="{{l.qty}}" [(ngModel)]="l.qty"></clr-dg-cell>
     </clr-dg-row>
-    <clr-dg-footer>
+    <!-- <clr-dg-footer>
       <clr-dg-pagination #pagination  >
         <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
         {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} จาก {{pagination.totalItems}} รายการ
       </clr-dg-pagination>
-    </clr-dg-footer>
+    </clr-dg-footer> -->
   </clr-datagrid>
   <br>
   <button class="btn btn-success btn-block" (click)="onClickSave()" [disabled]="isSave">บันทึก</button>

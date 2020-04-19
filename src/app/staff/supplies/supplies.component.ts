@@ -109,6 +109,7 @@ export class SuppliesComponent implements OnInit {
           const obj: any = {};
           obj.generic_id = v.id;
           obj.qty = v.qty;
+          obj.month_usage_qty = v.month_usage_qty;
           data.push(obj);
         }
         const rs: any = await this.supplieService.save(data);

@@ -16,12 +16,23 @@
       <clr-dg-column>รายการ</clr-dg-column>
       <clr-dg-column>จำนวน</clr-dg-column>
       <clr-dg-column>วันที่จ่าย</clr-dg-column>
+      <clr-dg-column></clr-dg-column>
 
       <clr-dg-row *ngFor="let l of list">
         <clr-dg-cell>{{l.hospname}}</clr-dg-cell>
         <clr-dg-cell>ผ้าปิดจมูกใยสังเคราะห์ 3 ชั้น (Surgical Mask)</clr-dg-cell>
         <clr-dg-cell>{{l.qty}} ชิ้น</clr-dg-cell>
         <clr-dg-cell>{{l.created_at | dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
+        <clr-dg-cell>
+          <div class="btn-group">
+            <button class="btn btn-sm btn-success" (click)="onClickEdit(l)" title="แก้ไข">
+              <clr-icon shape="note"></clr-icon>
+            </button>
+            <button class="btn btn-sm btn-danger" (click)="onClickRemove(l)" title="ลบ">
+              <clr-icon shape="trash"></clr-icon>
+            </button>
+          </div>
+        </clr-dg-cell>
       </clr-dg-row>
 
       <clr-dg-footer>
@@ -36,23 +47,14 @@
 </div>
 
 <clr-modal [(clrModalOpen)]="modal" [clrModalClosable]="false" [clrModalSize]="'lg'">
-  <!-- <h3 class="modal-title">เพิ่ม/แก้ไข เวชภัณฑ์</h3> -->
   <div class="modal-body">
     <div class="clr-row" style="padding: 2rem;">
-      <!-- <div class="clr-col-12">
-        <div class="clr-form clr-form-compact clr-row">
-          <label class="clr-control-label clr-col-7">วันที่</label>
-          <my-date-picker-th class="clr-col-5 width-fit" name="date" [options]="myDatePickerOptions"
-            [(ngModel)]="date" required>
-          </my-date-picker-th>
-        </div>
-      </div> -->
       <div class="clr-col-12">
         <div class="clr-form clr-form-compact clr-row">
           <label class="clr-control-label clr-col-7">ชื่อสถานบริการ</label>
-          <app-autocomplete-hospital class="clr-col-5 clr-input width-fit" style="padding: 0px; width: 80%;" #hospital
-            (onchange)="onSelectHosp($event)" (onselect)="onSelectHosp($event)">
-          </app-autocomplete-hospital>
+          <app-selected-hospital-child-node class="clr-col-5 clr-input width-fit" style="padding: 0px; width: 80%;"
+            #hospital (onselect)="onSelectHosp($event)">
+          </app-selected-hospital-child-node>
         </div>
       </div>
       <div class="clr-col-12">
@@ -64,10 +66,37 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="save()" [disabled]="!hospitalId">
+    <button type="button" class="btn btn-success" (click)="save()" [disabled]="!hospitalId || !qty">
       บันทึก
     </button>
-    <button type="button" class="btn btn-danger" (click)="modal = false">
+    <button type="button" class="btn btn-danger" (click)="close()">
+      ปิด
+    </button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="modalEdit" [clrModalClosable]="false" [clrModalSize]="'lg'">
+  <div class="modal-body">
+    <div class="clr-row" style="padding: 2rem;">
+      <div class="clr-col-12">
+        <div class="clr-form clr-form-compact clr-row">
+          <label class="clr-control-label clr-col-7">ชื่อสถานบริการ</label>
+          <input type="text" [(ngModel)]="hospitalName" class="clr-col-5 clr-input width-fit" [disabled]="true">
+        </div>
+      </div>
+      <div class="clr-col-12">
+        <div class="clr-form clr-form-compact clr-row">
+          <label class="clr-control-label clr-col-7">ผ้าปิดจมูกใยสังเคราะห์ 3 ชั้น (Surgical Mask)</label>
+          <input type="text" appNumberOnly name="qty" [(ngModel)]="qty" class="clr-col-5 clr-input width-fit">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="save()">
+      บันทึก
+    </button>
+    <button type="button" class="btn btn-danger" (click)="modalEdit=false;">
       ปิด
     </button>
   </div>
