@@ -121,7 +121,7 @@ export class CovidCaseComponent implements OnInit {
 
   onEdit() {
     try {
-
+      this.router.navigate(['/staff/covid-case-edit']);
     } catch (error) {
 
     }
@@ -133,6 +133,7 @@ export class CovidCaseComponent implements OnInit {
       if (confirm) {
         const rs: any = await this.covidCaseService.removeCase(l.covid_case_id);
         if (rs.ok) {
+          await this.getList();
           this.alertService.success();
         } else {
           this.alertService.error(rs.error);

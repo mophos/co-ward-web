@@ -147,7 +147,6 @@ export class CovidCaseNewComponent implements OnInit {
 
   setData() {
     try {
-
       this.hn = this.data.hn;
       this.an = this.data.an;
       this.titleId = this.data.title_id;
@@ -371,7 +370,7 @@ export class CovidCaseNewComponent implements OnInit {
           countryId: this.countryId,
           drugs
         };
-        
+
         if (this.confirmDate) {
           obj.confirmDate = `${this.confirmDate.date.year}-${this.confirmDate.date.month}-${this.confirmDate.date.day}`;
         }
@@ -524,6 +523,7 @@ export class CovidCaseNewComponent implements OnInit {
           const rs: any = await this.covidCaseService.checkNo(this.modalCIDType, this.modalCIDCid, this.modalCIDPassport);
           if (rs.ok) {
             if (rs.case === 'NEW') {
+              this.infoCid(this.modalCIDCid);
               this.cid = this.modalCIDCid;
               this.isKey = true;
               this.modalCID = false;
@@ -553,6 +553,12 @@ export class CovidCaseNewComponent implements OnInit {
 
   onClickOpenModalCid() {
     this.modalCID = true;
+  }
+
+  async infoCid(cid) {
+    try {
+    } catch (error) {
+    }
   }
 
 }

@@ -30,6 +30,8 @@ export class DateThPipe implements PipeTransform {
           date = moment(value).format('D MMM ') + (moment(value).get('year') + 543);
         } else if (args === 'D MMM YYYY hh:mm') {
           date = moment(value).format('D MMM ') + (moment(value).get('year') + 543) + ' ' + moment(value).format('HH:mm') + ' น.';
+        } else if (args === 'YYYY-MM-DD') {
+          date = moment(value).format('YYYY-MM-DD');
         }
       } else {
         date = moment(value).format('D MMM ') + (moment(value).get('year') + 543);
