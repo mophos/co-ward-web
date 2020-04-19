@@ -12,4 +12,9 @@ export class HelpService {
     const url = `${this.url}/v1/basic-auth/list-child-node`;
     return this.http.get(url).toPromise();
   }
+
+  async getDateCut() {
+    const url = `${this.url}/date-time-cut`;
+    return await this.http.get(url).toPromise();
+  }
 }

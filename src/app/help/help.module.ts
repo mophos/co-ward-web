@@ -18,6 +18,7 @@ import { AutocompleteCountriesComponent } from './autocomplete-countries/autocom
 import { EnNoSpaceDirective } from './en-no-space.directive';
 import { SelectedHospitalChildNodeComponent } from './selected-hospital-child-node/selected-hospital-child-node.component';
 import { HelpService } from './help.service';
+import { CheckCutTimePipe } from './check-cut-time.pipe';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { HelpService } from './help.service';
     SafePipe,
     AutocompleteCountriesComponent,
     EnNoSpaceDirective,
-    SelectedHospitalChildNodeComponent
+    SelectedHospitalChildNodeComponent,
+    CheckCutTimePipe
   ],
   imports: [
     CommonModule,
@@ -57,7 +59,8 @@ import { HelpService } from './help.service';
     AutocompleteHospitalRequisitionComponent,
     AutocompleteCountriesComponent,
     EnNoSpaceDirective,
-    SelectedHospitalChildNodeComponent
+    SelectedHospitalChildNodeComponent,
+    CheckCutTimePipe
   ],
   providers: [
     HelpService
