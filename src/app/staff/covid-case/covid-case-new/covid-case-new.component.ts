@@ -389,6 +389,9 @@ export class CovidCaseNewComponent implements OnInit {
           this.isSave = false;
           this.alertService.error(rs.error);
         }
+      } else {
+        this.isSave = false;
+        this.alertService.error('กรอกข้อมูลไม่ครบ\nกรุณาตรวจสอบข้อมูล');
       }
     } catch (error) {
       this.isSave = false;
