@@ -18,30 +18,23 @@ export class LayoutComponent implements OnInit {
 
   covidCaseMenu: any;
   covidCaseStatusMenu: any;
-  covidCaseApprovedMenu: any;
+  covidApproveDrugsMenu: any;
+  covidApproveSuppliesMenu: any;
+  // ---------------------------------
   covidCaseRequisitionMenu: any;
-  covidPayMenu: any;
-  stockDrugsMenu: any;
-  stockBedsMenu: any;
+  covidProductStock: any;
+  surgicalSPHP: any;
   stockSuppliesMenu: any;
   trackingMenu: any;
-  checkDrugsMenu: any;
+  // ---------------------------------
   checkSuppliesMenu: any;
-  checkBedsMenu: any;
+  // ---------------------------------
   settingBasicMenu: any;
   settingBedsMenu: any;
-
-  requisitionMenu: any;
-  requisitionSuppliesMenu: any;
-  checkBedMenu: any;
-  balanceSuppliesMenu: any;
-  balanceBedMeny: any;
-  statusTrackingMenu: any;
-  settingMenu: any;
   settingMedicalSuppliesMenu: any;
   settingProfessionalMenu: any;
-  settingProvinceSubUserMenu: any;
   settingUserMenu: any;
+  settingProvinceSubUserMenu: any;
 
   public jwtHelper = new JwtHelperService();
   constructor(
@@ -54,28 +47,23 @@ export class LayoutComponent implements OnInit {
 
     this.covidCaseMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE' }) === -1 ? false : true;
     this.covidCaseStatusMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE_STATUS' }) === -1 ? false : true;
-    if (findIndex(this.rights, { name: 'STAFF_COVID_CASE_DRUGS_APPROVED' }) === -1) {
-      this.covidCaseApprovedMenu = false;
-    } else if (findIndex(this.rights, { name: 'STAFF_COVID_CASE_DRUGS_APPROVED' }) === -1) {
-      this.covidCaseApprovedMenu = false;
-    } else {
-      this.covidCaseApprovedMenu = true;
-    }
+    this.covidApproveDrugsMenu = findIndex(this.rights, { name: 'STAFF_APPROVED_DRUGS' }) === -1 ? false : true;
+    this.covidApproveSuppliesMenu = findIndex(this.rights, { name: 'STAFF_APPROVED_SUPPLIES' }) === -1 ? false : true;
+    this.settingProvinceSubUserMenu = findIndex(this.rights, { name: 'STAFF_PROVINCE_SET_SUPER_USER' }) === -1 ? false : true;
+    // ---------------------------------------------------------------------------------------------------
     this.covidCaseRequisitionMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE_REQUISITION' }) === -1 ? false : true;
-    this.covidPayMenu = findIndex(this.rights, { name: 'STAFF_PAY' }) === -1 ? false : true;
-    this.stockDrugsMenu = findIndex(this.rights, { name: 'STAFF_STOCK_DRUGS' }) === -1 ? false : true;
-    this.stockBedsMenu = findIndex(this.rights, { name: 'STAFF_STOCK_BEDS' }) === -1 ? false : true;
+    this.covidProductStock = findIndex(this.rights, { name: 'STAFF_STOCK_PRODUCTS' }) === -1 ? false : true;
+    this.surgicalSPHP = findIndex(this.rights, { name: 'STAFF_SURGICAL_SPHP' }) === -1 ? false : true;
     this.stockSuppliesMenu = findIndex(this.rights, { name: 'STAFF_STOCK_SUPPLIES' }) === -1 ? false : true;
     this.trackingMenu = findIndex(this.rights, { name: 'STAFF_TRACKING' }) === -1 ? false : true;
-    this.checkDrugsMenu = findIndex(this.rights, { name: 'STAFF_CHECK_DRUGS' }) === -1 ? false : true;
+    // ---------------------------------------------------------------------------------------------------
     this.checkSuppliesMenu = findIndex(this.rights, { name: 'STAFF_CHECK_SUPPLIES' }) === -1 ? false : true;
-    this.checkBedsMenu = findIndex(this.rights, { name: 'STAFF_CHECK_BEDS' }) === -1 ? false : true;
+    // ---------------------------------------------------------------------------------------------------
     this.settingBasicMenu = findIndex(this.rights, { name: 'STAFF_SETTING_BASIC' }) === -1 ? false : true;
     this.settingBedsMenu = findIndex(this.rights, { name: 'STAFF_SETTING_BEDS' }) === -1 ? false : true;
     this.settingMedicalSuppliesMenu = findIndex(this.rights, { name: 'STAFF_SETTING_MEDICALSUPPLIE' }) === -1 ? false : true;
-    this.settingUserMenu = findIndex(this.rights, { name: 'STAFF_SETTING_USERS' }) === -1 ? false : true;
     this.settingProfessionalMenu = findIndex(this.rights, { name: 'STAFF_SETTING_PROFESSIONAL' }) === -1 ? false : true;
-    this.settingProvinceSubUserMenu = findIndex(this.rights, { name: 'STAFF_PROVINCE_SET_SUPER_USER' }) === -1 ? false : true;
+    this.settingUserMenu = findIndex(this.rights, { name: 'STAFF_SETTING_USERS' }) === -1 ? false : true;
   }
 
   ngOnInit() {

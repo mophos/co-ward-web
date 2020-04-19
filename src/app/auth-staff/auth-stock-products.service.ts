@@ -7,7 +7,7 @@ import * as _ from 'lodash';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthCheckBedsService implements CanActivate {
+export class AuthStockProductsService implements CanActivate {
   public token: string;
   public jwtHelper = new JwtHelperService();
 
@@ -25,7 +25,7 @@ export class AuthCheckBedsService implements CanActivate {
           return false;
         } else {
           let isAccess = false;
-          if (_.findIndex(rights, { name: 'STAFF_CHECK_BEDS' }) > -1) {
+          if (_.findIndex(rights, { name: 'STAFF_STOCK_PRODUCTS' }) > -1) {
             isAccess = true;
           } else {
             isAccess = false;
