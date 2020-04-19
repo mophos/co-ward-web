@@ -18,12 +18,13 @@ import { StaffGuard } from '../staff-guard.service';
 import { DrugComponent } from './drug/drug.component';
 import { AuthCovidCaseService } from '../auth-staff/auth-covid-case.service';
 import { AuthCovidCaseStatusService } from '../auth-staff/auth-covid-case-status.service';
-import { AuthCovidCaseApprovedService } from '../auth-staff/auth-covid-case-approved.service';
+import { AuthApprovedDrugsService } from '../auth-staff/auth-approved-drugs.service';
+import { AuthApprovedSuppliesService } from '../auth-staff/auth-approved-supplies.service';
+import { AuthStockProductsService } from '../auth-staff/auth-stock-products.service';
 import { AuthStockDrugsService } from '../auth-staff/auth-stock-drugs.service';
 import { AuthStockBedsService } from '../auth-staff/auth-stock-beds.service';
 import { AuthStockSuppliesService } from '../auth-staff/auth-stock-supplies.service';
 import { AuthTrackingService } from '../auth-staff/auth-tracking.service';
-import { AuthCheckDrugsService } from '../auth-staff/auth-check-drugs.service';
 import { AuthCheckSuppliesService } from '../auth-staff/auth-check-supplies.service';
 import { AuthCheckBedsService } from '../auth-staff/auth-check-beds.service';
 import { AuthSettingBasicService } from '../auth-staff/auth-setting-basic.service';
@@ -59,16 +60,16 @@ const routes: Routes = [
         ]
       },
       { path: 'covid-case-new', canActivate: [AuthCovidCaseService], component: CovidCaseNewComponent },
+      { path: 'covid-case-old', canActivate: [AuthCovidCaseService], component: CovidCaseNewComponent },
       { path: 'covid-case-status', canActivate: [AuthCovidCaseStatusService], component: CovidCaseStatusComponent },
-      { path: 'covid-case-approved', canActivate: [AuthCovidCaseApprovedService], component: CovidCaseApprovedComponent },
+      { path: 'covid-case-approved-drugs', canActivate: [AuthApprovedDrugsService], component: CovidCaseApprovedComponent },
+      { path: 'covid-case-approved-supplies', canActivate: [AuthApprovedSuppliesService], component: CovidCaseApprovedComponent },
+      { path: 'province-set-sup-user', canActivate: [AuthProvinceSetSupUserService], component: ManageProvinceSetSupUserComponent },
+      // ----------------------------------------------------------------------------------------------------------
       { path: 'covid-case-requisition', canActivate: [AuthCovidCaseRequisitionService], component: CovidCaseRequisitionComponent },
-
-      { path: 'inventory-status', component: InventoryStatusComponent },
-      { path: 'drugs', canActivate: [AuthStockDrugsService], component: DrugComponent },
-      { path: 'beds', canActivate: [AuthStockBedsService], component: BedComponent },
-      { path: 'supplies', canActivate: [AuthStockSuppliesService], component: SuppliesComponent },
+      { path: 'stock-products', canActivate: [AuthStockProductsService], component: InventoryStatusComponent },
       { path: 'pay', canActivate: [AuthPayService], component: SurgicalMaskShphComponent },
-
+      { path: 'supplies', canActivate: [AuthStockSuppliesService], component: SuppliesComponent },
       {
         path: 'tracking',
         canActivate: [AuthTrackingService],
@@ -77,10 +78,9 @@ const routes: Routes = [
           { path: 'details', component: TrackingDetailComponent },
         ]
       },
-
-      { path: 'check-bed', canActivate: [AuthCheckBedsService], component: CheckBedComponent },
+      // ----------------------------------------------------------------------------------------------------------
       { path: 'check-supplie', canActivate: [AuthCheckSuppliesService], component: CheckSuppliesComponent },
-
+      // ----------------------------------------------------------------------------------------------------------
       {
         path: 'setting',
         children: [
@@ -89,7 +89,6 @@ const routes: Routes = [
           { path: 'medical-supplies', canActivate: [AuthSettingMedicalSuppliesService], component: SettingMedicalSuppliesComponent },
           { path: 'professional', canActivate: [AuthSettingProfessionalService], component: ProfessionalComponent },
           { path: 'users', canActivate: [AuthSettinUserService], component: SettingUsersComponent },
-          { path: 'province-set-sup-user', canActivate: [AuthProvinceSetSupUserService], component: ManageProvinceSetSupUserComponent },
         ]
       },
     ]
