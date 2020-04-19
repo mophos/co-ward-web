@@ -1,4 +1,4 @@
 <select name="hospType" [(ngModel)]="hosp" (change)="onSelected()" class="clr-select" style="width: 100%;">
-  <option [value]="null" >กรุณาเลือกสถานบริการ</option>
+  <option [value]="null" disabled >กรุณาเลือกสถานบริการ</option>
   <option *ngFor="let l of list" [ngValue]="l">{{l.hospcode}}-{{l.hospname}}</option>
 </select>
