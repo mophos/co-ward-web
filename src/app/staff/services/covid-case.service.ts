@@ -114,4 +114,9 @@ export class CovidCaseService {
     const url = `${this.apiUrl}/v1/staff/covid-case?covidCaseId=${id}`;
     return await this.http.delete(url).toPromise();
   }
+
+  async infoCid(cid) {
+    const url = `${this.apiUrl}/v1/staff/smh?cid=${cid}`;
+    return await this.http.get(url).toPromise();
+  }
 }
