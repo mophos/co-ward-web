@@ -1,3 +1,4 @@
+import { ApproveDrugsComponent } from './approve-drugs/approve-drugs.component';
 import { InventoryStatusComponent } from './inventory-status/inventory-status.component';
 import { SuppliesComponent } from './supplies/supplies.component';
 import { CovidCaseApprovedComponent } from './covid-case-approved/covid-case-approved.component';
@@ -57,7 +58,7 @@ const routes: Routes = [
       { path: 'covid-case-edit', canActivate: [AuthCovidCaseService], component: CovidCaseEditComponent },
       { path: 'covid-case-old', canActivate: [AuthCovidCaseService], component: CovidCaseNewComponent },
       { path: 'covid-case-status', canActivate: [AuthCovidCaseStatusService], component: CovidCaseStatusComponent },
-      { path: 'covid-case-approved-drugs', canActivate: [AuthApprovedDrugsService], component: CovidCaseApprovedComponent },
+      { path: 'covid-case-approved-drugs', canActivate: [AuthApprovedDrugsService], component: ApproveDrugsComponent },
       { path: 'covid-case-approved-supplies', canActivate: [AuthApprovedSuppliesService], component: CovidCaseApprovedComponent },
       { path: 'province-set-sup-user', canActivate: [AuthProvinceSetSupUserService], component: ManageProvinceSetSupUserComponent },
       // ----------------------------------------------------------------------------------------------------------
