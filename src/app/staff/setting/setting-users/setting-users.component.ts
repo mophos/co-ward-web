@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../user.service';
+import { RegisterService } from '../../../register/register.service';
 import { AlertService } from '../../../help/alert.service';
 
 @Component({
@@ -12,10 +13,14 @@ export class SettingUsersComponent implements OnInit {
   query: any = '';
   list: any;
   userId: any;
+  province: any;
+  isNodeDrugs: any;
+  isNodeSupplies: any;
 
   constructor(
     private alertService: AlertService,
     private userService: UserService,
+    private registerService: RegisterService,
   ) { }
 
   ngOnInit() {
@@ -55,6 +60,39 @@ export class SettingUsersComponent implements OnInit {
   }
 
   async editRights(e) {
+    if (Object.values(e).length) {
+      this.province = e.hosptype_id === '1' ? true : false;
+      const id = e.id;
+      try {
+        const rs: any = await this.registerService.getNodeDrugs(id);
+        if (rs.ok) {
+          if (rs.rows.length) {
+            this.isNodeDrugs = true;
+          } else {
+            this.isNodeDrugs = false;
+          }
+        } else {
+          this.alertService.error(rs.error);
+        }
+
+        const rs2: any = await this.registerService.getNodeSupplies(id);
+        if (rs2.ok) {
+          if (rs2.rows.length) {
+            this.isNodeSupplies = true;
+          } else {
+            this.isNodeSupplies = false;
+          }
+        } else {
+          this.alertService.error(rs.error);
+        }
+      } catch (error) {
+        this.alertService.error(error.message);
+      }
+    }
+
+    console.log(this.province);
+    console.log(this.isNodeDrugs);
+    console.log(this.isNodeSupplies);
 
   }
   // this.province = e.hosptype_id === '1' ? 'Y' : 'N';
