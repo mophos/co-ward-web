@@ -42,6 +42,7 @@ import { ProfessionalComponent } from './setting/professional/professional.compo
 import { AuthProvinceSetSupUserService } from '../auth-staff/auth-province-set-sup-user.service';
 import { ManageProvinceSetSupUserComponent } from './manage-province-set-sup-user/manage-province-set-sup-user.component';
 import { SettingUsersComponent } from '../staff/setting/setting-users/setting-users.component';
+import { CovidCaseEditComponent } from './covid-case/covid-case-edit/covid-case-edit.component';
 
 const routes: Routes = [
   {
@@ -51,15 +52,9 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'covid-case', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
-      {
-        path: 'covid-case',
-        canActivate: [AuthCovidCaseService],
-        children: [
-          { path: '', component: CovidCaseComponent },
-          // { path: 'new', component: CovidCaseNewComponent },
-        ]
-      },
+      { path: 'covid-case', canActivate: [AuthCovidCaseService], component: CovidCaseComponent },
       { path: 'covid-case-new', canActivate: [AuthCovidCaseService], component: CovidCaseNewComponent },
+      { path: 'covid-case-edit', canActivate: [AuthCovidCaseService], component: CovidCaseEditComponent },
       { path: 'covid-case-old', canActivate: [AuthCovidCaseService], component: CovidCaseNewComponent },
       { path: 'covid-case-status', canActivate: [AuthCovidCaseStatusService], component: CovidCaseStatusComponent },
       { path: 'covid-case-approved-drugs', canActivate: [AuthApprovedDrugsService], component: CovidCaseApprovedComponent },
