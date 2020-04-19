@@ -3,6 +3,7 @@ import { AlertService } from '../../help/alert.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PayService } from '../pay.service';
 import { IMyOptions } from 'mydatepicker-th';
+import { SelectedHospitalChildNodeComponent } from 'src/app/help/selected-hospital-child-node/selected-hospital-child-node.component';
 
 @Component({
   selector: 'app-pay',
@@ -24,7 +25,7 @@ export class SurgicalMaskShphComponent implements OnInit {
     height: '25px',
     width: '200px'
   };
-  @ViewChild('hospital') hospital: AutocompleteHospitalComponent;
+  @ViewChild('hospital') hospital: SelectedHospitalChildNodeComponent;
   constructor(
     private payService: PayService,
     private alertService: AlertService,
@@ -89,7 +90,14 @@ export class SurgicalMaskShphComponent implements OnInit {
   clear() {
     this.qty = null;
     this.hospitalId = null;
-    this.hospital.setQuery('');
+    this.hospital.clear();
+  }
+
+  close() {
+    this.modal = false;
+    this.qty = null;
+    this.hospitalId = null;
+    this.hospital.clear();
   }
 
 }

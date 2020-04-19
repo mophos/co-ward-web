@@ -50,9 +50,12 @@
       <div class="clr-col-12">
         <div class="clr-form clr-form-compact clr-row">
           <label class="clr-control-label clr-col-7">ชื่อสถานบริการ</label>
-          <app-autocomplete-hospital class="clr-col-5 clr-input width-fit" style="padding: 0px; width: 80%;" #hospital
+          <!-- <app-autocomplete-hospital class="clr-col-5 clr-input width-fit" style="padding: 0px; width: 80%;" #hospital
             (onchange)="onSelectHosp($event)" (onselect)="onSelectHosp($event)">
-          </app-autocomplete-hospital>
+          </app-autocomplete-hospital> -->
+          <app-selected-hospital-child-node class="clr-col-5 clr-input width-fit" style="padding: 0px; width: 80%;" #hospital
+          (onselect)="onSelectHosp($event)">
+          </app-selected-hospital-child-node>
         </div>
       </div>
       <div class="clr-col-12">
@@ -64,10 +67,10 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="save()" [disabled]="!hospitalId">
+    <button type="button" class="btn btn-success" (click)="save()" [disabled]="!hospitalId || !qty">
       บันทึก
     </button>
-    <button type="button" class="btn btn-danger" (click)="modal = false">
+    <button type="button" class="btn btn-danger" (click)="close()">
       ปิด
     </button>
   </div>
