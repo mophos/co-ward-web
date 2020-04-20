@@ -67,7 +67,12 @@ export class CovidCaseEditComponent implements OnInit {
   @ViewChild('tambon') tambon: AutocompleteSubdistrictComponent;
   @ViewChild('zipcode') zipc: AutocompleteZipcodeComponent;
   @ViewChild('loading') loading: any;
-
+  myDatePickerOptions: any = {
+    inline: false,
+    dateFormat: 'dd mmm yyyy',
+    editableDateField: false,
+    showClearDateBtn: false
+  };
   constructor(
     private route: ActivatedRoute,
     private alertService: AlertService,
@@ -274,5 +279,61 @@ export class CovidCaseEditComponent implements OnInit {
       console.log(error);
       return false;
     }
+  }
+
+  async onSelectCountry(e) {
+    this.countryId = e.id;
+  }
+
+
+  onSelectProvince(e) {
+    this.tambonId = e.tambon_code;
+    this.tambonName = e.tambon_name;
+    this.ampurId = e.ampur_code;
+    this.ampurName = e.ampur_name;
+    this.provinceId = e.province_id;
+    this.provinceName = e.province_name;
+    this.zipcode = e.zip_code;
+    this.setValue();
+  }
+
+  onSelectAmpur(e) {
+    this.tambonId = e.tambon_code;
+    this.tambonName = e.tambon_name;
+    this.ampurId = e.ampur_code;
+    this.ampurName = e.ampur_name;
+    this.provinceId = e.province_id;
+    this.provinceName = e.province_name;
+    this.zipcode = e.zip_code;
+    this.setValue();
+  }
+
+  onSelectTambon(e) {
+    this.tambonId = e.tambon_code;
+    this.tambonName = e.tambon_name;
+    this.ampurId = e.ampur_code;
+    this.ampurName = e.ampur_name;
+    this.provinceId = e.province_id;
+    this.provinceName = e.province_name;
+    this.zipcode = e.zip_code;
+    this.setValue();
+  }
+
+  onSelectZipcode(e) {
+    this.tambonId = e.tambon_code;
+    this.tambonName = e.tambon_name;
+    this.ampurId = e.ampur_code;
+    this.ampurName = e.ampur_name;
+    this.provinceId = e.province_id;
+    this.provinceName = e.province_name;
+    this.zipcode = e.zip_code;
+    this.setValue();
+  }
+
+  setValue() {
+    this.province.setQuery(this.provinceName);
+    this.ampur.setQuery(this.ampurName);
+    this.tambon.setQuery(this.tambonName);
+    this.zipc.setQuery(this.zipcode);
   }
 }
