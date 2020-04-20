@@ -19,6 +19,7 @@ export class SettingUsersComponent implements OnInit {
   isNodeSupplies: any;
   groupName: any;
   rights: any;
+  all: any;
   modal: any = false;
   loading: any = false;
   isSave: any = false;
