@@ -76,6 +76,7 @@ export class CovidCaseStatusComponent implements OnInit {
   };
 
   @ViewChild('hospital') hosp: AutocompleteHospitalComponent;
+  dateCut: string;
 
   constructor(
     private covidCaseService: CovidCaseService,
@@ -86,6 +87,7 @@ export class CovidCaseStatusComponent implements OnInit {
 
   async ngOnInit() {
     await this.getDate();
+    await this.getDateCut();
     await this.getList();
     await this.getGCS();
     await this.getGCSSum();
@@ -125,6 +127,19 @@ export class CovidCaseStatusComponent implements OnInit {
       const rs: any = await this.basicService.getDate();
       if (rs.ok) {
         this.date = moment(rs.rows).format('YYYY-MM-DD');
+      } else {
+        this.alertService.error(rs.error);
+      }
+    } catch (error) {
+      this.alertService.error(error);
+    }
+  }
+
+  async getDateCut() {
+    try {
+      const rs: any = await this.basicService.getDateCut();
+      if (rs.ok) {
+        this.dateCut = moment(rs.rows).format('YYYY-MM-DD');
       } else {
         this.alertService.error(rs.error);
       }
@@ -304,7 +319,7 @@ export class CovidCaseStatusComponent implements OnInit {
       if (confirm) {
         const idx = findIndex(this.list, { id });
         if (idx > -1) {
-          this.list[idx].create_date = this.date;
+          this.list[idx].create_date = this.dateCut;
           this.list[idx].drugs = await this.setGenericSave(this.list[idx]);
           const rs: any = await this.covidCaseService.updateStatus(this.list[idx]);
           if (rs.ok) {
@@ -318,6 +333,36 @@ export class CovidCaseStatusComponent implements OnInit {
       this.alertService.error(error);
     }
 
+  }
+
+  async onClickEdit(id) {
+    const idx = findIndex(this.list, { id });
+    if (idx > -1) {
+      if ('is_edit' in this.list[idx]) {
+        if (this.list[idx].is_edit) {
+          try {
+            const confirm = await this.alertService.confirm();
+            if (confirm) {
+              // this.list[idx].create_date = this.date;
+              this.list[idx].drugs = await this.setGenericSave(this.list[idx]);
+              const rs: any = await this.covidCaseService.editStatus(this.list[idx]);
+              if (rs.ok) {
+                this.alertService.success();
+              } else {
+                this.alertService.error(rs.error);
+              }
+            }
+          } catch (error) {
+            this.alertService.error(error);
+          }
+          this.list[idx].is_edit = false;
+        } else {
+          this.list[idx].is_edit = true;
+        }
+      } else {
+        this.list[idx].is_edit = true;
+      }
+    }
   }
 
   counter(i: number) {
