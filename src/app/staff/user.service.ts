@@ -21,5 +21,13 @@ export class UserService {
     return this.http.delete(url).toPromise();
   }
 
-  
+  async getUserRight(userId, groupName) {
+    const url = `${this.apiUrl}/v1/staff/users/get-user-right?userId=${userId}&groupName=${groupName}`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async updateUserRight(data: any, id: any) {
+    const url = `${this.apiUrl}/v1/staff/users/update-user-right/${id}`;
+    return this.http.put(url, { data }).toPromise();
+  }
 }
