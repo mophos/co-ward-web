@@ -43,6 +43,11 @@ export class CovidCaseService {
     return await this.http.put(url, { data }).toPromise();
   }
 
+  async editStatus(data) {
+    const url = `${this.apiUrl}/v1/staff/covid-case/present/edit`;
+    return await this.http.put(url, { data }).toPromise();
+  }
+
   async checkNo(type, cid, passport) {
     const url = `${this.apiUrl}/v1/staff/covid-case/check-register`;
     return await this.http.post(url, {
