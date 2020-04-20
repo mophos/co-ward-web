@@ -13,17 +13,17 @@
         <clr-dg-column>ชื่อของ</clr-dg-column>
         <clr-dg-column>คงคลัง</clr-dg-column>
         <clr-dg-column>หน่วย</clr-dg-column>
-         <!--<clr-dg-column>จำนวนเติม</clr-dg-column> -->
+        <!--<clr-dg-column>จำนวนเติม</clr-dg-column> -->
         <!-- <clr-dg-column>สถานะการส่ง</clr-dg-column> -->
         <clr-dg-column></clr-dg-column>
 
-        <clr-dg-row  *clrDgItems="let l of list; let idx=index;" [clrDgItem]="l">
+        <clr-dg-row *clrDgItems="let l of list; let idx=index;" [clrDgItem]="l">
           <clr-dg-cell>{{idx+1}}</clr-dg-cell>
           <!-- <clr-dg-cell>{{l.hospname}}</clr-dg-cell> -->
           <clr-dg-cell>{{l.generic_name}}</clr-dg-cell>
           <clr-dg-cell>{{l.qty}}</clr-dg-cell>
           <clr-dg-cell>{{l.unit_name}}</clr-dg-cell>
-         <!--  <clr-dg-cell>{{l.restock_qty}}</clr-dg-cell> -->
+          <!--  <clr-dg-cell>{{l.restock_qty}}</clr-dg-cell> -->
           <!-- <clr-dg-cell>{{l.status}}</clr-dg-cell> -->
           <clr-dg-cell style="text-align: center;">
             <!-- <div class="btn-group">
@@ -75,5 +75,74 @@
       </clr-datagrid>
     </clr-tab-content>
   </clr-tab> -->
-</clr-tabs>
 
+  <clr-tab>
+    <button clrTabLink id="link2" (click)="getListReceives()">รับเข้าแบบไม่มี PO</button>
+    <clr-tab-content id="content2">
+      <div class="clr-row">
+        <div class="clr-col-3">
+          <div class="clr-row">
+            <div class="clr-col-12">
+              <button class="btn btn-sm btn-success" (click)="onClickAdd()" [disabled]="isSave">
+                <clr-icon shape="plus"></clr-icon> เพิ่มรายการ
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="clr-col-9">
+          <h4 *ngIf="date != null">บันทึกข้อมูลประจำวันที่ {{date | dateTh:'DD/MM/YYYY'}}</h4>
+        </div>
+      </div>
+      <div class="clr-row">
+        <div class="clr-col-3">
+          <div class="clr-row">
+            <div class="clr-col-12">
+              <clr-datagrid [clrDgLoading]="loading" [style.height.px]="700">
+                <clr-dg-column>วันที่</clr-dg-column>
+                <clr-dg-column>ชื่อผู้บันทึก</clr-dg-column>
+
+                <clr-dg-row *ngFor="let l of listReceives; let idx=index;" (click)="getListReceivesDetail(l.id);listId=l.id;"
+                  [ngClass]="{ 'isSuccess': l.id == listId }">
+                  <clr-dg-cell>
+                    <label for="" *ngIf="l.update_date == null">
+                      {{l.create_date | dateTh:'DD/MM/YYYY hh:mm'}}
+                    </label>
+                    <label for="" *ngIf="l.update_date != null">
+                      {{l.update_date | dateTh:'DD/MM/YYYY hh:mm'}}
+                    </label>
+                  </clr-dg-cell>
+                  <clr-dg-cell>{{l.title_name}} {{l.fname}} {{l.lname}}</clr-dg-cell>
+                </clr-dg-row>
+              </clr-datagrid>
+            </div>
+          </div>
+        </div>
+        <div class="clr-col-9">
+          <clr-datagrid [clrDgLoading]="loading" [style.height.px]="700">
+            <clr-dg-column>#</clr-dg-column>
+            <clr-dg-column>รายการ</clr-dg-column>
+            <clr-dg-column>จำนวนยารับเข้า</clr-dg-column>
+            <clr-dg-column>หน่วย</clr-dg-column>
+
+            <clr-dg-row *ngFor="let l of listReceiveDetail; let idx=index;">
+              <clr-dg-cell>{{idx+1}}</clr-dg-cell>
+              <clr-dg-cell>{{l.name}}</clr-dg-cell>
+              <clr-dg-cell>
+                <input [disabled]="isUpdate" type="number" style="text-align: right;" name="qty" [(ngModel)]="l.qty"
+                  class="clr-col-9 clr-input width-fit" value="{{l.qty}}">
+              </clr-dg-cell>
+              <clr-dg-cell>{{l.unit_name}}</clr-dg-cell>
+            </clr-dg-row>
+            <clr-dg-row *ngIf="listReceiveDetail.length && !isUpdate">
+              <clr-dg-cell>
+                <button type="button" class="btn btn-success  btn-block" (click)="save()" [disabled]="isSave">
+                  บันทึก
+                </button>
+              </clr-dg-cell>
+            </clr-dg-row>
+          </clr-datagrid>
+        </div>
+      </div>
+    </clr-tab-content>
+  </clr-tab>
+</clr-tabs>
