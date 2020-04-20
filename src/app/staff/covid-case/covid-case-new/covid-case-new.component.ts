@@ -387,6 +387,7 @@ export class CovidCaseNewComponent implements OnInit {
           this.clear();
           this.isKey = false;
           this.isSave = false;
+          this.alertService.success();
           this.onClickOpenModalCid();
         } else {
           this.isSave = false;

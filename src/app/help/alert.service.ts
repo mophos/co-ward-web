@@ -25,7 +25,7 @@ export class AlertService {
     const option: any = {
       title,
       text,
-      timer: 1500,
+      timer: 3000,
       type: 'success',
       confirmButtonText: 'ตกลง'
     };
