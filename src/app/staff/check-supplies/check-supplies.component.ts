@@ -1,6 +1,6 @@
 
-import { Component, OnInit } from '@angular/core';
-import { SupplieService } from '../supplie.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ReportService } from '../report.service';
 import { AlertService } from '../../help/alert.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -11,38 +11,36 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class CheckSuppliesComponent implements OnInit {
   list: any;
+  detail: any;
+  query: any = '';
 
-  fullname: any;
-  hospname: any;
   public jwtHelper = new JwtHelperService();
+  @ViewChild('loading') loading: any;
 
   constructor(
-    private supplieService: SupplieService,
+    private service: ReportService,
     private alertService: AlertService
-  ) {
-    const decoded = this.jwtHelper.decodeToken(sessionStorage.getItem('token'));
-    this.fullname = decoded.fullname;
-    this.hospname = decoded.hospname;
-  }
+  ) { }
 
   ngOnInit() {
     this.getList();
   }
 
   async getList() {
+    this.loading.show();
     try {
-      let rs: any = await this.supplieService.getSupplieHospital();
+      const rs: any = await this.service.getSupplies(this.query);
       if (rs.ok) {
         this.list = rs.rows;
-        for (const v of this.list) {
-          if (v.created_at === null) {
-            v.created_at = '-';
-          }
-        }
+        console.log(this.list);
+        
+        this.loading.hide();
       } else {
+        this.loading.hide();
         this.alertService.error();
       }
     } catch (error) {
+      this.loading.hide();
       this.alertService.error(error);
     }
   }

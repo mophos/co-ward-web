@@ -35,6 +35,8 @@ export class LayoutComponent implements OnInit {
   settingProfessionalMenu: any;
   settingUserMenu: any;
   settingProvinceSubUserMenu: any;
+  // ---------------------------------
+  reportPatientsMenu: any;
 
   public jwtHelper = new JwtHelperService();
   constructor(
@@ -58,6 +60,7 @@ export class LayoutComponent implements OnInit {
     this.trackingMenu = findIndex(this.rights, { name: 'STAFF_TRACKING' }) === -1 ? false : true;
     // ---------------------------------------------------------------------------------------------------
     this.checkSuppliesMenu = findIndex(this.rights, { name: 'STAFF_CHECK_SUPPLIES' }) === -1 ? false : true;
+    this.reportPatientsMenu = findIndex(this.rights, { name: 'STAFF_REPORT_PATEINTS' }) === -1 ? false : true;
     // ---------------------------------------------------------------------------------------------------
     this.settingBasicMenu = findIndex(this.rights, { name: 'STAFF_SETTING_BASIC' }) === -1 ? false : true;
     this.settingBedsMenu = findIndex(this.rights, { name: 'STAFF_SETTING_BEDS' }) === -1 ? false : true;

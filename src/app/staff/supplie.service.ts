@@ -12,7 +12,12 @@ export class SupplieService {
   ) { }
 
   async getSupplieHospital() {
-    const url = `${this.apiUrl}/v1/staff/supplies/check-supplie/hos`;
+    const url = `${this.apiUrl}/v1/staff/supplies/total`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async getTotal() {
+    const url = `${this.apiUrl}/v1/staff/covid-case/gcs-bed`;
     return await this.http.get(url).toPromise();
   }
 
@@ -36,18 +41,4 @@ export class SupplieService {
     return await this.http.get(url).toPromise();
   }
 
-  // async getBalanceList() {
-  //   const url = `${this.apiUrl}/v1/staff/balance`;
-  //   return await this.http.get(url).toPromise();
-  // }
-
-  // async getBalanceEdit(id) {
-  //   const url = `${this.apiUrl}/v1/staff/balance/${id}`;
-  //   return await this.http.get(url).toPromise();
-  // }
-
-  // async updateBalance(id, data) {
-  //   const url = `${this.apiUrl}/v1/staff/balance/${id}`;
-  //   return await this.http.put(url, { data }).toPromise();
-  // }
 }

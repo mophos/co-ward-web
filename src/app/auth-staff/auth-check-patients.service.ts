@@ -4,11 +4,10 @@ import { CanActivate } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import * as _ from 'lodash';
 
-
 @Injectable({
   providedIn: 'root'
 })
-export class AuthSettingProfessionalService implements CanActivate {
+export class AuthCheckPatientsService {
   public token: string;
   public jwtHelper = new JwtHelperService();
 
@@ -26,7 +25,7 @@ export class AuthSettingProfessionalService implements CanActivate {
           return false;
         } else {
           let isAccess = false;
-          if (_.findIndex(rights, { name: 'STAFF_SETTING_PROFESSIONAL' }) > -1) {
+          if (_.findIndex(rights, { name: 'STAFF_REPORT_PATEINTS' }) > -1) {
             isAccess = true;
           } else {
             isAccess = false;

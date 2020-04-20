@@ -1,18 +1,15 @@
 <nav class="breadcrumb">
-    <!-- <a class="breadcrumb-item" href="javascript://" routerLink="/admin/manage-min-max">รายการสังกัด</a> -->
-    <span class="breadcrumb-item active">ตรวจสอบการบันทึกข้อมูลเตียง</span>
-  </nav>
-<clr-stack-view>
+  <!-- <a class="breadcrumb-item" href="javascript://" routerLink="/admin/manage-min-max">รายการสังกัด</a> -->
+  <span class="breadcrumb-item active">รายงานยอดคงเหลือเวชภัณฑ์แยกรายโรงพยาบาล</span>
+</nav>
 
-  <clr-stack-block [clrSbExpanded]="true">
+<clr-datagrid [style.height.px]="700">
+  <clr-dg-column>โรงพยาบาล</clr-dg-column>
+  <clr-dg-column>จำนวนผู้ป่วย (ราย)</clr-dg-column>
 
-    <clr-stack-label>{{hospname}}</clr-stack-label>
-    <clr-stack-content>วันที่บันทึกล่าสุด</clr-stack-content>
-    <clr-stack-block *ngFor="let l of list;">
-      <clr-stack-label>{{l.hospname}}</clr-stack-label>
-      <clr-stack-content>{{l.created_at}}</clr-stack-content>
-    </clr-stack-block>
-
-  </clr-stack-block>
-
-</clr-stack-view>
+  <clr-dg-row *ngFor="let l of list; let idx=index;">
+    <clr-dg-cell>{{l.hospname}}</clr-dg-cell>
+    <clr-dg-cell>{{l.count}}</clr-dg-cell>
+  </clr-dg-row>
+</clr-datagrid>
+<app-loadding #loading></app-loadding>

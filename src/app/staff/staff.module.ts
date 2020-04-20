@@ -53,6 +53,7 @@ import { SettingUsersComponent } from './setting/setting-users/setting-users.com
 import { SettingProfilesComponent } from './setting/setting-profiles/setting-profiles.component';
 import { CovidCaseEditComponent } from './covid-case/covid-case-edit/covid-case-edit.component';
 import { ApproveDrugsComponent } from './approve-drugs/approve-drugs.component';
+import { CheckPatientsComponent } from './check-patients/check-patients.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -80,7 +81,8 @@ import { ApproveDrugsComponent } from './approve-drugs/approve-drugs.component';
     SettingUsersComponent,
     SettingProfilesComponent,
     CovidCaseEditComponent,
-    ApproveDrugsComponent
+    ApproveDrugsComponent,
+    CheckPatientsComponent
   ],
   imports: [
     HelpModule,

@@ -21,7 +21,6 @@ export class StaffGuard implements CanActivate {
     try {
       const decodedToken = this.jwtHelper.decodeToken(token);
       const type = decodedToken.type;
-      
       if (type === 'STAFF') {
         isStaff = true;
       } else {

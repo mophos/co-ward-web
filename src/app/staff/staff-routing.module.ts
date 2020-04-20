@@ -34,7 +34,7 @@ import { AuthSettingMedicalSuppliesService } from '../auth-staff/auth-setting-me
 import { AuthCovidCaseRequisitionService } from '../auth-staff/auth-covid-case-requisition.service';
 import { AuthSettingProfessionalService } from '../auth-staff/auth-setting-professional.service';
 import { AuthPayService } from '../auth-staff/auth-pay.service';
-import { AuthSettinUserService } from '../auth-staff/auth-settin-user.service';
+import { AuthSettinUserService } from '../auth-staff/auth-setting-user.service';
 import { HomeComponent } from '../staff/home/home.component';
 import { CovidCaseRequisitionComponent } from './covid-case-requisition/covid-case-requisition.component';
 import { SurgicalMaskShphComponent } from './surgical-mask-shph/surgical-mask-shph.component';
@@ -44,6 +44,8 @@ import { AuthProvinceSetSupUserService } from '../auth-staff/auth-province-set-s
 import { ManageProvinceSetSupUserComponent } from './manage-province-set-sup-user/manage-province-set-sup-user.component';
 import { SettingUsersComponent } from '../staff/setting/setting-users/setting-users.component';
 import { CovidCaseEditComponent } from './covid-case/covid-case-edit/covid-case-edit.component';
+import { CheckPatientsComponent } from './check-patients/check-patients.component';
+import { AuthCheckPatientsService } from '../auth-staff/auth-check-patients.service';
 
 const routes: Routes = [
   {
@@ -76,6 +78,8 @@ const routes: Routes = [
       },
       // ----------------------------------------------------------------------------------------------------------
       { path: 'check-supplie', canActivate: [AuthCheckSuppliesService], component: CheckSuppliesComponent },
+      // ----------------------------------------------------------------------------------------------------------
+      { path: 'report-patient', canActivate: [AuthCheckPatientsService], component: CheckPatientsComponent },
       // ----------------------------------------------------------------------------------------------------------
       {
         path: 'setting',
