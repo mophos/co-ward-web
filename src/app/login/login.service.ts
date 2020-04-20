@@ -22,6 +22,11 @@ export class LoginService {
     return this.http.get(url).toPromise();
   }
 
+  async getDemo() {
+    const url = `${this.url}/demo`;
+    return await this.http.get(url).toPromise();
+  }
+
   getUsername(cid, phoneNumber) {
     const url = `${this.url}/v1/login/get-username?cid=${cid}&phoneNumber=${phoneNumber}`;
     return this.http.get(url).toPromise();

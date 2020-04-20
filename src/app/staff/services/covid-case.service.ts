@@ -33,6 +33,11 @@ export class CovidCaseService {
     return await this.http.post(url, { data }).toPromise();
   }
 
+  async updateCase(id, data) {
+    const url = `${this.apiUrl}/v1/staff/covid-case`;
+    return await this.http.put(url, { data }).toPromise();
+  }
+
   async updateStatus(data) {
     const url = `${this.apiUrl}/v1/staff/covid-case/present`;
     return await this.http.put(url, { data }).toPromise();
@@ -113,5 +118,10 @@ export class CovidCaseService {
   async removeCase(id) {
     const url = `${this.apiUrl}/v1/staff/covid-case?covidCaseId=${id}`;
     return await this.http.delete(url).toPromise();
+  }
+
+  async infoCid(cid) {
+    const url = `${this.apiUrl}/v1/staff/smh?cid=${cid}`;
+    return await this.http.get(url).toPromise();
   }
 }

@@ -119,9 +119,9 @@ export class CovidCaseComponent implements OnInit {
   }
 
 
-  onEdit() {
+  onEdit(l) {
     try {
-      this.router.navigate(['/staff/covid-case-edit']);
+      this.router.navigate(['/staff/covid-case-edit', { data: JSON.stringify(l) }]);
     } catch (error) {
 
     }

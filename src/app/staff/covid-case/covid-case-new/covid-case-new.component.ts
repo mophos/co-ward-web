@@ -145,7 +145,9 @@ export class CovidCaseNewComponent implements OnInit {
     // await this.setDrugs();
   }
 
-  setData() {
+  async setData() {
+    console.log(this.data);
+
     try {
       this.hn = this.data.hn;
       this.an = this.data.an;
@@ -153,7 +155,7 @@ export class CovidCaseNewComponent implements OnInit {
       this.fname = this.data.first_name;
       this.mname = this.data.middle_name;
       this.lname = this.data.last_name;
-      this.genderId = this.data.gender_id;
+      this.genderId = this.data.gender_id.toString();
 
       if (this.data.birth_date) {
         this.birthDate = {
@@ -176,6 +178,7 @@ export class CovidCaseNewComponent implements OnInit {
       this.provinceId = this.data.province_code;
       this.zipcode = this.data.zipcode;
       this.countryId = this.data.country_code;
+
       if (this.data.country_name) {
         this.countries.setQuery(this.data.country_name);
         if (this.data.country_name === 'ไทย') {
@@ -204,6 +207,7 @@ export class CovidCaseNewComponent implements OnInit {
       this.alertService.serverError();
     }
   }
+
   async getGenericSet() {
     try {
       const rs: any = await this.basicAuthService.getGenericSet('DRUG');
@@ -523,7 +527,7 @@ export class CovidCaseNewComponent implements OnInit {
           const rs: any = await this.covidCaseService.checkNo(this.modalCIDType, this.modalCIDCid, this.modalCIDPassport);
           if (rs.ok) {
             if (rs.case === 'NEW') {
-              this.infoCid(this.modalCIDCid);
+              await this.infoCid(this.modalCIDCid);
               this.cid = this.modalCIDCid;
               this.isKey = true;
               this.modalCID = false;
@@ -556,8 +560,18 @@ export class CovidCaseNewComponent implements OnInit {
   }
 
   async infoCid(cid) {
+    this.loading.show();
     try {
+      const rs: any = await this.covidCaseService.infoCid(cid);
+      if (rs.ok) {
+        this.data = rs.rows;
+        await this.setData();
+        this.loading.hide();
+      }
+      this.loading.hide();
     } catch (error) {
+      this.loading.hide();
+      this.alertService.error(error);
     }
   }
 
