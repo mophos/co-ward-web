@@ -40,4 +40,24 @@ export class InventoryService {
     const url = `${this.apiUrl}/v1/staff/balance/inventory-status?limit=${limit}&offset=${offset}`;
     return await this.http.get(url).toPromise();
   }
+
+  async getReceives() {
+    const url = `${this.apiUrl}/v1/staff/balance/receives`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async getReceivesDetail(id) {
+    const url = `${this.apiUrl}/v1/staff/balance/get-receives-detail?id=${id}`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async getReceivesGenerics() {
+    const url = `${this.apiUrl}/v1/staff/balance/get-receives-generics`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async save(data) {
+    const url = `${this.apiUrl}/v1/staff/balance/save`;
+    return await this.http.post(url, { data }).toPromise();
+  }
 }

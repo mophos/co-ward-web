@@ -32,7 +32,9 @@ export class SettingBedsComponent implements OnInit {
         this.list = rs.rows;
         for (const v of this.list) {
           const idx = findIndex(this.remain, { id: v.bed_id });
-          v.use_covid_qty = this.remain[idx].count === null ? 0 : this.remain[idx].count;
+          if (idx > -1) {
+            v.use_covid_qty = this.remain[idx].count === null ? 0 : this.remain[idx].count;
+          }
         }
       } else {
         this.alertService.error(rs.error);

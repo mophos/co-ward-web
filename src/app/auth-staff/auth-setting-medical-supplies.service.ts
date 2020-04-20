@@ -25,7 +25,7 @@ export class AuthSettingMedicalSuppliesService implements CanActivate {
           return false;
         } else {
           let isAccess = false;
-          if (_.findIndex(rights, { name: 'STAFF_SETTING_MEDICALSUPPLIE' }) > -1) {
+          if (_.findIndex(rights, { name: 'STAFF_SETTING_MEDICAL_SUPPLIE' }) > -1) {
             isAccess = true;
           } else {
             isAccess = false;
