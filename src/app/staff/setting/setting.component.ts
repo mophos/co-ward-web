@@ -46,7 +46,9 @@ export class SettingComponent implements OnInit {
 
   tambonId: any;
   tambonName: any;
+  ampurId: any;
   ampurName: any;
+  provinceId: any;
   provinceName: any;
   zipcode: any;
   lat: any;
@@ -212,10 +214,9 @@ export class SettingComponent implements OnInit {
         obj.contact_tel = this.contactTel;
         obj.lat = this.lat;
         obj.long = this.long;
-        obj.tambon_name = this.tambonName;
-        obj.province_code = this.tambonId.substring(0, 2);
-        obj.ampur_code = this.tambonId.substring(2, 4);
-        obj.tambon_code = this.tambonId.substring(4, 6);
+        obj.province_code = this.provinceId;
+        obj.ampur_code = this.ampurId;
+        obj.tambon_code = this.tambonId;
         obj.zipcode = this.zipcode;
         data.push(obj);
 
@@ -229,45 +230,55 @@ export class SettingComponent implements OnInit {
           this.password = '';
           this.passwordConfirm = '';
         } else {
-          this.alertService.error();
+          this.alertService.error(rs.error);
         }
       } catch (error) {
-        this.alertService.error();
+        console.log(error);
+
+        this.alertService.error(error);
       }
     }
   }
 
   onSelectProvince(e) {
-    this.tambonId = e.tambon_id;
+    this.tambonId = e.tambon_code;
     this.tambonName = e.tambon_name;
+    this.ampurId = e.ampur_code;
     this.ampurName = e.ampur_name;
+    this.provinceId = e.province_code;
     this.provinceName = e.province_name;
     this.zipcode = e.zip_code;
     this.setValue();
   }
 
   onSelectAmpur(e) {
-    this.tambonId = e.tambon_id;
+    this.tambonId = e.tambon_code;
     this.tambonName = e.tambon_name;
+    this.ampurId = e.ampur_code;
     this.ampurName = e.ampur_name;
+    this.provinceId = e.province_code;
     this.provinceName = e.province_name;
     this.zipcode = e.zip_code;
     this.setValue();
   }
 
   onSelectTambon(e) {
-    this.tambonId = e.tambon_id;
+    this.tambonId = e.tambon_code;
     this.tambonName = e.tambon_name;
+    this.ampurId = e.ampur_code;
     this.ampurName = e.ampur_name;
+    this.provinceId = e.province_code;
     this.provinceName = e.province_name;
     this.zipcode = e.zip_code;
     this.setValue();
   }
 
   onSelectZipcode(e) {
-    this.tambonId = e.tambon_id;
+    this.tambonId = e.tambon_code;
     this.tambonName = e.tambon_name;
+    this.ampurId = e.ampur_code;
     this.ampurName = e.ampur_name;
+    this.provinceId = e.province_code;
     this.provinceName = e.province_name;
     this.zipcode = e.zip_code;
     this.setValue();

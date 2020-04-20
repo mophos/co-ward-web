@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
     try {
       const rs: any = await this.loginService.getDemo();
       if (rs.ok) {
-        this.demo = 'Demo';
+        this.demo = 'Demo ทดสอบ Demo ทดสอบ Demo ';
       }
     } catch (error) {
 
