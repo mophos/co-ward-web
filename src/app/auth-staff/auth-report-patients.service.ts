@@ -7,7 +7,7 @@ import * as _ from 'lodash';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthCheckPatientsService {
+export class AuthReportPatientsService {
   public token: string;
   public jwtHelper = new JwtHelperService();
 

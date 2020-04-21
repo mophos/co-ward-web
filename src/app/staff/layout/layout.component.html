@@ -91,7 +91,7 @@
         ติดตามสถานะสินค้า
       </a> -->
       <div clrVerticalNavLink routerLinkActive="active" style="background-color: rgba(165, 165, 165,0.2);"></div>
-      
+
       <a *ngIf="checkSuppliesMenu" clrVerticalNavLink routerLink="/staff/check-supplie"
         title="ตรวจสอบการบันทึกข้อมูลเวชภัณฑ์" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
@@ -101,6 +101,11 @@
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         รายงานผู้ป่วย
+      </a>
+      <a *ngIf="reportPatientsMenu" clrVerticalNavLink routerLink="/staff/report-bed" title="รายงานเตียง"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        รายงานเตียง
       </a>
       <!-- <a *ngIf="checkBedsMenu" clrVerticalNavLink routerLink="/staff/check-bed" title="ตรวจสอบการบันทึกข้อมูลเตียง" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>

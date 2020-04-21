@@ -16,6 +16,8 @@ import { CheckHospitalSuppliesComponent } from './check-hospital-supplies/check-
 import { ReportPatientsComponent } from './report-patients/report-patients.component';
 import { ReportSuppliesComponent } from './report-supplies/report-supplies.component';
 import { MyDatePickerTHModule } from 'mydatepicker-th';
+import { ReportBedsComponent } from './report-beds/report-beds.component';
+import { ReportProfessionalsComponent } from './report-professionals/report-professionals.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { MyDatePickerTHModule } from 'mydatepicker-th';
     CheckBedEoc2Component,
     CheckHospitalSuppliesComponent,
     ReportPatientsComponent,
-    ReportSuppliesComponent
+    ReportSuppliesComponent,
+    ReportBedsComponent,
+    ReportProfessionalsComponent
   ],
   imports: [
     CommonModule,

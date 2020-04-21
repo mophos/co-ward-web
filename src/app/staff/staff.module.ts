@@ -33,6 +33,8 @@ import { AuthCheckBedsService } from '../auth-staff/auth-check-beds.service';
 import { AuthSettingBasicService } from '../auth-staff/auth-setting-basic.service';
 import { AuthSettingBedsService } from '../auth-staff/auth-setting-beds.service';
 
+import { AuthReportPatientsService } from '../auth-staff/auth-report-patients.service';
+
 import { DrugComponent } from './drug/drug.component';
 import { MyDatePickerTHModule } from 'mydatepicker-th';
 import { CovidCaseComponent } from './covid-case/covid-case.component';
@@ -54,6 +56,7 @@ import { SettingProfilesComponent } from './setting/setting-profiles/setting-pro
 import { CovidCaseEditComponent } from './covid-case/covid-case-edit/covid-case-edit.component';
 import { ApproveDrugsComponent } from './approve-drugs/approve-drugs.component';
 import { CheckPatientsComponent } from './check-patients/check-patients.component';
+import { ReportBedComponent } from './report-bed/report-bed.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -82,7 +85,8 @@ import { CheckPatientsComponent } from './check-patients/check-patients.componen
     SettingProfilesComponent,
     CovidCaseEditComponent,
     ApproveDrugsComponent,
-    CheckPatientsComponent
+    CheckPatientsComponent,
+    ReportBedComponent
   ],
   imports: [
     HelpModule,
@@ -112,7 +116,8 @@ import { CheckPatientsComponent } from './check-patients/check-patients.componen
     AuthCheckBedsService,
     AuthSettingBasicService,
     AuthSettingBedsService,
-    AuthProvinceSetSupUserService
+    AuthProvinceSetSupUserService,
+    AuthReportPatientsService
   ]
 })
 export class StaffModule { }
