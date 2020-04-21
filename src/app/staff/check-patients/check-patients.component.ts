@@ -37,7 +37,7 @@ export class CheckPatientsComponent implements OnInit {
   async getGcs() {
     this.loading.show();
     try {
-      const rs: any = await this.service.getGcs(this.query);
+      const rs: any = await this.service.getPatients(this.query);
       if (rs.ok) {
         this.list = rs.rows;
         console.log(this.list);
@@ -52,6 +52,10 @@ export class CheckPatientsComponent implements OnInit {
     }
   }
 
+  onChangeDate(){
+    console.log(e);
+    
+  }
   // async getList() {
   //   this.loading.show();
   //   try {
