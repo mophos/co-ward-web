@@ -1,3 +1,4 @@
+import { ReportSuppliesComponent } from './report-supplies/report-supplies.component';
 import { ApproveDrugsComponent } from './approve-drugs/approve-drugs.component';
 import { InventoryStatusComponent } from './inventory-status/inventory-status.component';
 import { SuppliesComponent } from './supplies/supplies.component';
@@ -82,6 +83,7 @@ const routes: Routes = [
       // ----------------------------------------------------------------------------------------------------------
       { path: 'report-patient', component: CheckPatientsComponent },
       { path: 'report-bed', component: ReportBedComponent },
+      { path: 'report-supplies', component: ReportSuppliesComponent },
       // ----------------------------------------------------------------------------------------------------------
       {
         path: 'setting',

@@ -31,8 +31,6 @@ export class CheckPatientsComponent implements OnInit {
   ) {
     const token = sessionStorage.getItem('token');
     const decoded = this.jwtHelper.decodeToken(token);
-    console.log(decoded);
-
   }
 
   async ngOnInit() {

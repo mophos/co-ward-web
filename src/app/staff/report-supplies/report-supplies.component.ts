@@ -2,39 +2,36 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportService } from '../report.service';
 import { AlertService } from '../../help/alert.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import * as findIndex from 'lodash/findIndex';
 import { IMyOptions } from 'mydatepicker-th';
 @Component({
-  selector: 'app-report-patients',
-  templateUrl: './report-patients.component.html',
+  selector: 'app-report-supplies',
+  templateUrl: './report-supplies.component.html',
   styles: []
 })
-export class ReportPatientsComponent implements OnInit {
-  list: any;
-  detail: any;
-  query: any = '';
-  case: any;
-  zone: any = '';
-  date: any;
+export class ReportSuppliesComponent implements OnInit {
 
-  total: any = 0;
-  severe: any = 0;
-  moderate: any = 0;
-  mild: any = 0;
-  asymptomatic: any = 0;
-  ippui: any = 0;
+  list: any;
+  query: any = '';
+  date: any;
+  public jwtHelper = new JwtHelperService();
+  @ViewChild('loading') loading: any;
+
   myDatePickerOptions: IMyOptions = {
     inline: false,
     dateFormat: 'dd mmm yyyy',
     editableDateField: false,
     showClearDateBtn: false
   };
-  public jwtHelper = new JwtHelperService();
-  @ViewChild('loading') loading: any;
 
   constructor(
     private service: ReportService,
     private alertService: AlertService
-  ) { }
+  ) {
+    const token = sessionStorage.getItem('token');
+    const decoded = this.jwtHelper.decodeToken(token);
+
+  }
 
   async ngOnInit() {
     const date = new Date();
@@ -52,11 +49,10 @@ export class ReportPatientsComponent implements OnInit {
     this.loading.show();
     try {
       const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
-      const rs: any = await this.service.getPatients(this.zone, date);
+      const rs: any = await this.service.getSupplies(date, null);
       if (rs.ok) {
         this.list = rs.rows;
         console.log(this.list);
-
         this.loading.hide();
       } else {
         this.loading.hide();
@@ -68,12 +64,10 @@ export class ReportPatientsComponent implements OnInit {
     }
   }
 
-  async click(z) {
-    this.zone = z;
+  onChangeDate() {
     this.getList();
-  }
+    // console.log(e);
 
-  doEnter() {
-    this.getList();
   }
+  
 }
