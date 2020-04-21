@@ -119,7 +119,7 @@ export class ReportSuppliesComponent implements OnInit {
 
   async click(z) {
     this.zone = z;
-    await this.getSumByZone(z);
+    // await this.getSumByZone(z);
     await this.getList();
   }
 

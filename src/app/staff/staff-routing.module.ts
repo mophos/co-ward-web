@@ -45,7 +45,8 @@ import { ManageProvinceSetSupUserComponent } from './manage-province-set-sup-use
 import { SettingUsersComponent } from '../staff/setting/setting-users/setting-users.component';
 import { CovidCaseEditComponent } from './covid-case/covid-case-edit/covid-case-edit.component';
 import { CheckPatientsComponent } from './check-patients/check-patients.component';
-import { AuthCheckPatientsService } from '../auth-staff/auth-check-patients.service';
+import { ReportBedComponent } from './report-bed/report-bed.component';
+import { AuthReportPatientsService } from '../auth-staff/auth-report-patients.service';
 
 const routes: Routes = [
   {
@@ -79,7 +80,8 @@ const routes: Routes = [
       // ----------------------------------------------------------------------------------------------------------
       { path: 'check-supplie', canActivate: [AuthCheckSuppliesService], component: CheckSuppliesComponent },
       // ----------------------------------------------------------------------------------------------------------
-      { path: 'report-patient', canActivate: [AuthCheckPatientsService], component: CheckPatientsComponent },
+      { path: 'report-patient', component: CheckPatientsComponent },
+      { path: 'report-bed', component: ReportBedComponent },
       // ----------------------------------------------------------------------------------------------------------
       {
         path: 'setting',
