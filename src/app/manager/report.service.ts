@@ -11,8 +11,18 @@ export class ReportService {
     @Inject('API_URL') private apiUrl: string
   ) { }
 
-  async getPatients(zone) {
-    const url = `${this.apiUrl}/v1/report/get-gcs?zone=${zone}`;
+  async getPatients(zone, date) {
+    const url = `${this.apiUrl}/v1/report/get-gcs?zone=${zone}&date=${date}`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async getProfessionals(zone) {
+    const url = `${this.apiUrl}/v1/report/get-professional?zone=${zone}`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async getBeds(zone) {
+    const url = `${this.apiUrl}/v1/report/get-bed?zone=${zone}`;
     return await this.http.get(url).toPromise();
   }
 
