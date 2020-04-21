@@ -21,7 +21,7 @@ export class CovidCaseStatusComponent implements OnInit {
   gcsSum = [];
   BedsSum = [];
   gcs: any = [];
-  gcsId: any;
+  gcsId: any = null;
   reason: any;
 
   query: any = '';
@@ -29,13 +29,13 @@ export class CovidCaseStatusComponent implements OnInit {
   saveId: any;
 
   beds: any = [];
-  bedId: any;
+  bedId: any  = null;
 
   medicalSupplieSum: any = [];
   medicalSupplies: any = [];
   medicalSuppliesSum: any = [];
-  medicalSupplieId: any;
-  hospitalId: any;
+  medicalSupplieId: any  = null;
+  hospitalId: any  = null;
 
   hour: any;
   minute: any;
@@ -319,10 +319,12 @@ export class CovidCaseStatusComponent implements OnInit {
       if (confirm) {
         const idx = findIndex(this.list, { id });
         if (idx > -1) {
-          this.list[idx].create_date = this.dateCut;
+          // this.list[idx].create_date = this.dateCut;
+          // this.list[idx].entry_date = this.dateCut;
           this.list[idx].drugs = await this.setGenericSave(this.list[idx]);
           const rs: any = await this.covidCaseService.updateStatus(this.list[idx]);
           if (rs.ok) {
+            this.getList();
             this.alertService.success();
           } else {
             this.alertService.error(rs.error);
@@ -340,21 +342,7 @@ export class CovidCaseStatusComponent implements OnInit {
     if (idx > -1) {
       if ('is_edit' in this.list[idx]) {
         if (this.list[idx].is_edit) {
-          try {
-            const confirm = await this.alertService.confirm();
-            if (confirm) {
-              // this.list[idx].create_date = this.date;
-              this.list[idx].drugs = await this.setGenericSave(this.list[idx]);
-              const rs: any = await this.covidCaseService.editStatus(this.list[idx]);
-              if (rs.ok) {
-                this.alertService.success();
-              } else {
-                this.alertService.error(rs.error);
-              }
-            }
-          } catch (error) {
-            this.alertService.error(error);
-          }
+          this.onClickSave(id);
           this.list[idx].is_edit = false;
         } else {
           this.list[idx].is_edit = true;
