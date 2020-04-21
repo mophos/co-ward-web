@@ -12,7 +12,7 @@ export class ReportService {
   ) { }
 
   async getPatients() {
-    const url = `${this.apiUrl}/v1/report/hosp`;
+    const url = `${this.apiUrl}/v1/report/get-gcs`;
     return await this.http.get(url).toPromise();
   }
 

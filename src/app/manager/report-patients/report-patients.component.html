@@ -72,7 +72,7 @@
   </div>
 </div>
 
-<clr-stack-view *ngFor="let l of list">
+<!-- <clr-stack-view *ngFor="let l of list">
   <clr-stack-header>เขต {{l.name}}</clr-stack-header>
 
   <clr-stack-block>
@@ -105,7 +105,48 @@
       </tbody>
     </table>
   </clr-stack-block>
-</clr-stack-view>
+</clr-stack-view> -->
+
+<div *ngFor="let l of list">
+    <h4> {{l.provinces == 1 ? '' : 'เขต '+l.name}}</h4>
+    <table class="table" *ngFor="let p of l.provinces">
+      <thead>
+        <tr>
+          <th colspan="7" style="text-align: left;"><h3>{{p.province_name}}</h3></th>
+        </tr>
+        <tr>
+          <th class="right">โรงพยาบาล</th>
+          <th class="right">จำนวนผู้ป่วย</th>
+          <th class="right">Severe</th>
+          <th class="right">Moderate</th>
+          <th class="right">Mild</th>
+          <th class="right">Asymptomatic</th>
+          <th class="right">IP PUI</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let h of p.hospitals">
+          <td class="left">{{h.hospname}}</td>
+          <td class="right">{{h['Severe'] || 0 + h['Moderate']|| 0 + h['Mild']|| 0 + h['Asymptomatic']|| 0 + h['IP PUI'] || 0}}</td>
+          <td class="right">{{h['Severe'] }}</td>
+          <td class="right">{{h['Moderate']}}</td>
+          <td class="right">{{h['Mild']}}</td>
+          <td class="right">{{h['Asymptomatic']}}</td>
+          <td class="right">{{h['IP PUI']}}</td>
+        </tr>
+        <tr>
+          <td class="right" style="font-weight: bold;">รวม</td>
+          <td class="right" style="font-weight: bold;">{{l.count}}</td>
+          <td class="right" style="font-weight: bold;">{{l.ippui}}</td>
+          <td class="right" style="font-weight: bold;">{{l.severe}}</td>
+          <td class="right" style="font-weight: bold;">{{l.moderate}}</td>
+          <td class="right" style="font-weight: bold;">{{l.mild}}</td>
+          <td class="right" style="font-weight: bold;">{{l.asymptomatic}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
 <!-- <div *ngFor="let l of list">
   <h4>เขต {{l.name}}</h4>
   <table class="table">

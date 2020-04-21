@@ -11,11 +11,6 @@ export class ReportService {
     @Inject('API_URL') private apiUrl: string
   ) { }
 
-  async getPatients(query) {
-    const url = `${this.apiUrl}/v1/staff/report/zone?query=${query}`;
-    return await this.http.get(url).toPromise();
-  }
-
   async getCase() {
     const url = `${this.apiUrl}/v1/staff/report/covid-case`;
     return await this.http.get(url).toPromise();
@@ -26,8 +21,8 @@ export class ReportService {
     return await this.http.get(url).toPromise();
   }
 
-  async getGcs(query) {
-    const url = `${this.apiUrl}/v1/staff/report/hosp?query=${query}`;
+  async getPatients(date,query) {
+    const url = `${this.apiUrl}/v1/staff/report/hosp?date=${date}&query=${query}`;
     return await this.http.get(url).toPromise();
   }
 }
