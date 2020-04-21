@@ -62,6 +62,8 @@ export class LayoutComponent implements OnInit {
     this.checkSuppliesMenu = findIndex(this.rights, { name: 'STAFF_CHECK_SUPPLIES' }) === -1 ? false : true;
     if (decoded.providerType === 'ZONE' || decoded.providerType === 'SSJ') {
       this.reportMenu = true;
+    } else {
+      this.reportMenu = false;
     }
     // ---------------------------------------------------------------------------------------------------
     this.settingBasicMenu = findIndex(this.rights, { name: 'STAFF_SETTING_BASIC' }) === -1 ? false : true;
