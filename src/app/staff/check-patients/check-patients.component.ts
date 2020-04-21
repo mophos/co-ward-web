@@ -3,6 +3,7 @@ import { ReportService } from '../report.service';
 import { AlertService } from '../../help/alert.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import * as findIndex from 'lodash/findIndex';
+import { IMyOptions } from 'mydatepicker-th';
 
 @Component({
   selector: 'app-check-patients',
@@ -17,6 +18,13 @@ export class CheckPatientsComponent implements OnInit {
   public jwtHelper = new JwtHelperService();
   @ViewChild('loading') loading: any;
 
+  myDatePickerOptions: IMyOptions = {
+    inline: false,
+    dateFormat: 'dd mmm yyyy',
+    editableDateField: false,
+    showClearDateBtn: false
+  };
+  
   constructor(
     private service: ReportService,
     private alertService: AlertService

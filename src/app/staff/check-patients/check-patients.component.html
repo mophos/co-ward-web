@@ -29,8 +29,13 @@
 </table> -->
 <br>
 
-<input type="date" name="date" [(ngModel)]="date" (change)="onChangeDate()">
-
+<div class="clr-row">
+  <div class="clr-col-2">วันที่แสดงข้อมูล</div>
+  <div class="clr-col-2">
+    <my-date-picker-th name="date" [options]="myDatePickerOptions" (dateChanged)="onChangeDate()" [(ngModel)]="date" required>
+    </my-date-picker-th>
+  </div>
+</div>
 <!-- <clr-datagrid>
   <clr-dg-column>เขตสุขภาพ</clr-dg-column>
 
@@ -68,7 +73,9 @@
   <table class="table" *ngFor="let p of l.provinces">
     <thead>
       <tr>
-        <th colspan="7" style="text-align: left;"><h3>{{p.province_name}}</h3></th>
+        <th colspan="7" style="text-align: left;">
+          <h3>{{p.province_name}}</h3>
+        </th>
       </tr>
       <tr>
         <th class="right">โรงพยาบาล</th>
@@ -83,7 +90,8 @@
     <tbody>
       <tr *ngFor="let h of p.hospitals">
         <td class="left">{{h.hospname}}</td>
-        <td class="right">{{h['Severe'] || 0 + h['Moderate']|| 0 + h['Mild']|| 0 + h['Asymptomatic']|| 0 + h['IP PUI'] || 0}}</td>
+        <td class="right">
+          {{h['Severe'] || 0 + h['Moderate']|| 0 + h['Mild']|| 0 + h['Asymptomatic']|| 0 + h['IP PUI'] || 0}}</td>
         <td class="right">{{h['Severe'] }}</td>
         <td class="right">{{h['Moderate']}}</td>
         <td class="right">{{h['Mild']}}</td>
