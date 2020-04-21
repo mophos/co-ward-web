@@ -12,17 +12,17 @@ export class ReportService {
   ) { }
 
   async getPatients(query) {
-    const url = `${this.apiUrl}/v1/staff/report/zone?query=${query}`;
+    const url = `${this.apiUrl}/v1/manager/report/zone?query=${query}`;
     return await this.http.get(url).toPromise();
   }
 
   async getCase() {
-    const url = `${this.apiUrl}/v1/staff/report/covid-case`;
+    const url = `${this.apiUrl}/v1/manager/report/covid-case`;
     return await this.http.get(url).toPromise();
   }
 
   async getSupplies(date, query) {
-    const url = `${this.apiUrl}/v1/staff/report/supplies?date=${date}&query=${query}`;
+    const url = `${this.apiUrl}/v1/manager/report/supplies?date=${date}&query=${query}`;
     return await this.http.get(url).toPromise();
   }
 }

@@ -1,0 +1,69 @@
+<nav class="breadcrumb">
+  <!-- <a class="breadcrumb-item" href="javascript://" routerLink="/admin/manage-min-max">รายการสังกัด</a> -->
+  <span class="breadcrumb-item active">รายงานจำนวนผู้ป่วย COVID ADMIT แยกรายโรงพยาบาล</span>
+</nav>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th colspan="2" class="left"></th>
+      <th class="left">จำนวนผู้ป่วย</th>
+      <th class="left">IP PUI</th>
+      <th class="left">Severve</th>
+      <th class="left">Moderate</th>
+      <th class="left">Mild</th>
+      <th class="left">Asymptomatic</th>
+    </tr>
+  </thead>
+  <thead>
+    <tr>
+      <th colspan="2" class="right" style="font-weight: bold;">รวมทั้งสิ้น</th>
+      <th class="right" style="font-weight: bold;">{{total}}</th>
+      <th class="right" style="font-weight: bold;">{{ippui}}</th>
+      <th class="right" style="font-weight: bold;">{{severe}}</th>
+      <th class="right" style="font-weight: bold;">{{moderate}}</th>
+      <th class="right" style="font-weight: bold;">{{mild}}</th>
+      <th class="right" style="font-weight: bold;">{{asymptomatic}}</th>
+    </tr>
+  </thead>
+</table>
+<div *ngFor="let l of list">
+  <h4>เขต {{l.zone}}</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="left">จังหวัด</th>
+        <th class="left">โรงพยาบาล</th>
+        <th class="left">จำนวนผู้ป่วย</th>
+        <th class="left">IP PUI</th>
+        <th class="left">Severve</th>
+        <th class="left">Moderate</th>
+        <th class="left">Mild</th>
+        <th class="left">Asymptomatic</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let h of l.hospital">
+        <td class="left">{{h.province_name}}</td>
+        <td class="left">{{h.hospname}}</td>
+        <td class="right">{{h.count}}</td>
+        <td class="right">{{h.ippui}}</td>
+        <td class="right">{{h.severe}}</td>
+        <td class="right">{{h.moderate}}</td>
+        <td class="right">{{h.mild}}</td>
+        <td class="right">{{h.asymptomatic}}</td>
+      </tr>
+      <tr>
+        <td colspan="2" class="right" style="font-weight: bold;">รวม</td>
+        <td class="right" style="font-weight: bold;">{{l.count}}</td>
+        <td class="right" style="font-weight: bold;">{{l.ippui}}</td>
+        <td class="right" style="font-weight: bold;">{{l.severe}}</td>
+        <td class="right" style="font-weight: bold;">{{l.moderate}}</td>
+        <td class="right" style="font-weight: bold;">{{l.mild}}</td>
+        <td class="right" style="font-weight: bold;">{{l.asymptomatic}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-loadding #loading></app-loadding>

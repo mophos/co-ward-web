@@ -5,11 +5,11 @@ import { AlertService } from '../../help/alert.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { IMyOptions } from 'mydatepicker-th';
 @Component({
-  selector: 'app-check-supplies',
-  templateUrl: './check-supplies.component.html',
+  selector: 'app-report-supplies',
+  templateUrl: './report-supplies.component.html',
   styles: []
 })
-export class CheckSuppliesComponent implements OnInit {
+export class ReportSuppliesComponent implements OnInit {
   list: any;
   detail: any;
   query: any = '';
