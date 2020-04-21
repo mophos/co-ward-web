@@ -13,7 +13,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'check-hospital-supplies', pathMatch: 'full' },
-      { path: 'check-hospital-supplies', component: CheckHospitalSuppliesComponent },
       { path: 'report-supplies', component: ReportSuppliesComponent },
       { path: 'report-patients', component: ReportPatientsComponent },
     ]
