@@ -91,22 +91,22 @@
       <tr *ngFor="let h of p.hospitals">
         <td class="left">{{h.hospname}}</td>
         <td class="right">
-          {{h['Severe'] || 0 + h['Moderate']|| 0 + h['Mild']|| 0 + h['Asymptomatic']|| 0 + h['IP PUI'] || 0}}</td>
+          {{h.sum || 0}}</td>
         <td class="right">{{h['Severe'] }}</td>
         <td class="right">{{h['Moderate']}}</td>
         <td class="right">{{h['Mild']}}</td>
         <td class="right">{{h['Asymptomatic']}}</td>
         <td class="right">{{h['IP PUI']}}</td>
       </tr>
-      <tr>
+      <!-- <tr>
         <td class="right" style="font-weight: bold;">รวม</td>
-        <td class="right" style="font-weight: bold;">{{l.count}}</td>
+        <td class="right" style="font-weight: bold;">{{l.sum}}</td>
         <td class="right" style="font-weight: bold;">{{l.ippui}}</td>
         <td class="right" style="font-weight: bold;">{{l.severe}}</td>
         <td class="right" style="font-weight: bold;">{{l.moderate}}</td>
         <td class="right" style="font-weight: bold;">{{l.mild}}</td>
         <td class="right" style="font-weight: bold;">{{l.asymptomatic}}</td>
-      </tr>
+      </tr> -->
     </tbody>
   </table>
 </div>
