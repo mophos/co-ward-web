@@ -12,27 +12,27 @@ export class ReportService {
   ) { }
 
   async getPatients(query) {
-    const url = `${this.apiUrl}/v1/manager/report/zone?query=${query}`;
+    const url = `${this.apiUrl}/v1/report/zone?query=${query}`;
     return await this.http.get(url).toPromise();
   }
 
   async getCase() {
-    const url = `${this.apiUrl}/v1/manager/report/covid-case`;
+    const url = `${this.apiUrl}/v1/report/covid-case`;
     return await this.http.get(url).toPromise();
   }
 
   async getSupplies(date, query, zone) {
-    const url = `${this.apiUrl}/v1/manager/report/supplies?date=${date}&query=${query}&zone=${zone}`;
+    const url = `${this.apiUrl}/v1/report/supplies?date=${date}&query=${query}&zone=${zone}`;
     return await this.http.get(url).toPromise();
   }
 
   async getTotal() {
-    const url = `${this.apiUrl}/v1/manager/report/total`;
+    const url = `${this.apiUrl}/v1/report/total`;
     return await this.http.get(url).toPromise();
   }
 
   async getSumByZone(zone) {
-    const url = `${this.apiUrl}/v1/manager/report/total-zone?zone=${zone}`;
+    const url = `${this.apiUrl}/v1/report/total-zone?zone=${zone}`;
     return await this.http.get(url).toPromise();
   }
 
