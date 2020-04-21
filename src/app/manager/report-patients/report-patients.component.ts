@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportService } from '../report.service';
 import { AlertService } from '../../help/alert.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { IMyOptions } from 'mydatepicker-th';
 @Component({
   selector: 'app-report-patients',
   templateUrl: './report-patients.component.html',
