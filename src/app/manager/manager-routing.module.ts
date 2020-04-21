@@ -5,6 +5,7 @@ import { AuthGuard } from '../auth-guard.service';
 import { ReportPatientsComponent } from './report-patients/report-patients.component';
 import { ReportSuppliesComponent } from './report-supplies/report-supplies.component';
 import { ReportBedsComponent } from './report-beds/report-beds.component';
+import { ReportProfessionalsComponent } from './report-professionals/report-professionals.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
       { path: 'report-supplies', component: ReportSuppliesComponent },
       { path: 'report-patients', component: ReportPatientsComponent },
       { path: 'report-beds', component: ReportBedsComponent },
+      { path: 'report-professionals', component: ReportProfessionalsComponent },
     ]
   }
 ];
