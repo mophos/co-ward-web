@@ -1,7 +1,54 @@
 <nav class="breadcrumb">
   <!-- <a class="breadcrumb-item" href="javascript://" routerLink="/admin/manage-min-max">รายการสังกัด</a> -->
-  <span class="breadcrumb-item active">รายงานยอดคงเหลือเวชภัณฑ์แยกรายโรงพยาบาล</span>
+  <span class="breadcrumb-item active">รายงานยอดคงเหลือเวชภัณฑ์</span>
 </nav>
+
+<table class="table table-compact">
+  <thead>
+    <tr>
+      <th rowspan="2">รายการ</th>
+      <th colspan="14">{{dateShow | dateTh:'DD/MM/YYYY'}}</th>
+    </tr>
+    <tr>
+      <!-- <th rowspan="2">รายการ</th> -->
+      <th>เขต 1</th>
+      <th>เขต 2</th>
+      <th>เขต 3</th>
+      <th>เขต 4</th>
+      <th>เขต 5</th>
+      <th>เขต 6</th>
+      <th>เขต 7</th>
+      <th>เขต 8</th>
+      <th>เขต 9</th>
+      <th>เขต 10</th>
+      <th>เขต 11</th>
+      <th>เขต 12</th>
+      <th>เขต 13</th>
+      <th>รวม</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let l of total;">
+      <td class="left">{{l.supplies}}</td>
+      <td class="right">{{l.zone1 | number:'1.0-0'}}</td>
+      <td class="right">{{l.zone2 | number:'1.0-0'}}</td>
+      <td class="right">{{l.zone3 | number:'1.0-0'}}</td>
+      <td class="right">{{l.zone4 | number:'1.0-0'}}</td>
+      <td class="right">{{l.zone5 | number:'1.0-0'}}</td>
+      <td class="right">{{l.zone6 | number:'1.0-0'}}</td>
+      <td class="right">{{l.zone7 | number:'1.0-0'}}</td>
+      <td class="right">{{l.zone8 | number:'1.0-0'}}</td>
+      <td class="right">{{l.zone9 | number:'1.0-0'}}</td>
+      <td class="right">{{l.zone10 | number:'1.0-0'}}</td>
+      <td class="right">{{l.zone11 | number:'1.0-0'}}</td>
+      <td class="right">{{l.zone12 | number:'1.0-0'}}</td>
+      <td class="right">{{l.zone13 | number:'1.0-0'}}</td>
+      <td class="right">{{l.total | number:'1.0-0'}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
 
 <div class="clr-row">
   <div class="clr-col-3">
@@ -11,15 +58,89 @@
   <div class="clr-col-3">
     <input class="clr-input width-fit" name="query" [(ngModel)]="query" placeholder="ค้นหาชื่อสถานบริการ,รหัสสถานบริการ" />
   </div>
-
   <div class="clr-col-1">
     <button class="btn btn-sm btn-primary" (click)="doEnter()">
       <clr-icon shape="search"></clr-icon>
     </button>
   </div>
 </div>
+<div class="clr-row" style="padding-bottom: 0rem;">
+  <div class="clr-col-12">
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('01')">
+      เขต 1
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('02')">
+      เขต 2
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('03')">
+      เขต 3
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('04')">
+      เขต 4
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('05')">
+      เขต 5
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('06')">
+      เขต 6
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('07')">
+      เขต 7
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('08')">
+      เขต 8
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('09')">
+      เขต 9
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('10')">
+      เขต 10
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('11')">
+      เขต 11
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('12')">
+      เขต 12
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('13')">
+      เขต 13
+    </button>
+  </div>
+</div>
 
-<clr-datagrid [style.height.px]="700">
+<div *ngFor="let b of list" style="padding: 0rem;">
+  <h4>เขต {{b.zone}}</h4>
+  <table class="table table-compact" style="position: relative; border-collapse: collapse;">
+    <thead>
+      <tr>
+        <th style="position: sticky; top: 0;">โรงพยาบาล</th>
+        <th style="position: sticky; top: 0;">Sugical mask</th>
+        <th style="position: sticky; top: 0;">N95</th>
+        <th style="position: sticky; top: 0;">Cover All-1 (Industrial grade)</th>
+        <th style="position: sticky; top: 0;">Cover All-2 (Medical grade)</th>
+        <th style="position: sticky; top: 0;">Shoe Cover</th>
+        <th style="position: sticky; top: 0;">Surgical hood</th>
+        <th style="position: sticky; top: 0;">Long glove</th>
+        <th style="position: sticky; top: 0;">Face shield</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let l of b.detail; let idx=index;">
+        <td class="left">{{l.hospname}}</td>
+        <td class="right">{{l.surgical_mask | number:'1.0-0'}}</td>
+        <td class="right">{{l.N95 | number:'1.0-0'}}</td>
+        <td class="right">{{l.cover_all_1 | number:'1.0-0'}}</td>
+        <td class="right">{{l.cover_all_2 | number:'1.0-0'}}</td>
+        <td class="right">{{l.shoe_cover | number:'1.0-0'}}</td>
+        <td class="right">{{l.surgical_hood | number:'1.0-0'}}</td>
+        <td class="right">{{l.long_glove | number:'1.0-0'}}</td>
+        <td class="right">{{l.face_shield | number:'1.0-0'}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- <clr-datagrid [style.height.px]="700">
   <clr-dg-column>โรงพยาบาล</clr-dg-column>
   <clr-dg-column>Sugical mask</clr-dg-column>
   <clr-dg-column>N95</clr-dg-column>
@@ -32,15 +153,15 @@
 
   <clr-dg-row *ngFor="let l of list; let idx=index;">
     <clr-dg-cell>{{l.hospname}}</clr-dg-cell>
-    <clr-dg-cell class="right">{{l.surgical_mask}}</clr-dg-cell>
-    <clr-dg-cell class="right">{{l.N95}}</clr-dg-cell>
-    <clr-dg-cell class="right">{{l.cover_all_1}}</clr-dg-cell>
-    <clr-dg-cell class="right">{{l.cover_all_2}}</clr-dg-cell>
-    <clr-dg-cell class="right">{{l.shoe_cover}}</clr-dg-cell>
-    <clr-dg-cell class="right">{{l.surgical_hood}}</clr-dg-cell>
-    <clr-dg-cell class="right">{{l.long_glove}}</clr-dg-cell>
-    <clr-dg-cell class="right">{{l.face_shield}}</clr-dg-cell>
+    <clr-dg-cell class="right">{{l.surgical_mask | number:'1.0-0'}}</clr-dg-cell>
+    <clr-dg-cell class="right">{{l.N95 | number:'1.0-0'}}</clr-dg-cell>
+    <clr-dg-cell class="right">{{l.cover_all_1 | number:'1.0-0'}}</clr-dg-cell>
+    <clr-dg-cell class="right">{{l.cover_all_2 | number:'1.0-0'}}</clr-dg-cell>
+    <clr-dg-cell class="right">{{l.shoe_cover | number:'1.0-0'}}</clr-dg-cell>
+    <clr-dg-cell class="right">{{l.surgical_hood | number:'1.0-0'}}</clr-dg-cell>
+    <clr-dg-cell class="right">{{l.long_glove | number:'1.0-0'}}</clr-dg-cell>
+    <clr-dg-cell class="right">{{l.face_shield | number:'1.0-0'}}</clr-dg-cell>
   </clr-dg-row>
-</clr-datagrid>
+</clr-datagrid> -->
 
 <app-loadding #loading></app-loadding>

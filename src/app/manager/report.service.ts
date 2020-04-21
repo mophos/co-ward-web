@@ -21,8 +21,14 @@ export class ReportService {
     return await this.http.get(url).toPromise();
   }
 
-  async getSupplies(date, query) {
-    const url = `${this.apiUrl}/v1/manager/report/supplies?date=${date}&query=${query}`;
+  async getSupplies(date, query, zone) {
+    const url = `${this.apiUrl}/v1/manager/report/supplies?date=${date}&query=${query}&zone=${zone}`;
     return await this.http.get(url).toPromise();
   }
+
+  async getTotal() {
+    const url = `${this.apiUrl}/v1/manager/report/total`;
+    return await this.http.get(url).toPromise();
+  }
+
 }
