@@ -26,25 +26,17 @@
       <router-outlet></router-outlet>
     </div>
     <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
-      <!-- <a clrVerticalNavLink routerLink="/manager/check-bed-eoc" title="ตรวจสอบการบันทึกข้อมูลเตียง" routerLinkActive="active">
-        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
-        ตรวจสอบเตียง EOC
-      </a> -->
-      <!-- <a clrVerticalNavLink routerLink="/manager/check-bed-eoc2" title="ตรวจสอบการบันทึกข้อมูลเตียง" routerLinkActive="active">
-        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
-        ตรวจสอบเตียง EOC
-      </a>
-      <a clrVerticalNavLink routerLink="/manager/check-beds" title="ตรวจสอบการบันทึกข้อมูลเตียง" routerLinkActive="active">
-        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
-        ตรวจสอบการบันทึกข้อมูลเตียง
-      </a>
-      <a clrVerticalNavLink routerLink="/manager/check-supplies" title="ตรวจสอบการบันทึกเวชภัณฑ์" routerLinkActive="active">
-        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
-        ตรวจสอบการบันทึกเวชภัณฑ์
-      </a> -->
       <a clrVerticalNavLink routerLink="/manager/check-hospital-supplies" title="รายการเวชภัณฑ์คงเหลือ" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         รายการเวชภัณฑ์คงเหลือ
+      </a>
+      <a clrVerticalNavLink routerLink="/manager/report-supplies" title="รายงานเวชภัณฑ์" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        รายงานเวชภัณฑ์
+      </a>
+      <a clrVerticalNavLink routerLink="/manager/report-patients" title="รายงานยอดผู้ป่วย" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        รายงานยอดผู้ป่วย
       </a>
     </clr-vertical-nav>
   </div>

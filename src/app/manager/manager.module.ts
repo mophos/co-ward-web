@@ -13,9 +13,21 @@ import { CheckSuppliesComponent } from './check-supplies/check-supplies.componen
 import { CheckBedEocComponent } from './check-bed-eoc/check-bed-eoc.component';
 import { CheckBedEoc2Component } from './check-bed-eoc2/check-bed-eoc2.component';
 import { CheckHospitalSuppliesComponent } from './check-hospital-supplies/check-hospital-supplies.component';
+import { ReportPatientsComponent } from './report-patients/report-patients.component';
+import { ReportSuppliesComponent } from './report-supplies/report-supplies.component';
+import { MyDatePickerTHModule } from 'mydatepicker-th';
 
 @NgModule({
-  declarations: [LayoutComponent, CheckBedsComponent, CheckSuppliesComponent, CheckBedEocComponent, CheckBedEoc2Component, CheckHospitalSuppliesComponent],
+  declarations: [
+    LayoutComponent,
+    CheckBedsComponent,
+    CheckSuppliesComponent,
+    CheckBedEocComponent,
+    CheckBedEoc2Component,
+    CheckHospitalSuppliesComponent,
+    ReportPatientsComponent,
+    ReportSuppliesComponent
+  ],
   imports: [
     CommonModule,
     ManagerRoutingModule,
@@ -23,7 +35,8 @@ import { CheckHospitalSuppliesComponent } from './check-hospital-supplies/check-
     ClarityModule,
     BrowserAnimationsModule,
     FormsModule,
-    HelpModule
+    HelpModule,
+    MyDatePickerTHModule
   ]
 })
 export class ManagerModule { }
