@@ -18,6 +18,7 @@ export class ReportSuppliesComponent implements OnInit {
   dateset: any;
   total: any;
   dateShow: any;
+  sumZone: any;
 
   zone: any = '';
   zone1: any = 0;
@@ -116,11 +117,28 @@ export class ReportSuppliesComponent implements OnInit {
     }
   }
 
-  click(z) {
+  async click(z) {
     this.zone = z;
-    this.getList();
+    await this.getSumByZone(z);
+    await this.getList();
   }
 
+  async getSumByZone(z) {
+    this.loading.show();
+    try {
+      const rs: any = await this.service.getSumByZone(z);
+      if (rs.ok) {
+        this.list = rs.rows;
+        this.loading.hide();
+      } else {
+        this.loading.hide();
+        this.alertService.error();
+      }
+    } catch (error) {
+      this.loading.hide();
+      this.alertService.error(error);
+    }
+  }
   doEnter() {
     this.getList();
   }

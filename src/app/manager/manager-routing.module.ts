@@ -12,7 +12,7 @@ const routes: Routes = [
     component: LayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: '', redirectTo: 'check-hospital-supplies', pathMatch: 'full' },
+      { path: '', redirectTo: 'report-supplies', pathMatch: 'full' },
       { path: 'report-supplies', component: ReportSuppliesComponent },
       { path: 'report-patients', component: ReportPatientsComponent },
     ]

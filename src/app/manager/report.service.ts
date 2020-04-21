@@ -31,4 +31,9 @@ export class ReportService {
     return await this.http.get(url).toPromise();
   }
 
+  async getSumByZone(zone) {
+    const url = `${this.apiUrl}/v1/manager/report/total-zone?zone=${zone}`;
+    return await this.http.get(url).toPromise();
+  }
+
 }
