@@ -9,7 +9,6 @@ import * as findIndex from 'lodash/findIndex';
   styles: []
 })
 export class ReportProfessionalsComponent implements OnInit {
-  query: any = '';
   list: any;
 
   @ViewChild('loading') loading: any;
@@ -28,7 +27,7 @@ export class ReportProfessionalsComponent implements OnInit {
   async getList() {
     this.loading.show();
     try {
-      const rs: any = await this.service.getPatients(this.query);
+      const rs: any = await this.service.getPatients();
       if (rs.ok) {
         this.list = rs.rows;
         this.loading.hide();

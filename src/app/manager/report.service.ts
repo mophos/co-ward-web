@@ -11,8 +11,8 @@ export class ReportService {
     @Inject('API_URL') private apiUrl: string
   ) { }
 
-  async getPatients(query) {
-    const url = `${this.apiUrl}/v1/report/zone?query=${query}`;
+  async getPatients() {
+    const url = `${this.apiUrl}/v1/report/hosp`;
     return await this.http.get(url).toPromise();
   }
 

@@ -27,8 +27,87 @@
     </tr>
   </thead>
 </table>
-<div *ngFor="let l of list">
-  <h4>เขต {{l.zone}}</h4>
+
+<div class="clr-row" style="padding-bottom: 0rem;">
+  <div class="clr-col-12">
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('01')">
+      เขต 1
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('02')">
+      เขต 2
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('03')">
+      เขต 3
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('04')">
+      เขต 4
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('05')">
+      เขต 5
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('06')">
+      เขต 6
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('07')">
+      เขต 7
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('08')">
+      เขต 8
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('09')">
+      เขต 9
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('10')">
+      เขต 10
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('11')">
+      เขต 11
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('12')">
+      เขต 12
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('13')">
+      เขต 13
+    </button>
+  </div>
+</div>
+
+<clr-stack-view *ngFor="let l of list">
+  <clr-stack-header>เขต {{l.name}}</clr-stack-header>
+
+  <clr-stack-block>
+    <clr-stack-label>จังหวัด</clr-stack-label>
+  </clr-stack-block>
+
+  <clr-stack-block [clrSbExpanded]="false" *ngFor="let p of l.provinces">
+    <clr-stack-label>{{p.province_name}}</clr-stack-label>
+    <clr-stack-content></clr-stack-content>
+    <table class="table">
+      <thead>
+        <tr>
+          <td></td>
+          <td>Severe</td>
+          <td>Moderate</td>
+          <td>Mild</td>
+          <td>Asymptomatic</td>
+          <td>IP PUI</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let h of p.hospitals">
+          <td>{{h.['hospname']}}</td>
+          <td>{{h.['Severe']}}</td>
+          <td>{{h.['Moderate']}}</td>
+          <td>{{h.['Mild']}}</td>
+          <td>{{h.['Asymptomatic']}}</td>
+          <td>{{h.['IP PUI']}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </clr-stack-block>
+</clr-stack-view>
+<!-- <div *ngFor="let l of list">
+  <h4>เขต {{l.name}}</h4>
   <table class="table">
     <thead>
       <tr>
@@ -64,6 +143,6 @@
       </tr>
     </tbody>
   </table>
-</div>
+</div> -->
 
 <app-loadding #loading></app-loadding>

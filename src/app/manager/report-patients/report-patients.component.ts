@@ -32,16 +32,17 @@ export class ReportPatientsComponent implements OnInit {
 
   async ngOnInit() {
     await this.getList();
-    await this.getCase();
-    await this.merge();
+    // await this.getCase();
+    // await this.merge();
   }
 
   async getList() {
     this.loading.show();
     try {
-      const rs: any = await this.service.getPatients(this.query);
+      const rs: any = await this.service.getPatients();
       if (rs.ok) {
         this.list = rs.rows;
+        console.log(this.list);
         this.loading.hide();
       } else {
         this.loading.hide();
