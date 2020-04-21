@@ -33,6 +33,8 @@ import { AuthCheckBedsService } from '../auth-staff/auth-check-beds.service';
 import { AuthSettingBasicService } from '../auth-staff/auth-setting-basic.service';
 import { AuthSettingBedsService } from '../auth-staff/auth-setting-beds.service';
 
+import { AuthReportPatientsService } from '../auth-staff/auth-report-patients.service';
+
 import { DrugComponent } from './drug/drug.component';
 import { MyDatePickerTHModule } from 'mydatepicker-th';
 import { CovidCaseComponent } from './covid-case/covid-case.component';
@@ -112,7 +114,8 @@ import { CheckPatientsComponent } from './check-patients/check-patients.componen
     AuthCheckBedsService,
     AuthSettingBasicService,
     AuthSettingBedsService,
-    AuthProvinceSetSupUserService
+    AuthProvinceSetSupUserService,
+    AuthReportPatientsService
   ]
 })
 export class StaffModule { }
