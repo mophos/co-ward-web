@@ -13,7 +13,7 @@ export class CheckPatientsComponent implements OnInit {
 
   list: any;
   query: any = '';
-
+  date: any;
   public jwtHelper = new JwtHelperService();
   @ViewChild('loading') loading: any;
 
@@ -28,16 +28,22 @@ export class CheckPatientsComponent implements OnInit {
   }
 
   async ngOnInit() {
-    // await this.getList();
-    // await this.getCase();
-    // await this.merge();
+    const date = new Date();
+    this.date = {
+      date: {
+        year: date.getFullYear(),
+        month: date.getMonth() + 1,
+        day: date.getDate()
+      }
+    };
     await this.getGcs();
   }
 
   async getGcs() {
     this.loading.show();
     try {
-      const rs: any = await this.service.getPatients(null, null);
+      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
+      const rs: any = await this.service.getPatients(date, null);
       if (rs.ok) {
         this.list = rs.rows;
         console.log(this.list);
@@ -53,7 +59,8 @@ export class CheckPatientsComponent implements OnInit {
   }
 
   onChangeDate() {
-    console.log(e);
+    this.getGcs();
+    // console.log(e);
 
   }
   // async getList() {

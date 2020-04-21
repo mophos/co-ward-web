@@ -22,7 +22,7 @@ export class ReportService {
   }
 
   async getPatients(date,query) {
-    const url = `${this.apiUrl}/v1/staff/report/hosp?date=${date}&query=${query}`;
+    const url = `${this.apiUrl}/v1/report/get-gcs?date=${date}&query=${query}`;
     return await this.http.get(url).toPromise();
   }
 }
