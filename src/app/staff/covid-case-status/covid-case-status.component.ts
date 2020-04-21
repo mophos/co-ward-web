@@ -29,13 +29,13 @@ export class CovidCaseStatusComponent implements OnInit {
   saveId: any;
 
   beds: any = [];
-  bedId: any  = null;
+  bedId: any = null;
 
   medicalSupplieSum: any = [];
   medicalSupplies: any = [];
   medicalSuppliesSum: any = [];
-  medicalSupplieId: any  = null;
-  hospitalId: any  = null;
+  medicalSupplieId: any = null;
+  hospitalId: any = null;
 
   hour: any;
   minute: any;
@@ -412,7 +412,8 @@ export class CovidCaseStatusComponent implements OnInit {
         obj.dateDischarge = this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day + ' ' + this.hour + ':' + this.minute + ':00';
         obj.covidCaseId = this.selected.covid_case_id;
         obj.status = status;
-        const rs: any = await this.covidCaseService.updateDischarge(obj);
+
+        const rs: any = await this.covidCaseService.updateDischarge(obj, this.selected);
         if (rs.ok) {
           this.modalDischarge = false;
           this.getList();
