@@ -47,7 +47,6 @@ export class ReportSuppliesComponent implements OnInit {
     private service: ReportService,
     private alertService: AlertService
   ) {
-    this.getList();
     const date = new Date();
     this.dateset = {
       date: {
@@ -59,9 +58,9 @@ export class ReportSuppliesComponent implements OnInit {
     this.dateShow = this.dateset.date.year + '-' + this.dateset.date.month + '-' + this.dateset.date.day;
   }
 
-  ngOnInit() {
-    this.getList();
-    this.getTotal();
+  async ngOnInit() {
+    await this.getList();
+    await this.getTotal();
   }
 
   async getList() {
@@ -139,6 +138,7 @@ export class ReportSuppliesComponent implements OnInit {
       this.alertService.error(error);
     }
   }
+  
   doEnter() {
     this.getList();
   }

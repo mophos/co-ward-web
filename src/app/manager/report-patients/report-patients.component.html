@@ -2,31 +2,6 @@
   <span class="breadcrumb-item active">รายงานจำนวนผู้ป่วย COVID ADMIT แยกรายโรงพยาบาล</span>
 </nav>
 
-<!-- <table class="table">
-  <thead>
-    <tr>
-      <th colspan="2" class="center"></th>
-      <th class="center">จำนวนผู้ป่วย</th>
-      <th class="center">IP PUI</th>
-      <th class="center">Severve</th>
-      <th class="center">Moderate</th>
-      <th class="center">Mild</th>
-      <th class="center">Asymptomatic</th>
-    </tr>
-  </thead>
-  <thead>
-    <tr>
-      <th colspan="2" class="right" style="font-weight: bold;">รวมทั้งสิ้น</th>
-      <th class="right" style="font-weight: bold;">{{total}}</th>
-      <th class="right" style="font-weight: bold;">{{ippui}}</th>
-      <th class="right" style="font-weight: bold;">{{severe}}</th>
-      <th class="right" style="font-weight: bold;">{{moderate}}</th>
-      <th class="right" style="font-weight: bold;">{{mild}}</th>
-      <th class="right" style="font-weight: bold;">{{asymptomatic}}</th>
-    </tr>
-  </thead>
-</table> -->
-
 <div class="clr-row" style="padding-bottom: 0rem;">
   <div class="clr-col-12">
     <button class="btn btn-sm btn-primary btn-outline" (click)="click('')">
@@ -74,13 +49,26 @@
   </div>
 </div>
 
+<br>
+<div class="clr-row">
+  <div class="clr-col-3">
+    <my-date-picker-th name="date" [options]="myDatePickerOptions" [(ngModel)]="date" required>
+    </my-date-picker-th>
+  </div>
+  <div class="clr-col-1">
+    <button class="btn btn-sm btn-primary" (click)="doEnter()">
+      <clr-icon shape="search"></clr-icon>
+    </button>
+  </div>
+</div>
+
 <div *ngFor="let l of list">
-  <h4> {{l.provinces == 1 ? '' : 'เขต '+l.name}}</h4>
+  <h3> {{l.provinces == 1 ? '' : 'เขต '+l.name}}</h3>
   <table class="table table-compact" style="position: relative; border-collapse: collapse;" *ngFor="let p of l.provinces">
     <thead>
       <tr>
         <th colspan="7" style="text-align: left;">
-          <h3>{{p.province_name}}</h3>
+          <h4>{{p.province_name}}</h4>
         </th>
       </tr>
       <tr>
@@ -104,6 +92,15 @@
         <td class="right">{{h['Asymptomatic']}}</td>
         <td class="right">{{h['IP PUI']}}</td>
       </tr>
+      <!-- <tr>
+          <td class="right" style="font-weight: bold;">รวม</td>
+          <td class="right" style="font-weight: bold;">{{l.count}}</td>
+          <td class="right" style="font-weight: bold;">{{l.severe}}</td>
+          <td class="right" style="font-weight: bold;">{{l.moderate}}</td>
+          <td class="right" style="font-weight: bold;">{{l.mild}}</td>
+          <td class="right" style="font-weight: bold;">{{l.asymptomatic}}</td>
+          <td class="right" style="font-weight: bold;">{{l.ippui}}</td>
+        </tr> -->
     </tbody>
   </table>
 </div>

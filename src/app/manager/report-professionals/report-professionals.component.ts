@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportService } from '../report.service';
 import { AlertService } from '../../help/alert.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import * as findIndex from 'lodash/findIndex';
 @Component({
   selector: 'app-report-professionals',
   templateUrl: './report-professionals.component.html',
@@ -10,6 +9,7 @@ import * as findIndex from 'lodash/findIndex';
 })
 export class ReportProfessionalsComponent implements OnInit {
   list: any;
+  zone: any = '';
 
   @ViewChild('loading') loading: any;
 
@@ -27,7 +27,7 @@ export class ReportProfessionalsComponent implements OnInit {
   async getList() {
     this.loading.show();
     try {
-      const rs: any = await this.service.getPatients();
+      const rs: any = await this.service.getProfessionals(this.zone);
       if (rs.ok) {
         this.list = rs.rows;
         this.loading.hide();
@@ -39,5 +39,10 @@ export class ReportProfessionalsComponent implements OnInit {
       this.loading.hide();
       this.alertService.error(error);
     }
+  }
+
+  async click(z) {
+    this.zone = z;
+    this.getList();
   }
 }

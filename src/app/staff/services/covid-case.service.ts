@@ -115,9 +115,9 @@ export class CovidCaseService {
     return await this.http.get(url).toPromise();
   }
 
-  async updateDischarge(data) {
+  async updateDischarge(data, detail) {
     const url = `${this.apiUrl}/v1/staff/covid-case/update/discharge`;
-    return await this.http.post(url, { data }).toPromise();
+    return await this.http.post(url, { data, detail }).toPromise();
   }
 
   async removeCase(id) {

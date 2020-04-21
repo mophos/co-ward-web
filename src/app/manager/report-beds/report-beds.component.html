@@ -1,3 +1,114 @@
-<p>
-  report-beds works!
-</p>
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">รายงานจำนวนเตียงผู้ป่วย</span>
+</nav>
+<div class="clr-row" style="padding-bottom: 0rem;">
+  <div class="clr-col-12">
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('')">
+      ทั้งหมด
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('01')">
+      เขต 1
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('02')">
+      เขต 2
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('03')">
+      เขต 3
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('04')">
+      เขต 4
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('05')">
+      เขต 5
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('06')">
+      เขต 6
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('07')">
+      เขต 7
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('08')">
+      เขต 8
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('09')">
+      เขต 9
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('10')">
+      เขต 10
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('11')">
+      เขต 11
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('12')">
+      เขต 12
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('13')">
+      เขต 13
+    </button>
+  </div>
+</div>
+
+<br>
+<div class="clr-row">
+  <div class="clr-col-3">
+    <my-date-picker-th name="dateset" [options]="myDatePickerOptions" [(ngModel)]="dateset" required>
+    </my-date-picker-th>
+  </div>
+  <div class="clr-col-1">
+    <button class="btn btn-sm btn-primary" (click)="doEnter()">
+      <clr-icon shape="search"></clr-icon>
+    </button>
+  </div>
+</div>
+
+<div *ngFor="let l of list">
+  <h3> {{l.provinces == 1 ? '' : 'เขต '+l.name}}</h3>
+  <table class="table table-compact" style="position: relative; border-collapse: collapse;" *ngFor="let p of l.provinces">
+    <thead>
+      <tr>
+        <th colspan="11" style="text-align: left;">
+          <h4>{{p.province_name}}</h4>
+        </th>
+      </tr>
+      <tr>
+        <th class="right" style="position: sticky; top: 0;">โรงพยาบาล</th>
+        <th class="right" style="position: sticky; top: 0;">AIIR ทั้งหมด</th>
+        <th class="right" style="position: sticky; top: 0;">AIIR ใช้ไปแล้ว</th>
+        <th class="right" style="position: sticky; top: 0;">Modified AIIR ทั้งหมด</th>
+        <th class="right" style="position: sticky; top: 0;">Modified AIIR ใช้ไปแล้ว</th>
+        <th class="right" style="position: sticky; top: 0;">Isolate ทั้งหมด</th>
+        <th class="right" style="position: sticky; top: 0;">Isolate ใช้ไปแล้ว</th>
+        <th class="right" style="position: sticky; top: 0;">Cohort ทั้งหมด</th>
+        <th class="right" style="position: sticky; top: 0;">Cohort ใช้ไปแล้ว</th>
+        <th class="right" style="position: sticky; top: 0;">Hospitel ทั้งหมด</th>
+        <th class="right" style="position: sticky; top: 0;">Hospitel ใช้ไปแล้ว</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let h of p.hospitals">
+        <td class="left">{{h.hospname}}</td>
+        <td class="right">{{h['AIIR_qty'] }}</td>
+        <td class="right">{{h['AIIR_usage_qty'] }}</td>
+        <td class="right">{{h['Modified AIIR_qty'] }}</td>
+        <td class="right">{{h['Modified AIIR_usage_qty'] }}</td>
+        <td class="right">{{h['Isolate_qty'] }}</td>
+        <td class="right">{{h['Isolate_usage_qty'] }}</td>
+        <td class="right">{{h['Cohort_qty'] }}</td>
+        <td class="right">{{h['Cohort_usage_qty'] }}</td>
+        <td class="right">{{h['Hospitel_qty'] }}</td>
+        <td class="right">{{h['Hospitel_usage_qty'] }}</td>
+      </tr>
+      <!-- <tr>
+          <td class="right" style="font-weight: bold;">รวม</td>
+          <td class="right" style="font-weight: bold;">{{l.count}}</td>
+          <td class="right" style="font-weight: bold;">{{l.severe}}</td>
+          <td class="right" style="font-weight: bold;">{{l.moderate}}</td>
+          <td class="right" style="font-weight: bold;">{{l.mild}}</td>
+          <td class="right" style="font-weight: bold;">{{l.asymptomatic}}</td>
+          <td class="right" style="font-weight: bold;">{{l.ippui}}</td>
+        </tr> -->
+    </tbody>
+  </table>
+</div>
+
+<app-loadding #loading></app-loadding>
