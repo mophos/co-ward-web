@@ -66,4 +66,8 @@ export class ReportPatientsComponent implements OnInit {
     this.zone = z;
     this.getList();
   }
+
+  doEnter() {
+    this.getList();
+  }
 }

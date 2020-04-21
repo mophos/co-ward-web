@@ -21,8 +21,8 @@ export class ReportService {
     return await this.http.get(url).toPromise();
   }
 
-  async getBeds(zone) {
-    const url = `${this.apiUrl}/v1/report/get-bed?zone=${zone}`;
+  async getBeds(zone, date) {
+    const url = `${this.apiUrl}/v1/report/get-bed?zone=${zone}&date=${date}`;
     return await this.http.get(url).toPromise();
   }
 

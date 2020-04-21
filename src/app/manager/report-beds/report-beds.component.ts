@@ -10,6 +10,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class ReportBedsComponent implements OnInit {
   list: any;
   zone: any = '';
+  dateset: any;
 
   @ViewChild('loading') loading: any;
 
@@ -18,16 +19,26 @@ export class ReportBedsComponent implements OnInit {
   constructor(
     private service: ReportService,
     private alertService: AlertService
-  ) { }
+  ) {
+    const date = new Date();
+    this.dateset = {
+      date: {
+        year: date.getFullYear(),
+        month: date.getMonth() + 1,
+        day: date.getDate()
+      }
+    };
+  }
 
-  ngOnInit() {
-    this.getList();
+  async ngOnInit() {
+    await this.getList();
   }
 
   async getList() {
     this.loading.show();
     try {
-      const rs: any = await this.service.getBeds(this.zone);
+      const date = this.dateset.date.year + '-' + this.dateset.date.month + '-' + this.dateset.date.day;
+      const rs: any = await this.service.getBeds(this.zone, date);
       if (rs.ok) {
         this.list = rs.rows;
         this.loading.hide();
@@ -43,6 +54,10 @@ export class ReportBedsComponent implements OnInit {
 
   async click(z) {
     this.zone = z;
+    this.getList();
+  }
+
+  doEnter() {
     this.getList();
   }
 }
