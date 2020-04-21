@@ -3,7 +3,7 @@
   <span class="breadcrumb-item active">รายงานจำนวนผู้ป่วย COVID ADMIT แยกรายโรงพยาบาล</span>
 </nav>
 
-<table class="table">
+<!-- <table class="table">
   <thead>
     <tr>
       <th colspan="2" class="left"></th>
@@ -26,44 +26,54 @@
       <th class="right" style="font-weight: bold;">{{asymptomatic}}</th>
     </tr>
   </thead>
-</table>
-<div *ngFor="let l of list">
-  <h4>เขต {{l.zone}}</h4>
-  <table class="table">
-    <thead>
-      <tr>
-        <th class="left">จังหวัด</th>
-        <th class="left">โรงพยาบาล</th>
-        <th class="left">จำนวนผู้ป่วย</th>
-        <th class="left">IP PUI</th>
-        <th class="left">Severve</th>
-        <th class="left">Moderate</th>
-        <th class="left">Mild</th>
-        <th class="left">Asymptomatic</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let h of l.hospital">
-        <td class="left">{{h.province_name}}</td>
-        <td class="left">{{h.hospname}}</td>
-        <td class="right">{{h.count}}</td>
-        <td class="right">{{h.ippui}}</td>
-        <td class="right">{{h.severe}}</td>
-        <td class="right">{{h.moderate}}</td>
-        <td class="right">{{h.mild}}</td>
-        <td class="right">{{h.asymptomatic}}</td>
-      </tr>
-      <tr>
-        <td colspan="2" class="right" style="font-weight: bold;">รวม</td>
-        <td class="right" style="font-weight: bold;">{{l.count}}</td>
-        <td class="right" style="font-weight: bold;">{{l.ippui}}</td>
-        <td class="right" style="font-weight: bold;">{{l.severe}}</td>
-        <td class="right" style="font-weight: bold;">{{l.moderate}}</td>
-        <td class="right" style="font-weight: bold;">{{l.mild}}</td>
-        <td class="right" style="font-weight: bold;">{{l.asymptomatic}}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+</table> -->
+<br>
+
+<input type="date" name="date" [(ngModel)]="date" (change)="onChangeDate()">
+
+<clr-datagrid>
+  <clr-dg-column>เขตสุขภาพ</clr-dg-column>
+
+  <clr-dg-row *ngFor="let b of list">
+    <clr-dg-cell>{{b.name}}</clr-dg-cell>
+    <clr-datagrid ngProjectAs="clr-dg-row-detail" *clrIfExpanded>
+      <clr-dg-column>จังหวัด</clr-dg-column>
+      <clr-dg-row *ngFor="let p of b.provinces">
+        <clr-dg-cell>{{p.province_name}}</clr-dg-cell>
+       
+        <clr-datagrid ngProjectAs="clr-dg-row-detail" *clrIfExpanded>
+          <clr-dg-column>โรงพยาบาล</clr-dg-column>
+          <clr-dg-column>Severe</clr-dg-column>
+          <clr-dg-column>Moderate</clr-dg-column>
+          <clr-dg-column>Mild</clr-dg-column>
+          <clr-dg-column>Asymptomatic</clr-dg-column>
+          <clr-dg-column>IP PUI</clr-dg-column>
+          <clr-dg-row *ngFor="let h of p.hospitals">
+            <clr-dg-cell>{{h.hospname}}</clr-dg-cell>
+            <clr-dg-cell>{{h['Severe']}}</clr-dg-cell>
+            <clr-dg-cell>{{h['Moderate']}}</clr-dg-cell>
+            <clr-dg-cell>{{h['Mild']}}</clr-dg-cell>
+            <clr-dg-cell>{{h['Asymptomatic']}}</clr-dg-cell>
+            <clr-dg-cell>{{h['IP PUI']}}</clr-dg-cell>
+             <!-- <clr-datagrid ngProjectAs="clr-dg-row-detail" *clrIfExpanded>
+              <clr-dg-column>aiir</clr-dg-column>
+              <clr-dg-column>จังหวัด</clr-dg-column>
+              <clr-dg-column>จังหวัด</clr-dg-column>
+              <clr-dg-column>จังหวัด</clr-dg-column>
+              <clr-dg-column>จังหวัด</clr-dg-column>
+              <clr-dg-row *ngFor="let p of p.hospitals">
+                <clr-dg-cell>{{h.hospname}}</clr-dg-cell>
+              </clr-dg-row>
+            </clr-datagrid>  -->
+          </clr-dg-row>
+          <!-- <clr-dg-footer>{{users.length}} users</clr-dg-footer> -->
+        </clr-datagrid>
+      </clr-dg-row>
+      <!-- <clr-dg-footer>{{users.length}} users</clr-dg-footer> -->
+    </clr-datagrid>
+  </clr-dg-row>
+
+  <!-- <clr-dg-footer>{{users.length}} users</clr-dg-footer> -->
+</clr-datagrid>
 
 <app-loadding #loading></app-loadding>
