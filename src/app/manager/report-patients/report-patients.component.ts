@@ -21,7 +21,12 @@ export class ReportPatientsComponent implements OnInit {
   mild: any = 0;
   asymptomatic: any = 0;
   ippui: any = 0;
-
+  myDatePickerOptions: IMyOptions = {
+    inline: false,
+    dateFormat: 'dd mmm yyyy',
+    editableDateField: false,
+    showClearDateBtn: false
+  };
   public jwtHelper = new JwtHelperService();
   @ViewChild('loading') loading: any;
 
