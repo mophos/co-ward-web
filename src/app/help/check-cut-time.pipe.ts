@@ -16,7 +16,7 @@ export class CheckCutTimePipe implements PipeTransform {
   transform(value: any, args?: any): any {
     if (this.timeCus.ok) {
       if (moment(value, 'YYYY-MM-DD').isValid() || moment(value, 'YYYY-MM-DD hh:mm:ss').isValid()) {
-        if (this.timeCus.rows === value) {
+        if (moment(this.timeCus.rows).format('YYYY-MM-DD') === moment(value).format('YYYY-MM-DD')) {
           return false; // วันที่ตรงกัน
         } else {
           return true; // วันที่ไม่ตรงกัน

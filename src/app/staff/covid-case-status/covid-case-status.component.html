@@ -70,14 +70,20 @@
               {{l.title_name}}{{l.first_name}} {{l.last_name}}
             </div>
             <div style="margin-top: 0.2rem;">
-              <span>
-                อัพเดทล่าสุด : {{l.create_date | dateTh:'DD/MM/YYYY'}}
+              อัพเดทล่าสุด
+            </div>
+            <div >
+              <span *ngIf="l.updated_date">
+                : {{l.updated_date | dateTh:'DD/MM/YYYY hh:mm'}}
+              </span>
+              <span *ngIf="!(l.updated_date)">
+                : {{l.create_date | dateTh:'DD/MM/YYYY hh:mm'}}
               </span>
             </div>
           </td>
           <td class="left">
             <div *ngFor="let i of gcs">
-              <input [disabled]="(!(l.create_date | checkCutTime) && !l.is_edit)" type="radio" name="gcs-{{l.id}}" id="gcs-{{i.id}}-{{l.id}}"
+              <input [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)" type="radio" name="gcs-{{l.id}}" id="gcs-{{i.id}}-{{l.id}}"
                 [(ngModel)]="l.gcs_id" [value]="i.id">
               <label [title]="i.name" class="pointer" for="gcs-{{i.id}}-{{l.id}}">
                 {{i.name}}
@@ -86,7 +92,7 @@
           </td>
           <td class="left">
             <div *ngFor="let i of beds">
-              <input [disabled]="(!(l.create_date | checkCutTime) && !l.is_edit)" type="radio" name="bed-{{l.id}}" id="bed-{{i.id}}-{{l.id}}"
+              <input [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)" type="radio" name="bed-{{l.id}}" id="bed-{{i.id}}-{{l.id}}"
                 [(ngModel)]="l.bed_id" [value]="i.id">
               <label [title]="i.name" class="pointer" for="bed-{{i.id}}-{{l.id}}">
                 {{i.name}}
@@ -95,7 +101,7 @@
           </td>
           <td class="left">
             <div *ngFor="let i of medicalSupplies">
-              <input [disabled]="(!(l.create_date | checkCutTime) && !l.is_edit)" type="radio" (click)='uncheckRadioMedicalSupplies(l.id,i.id)'
+              <input [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)" type="radio" (click)='uncheckRadioMedicalSupplies(l.id,i.id)'
                 name="medicalSupplie-id-{{l.id}}" id="medicalSupplie-{{i.id}}-{{l.id}}" [(ngModel)]="l.medical_supplie_id"
                 [value]="i.id">
               <label [title]="i.name" class="pointer" for="medicalSupplie-{{i.id}}-{{l.id}}">
@@ -106,38 +112,38 @@
           <td class="left">
             <div class="clr-control-inline">
               <div *ngFor="let i of s1" class="clr-col-6" style="padding: 0rem;">
-                <input [disabled]="(!(l.create_date | checkCutTime) && !l.is_edit)" (click)='uncheckRadio(l.id,i.generic,"set1")' type="radio"
+                <input [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)" (click)='uncheckRadio(l.id,i.generic,"set1")' type="radio"
                   name="s1-{{l.id}}" id="s1-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set1">
                 <label [title]="i.name" class="pointer" for="s1-{{i.generic}}-{{l.id}}"> {{i.name}}</label>
               </div>
             </div>
             <div class="clr-control-inline">
               <div *ngFor="let i of s2" class="clr-col-6" style="padding: 0rem;">
-                <input [disabled]="(!(l.create_date | checkCutTime) && !l.is_edit)" (click)='uncheckRadio(l.id,i.generic,"set2")' type="radio"
+                <input [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)" (click)='uncheckRadio(l.id,i.generic,"set2")' type="radio"
                   name="s2-{{l.id}}" id="s2-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set2">
                 <label [title]="i.name" class="pointer" for="s2-{{i.generic}}-{{l.id}}"> {{i.name}}</label>
               </div>
             </div>
             <div class="clr-control-inline">
               <div *ngFor="let i of s3" class="clr-col-6" style="padding: 0rem;">
-                <input [disabled]="(!(l.create_date | checkCutTime) && !l.is_edit)" (click)='uncheckRadio(l.id,i.generic,"set3")' type="radio"
+                <input [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)" (click)='uncheckRadio(l.id,i.generic,"set3")' type="radio"
                   name="s3-{{l.id}}" id="s3-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set3">
                 <label [title]="i.name" class="pointer" for="s3-{{i.generic}}-{{l.id}}"> {{i.name}}</label>
               </div>
             </div>
             <div class="clr-control-inline">
               <div *ngFor="let i of s4" class="clr-col-6" style="padding: 0rem;">
-                <input [disabled]="(!(l.create_date | checkCutTime) && !l.is_edit)" (click)='uncheckRadio(l.id,i.generic,"set4")' type="radio"
+                <input [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)" (click)='uncheckRadio(l.id,i.generic,"set4")' type="radio"
                   name="s4-{{l.id}}" id="s4-{{i.generic}}-{{l.id}}" [value]="i.generic" [(ngModel)]="l.set4">
                 <label [title]="i.name" class="pointer" for="s4-{{i.generic}}-{{l.id}}"> <span [innerHTML]="i.name"></span></label>
               </div>
             </div>
           </td>
           <td style="text-align: right;">
-            <div *ngIf="l.create_date | checkCutTime">
-              <button class="btn btn-sm btn-success" (click)="onClickSave(l.id)" [disabled]="!(l.create_date | checkCutTime)">บันทึก</button>
+            <div *ngIf="l.entry_date | checkCutTime">
+              <button class="btn btn-sm btn-success" (click)="onClickSave(l.id)" [disabled]="!(l.entry_date | checkCutTime)">บันทึก</button>
             </div>
-            <div *ngIf="!(l.create_date | checkCutTime)">
+            <div *ngIf="!(l.entry_date | checkCutTime)">
               <button class="btn btn-sm " [ngClass]="{'btn-primary-outline': !l.is_edit, 'btn-primary': l.is_edit}"  
               (click)="onClickEdit(l.id)" [disabled]="">
                 <label *ngIf="l.is_edit">บันทึก</label>
