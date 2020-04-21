@@ -10,7 +10,9 @@ import * as findIndex from 'lodash/findIndex';
   styles: []
 })
 export class CheckPatientsComponent implements OnInit {
+
   list: any;
+  listGcs: any;
   detail: any;
   query: any = '';
   case: any;
@@ -34,6 +36,25 @@ export class CheckPatientsComponent implements OnInit {
     await this.getList();
     await this.getCase();
     await this.merge();
+    await this.getGcs();
+  }
+
+  async getGcs() {
+    this.loading.show();
+    try {
+      const rs: any = await this.service.getGcs(this.query);
+      if (rs.ok) {
+        this.listGcs = rs.rows;
+        console.log(this.listGcs);
+        this.loading.hide();
+      } else {
+        this.loading.hide();
+        this.alertService.error();
+      }
+    } catch (error) {
+      this.loading.hide();
+      this.alertService.error(error);
+    }
   }
 
   async getList() {
