@@ -35,27 +35,27 @@ export class CheckPatientsComponent implements OnInit {
   }
 
   async getGcs() {
-    // this.loading.show();
-    // try {
-    //   const rs: any = await this.service.getPatients();
-    //   if (rs.ok) {
-    //     this.list = rs.rows;
-    //     console.log(this.list);
-    //     this.loading.hide();
-    //   } else {
-    //     this.loading.hide();
-    //     this.alertService.error();
-    //   }
-    // } catch (error) {
-    //   this.loading.hide();
-    //   this.alertService.error(error);
-    // }
+    this.loading.show();
+    try {
+      const rs: any = await this.service.getPatients(null, null);
+      if (rs.ok) {
+        this.list = rs.rows;
+        console.log(this.list);
+        this.loading.hide();
+      } else {
+        this.loading.hide();
+        this.alertService.error();
+      }
+    } catch (error) {
+      this.loading.hide();
+      this.alertService.error(error);
+    }
   }
 
-  // onChangeDate() {
-  //   console.log(e);
+  onChangeDate() {
+    console.log(e);
 
-  // }
+  }
   // async getList() {
   //   this.loading.show();
   //   try {
