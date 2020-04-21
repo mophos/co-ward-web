@@ -57,6 +57,7 @@ import { CovidCaseEditComponent } from './covid-case/covid-case-edit/covid-case-
 import { ApproveDrugsComponent } from './approve-drugs/approve-drugs.component';
 import { CheckPatientsComponent } from './check-patients/check-patients.component';
 import { ReportBedComponent } from './report-bed/report-bed.component';
+import { ReportSuppliesComponent } from './report-supplies/report-supplies.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -86,7 +87,8 @@ import { ReportBedComponent } from './report-bed/report-bed.component';
     CovidCaseEditComponent,
     ApproveDrugsComponent,
     CheckPatientsComponent,
-    ReportBedComponent
+    ReportBedComponent,
+    ReportSuppliesComponent
   ],
   imports: [
     HelpModule,
