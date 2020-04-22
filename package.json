@@ -32,7 +32,6 @@
     "mydatepicker-th": "^0.1.1",
     "ngx-material-timepicker": "^5.5.1",
     "rxjs": "~6.3.3",
-    "select2": "^4.0.13",
     "sweetalert2": "^9.10.7",
     "thai-id-card": "0.0.15",
     "ts-xlsx": "0.0.11",

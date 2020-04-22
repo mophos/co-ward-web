@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CanActivate } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import * as _ from 'lodash';
+import { findIndex } from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,7 @@ export class AuthUsermanage implements CanActivate {
           return false;
         } else {
           let isAccess = false;
-          if (_.findIndex(rights, { name: 'ADMIN_MANAGE_USERS' }) > -1) {
+          if (findIndex(rights, { name: 'ADMIN_MANAGE_USERS' }) > -1) {
             isAccess = true;
           } else {
             isAccess = false;
