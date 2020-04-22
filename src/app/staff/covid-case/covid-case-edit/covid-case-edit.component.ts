@@ -106,7 +106,7 @@ export class CovidCaseEditComponent implements OnInit {
         this.fname = rs.rows.first_name;
         this.mname = rs.rows.middle_name;
         this.lname = rs.rows.last_name;
-        this.genderId = rs.rows.gender_id.toString();
+        this.genderId = rs.rows.gender_id ? rs.rows.gender_id.toString() : null;
         this.peopleType = rs.rows.people_type;
         if (rs.rows.birth_date) {
           this.birthDate = {
@@ -154,6 +154,7 @@ export class CovidCaseEditComponent implements OnInit {
         this.alertService.error(rs.error);
       }
     } catch (error) {
+      console.log(error);
 
     }
   }

@@ -1,3 +1,4 @@
+import { CovidCaseOldComponent } from './covid-case/covid-case-old/covid-case-old.component';
 import { HelpModule } from '../help/help.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -71,6 +72,7 @@ import { ReportSuppliesComponent } from './report-supplies/report-supplies.compo
     DrugComponent,
     CovidCaseComponent,
     CovidCaseNewComponent,
+    CovidCaseOldComponent,
     CovidCaseStatusComponent,
     SettingBedsComponent,
     SuppliesComponent,

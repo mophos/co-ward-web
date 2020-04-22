@@ -1,3 +1,4 @@
+import { CovidCaseOldComponent } from './covid-case/covid-case-old/covid-case-old.component';
 import { ReportSuppliesComponent } from './report-supplies/report-supplies.component';
 import { ApproveDrugsComponent } from './approve-drugs/approve-drugs.component';
 import { InventoryStatusComponent } from './inventory-status/inventory-status.component';
@@ -60,7 +61,7 @@ const routes: Routes = [
       { path: 'covid-case', canActivate: [AuthCovidCaseService], component: CovidCaseComponent },
       { path: 'covid-case-new', canActivate: [AuthCovidCaseService], component: CovidCaseNewComponent },
       { path: 'covid-case-edit', canActivate: [AuthCovidCaseService], component: CovidCaseEditComponent },
-      { path: 'covid-case-old', canActivate: [AuthCovidCaseService], component: CovidCaseNewComponent },
+      { path: 'covid-case-old', canActivate: [AuthCovidCaseService], component: CovidCaseOldComponent },
       { path: 'covid-case-status', canActivate: [AuthCovidCaseStatusService], component: CovidCaseStatusComponent },
       { path: 'covid-case-approved-drugs', canActivate: [AuthApprovedDrugsService], component: ApproveDrugsComponent },
       { path: 'covid-case-approved-supplies', canActivate: [AuthApprovedSuppliesService], component: CovidCaseApprovedComponent },

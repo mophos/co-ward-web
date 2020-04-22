@@ -15,11 +15,11 @@ import * as moment from 'moment';
 import thaiIdCard from 'thai-id-card';
 
 @Component({
-  selector: 'app-covid-case-new',
-  templateUrl: './covid-case-new.component.html',
+  selector: 'app-covid-case-old',
+  templateUrl: './covid-case-old.component.html',
   styles: []
 })
-export class CovidCaseNewComponent implements OnInit {
+export class CovidCaseOldComponent implements OnInit {
 
   isRefer: any;
   typeRegister: any;
@@ -102,7 +102,21 @@ export class CovidCaseNewComponent implements OnInit {
   modalCIDCidError = false;
 
   modalCIDPassport: any;
+  modalDischargeType: any;
   isKey = false;
+  hospitalId: any;
+  dateDischarge: any;
+  minute: any;
+  hour: any;
+  reason: any;
+
+  hours: any = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
+  minutes: any = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+    '10', '11', '12', '13', '14', '15', '16', '17', '18', '19',
+    '20', '21', '22', '23', '24', '25', '26', '27', '28', '29',
+    '30', '31', '32', '33', '34', '35', '36', '37', '38', '39',
+    '40', '41', '42', '43', '44', '45', '46', '47', '48', '49',
+    '50', '51', '52', '53', '54', '55', '56', '57', '58', '59'];
   @ViewChild('hospital') hospitals: AutocompleteHospitalComponent;
   @ViewChild('countries') countries: AutocompleteCountriesComponent;
   @ViewChild('province') province: AutocompleteProvinceComponent;
@@ -327,26 +341,6 @@ export class CovidCaseNewComponent implements OnInit {
     this.isSave = true;
     try {
       if (await this.verifyInput()) {
-        const drugs = [];
-        if (+this.s1 === 1) {
-          drugs.push({ genericId: 1 });
-        } else if (+this.s1 === 2) {
-          drugs.push({ genericId: 2 });
-        }
-        if (+this.s2 === 1) {
-          drugs.push({ genericId: 3 });
-          drugs.push({ genericId: 5 });
-        } else if (+this.s2 === 2) {
-          drugs.push({ genericId: 4 });
-        }
-
-        if (+this.s3 === 1) {
-          drugs.push({ genericId: 7 });
-        }
-
-        if (+this.s4 === 1) {
-          drugs.push({ genericId: 7 });
-        }
 
         const obj: any = {
           type: this.typeRegister,
@@ -360,9 +354,6 @@ export class CovidCaseNewComponent implements OnInit {
           lname: this.lname,
           tel: this.tel,
           admitDate: `${this.admitDate.date.year}-${this.admitDate.date.month}-${this.admitDate.date.day}`,
-          gcsId: this.gcsId,
-          bedId: this.bedId,
-          medicalSupplieId: this.medicalSupplieId,
           houseNo: this.houseNo,
           roomNo: this.roomNo,
           village: this.village,
@@ -373,7 +364,6 @@ export class CovidCaseNewComponent implements OnInit {
           provinceCode: this.provinceId,
           zipcode: this.zipcode,
           countryId: this.countryId,
-          drugs
         };
 
         if (this.confirmDate) {
@@ -383,7 +373,23 @@ export class CovidCaseNewComponent implements OnInit {
           obj.birthDate = `${this.birthDate.date.year}-${this.birthDate.date.month}-${this.birthDate.date.day}`;
         }
 
-        const rs: any = await this.covidCaseService.saveNewCase(obj);
+        let status = null;
+        if (this.modalDischargeType === 'HOME') {
+          status = 'DISCHARGE';
+        } else if (this.modalDischargeType === 'DEATH') {
+          status = 'DEATH';
+        } else if (this.modalDischargeType === 'REFER') {
+          status = 'REFER';
+          obj.hospitalId = this.hospitalId;
+          obj.reason = this.reason;
+        } else if (this.modalDischargeType === 'NEGATIVE') {
+          status = 'NEGATIVE';
+        }
+        obj.dateDischarge = this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day + ' ' + this.hour + ':' + this.minute + ':00';
+        obj.status = status;
+
+
+        const rs: any = await this.covidCaseService.saveOldCase(obj);
         if (rs.ok) {
           this.clear();
           this.isKey = false;
