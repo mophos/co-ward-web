@@ -49,9 +49,6 @@ export class ReportPatientsComponent implements OnInit {
   async getGcs(date) {
     this.loading.show();
     try {
-      // // // const date = date.date.year + '-' + date.date.month + '-' + date.date.day;
-      console.log(this.date);
-
       const rs: any = await this.service.getPatients(date, null);
       if (rs.ok) {
         this.list = rs.rows;

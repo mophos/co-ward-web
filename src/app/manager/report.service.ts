@@ -32,7 +32,7 @@ export class ReportService {
   }
 
   async getSupplies(date, query, zone) {
-    const url = `${this.apiUrl}/v1/report/supplies?date=${date}&query=${query}&zone=${zone}`;
+    const url = `${this.apiUrl}/v1/report/get-supplies?date=${date}&query=${query}&zone=${zone}`;
     return await this.http.get(url).toPromise();
   }
 
