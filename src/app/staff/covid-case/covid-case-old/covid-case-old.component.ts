@@ -583,4 +583,8 @@ export class CovidCaseOldComponent implements OnInit {
     }
   }
 
+
+  onSelectHosp(e) {
+    this.hospitalId = e.id;
+  }
 }
