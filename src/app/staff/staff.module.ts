@@ -56,9 +56,10 @@ import { SettingUsersComponent } from './setting/setting-users/setting-users.com
 import { SettingProfilesComponent } from './setting/setting-profiles/setting-profiles.component';
 import { CovidCaseEditComponent } from './covid-case/covid-case-edit/covid-case-edit.component';
 import { ApproveDrugsComponent } from './approve-drugs/approve-drugs.component';
-import { CheckPatientsComponent } from './check-patients/check-patients.component';
+import { ReportPatientsComponent } from './report-patients/report-patients.component';
 import { ReportBedComponent } from './report-bed/report-bed.component';
 import { ReportSuppliesComponent } from './report-supplies/report-supplies.component';
+import { ReportPatientAdmitComponent } from './report-patient-admit/report-patient-admit.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -88,9 +89,10 @@ import { ReportSuppliesComponent } from './report-supplies/report-supplies.compo
     SettingProfilesComponent,
     CovidCaseEditComponent,
     ApproveDrugsComponent,
-    CheckPatientsComponent,
+    ReportPatientsComponent,
     ReportBedComponent,
-    ReportSuppliesComponent
+    ReportSuppliesComponent,
+    ReportPatientAdmitComponent
   ],
   imports: [
     HelpModule,

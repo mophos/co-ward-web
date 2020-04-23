@@ -34,21 +34,21 @@ export class ReportSuppliesComponent implements OnInit {
   }
 
   async ngOnInit() {
-    const date = new Date();
+    const dateNow = new Date();
     this.date = {
       date: {
-        year: date.getFullYear(),
-        month: date.getMonth() + 1,
-        day: date.getDate()
+        year: dateNow.getFullYear(),
+        month: dateNow.getMonth() + 1,
+        day: dateNow.getDate()
       }
     };
-    await this.getList();
+    const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
+    await this.getList(date);
   }
 
-  async getList() {
+  async getList(date) {
     this.loading.show();
     try {
-      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
       const rs: any = await this.service.getSupplies(date, null);
       if (rs.ok) {
         this.list = rs.rows;
@@ -64,10 +64,11 @@ export class ReportSuppliesComponent implements OnInit {
     }
   }
 
-  onChangeDate() {
-    this.getList();
-    // console.log(e);
-
+  async onChangeDate(e) {
+    if (e) {
+      const date = e.date.year + '-' + e.date.month + '-' + e.date.day;
+      await this.getList(date);
+    }
   }
-  
+
 }

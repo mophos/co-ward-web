@@ -1,0 +1,107 @@
+<nav class="breadcrumb">
+  <!-- <a class="breadcrumb-item" href="javascript://" routerLink="/admin/manage-min-max">รายการสังกัด</a> -->
+  <span class="breadcrumb-item active">รายงานจำนวนผู้ป่วยทั้งหมดรายวัน</span>
+</nav>
+
+
+<div class="clr-row">
+  <div class="clr-col-2">วันที่แสดงข้อมูล</div>
+  <div class="clr-col-2">
+    <my-date-picker-th name="date" [options]="myDatePickerOptions" (dateChanged)="onChangeDate($event)"
+      [(ngModel)]="date" required>
+    </my-date-picker-th>
+  </div>
+  <div class="clr-col-8"><span class="required">*</span> หมายเหตุ หากดูรายงานวันปัจจุบัน ข้อมูลอาจเปลี่ยนแปลง
+    เพราะรพ.สามารถแก้ไขข้อมูลในวันปัจจุบันได้</div>
+</div>
+<!-- <clr-datagrid>
+  <clr-dg-column>เขตสุขภาพ</clr-dg-column>
+
+  <clr-dg-row *ngFor="let b of list">
+    <clr-dg-cell>{{b.name}}</clr-dg-cell>
+    <clr-datagrid ngProjectAs="clr-dg-row-detail" *clrIfExpanded>
+      <clr-dg-column>จังหวัด</clr-dg-column>
+      <clr-dg-row *ngFor="let p of b.provinces">
+        <clr-dg-cell>{{p.province_name}}</clr-dg-cell>
+
+        <clr-datagrid ngProjectAs="clr-dg-row-detail" *clrIfExpanded>
+          <clr-dg-column>โรงพยาบาล</clr-dg-column>
+          <clr-dg-column>Severe</clr-dg-column>
+          <clr-dg-column>Moderate</clr-dg-column>
+          <clr-dg-column>Mild</clr-dg-column>
+          <clr-dg-column>Asymptomatic</clr-dg-column>
+          <clr-dg-column>IP PUI</clr-dg-column>
+          <clr-dg-row *ngFor="let h of p.hospitals">
+            <clr-dg-cell>{{h.hospname}}</clr-dg-cell>
+            <clr-dg-cell>{{h['Severe']}}</clr-dg-cell>
+            <clr-dg-cell>{{h['Moderate']}}</clr-dg-cell>
+            <clr-dg-cell>{{h['Mild']}}</clr-dg-cell>
+            <clr-dg-cell>{{h['Asymptomatic']}}</clr-dg-cell>
+            <clr-dg-cell>{{h['IP PUI']}}</clr-dg-cell>
+          </clr-dg-row>
+        </clr-datagrid>
+      </clr-dg-row>
+    </clr-datagrid>
+  </clr-dg-row>
+</clr-datagrid> -->
+
+
+<div *ngFor="let l of list">
+  <h4> {{l.provinces == 1 ? '' : 'เขต '+l.name}}</h4>
+  <table class="table" *ngFor="let p of l.provinces">
+    <thead>
+      <tr>
+        <th colspan="2" style="text-align: left;">
+          <h3>{{p.province_name}}</h3>
+        </th>
+      </tr>
+      <tr>
+        <th class="left">โรงพยาบาล</th>
+        <th class="right"></th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let h of p.hospitals">
+        <td colspan="7" class="left" style="padding: 0;">
+          <table style="width:100%">
+            <tr>
+              <td class="left" width="20%">{{h.hospname}}</td>
+              <td class="left" width="10%">{{ h.details.length ? 'HN':''}}</td>
+              <td class="left">{{ h.details.length ? 'Admit date':''}}</td>
+              <td class="left">{{ h.details.length ? 'Status':''}}</td>
+            </tr>
+            <tr *ngFor="let d of h.details">
+              <td width="20%"></td>
+              <td class="left" width="10%">{{d.hn}}</td>
+              <td class="left" >{{d.date_admit | dateTh:'D MMM YYYY'}}</td>
+              <td class="left">{{d.status}}</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+
+      <!-- <td class="right">
+          {{h.sum || 0}}</td>
+        <td class="right">{{h['Severe'] }}</td>
+        <td class="right">{{h['Moderate']}}</td>
+        <td class="right">{{h['Mild']}}</td>
+        <td class="right">{{h['Asymptomatic']}}</td>
+        <td class="right">{{h['IP PUI']}}</td> -->
+
+      <!-- <tr>
+        <td class="right" style="font-weight: bold;">รวม</td>
+        <td class="right" style="font-weight: bold;">{{l.sum}}</td>
+        <td class="right" style="font-weight: bold;">{{l.ippui}}</td>
+        <td class="right" style="font-weight: bold;">{{l.severe}}</td>
+        <td class="right" style="font-weight: bold;">{{l.moderate}}</td>
+        <td class="right" style="font-weight: bold;">{{l.mild}}</td>
+        <td class="right" style="font-weight: bold;">{{l.asymptomatic}}</td>
+      </tr> -->
+    </tbody>
+  </table>
+</div>
+
+
+<app-loadding #loading></app-loadding>

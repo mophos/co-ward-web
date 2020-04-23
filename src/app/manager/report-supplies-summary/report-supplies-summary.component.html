@@ -1,0 +1,52 @@
+<nav class="breadcrumb">
+  <!-- <a class="breadcrumb-item" href="javascript://" routerLink="/admin/manage-min-max">รายการสังกัด</a> -->
+  <span class="breadcrumb-item active">รายงานยอดคงเหลือเวชภัณฑ์</span>
+</nav>
+
+<table class="table table-compact">
+  <thead>
+    <tr>
+      <th rowspan="2">รายการ</th>
+      <th colspan="14">{{dateShow | dateTh:'DD/MM/YYYY'}}</th>
+    </tr>
+    <tr>
+      <!-- <th rowspan="2">รายการ</th> -->
+      <th style="text-align: right;">เขต 1</th>
+      <th style="text-align: right;">เขต 2</th>
+      <th style="text-align: right;">เขต 3</th>
+      <th style="text-align: right;">เขต 4</th>
+      <th style="text-align: right;">เขต 5</th>
+      <th style="text-align: right;">เขต 6</th>
+      <th style="text-align: right;">เขต 7</th>
+      <th style="text-align: right;">เขต 8</th>
+      <th style="text-align: right;">เขต 9</th>
+      <th style="text-align: right;">เขต 10</th>
+      <th style="text-align: right;">เขต 11</th>
+      <th style="text-align: right;">เขต 12</th>
+      <th style="text-align: right;">เขต 13</th>
+      <th>รวม</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let l of total;">
+      <td class="left">{{l.supplies}}</td>
+      <td style="text-align: right;">{{l.zone1 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.zone2 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.zone3 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.zone4 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.zone5 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.zone6 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.zone7 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.zone8 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.zone9 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.zone10 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.zone11 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.zone12 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.zone13 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.total | number:'1.0-0'}}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<app-loadding #loading></app-loadding>

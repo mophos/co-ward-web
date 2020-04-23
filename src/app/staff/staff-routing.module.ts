@@ -1,3 +1,4 @@
+import { ReportPatientAdmitComponent } from './report-patient-admit/report-patient-admit.component';
 import { CovidCaseOldComponent } from './covid-case/covid-case-old/covid-case-old.component';
 import { ReportSuppliesComponent } from './report-supplies/report-supplies.component';
 import { ApproveDrugsComponent } from './approve-drugs/approve-drugs.component';
@@ -46,7 +47,7 @@ import { AuthProvinceSetSupUserService } from '../auth-staff/auth-province-set-s
 import { ManageProvinceSetSupUserComponent } from './manage-province-set-sup-user/manage-province-set-sup-user.component';
 import { SettingUsersComponent } from '../staff/setting/setting-users/setting-users.component';
 import { CovidCaseEditComponent } from './covid-case/covid-case-edit/covid-case-edit.component';
-import { CheckPatientsComponent } from './check-patients/check-patients.component';
+import { ReportPatientsComponent } from './report-patients/report-patients.component';
 import { ReportBedComponent } from './report-bed/report-bed.component';
 import { AuthReportPatientsService } from '../auth-staff/auth-report-patients.service';
 
@@ -82,7 +83,8 @@ const routes: Routes = [
       // ----------------------------------------------------------------------------------------------------------
       { path: 'check-supplie', canActivate: [AuthCheckSuppliesService], component: CheckSuppliesComponent },
       // ----------------------------------------------------------------------------------------------------------
-      { path: 'report-patient', component: CheckPatientsComponent },
+      { path: 'report-patient-admit', component: ReportPatientAdmitComponent },
+      { path: 'report-patient', component: ReportPatientsComponent },
       { path: 'report-bed', component: ReportBedComponent },
       { path: 'report-supplies', component: ReportSuppliesComponent },
       // ----------------------------------------------------------------------------------------------------------

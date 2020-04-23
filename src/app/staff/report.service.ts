@@ -17,6 +17,11 @@ export class ReportService {
   }
 
 
+  async getAdmitPatients(date,query) {
+    const url = `${this.apiUrl}/v1/report/get-gcs-admit?date=${date}&query=${query}`;
+    return await this.http.get(url).toPromise();
+  }
+
   async getPatients(date,query) {
     const url = `${this.apiUrl}/v1/report/get-gcs?date=${date}&query=${query}`;
     return await this.http.get(url).toPromise();

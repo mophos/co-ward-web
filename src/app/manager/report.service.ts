@@ -12,7 +12,7 @@ export class ReportService {
   ) { }
 
   async getPatients(zone, date) {
-    const url = `${this.apiUrl}/v1/report/get-gcs?zone=${zone}&date=${date}`;
+    const url = `${this.apiUrl}/v1/report/get-gcs-admit?zone=${zone}&date=${date}`;
     return await this.http.get(url).toPromise();
   }
 
@@ -32,7 +32,7 @@ export class ReportService {
   }
 
   async getSupplies(date, query, zone) {
-    const url = `${this.apiUrl}/v1/report/supplies?date=${date}&query=${query}&zone=${zone}`;
+    const url = `${this.apiUrl}/v1/report/get-supplies?date=${date}&query=${query}&zone=${zone}`;
     return await this.http.get(url).toPromise();
   }
 

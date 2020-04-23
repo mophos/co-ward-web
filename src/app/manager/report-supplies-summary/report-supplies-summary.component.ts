@@ -1,20 +1,17 @@
-
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportService } from '../report.service';
 import { AlertService } from '../../help/alert.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { IMyOptions } from 'mydatepicker-th';
 @Component({
-  selector: 'app-report-supplies',
-  templateUrl: './report-supplies.component.html',
+  selector: 'app-report-supplies-summary',
+  templateUrl: './report-supplies-summary.component.html',
   styles: []
 })
-export class ReportSuppliesComponent implements OnInit {
+export class ReportSuppliesSummaryComponent implements OnInit {
   @ViewChild('loading') loading: any;
 
-  list: any;
   detail: any;
-  query: any = '';
   dateset: any;
   total: any;
   dateShow: any;
@@ -59,29 +56,9 @@ export class ReportSuppliesComponent implements OnInit {
   }
 
   async ngOnInit() {
-    await this.getList();
     await this.getTotal();
   }
 
-  async getList() {
-    this.loading.show();
-    try {
-      const rs: any = await this.service.getSupplies(this.dateShow, this.query, this.zone);
-      if (rs.ok) {
-        this.list = rs.rows;
-        this.zone = '';
-        this.loading.hide();
-      } else {
-        this.zone = '';
-        this.loading.hide();
-        this.alertService.error();
-      }
-    } catch (error) {
-      this.zone = '';
-      this.loading.hide();
-      this.alertService.error(error);
-    }
-  }
 
   async getTotal() {
     this.loading.show();
@@ -104,6 +81,8 @@ export class ReportSuppliesComponent implements OnInit {
           this.zone12 += v.zone12;
           this.zone13 += v.zone13;
         }
+        console.log(this.total);
+        
         this.loading.hide();
       } else {
         this.loading.hide();
@@ -115,38 +94,5 @@ export class ReportSuppliesComponent implements OnInit {
     }
   }
 
-  async click(z) {
-    this.zone = z;
-    // await this.getSumByZone(z);
-    await this.getList();
-  }
 
-  async getSumByZone(z) {
-    this.loading.show();
-    try {
-      const rs: any = await this.service.getSumByZone(z);
-      if (rs.ok) {
-        this.list = rs.rows;
-        this.loading.hide();
-      } else {
-        this.loading.hide();
-        this.alertService.error();
-      }
-    } catch (error) {
-      this.loading.hide();
-      this.alertService.error(error);
-    }
-  }
-
-  doEnter() {
-    this.getList();
-  }
-
-  async onChangeDate(e) {
-    if (e) {
-      const date = e.date.year + '-' + e.date.month + '-' + e.date.day;
-      this.dateShow = date;
-      await this.getList();
-    }
-  }
 }

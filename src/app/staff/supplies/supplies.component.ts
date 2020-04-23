@@ -108,8 +108,8 @@ export class SuppliesComponent implements OnInit {
         for (const v of this.listDetail) {
           const obj: any = {};
           obj.generic_id = v.id;
-          obj.qty = v.qty;
-          obj.month_usage_qty = v.month_usage_qty;
+          obj.qty = v.qty || null;
+          obj.month_usage_qty = v.month_usage_qty || null;
           data.push(obj);
         }
         const rs: any = await this.supplieService.save(data);
