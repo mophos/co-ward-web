@@ -385,7 +385,9 @@ export class CovidCaseOldComponent implements OnInit {
         } else if (this.modalDischargeType === 'NEGATIVE') {
           status = 'NEGATIVE';
         }
-        obj.dateDischarge = this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day + ' ' + this.hour + ':' + this.minute + ':00';
+        if (this.modalDischargeType !== 'REFER') {
+          obj.dateDischarge = this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day + ' ' + this.hour + ':' + this.minute + ':00';
+        }
         obj.status = status;
 
 
