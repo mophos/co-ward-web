@@ -1,3 +1,4 @@
+import { ReportSuppliesSummaryComponent } from './report-supplies-summary/report-supplies-summary.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
@@ -14,6 +15,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'report-supplies', pathMatch: 'full' },
+      { path: 'report-supplies-summary', component: ReportSuppliesSummaryComponent },
       { path: 'report-supplies', component: ReportSuppliesComponent },
       { path: 'report-patients', component: ReportPatientsComponent },
       { path: 'report-beds', component: ReportBedsComponent },
