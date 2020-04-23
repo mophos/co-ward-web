@@ -1,6 +1,6 @@
 <nav class="breadcrumb">
   <!-- <a class="breadcrumb-item" href="javascript://" routerLink="/admin/manage-min-max">รายการสังกัด</a> -->
-  <span class="breadcrumb-item active">รายงานจำนวนผู้ป่วย COVID ADMIT แยกรายโรงพยาบาล</span>
+  <span class="breadcrumb-item active">รายงานจำนวนผู้ป่วย ADMIT รายวัน</span>
 </nav>
 
 <!-- <table class="table">
@@ -35,6 +35,7 @@
     <my-date-picker-th name="date" [options]="myDatePickerOptions" (dateChanged)="onChangeDate()" [(ngModel)]="date" required>
     </my-date-picker-th>
   </div>
+  <div class="clr-col-8"><span class="required">*</span> หมายเหตุ หากดูรายงานวันปัจจุบัน ข้อมูลอาจเปลี่ยนแปลง เพราะรพ.สามารถแก้ไขข้อมูลได้ในวันปัจจุบัน</div>
 </div>
 <!-- <clr-datagrid>
   <clr-dg-column>เขตสุขภาพ</clr-dg-column>

@@ -6,11 +6,11 @@ import * as findIndex from 'lodash/findIndex';
 import { IMyOptions } from 'mydatepicker-th';
 
 @Component({
-  selector: 'app-check-patients',
-  templateUrl: './check-patients.component.html',
+  selector: 'app-report-patients',
+  templateUrl: './report-patients.component.html',
   styles: []
 })
-export class CheckPatientsComponent implements OnInit {
+export class ReportPatientsComponent implements OnInit {
 
   list: any;
   query: any = '';
@@ -24,7 +24,7 @@ export class CheckPatientsComponent implements OnInit {
     editableDateField: false,
     showClearDateBtn: false
   };
-  
+
   constructor(
     private service: ReportService,
     private alertService: AlertService
@@ -34,25 +34,26 @@ export class CheckPatientsComponent implements OnInit {
   }
 
   async ngOnInit() {
-    const date = new Date();
+    const dateNow = new Date();
     this.date = {
       date: {
-        year: date.getFullYear(),
-        month: date.getMonth() + 1,
-        day: date.getDate()
+        year: dateNow.getFullYear(),
+        month: dateNow.getMonth() + 1,
+        day: dateNow.getDate()
       }
     };
-    await this.getGcs();
+    const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
+    await this.getGcs(date);
   }
 
-  async getGcs() {
+  async getGcs(date) {
     this.loading.show();
     try {
-      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
       const rs: any = await this.service.getPatients(date, null);
       if (rs.ok) {
         this.list = rs.rows;
         console.log(this.list);
+        
         this.loading.hide();
       } else {
         this.loading.hide();
@@ -64,8 +65,9 @@ export class CheckPatientsComponent implements OnInit {
     }
   }
 
-  onChangeDate() {
-    this.getGcs();
+  async onChangeDate(e) {
+    const date = e.date.year + '-' + e.date.month + '-' + e.date.day;
+    await this.getGcs(date);
     // console.log(e);
 
   }

@@ -11,39 +11,39 @@
     </tr>
     <tr>
       <!-- <th rowspan="2">รายการ</th> -->
-      <th>เขต 1</th>
-      <th>เขต 2</th>
-      <th>เขต 3</th>
-      <th>เขต 4</th>
-      <th>เขต 5</th>
-      <th>เขต 6</th>
-      <th>เขต 7</th>
-      <th>เขต 8</th>
-      <th>เขต 9</th>
-      <th>เขต 10</th>
-      <th>เขต 11</th>
-      <th>เขต 12</th>
-      <th>เขต 13</th>
+      <th style="text-align: right;">เขต 1</th>
+      <th style="text-align: right;">เขต 2</th>
+      <th style="text-align: right;">เขต 3</th>
+      <th style="text-align: right;">เขต 4</th>
+      <th style="text-align: right;">เขต 5</th>
+      <th style="text-align: right;">เขต 6</th>
+      <th style="text-align: right;">เขต 7</th>
+      <th style="text-align: right;">เขต 8</th>
+      <th style="text-align: right;">เขต 9</th>
+      <th style="text-align: right;">เขต 10</th>
+      <th style="text-align: right;">เขต 11</th>
+      <th style="text-align: right;">เขต 12</th>
+      <th style="text-align: right;">เขต 13</th>
       <th>รวม</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let l of total;">
       <td class="left">{{l.supplies}}</td>
-      <td class="right">{{l.zone1 | number:'1.0-0'}}</td>
-      <td class="right">{{l.zone2 | number:'1.0-0'}}</td>
-      <td class="right">{{l.zone3 | number:'1.0-0'}}</td>
-      <td class="right">{{l.zone4 | number:'1.0-0'}}</td>
-      <td class="right">{{l.zone5 | number:'1.0-0'}}</td>
-      <td class="right">{{l.zone6 | number:'1.0-0'}}</td>
-      <td class="right">{{l.zone7 | number:'1.0-0'}}</td>
-      <td class="right">{{l.zone8 | number:'1.0-0'}}</td>
-      <td class="right">{{l.zone9 | number:'1.0-0'}}</td>
-      <td class="right">{{l.zone10 | number:'1.0-0'}}</td>
-      <td class="right">{{l.zone11 | number:'1.0-0'}}</td>
-      <td class="right">{{l.zone12 | number:'1.0-0'}}</td>
-      <td class="right">{{l.zone13 | number:'1.0-0'}}</td>
-      <td class="right">{{l.total | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.zone1 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.zone2 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.zone3 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.zone4 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.zone5 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.zone6 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.zone7 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.zone8 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.zone9 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.zone10 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.zone11 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.zone12 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.zone13 | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.total | number:'1.0-0'}}</td>
     </tr>
   </tbody>
 </table>
@@ -52,7 +52,7 @@
 
 <div class="clr-row">
   <div class="clr-col-3">
-    <my-date-picker-th name="dateset" [options]="myDatePickerOptions" [(ngModel)]="dateset" required>
+    <my-date-picker-th name="dateset" (dateChanged)="onChangeDate($event)" [options]="myDatePickerOptions" [(ngModel)]="dateset" required>
     </my-date-picker-th>
   </div>
   <div class="clr-col-3">
@@ -108,38 +108,56 @@
   </div>
 </div>
 
-<div *ngFor="let b of list" style="padding: 0rem;">
-  <h4>เขต {{b.zone}}</h4>
-  <table class="table table-compact" style="position: relative; border-collapse: collapse;">
+
+<div *ngFor="let l of list"  style="padding: 0rem;">
+  <h4> {{l.provinces == 1 ? '' : 'เขต '+l.name}}</h4>
+  <table class="table" *ngFor="let p of l.provinces">
     <thead>
       <tr>
-        <th style="position: sticky; top: 0;">โรงพยาบาล</th>
-        <th style="position: sticky; top: 0;">Sugical mask</th>
-        <th style="position: sticky; top: 0;">N95</th>
-        <th style="position: sticky; top: 0;">Cover All-1 (Industrial grade)</th>
-        <th style="position: sticky; top: 0;">Cover All-2 (Medical grade)</th>
-        <th style="position: sticky; top: 0;">Shoe Cover</th>
-        <th style="position: sticky; top: 0;">Surgical hood</th>
-        <th style="position: sticky; top: 0;">Long glove</th>
-        <th style="position: sticky; top: 0;">Face shield</th>
+        <th colspan="11" style="text-align: left;">
+          <h3>{{p.province_name}}</h3>
+        </th>
+      </tr>
+      <tr>
+        <th class="right">โรงพยาบาล</th>
+        <th class="right">Surgical Gown</th>
+        <th class="right">Cover All-1</th>
+        <th class="right">Cover All-2</th>
+        <th class="right">N95</th>
+        <th class="right">Shoe Cover</th>
+        <th class="right">Surgical hood</th>
+        <th class="right">Long glove</th>
+        <th class="right">Face shield</th>
+        <th class="right">Surgical Mask</th>
+        <th class="right">Powered air-purifying respirator</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let l of b.detail; let idx=index;">
-        <td class="left">{{l.hospname}}</td>
-        <td class="right">{{l.surgical_mask | number:'1.0-0'}}</td>
-        <td class="right">{{l.N95 | number:'1.0-0'}}</td>
-        <td class="right">{{l.cover_all_1 | number:'1.0-0'}}</td>
-        <td class="right">{{l.cover_all_2 | number:'1.0-0'}}</td>
-        <td class="right">{{l.shoe_cover | number:'1.0-0'}}</td>
-        <td class="right">{{l.surgical_hood | number:'1.0-0'}}</td>
-        <td class="right">{{l.long_glove | number:'1.0-0'}}</td>
-        <td class="right">{{l.face_shield | number:'1.0-0'}}</td>
+      <tr *ngFor="let h of p.hospitals">
+        <td class="left">{{h.hospname}}</td>
+        <td class="right">{{h['9'] }}</td>
+        <td class="right">{{h['10']}}</td>
+        <td class="right">{{h['11']}}</td>
+        <td class="right">{{h['12']}}</td>
+        <td class="right">{{h['13']}}</td>
+        <td class="right">{{h['14']}}</td>
+        <td class="right">{{h['15']}}</td>
+        <td class="right">{{h['16']}}</td>
+        <td class="right">{{h['17']}}</td>
+        <td class="right">{{h['18']}}</td>
       </tr>
+      <!-- <tr>
+        <td class="right" style="font-weight: bold;">รวม</td>
+        <td class="right" style="font-weight: bold;">{{l.sum}}</td>
+        <td class="right" style="font-weight: bold;">{{l.ippui}}</td>
+        <td class="right" style="font-weight: bold;">{{l.severe}}</td>
+        <td class="right" style="font-weight: bold;">{{l.moderate}}</td>
+        <td class="right" style="font-weight: bold;">{{l.mild}}</td>
+        <td class="right" style="font-weight: bold;">{{l.asymptomatic}}</td>
+      </tr> -->
     </tbody>
   </table>
 </div>
-
 <!-- <clr-datagrid [style.height.px]="700">
   <clr-dg-column>โรงพยาบาล</clr-dg-column>
   <clr-dg-column>Sugical mask</clr-dg-column>

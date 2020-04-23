@@ -97,10 +97,15 @@
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         ตรวจสอบเวชภัณฑ์
       </a> -->
-      <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff/report-patient" title="รายงานผู้ป่วย"
+      <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff/report-patient-admit" title="รายงานผู้ป่วย Admit"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
-        รายงานผู้ป่วย
+        รายงานผู้ป่วย Admit
+      </a>
+      <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff/report-patient" title="รายงานผู้ป่วย Admit"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        รายงานผู้ป่วยทั้งหมด
       </a>
       <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff/report-supplies" title="รายงานเวชภัณฑ์"
         routerLinkActive="active">
