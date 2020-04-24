@@ -165,6 +165,7 @@ export class CovidCaseOldComponent implements OnInit {
     try {
       this.hn = this.data.hn;
       this.an = this.data.an;
+      this.cid = this.data.cid;
       this.titleId = this.data.title_id;
       this.fname = this.data.first_name;
       this.mname = this.data.middle_name;
@@ -351,7 +352,9 @@ export class CovidCaseOldComponent implements OnInit {
           titleId: this.titleId,
           genderId: this.genderId,
           fname: this.fname,
+          mname: this.mname,
           lname: this.lname,
+          peopleType: this.peopleType,
           tel: this.tel,
           admitDate: `${this.admitDate.date.year}-${this.admitDate.date.month}-${this.admitDate.date.day}`,
           houseNo: this.houseNo,
@@ -365,6 +368,7 @@ export class CovidCaseOldComponent implements OnInit {
           zipcode: this.zipcode,
           countryId: this.countryId,
         };
+        console.log(obj);
 
         if (this.confirmDate) {
           obj.confirmDate = `${this.confirmDate.date.year}-${this.confirmDate.date.month}-${this.confirmDate.date.day}`;
