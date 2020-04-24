@@ -417,6 +417,9 @@ export class CovidCaseStatusComponent implements OnInit {
         if (rs.ok) {
           this.modalDischarge = false;
           this.getList();
+          this.getGCSSum();
+          this.getBedSum();
+          this.medicalSupplieSum();
           this.alertService.success();
         } else {
           console.log(rs.error);
