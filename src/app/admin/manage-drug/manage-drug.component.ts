@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { DrugService } from '../drug.service';
+import { DrugService } from '../services/drug.service';
 import { AlertService } from '../../help/alert.service';
 import * as findIndex from 'lodash/findIndex';
 

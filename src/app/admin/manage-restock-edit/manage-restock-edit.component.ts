@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild, } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { AlertService } from '../../help/alert.service';
-import { MinMaxService } from '../min-max.service';
-import { RestockService } from '../restock.service';
+import { MinMaxService } from '../services/min-max.service';
+import { RestockService } from '../services/restock.service';
 import * as XLSX from 'ts-xlsx';
 
 @Component({

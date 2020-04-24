@@ -27,6 +27,8 @@ import { ManageDrugComponent } from './manage-drug/manage-drug.component';
 import { RequisitionMinMaxComponent } from './requisition-min-max/requisition-min-max.component';
 import { ManageRestockCollectionComponent } from './manage-restock-collection/manage-restock-collection.component';
 import { AuthRestockCollection } from '../auth-restock-collection.service';
+import { HomeComponent } from './home/home.component';
+import { FulfillDrugsComponent } from './fulfill-drugs/fulfill-drugs.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { AuthRestockCollection } from '../auth-restock-collection.service';
     ManageHospitalComponent,
     ManageDrugComponent,
     RequisitionMinMaxComponent,
-    ManageRestockCollectionComponent
+    ManageRestockCollectionComponent,
+    HomeComponent,
+    FulfillDrugsComponent
   ],
   imports: [
     HelpModule,

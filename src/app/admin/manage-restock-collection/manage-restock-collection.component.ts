@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RestockCollectionService } from '../restock-collection.service';
+import { RestockCollectionService } from '../services/restock-collection.service';
 import { AlertService } from 'src/app/help/alert.service';
 
 @Component({

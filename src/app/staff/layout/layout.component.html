@@ -117,6 +117,11 @@
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         รายงานเตียง
       </a>
+      <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff/dashboard" title="Dashboard"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="file"></clr-icon>
+        Dashboard
+      </a>
       <!-- <a *ngIf="checkBedsMenu" clrVerticalNavLink routerLink="/staff/check-bed" title="ตรวจสอบการบันทึกข้อมูลเตียง" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         ตรวจสอบเตียง
