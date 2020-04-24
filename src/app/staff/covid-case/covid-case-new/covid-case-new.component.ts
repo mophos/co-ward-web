@@ -149,6 +149,7 @@ export class CovidCaseNewComponent implements OnInit {
     console.log(this.data);
 
     try {
+      this.cid = this.data.cid;
       this.hn = this.data.hn;
       this.an = this.data.an;
       this.titleId = this.data.title_id;
@@ -357,7 +358,9 @@ export class CovidCaseNewComponent implements OnInit {
           titleId: this.titleId,
           genderId: this.genderId,
           fname: this.fname,
+          mname: this.mname,
           lname: this.lname,
+          peopleType: this.peopleType,
           tel: this.tel,
           admitDate: `${this.admitDate.date.year}-${this.admitDate.date.month}-${this.admitDate.date.day}`,
           gcsId: this.gcsId,
@@ -375,6 +378,7 @@ export class CovidCaseNewComponent implements OnInit {
           countryId: this.countryId,
           drugs
         };
+        console.log(obj);
 
         if (this.confirmDate) {
           obj.confirmDate = `${this.confirmDate.date.year}-${this.confirmDate.date.month}-${this.confirmDate.date.day}`;
@@ -453,7 +457,7 @@ export class CovidCaseNewComponent implements OnInit {
     this.tambonName = e.tambon_name;
     this.ampurId = e.ampur_code;
     this.ampurName = e.ampur_name;
-    this.provinceId = e.province_id;
+    this.provinceId = e.province_code;
     this.provinceName = e.province_name;
     this.zipcode = e.zip_code;
     this.setValue();
@@ -464,7 +468,7 @@ export class CovidCaseNewComponent implements OnInit {
     this.tambonName = e.tambon_name;
     this.ampurId = e.ampur_code;
     this.ampurName = e.ampur_name;
-    this.provinceId = e.province_id;
+    this.provinceId = e.province_code;
     this.provinceName = e.province_name;
     this.zipcode = e.zip_code;
     this.setValue();
@@ -475,7 +479,7 @@ export class CovidCaseNewComponent implements OnInit {
     this.tambonName = e.tambon_name;
     this.ampurId = e.ampur_code;
     this.ampurName = e.ampur_name;
-    this.provinceId = e.province_id;
+    this.provinceId = e.province_code;
     this.provinceName = e.province_name;
     this.zipcode = e.zip_code;
     this.setValue();
@@ -486,7 +490,7 @@ export class CovidCaseNewComponent implements OnInit {
     this.tambonName = e.tambon_name;
     this.ampurId = e.ampur_code;
     this.ampurName = e.ampur_name;
-    this.provinceId = e.province_id;
+    this.provinceId = e.province_code;
     this.provinceName = e.province_name;
     this.zipcode = e.zip_code;
     this.setValue();
@@ -529,8 +533,12 @@ export class CovidCaseNewComponent implements OnInit {
           const rs: any = await this.covidCaseService.checkNo(this.modalCIDType, this.modalCIDCid, this.modalCIDPassport);
           if (rs.ok) {
             if (rs.case === 'NEW') {
-              await this.infoCid(this.modalCIDCid);
-              this.cid = this.modalCIDCid;
+              if (this.modalCIDType === 'CID') {
+                await this.infoCid(this.modalCIDCid);
+                this.cid = this.modalCIDCid;
+              } else if (this.modalCIDType === 'PASSPORT') {
+                this.passport = this.modalCIDPassport;
+              }
               this.isKey = true;
               this.modalCID = false;
             } else if (rs.case === 'REFER') {
