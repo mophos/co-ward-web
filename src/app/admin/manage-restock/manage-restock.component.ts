@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RestockService } from '../restock.service';
+import { RestockService } from '../services/restock.service';
 import { AlertService } from '../../help/alert.service';
 import { Router } from '@angular/router';
 import { findIndex } from 'lodash';

@@ -26,11 +26,21 @@
             <router-outlet></router-outlet>
         </div>
         <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
-            <a *ngIf="restockCollectionMenu" clrVerticalNavLink routerLink="/admin/manage-restock-collection" title="เติมกลุ่มสินค้า"
+            <a  clrVerticalNavLink routerLink="/admin/fulfill-drugs" title="เติมยา"
                 routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
-                เติมกลุ่มสินค้า
+                เติมยา
             </a>
+            <!-- <a  clrVerticalNavLink routerLink="/admin/fulfill-supplies" title="เติมเวชภัณฑ์"
+                routerLinkActive="active">
+                <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+                เติมเวชภัณฑ์
+            </a> -->
+            <a *ngIf="restockCollectionMenu" clrVerticalNavLink routerLink="/admin/manage-restock-collection" title="เติมกลุ่มสินค้า"
+            routerLinkActive="active">
+            <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+            เติมกลุ่มสินค้า
+        </a>
             <a *ngIf="restockMenu" clrVerticalNavLink routerLink="/admin/manage-restock" title="เติมเวชภัณฑ์"
                 routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>

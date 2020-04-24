@@ -1,3 +1,5 @@
+import { FulfillDrugsComponent } from './fulfill-drugs/fulfill-drugs.component';
+import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
@@ -27,7 +29,7 @@ const routes: Routes = [
     component: LayoutComponent,
     canActivate: [AdminGuard],
     children: [
-      { path: '', redirectTo: 'manage-restock-collection', pathMatch: 'full' },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
       {
         path: 'manage-restock-collection',
         canActivate: [AuthRestockCollection],
@@ -59,6 +61,12 @@ const routes: Routes = [
       { path: 'manage-hospital', canActivate: [AuthHospitalmanage], component: ManageHospitalComponent },
       { path: 'manage-drug', component: ManageDrugComponent },
       { path: 'requisition-min-max', component: RequisitionMinMaxComponent },
+     
+     
+     
+     
+      { path: 'home', component: HomeComponent },
+      { path: 'fulfill-drugs', component: FulfillDrugsComponent },
     ]
   }
 ];

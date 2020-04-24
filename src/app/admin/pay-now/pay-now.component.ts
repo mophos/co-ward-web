@@ -1,7 +1,7 @@
 import { AutocompleteHospitalComponent } from 'src/app/help/autocomplete-hospital/autocomplete-hospital.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertService } from '../../help/alert.service';
-import { RestockService } from '../restock.service';
+import { RestockService } from '../services/restock.service';
 import { Router } from '@angular/router';
 
 import * as findIndex from 'lodash/findIndex';

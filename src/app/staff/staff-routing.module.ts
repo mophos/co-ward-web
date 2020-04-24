@@ -1,3 +1,4 @@
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReportPatientAdmitComponent } from './report-patient-admit/report-patient-admit.component';
 import { CovidCaseOldComponent } from './covid-case/covid-case-old/covid-case-old.component';
 import { ReportSuppliesComponent } from './report-supplies/report-supplies.component';
@@ -59,6 +60,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'covid-case', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
+      { path: 'dashboard', component: DashboardComponent },
       { path: 'covid-case', canActivate: [AuthCovidCaseService], component: CovidCaseComponent },
       { path: 'covid-case-new', canActivate: [AuthCovidCaseService], component: CovidCaseNewComponent },
       { path: 'covid-case-edit', canActivate: [AuthCovidCaseService], component: CovidCaseEditComponent },

@@ -60,7 +60,8 @@ import { CheckCutTimePipe } from './check-cut-time.pipe';
     AutocompleteCountriesComponent,
     EnNoSpaceDirective,
     SelectedHospitalChildNodeComponent,
-    CheckCutTimePipe
+    CheckCutTimePipe,
+    SafePipe
   ],
   providers: [
     HelpService

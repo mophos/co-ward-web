@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SuppliesService } from '../supplies.service';
+import { SuppliesService } from '../services/supplies.service';
 import { AlertService } from '../../help/alert.service';
 import * as findIndex from 'lodash/findIndex';
 import { JwtHelperService } from '@auth0/angular-jwt';

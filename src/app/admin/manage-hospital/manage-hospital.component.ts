@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HospitalService } from '../hospital.service';
+import { HospitalService } from '../services/hospital.service';
 import { AlertService } from '../../help/alert.service';
 import * as findIndex from 'lodash/findIndex';
 import { ClrDatagridStateInterface } from '@clr/angular';

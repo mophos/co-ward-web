@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MinMaxService } from '../min-max.service';
+import { MinMaxService } from '../services/min-max.service';
 import { AlertService } from '../../help/alert.service';
 import { Router } from '@angular/router';
 

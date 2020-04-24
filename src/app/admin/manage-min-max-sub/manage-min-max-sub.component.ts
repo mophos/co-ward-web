@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MinMaxService } from '../min-max.service';
+import { MinMaxService } from '../services/min-max.service';
 import { AlertService } from '../../help/alert.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class ManageMinMaxSubComponent implements OnInit {
 
   hospcode: any;
 
-  modal: boolean = false;
+  modal = false;
 
   total: any;
   query: any;

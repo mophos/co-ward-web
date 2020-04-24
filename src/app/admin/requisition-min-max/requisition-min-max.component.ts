@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from '../../help/alert.service';
-import { RequisitionMinMaxService } from '../requisition-min-max.service';
+import { RequisitionMinMaxService } from '../services/requisition-min-max.service';
 
 @Component({
   selector: 'app-requisition-min-max',
