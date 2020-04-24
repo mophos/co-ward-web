@@ -35,7 +35,7 @@ export class CovidCaseOldComponent implements OnInit {
   genderId: any;
   birthDate: any;
   tel = '';
-  peopleType: any;
+  peopleType: any = null;
 
   admitDate: any;
   confirmDate: any;
