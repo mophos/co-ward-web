@@ -7,6 +7,7 @@ import { ReportPatientsComponent } from './report-patients/report-patients.compo
 import { ReportSuppliesComponent } from './report-supplies/report-supplies.component';
 import { ReportBedsComponent } from './report-beds/report-beds.component';
 import { ReportProfessionalsComponent } from './report-professionals/report-professionals.component';
+import { ReportMedicalsComponent } from './report-medicals/report-medicals.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: 'report-patients', component: ReportPatientsComponent },
       { path: 'report-beds', component: ReportBedsComponent },
       { path: 'report-professionals', component: ReportProfessionalsComponent },
+      { path: 'report-medicals', component: ReportMedicalsComponent },
     ]
   }
 ];

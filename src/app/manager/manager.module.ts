@@ -19,6 +19,7 @@ import { MyDatePickerTHModule } from 'mydatepicker-th';
 import { ReportBedsComponent } from './report-beds/report-beds.component';
 import { ReportProfessionalsComponent } from './report-professionals/report-professionals.component';
 import { ReportSuppliesSummaryComponent } from './report-supplies-summary/report-supplies-summary.component';
+import { ReportMedicalsComponent } from './report-medicals/report-medicals.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ReportSuppliesSummaryComponent } from './report-supplies-summary/report
     ReportSuppliesComponent,
     ReportBedsComponent,
     ReportProfessionalsComponent,
-    ReportSuppliesSummaryComponent
+    ReportSuppliesSummaryComponent,
+    ReportMedicalsComponent
   ],
   imports: [
     CommonModule,

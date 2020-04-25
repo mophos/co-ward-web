@@ -26,6 +26,11 @@ export class ReportService {
     return await this.http.get(url).toPromise();
   }
 
+  async getMedicals(zone, date) {
+    const url = `${this.apiUrl}/v1/report/get-medicals?zone=${zone}`;
+    return await this.http.get(url).toPromise();
+  }
+
   async getCase() {
     const url = `${this.apiUrl}/v1/report/covid-case`;
     return await this.http.get(url).toPromise();
