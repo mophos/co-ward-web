@@ -24,6 +24,8 @@ export class CovidCaseOldComponent implements OnInit {
   isRefer: any;
   typeRegister: any;
   // profile ----------------
+  covidCaseId: any;
+  personId: any;
   passport = '';
   cid = '';
   hn = '';
@@ -160,9 +162,10 @@ export class CovidCaseOldComponent implements OnInit {
   }
 
   async setData() {
-    console.log(this.data);
 
     try {
+      this.covidCaseId = this.data.covid_case_id;
+      this.personId = this.data.id;
       this.hn = this.data.hn;
       this.an = this.data.an;
       this.cid = this.data.cid;
@@ -344,6 +347,7 @@ export class CovidCaseOldComponent implements OnInit {
       if (await this.verifyInput()) {
 
         const obj: any = {
+          personId: this.personId,
           type: this.typeRegister,
           cid: this.cid,
           passport: this.passport,
@@ -418,6 +422,8 @@ export class CovidCaseOldComponent implements OnInit {
 
   clear() {
     try {
+      this.cid = null;
+      this.passport = null;
       this.an = '';
       this.hn = '';
       this.fname = '';
@@ -541,11 +547,18 @@ export class CovidCaseOldComponent implements OnInit {
           const rs: any = await this.covidCaseService.checkNo(this.modalCIDType, this.modalCIDCid, this.modalCIDPassport);
           if (rs.ok) {
             if (rs.case === 'NEW') {
-              await this.infoCid(this.modalCIDCid);
-              this.cid = this.modalCIDCid;
+              if (this.modalCIDType === 'CID') {
+                this.typeRegister = 'CID';
+                await this.infoCid(this.modalCIDCid);
+                this.cid = this.modalCIDCid;
+              } else if (this.modalCIDType === 'PASSPORT') {
+                this.typeRegister = 'PASSPORT';
+                this.passport = this.modalCIDPassport;
+              }
               this.isKey = true;
               this.modalCID = false;
             } else if (rs.case === 'REFER') {
+              this.typeRegister = 'REFER';
               const confirm = await this.alertService.confirm(`คุณรับผู้ป่วย Refer มาจาก ${rs.rows.hospname} ใช่หรือไม่ ?`);
               if (confirm) {
                 this.isKey = true;

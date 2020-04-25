@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 import * as findIndex from 'lodash/findIndex';
+
+import * as mqttClient from '../../../vendor/mqtt.min.js';
+import { MqttClient } from 'mqtt';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -37,7 +40,7 @@ export class LayoutComponent implements OnInit {
   settingProvinceSubUserMenu: any;
   // ---------------------------------
   reportMenu: any;
-
+  mqttClient: MqttClient;
   public jwtHelper = new JwtHelperService();
   constructor(
     private route: Router,
@@ -73,11 +76,52 @@ export class LayoutComponent implements OnInit {
     this.settingUserMenu = findIndex(this.rights, { name: 'STAFF_SETTING_USERS' }) === -1 ? false : true;
   }
 
-  ngOnInit() {
+  async  ngOnInit() {
+    // this.initialSocket();
+  }
+
+  async initialSocket() {
+    // connect mqtt
+    await this.connectMqtt();
+    await this.subscribeMqtt();
+    await this.messageMqtt();
   }
 
   logout() {
     sessionStorage.removeItem('token');
     this.route.navigate(['/login']);
+  }
+
+  connectMqtt() {
+    try {
+      this.mqttClient = new mqttClient('mqtt://localhost', {
+        clienId: Math.floor(Math.random() * 10000),
+        username: 'q4u',
+        password: '##q4u##'
+      });
+      console.log('success');
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  subscribeMqtt() {
+    const topic = 'co-ward-close';
+    const that = this;
+    this.mqttClient.on('connect', () => {
+      that.mqttClient.subscribe(topic, (err) => {
+        if (err) {
+          console.log('Subscribe Error!!');
+        }
+      });
+    });
+  }
+
+  messageMqtt() {
+    this.mqttClient.on('message', (topic, payload) => {
+      console.log(payload);
+
+    });
   }
 }
