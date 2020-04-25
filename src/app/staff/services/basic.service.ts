@@ -28,7 +28,10 @@ export class BasicService {
     return await this.http.get(url).toPromise();
   }
 
-
+  async getSystems() {
+    const url = `${this.apiUrl}/v1/basic/systems`;
+    return await this.http.get(url).toPromise();
+  }
 
 
 }

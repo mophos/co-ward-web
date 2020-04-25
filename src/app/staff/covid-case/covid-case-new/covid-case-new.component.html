@@ -356,7 +356,7 @@
             <div class="clr-col-4">
               <div class="clr-row isProblem">
                 <div class="clr-col-2"></div>
-                <div class="clr-col-10">ระดับความรุนแรง</div>
+                <div class="clr-col-10">ระดับความรุนแรง<span class="required">*</span> </div>
               </div>
               <div class="clr-row" *ngFor="let i of gcs;let idx = index" [ngClass]="{isWarning: idx%2==0}">
                 <div class="clr-col-2"><input id="gcs-{{i.id}}" type="radio" name="gcsId" [(ngModel)]="gcsId" [value]="i.id"
@@ -367,7 +367,7 @@
             <div class="clr-col-4">
               <div class="clr-row isProblem">
                 <div class="clr-col-2"></div>
-                <div class="clr-col-10">ประเภทเตียงที่ใช้</div>
+                <div class="clr-col-10">ประเภทเตียงที่ใช้<span class="required">*</span> </div>
               </div>
               <div class="clr-row" *ngFor="let i of beds;let idx = index" [ngClass]="{isWarning: idx%2==0}">
                 <div class="clr-col-2"><input id="beds-{{i.id}}" type="radio" name="bedId" [(ngModel)]="bedId" [value]="i.id"

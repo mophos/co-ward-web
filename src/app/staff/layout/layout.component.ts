@@ -1,3 +1,4 @@
+import { BasicService } from './../services/basic.service';
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
@@ -41,9 +42,13 @@ export class LayoutComponent implements OnInit {
   // ---------------------------------
   reportMenu: any;
   mqttClient: MqttClient;
+  modalClose = false;
+  modalAlert = false;
+  message: any;
   public jwtHelper = new JwtHelperService();
   constructor(
     private route: Router,
+    private basicService: BasicService
   ) {
     const decoded = this.jwtHelper.decodeToken(sessionStorage.getItem('token'));
     this.fullname = decoded.fullname;
@@ -77,7 +82,22 @@ export class LayoutComponent implements OnInit {
   }
 
   async  ngOnInit() {
-    // this.initialSocket();
+    await this.initialSocket();
+    await this.getSystems();
+  }
+
+  async getSystems() {
+    try {
+      const rs: any = await this.basicService.getSystems();
+      if (rs.ok) {
+        if (rs.rows === 'CLOSE') {
+          this.modalClose = true;
+
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async initialSocket() {
@@ -94,7 +114,7 @@ export class LayoutComponent implements OnInit {
 
   connectMqtt() {
     try {
-      this.mqttClient = new mqttClient('mqtt://localhost', {
+      this.mqttClient = new mqttClient('http://203.157.103.140:8883', {
         clienId: Math.floor(Math.random() * 10000),
         username: 'q4u',
         password: '##q4u##'
@@ -107,10 +127,9 @@ export class LayoutComponent implements OnInit {
   }
 
   subscribeMqtt() {
-    const topic = 'co-ward-close';
     const that = this;
     this.mqttClient.on('connect', () => {
-      that.mqttClient.subscribe(topic, (err) => {
+      that.mqttClient.subscribe(['co-ward-close', 'co-ward-alert'], (err) => {
         if (err) {
           console.log('Subscribe Error!!');
         }
@@ -120,8 +139,18 @@ export class LayoutComponent implements OnInit {
 
   messageMqtt() {
     this.mqttClient.on('message', (topic, payload) => {
-      console.log(payload);
-
+      console.log(topic);
+      console.log(payload.toString());
+      if (topic === 'co-ward-close') {
+        if (payload.toString() === 'CLOSE') {
+          this.modalClose = true;
+        } else if (payload.toString() === 'OPEN') {
+          this.modalClose = false;
+        }
+      } else if (topic === 'co-ward-alert') {
+        this.message = payload.toString();
+        this.modalAlert = true;
+      }
     });
   }
 }
