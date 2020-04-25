@@ -114,10 +114,10 @@ export class LayoutComponent implements OnInit {
 
   connectMqtt() {
     try {
-      this.mqttClient = new mqttClient('http://203.157.103.140:8883', {
+      this.mqttClient = new mqttClient('mqtt://mqtt.h4u.moph.go.th', {
         clienId: Math.floor(Math.random() * 10000),
         username: 'q4u',
-        password: '##q4u##'
+        password: 'q4u'
       });
       console.log('success');
 
