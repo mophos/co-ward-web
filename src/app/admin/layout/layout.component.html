@@ -65,6 +65,11 @@
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 จัดการสถานบริการ
             </a>
+            <a *ngIf="systemManageMenu" clrVerticalNavLink routerLink="/admin/systems" title="จัดการระบบ"
+                routerLinkActive="active">
+                <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+                จัดการระบบ
+            </a>
 
             <!-- <a clrVerticalNavLink routerLink="/admin/manage-drug" title="จัดการยา" routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>

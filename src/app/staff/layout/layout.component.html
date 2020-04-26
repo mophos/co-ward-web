@@ -160,12 +160,15 @@
 <clr-modal [(clrModalOpen)]="modalClose" [clrModalClosable]="false">
   <h3 class="modal-title">ระบบปิดปรับปรุงชั่วคราว ขออภัยในความไม่สะดวก</h3>
   <div class="modal-body">
-    กรุณารอจนหน้าจอนี้หายไป
+    <span class="spinner">
+      Loading...
+  </span>
+    กรุณารอจนหน้าจอนี้หายไป 
   </div>
 </clr-modal>
 
 <clr-modal [(clrModalOpen)]="modalAlert" >
-  <h3 class="modal-title">แจ้งเตือน</h3>
+  <h3 class="modal-title">ข้อความ</h3>
   <div class="modal-body">
     <span [innerHTML]="message"></span>
   </div>

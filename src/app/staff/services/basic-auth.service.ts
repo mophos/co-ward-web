@@ -28,6 +28,21 @@ export class BasicAuthService {
     return await this.http.get(url).toPromise();
   }
 
+  async closeSystems() {
+    const url = `${this.apiUrl}/v1/basic-auth/close-systems`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async openSystems() {
+    const url = `${this.apiUrl}/v1/basic-auth/open-systems`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async broadcast(message) {
+    const url = `${this.apiUrl}/v1/basic-auth/broadcast`;
+    return await this.http.post(url, { message }).toPromise();
+  }
+
 
 
 

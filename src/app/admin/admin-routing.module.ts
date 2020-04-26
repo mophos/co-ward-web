@@ -1,3 +1,4 @@
+import { ManageSystemsComponent } from './manage-systems/manage-systems.component';
 import { FulfillDrugsComponent } from './fulfill-drugs/fulfill-drugs.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
@@ -67,6 +68,7 @@ const routes: Routes = [
      
       { path: 'home', component: HomeComponent },
       { path: 'fulfill-drugs', component: FulfillDrugsComponent },
+      { path: 'systems', component: ManageSystemsComponent },
     ]
   }
 ];
