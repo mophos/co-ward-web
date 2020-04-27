@@ -9,8 +9,11 @@ import { FulfillService } from '../../admin/services/fulfill.service';
 export class FulfillDrugDetailsComponent implements OnInit {
 
   @Input() id: any;
+  list: any;
 
-  constructor() { }
+  constructor(
+    private fulfillService: FulfillService
+  ) { }
 
   ngOnInit() {
     this.getDrugSumDetails();
@@ -18,7 +21,11 @@ export class FulfillDrugDetailsComponent implements OnInit {
 
   async getDrugSumDetails() {
     try {
-
+      const rs: any = await this.fulfillService.getDrugSumDetails(this.id);
+      if (rs.ok) {
+        this.list = rs.rows;
+        console.log(this.list);
+      }
     } catch (error) {
 
     }

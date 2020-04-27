@@ -1,3 +1,12 @@
-<p>
-  fulfill-drug-details works!
-</p>
+<clr-datagrid [clrDgLoading]="loading" [(clrDgSelected)]="selectedFulfills"
+  (clrDgSelectedChange)="selectionChanged($event)">
+  <clr-dg-column>ชื่อยา</clr-dg-column>
+  <clr-dg-column>จำนวนยา</clr-dg-column>
+  <clr-dg-column>หน่วย</clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let i of list" [clrDgItem]="i">
+    <clr-dg-cell>{{i.generic_name}}</clr-dg-cell>
+    <clr-dg-cell>{{i.qty}}</clr-dg-cell>
+    <clr-dg-cell>{{i.unit_name}}</clr-dg-cell>
+  </clr-dg-row>
+</clr-datagrid>
