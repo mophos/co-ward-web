@@ -91,4 +91,9 @@ export class FulfillService {
     const url = `${this.url}/v1/admin/fulfill/drugs-sum-details?id=${id}`;
     return this.http.get(url).toPromise();
   }
+
+  approved(data) {
+    const url = `${this.url}/v1/admin/fulfill/approved-surgicak-mask?data=${data}`;
+    return this.http.get(url).toPromise();
+  }
 }
