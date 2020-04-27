@@ -3,11 +3,11 @@ import { FulfillService } from '../services/fulfill.service';
 import { AlertService } from '../../help/alert.service';
 
 @Component({
-  selector: 'app-manage-min-max-drugs',
-  templateUrl: './manage-min-max-drugs.component.html',
+  selector: 'app-manage-min-max-supplies',
+  templateUrl: './manage-min-max-supplies.component.html',
   styles: []
 })
-export class ManageMinMaxDrugsComponent implements OnInit {
+export class ManageMinMaxSuppliesComponent implements OnInit {
 
   listHospNode: any;
   listDrugEdit: any;
@@ -24,7 +24,7 @@ export class ManageMinMaxDrugsComponent implements OnInit {
 
   async getHospNode() {
     try {
-      const rs: any = await this.fulfillService.getHopsNodeDrugs();
+      const rs: any = await this.fulfillService.getHopsNodeSupplies();
       if (rs.ok) {
         this.listHospNode = rs.rows;
       }
@@ -36,7 +36,7 @@ export class ManageMinMaxDrugsComponent implements OnInit {
   async getDrugEdit(e) {
     this.hospId = e.id;
     try {
-      const rs: any = await this.fulfillService.getDrugMinMax(e.id);
+      const rs: any = await this.fulfillService.getSuppliesMinMax(e.id);
       if (rs.ok) {
         this.listDrugEdit = rs.rows;
       }
@@ -59,7 +59,7 @@ export class ManageMinMaxDrugsComponent implements OnInit {
       data.push(obj);
     }
     try {
-      const rs: any = await this.fulfillService.saveDrugMinMax(data);
+      const rs: any = await this.fulfillService.saveSuppliesMinMax(data);
       if (rs.ok) {
         this.alertService.success();
         this.hospId = '';

@@ -1,3 +1,5 @@
+import { ManageMinMaxSuppliesComponent } from './manage-min-max-supplies/manage-min-max-supplies.component';
+import { FulfillSuppliesComponent } from './fulfill-supplies/fulfill-supplies.component';
 import { ManageSystemsComponent } from './manage-systems/manage-systems.component';
 import { FulfillDrugsComponent } from './fulfill-drugs/fulfill-drugs.component';
 import { HomeComponent } from './home/home.component';
@@ -77,7 +79,9 @@ const routes: Routes = [
           { path: 'fulfill-surgical-masks', component: FulfillSurgicalMaskComponent }
         ]
       },
+      { path: 'fulfill-supplies', component: FulfillSuppliesComponent },
       { path: 'min-max-drugs', component: ManageMinMaxDrugsComponent },
+      { path: 'min-max-supplies', component: ManageMinMaxSuppliesComponent },
       { path: 'systems', component: ManageSystemsComponent },
       { path: 'report-beds', component: ReportBedsComponent },
       { path: 'patient-info', canActivate: [AuthSearchPatient], component: PatientInfoComponent },

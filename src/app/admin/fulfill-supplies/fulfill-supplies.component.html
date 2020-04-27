@@ -1,17 +1,17 @@
 <nav class="breadcrumb">
   <!-- <a class="breadcrumb-item" href="javascript://" routerLink="/admin/requisition-min-max">ตั้งค่า MIN-MAX</a> -->
-  <span>เติมยา</span>
+  <span>เติมเวชภัณฑ์</span>
 </nav>
 
 <clr-tabs>
   <clr-tab>
-    <button clrTabLink id="link1" (click)="getProducts()">เติมยา</button>
+    <button clrTabLink id="link1" (click)="getProducts()">เติมเวชภัณฑ์</button>
     <clr-tab-content id="content1" *clrIfActive>
 
-      <button class="btn btn-success btn-sm" (click)="onClickFulFill()">เติมยา {{selected.length+' รายการ'}}</button>
+      <button class="btn btn-success btn-sm" (click)="onClickFulFill()">เติมเวชภัณฑ์ {{selected.length+' รายการ'}}</button>
       <table class="table" style="width:100%">
         <tr>
-          <td>Hydroxychloroquine 200 mg.<br>0 Tab</td>
+          <td>N95 200 mg.<br>0 ชิ้น</td>
           <td>Chloroquine 250 mg.<br>0 Tab</td>
           <td>Darunavir 600mg<br>0 Tab</td>
           <td>Lopinavir 200 mg/Ritonavir 50 mg.<br>0 Tab</td>
@@ -48,7 +48,7 @@
     </clr-tab-content>
   </clr-tab>
   <clr-tab>
-    <button clrTabLink>รายการเติมยา</button>
+    <button clrTabLink>รายการเติมเวชภัณฑ์</button>
     <clr-tab-content *clrIfActive>
       <button class="btn btn-primary btn-sm" (click)="onClickExport()">Export {{countExport+' รายการ'}}</button>
       <button class="btn btn-success btn-sm" (click)="onClickApprove()">อนุมัติ {{countApprove+' รายการ'}}</button>
