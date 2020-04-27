@@ -10,6 +10,7 @@ import { FulfillService } from '../../admin/services/fulfill.service';
 export class FulfillSurgicalMaskDetailsComponent implements OnInit {
   @Input() id: any;
   list: any;
+  loading = false;
 
   constructor(
     private fulfillService: FulfillService
@@ -25,7 +26,7 @@ export class FulfillSurgicalMaskDetailsComponent implements OnInit {
       if (rs.ok) {
         this.list = rs.rows;
         console.log(this.list);
-        
+
       }
     } catch (error) {
 
