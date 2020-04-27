@@ -26,31 +26,34 @@
             <router-outlet></router-outlet>
         </div>
         <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
-            <a  clrVerticalNavLink routerLink="/admin/fulfill-drugs" title="เติมยา"
-                routerLinkActive="active">
+            <a clrVerticalNavLink routerLink="/admin/fulfill-drugs" title="เติมยา" routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 เติมยา
+            </a>
+            <a clrVerticalNavLink routerLink="/admin/min-max-drugs" title="จัดการ min/max ยา" routerLinkActive="active">
+                <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+                จัดการ min/max ยา
             </a>
             <!-- <a  clrVerticalNavLink routerLink="/admin/fulfill-supplies" title="เติมเวชภัณฑ์"
                 routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 เติมเวชภัณฑ์
             </a> -->
-            <a *ngIf="restockCollectionMenu" clrVerticalNavLink routerLink="/admin/manage-restock-collection" title="เติมกลุ่มสินค้า"
-            routerLinkActive="active">
-            <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
-            เติมกลุ่มสินค้า
-        </a>
+            <!-- <a *ngIf="restockCollectionMenu" clrVerticalNavLink routerLink="/admin/manage-restock-collection"
+                title="เติมกลุ่มสินค้า" routerLinkActive="active">
+                <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+                เติมกลุ่มสินค้า
+            </a>
             <a *ngIf="restockMenu" clrVerticalNavLink routerLink="/admin/manage-restock" title="เติมเวชภัณฑ์"
                 routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 เติมเวชภัณฑ์
-            </a>
+            </a> -->
             <!-- <a *ngIf="" clrVerticalNavLink routerLink="/admin/manage-request" title="กรอกคงคลัง" routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 จัดส่งเวชภัณฑ์
             </a> -->
-            <a *ngIf="minMaxMenu" clrVerticalNavLink routerLink="/admin/manage-min-max" title="จัดการ Min-Max"
+            <!-- <a *ngIf="minMaxMenu" clrVerticalNavLink routerLink="/admin/manage-min-max" title="จัดการ Min-Max"
                 routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 จัดการ Min-Max
@@ -60,10 +63,15 @@
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 จัดการผู้ใช้งาน
             </a>
-            <a *ngIf="hospitalManageMenu" clrVerticalNavLink routerLink="/admin/manage-hospital" title="จัดการสถานบริการ"
-                routerLinkActive="active">
+            <a *ngIf="hospitalManageMenu" clrVerticalNavLink routerLink="/admin/manage-hospital"
+                title="จัดการสถานบริการ" routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 จัดการสถานบริการ
+            </a> -->
+            <a *ngIf="systemManageMenu" clrVerticalNavLink routerLink="/admin/systems" title="จัดการระบบ"
+                routerLinkActive="active">
+                <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+                จัดการระบบ
             </a>
 
             <!-- <a clrVerticalNavLink routerLink="/admin/manage-drug" title="จัดการยา" routerLinkActive="active">

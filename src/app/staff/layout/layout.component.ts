@@ -1,3 +1,4 @@
+import { BasicService } from './../services/basic.service';
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
@@ -41,14 +42,20 @@ export class LayoutComponent implements OnInit {
   // ---------------------------------
   reportMenu: any;
   mqttClient: MqttClient;
+  modalClose = false;
+  modalAlert = false;
+  message: any;
+  topic: any;
   public jwtHelper = new JwtHelperService();
   constructor(
     private route: Router,
+    private basicService: BasicService
   ) {
     const decoded = this.jwtHelper.decodeToken(sessionStorage.getItem('token'));
     this.fullname = decoded.fullname;
     this.hospname = decoded.hospname;
     this.rights = decoded.rights;
+    this.topic = decoded.mqttTopic;
 
     this.covidCaseMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE' }) === -1 ? false : true;
     this.covidCaseStatusMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE_STATUS' }) === -1 ? false : true;
@@ -77,7 +84,22 @@ export class LayoutComponent implements OnInit {
   }
 
   async  ngOnInit() {
-    // this.initialSocket();
+    await this.initialSocket();
+    await this.getSystems();
+  }
+
+  async getSystems() {
+    try {
+      const rs: any = await this.basicService.getSystems();
+      if (rs.ok) {
+        if (rs.rows === 'CLOSE') {
+          this.modalClose = true;
+
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async initialSocket() {
@@ -94,10 +116,11 @@ export class LayoutComponent implements OnInit {
 
   connectMqtt() {
     try {
-      this.mqttClient = new mqttClient('mqtt://localhost', {
+      // this.mqttClient  = mqttClient.connect('mqtt://test.mosquitto.org')
+      this.mqttClient = mqttClient.connect('ws://203.157.104.220:8080', {
         clienId: Math.floor(Math.random() * 10000),
-        username: 'q4u',
-        password: '##q4u##'
+        username: 'mqtt',
+        password: '##Mqtt'
       });
       console.log('success');
 
@@ -107,10 +130,9 @@ export class LayoutComponent implements OnInit {
   }
 
   subscribeMqtt() {
-    const topic = 'co-ward-close';
     const that = this;
     this.mqttClient.on('connect', () => {
-      that.mqttClient.subscribe(topic, (err) => {
+      that.mqttClient.subscribe([`${this.topic}co-ward-close`, `${this.topic}co-ward-alert`], (err) => {
         if (err) {
           console.log('Subscribe Error!!');
         }
@@ -120,8 +142,16 @@ export class LayoutComponent implements OnInit {
 
   messageMqtt() {
     this.mqttClient.on('message', (topic, payload) => {
-      console.log(payload);
-
+      if (topic === `${this.topic}co-ward-close`) {
+        if (payload.toString() === 'CLOSE') {
+          this.modalClose = true;
+        } else if (payload.toString() === 'OPEN') {
+          this.modalClose = false;
+        }
+      } else if (topic === `${this.topic}co-ward-alert`) {
+        this.message = payload.toString();
+        this.modalAlert = true;
+      }
     });
   }
 }
