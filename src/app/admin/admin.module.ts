@@ -34,6 +34,8 @@ import { ManageSystemsComponent } from './manage-systems/manage-systems.componen
 import { ReportBedsComponent } from './report-beds/report-beds.component';
 import { MyDatePickerTHModule } from 'mydatepicker-th';
 import { PatientInfoComponent } from './patient-info/patient-info.component';
+import { FulfillSuppliesComponent } from './fulfill-supplies/fulfill-supplies.component';
+import { ManageMinMaxSuppliesComponent } from './manage-min-max-supplies/manage-min-max-supplies.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import { PatientInfoComponent } from './patient-info/patient-info.component';
     ManageMinMaxDrugsComponent,
     ManageSystemsComponent,
     ReportBedsComponent,
-    PatientInfoComponent
+    PatientInfoComponent,
+    FulfillSuppliesComponent,
+    ManageMinMaxSuppliesComponent
   ],
   imports: [
     HelpModule,

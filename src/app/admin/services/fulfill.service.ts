@@ -35,8 +35,20 @@ export class FulfillService {
     const url = `${this.url}/v1/admin/fulfill/drugs`;
     return this.http.get(url).toPromise();
   }
-  approved(data) {
+  saveFulFillSupplies(data: any) {
+    const url = `${this.url}/v1/admin/fulfill/supplies`;
+    return this.http.post(url, { data }).toPromise();
+  }
+  getFulFillSupplies() {
+    const url = `${this.url}/v1/admin/fulfill/supplies`;
+    return this.http.get(url).toPromise();
+  }
+  approvedDrugs(data) {
     const url = `${this.url}/v1/admin/fulfill/drugs/approved`;
+    return this.http.post(url, { data }).toPromise();
+  }
+  approvedSupplies(data) {
+    const url = `${this.url}/v1/admin/fulfill/supplies/approved`;
     return this.http.post(url, { data }).toPromise();
   }
 

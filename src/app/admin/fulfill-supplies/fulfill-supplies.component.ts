@@ -3,11 +3,11 @@ import { FulfillService } from '../services/fulfill.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-fulfill-drugs',
-  templateUrl: './fulfill-drugs.component.html',
+  selector: 'app-fulfill-supplies',
+  templateUrl: './fulfill-supplies.component.html',
   styles: []
 })
-export class FulfillDrugsComponent implements OnInit {
+export class FulfillSuppliesComponent implements OnInit {
 
   selected = [];
   selectedFulfills = [];
@@ -27,7 +27,7 @@ export class FulfillDrugsComponent implements OnInit {
 
   async getProducts() {
     try {
-      const rs: any = await this.fulfillService.getList('DRUG');
+      const rs: any = await this.fulfillService.getList('SUPPLIES');
       if (rs.ok) {
         this.products = rs.rows;
       } else {
@@ -40,7 +40,7 @@ export class FulfillDrugsComponent implements OnInit {
 
   async getFulfills() {
     try {
-      const rs: any = await this.fulfillService.getFulFillDrug();
+      const rs: any = await this.fulfillService.getFulFillSupplies();
       if (rs.ok) {
         this.fulfills = rs.rows;
       } else {
@@ -55,7 +55,7 @@ export class FulfillDrugsComponent implements OnInit {
     try {
       const confirm = await this.alertService.confirm(`คุณต้องการเติมยา ${this.selected.length} รายการ ใช่หรือไม่?`);
       if (confirm) {
-        const rs: any = await this.fulfillService.saveFulFillDrug(this.selected);
+        const rs: any = await this.fulfillService.saveFulFillSupplies(this.selected);
         if (rs.ok) {
           this.alertService.success();
           await this.getProducts();
@@ -77,7 +77,7 @@ export class FulfillDrugsComponent implements OnInit {
     try {
       const confirm = await this.alertService.confirm();
       if (confirm) {
-        const rs: any = await this.fulfillService.approvedDrugs(this.selectedFulfills);
+        const rs: any = await this.fulfillService.approvedSupplies(this.selectedFulfills);
         if (rs.ok) {
           await this.getFulfills();
           this.alertService.success();
