@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +54,11 @@ export class ReportService {
   async getSumByZone(zone) {
     const url = `${this.apiUrl}/v1/report/total-zone?zone=${zone}`;
     return await this.http.get(url).toPromise();
+  }
+
+  async getFulFillDrugs(id) {
+    const url = `${this.apiUrl}/v1/report/fulfill-drugs?id=` + map(id, 'id').join('&id=');
+    return await this.http.get(url, {responseType: 'blob'}).toPromise();
   }
 
 }
