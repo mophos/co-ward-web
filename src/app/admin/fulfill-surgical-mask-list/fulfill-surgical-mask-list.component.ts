@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class FulfillSurgicalMaskListComponent implements OnInit {
   list: any;
-
+  loading = false;
   constructor(
     private fulfillService: FulfillService,
     private alertService: AlertService,
