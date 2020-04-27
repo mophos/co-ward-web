@@ -24,7 +24,7 @@ export class ManageMinMaxDrugsComponent implements OnInit {
 
   async getHospNode() {
     try {
-      const rs: any = await this.fulfillService.getHopsNode();
+      const rs: any = await this.fulfillService.getHopsNodeDrugs();
       if (rs.ok) {
         this.listHospNode = rs.rows;
       }
