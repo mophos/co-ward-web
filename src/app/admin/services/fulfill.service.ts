@@ -13,5 +13,19 @@ export class FulfillService {
     return this.http.get(url).toPromise();
   }
 
+  getHopsNode() {
+    const url = `${this.url}/v1/admin/fulfill/min-max/get-hopsnode`;
+    return this.http.get(url).toPromise();
+  }
+
+  getDrugMinMax(hospitalId) {
+    const url = `${this.url}/v1/admin/fulfill/min-max/get-drug-min-max?hospitalId=${hospitalId}`;
+    return this.http.get(url).toPromise();
+  }
+
+  saveDrugMinMax(data: any) {
+    const url = `${this.url}/v1/admin/fulfill/min-max/save`;
+    return this.http.post(url, { data }).toPromise();
+  }
 
 }

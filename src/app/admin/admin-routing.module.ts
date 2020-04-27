@@ -23,6 +23,7 @@ import { ManageDrugComponent } from '../admin/manage-drug/manage-drug.component'
 import { RequisitionMinMaxComponent } from './requisition-min-max/requisition-min-max.component';
 import { AuthRestockCollection } from '../auth-restock-collection.service';
 import { ManageRestockCollectionComponent } from './manage-restock-collection/manage-restock-collection.component';
+import { ManageMinMaxDrugsComponent } from './manage-min-max-drugs/manage-min-max-drugs.component';
 
 const routes: Routes = [
   {
@@ -62,12 +63,9 @@ const routes: Routes = [
       { path: 'manage-hospital', canActivate: [AuthHospitalmanage], component: ManageHospitalComponent },
       { path: 'manage-drug', component: ManageDrugComponent },
       { path: 'requisition-min-max', component: RequisitionMinMaxComponent },
-     
-     
-     
-     
       { path: 'home', component: HomeComponent },
       { path: 'fulfill-drugs', component: FulfillDrugsComponent },
+      { path: 'min-max-drugs', component: ManageMinMaxDrugsComponent },
       { path: 'systems', component: ManageSystemsComponent },
     ]
   }
