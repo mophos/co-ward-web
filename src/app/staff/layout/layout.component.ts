@@ -1,7 +1,11 @@
+import { BasicService } from './../services/basic.service';
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 import * as findIndex from 'lodash/findIndex';
+
+import * as mqttClient from '../../../vendor/mqtt.min.js';
+import { MqttClient } from 'mqtt';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -37,15 +41,21 @@ export class LayoutComponent implements OnInit {
   settingProvinceSubUserMenu: any;
   // ---------------------------------
   reportMenu: any;
-
+  mqttClient: MqttClient;
+  modalClose = false;
+  modalAlert = false;
+  message: any;
+  topic: any;
   public jwtHelper = new JwtHelperService();
   constructor(
     private route: Router,
+    private basicService: BasicService
   ) {
     const decoded = this.jwtHelper.decodeToken(sessionStorage.getItem('token'));
     this.fullname = decoded.fullname;
     this.hospname = decoded.hospname;
     this.rights = decoded.rights;
+    this.topic = decoded.mqttTopic;
 
     this.covidCaseMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE' }) === -1 ? false : true;
     this.covidCaseStatusMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE_STATUS' }) === -1 ? false : true;
@@ -73,11 +83,75 @@ export class LayoutComponent implements OnInit {
     this.settingUserMenu = findIndex(this.rights, { name: 'STAFF_SETTING_USERS' }) === -1 ? false : true;
   }
 
-  ngOnInit() {
+  async  ngOnInit() {
+    await this.initialSocket();
+    await this.getSystems();
+  }
+
+  async getSystems() {
+    try {
+      const rs: any = await this.basicService.getSystems();
+      if (rs.ok) {
+        if (rs.rows === 'CLOSE') {
+          this.modalClose = true;
+
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async initialSocket() {
+    // connect mqtt
+    await this.connectMqtt();
+    await this.subscribeMqtt();
+    await this.messageMqtt();
   }
 
   logout() {
     sessionStorage.removeItem('token');
     this.route.navigate(['/login']);
+  }
+
+  connectMqtt() {
+    try {
+      // this.mqttClient  = mqttClient.connect('mqtt://test.mosquitto.org')
+      this.mqttClient = mqttClient.connect('ws://203.157.104.220:8080', {
+        clienId: Math.floor(Math.random() * 10000),
+        username: 'mqtt',
+        password: '##Mqtt'
+      });
+      console.log('success');
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  subscribeMqtt() {
+    const that = this;
+    this.mqttClient.on('connect', () => {
+      that.mqttClient.subscribe([`${this.topic}co-ward-close`, `${this.topic}co-ward-alert`], (err) => {
+        if (err) {
+          console.log('Subscribe Error!!');
+        }
+      });
+    });
+  }
+
+  messageMqtt() {
+    this.mqttClient.on('message', (topic, payload) => {
+      if (topic === `${this.topic}co-ward-close`) {
+        if (payload.toString() === 'CLOSE') {
+          this.modalClose = true;
+        } else if (payload.toString() === 'OPEN') {
+          this.modalClose = false;
+        }
+      } else if (topic === `${this.topic}co-ward-alert`) {
+        this.message = payload.toString();
+        this.modalAlert = true;
+      }
+    });
   }
 }

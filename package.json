@@ -29,6 +29,7 @@
     "exceljs": "^3.8.2",
     "jquery": "^3.4.1",
     "moment": "^2.24.0",
+    "mqtt": "^3.0.0",
     "mydatepicker-th": "^0.1.1",
     "ngx-material-timepicker": "^5.5.1",
     "rxjs": "~6.3.3",

@@ -155,3 +155,26 @@
     </clr-vertical-nav>
   </div>
 </div>
+
+
+<clr-modal [(clrModalOpen)]="modalClose" [clrModalClosable]="false">
+  <h3 class="modal-title">ระบบปิดปรับปรุงชั่วคราว ขออภัยในความไม่สะดวก</h3>
+  <div class="modal-body">
+    <span class="spinner">
+      Loading...
+  </span>
+    กรุณารอจนหน้าจอนี้หายไป 
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="modalAlert" >
+  <h3 class="modal-title">ข้อความ</h3>
+  <div class="modal-body">
+    <span [innerHTML]="message"></span>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modalAlert = false">
+      ปิด
+    </button>
+  </div>
+</clr-modal>

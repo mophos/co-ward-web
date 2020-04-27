@@ -1,0 +1,27 @@
+<label class="btn btn-primary btn-block">สถานะระบบ : {{status}}</label>
+<br>
+<br>
+<button class="btn btn-success btn-block" (click)="openSystems()">เปิดระบบ</button>
+<button class="btn btn-danger btn-block" (click)="closeSystems()">ปิดระบบ</button>
+<button class="btn btn-dark btn-block" (click)="openBroadcast()">Broadcase</button>
+
+
+
+<clr-modal [(clrModalOpen)]="modalBroadcast" >
+  <h3 class="modal-title">แจ้งเตือน</h3>
+  <div class="modal-body">
+   <div class="clr-row">
+     <div class="clr-col-12">
+       <input type="text" class="clr-input width-fit" name="message" [(ngModel)]="message" >
+     </div>
+   </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="sendBroadcase()">
+      ส่ง
+    </button>
+    <button type="button" class="btn btn-danger" (click)="modalBroadcast = false">
+      ปิด
+    </button>
+  </div>
+</clr-modal>

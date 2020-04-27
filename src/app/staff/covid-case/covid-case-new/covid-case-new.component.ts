@@ -24,6 +24,8 @@ export class CovidCaseNewComponent implements OnInit {
   isRefer: any;
   typeRegister: any;
   // profile ----------------
+  personId: any;
+  covidCaseId: any;
   passport = '';
   cid = '';
   hn = '';
@@ -146,9 +148,9 @@ export class CovidCaseNewComponent implements OnInit {
   }
 
   async setData() {
-    console.log(this.data);
-
     try {
+      this.covidCaseId = this.data.covid_case_id;
+      this.personId = this.data.id;
       this.cid = this.data.cid;
       this.hn = this.data.hn;
       this.an = this.data.an;
@@ -350,8 +352,10 @@ export class CovidCaseNewComponent implements OnInit {
         }
 
         const obj: any = {
+          covidCaseId: this.covidCaseId,
           type: this.typeRegister,
           cid: this.cid,
+          personId: this.personId,
           passport: this.passport,
           hn: this.hn,
           an: this.an,
@@ -447,6 +451,9 @@ export class CovidCaseNewComponent implements OnInit {
       this.zipc.setQuery('');
       this.countries.setQuery('ไทย');
       this.drugDay = null;
+      this.personId = null;
+      this.covidCaseId = null;
+      this.typeRegister = null;
     } catch (error) {
       console.log(error);
     }
@@ -534,14 +541,17 @@ export class CovidCaseNewComponent implements OnInit {
           if (rs.ok) {
             if (rs.case === 'NEW') {
               if (this.modalCIDType === 'CID') {
+                this.typeRegister = 'CID';
                 await this.infoCid(this.modalCIDCid);
                 this.cid = this.modalCIDCid;
               } else if (this.modalCIDType === 'PASSPORT') {
+                this.typeRegister = 'PASSPORT';
                 this.passport = this.modalCIDPassport;
               }
               this.isKey = true;
               this.modalCID = false;
             } else if (rs.case === 'REFER') {
+              this.typeRegister = 'REFER';
               const confirm = await this.alertService.confirm(`คุณรับผู้ป่วย Refer มาจาก ${rs.rows.hospname} ใช่หรือไม่ ?`);
               if (confirm) {
                 this.isKey = true;
