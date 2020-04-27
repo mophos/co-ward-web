@@ -13,6 +13,16 @@ export class FulfillService {
     return this.http.get(url).toPromise();
   }
 
+  getListSurgical() {
+    const url = `${this.url}/v1/admin/fulfill/surgical-mask`;
+    return this.http.get(url).toPromise();
+  }
+
+  calSurgicalMask(hosptypeCode, totalQty) {
+    const url = `${this.url}/v1/admin/fulfill/surgical-mask`;
+    return this.http.post(url, { hosptypeCode, totalQty }).toPromise();
+  }
+
   getHopsNode() {
     const url = `${this.url}/v1/admin/fulfill/min-max/get-hopsnode`;
     return this.http.get(url).toPromise();
@@ -25,6 +35,11 @@ export class FulfillService {
 
   saveDrugMinMax(data: any) {
     const url = `${this.url}/v1/admin/fulfill/min-max/save`;
+    return this.http.post(url, { data }).toPromise();
+  }
+
+  saveSurgicalMask(data: any) {
+    const url = `${this.url}/v1/admin/fulfill/surgical-mask/save`;
     return this.http.post(url, { data }).toPromise();
   }
 
