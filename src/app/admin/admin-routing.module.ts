@@ -29,6 +29,8 @@ import { ManageMinMaxDrugsComponent } from './manage-min-max-drugs/manage-min-ma
 import { ReportBedsComponent } from './report-beds/report-beds.component';
 import { PatientInfoComponent } from './patient-info/patient-info.component';
 import { AuthSearchPatient } from './auth-search-patient.service';
+import { FulfillSurgicalMaskComponent } from './fulfill-surgical-mask/fulfill-surgical-mask.component';
+import { FulfillSurgicalMaskListComponent } from './fulfill-surgical-mask-list/fulfill-surgical-mask-list.component';
 
 const routes: Routes = [
   {
@@ -70,6 +72,13 @@ const routes: Routes = [
       { path: 'requisition-min-max', component: RequisitionMinMaxComponent },
       { path: 'home', component: HomeComponent },
       { path: 'fulfill-drugs', component: FulfillDrugsComponent },
+      {
+        path: 'fulfill-surgical-masks-list',
+        children: [
+          { path: '', component: FulfillSurgicalMaskListComponent },
+          { path: 'fulfill-surgical-masks', component: FulfillSurgicalMaskComponent }
+        ]
+      },
       { path: 'fulfill-supplies', component: FulfillSuppliesComponent },
       { path: 'min-max-drugs', component: ManageMinMaxDrugsComponent },
       { path: 'min-max-supplies', component: ManageMinMaxSuppliesComponent },

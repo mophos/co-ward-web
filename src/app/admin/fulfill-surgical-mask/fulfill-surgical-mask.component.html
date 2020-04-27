@@ -1,0 +1,111 @@
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="javascript://" routerLink="/admin/fulfill-surgical-masks-list">เติม Surgical Mask</a>
+  <span> / คำนวน Surgical Mask</span>
+</nav>
+<br>
+<div class="clr-row" style="margin: 0rem;">
+  <div class="clr-col-3">
+    จำนวนรวม :
+    <input type="number" name="totalQty" [(ngModel)]="totalQty" class="clr-input width-fit" placeholder="กรอกจำนวน Surgical Mask">
+  </div>
+  <div class="clr-col-6">
+    <div class="card" style="margin: 0rem; text-align: center;">
+      <div class="clr-row">
+        <div class="clr-col-4">
+          <input type="checkbox" [(ngModel)]="mHospital" style="margin-right: 0.5rem;">
+          รพศ.
+        </div>
+        <div class="clr-col-4">
+          <input type="checkbox" [(ngModel)]="gHospital" style="margin-right: 0.5rem;">
+          รพท.
+        </div>
+        <div class="clr-col-4">
+          <input type="checkbox" [(ngModel)]="cHospital" style="margin-right: 0.5rem;">
+          รพช.
+        </div>
+      </div>
+      <div class="clr-row">
+        <div class="clr-col-4">
+          <input type="checkbox" [(ngModel)]="province" style="margin-right: 0.5rem;">
+          สสจ.
+        </div>
+        <div class="clr-col-4">
+          <input type="checkbox" [(ngModel)]="district" style="margin-right: 0.5rem;">
+          สสอ.
+        </div>
+        <div class="clr-col-4">
+          <input type="checkbox" [(ngModel)]="subdistrict" />
+          รพสต.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clr-col-2">
+    <button class="btn btn-lg btn-success" (click)="save()" style="float:right;">
+      <clr-icon shape="floppy" class="is-solid"></clr-icon>
+      บันทึก
+    </button>
+    <button class="btn btn-lg btn-primary" (click)="enter()" style="float:right;" [disabled]="totalQty == null">
+      <clr-icon shape="calculator" class="is-solid"></clr-icon>
+      คำนวน
+    </button>
+  </div>
+</div>
+
+<clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
+  <clr-dg-column>จังหวัด</clr-dg-column>
+  <clr-dg-column>โรงพยาบาล</clr-dg-column>
+  <clr-dg-column>คงคลัง</clr-dg-column>
+  <clr-dg-column>อัตราการใช้ต่อเดือน</clr-dg-column>
+  <clr-dg-column>
+    <input type="radio" value="1" [(ngModel)]="week" style="margin-right: 0.2rem;">
+    1 อาทิตย์
+  </clr-dg-column>
+  <clr-dg-column>
+    <input type="radio" value="2" [(ngModel)]="week" style="margin-right: 0.2rem;">
+    2 อาทิตย์
+  </clr-dg-column>
+  <clr-dg-column>
+    <input type="radio" value="3" [(ngModel)]="week" style="margin-right: 0.2rem;">
+    3 อาทิตย์
+  </clr-dg-column>
+  <clr-dg-column>
+    <input type="radio" value="4" [(ngModel)]="week" style="margin-right: 0.2rem;">
+    4 อาทิตย์
+  </clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let i of list">
+    <clr-dg-cell>{{i.province_name}}</clr-dg-cell>
+    <clr-dg-cell>{{i.hospname}}</clr-dg-cell>
+    <clr-dg-cell class="right">{{i.qty | number:'1.0-0'}}</clr-dg-cell>
+    <clr-dg-cell class="right">{{i.month_usage_qty | number:'1.0-0'}}</clr-dg-cell>
+    <clr-dg-cell>{{i.per1 | number:'1.0-0'}}</clr-dg-cell>
+    <clr-dg-cell>{{i.per2 | number:'1.0-0'}}</clr-dg-cell>
+    <clr-dg-cell>{{i.per3 | number:'1.0-0'}}</clr-dg-cell>
+    <clr-dg-cell>{{i.per4 | number:'1.0-0'}}</clr-dg-cell>
+  </clr-dg-row>
+</clr-datagrid>
+<!-- <div class="clr-row" style="padding-top: 0.1rem;">
+  <div class="clr-col-7">
+    <div class="card" style="margin: 0rem; text-align: center;">
+      <div class="clr-row">
+        <div class="clr-col-3">
+          <input type="radio" value="1" [(ngModel)]="week" style="margin-right: 0.5rem;">
+          1 อาทิตย์
+        </div>
+        <div class="clr-col-3">
+          <input type="radio" value="2" [(ngModel)]="week" style="margin-right: 0.5rem;">
+          2 อาทิตย์
+        </div>
+        <div class="clr-col-3">
+          <input type="radio" value="3" [(ngModel)]="week" style="margin-right: 0.5rem;">
+          3 อาทิตย์
+        </div>
+        <div class="clr-col-3">
+          <input type="radio" value="4" [(ngModel)]="week" style="margin-right: 0.5rem;">
+          4 อาทิตย์
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
