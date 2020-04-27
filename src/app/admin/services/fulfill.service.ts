@@ -94,6 +94,10 @@ export class FulfillService {
 
   approved(data) {
     const url = `${this.url}/v1/admin/fulfill/approved-surgicak-mask?data=${data}`;
+  }
+
+  getSuppliesSumDetails(id) {
+    const url = `${this.url}/v1/admin/fulfill/supplies-sum-details?id=${id}`;
     return this.http.get(url).toPromise();
   }
 }

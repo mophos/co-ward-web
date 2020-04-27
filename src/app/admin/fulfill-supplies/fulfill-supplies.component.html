@@ -62,6 +62,7 @@
           <clr-dg-cell>{{i.created_date | dateTh:'D MMM YYYY'}}</clr-dg-cell>
           <clr-dg-cell>{{i.fname}} {{i.lname}}</clr-dg-cell>
           <clr-dg-cell>{{i.is_approved == 'Y' ? 'อนุมัติแล้ว':'รออนุมัติ'}}</clr-dg-cell>
+          <app-fulfill-supplies-details [id]="i.id" *clrIfExpanded ngProjectAs="clr-dg-row-detail"></app-fulfill-supplies-details>
           <!-- <clr-dg-cell>
             <input type="text" appNumberOnly name="{{i.fill_qty}}" [(ngModel)]="i.fill_qty">
           </clr-dg-cell> -->
