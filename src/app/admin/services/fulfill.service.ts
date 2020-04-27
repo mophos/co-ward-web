@@ -77,9 +77,9 @@ export class FulfillService {
     return this.http.post(url, { data }).toPromise();
   }
 
-  saveSurgicalMask(data: any) {
+  saveSurgicalMask(data: any, week: any) {
     const url = `${this.url}/v1/admin/fulfill/surgical-mask/save`;
-    return this.http.post(url, { data }).toPromise();
+    return this.http.post(url, { data, week }).toPromise();
   }
 
   saveSuppliesMinMax(data: any) {
