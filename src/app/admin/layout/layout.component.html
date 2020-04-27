@@ -27,12 +27,20 @@
         </div>
         <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
             <a clrVerticalNavLink routerLink="/admin/fulfill-drugs" title="เติมยา" routerLinkActive="active">
-                <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+                <clr-icon shape="archive" class="is-solid"></clr-icon>
                 เติมยา
             </a>
+            <a *ngIf="patientInfoMenu" clrVerticalNavLink routerLink="/admin/patient-info" title="ค้นหาผู้ป่วย" routerLinkActive="active">
+                <clr-icon shape="user" class="is-solid"></clr-icon>
+                ค้นหาผู้ป่วย
+            </a>
             <a clrVerticalNavLink routerLink="/admin/min-max-drugs" title="จัดการ min/max ยา" routerLinkActive="active">
-                <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+                <clr-icon shape="bar-chart" class="is-solid"></clr-icon>
                 จัดการ min/max ยา
+            </a>
+            <a clrVerticalNavLink routerLink="/admin/report-beds" title="รายงานเตียง" routerLinkActive="active">
+                <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+                รายงานเตียง
             </a>
             <!-- <a  clrVerticalNavLink routerLink="/admin/fulfill-supplies" title="เติมเวชภัณฑ์"
                 routerLinkActive="active">
@@ -70,7 +78,7 @@
             </a> -->
             <a *ngIf="systemManageMenu" clrVerticalNavLink routerLink="/admin/systems" title="จัดการระบบ"
                 routerLinkActive="active">
-                <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+                <clr-icon shape="cog" class="is-solid"></clr-icon>
                 จัดการระบบ
             </a>
 

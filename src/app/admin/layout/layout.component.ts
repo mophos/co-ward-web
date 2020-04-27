@@ -21,6 +21,7 @@ export class LayoutComponent implements OnInit {
   hospitalManageMenu: any;
   restockCollectionMenu: any;
   systemManageMenu: any;
+  patientInfoMenu: any;
 
 
   public jwtHelper = new JwtHelperService();
@@ -38,6 +39,7 @@ export class LayoutComponent implements OnInit {
     // this.suppliesManageMenu = findIndex(this.rights, { name: 'ADMIN_MANAGE_SUPPLIES' }) === -1 ? false : true;
     this.restockCollectionMenu = findIndex(this.rights, { name: 'ADMIN_RESTOCK_COLLECTION' }) === -1 ? false : true;
     this.systemManageMenu = findIndex(this.rights, { name: 'ADMIN_MANAGE_SYSTEMS' }) === -1 ? false : true;
+    this.patientInfoMenu = findIndex(this.rights, { name: 'ADMIN_SEARCH_PATIENTS' }) === -1 ? false : true;
   }
 
   ngOnInit() {

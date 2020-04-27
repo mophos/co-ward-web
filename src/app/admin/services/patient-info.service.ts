@@ -1,0 +1,15 @@
+import { Injectable, Inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PatientInfoService {
+
+  constructor(private http: HttpClient, @Inject('API_URL') private url: string) { }
+
+  getList(cid) {
+    const url = `${this.url}/v1/admin/patient-info?cid=${cid}`;
+    return this.http.get(url).toPromise();
+  }
+}

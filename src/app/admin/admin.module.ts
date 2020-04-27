@@ -31,6 +31,9 @@ import { HomeComponent } from './home/home.component';
 import { FulfillDrugsComponent } from './fulfill-drugs/fulfill-drugs.component';
 import { ManageMinMaxDrugsComponent } from './manage-min-max-drugs/manage-min-max-drugs.component';
 import { ManageSystemsComponent } from './manage-systems/manage-systems.component';
+import { ReportBedsComponent } from './report-beds/report-beds.component';
+import { MyDatePickerTHModule } from 'mydatepicker-th';
+import { PatientInfoComponent } from './patient-info/patient-info.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +54,9 @@ import { ManageSystemsComponent } from './manage-systems/manage-systems.componen
     HomeComponent,
     FulfillDrugsComponent,
     ManageMinMaxDrugsComponent,
-    ManageSystemsComponent
+    ManageSystemsComponent,
+    ReportBedsComponent,
+    PatientInfoComponent
   ],
   imports: [
     HelpModule,
@@ -60,7 +65,8 @@ import { ManageSystemsComponent } from './manage-systems/manage-systems.componen
     BrowserModule,
     ClarityModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    MyDatePickerTHModule
   ],
   providers: [
     AuthRestock,
