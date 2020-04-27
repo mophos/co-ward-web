@@ -15,13 +15,13 @@
   </div>
 </div>
 
-<clr-datagrid [clrDgLoading]="loading" [style.height.px]="800" [(clrDgSelected)]="selected"
-[clrDgRowSelection]="true">
+<clr-datagrid [clrDgLoading]="loading" [style.height.px]="800" [(clrDgSelected)]="selected" [clrDgRowSelection]="true">
   <clr-dg-column>รหัสใบเติม</clr-dg-column>
   <clr-dg-column>วันที่</clr-dg-column>
 
   <clr-dg-row *clrDgItems="let i of list; let idx = index;" [clrDgItem]="i" [ngClass]="{isSuccess: i.is_approved == 'Y'}">
     <clr-dg-cell>{{i.code}}</clr-dg-cell>
     <clr-dg-cell>{{i.created_at | dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
+    <app-fulfill-surgical-mask-details [id]="i.id" *clrIfExpanded ngProjectAs="clr-dg-row-detail"></app-fulfill-surgical-mask-details>
   </clr-dg-row>
 </clr-datagrid>
