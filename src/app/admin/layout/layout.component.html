@@ -27,17 +27,37 @@
         </div>
         <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
             <a clrVerticalNavLink routerLink="/admin/fulfill-drugs" title="เติมยา" routerLinkActive="active">
-                <clr-icon shape="archive" class="is-solid"></clr-icon>
+                <clr-icon shape="archive"></clr-icon>
                 เติมยา
             </a>
-            <a *ngIf="patientInfoMenu" clrVerticalNavLink routerLink="/admin/patient-info" title="ค้นหาผู้ป่วย" routerLinkActive="active">
+            <a clrVerticalNavLink routerLink="/admin/fulfill-surgical-masks-list" title="เติม Surgical Mask"
+                routerLinkActive="active">
+                <clr-icon shape="archive" class="is-solid"></clr-icon>
+                เติม Surgical Mask
+            </a>
+            <a *ngIf="patientInfoMenu" clrVerticalNavLink routerLink="/admin/patient-info" title="ค้นหาผู้ป่วย"
+                routerLinkActive="active">
                 <clr-icon shape="user" class="is-solid"></clr-icon>
                 ค้นหาผู้ป่วย
             </a>
+            <a clrVerticalNavLink routerLink="/admin/fulfill-supplies" title="เติมเวชภัณฑ์" routerLinkActive="active">
+                <clr-icon shape="archive" class="is-solid"></clr-icon>
+                เติมเวชภัณฑ์
+            </a>
             <a clrVerticalNavLink routerLink="/admin/min-max-drugs" title="จัดการ min/max ยา" routerLinkActive="active">
-                <clr-icon shape="bar-chart" class="is-solid"></clr-icon>
+                <clr-icon shape="bar-chart"></clr-icon>
                 จัดการ min/max ยา
             </a>
+            <a clrVerticalNavLink routerLink="/admin/min-max-supplies" title="จัดการ min/max เวชภัณฑ์" routerLinkActive="active">
+                <clr-icon shape="bar-chart" class="is-solid"></clr-icon>
+                จัดการ min/max เวชภัณฑ์
+            </a>
+            <a *ngIf="patientInfoMenu" clrVerticalNavLink routerLink="/admin/patient-info" title="ค้นหาผู้ป่วย"
+                routerLinkActive="active">
+                <clr-icon shape="user" class="is-solid"></clr-icon>
+                ค้นหาผู้ป่วย
+            </a>
+
             <a clrVerticalNavLink routerLink="/admin/report-beds" title="รายงานเตียง" routerLinkActive="active">
                 <clr-icon shape="folder-open" class="is-solid"></clr-icon>
                 รายงานเตียง
