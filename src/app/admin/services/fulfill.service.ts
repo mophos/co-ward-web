@@ -86,4 +86,9 @@ export class FulfillService {
     const url = `${this.url}/v1/admin/min-max/save?type=SUPPLIES`;
     return this.http.post(url, { data }).toPromise();
   }
+
+  getDrugSumDetails(id) {
+    const url = `${this.url}/v1/admin/fulfill/drugs-sum-details?id=${id}`;
+    return this.http.get(url).toPromise();
+  }
 }
