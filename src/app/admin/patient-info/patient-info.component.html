@@ -1,0 +1,27 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">ค้นหาผู้ป่วย</span>
+</nav>
+<br>
+<div class="clr-row">
+  <div class="clr-col-1">
+    ค้นหา :
+  </div>
+  <div class="clr-col-3">
+    <input class="clr-input width-fit" (keyup)="doEnter($event)" name="query" [(ngModel)]="query" placeholder="โปรดระบุเลขประจำตัวประชาชน" />
+  </div>
+</div>
+
+<button style="float: right;" class="btn btn-sm btn-primary" (click)="clear()">
+  <clr-icon shape="repeat"></clr-icon>
+  ล้าง
+</button>
+<h4>รายชื่อผู้ป่วย</h4>
+<clr-datagrid>
+  <clr-dg-column>ชื่อ-นามสกุล</clr-dg-column>
+
+  <clr-dg-row *ngFor="let l of list">
+    <clr-dg-cell>{{l.tname}}{{l.fname}} {{l.lname}}</clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-footer>{{list.length}} รายการ</clr-dg-footer>
+</clr-datagrid>
