@@ -13,20 +13,6 @@ export class FulfillService {
     return this.http.get(url).toPromise();
   }
 
-  getHopsNode() {
-    const url = `${this.url}/v1/admin/fulfill/min-max/get-hopsnode`;
-    return this.http.get(url).toPromise();
-  }
-
-  getDrugMinMax(hospitalId) {
-    const url = `${this.url}/v1/admin/fulfill/min-max/get-drug-min-max?hospitalId=${hospitalId}`;
-    return this.http.get(url).toPromise();
-  }
-
-  saveDrugMinMax(data: any) {
-    const url = `${this.url}/v1/admin/fulfill/min-max/save`;
-    return this.http.post(url, { data }).toPromise();
-  }
   saveFulFillDrug(data: any) {
     const url = `${this.url}/v1/admin/fulfill/drugs`;
     return this.http.post(url, { data }).toPromise();
@@ -52,4 +38,33 @@ export class FulfillService {
     return this.http.post(url, { data }).toPromise();
   }
 
+  getHopsNodeDrugs() {
+    const url = `${this.url}/v1/admin/min-max/get-hopsnode-drugs`;
+    return this.http.get(url).toPromise();
+  }
+
+  getHopsNodeSupplies() {
+    const url = `${this.url}/v1/admin/min-max/get-hopsnode-supplies`;
+    return this.http.get(url).toPromise();
+  }
+
+  getDrugMinMax(hospitalId) {
+    const url = `${this.url}/v1/admin/min-max/get-min-max?hospitalId=${hospitalId}&type=DRUG`;
+    return this.http.get(url).toPromise();
+  }
+
+  getSuppliesMinMax(hospitalId) {
+    const url = `${this.url}/v1/admin/min-max/get-min-max?hospitalId=${hospitalId}&type=SUPPLIES`;
+    return this.http.get(url).toPromise();
+  }
+
+  saveDrugMinMax(data: any) {
+    const url = `${this.url}/v1/admin/min-max/save?type=DRUG`;
+    return this.http.post(url, { data }).toPromise();
+  }
+
+  saveSuppliesMinMax(data: any) {
+    const url = `${this.url}/v1/admin/min-max/save?type=SUPPLIES`;
+    return this.http.post(url, { data }).toPromise();
+  }
 }
