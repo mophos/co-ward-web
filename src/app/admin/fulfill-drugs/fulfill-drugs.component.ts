@@ -9,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FulfillDrugsComponent implements OnInit {
 
+  selected = [];
+  selectedFulfills = [];
   products = [];
+  fulfills = [];
   constructor(
     private fulfillService: FulfillService,
     private alertService: AlertService
@@ -17,6 +20,7 @@ export class FulfillDrugsComponent implements OnInit {
 
   ngOnInit() {
     this.getProducts();
+    this.getFulfills();
   }
 
   async getProducts() {
@@ -30,5 +34,57 @@ export class FulfillDrugsComponent implements OnInit {
     } catch (error) {
       this.alertService.error(error);
     }
+  }
+
+  async getFulfills() {
+    try {
+      const rs: any = await this.fulfillService.getFulFillDrug();
+      if (rs.ok) {
+        this.fulfills = rs.rows;
+      } else {
+        this.alertService.error(rs.error);
+      }
+    } catch (error) {
+      this.alertService.error(error);
+    }
+  }
+
+  async onClickFulFill() {
+    try {
+      const confirm = await this.alertService.confirm(`คุณต้องการเติมยา ${this.selected.length} รายการ ใช่หรือไม่?`);
+      if (confirm) {
+        const rs: any = await this.fulfillService.saveFulFillDrug(this.selected);
+        if (rs.ok) {
+          this.alertService.success();
+          await this.getProducts();
+        } else {
+          this.alertService.error(rs.error);
+        }
+      }
+    } catch (error) {
+      this.alertService.error(error);
+    }
+  }
+
+  onClickExport() {
+
+  }
+
+  async onClickApprove() {
+    try {
+      const confirm = await this.alertService.confirm();
+      if (confirm) {
+        const rs: any = await this.fulfillService.approved(this.selectedFulfills);
+        if (rs.ok) {
+          await this.getFulfills();
+          this.alertService.success();
+        } else {
+          this.alertService.error(rs.error);
+        }
+      }
+    } catch (error) {
+      this.alertService.error(error);
+    }
+
   }
 }

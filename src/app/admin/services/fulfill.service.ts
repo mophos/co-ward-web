@@ -27,5 +27,17 @@ export class FulfillService {
     const url = `${this.url}/v1/admin/fulfill/min-max/save`;
     return this.http.post(url, { data }).toPromise();
   }
+  saveFulFillDrug(data: any) {
+    const url = `${this.url}/v1/admin/fulfill/drugs`;
+    return this.http.post(url, { data }).toPromise();
+  }
+  getFulFillDrug() {
+    const url = `${this.url}/v1/admin/fulfill/drugs`;
+    return this.http.get(url).toPromise();
+  }
+  approved(data) {
+    const url = `${this.url}/v1/admin/fulfill/drugs/approved`;
+    return this.http.post(url, { data }).toPromise();
+  }
 
 }
