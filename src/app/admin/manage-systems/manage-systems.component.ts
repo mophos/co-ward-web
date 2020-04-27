@@ -4,6 +4,7 @@ import { BasicAuthService } from './../../staff/services/basic-auth.service';
 import { Component, OnInit } from '@angular/core';
 import * as mqttClient from '../../../vendor/mqtt.min.js';
 import { MqttClient } from 'mqtt';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-manage-systems',
@@ -16,11 +17,16 @@ export class ManageSystemsComponent implements OnInit {
   mqttClient: MqttClient;
   modalBroadcast = false;
   message: any;
+  topic: any;
+  public jwtHelper = new JwtHelperService();
   constructor(
     private basicAuthService: BasicAuthService,
     private basicService: BasicService,
     private alertService: AlertService
-  ) { }
+  ) {
+    const decoded = this.jwtHelper.decodeToken(sessionStorage.getItem('token'));
+    this.topic = decoded.mqttTopic;
+  }
 
   ngOnInit() {
     this.initialSocket();
@@ -78,7 +84,7 @@ export class ManageSystemsComponent implements OnInit {
   }
 
   closeSystemsMQTT() {
-    this.mqttClient.publish('co-ward-close', 'CLOSE', { qos: 0 }, (err) => {
+    this.mqttClient.publish(`${this.topic}co-ward-close`, 'CLOSE', { qos: 0 }, (err) => {
       if (err) {
         console.log('publish Error!!');
       }
@@ -102,7 +108,7 @@ export class ManageSystemsComponent implements OnInit {
 
   openSystemsMQTT() {
     try {
-      this.mqttClient.publish('co-ward-close', 'OPEN', { qos: 0 }, (err) => {
+      this.mqttClient.publish(`${this.topic}co-ward-close`, 'OPEN', { qos: 0 }, (err) => {
         if (err) {
           console.log('publish Error!!');
         }
@@ -114,7 +120,7 @@ export class ManageSystemsComponent implements OnInit {
     }
   }
   alertMQTT(message) {
-    this.mqttClient.publish('co-ward-alert', message.toString(), (err) => {
+    this.mqttClient.publish(`${this.topic}co-ward-alert`, message.toString(), (err) => {
       if (err) {
         console.log('publish Error!!');
       }

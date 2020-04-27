@@ -12,7 +12,7 @@ export class ManageMinMaxDrugsComponent implements OnInit {
   listHospNode: any;
   listDrugEdit: any;
   hospId: any;
-
+  loading = false;
   constructor(
     private fulfillService: FulfillService,
     private alertService: AlertService
