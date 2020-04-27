@@ -37,7 +37,6 @@ export class ManageMinMaxDrugsComponent implements OnInit {
     this.hospId = e.id;
     try {
       const rs: any = await this.fulfillService.getDrugMinMax(e.id);
-      console.log(rs.rows);
       if (rs.ok) {
         this.listDrugEdit = rs.rows;
       }
@@ -59,7 +58,6 @@ export class ManageMinMaxDrugsComponent implements OnInit {
       };
       data.push(obj);
     }
-    console.log(data);
     try {
       const rs: any = await this.fulfillService.saveDrugMinMax(data);
       if (rs.ok) {
