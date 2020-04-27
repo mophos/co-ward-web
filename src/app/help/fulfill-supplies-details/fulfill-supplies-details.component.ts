@@ -10,7 +10,7 @@ export class FulfillSuppliesDetailsComponent implements OnInit {
 
   @Input() id: any;
   list: any;
-
+  loading = false;
   constructor(
     private fulfillService: FulfillService
   ) { }
