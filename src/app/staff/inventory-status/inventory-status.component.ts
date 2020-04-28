@@ -107,7 +107,6 @@ export class InventoryStatusComponent implements OnInit {
       const rs: any = await this.inventoryService.getReceivesDetail(e);
       if (rs.ok) {
         this.listReceiveDetail = rs.rows;
-        console.log(this.listReceiveDetail);
       } else {
         this.alertService.error();
       }

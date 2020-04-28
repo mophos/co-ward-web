@@ -46,7 +46,7 @@
       </clr-datagrid>
     </clr-tab-content>
   </clr-tab>
-  <!-- <clr-tab>
+  <clr-tab>
     <button clrTabLink>รายการจ่ายจากส่วนกลาง</button> (click)="getListPay()()"
     <clr-tab-content *clrIfActive>
       <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
@@ -64,6 +64,18 @@
               <clr-icon shape="download"></clr-icon>
             </button>
           </clr-dg-cell>
+          <clr-datagrid ngProjectAs="clr-dg-row-detail" *clrIfExpanded>
+            <clr-dg-column>ชื่อ</clr-dg-column>
+            <clr-dg-column>จำนวน</clr-dg-column>
+            <clr-dg-column>หน่วย</clr-dg-column>
+
+            <clr-dg-row *ngFor="let i of l.details;">
+              <clr-dg-cell>{{i.generic_name}}</clr-dg-cell>
+              <clr-dg-cell>{{i.qty}}</clr-dg-cell>
+              <clr-dg-cell>{{i.unit_name}}</clr-dg-cell>
+            </clr-dg-row>
+            <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
+          </clr-datagrid>
         </clr-dg-row>
         <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
         <clr-dg-footer>
@@ -74,7 +86,7 @@
         </clr-dg-footer>
       </clr-datagrid>
     </clr-tab-content>
-  </clr-tab> -->
+  </clr-tab>
 
   <!-- <clr-tab>
     <button clrTabLink id="link2" (click)="getListReceives()">รับเข้าแบบไม่มี PO</button>
