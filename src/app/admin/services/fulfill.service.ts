@@ -95,6 +95,7 @@ export class FulfillService {
 
   approved(data) {
     const url = `${this.url}/v1/admin/fulfill/approved-surgicak-mask?data=${data}`;
+    return this.http.get(url).toPromise();
   }
 
   getSuppliesSumDetails(id) {
