@@ -17,11 +17,19 @@
 </button>
 <h4>รายชื่อผู้ป่วย</h4>
 <clr-datagrid>
+  <clr-dg-column>Sat Code</clr-dg-column>
   <clr-dg-column>ชื่อ-นามสกุล</clr-dg-column>
+  <clr-dg-column>เบอร์โทร</clr-dg-column>
+  <clr-dg-column>ที่อยู่</clr-dg-column>
 
   <clr-dg-row *ngFor="let l of list">
+    <clr-dg-cell>{{l.sat_id}}</clr-dg-cell>
     <clr-dg-cell>{{l.tname}}{{l.fname}} {{l.lname}}</clr-dg-cell>
+    <clr-dg-cell>{{l.tel}}</clr-dg-cell>
+    <clr-dg-cell>{{l.village}} {{l.village_no}} {{l.house_no}} {{l.road}} {{l.tambon_name}} {{l.ampur_name}} {{l.province_name}}</clr-dg-cell>
   </clr-dg-row>
 
   <clr-dg-footer>{{list.length}} รายการ</clr-dg-footer>
 </clr-datagrid>
+
+<app-loadding #modalLoading></app-loadding>
