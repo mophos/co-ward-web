@@ -3,7 +3,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportService } from '../report.service';
 import { AlertService } from '../../help/alert.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
-
 @Component({
   selector: 'app-report-beds',
   templateUrl: './report-beds.component.html',
@@ -12,6 +11,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class ReportBedsComponent implements OnInit {
   list: any;
   zone: any = '';
+  date: any;
   @ViewChild('loading') loading: any;
 
   public jwtHelper = new JwtHelperService();
@@ -23,6 +23,7 @@ export class ReportBedsComponent implements OnInit {
 
   async ngOnInit() {
     await this.getList();
+    this.date = new Date();
   }
 
   async getList() {
@@ -32,7 +33,7 @@ export class ReportBedsComponent implements OnInit {
       if (rs.ok) {
         this.list = rs.rows;
         console.log(this.list);
-        
+
         this.loading.hide();
       } else {
         this.loading.hide();
