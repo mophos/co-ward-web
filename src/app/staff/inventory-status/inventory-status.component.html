@@ -59,7 +59,7 @@
           <clr-dg-cell>{{l.approved_date | dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
           <clr-dg-cell>{{l.code}}</clr-dg-cell>
           <clr-dg-cell>
-            <button class="btn btn-sm btn-icon btn-success" style="margin: 0;" (click)="receive(l)">
+            <button class="btn btn-sm btn-icon btn-success" style="margin: 0;" *ngIf="l.is_received == 'N'" (click)="receive(l)">
               <clr-icon shape="download"></clr-icon>
               รับเข้าคลัง
             </button>
