@@ -13,7 +13,7 @@ export class FulfillSurgicalMaskListComponent implements OnInit {
   loading = false;
   selected = [];
   isSave = false;
-
+  countApprove: any = 0;
   constructor(
     private fulfillService: FulfillService,
     private alertService: AlertService,
@@ -43,14 +43,16 @@ export class FulfillSurgicalMaskListComponent implements OnInit {
 
   async approved() {
     const comfirm = await this.alertService.confirm();
+    const id: any = [];
+    for (const v of this.selected) {
+      if (v.is_approved === 'N') {
+        id.push(v.id);
+      }
+    }
     if (comfirm) {
       this.isSave = true;
       this.loading = true;
       try {
-        const id: any = [];
-        for (const v of this.selected) {
-          id.push(v.id);
-        }
         const rs: any = await this.fulfillService.approved(id);
         if (rs.ok) {
           this.getlist();
@@ -60,7 +62,7 @@ export class FulfillSurgicalMaskListComponent implements OnInit {
           this.loading = false;
         } else {
           this.isSave = false;
-          this.alertService.error();
+          this.alertService.error(rs.error);
           this.loading = false;
         }
       } catch (error) {
@@ -70,5 +72,15 @@ export class FulfillSurgicalMaskListComponent implements OnInit {
         this.alertService.error();
       }
     }
+  }
+
+  selectionChanged(e) {
+    let approveCount = 0;
+    for (const i of e) {
+      if (i.is_approved === 'N') {
+        approveCount++;
+      }
+    }
+    this.countApprove = approveCount;
   }
 }

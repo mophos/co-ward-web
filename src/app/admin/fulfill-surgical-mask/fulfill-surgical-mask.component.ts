@@ -16,7 +16,6 @@ export class FulfillSurgicalMaskComponent implements OnInit {
   district: any;
   subdistrict: any;
   totalQty: any;
-
   hospitalTypeCode: any = [];
   week: any;
 
@@ -74,23 +73,28 @@ export class FulfillSurgicalMaskComponent implements OnInit {
   }
 
   async save() {
-    if (this.week > 0) {
-      const confirm = await this.alertService.confirm();
-      if (confirm) {
-        try {
-          const rs: any = await this.fulfillService.saveSurgicalMask(this.list, this.week);
-          if (rs.ok) {
-            this.alertService.success();
-            this.router.navigate(['/admin/fulfill-surgical-masks-list']);
-          } else {
+    if (this.hospitalTypeCode.length > 0) {
+      if (this.week > 0) {
+        const confirm = await this.alertService.confirm();
+        if (confirm) {
+          try {
+            const rs: any = await this.fulfillService.saveSurgicalMask(this.list, this.week);
+            if (rs.ok) {
+              this.alertService.success();
+              this.router.navigate(['/admin/fulfill-surgical-masks-list']);
+            } else {
+              this.alertService.error();
+            }
+          } catch (error) {
             this.alertService.error();
           }
-        } catch (error) {
-          this.alertService.error();
         }
+      } else {
+        this.alertService.error('กรุณาเลือกระยะเวลา');
       }
     } else {
-      this.alertService.error('กรุณาเลือกระยะเวลา');
+      this.alertService.error('กรุณาเลือกประเภทสถานบริการ');
     }
   }
+
 }

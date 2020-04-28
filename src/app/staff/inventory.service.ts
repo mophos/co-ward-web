@@ -67,7 +67,7 @@ export class InventoryService {
   }
 
   async saveWmGenerics(data) {
-    const url = `${this.apiUrl}/v1/staff/balance/receive`;
+    const url = `${this.apiUrl}/v1/staff/receives`;
     return await this.http.post(url, { data }).toPromise();
   }
 }
