@@ -3,7 +3,8 @@ import { AlertService } from './../../help/alert.service';
 import { CovidCaseService } from './../services/covid-case.service';
 import { Component, OnInit } from '@angular/core';
 import thaiIdCard from 'thai-id-card';
-
+import { IMyOptions } from 'mydatepicker-th';
+import * as moment from 'moment';
 @Component({
   selector: 'app-covid-case',
   templateUrl: './covid-case.component.html',
@@ -11,19 +12,27 @@ import thaiIdCard from 'thai-id-card';
 })
 export class CovidCaseComponent implements OnInit {
 
-  modalCID = false;
-  modalCIDType = 'CID';
-  modalCidLoading = false;
-  isModelSearch = false;
+  // modalCID = false;
+  // modalCIDType = 'CID';
+  // modalCidLoading = false;
+  // isModelSearch = false;
 
-  modalCIDCid: any;
-  modalCIDCidError = false;
+  // modalCIDCid: any;
+  // modalCIDCidError = false;
 
-  modalCIDPassport: any;
+  // modalCIDPassport: any;
+  confirmDate: any;
+  myDatePickerOptions: IMyOptions = {
+    inline: false,
+    dateFormat: 'dd mmm yyyy',
+    editableDateField: false,
+    showClearDateBtn: false
+  };
+  modalConfirmDate = false;
   list = [];
   historys = [];
   data: any = {};
-
+  id: any;
   isLoadding = false;
   constructor(
     private covidCaseService: CovidCaseService,
@@ -33,6 +42,13 @@ export class CovidCaseComponent implements OnInit {
 
   ngOnInit() {
     this.getList();
+    this.confirmDate = {
+      date: {
+        year: moment().get('year'),
+        month: moment().get('month') + 1,
+        day: moment().get('day')
+      }
+    };
   }
 
 
@@ -83,42 +99,6 @@ export class CovidCaseComponent implements OnInit {
     }
   }
 
-  onClickOpenModalCid() {
-    this.modalCID = true;
-  }
-
-  async onSearchModal() {
-    try {
-      this.isModelSearch = true;
-      this.modalCIDCidError = !thaiIdCard.verify(this.modalCIDCid);
-
-      if (this.modalCIDType !== 'NO') {
-        if ((!this.modalCIDCidError && this.modalCIDType === 'CID') || this.modalCIDType === 'PASSPORT') {
-          const rs: any = await this.covidCaseService.checkNo(this.modalCIDType, this.modalCIDCid, this.modalCIDPassport);
-          if (rs.ok) {
-            if (rs.case === 'NEW') {
-              this.router.navigate(['/staff/covid-case-new', { type: this.modalCIDType, cid: this.modalCIDCid, passport: this.modalCIDPassport }]);
-            } else if (rs.case === 'REFER') {
-              const confirm = await this.alertService.confirm(`คุณรับผู้ป่วย Refer มาจาก ${rs.rows.hospname} ใช่หรือไม่ ?`);
-              if (confirm) {
-                this.router.navigate(['/staff/covid-case-new', { isRefer: 'Y', type: this.modalCIDType, cid: this.modalCIDCid, passport: this.modalCIDPassport, data: JSON.stringify(rs.rows) }]);
-              }
-            }
-          } else {
-            this.alertService.error(rs.error);
-          }
-        }
-      } else {
-        this.router.navigate(['/staff/covid-case-new', { type: this.modalCIDType }]);
-      }
-      this.isModelSearch = false;
-    } catch (error) {
-      this.isModelSearch = false;
-      this.alertService.error(error);
-    }
-  }
-
-
   onEdit(l) {
     try {
       this.router.navigate(['/staff/covid-case-edit', { data: JSON.stringify(l) }]);
@@ -138,6 +118,30 @@ export class CovidCaseComponent implements OnInit {
         } else {
           this.alertService.error(rs.error);
         }
+      }
+    } catch (error) {
+      this.alertService.error(error);
+
+    }
+  }
+
+  onClickOpenModalDateConfirm(l) {
+    console.log(l);
+    this.id = l.covid_case_id;
+    this.modalConfirmDate = true;
+  }
+
+  async saevConfirmDate() {
+    try {
+      const date = `${this.confirmDate.date.year}-${this.confirmDate.date.month}-${this.confirmDate.date.day}`;
+      const rs: any = await this.covidCaseService.updateConfrimDate(this.id, date);
+      if (rs.ok) {
+        this.alertService.success();
+        this.getList();
+        this.id = null;
+        this.modalConfirmDate = false;
+      } else {
+        this.alertService.error(rs.error);
       }
     } catch (error) {
       this.alertService.error(error);

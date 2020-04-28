@@ -4,6 +4,7 @@ import { ReportService } from '../report.service';
 import { AlertService } from '../../help/alert.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { IMyOptions } from 'mydatepicker-th';
+import * as moment from 'moment';
 @Component({
   selector: 'app-check-supplies',
   templateUrl: './check-supplies.component.html',
@@ -33,9 +34,9 @@ export class CheckSuppliesComponent implements OnInit {
     const date = new Date();
     this.dateset = {
       date: {
-        year: date.getFullYear(),
-        month: date.getMonth() + 1,
-        day: date.getDate()
+        year: moment().get('year'),
+        month: moment().get('month') + 1,
+        day: moment().get('day')
       }
     };
   }

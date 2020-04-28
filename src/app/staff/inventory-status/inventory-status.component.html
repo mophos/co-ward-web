@@ -46,7 +46,7 @@
     </clr-tab-content>
   </clr-tab>
   <clr-tab>
-    <button clrTabLink>รายการจ่ายจากส่วนกลาง</button>
+    <button clrTabLink>รายการจ่ายจากส่วนกลาง</button> (click)="getListPay()()"
     <clr-tab-content *clrIfActive>
       <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
         <clr-dg-column>#</clr-dg-column>
