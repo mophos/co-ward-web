@@ -107,7 +107,6 @@ export class InventoryStatusComponent implements OnInit {
       const rs: any = await this.inventoryService.getReceivesDetail(e);
       if (rs.ok) {
         this.listReceiveDetail = rs.rows;
-        console.log(this.listReceiveDetail);
       } else {
         this.alertService.error();
       }
@@ -152,12 +151,10 @@ export class InventoryStatusComponent implements OnInit {
     const confirm = await this.alertService.confirm();
     if (confirm) {
       try {
-        console.log(l);
-        
         const rs: any = await this.inventoryService.saveWmGenerics(l);
         if (rs.ok) {
           this.alertService.success();
-          this.getInventoryStatus();
+          this.getListPay();
         } else {
           this.alertService.error();
         }
