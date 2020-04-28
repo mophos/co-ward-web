@@ -51,6 +51,7 @@ import { CovidCaseEditComponent } from './covid-case/covid-case-edit/covid-case-
 import { ReportPatientsComponent } from './report-patients/report-patients.component';
 import { ReportBedComponent } from './report-bed/report-bed.component';
 import { AuthReportPatientsService } from '../auth-staff/auth-report-patients.service';
+import { ReceivesComponent } from '../staff/receives/receives.component';
 
 const routes: Routes = [
   {
@@ -72,6 +73,7 @@ const routes: Routes = [
       // ----------------------------------------------------------------------------------------------------------
       { path: 'covid-case-requisition', canActivate: [AuthCovidCaseRequisitionService], component: CovidCaseRequisitionComponent },
       { path: 'stock-products', canActivate: [AuthStockProductsService], component: InventoryStatusComponent },
+      { path: 'receive-products', canActivate: [AuthStockProductsService], component: ReceivesComponent },
       { path: 'surgical-sphp', canActivate: [AuthPayService], component: SurgicalMaskShphComponent },
       { path: 'supplies', canActivate: [AuthStockSuppliesService], component: SuppliesComponent },
       {
