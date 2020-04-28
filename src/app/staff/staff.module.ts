@@ -61,6 +61,7 @@ import { ReportBedComponent } from './report-bed/report-bed.component';
 import { ReportSuppliesComponent } from './report-supplies/report-supplies.component';
 import { ReportPatientAdmitComponent } from './report-patient-admit/report-patient-admit.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ReceivesComponent } from './receives/receives.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -94,7 +95,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ReportBedComponent,
     ReportSuppliesComponent,
     ReportPatientAdmitComponent,
-    DashboardComponent
+    DashboardComponent,
+    ReceivesComponent
   ],
   imports: [
     HelpModule,
