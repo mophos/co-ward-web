@@ -20,6 +20,8 @@ import { SelectedHospitalChildNodeComponent } from './selected-hospital-child-no
 import { HelpService } from './help.service';
 import { CheckCutTimePipe } from './check-cut-time.pipe';
 import { FulfillDrugDetailsComponent } from './fulfill-drug-details/fulfill-drug-details.component';
+import { FulfillSuppliesDetailsComponent } from './fulfill-supplies-details/fulfill-supplies-details.component';
+import { FulfillSurgicalMaskDetailsComponent } from './fulfill-surgical-mask-details/fulfill-surgical-mask-details.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { FulfillDrugDetailsComponent } from './fulfill-drug-details/fulfill-drug
     EnNoSpaceDirective,
     SelectedHospitalChildNodeComponent,
     CheckCutTimePipe,
-    FulfillDrugDetailsComponent
+    FulfillDrugDetailsComponent,
+    FulfillSuppliesDetailsComponent,
+    FulfillSurgicalMaskDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -64,7 +68,9 @@ import { FulfillDrugDetailsComponent } from './fulfill-drug-details/fulfill-drug
     SelectedHospitalChildNodeComponent,
     CheckCutTimePipe,
     SafePipe,
-    FulfillDrugDetailsComponent
+    FulfillDrugDetailsComponent,
+    FulfillSuppliesDetailsComponent,
+    FulfillSurgicalMaskDetailsComponent
   ],
   providers: [
     HelpService

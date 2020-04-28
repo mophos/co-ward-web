@@ -116,23 +116,12 @@ export class CovidCaseApprovedComponent implements OnInit {
     try {
       const confirm = await this.alertService.confirm();
       if (confirm) {
-        const data: any = [];
-        for (const v of this.drugStock) {
-          if (v.stock_qty - v.requisition_qty < 0) {
-            this.alertService.error('ไม่พอจ่าย');
-          } else {
-            const obj: any = {};
-            obj.id = v.wm_id;
-            obj.qty = v.stock_qty - v.requisition_qty;
-            data.push(obj);
-          }
-        }
 
         const dataReqId: any = [];
         for (const v of this.selected) {
           dataReqId.push(v.id);
         }
-        const rs: any = await this.covidCaseService.approved(data, dataReqId);
+        const rs: any = await this.covidCaseService.approved(this.drugStock, dataReqId);
         if (rs.ok) {
           this.isSave = false;
           this.clear();

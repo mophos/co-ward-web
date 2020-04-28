@@ -14,7 +14,7 @@ export class FulfillService {
   }
 
   getListSurgical() {
-    const url = `${this.url}/v1/admin/fulfill/surgical-mask`;
+    const url = `${this.url}/v1/admin/fulfill/list/surgical-mask`;
     return this.http.get(url).toPromise();
   }
 
@@ -25,6 +25,7 @@ export class FulfillService {
 
   getHopsNode() {
     const url = `${this.url}/v1/admin/fulfill/min-max/get-hopsnode`;
+    return this.http.get(url).toPromise();
   }
 
   saveFulFillDrug(data: any) {
@@ -77,9 +78,9 @@ export class FulfillService {
     return this.http.post(url, { data }).toPromise();
   }
 
-  saveSurgicalMask(data: any) {
+  saveSurgicalMask(data: any, week: any) {
     const url = `${this.url}/v1/admin/fulfill/surgical-mask/save`;
-    return this.http.post(url, { data }).toPromise();
+    return this.http.post(url, { data, week }).toPromise();
   }
 
   saveSuppliesMinMax(data: any) {
@@ -89,6 +90,20 @@ export class FulfillService {
 
   getDrugSumDetails(id) {
     const url = `${this.url}/v1/admin/fulfill/drugs-sum-details?id=${id}`;
+    return this.http.get(url).toPromise();
+  }
+
+  approved(data) {
+    const url = `${this.url}/v1/admin/fulfill/approved-surgicak-mask?data=${data}`;
+  }
+
+  getSuppliesSumDetails(id) {
+    const url = `${this.url}/v1/admin/fulfill/supplies-sum-details?id=${id}`;
+    return this.http.get(url).toPromise();
+  }
+
+  getSurgicalMaskDetails(id) {
+    const url = `${this.url}/v1/admin/fulfill/detail/surgical-mask-details?id=${id}`;
     return this.http.get(url).toPromise();
   }
 }

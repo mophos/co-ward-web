@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from '../../help/alert.service';
 import { FulfillService } from '../services/fulfill.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-fulfill-surgical-mask',
   templateUrl: './fulfill-surgical-mask.component.html',
@@ -23,7 +23,9 @@ export class FulfillSurgicalMaskComponent implements OnInit {
   list: any;
   constructor(
     private fulfillService: FulfillService,
-    private alertService: AlertService) { }
+    private alertService: AlertService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
@@ -73,14 +75,22 @@ export class FulfillSurgicalMaskComponent implements OnInit {
 
   async save() {
     if (this.week > 0) {
-      const confirm = this.alertService.confirm();
+      const confirm = await this.alertService.confirm();
       if (confirm) {
         try {
-          
+          const rs: any = await this.fulfillService.saveSurgicalMask(this.list, this.week);
+          if (rs.ok) {
+            this.alertService.success();
+            this.router.navigate(['/admin/fulfill-surgical-masks-list']);
+          } else {
+            this.alertService.error();
+          }
         } catch (error) {
-
+          this.alertService.error();
         }
       }
+    } else {
+      this.alertService.error('กรุณาเลือกระยะเวลา');
     }
   }
 }

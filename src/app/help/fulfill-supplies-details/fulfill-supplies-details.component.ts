@@ -2,11 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FulfillService } from '../../admin/services/fulfill.service';
 
 @Component({
-  selector: 'app-fulfill-drug-details',
-  templateUrl: './fulfill-drug-details.component.html',
+  selector: 'app-fulfill-supplies-details',
+  templateUrl: './fulfill-supplies-details.component.html',
   styles: []
 })
-export class FulfillDrugDetailsComponent implements OnInit {
+export class FulfillSuppliesDetailsComponent implements OnInit {
 
   @Input() id: any;
   list: any;
@@ -16,12 +16,12 @@ export class FulfillDrugDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getDrugSumDetails();
+    this.getSuppliesSumDetails();
   }
 
-  async getDrugSumDetails() {
+  async getSuppliesSumDetails() {
     try {
-      const rs: any = await this.fulfillService.getDrugSumDetails(this.id);
+      const rs: any = await this.fulfillService.getSuppliesSumDetails(this.id);
       if (rs.ok) {
         this.list = rs.rows;
       }
