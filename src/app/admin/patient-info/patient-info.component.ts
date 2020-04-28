@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertService } from '../../help/alert.service';
 import { PatientInfoService } from '../services/patient-info.service';
 
@@ -10,7 +10,7 @@ import { PatientInfoService } from '../services/patient-info.service';
 export class PatientInfoComponent implements OnInit {
   list: any = [];
   query: any;
-
+  @ViewChild('modalLoading') loadding: any;
   constructor(
     private alertService: AlertService,
     private patientService: PatientInfoService
@@ -20,15 +20,19 @@ export class PatientInfoComponent implements OnInit {
   }
 
   async getList() {
+    this.loadding.show();
     try {
       const rs: any = await this.patientService.getList(this.query);
       if (rs.ok) {
-        this.list.push(rs.rows);
+        this.loadding.hide();
+        this.list = rs.rows;
         this.query = null;
       } else {
+        this.loadding.hide();
         this.alertService.error('ไม่พบผู้ป่วย');
       }
     } catch (error) {
+      this.loadding.hide();
       this.alertService.error();
     }
   }

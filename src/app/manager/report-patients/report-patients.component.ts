@@ -3,6 +3,7 @@ import { ReportService } from '../report.service';
 import { AlertService } from '../../help/alert.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { IMyOptions } from 'mydatepicker-th';
+import * as moment from 'moment';
 @Component({
   selector: 'app-report-patients',
   templateUrl: './report-patients.component.html',
@@ -37,12 +38,11 @@ export class ReportPatientsComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    const date = new Date();
     this.date = {
       date: {
-        year: date.getFullYear(),
-        month: date.getMonth() + 1,
-        day: date.getDate()
+        year: moment().get('year'),
+        month: moment().get('month') + 1,
+        day: moment().get('day')
       }
     };
     await this.getList();

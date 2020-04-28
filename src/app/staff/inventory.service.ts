@@ -46,6 +46,11 @@ export class InventoryService {
     return await this.http.get(url).toPromise();
   }
 
+  async getListFulfull() {
+    const url = `${this.apiUrl}/v1/staff/receives/fulfill`;
+    return await this.http.get(url).toPromise();
+  }
+
   async getReceivesDetail(id) {
     const url = `${this.apiUrl}/v1/staff/balance/get-receives-detail?id=${id}`;
     return await this.http.get(url).toPromise();
@@ -58,6 +63,11 @@ export class InventoryService {
 
   async save(data) {
     const url = `${this.apiUrl}/v1/staff/balance/save`;
+    return await this.http.post(url, { data }).toPromise();
+  }
+
+  async saveWmGenerics(data) {
+    const url = `${this.apiUrl}/v1/staff/balance/receive`;
     return await this.http.post(url, { data }).toPromise();
   }
 }

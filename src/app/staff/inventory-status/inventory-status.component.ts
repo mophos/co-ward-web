@@ -19,7 +19,7 @@ export class InventoryStatusComponent implements OnInit {
   isUpdate = false;
   listReceives: any = [];
   listReceiveDetail: any = [];
-
+  listFulFill = [];
 
   myDatePickerOptions: IMyOptions = {
     inline: false,
@@ -35,6 +35,7 @@ export class InventoryStatusComponent implements OnInit {
 
   ngOnInit() {
     this.getInventoryStatus();
+    this.getListPay();
   }
 
   async getInventoryStatus() {
@@ -86,13 +87,26 @@ export class InventoryStatusComponent implements OnInit {
     }
   }
 
+  async getListPay() {
+    this.isUpdate = true;
+    try {
+      const rs: any = await this.inventoryService.getListFulfull();
+      if (rs.ok) {
+        this.listFulFill = rs.rows;
+      } else {
+        this.alertService.error();
+      }
+    } catch (error) {
+      this.alertService.error();
+    }
+  }
+
   async getListReceivesDetail(e) {
     try {
       this.isUpdate = false;
       const rs: any = await this.inventoryService.getReceivesDetail(e);
       if (rs.ok) {
         this.listReceiveDetail = rs.rows;
-        console.log(this.listReceiveDetail);
       } else {
         this.alertService.error();
       }
@@ -129,6 +143,23 @@ export class InventoryStatusComponent implements OnInit {
       } catch (error) {
         this.isSave = false;
         this.alertService.error(error);
+      }
+    }
+  }
+
+  async receive(l) {
+    const confirm = await this.alertService.confirm();
+    if (confirm) {
+      try {
+        const rs: any = await this.inventoryService.saveWmGenerics(l);
+        if (rs.ok) {
+          this.alertService.success();
+          this.getListPay();
+        } else {
+          this.alertService.error();
+        }
+      } catch (error) {
+        this.alertService.error();
       }
     }
   }
