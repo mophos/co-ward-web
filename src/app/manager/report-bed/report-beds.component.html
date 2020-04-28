@@ -2,19 +2,19 @@
   <span class="breadcrumb-item active">รายงานจำนวนเตียงผู้ป่วย</span>
 </nav>
 <br>
-รายงานจำนวนเตียงผู้ป่วย ณ วันที่ {{date | dateTh:'D MMM YYYY'}}
 <div class="clr-row">
-  <!-- <div class="clr-col-3">
-    <my-date-picker-th name="dateset" [options]="myDatePickerOptions" [(ngModel)]="dateset" required>
-    </my-date-picker-th>
-  </div> -->
-  <div class="clr-col-12">
+  <div class="clr-col-7">
+    รายงานจำนวนเตียงผู้ป่วย ณ วันที่ {{date | dateTh:'D MMM YYYY'}}
+   <!--  <my-date-picker-th name="dateset" [options]="myDatePickerOptions" [(ngModel)]="dateset" required>
+    </my-date-picker-th> -->
+  </div>
+  <div class="clr-col-5" style="text-align: right;">
     <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
       <clr-icon shape="download"></clr-icon>export excel
     </button>
-    <button class="btn btn-sm btn-success" (click)="doExportCsv()">
+    <!-- <button class="btn btn-sm btn-success" (click)="doExportCsv()">
       <clr-icon shape="download"></clr-icon>export csv
-    </button>
+    </button> -->
   </div>
 </div>
 
