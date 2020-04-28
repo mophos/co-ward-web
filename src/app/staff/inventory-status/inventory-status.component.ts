@@ -19,7 +19,7 @@ export class InventoryStatusComponent implements OnInit {
   isUpdate = false;
   listReceives: any = [];
   listReceiveDetail: any = [];
-
+  listFulFill = [];
 
   myDatePickerOptions: IMyOptions = {
     inline: false,
@@ -35,6 +35,7 @@ export class InventoryStatusComponent implements OnInit {
 
   ngOnInit() {
     this.getInventoryStatus();
+    this.getListPay();
   }
 
   async getInventoryStatus() {
@@ -78,6 +79,20 @@ export class InventoryStatusComponent implements OnInit {
         this.listReceives = rs.rows;
         console.log(this.listReceives);
         this.listReceiveDetail = [];
+      } else {
+        this.alertService.error();
+      }
+    } catch (error) {
+      this.alertService.error();
+    }
+  }
+
+  async getListPay() {
+    this.isUpdate = true;
+    try {
+      const rs: any = await this.inventoryService.getListFulfull();
+      if (rs.ok) {
+        this.listFulFill = rs.rows;
       } else {
         this.alertService.error();
       }

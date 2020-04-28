@@ -46,6 +46,11 @@ export class InventoryService {
     return await this.http.get(url).toPromise();
   }
 
+  async getListFulfull() {
+    const url = `${this.apiUrl}/v1/staff/receives/fulfill`;
+    return await this.http.get(url).toPromise();
+  }
+
   async getReceivesDetail(id) {
     const url = `${this.apiUrl}/v1/staff/balance/get-receives-detail?id=${id}`;
     return await this.http.get(url).toPromise();

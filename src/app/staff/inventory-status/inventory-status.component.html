@@ -47,17 +47,17 @@
     </clr-tab-content>
   </clr-tab>
   <!-- <clr-tab>
-    <button clrTabLink >รายการอนุมัติเติม</button> (click)="getRestockApproved()"
+    <button clrTabLink>รายการจ่ายจากส่วนกลาง</button> (click)="getListPay()()"
     <clr-tab-content *clrIfActive>
       <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
         <clr-dg-column>#</clr-dg-column>
-        <clr-dg-column>วันที่สร้าง</clr-dg-column>
-        <clr-dg-column>เลขที่</clr-dg-column>
-        <clr-dg-column>สถานะการส่ง</clr-dg-column>
+        <clr-dg-column>วันที่อนุมัติ</clr-dg-column>
+        <clr-dg-column>เลขที่ใบ</clr-dg-column>
+        <clr-dg-column></clr-dg-column>
 
-        <clr-dg-row *ngFor="let l of listApproved; let idx=index;">
+        <clr-dg-row *ngFor="let l of listFulFill; let idx=index;">
           <clr-dg-cell>{{idx+1}}</clr-dg-cell>
-          <clr-dg-cell>{{l.created_at | dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
+          <clr-dg-cell>{{l.approved_date | dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
           <clr-dg-cell>{{l.code}}</clr-dg-cell>
           <clr-dg-cell>
             <button class="btn btn-sm btn-icon btn-primary" style="margin: 0;" (click)="export(l.id)">
