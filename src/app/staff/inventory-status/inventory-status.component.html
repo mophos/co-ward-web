@@ -54,7 +54,7 @@
         <clr-dg-column>เลขที่ใบ</clr-dg-column>
         <clr-dg-column></clr-dg-column>
 
-        <clr-dg-row *ngFor="let l of listFulFill; let idx=index;">
+        <clr-dg-row *ngFor="let l of listFulFill; let idx=index;" [ngClass]="{ 'isSuccess': l.is_received == 'Y' }">
           <clr-dg-cell>{{idx+1}}</clr-dg-cell>
           <clr-dg-cell>{{l.approved_date | dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
           <clr-dg-cell>{{l.code}}</clr-dg-cell>
