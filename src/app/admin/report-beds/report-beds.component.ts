@@ -18,7 +18,8 @@ export class ReportBedsComponent implements OnInit {
 
   constructor(
     private service: ReportService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private reportService: ReportService
   ) { }
 
   async ngOnInit() {
@@ -52,5 +53,63 @@ export class ReportBedsComponent implements OnInit {
 
   doEnter() {
     this.getList();
+  }
+
+  async doExportExcel() {
+    this.loading.show();
+    try {
+      const rs: any = await this.reportService.getReportBedExcel();
+      console.log(rs);
+      if (!rs) {
+      this.loading.hide();
+    } else {
+      this.downloadFile('รายการเติมยา', 'xlsx', rs);
+      // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
+      this.loading.hide();
+    }
+    } catch (error) {
+      console.log(error);
+      this.alertService.error();
+      this.loading.hide();
+    }
+  }
+
+  async doExportCsv() {
+    this.loading.show();
+    try {
+      const rs: any = await this.reportService.getReportBedCsv();
+      console.log(rs);
+      if (!rs) {
+      this.loading.hide();
+    } else {
+      this.downloadFile('รายการเติมยา', 'csv', rs);
+      // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
+      this.loading.hide();
+    }
+    } catch (error) {
+      console.log(error);
+      this.alertService.error();
+      this.loading.hide();
+    }
+  }
+
+  downloadFile(name, type, data: any) {
+    try {
+      const url = window.URL.createObjectURL(new Blob([data]));
+      console.log(url);
+      const fileName = `${name}.${type}`;
+      // Debe haber una manera mejor de hacer esto...
+      const a = document.createElement('a');
+      document.body.appendChild(a);
+      a.setAttribute('style', 'display: none');
+      a.href = url;
+      a.download = fileName;
+      a.click();
+      window.URL.revokeObjectURL(url);
+      a.remove(); // remove the element
+    } catch (error) {
+      console.log(error);
+      this.alertService.error();
+    }
   }
 }
