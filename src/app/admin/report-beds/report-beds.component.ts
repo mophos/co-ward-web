@@ -31,6 +31,8 @@ export class ReportBedsComponent implements OnInit {
       const rs: any = await this.service.getAdminBeds();
       if (rs.ok) {
         this.list = rs.rows;
+        console.log(this.list);
+        
         this.loading.hide();
       } else {
         this.loading.hide();

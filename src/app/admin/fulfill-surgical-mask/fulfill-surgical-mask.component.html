@@ -41,7 +41,7 @@
     </div>
   </div>
   <div class="clr-col-2">
-    <button class="btn btn-lg btn-success" (click)="save()" style="float:right;">
+    <button class="btn btn-lg btn-success" (click)="save()" style="float:right;" [disabled]="totalQty == null">
       <clr-icon shape="floppy" class="is-solid"></clr-icon>
       บันทึก
     </button>

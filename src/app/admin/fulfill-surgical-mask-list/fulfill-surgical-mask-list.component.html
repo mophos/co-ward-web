@@ -4,18 +4,18 @@
 
 <div class="clr-row">
   <div class="clr-col-12">
-    <button class="btn btn-sm btn-success" (click)="cal()" style="float: left;">
+    <button class="btn btn-sm btn-primary" (click)="cal()" style="float: left;">
       <clr-icon shape="calculator" class="is-solid"></clr-icon>
       คำนวน Surgical Mask
     </button>
-    <button class="btn btn-lg primary" (click)="approved()" style="float: right;" [disabled]="!selected.length">
+    <button class="btn btn-sm btn-success" (click)="approved()" style="float: right;" [disabled]="!selected.length">
       <clr-icon shape="floppy" class="is-solid"></clr-icon>
-      อนุมัติ
+      อนุมัติ {{countApprove}} รายการ
     </button>
   </div>
 </div>
 
-<clr-datagrid [clrDgLoading]="loading" [style.height.px]="800" [(clrDgSelected)]="selected" [clrDgRowSelection]="true">
+<clr-datagrid [clrDgLoading]="loading" [style.height.px]="800" [(clrDgSelected)]="selected" [clrDgRowSelection]="true" (clrDgSelectedChange)="selectionChanged($event)">
   <clr-dg-column>รหัสใบเติม</clr-dg-column>
   <clr-dg-column>วันที่</clr-dg-column>
 
