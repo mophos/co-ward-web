@@ -148,4 +148,23 @@ export class InventoryStatusComponent implements OnInit {
     }
   }
 
+  async receive(l) {
+    const confirm = await this.alertService.confirm();
+    if (confirm) {
+      try {
+        console.log(l);
+        
+        const rs: any = await this.inventoryService.saveWmGenerics(l);
+        if (rs.ok) {
+          this.alertService.success();
+          this.getInventoryStatus();
+        } else {
+          this.alertService.error();
+        }
+      } catch (error) {
+        this.alertService.error();
+      }
+    }
+  }
+
 }
