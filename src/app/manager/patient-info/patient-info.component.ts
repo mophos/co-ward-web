@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertService } from '../../help/alert.service';
-import { PatientInfoService } from '../services/patient-info.service';
+import { PatientInfoService } from '../patient-info.service';
 
 @Component({
   selector: 'app-patient-info',

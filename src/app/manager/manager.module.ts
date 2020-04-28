@@ -20,6 +20,8 @@ import { ReportBedsComponent } from './report-beds/report-beds.component';
 import { ReportProfessionalsComponent } from './report-professionals/report-professionals.component';
 import { ReportSuppliesSummaryComponent } from './report-supplies-summary/report-supplies-summary.component';
 import { ReportMedicalsComponent } from './report-medicals/report-medicals.component';
+import { ReportBedByTypeComponent } from './report-bed/report-beds.component';
+import { PatientInfoComponent } from './patient-info/patient-info.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { ReportMedicalsComponent } from './report-medicals/report-medicals.compo
     ReportBedsComponent,
     ReportProfessionalsComponent,
     ReportSuppliesSummaryComponent,
-    ReportMedicalsComponent
+    ReportMedicalsComponent,
+    ReportBedByTypeComponent,
+    PatientInfoComponent
   ],
   imports: [
     CommonModule,

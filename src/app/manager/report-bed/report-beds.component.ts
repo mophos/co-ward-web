@@ -8,7 +8,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   templateUrl: './report-beds.component.html',
   styles: []
 })
-export class ReportBedsComponent implements OnInit {
+export class ReportBedByTypeComponent implements OnInit {
   list: any;
   zone: any = '';
   date: any;

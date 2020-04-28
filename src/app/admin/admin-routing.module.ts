@@ -26,9 +26,6 @@ import { RequisitionMinMaxComponent } from './requisition-min-max/requisition-mi
 import { AuthRestockCollection } from '../auth-restock-collection.service';
 import { ManageRestockCollectionComponent } from './manage-restock-collection/manage-restock-collection.component';
 import { ManageMinMaxDrugsComponent } from './manage-min-max-drugs/manage-min-max-drugs.component';
-import { ReportBedsComponent } from './report-beds/report-beds.component';
-import { PatientInfoComponent } from './patient-info/patient-info.component';
-import { AuthSearchPatient } from './auth-search-patient.service';
 import { FulfillSurgicalMaskComponent } from './fulfill-surgical-mask/fulfill-surgical-mask.component';
 import { FulfillSurgicalMaskListComponent } from './fulfill-surgical-mask-list/fulfill-surgical-mask-list.component';
 
@@ -83,8 +80,6 @@ const routes: Routes = [
       { path: 'min-max-drugs', component: ManageMinMaxDrugsComponent },
       { path: 'min-max-supplies', component: ManageMinMaxSuppliesComponent },
       { path: 'systems', component: ManageSystemsComponent },
-      { path: 'report-beds', component: ReportBedsComponent },
-      { path: 'patient-info', canActivate: [AuthSearchPatient], component: PatientInfoComponent },
     ]
   }
 ];

@@ -2,26 +2,31 @@ import { ReportSuppliesSummaryComponent } from './report-supplies-summary/report
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
-import { AuthGuard } from '../auth-guard.service';
 import { ReportPatientsComponent } from './report-patients/report-patients.component';
 import { ReportSuppliesComponent } from './report-supplies/report-supplies.component';
 import { ReportBedsComponent } from './report-beds/report-beds.component';
 import { ReportProfessionalsComponent } from './report-professionals/report-professionals.component';
 import { ReportMedicalsComponent } from './report-medicals/report-medicals.component';
+import { ReportBedByTypeComponent } from './report-bed/report-beds.component';
+import { PatientInfoComponent } from './patient-info/patient-info.component';
+import { ManagerGuard } from '../manager-guard.service';
+import { AuthSearchPatient } from './auth-search-patient.service';
 
 const routes: Routes = [
   {
     path: 'manager',
     component: LayoutComponent,
-    canActivate: [AuthGuard],
+    canActivate: [ManagerGuard],
     children: [
-      { path: '', redirectTo: 'report-supplies', pathMatch: 'full' },
+      { path: '', redirectTo: 'report-bed-by-types', pathMatch: 'full' },
       { path: 'report-supplies-summary', component: ReportSuppliesSummaryComponent },
       { path: 'report-supplies', component: ReportSuppliesComponent },
       { path: 'report-patients', component: ReportPatientsComponent },
       { path: 'report-beds', component: ReportBedsComponent },
       { path: 'report-professionals', component: ReportProfessionalsComponent },
       { path: 'report-medicals', component: ReportMedicalsComponent },
+      { path: 'report-bed-by-types', component: ReportBedByTypeComponent },
+      { path: 'patient-info', canActivate: [AuthSearchPatient], component: PatientInfoComponent },
     ]
   }
 ];

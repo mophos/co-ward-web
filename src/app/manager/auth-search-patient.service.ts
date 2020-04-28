@@ -26,7 +26,7 @@ export class AuthSearchPatient implements CanActivate {
           return false;
         } else {
           let isAccess = false;
-          if (findIndex(rights, { name: 'ADMIN_SEARCH_PATIENTS' }) > -1) {
+          if (findIndex(rights, { name: 'MANAGER_REPORT_PATIENT' }) > -1) {
             isAccess = true;
           } else {
             isAccess = false;

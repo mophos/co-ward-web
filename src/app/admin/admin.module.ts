@@ -31,9 +31,7 @@ import { HomeComponent } from './home/home.component';
 import { FulfillDrugsComponent } from './fulfill-drugs/fulfill-drugs.component';
 import { ManageMinMaxDrugsComponent } from './manage-min-max-drugs/manage-min-max-drugs.component';
 import { ManageSystemsComponent } from './manage-systems/manage-systems.component';
-import { ReportBedsComponent } from './report-beds/report-beds.component';
 import { MyDatePickerTHModule } from 'mydatepicker-th';
-import { PatientInfoComponent } from './patient-info/patient-info.component';
 import { FulfillSurgicalMaskComponent } from './fulfill-surgical-mask/fulfill-surgical-mask.component';
 import { FulfillSurgicalMaskListComponent } from './fulfill-surgical-mask-list/fulfill-surgical-mask-list.component';
 import { FulfillSuppliesComponent } from './fulfill-supplies/fulfill-supplies.component';
@@ -59,8 +57,6 @@ import { ManageMinMaxSuppliesComponent } from './manage-min-max-supplies/manage-
     FulfillDrugsComponent,
     ManageMinMaxDrugsComponent,
     ManageSystemsComponent,
-    ReportBedsComponent,
-    PatientInfoComponent,
     FulfillSurgicalMaskComponent,
     FulfillSurgicalMaskListComponent,
     FulfillSuppliesComponent,
