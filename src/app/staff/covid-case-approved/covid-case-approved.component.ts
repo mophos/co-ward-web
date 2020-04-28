@@ -123,16 +123,15 @@ export class CovidCaseApprovedComponent implements OnInit {
         }
         const rs: any = await this.covidCaseService.approved(this.drugStock, dataReqId);
         if (rs.ok) {
-          this.isSave = false;
           this.clear();
           this.getDetails();
           this.getList();
           this.alertService.success();
         } else {
-          this.isSave = false;
           this.alertService.error();
         }
       }
+      this.isSave = false;
     } catch (error) {
       this.isSave = false;
       this.alertService.error(error);
