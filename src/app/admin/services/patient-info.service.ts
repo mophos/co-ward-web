@@ -8,8 +8,8 @@ export class PatientInfoService {
 
   constructor(private http: HttpClient, @Inject('API_URL') private url: string) { }
 
-  getList(cid) {
-    const url = `${this.url}/v1/admin/patient-info?cid=${cid}`;
+  getList(keys) {
+    const url = `${this.url}/v1/admin/patient-info?keys=${keys}`;
     return this.http.get(url).toPromise();
   }
 }

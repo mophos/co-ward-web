@@ -6,8 +6,7 @@
   <clr-tab>
     <button clrTabLink id="link1" (click)="getInventoryStatus()">รายการคงคลัง</button>
     <clr-tab-content id="content1" *clrIfActive="true">
-      <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800" [(clrDgSelected)]="selected"
-        [clrDgRowSelection]="true">
+      <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800" [(clrDgSelected)]="selected" [clrDgRowSelection]="true">
         <clr-dg-column>#</clr-dg-column>
         <!-- <clr-dg-column>ชื่อโรงพยาบาล</clr-dg-column> -->
         <clr-dg-column>ชื่อของ</clr-dg-column>
@@ -60,10 +59,23 @@
           <clr-dg-cell>{{l.approved_date | dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
           <clr-dg-cell>{{l.code}}</clr-dg-cell>
           <clr-dg-cell>
-            <button class="btn btn-sm btn-icon btn-primary" style="margin: 0;" (click)="export(l.id)">
+            <button class="btn btn-sm btn-icon btn-success" style="margin: 0;" (click)="receive(l)">
               <clr-icon shape="download"></clr-icon>
+              รับเข้าคลัง
             </button>
           </clr-dg-cell>
+          <clr-datagrid ngProjectAs="clr-dg-row-detail" *clrIfExpanded>
+            <clr-dg-column>ชื่อ</clr-dg-column>
+            <clr-dg-column>จำนวน</clr-dg-column>
+            <clr-dg-column>หน่วย</clr-dg-column>
+
+            <clr-dg-row *ngFor="let i of l.details;">
+              <clr-dg-cell>{{i.generic_name}}</clr-dg-cell>
+              <clr-dg-cell>{{i.qty}}</clr-dg-cell>
+              <clr-dg-cell>{{i.unit_name}}</clr-dg-cell>
+            </clr-dg-row>
+            <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
+          </clr-datagrid>
         </clr-dg-row>
         <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
         <clr-dg-footer>
