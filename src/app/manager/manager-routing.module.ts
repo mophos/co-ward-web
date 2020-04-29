@@ -13,6 +13,7 @@ import { ManagerGuard } from '../manager-guard.service';
 import { AuthSearchPatient } from './auth-search-patient.service';
 import { ReportDms2Component } from './report-dms/report-dms2/report-dms2.component';
 import { ReportDms3Component } from './report-dms/report-dms3/report-dms3.component';
+import { ReportDms4Component } from './report-dms/report-dms4/report-dms4.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,7 @@ const routes: Routes = [
       { path: 'patient-info', canActivate: [AuthSearchPatient], component: PatientInfoComponent },
       { path: 'report-dms2', component: ReportDms2Component },
       { path: 'report-dms3', component: ReportDms3Component },
+      { path: 'report-dms4', component: ReportDms4Component },
     ]
   }
 ];
