@@ -6,7 +6,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ReportDmsService {
 
-  constructor(private http: HttpClient, @Inject('API_URL') private url: string) {
+  constructor(private http: HttpClient, @Inject('API_URL') private url: string) { }
 
+  getReport2(date) {
+    const url = `${this.url}/v1/manager/report-dms/report2?date=${date}`;
+    return this.http.get(url).toPromise();
   }
 }
