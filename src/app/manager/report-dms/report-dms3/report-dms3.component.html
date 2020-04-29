@@ -3,18 +3,23 @@
 </nav>
 <br>
 <div class="clr-row">
-  <div class="clr-col-7">
-    รายงานการแจ้งจำนวนผู้ป่วยเพื่อเบิกเวชภัณฑ์​สิ้นเปลืองประจำวัน ณ วันที่ {{date | dateTh:'D MMM YYYY'}}
-     <my-date-picker-th name="dateset" [options]="myDatePickerOptions" [(ngModel)]="date" required>
-      </my-date-picker-th>
+  <div class="clr-col-4">
+    <!-- รายงานจำนวนเตียงผู้ป่วย ณ วันที่ {{date | dateTh:'D MMM YYYY'}} -->
+    <my-date-picker-th name="date" [options]="myDatePickerOptions" [(ngModel)]="date" required>
+    </my-date-picker-th>
   </div>
-  <div class="clr-col-5" style="text-align: right;">
+  <div class="clr-col-1">
+    <button class="btn btn-sm btn-primary" (click)="doEnter()">
+      <clr-icon shape="search"></clr-icon>
+    </button>
+  </div>
+  <div class="clr-col-7" style="text-align: right;">
     <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
-        <clr-icon shape="download"></clr-icon>export excel
-      </button>
+      <clr-icon shape="download"></clr-icon>export excel
+    </button>
     <!-- <button class="btn btn-sm btn-success" (click)="doExportCsv()">
-        <clr-icon shape="download"></clr-icon>export csv
-      </button> -->
+          <clr-icon shape="download"></clr-icon>export csv
+        </button> -->
   </div>
 </div>
 
@@ -31,7 +36,7 @@
     <th class="right" style="position: sticky; top: 0;">อาการไม่รุนแรง <br> (Mild Case)</th>
     <th class="right" style="position: sticky; top: 0;">ผู้ป่วยผลบวกไม่มีอาการ <br> (Asymptomatic)</th>
   </tr>
-  <tr >
+  <tr>
     <td class="left">รวม</td>
     <td class="right">{{sum['severe']}}</td>
     <td class="right">{{sum['moderate']}}</td>

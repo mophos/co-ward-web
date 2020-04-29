@@ -1,3 +1,66 @@
-<p>
-  report-dms4 works!
-</p>
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">ยอดผู้ป่วยสะสมรวมที่รับไว้รักษาในโรงพยาบาล
+  </span>
+</nav>
+<br>
+<div class="clr-row">
+  <div class="clr-col-4">
+    <!-- รายงานจำนวนเตียงผู้ป่วย ณ วันที่ {{date | dateTh:'D MMM YYYY'}} -->
+    <my-date-picker-th name="date" [options]="myDatePickerOptions" [(ngModel)]="date" required>
+    </my-date-picker-th>
+  </div>
+  <div class="clr-col-1">
+    <button class="btn btn-sm btn-primary" (click)="doEnter()">
+      <clr-icon shape="search"></clr-icon>
+    </button>
+  </div>
+  <div class="clr-col-7" style="text-align: right;">
+    <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
+      <clr-icon shape="download"></clr-icon>export excel
+    </button>
+    <!-- <button class="btn btn-sm btn-success" (click)="doExportCsv()">
+          <clr-icon shape="download"></clr-icon>export csv
+        </button> -->
+  </div>
+</div>
+
+<table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
+  <tr>
+    <th rowspan="2" class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">โรงพยาบาล</th>
+    <th colspan="4" class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">Positive ยอดสะสม</th>
+    <th colspan="4" class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">PUI ยอดสะสม</th>
+    <th rowspan="2" class="right" style="position: sticky; top: 0;">หน่วยงาน</th>
+  </tr>
+  <tr>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">Admit</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">Discharge รวมสะสม <br> (รวมส่ง
+      Hospitel รวมตาย)</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">Discharge <br> ส่ง Hospitel</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">Discharge ตายสะสม</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">Admit</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">Discharge รวมสะสม <br> (รวมส่ง
+      Hospitel รวมตาย)</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">Discharge <br> ส่ง Hospitel</th>
+    <th class="right" style="position: sticky; top: 0;">Discharge ตายสะสม</th>
+  </tr>
+  <!-- <tr>
+      <th class="right" style="position: sticky; top: 0;">รวม</th>
+      <th class="right" style="position: sticky; top: 0;">{{sCase}}</th>
+      <th class="right" style="position: sticky; top: 0;">{{mCase}}</th>
+      <th class="right" style="position: sticky; top: 0;">{{mdCase}}</th>
+      <th class="right" style="position: sticky; top: 0;">{{aCase}}</th>
+      <th class="right" style="position: sticky; top: 0;">{{pCase}}</th>
+      <th class="right" style="position: sticky; top: 0;"></th>
+    </tr> -->
+  <!-- <tr *ngFor="let h of list">
+      <td class="left">{{h.hospname}}</td>
+      <td class="right">{{h['severe'] }}</td>
+      <td class="right">{{h['moderate'] }}</td>
+      <td class="right">{{h['mild'] }}</td>
+      <td class="right">{{h['asymptomatic'] }}</td>
+      <td class="right">{{h['ip_pui'] }}</td>
+      <td class="right">{{h['hosp_sub_min_name'] }}</td>
+    </tr> -->
+</table>
+
+<app-loadding #loading></app-loadding>

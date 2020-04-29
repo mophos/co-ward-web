@@ -13,7 +13,13 @@ export class ReportDms3Component implements OnInit {
   @ViewChild('loading') public loading;
   list: any;
   date: any;
-  sum: any;
+  sum = {
+    ip_pui: '-',
+    asymptomatic: '-',
+    mild: '-',
+    moderate: '-',
+    severe: '-'
+  };
   myDatePickerOptions: IMyOptions = {
     inline: false,
     dateFormat: 'dd mmm yyyy',
@@ -76,6 +82,12 @@ export class ReportDms3Component implements OnInit {
       this.loading.hide();
     }
   }
+
+
+  doEnter() {
+    this.getList();
+  }
+
 
   downloadFile(name, type, data: any) {
     try {
