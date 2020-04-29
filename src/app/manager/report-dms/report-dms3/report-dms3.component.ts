@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertService } from 'src/app/help/alert.service';
 import { ReportDmsService } from '../report-dms.service';
-
+import { IMyOptions } from 'mydatepicker-th';
+import * as moment from 'moment';
 @Component({
   selector: 'app-report-dms3',
   templateUrl: './report-dms3.component.html',
@@ -13,20 +14,32 @@ export class ReportDms3Component implements OnInit {
     private alertService: AlertService,
     private reportService: ReportDmsService, ) { }
   date: any;
+  myDatePickerOptions: IMyOptions = {
+    inline: false,
+    dateFormat: 'dd mmm yyyy',
+    editableDateField: false,
+    showClearDateBtn: false
+  };
   ngOnInit() {
+    this.date = {
+      date: {
+        year: moment().get('year'),
+        month: moment().get('month') + 1,
+        day: moment().get('day')
+      }
+    };
   }
 
 
   async onClickExport() {
     this.modalLoading.show();
     try {
-      const rs: any = await this.reportService.getReport3Excel(this.date);
+      const rs: any = await this.reportService.getReport3Excel(`${this.date.date.year}-${this.date.date.month}-29`);
       console.log(rs);
       if (!rs) {
         this.modalLoading.hide();
       } else {
-        this.downloadFile('รายการเติมยา', 'xlsx', rs);
-        // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
+        this.downloadFile('รายงานการแจ้งจำนวนผู้ป่วยเพื่อเบิกเวชภัณฑ์​สิ้นเปลืองประจำวัน', 'xlsx', rs);
         this.modalLoading.hide();
       }
     } catch (error) {
