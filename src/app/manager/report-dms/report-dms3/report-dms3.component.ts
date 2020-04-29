@@ -3,6 +3,7 @@ import { AlertService } from 'src/app/help/alert.service';
 import { ReportDmsService } from '../report-dms.service';
 import { IMyOptions } from 'mydatepicker-th';
 import * as moment from 'moment';
+import { sumBy, map } from 'lodash';
 @Component({
   selector: 'app-report-dms3',
   templateUrl: './report-dms3.component.html',
@@ -12,6 +13,13 @@ export class ReportDms3Component implements OnInit {
   @ViewChild('loading') public loading;
   list: any;
   date: any;
+  sum = {
+    ip_pui: '-',
+    asymptomatic: '-',
+    mild: '-',
+    moderate: '-',
+    severe: '-'
+  };
   myDatePickerOptions: IMyOptions = {
     inline: false,
     dateFormat: 'dd mmm yyyy',
@@ -40,6 +48,13 @@ export class ReportDms3Component implements OnInit {
       const rs: any = await this.reportService.getReport3(date);
       if (rs.ok) {
         this.list = rs.rows;
+        this.sum = {
+          ip_pui: sumBy(this.list, 'ip_pui'),
+          asymptomatic: sumBy(this.list, 'asymptomatic'),
+          mild: sumBy(this.list, 'mild'),
+          moderate: sumBy(this.list, 'moderate'),
+          severe: sumBy(this.list, 'severe'),
+        };
         this.loading.hide();
       } else {
         this.loading.hide();

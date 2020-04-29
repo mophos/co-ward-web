@@ -31,6 +31,15 @@
     <th class="right" style="position: sticky; top: 0;">อาการไม่รุนแรง <br> (Mild Case)</th>
     <th class="right" style="position: sticky; top: 0;">ผู้ป่วยผลบวกไม่มีอาการ <br> (Asymptomatic)</th>
   </tr>
+  <tr >
+    <td class="left">รวม</td>
+    <td class="right">{{sum['severe']}}</td>
+    <td class="right">{{sum['moderate']}}</td>
+    <td class="right">{{sum['mild']}}</td>
+    <td class="right">{{sum['asymptomatic']}}</td>
+    <td class="right">{{sum['ip_pui']}}</td>
+    <td class="right"></td>
+  </tr>
   <tr *ngFor="let h of list">
     <td class="left">{{h.hospname}}</td>
     <td class="right">{{h['severe'] }}</td>
