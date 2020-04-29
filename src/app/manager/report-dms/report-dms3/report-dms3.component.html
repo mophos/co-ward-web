@@ -1,6 +1,45 @@
-<p>
-  report-dms3 works!
-</p>
-<button class="btn btn-primary btn-sm" (click)="onClickExport()">Export</button>
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">รายงานการแจ้งจำนวนผู้ป่วยเพื่อเบิกเวชภัณฑ์​สิ้นเปลืองประจำวัน</span>
+</nav>
+<br>
+<div class="clr-row">
+  <div class="clr-col-7">
+    รายงานการแจ้งจำนวนผู้ป่วยเพื่อเบิกเวชภัณฑ์​สิ้นเปลืองประจำวัน ณ วันที่ {{date | dateTh:'D MMM YYYY'}}
+     <my-date-picker-th name="dateset" [options]="myDatePickerOptions" [(ngModel)]="date" required>
+      </my-date-picker-th>
+  </div>
+  <div class="clr-col-5" style="text-align: right;">
+    <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
+        <clr-icon shape="download"></clr-icon>export excel
+      </button>
+    <!-- <button class="btn btn-sm btn-success" (click)="doExportCsv()">
+        <clr-icon shape="download"></clr-icon>export csv
+      </button> -->
+  </div>
+</div>
 
-<app-loadding #modalLoading></app-loadding>
+<table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
+  <tr>
+    <th rowspan="2" class="right" style="position: sticky; top: 0;">โรงพยาบาล</th>
+    <th colspan="4" class="right" style="position: sticky; top: 0;">ผู้ป่วยยืนยัน (Confirm Case)</th>
+    <th rowspan="2" class="right" style="position: sticky; top: 0;">ผู้ป่วยเข้าเกณฑ์สงสัย PUI</th>
+    <th rowspan="2" class="right" style="position: sticky; top: 0;">หน่วยงาน</th>
+  </tr>
+  <tr>
+    <th class="right" style="position: sticky; top: 0;">อาการรุนแรง <br> (Severe Case)</th>
+    <th class="right" style="position: sticky; top: 0;">อาการรุนแรงปานกลาง <br> (Moderate Case)</th>
+    <th class="right" style="position: sticky; top: 0;">อาการไม่รุนแรง <br> (Mild Case)</th>
+    <th class="right" style="position: sticky; top: 0;">ผู้ป่วยผลบวกไม่มีอาการ <br> (Asymptomatic)</th>
+  </tr>
+  <tr *ngFor="let h of list">
+    <td class="left">{{h.hospname}}</td>
+    <td class="right">{{h['severe'] }}</td>
+    <td class="right">{{h['moderate'] }}</td>
+    <td class="right">{{h['mild'] }}</td>
+    <td class="right">{{h['asymptomatic'] }}</td>
+    <td class="right">{{h['ip_pui'] }}</td>
+    <td class="right">{{h['hosp_sub_min_name'] }}</td>
+  </tr>
+</table>
+
+<app-loadding #loading></app-loadding>

@@ -9,10 +9,8 @@ import * as moment from 'moment';
   styles: []
 })
 export class ReportDms3Component implements OnInit {
-  @ViewChild('modalLoading') public modalLoading;
-  constructor(
-    private alertService: AlertService,
-    private reportService: ReportDmsService, ) { }
+  @ViewChild('loading') public loading;
+  list: any;
   date: any;
   myDatePickerOptions: IMyOptions = {
     inline: false,
@@ -20,32 +18,53 @@ export class ReportDms3Component implements OnInit {
     editableDateField: false,
     showClearDateBtn: false
   };
-  ngOnInit() {
+  constructor(
+    private alertService: AlertService,
+    private reportService: ReportDmsService, ) { }
+
+  async ngOnInit() {
     this.date = {
       date: {
         year: moment().get('year'),
         month: moment().get('month') + 1,
-        day: moment().get('day')
+        day: moment().get('date')
       }
     };
+    await this.getList();
   }
 
-
+  async getList() {
+    this.loading.show();
+    try {
+      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
+      const rs: any = await this.reportService.getReport3(date);
+      if (rs.ok) {
+        this.list = rs.rows;
+        this.loading.hide();
+      } else {
+        this.loading.hide();
+        this.alertService.error();
+      }
+    } catch (error) {
+      this.loading.hide();
+      this.alertService.error(error);
+    }
+  }
   async onClickExport() {
-    this.modalLoading.show();
+    this.loading.show();
     try {
       const rs: any = await this.reportService.getReport3Excel(`${this.date.date.year}-${this.date.date.month}-29`);
       console.log(rs);
       if (!rs) {
-        this.modalLoading.hide();
+        this.loading.hide();
       } else {
         this.downloadFile('รายงานการแจ้งจำนวนผู้ป่วยเพื่อเบิกเวชภัณฑ์​สิ้นเปลืองประจำวัน', 'xlsx', rs);
-        this.modalLoading.hide();
+        this.loading.hide();
       }
     } catch (error) {
       console.log(error);
       this.alertService.error();
-      this.modalLoading.hide();
+      this.loading.hide();
     }
   }
 
