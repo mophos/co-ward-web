@@ -37,7 +37,7 @@ export class ReportPatientsComponent implements OnInit {
       date: {
         year: moment().get('year'),
         month: moment().get('month') + 1,
-        day: moment().get('day')
+        day: moment().get('date')
       }
     };
     const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;

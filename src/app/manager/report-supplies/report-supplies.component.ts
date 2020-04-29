@@ -52,7 +52,7 @@ export class ReportSuppliesComponent implements OnInit {
       date: {
         year: moment().get('year'),
         month: moment().get('month') + 1,
-        day: moment().get('day')
+        day: moment().get('date')
       }
     };
     this.dateShow = this.dateset.date.year + '-' + this.dateset.date.month + '-' + this.dateset.date.day;

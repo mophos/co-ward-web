@@ -46,7 +46,7 @@ export class CovidCaseComponent implements OnInit {
       date: {
         year: moment().get('year'),
         month: moment().get('month') + 1,
-        day: moment().get('day')
+        day: moment().get('date')
       }
     };
   }
