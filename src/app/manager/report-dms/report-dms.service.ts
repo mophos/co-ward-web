@@ -54,12 +54,12 @@ export class ReportDmsService {
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
   async getReport6(date) {
-    const url = `${this.apiUrl}/v1/manager/report-dms/report6?date=${date}`;
+    const url = `${this.apiUrl}/v1/report/admin/get-bed`;
     return await this.http.get(url).toPromise();
   }
 
   async getReport6Excel(date) {
-    const url = `${this.apiUrl}/v1/manager/report-dms/report6/excel?date=${date}`;
+    const url = `${this.apiUrl}/v1/report/admin/get-bed/exce`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
   async getReport7(date) {

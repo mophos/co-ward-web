@@ -1,0 +1,90 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">รายงานเตียงว่างแยกประเภท</span>
+</nav>
+<br>
+<div class="clr-row">
+  <div class="clr-col-4">
+    <!-- รายงานจำนวนเตียงผู้ป่วย ณ วันที่ {{date | dateTh:'D MMM YYYY'}} -->
+    <!-- <my-date-picker-th name="date" [options]="myDatePickerOptions" [(ngModel)]="date" required> -->
+    <!-- </my-date-picker-th> -->
+  </div>
+  <div class="clr-col-1">
+    <!-- <button class="btn btn-sm btn-primary" (click)="doEnter()">
+      <clr-icon shape="search"></clr-icon>
+    </button> -->
+  </div>
+  <div class="clr-col-7" style="text-align: right;">
+    <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
+      <clr-icon shape="download"></clr-icon>export excel
+    </button>
+    <!-- <button class="btn btn-sm btn-success" (click)="doExportCsv()">
+              <clr-icon shape="download"></clr-icon>export csv
+            </button> -->
+  </div>
+</div>
+
+<table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
+  <tr>
+    <th rowspan="2" class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">โรงพยาบาล</th>
+    <th colspan="3" class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">AIIR</th>
+    <th colspan="3" class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">Modified AIIR</th>
+    <th colspan="3" class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">Isolate</th>
+    <th colspan="3" class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">Cohort</th>
+    <th colspan="3" class="right" style="position: sticky; top: 0;">Hospitel</th>
+  </tr>
+  <tr>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">ทั้งหมด</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">ใช้ไปแล้ว</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">คงเหลือ</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">ทั้งหมด</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">ใช้ไปแล้ว</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">คงเหลือ</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">ทั้งหมด</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">ใช้ไปแล้ว</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">คงเหลือ</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">ทั้งหมด</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">ใช้ไปแล้ว</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">คงเหลือ</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">ทั้งหมด</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">ใช้ไปแล้ว</th>
+    <th class="right" style="position: sticky; top: 0;">คงเหลือ</th>
+  </tr>
+  <tr>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">รวม</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">{{aiir1}}</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">{{aiir2}}</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">{{aiir3 || null}}</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">{{modi1}}</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">{{modi2}}</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">{{modi3 || null}}</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">{{iso1}}</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">{{iso2}}</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">{{iso3 || null}}</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">{{coh1}}</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">{{coh2}}</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">{{coh3 || null}}</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">{{host1}}</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">{{host2}}</th>
+    <th class="right" style="position: sticky; top: 0;">{{host3 || null}}</th>
+  </tr>
+  <tr *ngFor="let h of list">
+    <td class="left" style="border-right: 1px gray solid;">{{h.hospname}}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['AIIR_qty'] }}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['AIIR_usage_qty'] }}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['AIIR_qty'] - h['AIIR_usage_qty'] || null}}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['Modified AIIR_qty'] }}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['Modified AIIR_usage_qty'] }}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['Modified AIIR_qty'] - h['Modified AIIR_usage_qty'] || null}}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['Isolate_qty'] }}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['Isolate_usage_qty'] }}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['Isolate_qty'] - h['Isolate_usage_qty'] || null}}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['Cohort_qty'] }}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['Cohort_usage_qty'] }}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['Cohort_qty'] - h['Cohort_usage_qty'] || null}}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['Hospitel_qty'] }}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['Hospitel_usage_qty'] }}</td>
+    <td class="right">{{h['Hospitel_qty'] - h['Hospitel_usage_qty'] || null}}</td>
+  </tr>
+</table>
+
+<app-loadding #loading></app-loadding>

@@ -46,12 +46,12 @@
     <th class="right" style="position: sticky; top: 0;"></th>
   </tr>
   <tr *ngFor="let h of list">
-    <td class="left">{{h.hospname}}</td>
-    <td class="right">{{h['severe'] }}</td>
-    <td class="right">{{h['moderate'] }}</td>
-    <td class="right">{{h['mild'] }}</td>
-    <td class="right">{{h['asymptomatic'] }}</td>
-    <td class="right">{{h['ip_pui'] }}</td>
+    <td class="left" style="border-right: 1px gray solid;">{{h.hospname}}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['severe'] }}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['moderate'] }}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['mild'] }}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['asymptomatic'] }}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['ip_pui'] }}</td>
     <td class="right">{{h['hosp_sub_min_name'] }}</td>
   </tr>
 </table>
