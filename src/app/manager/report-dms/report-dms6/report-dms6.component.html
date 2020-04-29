@@ -67,7 +67,7 @@
     <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">{{host2}}</th>
     <th class="right" style="position: sticky; top: 0;">{{host3 || null}}</th>
   </tr>
-  <tr *ngFor="let h of list">
+  <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
     <td class="left" style="border-right: 1px gray solid;">{{h.hospname}}</td>
     <td class="right" style="border-right: 1px gray solid;">{{h['AIIR_qty'] }}</td>
     <td class="right" style="border-right: 1px gray solid;">{{h['AIIR_usage_qty'] }}</td>

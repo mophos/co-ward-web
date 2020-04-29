@@ -52,7 +52,7 @@
       <th class="right" style="position: sticky; top: 0;">{{pCase}}</th>
       <th class="right" style="position: sticky; top: 0;"></th>
     </tr> -->
-  <!-- <tr *ngFor="let h of list">
+  <!-- <tr *ngFor="let h of list ; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
       <td class="left">{{h.hospname}}</td>
       <td class="right">{{h['severe'] }}</td>
       <td class="right">{{h['moderate'] }}</td>

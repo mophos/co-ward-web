@@ -45,7 +45,7 @@
     <td class="right" style="border-right: 1px gray solid;">{{sum['ip_pui']}}</td>
     <td class="right"></td>
   </tr>
-  <tr *ngFor="let h of list">
+  <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
     <td class="left" style="border-right: 1px gray solid;">{{h.hospname}}</td>
     <td class="right" style="border-right: 1px gray solid;">{{h['severe'] }}</td>
     <td class="right" style="border-right: 1px gray solid;">{{h['moderate'] }}</td>

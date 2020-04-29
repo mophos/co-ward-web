@@ -42,7 +42,7 @@
     <th class="right" style="position: sticky; top: 0;">{{qty5}}</th>
   </tr>
 
-  <tr *ngFor="let h of list">
+  <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
     <td class="left" style="border-right: 1px gray solid;">{{h.name}}</td>
     <td class="right" style="border-right: 1px gray solid;">{{h.hospital_qty}}</td>
     <td class="right" style="border-right: 1px gray solid;">{{h.bed_qty}}</td>
