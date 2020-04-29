@@ -21,7 +21,7 @@ export class Register2Service {
 
 
   register2(data) {
-    const url = `${this.url}/v1/register2`;
+    const url = `${this.url}/v1/register/2`;
     return this.http.post(url, { data }).toPromise();
   }
 
