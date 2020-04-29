@@ -119,7 +119,7 @@ export class Register2Component implements OnInit {
             isSupplies: this.isSupplies
           };
 
-          const rs: any = await this.registerService.register(obj);
+          const rs: any = await this.registerService.register2(obj);
           if (rs.ok) {
             this.alertService.success();
             if (this.redirect) {
