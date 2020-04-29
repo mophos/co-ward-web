@@ -6,9 +6,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ReportDmsService {
 
-  constructor(private http: HttpClient, @Inject('API_URL') private apiUrl: string) {
+  constructor(private http: HttpClient, @Inject('API_URL') private apiUrl: string) { }
 
-  }
   async getReport1(date) {
     const url = `${this.apiUrl}/v1/manager/report-dms/report1?date=${date}`;
     return await this.http.get(url).toPromise();
