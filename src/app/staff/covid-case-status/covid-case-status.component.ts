@@ -209,6 +209,7 @@ export class CovidCaseStatusComponent implements OnInit {
       const rs: any = await this.basicAuthService.getMedicalSupplies();
       if (rs.ok) {
         this.medicalSupplies = rs.rows;
+        this.medicalSupplies.push({ id: null, name: 'ไม่ใช้งาน' });
       } else {
         this.alertService.serverError();
       }

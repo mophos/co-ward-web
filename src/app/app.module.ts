@@ -1,3 +1,4 @@
+import { Register2Component } from './register2/register2.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
@@ -30,6 +31,7 @@ export function tokenGetter() {
     PageNotFoundComponent,
     RegisterComponent,
     RegisterDrugComponent,
+    Register2Component
   ],
   imports: [
     AppRoutingModule,
