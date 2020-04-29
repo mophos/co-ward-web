@@ -72,6 +72,11 @@
             <clr-icon shape="folder-open" class="is-solid"></clr-icon>
             2. ประเภทความรุนแรงของผู้ป่วยที่ยังรักษาตัวอยู่
           </a>
+          <a *ngIf="reportBed" clrVerticalNavLink routerLink="/manager/report-dms3" title="รายงานการแจ้งจำนวนผู้ป่วยเพื่อเบิกเวชภัณฑ์​สิ้นเปลืองประจำวัน"
+            routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            3. รายงานการแจ้งจำนวนผู้ป่วยเพื่อเบิกเวชภัณฑ์​สิ้นเปลืองประจำวัน
+          </a>
           <a *ngIf="reportBed" clrVerticalNavLink routerLink="/manager/report-bed-by-types" title="รายงานเตียงว่างแยกประเภท"
             routerLinkActive="active">
             <clr-icon shape="folder-open" class="is-solid"></clr-icon>
