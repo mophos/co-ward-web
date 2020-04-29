@@ -67,6 +67,11 @@
           รายงาน
         </a>
         <clr-vertical-nav-group-children *clrIfExpanded="true">
+          <a *ngIf="reportBed" clrVerticalNavLink routerLink="/manager/report-dms1" title="รายงานเตียงตามสังกัดหน่วยงาน"
+            routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            1. รายงานเตียงตามสังกัดหน่วยงาน
+          </a>
           <a *ngIf="reportBed" clrVerticalNavLink routerLink="/manager/report-dms2" title="ประเภทความรุนแรงของผู้ป่วยที่ยังรักษาตัวอยู่"
             routerLinkActive="active">
             <clr-icon shape="folder-open" class="is-solid"></clr-icon>

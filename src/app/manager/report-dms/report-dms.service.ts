@@ -8,13 +8,13 @@ export class ReportDmsService {
 
   constructor(private http: HttpClient, @Inject('API_URL') private apiUrl: string) { }
 
-  async getReport1(date) {
-    const url = `${this.apiUrl}/v1/manager/report-dms/report1?date=${date}`;
+  async getReport1() {
+    const url = `${this.apiUrl}/v1/manager/report-dms/report1`;
     return await this.http.get(url).toPromise();
   }
 
-  async getReport1Excel(date) {
-    const url = `${this.apiUrl}/v1/manager/report-dms/report1/excel?date=${date}`;
+  async getReport1Excel() {
+    const url = `${this.apiUrl}/v1/manager/report-dms/report1/excel`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
   async getReport2(date) {
