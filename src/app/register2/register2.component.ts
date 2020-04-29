@@ -1,17 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { RegisterService } from '../register/register.service';
+import { Register2Service } from './register2.service';
 import { AlertService } from '../help/alert.service';
 import thaiIdCard from 'thai-id-card';
 import { AutocompleteHospitalComponent } from '../help/autocomplete-hospital/autocomplete-hospital.component';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
+  selector: 'app-register2',
+  templateUrl: './register2.component.html',
   styles: []
 })
-export class RegisterComponent implements OnInit {
+export class Register2Component implements OnInit {
 
   hospcodeConfirm: any = '';
   onSelectHospcode: any = null;
@@ -32,7 +32,6 @@ export class RegisterComponent implements OnInit {
   checkPasswordConfirm: any;
   checkEmail: any;
   checkPhone: any;
-  checkImage: any;
 
   titleList: any;
   positionList: any;
@@ -43,21 +42,18 @@ export class RegisterComponent implements OnInit {
   isDRUGS: any = false;
   isSupplies: any = false;
   hospName: any = '';
-
-  fileName: any;
-  filesToUpload: File = null;
-  isVerify = false;
-  modalOTP = false;
-
-  refCode = false;
-  dateOtp: any = 0;
-  otp = '';
+  redirect: any;
   @ViewChild('hospital') hosp: AutocompleteHospitalComponent;
   constructor(
     private alertService: AlertService,
-    private registerService: RegisterService,
+    private registerService: Register2Service,
     private router: Router,
-  ) { }
+    private route: ActivatedRoute
+  ) {
+    this.redirect = this.route.snapshot.params.redirect ? this.route.snapshot.params.redirect : null;
+    console.log(this.redirect);
+
+  }
 
   ngOnInit() {
     this.getTitle();
@@ -97,31 +93,13 @@ export class RegisterComponent implements OnInit {
     this.checkEmail = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(this.email);
   }
 
-  async fileChangeEvent(fileInput: any) {
-    this.filesToUpload = null;
-    this.filesToUpload = fileInput.target.files[0] as File;
-    if (this.filesToUpload) {
-      this.fileName = fileInput.target.files[0].name;
-    }
-    try {
-      const rs: any = await this.registerService.uploadUserSupplie(
-        this.filesToUpload,
-        this.cid,
-      );
-      if (rs.ok) {
-        this.checkImage = true;
-      }
-    } catch (error) {
-      this.alertService.error(error);
-    }
 
-  }
 
   async save() {
     const confirm = await this.alertService.confirm();
     if (confirm) {
       try {
-        if (this.onSelectHospcode === this.hospcodeConfirm && this.checkCid && this.position && this.title && this.firstName !== '' && this.lastName !== '' && this.username !== '' && this.checkPasswordConfirm && this.checkEmail && this.checkPhone && this.checkImage) {
+        if (this.onSelectHospcode === this.hospcodeConfirm && this.checkCid && this.position && this.title && this.firstName !== '' && this.lastName !== '' && this.username !== '' && this.checkPasswordConfirm && this.checkEmail && this.checkPhone) {
           const obj: any = {
             username: this.username,
             password: this.password,
@@ -141,10 +119,15 @@ export class RegisterComponent implements OnInit {
             isSupplies: this.isSupplies
           };
 
-          const rs: any = await this.registerService.register(obj);
+          const rs: any = await this.registerService.register2(obj);
           if (rs.ok) {
             this.alertService.success();
-            this.router.navigate(['/login']);
+            if (this.redirect) {
+              window.location.href = `http://${this.redirect}`;
+            } else {
+              window.location.reload();
+            }
+            // this.router.navigate(['/login']);
           } else {
             this.alertService.error(rs.error);
           }
@@ -220,41 +203,5 @@ export class RegisterComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  onClickRequestOTP() {
-    this.modalOTP = true;
-    this.sendRequestOTP();
-  }
 
-  async sendRequestOTP() {
-    try {
-      const date = (+moment().format('h') * 60) + +moment().format('m');
-      console.log(this.dateOtp, date);
-
-      if (this.dateOtp < date) {
-        this.dateOtp = date + 5;
-        const rs: any = await this.registerService.requestOTP(this.phoneNumber);
-        if (rs.ok) {
-          this.refCode = rs.ref_code;
-        }
-      } else {
-        this.alertService.error('กรุณารอ 5 นาที');
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async verifyOTP() {
-    try {
-      const rs: any = await this.registerService.verifyOTP(this.refCode, this.otp);
-      if (rs.ok) {
-        this.modalOTP = false;
-        this.isVerify = true;
-      } else {
-        this.alertService.error('OTP ไม่ถูกต้อง');
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
 }

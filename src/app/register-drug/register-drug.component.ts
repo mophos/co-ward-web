@@ -128,7 +128,7 @@ export class RegisterDrugComponent implements OnInit {
             right: ['STAFF_REQUISITION','STAFF_RECEIVE_DRUG']
           }
 
-          let rs: any = await this.registerService.saveUserSupplie(obj);
+          let rs: any = await this.registerService.register(obj);
           if (rs.ok) {
             this.alertService.success();
             this.router.navigate(['/login']);
