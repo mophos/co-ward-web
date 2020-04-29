@@ -15,6 +15,7 @@ import { ReportDms1Component } from './report-dms/report-dms1/report-dms1.compon
 import { ReportDms2Component } from './report-dms/report-dms2/report-dms2.component';
 import { ReportDms3Component } from './report-dms/report-dms3/report-dms3.component';
 import { ReportDms4Component } from './report-dms/report-dms4/report-dms4.component';
+import { ReportDms7Component } from './report-dms/report-dms7/report-dms7.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,7 @@ const routes: Routes = [
       { path: 'report-dms2', component: ReportDms2Component },
       { path: 'report-dms3', component: ReportDms3Component },
       { path: 'report-dms4', component: ReportDms4Component },
+      { path: 'report-dms7', component: ReportDms7Component },
     ]
   }
 ];

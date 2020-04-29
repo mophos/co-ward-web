@@ -1,0 +1,37 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">รายงานจำนวนประเภทเครื่องช่วยหายใจ</span>
+</nav>
+<br>
+<div class="clr-row">
+  <div class="clr-col-4">
+    <my-date-picker-th name="date" [options]="myDatePickerOptions" [(ngModel)]="date" required>
+    </my-date-picker-th>
+  </div>
+  <div class="clr-col-1">
+    <button class="btn btn-sm btn-primary" (click)="doEnter()">
+      <clr-icon shape="search"></clr-icon>
+    </button>
+  </div>
+  <div class="clr-col-7" style="text-align: right;">
+    <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
+      <clr-icon shape="download"></clr-icon>export excel
+    </button>
+  </div>
+</div>
+
+<table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
+  <tr>
+    <th rowspan="2">โรงพยาบาล</th>
+    <th colspan="3">Non-invasive ventilator (NIV)</th>
+    <th colspan="3">Invasive ventilator</th>
+    <th rowspan="2">หน่วยงาน</th>
+  </tr>
+  <tr>
+    <th>ใช้กับผู้ป่วย Covid</th>
+    <th>ว่างพร้อมใช้งานทั้งโรงพยาบาล</th>
+    <th>ทั้งหมด</th>
+    <th>ใช้กับผู้ป่วย Covid</th>
+    <th>ว่างพร้อมใช้งานทั้งโรงพยาบาล</th>
+    <th>ทั้งหมด</th>
+  </tr>
+</table>

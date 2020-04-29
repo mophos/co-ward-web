@@ -1,47 +1,52 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportDmsService } from '../report-dms.service';
 import { AlertService } from '../../../help/alert.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import * as moment from 'moment';
 import { sumBy } from 'lodash';
 
 @Component({
-  selector: 'app-report-dms1',
-  templateUrl: './report-dms1.component.html',
+  selector: 'app-report-dms7',
+  templateUrl: './report-dms7.component.html',
   styles: []
 })
-export class ReportDms1Component implements OnInit {
+export class ReportDms7Component implements OnInit {
 
   list: any;
-  qtyHosp: any;
-  qtyBed: any;
-  qty1: any;
-  qty2: any;
-  qty3: any;
-  qty4: any;
-  qty5: any;
+  date: any;
+  nivQty: any;
+  nivUse: any;
+  nivAll: any;
+  ivQty: any;
+  ivUse: any;
+  ivAll: any;
 
   @ViewChild('loading') loading: any;
+
+  public jwtHelper = new JwtHelperService();
 
   constructor(
     private reportService: ReportDmsService,
     private alertService: AlertService
   ) { }
 
-  ngOnInit() {
-    this.getList();
+  async ngOnInit() {
+    this.date = {
+      date: {
+        year: moment().get('year'),
+        month: moment().get('month') + 1,
+        day: moment().get('date')
+      }
+    };
+    await this.getList();
   }
 
   async getList() {
     this.loading.show();
     try {
-      const rs: any = await this.reportService.getReport1();
+      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
+      const rs: any = await this.reportService.getReport7(date);
       if (rs.ok) {
-        this.qtyHosp = sumBy(rs.rows, 'hospital_qty');
-        this.qtyBed = sumBy(rs.rows, 'bed_qty');
-        this.qty1 = sumBy(rs.rows, 'aiir_qty');
-        this.qty2 = sumBy(rs.rows, 'modified_aiir_qty');
-        this.qty3 = sumBy(rs.rows, 'isolate_qty');
-        this.qty4 = sumBy(rs.rows, 'cohort_qty');
-        this.qty5 = sumBy(rs.rows, 'hospitel_qty');
         this.list = rs.rows;
 
         this.loading.hide();
@@ -55,15 +60,19 @@ export class ReportDms1Component implements OnInit {
     }
   }
 
+  async doEnter() {
+    await this.getList();
+  }
+
   async doExportExcel() {
     this.loading.show();
     try {
-      const rs: any = await this.reportService.getReport1Excel();
-      console.log(rs);
+      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
+      const rs: any = await this.reportService.getReport2Excel(date);
       if (!rs) {
         this.loading.hide();
       } else {
-        this.downloadFile('report-dms1', 'xlsx', rs);
+        this.downloadFile('report-dms2', 'xlsx', rs);
         // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
         this.loading.hide();
       }
@@ -77,7 +86,6 @@ export class ReportDms1Component implements OnInit {
   downloadFile(name, type, data: any) {
     try {
       const url = window.URL.createObjectURL(new Blob([data]));
-      console.log(url);
       const fileName = `${name}.${type}`;
       // Debe haber una manera mejor de hacer esto...
       const a = document.createElement('a');

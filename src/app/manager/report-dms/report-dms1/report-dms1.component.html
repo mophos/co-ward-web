@@ -31,6 +31,17 @@
     <th>(3) Single room</th>
   </tr>
 
+  <tr>
+    <th class="right" style="position: sticky; top: 0;">รวม</th>
+    <th class="right" style="position: sticky; top: 0;">{{qtyHosp}}</th>
+    <th class="right" style="position: sticky; top: 0;">{{qtyBed}}</th>
+    <th class="right" style="position: sticky; top: 0;">{{qty1}}</th>
+    <th class="right" style="position: sticky; top: 0;">{{qty2}}</th>
+    <th class="right" style="position: sticky; top: 0;">{{qty3}}</th>
+    <th class="right" style="position: sticky; top: 0;">{{qty4}}</th>
+    <th class="right" style="position: sticky; top: 0;">{{qty5}}</th>
+  </tr>
+
   <tr *ngFor="let h of list">
     <td class="left">{{h.name}}</td>
     <td class="right">{{h.hospital_qty}}</td>
