@@ -36,6 +36,15 @@
     <th class="right" style="position: sticky; top: 0;">อาการไม่รุนแรง <br> (Mild Case)</th>
     <th class="right" style="position: sticky; top: 0;">ผู้ป่วยผลบวกไม่มีอาการ <br> (Asymptomatic)</th>
   </tr>
+  <tr>
+    <th class="right" style="position: sticky; top: 0;">รวม</th>
+    <th class="right" style="position: sticky; top: 0;">{{sCase}}</th>
+    <th class="right" style="position: sticky; top: 0;">{{mCase}}</th>
+    <th class="right" style="position: sticky; top: 0;">{{mdCase}}</th>
+    <th class="right" style="position: sticky; top: 0;">{{aCase}}</th>
+    <th class="right" style="position: sticky; top: 0;">{{pCase}}</th>
+    <th class="right" style="position: sticky; top: 0;"></th>
+  </tr>
   <tr *ngFor="let h of list">
     <td class="left">{{h.hospname}}</td>
     <td class="right">{{h['severe'] }}</td>

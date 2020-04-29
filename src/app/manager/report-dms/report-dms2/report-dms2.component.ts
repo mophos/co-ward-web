@@ -3,6 +3,7 @@ import { ReportDmsService } from '../report-dms.service';
 import { AlertService } from '../../../help/alert.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import * as moment from 'moment';
+import { sumBy } from 'lodash';
 @Component({
   selector: 'app-report-dms2',
   templateUrl: './report-dms2.component.html',
@@ -12,6 +13,11 @@ export class ReportDms2Component implements OnInit {
   list: any;
   zone: any = '';
   date: any;
+  sCase: any;
+  mCase: any;
+  mdCase: any;
+  aCase: any;
+  pCase: any;
   @ViewChild('loading') loading: any;
 
   public jwtHelper = new JwtHelperService();
@@ -38,6 +44,11 @@ export class ReportDms2Component implements OnInit {
       const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
       const rs: any = await this.reportService.getReport2(date);
       if (rs.ok) {
+        this.sCase = sumBy(rs.rows, 'severe');
+        this.mCase = sumBy(rs.rows, 'moderate');
+        this.mdCase = sumBy(rs.rows, 'mild');
+        this.aCase = sumBy(rs.rows, 'asymptomatic');
+        this.pCase = sumBy(rs.rows, 'ip_pui');
         this.list = rs.rows;
         console.log(this.list);
 
