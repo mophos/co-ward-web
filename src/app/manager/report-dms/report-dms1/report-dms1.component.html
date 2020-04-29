@@ -1,3 +1,46 @@
-<p>
-  report-dms1 works!
-</p>
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">รายงานเตียงตามสังกัดหน่วยงาน</span>
+</nav>
+<br>
+<div class="clr-row">
+  <div class="clr-col-12" style="text-align: right;">
+    <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
+      <clr-icon shape="download"></clr-icon>export excel
+    </button>
+  </div>
+</div>
+
+<table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
+
+  <tr>
+    <th rowspan="3">หน่วยงาน</th>
+    <th rowspan="3">จำนวนโรงพยาบาล</th>
+    <th rowspan="3">เตียงทั้งหมด</th>
+    <th colspan="5">ประเภทเตียง</th>
+  </tr>
+
+  <tr>
+    <th  rowspan="2">(1) AIIR-ICU</th>
+    <th  colspan="2">Isolate Room</th>
+    <th  rowspan="2">(4) Cohort ward (bed)</th>
+    <th  rowspan="2">(5) Hospitel (room)</th>
+  </tr>
+
+  <tr>
+    <th>(2) Modified AIIR</th>
+    <th>(3) Single room</th>
+  </tr>
+
+  <tr *ngFor="let h of list">
+    <td class="left">{{h.name}}</td>
+    <td class="right">{{h.hospital_qty}}</td>
+    <td class="right">{{h.bed_qty}}</td>
+    <td class="right">{{h.aiir_qty}}</td>
+    <td class="right">{{h.modified_aiir_qty}}</td>
+    <td class="right">{{h.isolate_qty}}</td>
+    <td class="right">{{h.cohort_qty}}</td>
+    <td class="right">{{h.hospitel_qty}}</td>
+  </tr>
+</table>
+
+<app-loadding #loading></app-loadding>
