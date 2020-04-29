@@ -31,7 +31,6 @@ export class CheckSuppliesComponent implements OnInit {
     private alertService: AlertService
   ) {
     this.getList();
-    const date = new Date();
     this.dateset = {
       date: {
         year: moment().get('year'),

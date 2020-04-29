@@ -2,9 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportService } from '../report.service';
 import { AlertService } from '../../help/alert.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import * as findIndex from 'lodash/findIndex';
+import * as moment from 'moment';
 import { IMyOptions } from 'mydatepicker-th';
-
 @Component({
   selector: 'app-report-patients',
   templateUrl: './report-patients.component.html',
@@ -34,12 +33,11 @@ export class ReportPatientsComponent implements OnInit {
   }
 
   async ngOnInit() {
-    const dateNow = new Date();
     this.date = {
       date: {
-        year: dateNow.getFullYear(),
-        month: dateNow.getMonth() + 1,
-        day: dateNow.getDate()
+        year: moment().get('year'),
+        month: moment().get('month') + 1,
+        day: moment().get('day')
       }
     };
     const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;

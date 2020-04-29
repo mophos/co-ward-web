@@ -22,12 +22,11 @@ export class ReportDms2Component implements OnInit {
   ) { }
 
   async ngOnInit() {
-    const date = new Date();
     this.date = {
       date: {
-        year: moment(date).get('year'),
-        month: moment(date).get('month') + 1,
-        day: moment(date).get('day')
+        year: moment().get('year'),
+        month: moment().get('month') + 1,
+        day: moment().get('day')
       }
     };
     await this.getList();
@@ -62,24 +61,25 @@ export class ReportDms2Component implements OnInit {
   //   this.getList();
   // }
 
-  // async doExportExcel() {
-  //   this.loading.show();
-  //   try {
-  //     const rs: any = await this.reportService.getReportBedExcel();
-  //     console.log(rs);
-  //     if (!rs) {
-  //       this.loading.hide();
-  //     } else {
-  //       this.downloadFile('รายการเติมยา', 'xlsx', rs);
-  //       // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
-  //       this.loading.hide();
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     this.alertService.error();
-  //     this.loading.hide();
-  //   }
-  // }
+  async doExportExcel() {
+    this.loading.show();
+    try {
+      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
+      const rs: any = await this.reportService.getReport2Excel(date);
+      console.log(rs);
+      if (!rs) {
+        this.loading.hide();
+      } else {
+        this.downloadFile('รายการเติมยา', 'xlsx', rs);
+        // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
+        this.loading.hide();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.error();
+      this.loading.hide();
+    }
+  }
 
   // async doExportCsv() {
   //   this.loading.show();
@@ -100,23 +100,23 @@ export class ReportDms2Component implements OnInit {
   //   }
   // }
 
-  // downloadFile(name, type, data: any) {
-  //   try {
-  //     const url = window.URL.createObjectURL(new Blob([data]));
-  //     console.log(url);
-  //     const fileName = `${name}.${type}`;
-  //     // Debe haber una manera mejor de hacer esto...
-  //     const a = document.createElement('a');
-  //     document.body.appendChild(a);
-  //     a.setAttribute('style', 'display: none');
-  //     a.href = url;
-  //     a.download = fileName;
-  //     a.click();
-  //     window.URL.revokeObjectURL(url);
-  //     a.remove(); // remove the element
-  //   } catch (error) {
-  //     console.log(error);
-  //     this.alertService.error();
-  //   }
-  // }
+  downloadFile(name, type, data: any) {
+    try {
+      const url = window.URL.createObjectURL(new Blob([data]));
+      console.log(url);
+      const fileName = `${name}.${type}`;
+      // Debe haber una manera mejor de hacer esto...
+      const a = document.createElement('a');
+      document.body.appendChild(a);
+      a.setAttribute('style', 'display: none');
+      a.href = url;
+      a.download = fileName;
+      a.click();
+      window.URL.revokeObjectURL(url);
+      a.remove(); // remove the element
+    } catch (error) {
+      console.log(error);
+      this.alertService.error();
+    }
+  }
 }

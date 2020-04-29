@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportService } from '../report.service';
 import { AlertService } from '../../help/alert.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import * as moment from 'moment';
 @Component({
   selector: 'app-report-beds',
   templateUrl: './report-beds.component.html',
@@ -24,7 +25,7 @@ export class ReportBedByTypeComponent implements OnInit {
 
   async ngOnInit() {
     await this.getList();
-    this.date = new Date();
+    this.date = moment().format('YYYY-MM-DD');
   }
 
   async getList() {
@@ -61,12 +62,12 @@ export class ReportBedByTypeComponent implements OnInit {
       const rs: any = await this.reportService.getReportBedExcel();
       console.log(rs);
       if (!rs) {
-      this.loading.hide();
-    } else {
-      this.downloadFile('รายการเติมยา', 'xlsx', rs);
-      // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
-      this.loading.hide();
-    }
+        this.loading.hide();
+      } else {
+        this.downloadFile('รายการเติมยา', 'xlsx', rs);
+        // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
+        this.loading.hide();
+      }
     } catch (error) {
       console.log(error);
       this.alertService.error();
@@ -80,12 +81,12 @@ export class ReportBedByTypeComponent implements OnInit {
       const rs: any = await this.reportService.getReportBedCsv();
       console.log(rs);
       if (!rs) {
-      this.loading.hide();
-    } else {
-      this.downloadFile('รายการเติมยา', 'csv', rs);
-      // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
-      this.loading.hide();
-    }
+        this.loading.hide();
+      } else {
+        this.downloadFile('รายการเติมยา', 'csv', rs);
+        // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
+        this.loading.hide();
+      }
     } catch (error) {
       console.log(error);
       this.alertService.error();

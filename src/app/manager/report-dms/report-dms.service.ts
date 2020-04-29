@@ -12,4 +12,9 @@ export class ReportDmsService {
     const url = `${this.url}/v1/manager/report-dms/report2?date=${date}`;
     return this.http.get(url).toPromise();
   }
+
+  getReport2Excel(date) {
+    const url = `${this.url}/v1/manager/report-dms/report2/excel?date=${date}`;
+    return this.http.get(url).toPromise();
+  }
 }
