@@ -22,6 +22,7 @@ import { ReportSuppliesSummaryComponent } from './report-supplies-summary/report
 import { ReportMedicalsComponent } from './report-medicals/report-medicals.component';
 import { ReportBedByTypeComponent } from './report-bed/report-beds.component';
 import { PatientInfoComponent } from './patient-info/patient-info.component';
+import { ReportDms2Component } from './report-dms/report-dms2/report-dms2.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { PatientInfoComponent } from './patient-info/patient-info.component';
     ReportSuppliesSummaryComponent,
     ReportMedicalsComponent,
     ReportBedByTypeComponent,
-    PatientInfoComponent
+    PatientInfoComponent,
+    ReportDms2Component
   ],
   imports: [
     CommonModule,

@@ -11,6 +11,7 @@ import { ReportBedByTypeComponent } from './report-bed/report-beds.component';
 import { PatientInfoComponent } from './patient-info/patient-info.component';
 import { ManagerGuard } from '../manager-guard.service';
 import { AuthSearchPatient } from './auth-search-patient.service';
+import { ReportDms2Component } from './report-dms/report-dms2/report-dms2.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
       { path: 'report-medicals', component: ReportMedicalsComponent },
       { path: 'report-bed-by-types', component: ReportBedByTypeComponent },
       { path: 'patient-info', canActivate: [AuthSearchPatient], component: PatientInfoComponent },
+      { path: 'report-dms2', component: ReportDms2Component },
     ]
   }
 ];
