@@ -26,7 +26,7 @@ export class ReportDms2Component implements OnInit {
       date: {
         year: moment().get('year'),
         month: moment().get('month') + 1,
-        day: moment().get('day')
+        day: moment().get('date')
       }
     };
     await this.getList();
@@ -57,9 +57,9 @@ export class ReportDms2Component implements OnInit {
   //   this.getList();
   // }
 
-  // doEnter() {
-  //   this.getList();
-  // }
+  doEnter() {
+    this.getList();
+  }
 
   async doExportExcel() {
     this.loading.show();
@@ -70,7 +70,7 @@ export class ReportDms2Component implements OnInit {
       if (!rs) {
         this.loading.hide();
       } else {
-        this.downloadFile('รายการเติมยา', 'xlsx', rs);
+        this.downloadFile('report-dms2', 'xlsx', rs);
         // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
         this.loading.hide();
       }
@@ -89,7 +89,7 @@ export class ReportDms2Component implements OnInit {
   //     if (!rs) {
   //       this.loading.hide();
   //     } else {
-  //       this.downloadFile('รายการเติมยา', 'csv', rs);
+  //       this.downloadFile('report-dms2', 'csv', rs);
   //       // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
   //       this.loading.hide();
   //     }
