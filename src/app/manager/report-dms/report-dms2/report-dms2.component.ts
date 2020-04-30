@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportDmsService } from '../report-dms.service';
 import { AlertService } from '../../../help/alert.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { IMyOptions } from 'mydatepicker-th';
 import * as moment from 'moment';
 import { sumBy } from 'lodash';
 @Component({
@@ -18,6 +19,12 @@ export class ReportDms2Component implements OnInit {
   mdCase: any;
   aCase: any;
   pCase: any;
+  myDatePickerOptions: IMyOptions = {
+    inline: false,
+    dateFormat: 'dd mmm yyyy',
+    editableDateField: false,
+    showClearDateBtn: false
+  };
   @ViewChild('loading') loading: any;
 
   public jwtHelper = new JwtHelperService();
