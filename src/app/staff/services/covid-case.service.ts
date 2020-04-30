@@ -28,6 +28,11 @@ export class CovidCaseService {
     return await this.http.get(url).toPromise();
   }
 
+  async getCovidCaseDetails(covidCaseId) {
+    const url = `${this.apiUrl}/v1/staff/covid-case/details?covidCaseId=${covidCaseId}`;
+    return await this.http.get(url).toPromise();
+  }
+
   async saveNewCase(data) {
     const url = `${this.apiUrl}/v1/staff/covid-case`;
     return await this.http.post(url, { data }).toPromise();

@@ -40,7 +40,8 @@
 
       <clr-dg-row *clrDgItems="let l of list;let idx=index;" [clrDgItem]="l" (click)="getData(l)">
         <clr-dg-action-overflow>
-          <button class="action-item" (click)="onClickOpenModalDateConfirm(l)" *ngIf="!l.confirm_date">บันทึกวันที่ตรวจพบ</button>
+          <button class="action-item" (click)="onClickOpenModalDateConfirm(l)"
+            *ngIf="!l.confirm_date">บันทึกวันที่ตรวจพบ</button>
           <button class="action-item" (click)="onEdit(l)">แก้ไข</button>
           <button class="action-item" (click)="onDelete(l)">ลบ</button>
         </clr-dg-action-overflow>
@@ -98,15 +99,25 @@
           <br>
           ประวัติการรักษา
           <clr-datagrid [clrDgLoading]="isLoadding">
+            <clr-dg-column>AN</clr-dg-column>
             <clr-dg-column>วันที่ Admit</clr-dg-column>
             <clr-dg-column>วันที่ตรวจพบ</clr-dg-column>
             <clr-dg-column>โรงพยาบาล</clr-dg-column>
             <clr-dg-column>สถานะ</clr-dg-column>
+            <clr-dg-column>วันที่ D/C</clr-dg-column>
+            <clr-dg-column></clr-dg-column>
             <clr-dg-row *ngFor="let l of historys;let idx=index;">
+              <clr-dg-cell>{{l.an}}</clr-dg-cell>
               <clr-dg-cell>{{l.date_admit | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
               <clr-dg-cell>{{l.confirm_date | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
               <clr-dg-cell>{{l.hospname }}</clr-dg-cell>
               <clr-dg-cell>{{l.status }}</clr-dg-cell>
+              <clr-dg-cell>{{l.date_discharge | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
+              <clr-dg-cell>
+                <button type="button" class="btn btn-icon btn-primary" (click)="getDetails(l)" aria-label="settings">
+                  <clr-icon shape="search"></clr-icon>
+                </button>
+              </clr-dg-cell>
             </clr-dg-row>
             <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
           </clr-datagrid>
@@ -123,6 +134,48 @@
     </my-date-picker-th>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success btn-block" (click)="saevConfirmDate()" >บันทึก</button>
+    <button type="button" class="btn btn-success btn-block" (click)="saevConfirmDate()">บันทึก</button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="modalDetails" [clrModalSize]="'xl'">
+  <h3 class="modal-title">
+    <div class="clr-row">
+      <div class="clr-col-3">
+        HN: {{data.hn || '-'}}
+      </div>
+      <div class="clr-col-6">
+        ชื่อ: {{data.title_name || ''}}{{data.first_name || ''}} {{data.last_name || ''}}
+        [{{data.gender_id == 1 ? 'ชาย' : data.gender_id == 2 ? 'หญิง' : '-'|| '-'}}]
+      </div>
+      <div class="clr-col-3" style="text-align: right;">
+        สถานะ: {{data.status|| '-'}}
+      </div>
+    </div>
+  </h3>
+  <div class="modal-body">
+    <div class="clr-row">
+      <div class="clr-col-12">
+        <clr-datagrid [clrDgLoading]="isLoadding">
+          <clr-dg-column>วันที่บันทึก</clr-dg-column>
+          <clr-dg-column>ความรุนแรง</clr-dg-column>
+          <clr-dg-column>เตียง</clr-dg-column>
+          <clr-dg-column>เครื่องช่วยหายใจ</clr-dg-column>
+          <clr-dg-column>สถานะ</clr-dg-column>
+          <clr-dg-column>ผู้บันทึก</clr-dg-column>
+          <clr-dg-row *ngFor="let l of details;let idx=index;">
+            <clr-dg-cell>{{l.entry_date | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
+            <clr-dg-cell>{{l.gcs_name}}</clr-dg-cell>
+            <clr-dg-cell>{{l.bed_name}}</clr-dg-cell>
+            <clr-dg-cell>{{l.medical_supplie_name || '-'}}</clr-dg-cell>
+            <clr-dg-cell>{{l.status}}</clr-dg-cell>
+            <clr-dg-cell>{{l.fname}} {{l.lname}}</clr-dg-cell>
+          </clr-dg-row>
+          <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
+        </clr-datagrid>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
   </div>
 </clr-modal>
