@@ -346,18 +346,20 @@ export class CovidCaseOldComponent implements OnInit {
 
   async onClickSave() {
     this.isSave = true;
-    let startDate = moment(moment(this.admitDate.date).format('YYYY-MM-DD'), 'YYYY-MM-DD');
-    const endDate = moment(moment(this.dateDischarge.date).format('YYYY-MM-DD'), 'YYYY-MM-DD');
-    const rs: any = await this.basicService.getDate();
-    if (moment(endDate).format('YYYY-MM-DD') > moment(rs.rows).format('YYYY-MM-DD')) {
-      this.isSave = false;
-      this.alertService.error('ไม่อนุญาติให้เลือกวันที่เกินปัจจุบัน');
-    } else {
-      try {
+    try {
+      let startDate = moment(this.admitDate.date.year + '-' + this.admitDate.date.month + '-' + this.admitDate.date.day, 'YYYY-MM-DD');
+      const endDate = moment(this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day, 'YYYY-MM-DD');
+      const rs: any = await this.basicService.getDate();
+      console.log(moment(endDate).format('YYYY-MM-DD'), moment(rs.rows).format('YYYY-MM-DD'));
+      console.log(moment(endDate).format('YYYY-MM-DD') > moment(rs.rows).format('YYYY-MM-DD'));
+      if (moment(endDate).format('YYYY-MM-DD') > moment(rs.rows).format('YYYY-MM-DD')) {
+        this.isSave = false;
+        this.alertService.error('ไม่อนุญาตให้เลือกวันที่เกินปัจจุบัน');
+      } else {
         if (await this.verifyInput()) {
-          if (startDate >= endDate) {
+          if (startDate > endDate) {
             this.isSave = false;
-            this.alertService.error('ไม่อนุญาติให้วันที่ Admit มากกว่าหรือเท่ากับวันที่ Discharge');
+            this.alertService.error('ไม่อนุญาตให้วันที่ Admit มากกว่าวันที่ Discharge');
           } else {
             this.isSave = false;
             const dates = [];
@@ -436,10 +438,10 @@ export class CovidCaseOldComponent implements OnInit {
           this.isSave = false;
           this.alertService.error('กรอกข้อมูลไม่ครบ\nกรุณาตรวจสอบข้อมูล');
         }
-      } catch (error) {
-        this.isSave = false;
-        this.alertService.error(error);
       }
+    } catch (error) {
+      this.isSave = false;
+      this.alertService.error(error);
     }
   }
 

@@ -56,21 +56,21 @@ export class ReportDms6Component implements OnInit {
       const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
       const rs: any = await this.reportService.getReport6(date);
       if (rs.ok) {
-        this.aiir1 = sumBy(rs.rows, 'AIIR_qty');
-        this.aiir2 = sumBy(rs.rows, 'AIIR_usage_qty');
-        this.aiir3 = sumBy(rs.rows, 'AIIR_qty') - sumBy(rs.rows, 'AIIR_usage_qty');
-        this.modi1 = sumBy(rs.rows, 'Modified AIIR_qty');
-        this.modi2 = sumBy(rs.rows, 'Modified AIIR_usage_qty');
-        this.modi3 = sumBy(rs.rows, 'Modified AIIR_qty') - sumBy(rs.rows, 'Modified AIIR_usage_qty');
-        this.iso1 = sumBy(rs.rows, 'Isolate_qty');
-        this.iso2 = sumBy(rs.rows, 'Isolate_usage_qty');
-        this.iso3 = sumBy(rs.rows, 'Isolate_qty') - sumBy(rs.rows, 'Isolate_usage_qty');
-        this.coh1 = sumBy(rs.rows, 'Cohort_qty');
-        this.coh2 = sumBy(rs.rows, 'Cohort_usage_qty');
-        this.coh3 = sumBy(rs.rows, 'Cohort_qty') - sumBy(rs.rows, 'Cohort_usage_qty');
-        this.host1 = sumBy(rs.rows, 'Hospitel_qty');
-        this.host2 = sumBy(rs.rows, 'Hospitel_usage_qty');
-        this.host3 = sumBy(rs.rows, 'Hospitel_qty') - sumBy(rs.rows, 'Hospitel_usage_qty');
+        this.aiir1 = sumBy(rs.rows, 'aiir_qty');
+        this.aiir2 = sumBy(rs.rows, 'aiir_usage_qty');
+        this.aiir3 = sumBy(rs.rows, 'aiir_qty') - sumBy(rs.rows, 'aiir_usage_qty');
+        this.modi1 = sumBy(rs.rows, 'modified_aiir_qty');
+        this.modi2 = sumBy(rs.rows, 'modified_aiir_usage_qty');
+        this.modi3 = sumBy(rs.rows, 'modified_aiir_qty') - sumBy(rs.rows, 'modified_aiir_usage_qty');
+        this.iso1 = sumBy(rs.rows, 'isolate_qty');
+        this.iso2 = sumBy(rs.rows, 'isolate_usage_qty');
+        this.iso3 = sumBy(rs.rows, 'isolate_qty') - sumBy(rs.rows, 'isolate_usage_qty');
+        this.coh1 = sumBy(rs.rows, 'cohort_qty');
+        this.coh2 = sumBy(rs.rows, 'cohort_usage_qty');
+        this.coh3 = sumBy(rs.rows, 'cohort_qty') - sumBy(rs.rows, 'cohort_usage_qty');
+        this.host1 = sumBy(rs.rows, 'hospitel_qty');
+        this.host2 = sumBy(rs.rows, 'hospitel_usage_qty');
+        this.host3 = sumBy(rs.rows, 'hospitel_qty') - sumBy(rs.rows, 'hospitel_usage_qty');
 
         this.list = rs.rows;
         console.log(this.list);
