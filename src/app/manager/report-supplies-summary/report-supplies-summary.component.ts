@@ -3,6 +3,7 @@ import { ReportService } from '../report.service';
 import { AlertService } from '../../help/alert.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { IMyOptions } from 'mydatepicker-th';
+import * as moment from 'moment';
 @Component({
   selector: 'app-report-supplies-summary',
   templateUrl: './report-supplies-summary.component.html',
@@ -44,12 +45,11 @@ export class ReportSuppliesSummaryComponent implements OnInit {
     private service: ReportService,
     private alertService: AlertService
   ) {
-    const date = new Date();
     this.dateset = {
       date: {
-        year: date.getFullYear(),
-        month: date.getMonth() + 1,
-        day: date.getDate()
+        year: moment().get('year'),
+        month: moment().get('month') + 1,
+        day: moment().get('date')
       }
     };
     this.dateShow = this.dateset.date.year + '-' + this.dateset.date.month + '-' + this.dateset.date.day;
@@ -82,7 +82,7 @@ export class ReportSuppliesSummaryComponent implements OnInit {
           this.zone13 += v.zone13;
         }
         console.log(this.total);
-        
+
         this.loading.hide();
       } else {
         this.loading.hide();

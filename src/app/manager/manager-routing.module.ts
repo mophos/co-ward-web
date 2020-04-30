@@ -7,10 +7,15 @@ import { ReportSuppliesComponent } from './report-supplies/report-supplies.compo
 import { ReportBedsComponent } from './report-beds/report-beds.component';
 import { ReportProfessionalsComponent } from './report-professionals/report-professionals.component';
 import { ReportMedicalsComponent } from './report-medicals/report-medicals.component';
-import { ReportBedByTypeComponent } from './report-bed/report-beds.component';
 import { PatientInfoComponent } from './patient-info/patient-info.component';
 import { ManagerGuard } from '../manager-guard.service';
 import { AuthSearchPatient } from './auth-search-patient.service';
+import { ReportDms1Component } from './report-dms/report-dms1/report-dms1.component';
+import { ReportDms2Component } from './report-dms/report-dms2/report-dms2.component';
+import { ReportDms3Component } from './report-dms/report-dms3/report-dms3.component';
+import { ReportDms4Component } from './report-dms/report-dms4/report-dms4.component';
+import { ReportDms6Component } from './report-dms/report-dms6/report-dms6.component';
+import { ReportDms7Component } from './report-dms/report-dms7/report-dms7.component';
 
 const routes: Routes = [
   {
@@ -25,8 +30,13 @@ const routes: Routes = [
       { path: 'report-beds', component: ReportBedsComponent },
       { path: 'report-professionals', component: ReportProfessionalsComponent },
       { path: 'report-medicals', component: ReportMedicalsComponent },
-      { path: 'report-bed-by-types', component: ReportBedByTypeComponent },
       { path: 'patient-info', canActivate: [AuthSearchPatient], component: PatientInfoComponent },
+      { path: 'report-dms1', component: ReportDms1Component },
+      { path: 'report-dms2', component: ReportDms2Component },
+      { path: 'report-dms3', component: ReportDms3Component },
+      { path: 'report-dms4', component: ReportDms4Component },
+      { path: 'report-dms6', component: ReportDms6Component },
+      { path: 'report-dms7', component: ReportDms7Component },
     ]
   }
 ];

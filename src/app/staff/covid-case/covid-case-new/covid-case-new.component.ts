@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AutocompleteHospitalComponent } from 'src/app/help/autocomplete-hospital/autocomplete-hospital.component';
 import { IMyOptions } from 'mydatepicker-th';
+import { findIndex } from 'lodash';
 import { AutocompleteProvinceComponent } from '../../../help/autocomplete-address/autocomplete-province/autocomplete-province.component';
 import { AutocompleteDistrictComponent } from '../../../help/autocomplete-address/autocomplete-district/autocomplete-district.component';
 import { AutocompleteSubdistrictComponent } from '../../../help/autocomplete-address/autocomplete-subdistrict/autocomplete-subdistrict.component';
@@ -26,6 +27,7 @@ export class CovidCaseNewComponent implements OnInit {
   // profile ----------------
   personId: any;
   covidCaseId: any;
+  satCode: any;
   passport = '';
   cid = '';
   hn = '';
@@ -40,6 +42,8 @@ export class CovidCaseNewComponent implements OnInit {
   peopleType: any;
 
   admitDate: any;
+  diffDate: any;
+  admitDetail: any = [];
   confirmDate: any;
   // address ----------------
   houseNo: any;
@@ -88,10 +92,10 @@ export class CovidCaseNewComponent implements OnInit {
     height: '25px'
   };
 
-  s1 = '';
-  s2 = '';
-  s3 = '';
-  s4 = '';
+  s1 = [{ generic: 1, name: 'Hydroxychloroquine 200 mg.' }, { generic: 2, name: 'Chloroquine 250 mg.' }];
+  s2 = [{ generic: 3, name: 'Darunavir 600mg+Ritonavir100 mg.' }, { generic: 4, name: 'Lopinavir 200 mg/Ritonavir 50 mg.' }];
+  s3 = [{ generic: 7, name: 'Azithromycin 250 mg.' }];
+  s4 = [{ generic: 8, name: 'Favipiravir (เบิกจาก AntiDote) <a target="_BLANK" href="http://drug.nhso.go.th/Antidotes/index.jsp">คลิก</a>' }];
   data: any;
   drugDay = '5';
 
@@ -149,6 +153,7 @@ export class CovidCaseNewComponent implements OnInit {
 
   async setData() {
     try {
+      this.satCode = this.data.sat_id;
       this.covidCaseId = this.data.covid_case_id;
       this.personId = this.data.id;
       this.cid = this.data.cid;
@@ -328,88 +333,102 @@ export class CovidCaseNewComponent implements OnInit {
   }
 
   async onClickSave() {
-    this.isSave = true;
-    try {
-      if (await this.verifyInput()) {
-        const drugs = [];
-        if (+this.s1 === 1) {
-          drugs.push({ genericId: 1 });
-        } else if (+this.s1 === 2) {
-          drugs.push({ genericId: 2 });
-        }
-        if (+this.s2 === 1) {
-          drugs.push({ genericId: 3 });
-          drugs.push({ genericId: 5 });
-        } else if (+this.s2 === 2) {
-          drugs.push({ genericId: 4 });
-        }
-
-        if (+this.s3 === 1) {
-          drugs.push({ genericId: 7 });
-        }
-
-        if (+this.s4 === 1) {
-          drugs.push({ genericId: 7 });
-        }
-
-        const obj: any = {
-          covidCaseId: this.covidCaseId,
-          type: this.typeRegister,
-          cid: this.cid,
-          personId: this.personId,
-          passport: this.passport,
-          hn: this.hn,
-          an: this.an,
-          titleId: this.titleId,
-          genderId: this.genderId,
-          fname: this.fname,
-          mname: this.mname,
-          lname: this.lname,
-          peopleType: this.peopleType,
-          tel: this.tel,
-          admitDate: `${this.admitDate.date.year}-${this.admitDate.date.month}-${this.admitDate.date.day}`,
-          gcsId: this.gcsId,
-          bedId: this.bedId,
-          medicalSupplieId: this.medicalSupplieId,
-          houseNo: this.houseNo,
-          roomNo: this.roomNo,
-          village: this.village,
-          villageName: this.villageName,
-          road: this.road,
-          tambonCode: this.tambonId,
-          ampurCode: this.ampurId,
-          provinceCode: this.provinceId,
-          zipcode: this.zipcode,
-          countryId: this.countryId,
-          drugs
-        };
-        console.log(obj);
-
-        if (this.confirmDate) {
-          obj.confirmDate = `${this.confirmDate.date.year}-${this.confirmDate.date.month}-${this.confirmDate.date.day}`;
-        }
-        if (this.birthDate) {
-          obj.birthDate = `${this.birthDate.date.year}-${this.birthDate.date.month}-${this.birthDate.date.day}`;
-        }
-
-        const rs: any = await this.covidCaseService.saveNewCase(obj);
-        if (rs.ok) {
-          this.clear();
-          this.isKey = false;
-          this.isSave = false;
-          this.alertService.success();
-          this.onClickOpenModalCid();
-        } else {
-          this.isSave = false;
-          this.alertService.error(rs.error);
-        }
-      } else {
-        this.isSave = false;
-        this.alertService.error('กรอกข้อมูลไม่ครบ\nกรุณาตรวจสอบข้อมูล');
+    let checkNull = false;
+    for (const v of this.admitDetail) {
+      if (v.gcs_id === null || v.bed_id === null) {
+        checkNull = true;
       }
-    } catch (error) {
-      this.isSave = false;
-      this.alertService.error(error);
+    }
+    if (!checkNull) {
+      if (this.diffDate < 0) {
+        this.alertService.error('ไม่อนุญาติให้คีย์ Admit ล่วงหน้า');
+      } else {
+        this.isSave = true;
+        try {
+          if (await this.verifyInput()) {
+            const drugs = [];
+            if (+this.s1 === 1) {
+              drugs.push({ genericId: 1 });
+            } else if (+this.s1 === 2) {
+              drugs.push({ genericId: 2 });
+            }
+            if (+this.s2 === 1) {
+              drugs.push({ genericId: 3 });
+              drugs.push({ genericId: 5 });
+            } else if (+this.s2 === 2) {
+              drugs.push({ genericId: 4 });
+            }
+
+            if (+this.s3 === 1) {
+              drugs.push({ genericId: 7 });
+            }
+
+            if (+this.s4 === 1) {
+              drugs.push({ genericId: 7 });
+            }
+
+            const obj: any = {
+              covidCaseId: this.covidCaseId,
+              type: this.typeRegister,
+              cid: this.cid,
+              personId: this.personId,
+              passport: this.passport,
+              hn: this.hn,
+              an: this.an,
+              titleId: this.titleId,
+              genderId: this.genderId,
+              fname: this.fname,
+              mname: this.mname,
+              lname: this.lname,
+              peopleType: this.peopleType,
+              tel: this.tel,
+              admitDate: `${this.admitDate.date.year}-${this.admitDate.date.month}-${this.admitDate.date.day}`,
+              // gcsId: this.gcsId,
+              // bedId: this.bedId,
+              // medicalSupplieId: this.medicalSupplieId,
+              houseNo: this.houseNo,
+              roomNo: this.roomNo,
+              village: this.village,
+              villageName: this.villageName,
+              road: this.road,
+              tambonCode: this.tambonId,
+              ampurCode: this.ampurId,
+              provinceCode: this.provinceId,
+              zipcode: this.zipcode,
+              countryId: this.countryId,
+              detail: this.admitDetail
+              // drugs
+            };
+
+            if (this.confirmDate) {
+              obj.confirmDate = `${this.confirmDate.date.year}-${this.confirmDate.date.month}-${this.confirmDate.date.day}`;
+            }
+            if (this.birthDate) {
+              obj.birthDate = `${this.birthDate.date.year}-${this.birthDate.date.month}-${this.birthDate.date.day}`;
+            }
+
+            const rs: any = await this.covidCaseService.saveNewCase(obj);
+            if (rs.ok) {
+              this.clear();
+              this.isKey = false;
+              this.isSave = false;
+              this.alertService.success();
+              this.onClickOpenModalCid();
+            } else {
+              this.isSave = false;
+              this.alertService.error(rs.error);
+            }
+          } else {
+            this.isSave = false;
+            this.alertService.error('กรอกข้อมูลไม่ครบ\nกรุณาตรวจสอบข้อมูล');
+          }
+        } catch (error) {
+          this.isSave = false;
+          this.alertService.error(error);
+        }
+      }
+    } else {
+      this.alertService.error('กรุณาเลือกระดับความรุนแรงและเตียงผู้ป่วย');
     }
   }
 
@@ -455,6 +474,7 @@ export class CovidCaseNewComponent implements OnInit {
       this.personId = null;
       this.covidCaseId = null;
       this.typeRegister = null;
+      this.admitDetail = [];
     } catch (error) {
       console.log(error);
     }
@@ -511,26 +531,26 @@ export class CovidCaseNewComponent implements OnInit {
     this.zipc.setQuery(this.zipcode);
   }
 
-  uncheckRadio(type, id) {
-    if ('GCS' === type && this.gcsId === id) {
-      this.gcsId = null;
-    } else if ('BED' === type && this.bedId === id) {
-      this.bedId = null;
-    } else if ('MEDSUP' === type && this.medicalSupplieId === id) {
-      this.medicalSupplieId = null;
+  // uncheckRadio(type, id) {
+  //   if ('GCS' === type && this.gcsId === id) {
+  //     this.gcsId = null;
+  //   } else if ('BED' === type && this.bedId === id) {
+  //     this.bedId = null;
+  //   } else if ('MEDSUP' === type && this.medicalSupplieId === id) {
+  //     this.medicalSupplieId = null;
 
-    } else if ('S1' === type && this.s1 === id) {
-      this.s1 = null;
-    } else if ('S2' === type && this.s2 === id) {
-      this.s2 = null;
-    } else if ('S3' === type && this.s3 === id) {
-      this.s3 = null;
-    } else if ('S4' === type && this.s4 === id) {
-      this.s4 = null;
-    }
+  //   } else if ('S1' === type && this.s1 === id) {
+  //     this.s1 = null;
+  //   } else if ('S2' === type && this.s2 === id) {
+  //     this.s2 = null;
+  //   } else if ('S3' === type && this.s3 === id) {
+  //     this.s3 = null;
+  //   } else if ('S4' === type && this.s4 === id) {
+  //     this.s4 = null;
+  //   }
 
 
-  }
+  // }
 
   async onSearchModal() {
     try {
@@ -594,6 +614,51 @@ export class CovidCaseNewComponent implements OnInit {
       this.loading.hide();
       this.alertService.error(error);
     }
+  }
+
+  async dateAdmit() {
+    this.admitDetail = [];
+    try {
+      const rs: any = await this.basicService.getDate();
+      if (rs.ok) {
+        const aDate: any = this.admitDate.date.year + '-' + this.admitDate.date.month + '-' + this.admitDate.date.day;
+        this.diffDate = moment(moment(rs.rows).format('YYYY-MM-DD')).diff(moment(aDate), 'days');
+        let startDate = moment(aDate, 'YYYY-MM-DD');
+        let id = 1;
+        while (!startDate.isSame(moment(rs.rows).add(1, 'days').format('YYYY-MM-DD'))) {
+          const obj: any = {};
+          obj.date = startDate.format('YYYY-MM-DD');
+          obj.id = id;
+          obj.gcs_id = null;
+          obj.bed_id = null;
+          obj.medical_supplie_id = null;
+
+          obj.drugs = [];
+          startDate = startDate.add(1, 'days');
+          this.admitDetail.push(obj);
+          id++;
+        }
+      } else {
+        this.alertService.error('ไม่สามารถดึงวันที่ได้');
+      }
+    } catch (error) {
+      this.alertService.error(error);
+    }
+  }
+
+  uncheckRadioMedicalSupplies(listId, ms) {
+    const idx = findIndex(this.admitDetail, { id: listId });
+    if (idx > -1) {
+      this.admitDetail[idx].medical_supplie_id = this.admitDetail[idx].medical_supplie_id === ms ? null : ms;
+    }
+  }
+
+  uncheckRadio(listId, generic, type = '') {
+    const idx: any = findIndex(this.admitDetail[listId - 1].drugs, { set: type });
+    if (idx > -1) {
+      this.admitDetail[listId - 1].drugs.splice(idx, 1);
+    }
+    this.admitDetail[listId - 1].drugs.push({ set: type, generic_id: generic });
   }
 
 }

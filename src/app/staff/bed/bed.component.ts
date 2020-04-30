@@ -3,6 +3,7 @@ import { BedService } from '../bed.service';
 import { AlertService } from '../../help/alert.service';
 import { IMyOptions } from 'mydatepicker-th';
 import * as findIndex from 'lodash/findIndex';
+import * as moment from 'moment';
 @Component({
   selector: 'app-bed',
   templateUrl: './bed.component.html',
@@ -32,12 +33,11 @@ export class BedComponent implements OnInit {
 
   ngOnInit() {
     this.getList();
-    let date = new Date();
     this.dateset = {
       date: {
-        year: date.getFullYear(),
-        month: date.getMonth() + 1,
-        day: date.getDate()
+        year: moment().get('year'),
+        month: moment().get('month') + 1,
+        day: moment().get('date')
       }
     };
   }
@@ -54,7 +54,7 @@ export class BedComponent implements OnInit {
     this.date = this.dateset.date.year + '-' + this.dateset.date.month + '-' + this.dateset.date.day;
     this.loading = true;
     try {
-      let rs: any = await this.bedService.getListBeds();
+      const rs: any = await this.bedService.getListBeds();
       if (rs.ok) {
         this.listDetail = rs.rows;
       } else {
@@ -70,7 +70,7 @@ export class BedComponent implements OnInit {
   async getList() {
     this.loading = true;
     try {
-      let rs: any = await this.bedService.getBeds();
+      const rs: any = await this.bedService.getBeds();
       if (rs.ok) {
         this.list = rs.rows;
         // if (this.listId > 0) {
@@ -90,11 +90,11 @@ export class BedComponent implements OnInit {
 
   async getListDetail(id) {
     this.listId = id;
-    let idx = findIndex(this.list, { id: this.listId });
+    const idx = findIndex(this.list, { id: this.listId });
     this.date = this.list[idx].created_at;
     this.loading = true;
     try {
-      let rs: any = await this.bedService.getBedDetails(id);
+      const rs: any = await this.bedService.getBedDetails(id);
       if (rs.ok) {
         this.listDetail = rs.rows;
       } else {

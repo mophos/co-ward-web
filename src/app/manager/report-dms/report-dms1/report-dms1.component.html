@@ -1,0 +1,57 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">รายงานเตียงตามสังกัดหน่วยงาน</span>
+</nav>
+<br>
+<div class="clr-row">
+  <div class="clr-col-12" style="text-align: right;">
+    <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
+      <clr-icon shape="download"></clr-icon>export excel
+    </button>
+  </div>
+</div>
+
+<table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
+
+  <tr>
+    <th rowspan="3" style="border-right: 1px gray solid;">หน่วยงาน</th>
+    <th rowspan="3" style="border-right: 1px gray solid;">จำนวนโรงพยาบาล</th>
+    <th rowspan="3" style="border-right: 1px gray solid;">เตียงทั้งหมด</th>
+    <th colspan="5">ประเภทเตียง</th>
+  </tr>
+
+  <tr>
+    <th  rowspan="2" style="border-right: 1px gray solid;">(1) AIIR-ICU</th>
+    <th  colspan="2" style="border-right: 1px gray solid;">Isolate Room</th>
+    <th  rowspan="2" style="border-right: 1px gray solid;">(4) Cohort ward (bed)</th>
+    <th  rowspan="2">(5) Hospitel (room)</th>
+  </tr>
+
+  <tr>
+    <th>(2) Modified AIIR</th>
+    <th>(3) Single room</th>
+  </tr>
+
+  <tr>
+    <th class="right" style="position: sticky; top: 0;" style="border-right: 1px gray solid;">รวม</th>
+    <th class="right" style="position: sticky; top: 0;" style="border-right: 1px gray solid;">{{qtyHosp}}</th>
+    <th class="right" style="position: sticky; top: 0;" style="border-right: 1px gray solid;">{{qtyBed}}</th>
+    <th class="right" style="position: sticky; top: 0;" style="border-right: 1px gray solid;">{{qty1}}</th>
+    <th class="right" style="position: sticky; top: 0;" style="border-right: 1px gray solid;">{{qty2}}</th>
+    <th class="right" style="position: sticky; top: 0;" style="border-right: 1px gray solid;">{{qty3}}</th>
+    <th class="right" style="position: sticky; top: 0;" style="border-right: 1px gray solid;">{{qty4}}</th>
+    <th class="right" style="position: sticky; top: 0;">{{qty5}}</th>
+  </tr>
+
+  <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+    <td class="left" style="border-right: 1px gray solid;">{{h.name}}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h.hospital_qty}}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h.bed_qty}}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h.aiir_qty}}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h.modified_aiir_qty}}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h.isolate_qty}}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h.cohort_qty}}</td>
+    <td class="right">{{h.hospitel_qty}}</td>
+  </tr>
+</table>
+
+<app-loadding #loading></app-loadding>

@@ -29,8 +29,10 @@ export class CovidCaseComponent implements OnInit {
     showClearDateBtn: false
   };
   modalConfirmDate = false;
+  modalDetails = false;
   list = [];
   historys = [];
+  details = [];
   data: any = {};
   id: any;
   isLoadding = false;
@@ -46,7 +48,7 @@ export class CovidCaseComponent implements OnInit {
       date: {
         year: moment().get('year'),
         month: moment().get('month') + 1,
-        day: moment().get('day')
+        day: moment().get('date')
       }
     };
   }
@@ -91,6 +93,23 @@ export class CovidCaseComponent implements OnInit {
       const rs: any = await this.covidCaseService.getCovidCaseHistory(id);
       if (rs.ok) {
         this.historys = rs.rows;
+      } else {
+        this.alertService.error(rs.error);
+      }
+    } catch (error) {
+      this.alertService.error(error);
+    }
+  }
+
+  async getDetails(l) {
+    this.modalDetails = true;
+    console.log(l.covid_case_id);
+    try {
+      const rs: any = await this.covidCaseService.getCovidCaseDetails(l.covid_case_id);
+      console.log(rs);
+      if (rs.ok) {
+        this.details = rs.rows;
+        console.log(this.details);
       } else {
         this.alertService.error(rs.error);
       }
