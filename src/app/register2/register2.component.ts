@@ -116,7 +116,8 @@ export class Register2Component implements OnInit {
             isNodeDrugs: this.isNodeDrugs,
             isNodeSupplies: this.isNodeSupplies,
             isDRUGS: this.isDRUGS,
-            isSupplies: this.isSupplies
+            isSupplies: this.isSupplies,
+            hospname:this.hospName
           };
 
           const rs: any = await this.registerService.register2(obj);
@@ -141,6 +142,7 @@ export class Register2Component implements OnInit {
   async onSelectHosp(e) {
     if (Object.values(e).length) {
       this.onSelectHospcode = e.hospcode;
+      this.hospName = e.hospname;
       this.province = e.hosptype_id === '1' ? 'Y' : 'N';
       const id = e.id;
       try {
