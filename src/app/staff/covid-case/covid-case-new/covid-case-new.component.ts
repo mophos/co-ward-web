@@ -341,7 +341,7 @@ export class CovidCaseNewComponent implements OnInit {
     }
     if (!checkNull) {
       if (this.diffDate < 0) {
-        this.alertService.error('ไม่อนุญาติให้คีย์ Admit ล่วงหน้า');
+        this.alertService.error('ไม่อนุญาตให้คีย์ Admit ล่วงหน้า');
       } else {
         this.isSave = true;
         try {
@@ -621,7 +621,7 @@ export class CovidCaseNewComponent implements OnInit {
     const rs: any = await this.basicService.getDate();
     const aDate: any = this.admitDate.date.year + '-' + this.admitDate.date.month + '-' + this.admitDate.date.day;
     if (moment(aDate).format('YYYY-MM-DD') > moment(rs.rows).format('YYYY-MM-DD')) {
-      this.alertService.error('ไม่อนุญาติให้เลือกวันที่เกินปัจจุบัน');
+      this.alertService.error('ไม่อนุญาตให้เลือกวันที่เกินปัจจุบัน');
     } else {
       try {
         this.diffDate = moment(moment(rs.rows).format('YYYY-MM-DD')).diff(moment(aDate), 'days');

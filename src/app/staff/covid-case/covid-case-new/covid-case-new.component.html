@@ -437,25 +437,9 @@
 <div class="clr-row" [ngClass]="{hidden: !isKey}">
   <div class="clr-col-12">
     <div class="card" style="margin-top: 0;">
-      <div class="card-block">
-        <div class="card-text">
-          <div class="clr-col-6">
-            <div class="clr-row">
-              <div class="clr-col-3" style="text-align: right;">
-                <input type="radio" name="s4" [(ngModel)]="s4" value="1" (click)="uncheckRadio('S4','1')">
-              </div>
-              <div class="clr-col-9" style="padding-left: 0.2rem;padding-left: 0.2rem;">Favipiravir
-                (เลือกถ้าใช้ยานี้ แต่เบิกยาจาก
-                Antidote) <a target="_BLANK" href="http://drug.nhso.go.th/Antidotes/index.jsp">คลิก</a></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card-footer">
-        <button class="btn btn-success btn-block" (click)="onClickSave()" title="บันทึก" [disabled]="!peopleType || !admitDate || isSave">
-          <clr-icon shape="floppy"></clr-icon> บันทึก
-        </button>
-      </div>
+      <button class="btn btn-success btn-block" (click)="onClickSave()" title="บันทึก" [disabled]="!peopleType || !admitDate || isSave">
+        <clr-icon shape="floppy"></clr-icon> บันทึก
+      </button>
     </div>
   </div>
 </div>
