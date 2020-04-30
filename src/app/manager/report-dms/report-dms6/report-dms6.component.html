@@ -69,21 +69,21 @@
   </tr>
   <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
     <td class="left" style="border-right: 1px gray solid;">{{h.hospname}}</td>
-    <td class="right" style="border-right: 1px gray solid;">{{h['AIIR_qty'] }}</td>
-    <td class="right" style="border-right: 1px gray solid;">{{h['AIIR_usage_qty'] }}</td>
-    <td class="right" style="border-right: 1px gray solid;">{{h['AIIR_qty'] - h['AIIR_usage_qty'] || null}}</td>
-    <td class="right" style="border-right: 1px gray solid;">{{h['Modified AIIR_qty'] }}</td>
-    <td class="right" style="border-right: 1px gray solid;">{{h['Modified AIIR_usage_qty'] }}</td>
-    <td class="right" style="border-right: 1px gray solid;">{{h['Modified AIIR_qty'] - h['Modified AIIR_usage_qty'] || null}}</td>
-    <td class="right" style="border-right: 1px gray solid;">{{h['Isolate_qty'] }}</td>
-    <td class="right" style="border-right: 1px gray solid;">{{h['Isolate_usage_qty'] }}</td>
-    <td class="right" style="border-right: 1px gray solid;">{{h['Isolate_qty'] - h['Isolate_usage_qty'] || null}}</td>
-    <td class="right" style="border-right: 1px gray solid;">{{h['Cohort_qty'] }}</td>
-    <td class="right" style="border-right: 1px gray solid;">{{h['Cohort_usage_qty'] }}</td>
-    <td class="right" style="border-right: 1px gray solid;">{{h['Cohort_qty'] - h['Cohort_usage_qty'] || null}}</td>
-    <td class="right" style="border-right: 1px gray solid;">{{h['Hospitel_qty'] }}</td>
-    <td class="right" style="border-right: 1px gray solid;">{{h['Hospitel_usage_qty'] }}</td>
-    <td class="right">{{h['Hospitel_qty'] - h['Hospitel_usage_qty'] || null}}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['aiir_qty'] }}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['aiir_usage_qty'] }}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['aiir_qty'] - h['aiir_usage_qty'] || null}}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['modified_aiir_qty'] }}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['modified_aiir_usage_qty'] }}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['modified_aiir_qty'] - h['modified_aiir_usage_qty'] || null}}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['isolate_qty'] }}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['isolate_usage_qty'] }}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['isolate_qty'] - h['isolate_usage_qty'] || null}}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['cohort_qty'] }}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['cohort_usage_qty'] }}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['cohort_qty'] - h['cohort_usage_qty'] || null}}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['hospitel_qty'] }}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h['hospitel_usage_qty'] }}</td>
+    <td class="right">{{h['hospitel_qty'] - h['hospitel_usage_qty'] || null}}</td>
   </tr>
 </table>
 
