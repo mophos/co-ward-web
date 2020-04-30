@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  url = 'https://app.powerbi.com/view?r=eyJrIjoiNTI1YTg4ZmUtZGNjZS00YTgxLWJmNzQtNzNiYzkwYzhkNTkwIiwidCI6IjUzOGMzZjc1LTJmNTUtNDcxZi04MWU1LTI2NGZmOGYzZjQ4MCIsImMiOjEwfQ%3D%3D';
+  url = 'https://coviddashboard.moph.go.th/';
+  // url = 'https://app.powerbi.com/view?r=eyJrIjoiNTI1YTg4ZmUtZGNjZS00YTgxLWJmNzQtNzNiYzkwYzhkNTkwIiwidCI6IjUzOGMzZjc1LTJmNTUtNDcxZi04MWU1LTI2NGZmOGYzZjQ4MCIsImMiOjEwfQ%3D%3D';
   constructor() { }
 
   ngOnInit() {
