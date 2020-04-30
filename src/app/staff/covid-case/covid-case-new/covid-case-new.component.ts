@@ -618,10 +618,12 @@ export class CovidCaseNewComponent implements OnInit {
 
   async dateAdmit() {
     this.admitDetail = [];
-    try {
-      const rs: any = await this.basicService.getDate();
-      if (rs.ok) {
-        const aDate: any = this.admitDate.date.year + '-' + this.admitDate.date.month + '-' + this.admitDate.date.day;
+    const rs: any = await this.basicService.getDate();
+    const aDate: any = this.admitDate.date.year + '-' + this.admitDate.date.month + '-' + this.admitDate.date.day;
+    if (moment(aDate).format('YYYY-MM-DD') > moment(rs.rows).format('YYYY-MM-DD')) {
+      this.alertService.error('ไม่อนุญาติให้เลือกวันที่เกินปัจจุบัน');
+    } else {
+      try {
         this.diffDate = moment(moment(rs.rows).format('YYYY-MM-DD')).diff(moment(aDate), 'days');
         let startDate = moment(aDate, 'YYYY-MM-DD');
         let id = 1;
@@ -638,11 +640,9 @@ export class CovidCaseNewComponent implements OnInit {
           this.admitDetail.push(obj);
           id++;
         }
-      } else {
-        this.alertService.error('ไม่สามารถดึงวันที่ได้');
+      } catch (error) {
+        this.alertService.error(error);
       }
-    } catch (error) {
-      this.alertService.error(error);
     }
   }
 
