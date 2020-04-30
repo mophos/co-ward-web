@@ -135,6 +135,9 @@ export class LayoutComponent implements OnInit {
       that.mqttClient.subscribe([`${this.topic}co-ward-close`, `${this.topic}co-ward-alert`], (err) => {
         if (err) {
           console.log('Subscribe Error!!');
+        } else {
+          console.log(`subscribe ${this.topic}`);
+
         }
       });
     });
