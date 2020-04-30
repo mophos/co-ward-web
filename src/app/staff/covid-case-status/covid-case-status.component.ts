@@ -325,6 +325,9 @@ export class CovidCaseStatusComponent implements OnInit {
           const rs: any = await this.covidCaseService.updateStatus(this.list[idx]);
           if (rs.ok) {
             this.getList();
+            this.getGCSSum();
+            this.getBedSum();
+            this.getMedicalSuppliesSum();
             this.alertService.success();
           } else {
             this.alertService.error(rs.error);
