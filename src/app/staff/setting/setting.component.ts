@@ -217,10 +217,10 @@ export class SettingComponent implements OnInit {
         obj.province_code = this.provinceId;
         obj.ampur_code = this.ampurId;
         obj.tambon_code = this.tambonId;
+        obj.tambon_name = this.tambonName;
         obj.zipcode = this.zipcode;
         data.push(obj);
-
-
+        console.log(data);
 
         const rs: any = await this.settingService.save(data);
 

@@ -13,6 +13,7 @@ import { AutocompleteZipcodeComponent } from '../../../help/autocomplete-address
 import { AutocompleteCountriesComponent } from 'src/app/help/autocomplete-countries/autocomplete-countries.component';
 import * as moment from 'moment';
 import thaiIdCard from 'thai-id-card';
+import { start } from 'repl';
 
 @Component({
   selector: 'app-covid-case-old',
@@ -23,7 +24,8 @@ export class CovidCaseOldComponent implements OnInit {
 
   isRefer: any;
   typeRegister: any;
-  // profile ----------------
+  // profile ------
+  satCode: any;
   covidCaseId: any;
   personId: any;
   passport = '';
@@ -164,6 +166,7 @@ export class CovidCaseOldComponent implements OnInit {
   async setData() {
 
     try {
+      this.satCode = this.data.sat_id;
       this.covidCaseId = this.data.covid_case_id;
       this.personId = this.data.id;
       this.hn = this.data.hn;
@@ -345,70 +348,85 @@ export class CovidCaseOldComponent implements OnInit {
     this.isSave = true;
     try {
       if (await this.verifyInput()) {
-
-        const obj: any = {
-          personId: this.personId,
-          type: this.typeRegister,
-          cid: this.cid,
-          passport: this.passport,
-          hn: this.hn,
-          an: this.an,
-          titleId: this.titleId,
-          genderId: this.genderId,
-          fname: this.fname,
-          mname: this.mname,
-          lname: this.lname,
-          peopleType: this.peopleType,
-          tel: this.tel,
-          admitDate: `${this.admitDate.date.year}-${this.admitDate.date.month}-${this.admitDate.date.day}`,
-          houseNo: this.houseNo,
-          roomNo: this.roomNo,
-          village: this.village,
-          villageName: this.villageName,
-          road: this.road,
-          tambonCode: this.tambonId,
-          ampurCode: this.ampurId,
-          provinceCode: this.provinceId,
-          zipcode: this.zipcode,
-          countryId: this.countryId,
-        };
-        console.log(obj);
-
-        if (this.confirmDate) {
-          obj.confirmDate = `${this.confirmDate.date.year}-${this.confirmDate.date.month}-${this.confirmDate.date.day}`;
-        }
-        if (this.birthDate) {
-          obj.birthDate = `${this.birthDate.date.year}-${this.birthDate.date.month}-${this.birthDate.date.day}`;
-        }
-
-        let status = null;
-        if (this.modalDischargeType === 'HOME') {
-          status = 'DISCHARGE';
-        } else if (this.modalDischargeType === 'DEATH') {
-          status = 'DEATH';
-        } else if (this.modalDischargeType === 'REFER') {
-          status = 'REFER';
-          obj.hospitalId = this.hospitalId;
-          obj.reason = this.reason;
-        } else if (this.modalDischargeType === 'NEGATIVE') {
-          status = 'NEGATIVE';
-        }
-        if (this.modalDischargeType !== 'REFER') {
-          obj.dateDischarge = this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day + ' ' + this.hour + ':' + this.minute + ':00';
-        }
-        obj.status = status;
-
-
-        const rs: any = await this.covidCaseService.saveOldCase(obj);
-        if (rs.ok) {
-          this.clear();
-          this.isKey = false;
+        let startDate = moment(moment(this.admitDate.date).format('YYYY-MM-DD'), 'YYYY-MM-DD');
+        const endDate = moment(moment(this.dateDischarge.date).format('YYYY-MM-DD'), 'YYYY-MM-DD');
+        console.log(startDate, endDate);
+        if (startDate >= endDate) {
           this.isSave = false;
-          this.alertService.success();
-          this.onClickOpenModalCid();
+          this.alertService.error('ไม่อนุญาติให้วันที่ Admit มากกว่าหรือเท่ากับวันที่ Discharge');
         } else {
           this.isSave = false;
-          this.alertService.error(rs.error);
+          const dates = [];
+          dates.push(moment(startDate).format('YYYY-MM-DD'));
+          while (!startDate.isSame(endDate)) {
+            startDate = startDate.add(1, 'days');
+            dates.push(moment(startDate).format('YYYY-MM-DD'));
+          }
+
+          const obj: any = {
+            date: dates,
+            personId: this.personId,
+            type: this.typeRegister,
+            cid: this.cid,
+            passport: this.passport,
+            hn: this.hn,
+            an: this.an,
+            titleId: this.titleId,
+            genderId: this.genderId,
+            fname: this.fname,
+            mname: this.mname,
+            lname: this.lname,
+            peopleType: this.peopleType,
+            tel: this.tel,
+            admitDate: `${this.admitDate.date.year}-${this.admitDate.date.month}-${this.admitDate.date.day}`,
+            houseNo: this.houseNo,
+            roomNo: this.roomNo,
+            village: this.village,
+            villageName: this.villageName,
+            road: this.road,
+            tambonCode: this.tambonId,
+            ampurCode: this.ampurId,
+            provinceCode: this.provinceId,
+            zipcode: this.zipcode,
+            countryId: this.countryId,
+          };
+          console.log(obj);
+
+          if (this.confirmDate) {
+            obj.confirmDate = `${this.confirmDate.date.year}-${this.confirmDate.date.month}-${this.confirmDate.date.day}`;
+          }
+          if (this.birthDate) {
+            obj.birthDate = `${this.birthDate.date.year}-${this.birthDate.date.month}-${this.birthDate.date.day}`;
+          }
+
+          let status = null;
+          if (this.modalDischargeType === 'HOME') {
+            status = 'DISCHARGE';
+          } else if (this.modalDischargeType === 'DEATH') {
+            status = 'DEATH';
+          } else if (this.modalDischargeType === 'REFER') {
+            status = 'REFER';
+            obj.hospitalId = this.hospitalId;
+            obj.reason = this.reason;
+          } else if (this.modalDischargeType === 'NEGATIVE') {
+            status = 'NEGATIVE';
+          }
+          if (this.modalDischargeType !== 'REFER') {
+            obj.dateDischarge = this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day + ' ' + this.hour + ':' + this.minute + ':00';
+          }
+          obj.status = status;
+
+          const rs: any = await this.covidCaseService.saveOldCase(obj);
+          if (rs.ok) {
+            this.clear();
+            this.isKey = false;
+            this.isSave = false;
+            this.alertService.success();
+            this.onClickOpenModalCid();
+          } else {
+            this.isSave = false;
+            this.alertService.error(rs.error);
+          }
         }
       } else {
         this.isSave = false;
