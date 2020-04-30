@@ -333,92 +333,102 @@ export class CovidCaseNewComponent implements OnInit {
   }
 
   async onClickSave() {
-    if (this.diffDate < 0) {
-      this.alertService.error('ไม่อนุญาติให้คีย์ Admit ล่วงหน้า');
-    } else {
-      this.isSave = true;
-      try {
-        if (await this.verifyInput()) {
-          const drugs = [];
-          if (+this.s1 === 1) {
-            drugs.push({ genericId: 1 });
-          } else if (+this.s1 === 2) {
-            drugs.push({ genericId: 2 });
-          }
-          if (+this.s2 === 1) {
-            drugs.push({ genericId: 3 });
-            drugs.push({ genericId: 5 });
-          } else if (+this.s2 === 2) {
-            drugs.push({ genericId: 4 });
-          }
+    let checkNull = false;
+    for (const v of this.admitDetail) {
+      if (v.gcs_id === null || v.bed_id === null) {
+        checkNull = true;
+      }
+    }
+    if (!checkNull) {
+      if (this.diffDate < 0) {
+        this.alertService.error('ไม่อนุญาติให้คีย์ Admit ล่วงหน้า');
+      } else {
+        this.isSave = true;
+        try {
+          if (await this.verifyInput()) {
+            const drugs = [];
+            if (+this.s1 === 1) {
+              drugs.push({ genericId: 1 });
+            } else if (+this.s1 === 2) {
+              drugs.push({ genericId: 2 });
+            }
+            if (+this.s2 === 1) {
+              drugs.push({ genericId: 3 });
+              drugs.push({ genericId: 5 });
+            } else if (+this.s2 === 2) {
+              drugs.push({ genericId: 4 });
+            }
 
-          if (+this.s3 === 1) {
-            drugs.push({ genericId: 7 });
-          }
+            if (+this.s3 === 1) {
+              drugs.push({ genericId: 7 });
+            }
 
-          if (+this.s4 === 1) {
-            drugs.push({ genericId: 7 });
-          }
+            if (+this.s4 === 1) {
+              drugs.push({ genericId: 7 });
+            }
 
-          const obj: any = {
-            covidCaseId: this.covidCaseId,
-            type: this.typeRegister,
-            cid: this.cid,
-            personId: this.personId,
-            passport: this.passport,
-            hn: this.hn,
-            an: this.an,
-            titleId: this.titleId,
-            genderId: this.genderId,
-            fname: this.fname,
-            mname: this.mname,
-            lname: this.lname,
-            peopleType: this.peopleType,
-            tel: this.tel,
-            admitDate: `${this.admitDate.date.year}-${this.admitDate.date.month}-${this.admitDate.date.day}`,
-            // gcsId: this.gcsId,
-            // bedId: this.bedId,
-            // medicalSupplieId: this.medicalSupplieId,
-            houseNo: this.houseNo,
-            roomNo: this.roomNo,
-            village: this.village,
-            villageName: this.villageName,
-            road: this.road,
-            tambonCode: this.tambonId,
-            ampurCode: this.ampurId,
-            provinceCode: this.provinceId,
-            zipcode: this.zipcode,
-            countryId: this.countryId,
-            detail: this.admitDetail
-            // drugs
-          };
-          
-          if (this.confirmDate) {
-            obj.confirmDate = `${this.confirmDate.date.year}-${this.confirmDate.date.month}-${this.confirmDate.date.day}`;
-          }
-          if (this.birthDate) {
-            obj.birthDate = `${this.birthDate.date.year}-${this.birthDate.date.month}-${this.birthDate.date.day}`;
-          }
+            const obj: any = {
+              covidCaseId: this.covidCaseId,
+              type: this.typeRegister,
+              cid: this.cid,
+              personId: this.personId,
+              passport: this.passport,
+              hn: this.hn,
+              an: this.an,
+              titleId: this.titleId,
+              genderId: this.genderId,
+              fname: this.fname,
+              mname: this.mname,
+              lname: this.lname,
+              peopleType: this.peopleType,
+              tel: this.tel,
+              admitDate: `${this.admitDate.date.year}-${this.admitDate.date.month}-${this.admitDate.date.day}`,
+              // gcsId: this.gcsId,
+              // bedId: this.bedId,
+              // medicalSupplieId: this.medicalSupplieId,
+              houseNo: this.houseNo,
+              roomNo: this.roomNo,
+              village: this.village,
+              villageName: this.villageName,
+              road: this.road,
+              tambonCode: this.tambonId,
+              ampurCode: this.ampurId,
+              provinceCode: this.provinceId,
+              zipcode: this.zipcode,
+              countryId: this.countryId,
+              detail: this.admitDetail
+              // drugs
+            };
 
-          const rs: any = await this.covidCaseService.saveNewCase(obj);
-          if (rs.ok) {
-            this.clear();
-            this.isKey = false;
-            this.isSave = false;
-            this.alertService.success();
-            this.onClickOpenModalCid();
+            if (this.confirmDate) {
+              obj.confirmDate = `${this.confirmDate.date.year}-${this.confirmDate.date.month}-${this.confirmDate.date.day}`;
+            }
+            if (this.birthDate) {
+              obj.birthDate = `${this.birthDate.date.year}-${this.birthDate.date.month}-${this.birthDate.date.day}`;
+            }
+
+            const rs: any = await this.covidCaseService.saveNewCase(obj);
+            if (rs.ok) {
+              this.clear();
+              this.isKey = false;
+              this.isSave = false;
+              this.alertService.success();
+              this.onClickOpenModalCid();
+            } else {
+              this.isSave = false;
+              this.alertService.error(rs.error);
+            }
           } else {
             this.isSave = false;
-            this.alertService.error(rs.error);
+            this.alertService.error('กรอกข้อมูลไม่ครบ\nกรุณาตรวจสอบข้อมูล');
           }
-        } else {
+        } catch (error) {
           this.isSave = false;
-          this.alertService.error('กรอกข้อมูลไม่ครบ\nกรุณาตรวจสอบข้อมูล');
+          this.alertService.error(error);
         }
-      } catch (error) {
-        this.isSave = false;
-        this.alertService.error(error);
       }
+    } else {
+      this.alertService.error('กรุณาเลือกระดับความรุนแรงและเตียงผู้ป่วย');
     }
   }
 
@@ -464,6 +474,7 @@ export class CovidCaseNewComponent implements OnInit {
       this.personId = null;
       this.covidCaseId = null;
       this.typeRegister = null;
+      this.admitDetail = [];
     } catch (error) {
       console.log(error);
     }
