@@ -3,7 +3,7 @@
     <div class="branding">
       <a href="javascript://" class="nav-link">
         <!-- <img src="./assets/images/tt.png" alt="logo" style="width: 200px; padding-right: 10px;"> -->
-        <span class="title">COVID-SUPPLIES (MANAGER)</span>
+        <span class="title">COVID-SUPPLIES</span>
       </a>
     </div>
     <div class="header-nav">
@@ -67,6 +67,11 @@
           รายงาน
         </a>
         <clr-vertical-nav-group-children *clrIfExpanded="true">
+          <a *ngIf="reportBed" clrVerticalNavLink routerLink="/manager/report-review-homework" title="รายงานเตียงตามสังกัดหน่วยงาน"
+            routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            รายงานการลงทะเบียน
+          </a>
           <a *ngIf="reportBed" clrVerticalNavLink routerLink="/manager/report-dms1" title="รายงานเตียงตามสังกัดหน่วยงาน"
             routerLinkActive="active">
             <clr-icon shape="folder-open" class="is-solid"></clr-icon>

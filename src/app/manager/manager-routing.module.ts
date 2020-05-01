@@ -1,3 +1,5 @@
+import { HomeComponent } from './home/home.component';
+import { ReportReviewHomeworkComponent } from './report-dms/report-review-homework/report-review-homework.component';
 import { ReportSuppliesSummaryComponent } from './report-supplies-summary/report-supplies-summary.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -23,7 +25,8 @@ const routes: Routes = [
     component: LayoutComponent,
     canActivate: [ManagerGuard],
     children: [
-      { path: '', redirectTo: 'report-bed-by-types', pathMatch: 'full' },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: HomeComponent },
       { path: 'report-supplies-summary', component: ReportSuppliesSummaryComponent },
       { path: 'report-supplies', component: ReportSuppliesComponent },
       { path: 'report-patients', component: ReportPatientsComponent },
@@ -37,6 +40,7 @@ const routes: Routes = [
       { path: 'report-dms4', component: ReportDms4Component },
       { path: 'report-dms6', component: ReportDms6Component },
       { path: 'report-dms7', component: ReportDms7Component },
+      { path: 'report-review-homework', component: ReportReviewHomeworkComponent },
     ]
   }
 ];

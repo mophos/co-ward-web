@@ -98,4 +98,14 @@ export class ReportDmsService {
     const url = `${this.apiUrl}/v1/manager/report-dms/report10/excel?date=${date}`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
+  
+  async getReportReviewHomeworkGov() {
+    const url = `${this.apiUrl}/v1/manager/report-dms/report-homework-gov`;
+    return await this.http.get(url).toPromise();
+  }
+  async getReportReviewHomeworkComp() {
+    const url = `${this.apiUrl}/v1/manager/report-dms/report-homework-comp`;
+    return await this.http.get(url).toPromise();
+  }
+
 }

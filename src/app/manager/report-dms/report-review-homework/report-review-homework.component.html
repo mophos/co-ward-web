@@ -1,0 +1,45 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">รายงานการลงทะเบียน</span>
+</nav>
+<br>
+
+
+<h3>รัฐบาล</h3>
+<table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
+  <tr>
+    <th style="border-right: 1px gray solid;">โรงพยาบาล</th>
+    <th style="border-right: 1px gray solid;">วันที่ลงทะเบียนล่าสุด</th>
+    <th style="border-right: 1px gray solid;">สังกัด</th>
+    <th style="border-right: 1px gray solid;">จังหวัด</th>
+  </tr>
+
+
+  <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+    <td class="left" style="border-right: 1px gray solid;">{{h.hospcode}}:{{h.hospname}}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h.register_last_date | dateTh:'DD/MM/YYYY hh:mm'}}</td>
+    <td class="left" style="border-right: 1px gray solid;">{{h.sub_ministry_name}}</td>
+    <td class="left" style="border-right: 1px gray solid;">{{h.province_code}}:{{h.province_name}}</td>
+  </tr>
+</table>
+<br>
+<br>
+<br>
+<h3>เอกชน</h3>
+<table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
+  <tr>
+    <th style="border-right: 1px gray solid;">โรงพยาบาล</th>
+    <th style="border-right: 1px gray solid;">วันที่ลงทะเบียนล่าสุด</th>
+    <th style="border-right: 1px gray solid;">สังกัด</th>
+    <th style="border-right: 1px gray solid;">จังหวัด</th>
+  </tr>
+
+
+  <tr *ngFor="let h of list2; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+    <td class="left" style="border-right: 1px gray solid;">{{h.hospcode}}:{{h.hospname}}</td>
+    <td class="right" style="border-right: 1px gray solid;">{{h.register_last_date | dateTh:'DD/MM/YYYY hh:mm'}}</td>
+    <td class="left" style="border-right: 1px gray solid;">{{h.sub_ministry_name}}</td>
+    <td class="left" style="border-right: 1px gray solid;">{{h.province_code}}:{{h.province_name}}</td>
+  </tr>
+</table>
+
+<app-loadding #loading></app-loadding>

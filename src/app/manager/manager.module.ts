@@ -27,6 +27,8 @@ import { ReportDms4Component } from './report-dms/report-dms4/report-dms4.compon
 import { ReportDms1Component } from './report-dms/report-dms1/report-dms1.component';
 import { ReportDms6Component } from './report-dms/report-dms6/report-dms6.component';
 import { ReportDms7Component } from './report-dms/report-dms7/report-dms7.component';
+import { ReportReviewHomeworkComponent } from './report-dms/report-review-homework/report-review-homework.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { ReportDms7Component } from './report-dms/report-dms7/report-dms7.compon
     ReportDms4Component,
     ReportDms1Component,
     ReportDms6Component,
-    ReportDms7Component
+    ReportDms7Component,
+    ReportReviewHomeworkComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,
