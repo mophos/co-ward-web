@@ -130,12 +130,15 @@ export class ManageSystemsComponent implements OnInit {
     this.modalBroadcast = true;
   }
 
-  onClickRefresh() {
-    this.mqttClient.publish(`${this.topic}co-ward-restart`, 'RESTART', (err) => {
-      if (err) {
-        console.log('publish Error!!');
-      }
-    });
+  async onClickRefresh() {
+    const confirm = await this.alertService.confirm();
+    if (confirm) {
+      this.mqttClient.publish(`${this.topic}co-ward-restart`, 'RESTART', (err) => {
+        if (err) {
+          console.log('publish Error!!');
+        }
+      });
+    }
   }
 
   async sendBroadcase() {
