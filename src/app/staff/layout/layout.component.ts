@@ -154,6 +154,10 @@ export class LayoutComponent implements OnInit {
       } else if (topic === `${this.topic}co-ward-alert`) {
         this.message = payload.toString();
         this.modalAlert = true;
+      } else if (topic === `${this.topic}co-ward-restart`) {
+        if (payload.toString() === 'RESTART') {
+          window.location.reload();
+        }
       }
     });
   }
