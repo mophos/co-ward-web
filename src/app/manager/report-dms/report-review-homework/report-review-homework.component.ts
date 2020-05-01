@@ -12,6 +12,10 @@ export class ReportReviewHomeworkComponent implements OnInit {
 
   @ViewChild('loading') loading: any;
 
+  sum1 = 0;
+  sum2 = 0;
+  sum3 = 0;
+  sum4 = 0;
   list = [];
   list2 = [];
   constructor(
@@ -29,6 +33,12 @@ export class ReportReviewHomeworkComponent implements OnInit {
       const rs: any = await this.reportService.getReportReviewHomeworkGov();
       if (rs.ok) {
         this.list = rs.rows;
+        for (const i of rs.rows) {
+          this.sum2++;
+          if (i.register_last_date) {
+            this.sum1++;
+          }
+        }
       } else {
         this.alertService.error(rs.error);
       }
@@ -42,6 +52,12 @@ export class ReportReviewHomeworkComponent implements OnInit {
       const rs: any = await this.reportService.getReportReviewHomeworkComp();
       if (rs.ok) {
         this.list2 = rs.rows;
+        for (const i of rs.rows) {
+          this.sum4++;
+          if (i.register_last_date) {
+            this.sum3++;
+          }
+        }
       } else {
         this.alertService.error(rs.error);
       }

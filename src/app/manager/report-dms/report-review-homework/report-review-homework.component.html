@@ -7,6 +7,7 @@
 <h3>รัฐบาล</h3>
 <table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
   <tr>
+    <th style="border-right: 1px gray solid;"></th>
     <th style="border-right: 1px gray solid;">โรงพยาบาล</th>
     <th style="border-right: 1px gray solid;">วันที่ลงทะเบียนล่าสุด</th>
     <th style="border-right: 1px gray solid;">สังกัด</th>
@@ -15,10 +16,18 @@
 
 
   <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+    <td class="left" style="border-right: 1px gray solid;">{{idx+1}}</td>
     <td class="left" style="border-right: 1px gray solid;">{{h.hospcode}}:{{h.hospname}}</td>
     <td class="right" style="border-right: 1px gray solid;">{{h.register_last_date | dateTh:'DD/MM/YYYY hh:mm'}}</td>
     <td class="left" style="border-right: 1px gray solid;">{{h.sub_ministry_name}}</td>
     <td class="left" style="border-right: 1px gray solid;">{{h.province_code}}:{{h.province_name}}</td>
+  </tr>
+  <tr  class="isProblem">
+    <td class="left" style="border-right: 1px gray solid;"></td>
+    <td class="left" style="border-right: 1px gray solid;"></td>
+    <td class="right" style="border-right: 1px gray solid;"></td>
+    <td class="left" style="border-right: 1px gray solid;">ลงทะเบียนแล้ว {{sum1}}/{{sum2}} รพ.</td>
+    <td class="left" style="border-right: 1px gray solid;">{{sum1*100/sum2 | number:'1.0-2'}}%</td>
   </tr>
 </table>
 <br>
@@ -27,6 +36,7 @@
 <h3>เอกชน</h3>
 <table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
   <tr>
+    <td class="left" style="border-right: 1px gray solid;"></td>
     <th style="border-right: 1px gray solid;">โรงพยาบาล</th>
     <th style="border-right: 1px gray solid;">วันที่ลงทะเบียนล่าสุด</th>
     <th style="border-right: 1px gray solid;">สังกัด</th>
@@ -35,10 +45,18 @@
 
 
   <tr *ngFor="let h of list2; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+    <td class="left" style="border-right: 1px gray solid;">{{idx+1}}</td>
     <td class="left" style="border-right: 1px gray solid;">{{h.hospcode}}:{{h.hospname}}</td>
     <td class="right" style="border-right: 1px gray solid;">{{h.register_last_date | dateTh:'DD/MM/YYYY hh:mm'}}</td>
     <td class="left" style="border-right: 1px gray solid;">{{h.sub_ministry_name}}</td>
     <td class="left" style="border-right: 1px gray solid;">{{h.province_code}}:{{h.province_name}}</td>
+  </tr>
+  <tr class="isProblem">
+    <td class="left" style="border-right: 1px gray solid;"></td>
+    <td class="left" style="border-right: 1px gray solid;"></td>
+    <td class="right" style="border-right: 1px gray solid;"></td>
+    <td class="left" style="border-right: 1px gray solid;">ลงทะเบียนแล้ว {{sum3}}/{{sum4}} รพ.</td>
+    <td class="left" style="border-right: 1px gray solid;">{{sum3*100/sum4 | number:'1.0-2'}}%</td>
   </tr>
 </table>
 
