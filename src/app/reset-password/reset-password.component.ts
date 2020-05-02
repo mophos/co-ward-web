@@ -53,7 +53,9 @@ export class ResetPasswordComponent implements OnInit {
     private alertService: AlertService,
     private registerService: RegisterService,
   ) {
-    this.redirect = this.route.snapshot.params.redirect ? this.route.snapshot.params.redirect : null;
+    this.route.queryParams.subscribe(params => {
+      this.redirect = params.redirect ? params.redirect : null;
+    });
     console.log(this.redirect);
   }
 
@@ -171,7 +173,7 @@ export class ResetPasswordComponent implements OnInit {
       const rs: any = await this.loginService.updatePassword2(this.userId, this.cid, this.passwordNew);
       if (rs.ok) {
         if (this.redirect) {
-          window.location.href = `http://${this.redirect}`;
+          window.location.href = this.redirect;
         } else {
           window.location.reload();
         }

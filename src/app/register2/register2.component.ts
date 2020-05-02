@@ -50,7 +50,9 @@ export class Register2Component implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.redirect = this.route.snapshot.params.redirect ? this.route.snapshot.params.redirect : null;
+    this.route.queryParams.subscribe(params => {
+      this.redirect = params.redirect ? params.redirect : null;
+    });
     console.log(this.redirect);
 
   }
@@ -124,7 +126,7 @@ export class Register2Component implements OnInit {
           if (rs.ok) {
             this.alertService.success();
             if (this.redirect) {
-              window.location.href = `http://${this.redirect}`;
+              window.location.href = this.redirect;
             } else {
               window.location.reload();
             }
