@@ -16,8 +16,8 @@ export class Register2Component implements OnInit {
   hospcodeConfirm: any = '';
   onSelectHospcode: any = null;
   cid: any = '';
-  position: any = null;
-  title: any = null;
+  position: any = 8;
+  title: any = 135;
   firstName: any = '';
   lastName: any = '';
   username: any = '';
@@ -117,7 +117,7 @@ export class Register2Component implements OnInit {
             isNodeSupplies: this.isNodeSupplies,
             isDRUGS: this.isDRUGS,
             isSupplies: this.isSupplies,
-            hospname:this.hospName
+            hospname: this.hospName
           };
 
           const rs: any = await this.registerService.register2(obj);
@@ -178,7 +178,7 @@ export class Register2Component implements OnInit {
       const rs: any = await this.registerService.getTitle();
       if (rs.ok) {
         this.titleList = rs.rows;
-        this.title = rs.rows[0].id;
+        // this.title = rs.rows[0].id;
       } else {
         this.alertService.error(rs.error);
       }
@@ -192,7 +192,7 @@ export class Register2Component implements OnInit {
       const rs: any = await this.registerService.getPosition();
       if (rs.ok) {
         this.positionList = rs.rows;
-        this.position = rs.rows[0].id;
+        // this.position = rs.rows[0].id;
       } else {
         this.alertService.error(rs.error);
       }
