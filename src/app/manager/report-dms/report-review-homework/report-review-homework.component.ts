@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportDmsService } from '../report-dms.service';
 import { AlertService } from '../../../help/alert.service';
@@ -14,23 +15,29 @@ export class ReportReviewHomeworkComponent implements OnInit {
 
   sum1 = 0;
   sum2 = 0;
-  sum3 = 0;
-  sum4 = 0;
   list = [];
-  list2 = [];
+  sector: any;
   constructor(
     private reportService: ReportDmsService,
-    private alertService: AlertService
-  ) { }
+    private alertService: AlertService,
+    private route: ActivatedRoute
+  ) {
+    const params = this.route.snapshot.params;
+    // this.route.queryParams.subscribe((params) => {
+    this.sector = params.sector;
+    console.log(this.sector);
+    // });
+
+  }
 
   ngOnInit() {
     this.getList();
-    this.getList2();
   }
 
   async getList() {
     try {
-      const rs: any = await this.reportService.getReportReviewHomeworkGov();
+      this.loading.show();
+      const rs: any = await this.reportService.getReportReviewHomework(this.sector);
       if (rs.ok) {
         this.list = rs.rows;
         for (const i of rs.rows) {
@@ -42,26 +49,9 @@ export class ReportReviewHomeworkComponent implements OnInit {
       } else {
         this.alertService.error(rs.error);
       }
+      this.loading.hide();
     } catch (error) {
-      this.alertService.error(error);
-    }
-  }
-
-  async getList2() {
-    try {
-      const rs: any = await this.reportService.getReportReviewHomeworkComp();
-      if (rs.ok) {
-        this.list2 = rs.rows;
-        for (const i of rs.rows) {
-          this.sum4++;
-          if (i.register_last_date) {
-            this.sum3++;
-          }
-        }
-      } else {
-        this.alertService.error(rs.error);
-      }
-    } catch (error) {
+      this.loading.hide();
       this.alertService.error(error);
     }
   }

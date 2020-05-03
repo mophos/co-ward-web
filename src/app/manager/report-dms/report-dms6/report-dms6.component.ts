@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportDmsService } from '../report-dms.service';
 import { AlertService } from '../../../help/alert.service';
@@ -29,15 +30,19 @@ export class ReportDms6Component implements OnInit {
   host1: any;
   host2: any;
   host3: any;
-
+  sector: any;
   @ViewChild('loading') loading: any;
 
   public jwtHelper = new JwtHelperService();
 
   constructor(
     private reportService: ReportDmsService,
-    private alertService: AlertService
-  ) { }
+    private alertService: AlertService,
+    private route: ActivatedRoute
+  ) {
+    const params = this.route.snapshot.params;
+    this.sector = params.sector;
+  }
 
   async ngOnInit() {
     this.date = {
@@ -54,7 +59,7 @@ export class ReportDms6Component implements OnInit {
     this.loading.show();
     try {
       const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
-      const rs: any = await this.reportService.getReport6(date);
+      const rs: any = await this.reportService.getReport6(date, this.sector);
       if (rs.ok) {
         this.aiir1 = sumBy(rs.rows, 'aiir_qty');
         this.aiir2 = sumBy(rs.rows, 'aiir_usage_qty');
@@ -99,7 +104,7 @@ export class ReportDms6Component implements OnInit {
     this.loading.show();
     try {
       const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
-      const rs: any = await this.reportService.getReport6Excel(date);
+      const rs: any = await this.reportService.getReport6Excel(date, this.sector);
       console.log(rs);
       if (!rs) {
         this.loading.hide();

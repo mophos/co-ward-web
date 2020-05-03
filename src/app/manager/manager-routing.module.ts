@@ -1,3 +1,5 @@
+import { ReportDms8Component } from './report-dms/report-dms8/report-dms8.component';
+import { ReportDms5Component } from './report-dms/report-dms5/report-dms5.component';
 import { HomeComponent } from './home/home.component';
 import { ReportReviewHomeworkComponent } from './report-dms/report-review-homework/report-review-homework.component';
 import { ReportSuppliesSummaryComponent } from './report-supplies-summary/report-supplies-summary.component';
@@ -38,8 +40,10 @@ const routes: Routes = [
       { path: 'report-dms2', component: ReportDms2Component },
       { path: 'report-dms3', component: ReportDms3Component },
       { path: 'report-dms4', component: ReportDms4Component },
+      { path: 'report-dms5', component: ReportDms5Component },
       { path: 'report-dms6', component: ReportDms6Component },
       { path: 'report-dms7', component: ReportDms7Component },
+      { path: 'report-dms8', component: ReportDms8Component },
       { path: 'report-review-homework', component: ReportReviewHomeworkComponent },
     ]
   }

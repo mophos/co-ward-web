@@ -1,3 +1,5 @@
+import { ReportDms8Component } from './report-dms/report-dms8/report-dms8.component';
+import { ReportDms5Component } from './report-dms/report-dms5/report-dms5.component';
 import { HelpModule } from 'src/app/help/help.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -45,12 +47,14 @@ import { HomeComponent } from './home/home.component';
     ReportSuppliesSummaryComponent,
     ReportMedicalsComponent,
     PatientInfoComponent,
+    ReportDms1Component,
     ReportDms2Component,
     ReportDms3Component,
     ReportDms4Component,
-    ReportDms1Component,
+    ReportDms5Component,
     ReportDms6Component,
     ReportDms7Component,
+    ReportDms8Component,
     ReportReviewHomeworkComponent,
     HomeComponent
   ],

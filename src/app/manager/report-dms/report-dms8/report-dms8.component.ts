@@ -1,27 +1,37 @@
-import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportDmsService } from '../report-dms.service';
 import { AlertService } from '../../../help/alert.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { IMyOptions } from 'mydatepicker-th';
+import * as moment from 'moment';
 import { sumBy } from 'lodash';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-report-dms1',
-  templateUrl: './report-dms1.component.html',
+  selector: 'app-report-dms8',
+  templateUrl: './report-dms8.component.html',
   styles: []
 })
-export class ReportDms1Component implements OnInit {
+export class ReportDms8Component implements OnInit {
 
   list: any;
-  qtyHosp: any;
-  qtyBed: any;
-  qty1: any;
-  qty2: any;
-  qty3: any;
-  qty4: any;
-  qty5: any;
-  sector: any;
+  date: any;
+  n95: any;
+  surgicalMask: any;
+  coverAll: any;
+  surgicalGown: any;
+
+  myDatePickerOptions: IMyOptions = {
+    inline: false,
+    dateFormat: 'dd mmm yyyy',
+    editableDateField: false,
+    showClearDateBtn: false
+  };
+
   @ViewChild('loading') loading: any;
 
+  public jwtHelper = new JwtHelperService();
+  sector: any;
   constructor(
     private reportService: ReportDmsService,
     private alertService: AlertService,
@@ -31,24 +41,28 @@ export class ReportDms1Component implements OnInit {
     this.sector = params.sector;
   }
 
-  ngOnInit() {
-    this.getList();
+  async ngOnInit() {
+    this.date = {
+      date: {
+        year: moment().get('year'),
+        month: moment().get('month') + 1,
+        day: moment().get('date')
+      }
+    };
+    await this.getList();
   }
 
   async getList() {
     this.loading.show();
     try {
-      const rs: any = await this.reportService.getReport1(this.sector);
+      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
+      const rs: any = await this.reportService.getReport8(date, this.sector);
       if (rs.ok) {
-        this.qtyHosp = sumBy(rs.rows, 'hospital_qty');
-        this.qtyBed = sumBy(rs.rows, 'bed_qty');
-        this.qty1 = sumBy(rs.rows, 'aiir_qty');
-        this.qty2 = sumBy(rs.rows, 'modified_aiir_qty');
-        this.qty3 = sumBy(rs.rows, 'isolate_qty');
-        this.qty4 = sumBy(rs.rows, 'cohort_qty');
-        this.qty5 = sumBy(rs.rows, 'hospitel_qty');
         this.list = rs.rows;
-
+        this.n95 = sumBy(rs.rows, 'n95_qty');
+        this.surgicalMask = sumBy(rs.rows, 'surgical_mask_qty');
+        this.coverAll = sumBy(rs.rows, 'cover_all2_qty');
+        this.surgicalGown = sumBy(rs.rows, 'surgical_gown_qty');
         this.loading.hide();
       } else {
         this.loading.hide();
@@ -60,15 +74,19 @@ export class ReportDms1Component implements OnInit {
     }
   }
 
+  async doEnter() {
+    await this.getList();
+  }
+
   async doExportExcel() {
     this.loading.show();
     try {
-      const rs: any = await this.reportService.getReport1Excel(this.sector);
-      console.log(rs);
+      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
+      const rs: any = await this.reportService.getReport8Excel(date, this.sector);
       if (!rs) {
         this.loading.hide();
       } else {
-        this.downloadFile('report-dms1', 'xlsx', rs);
+        this.downloadFile('report-dms2', 'xlsx', rs);
         // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
         this.loading.hide();
       }
@@ -82,7 +100,6 @@ export class ReportDms1Component implements OnInit {
   downloadFile(name, type, data: any) {
     try {
       const url = window.URL.createObjectURL(new Blob([data]));
-      console.log(url);
       const fileName = `${name}.${type}`;
       // Debe haber una manera mejor de hacer esto...
       const a = document.createElement('a');
