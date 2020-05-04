@@ -113,6 +113,16 @@
             <clr-icon shape="folder-open" class="is-solid"></clr-icon>
             8. รายงานเวชภัณฑ์สิ้นเปลือง
           </a>
+          <a *ngIf="reportBed" clrVerticalNavLink [routerLink]="['/manager/report-dms9',{sector:'GOVERNMENT'}]"
+            title="รายงานจำนวนบุคลากร (แพทย์)" routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            9. รายงานจำนวนบุคลากร (แพทย์)
+          </a>
+          <a *ngIf="reportBed" clrVerticalNavLink [routerLink]="['/manager/report-dms10',{sector:'GOVERNMENT'}]"
+            title="รายงานจำนวนบุคลากร (พยาบาล) นับจำนวนทั้งหมดไม่นับเป็นเวร" routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            10. รายงานจำนวนบุคลากร (พยาบาล) นับจำนวนทั้งหมดไม่นับเป็นเวร
+          </a>
         </clr-vertical-nav-group-children>
       </clr-vertical-nav-group>
       <clr-vertical-nav-group routerLinkActive="active">
@@ -166,6 +176,16 @@
             title="รายงานเวชภัณฑ์สิ้นเปลือง" routerLinkActive="active">
             <clr-icon shape="folder-open" class="is-solid"></clr-icon>
             8. รายงานเวชภัณฑ์สิ้นเปลือง
+          </a>
+          <a *ngIf="reportBed" clrVerticalNavLink [routerLink]="['/manager/report-dms9',{sector:'PRIVATE'}]"
+            title="รายงานจำนวนบุคลากร (แพทย์)" routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            9. รายงานจำนวนบุคลากร (แพทย์)
+          </a>
+          <a *ngIf="reportBed" clrVerticalNavLink [routerLink]="['/manager/report-dms10',{sector:'PRIVATE'}]"
+            title="รายงานจำนวนบุคลากร (พยาบาล) นับจำนวนทั้งหมดไม่นับเป็นเวร" routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            10. รายงานจำนวนบุคลากร (พยาบาล) นับจำนวนทั้งหมดไม่นับเป็นเวร
           </a>
         </clr-vertical-nav-group-children>
       </clr-vertical-nav-group>

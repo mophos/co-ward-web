@@ -20,6 +20,8 @@ import { ReportDms3Component } from './report-dms/report-dms3/report-dms3.compon
 import { ReportDms4Component } from './report-dms/report-dms4/report-dms4.component';
 import { ReportDms6Component } from './report-dms/report-dms6/report-dms6.component';
 import { ReportDms7Component } from './report-dms/report-dms7/report-dms7.component';
+import { ReportDms9Component } from './report-dms/report-dms9/report-dms9.component';
+import { ReportDms10Component } from './report-dms/report-dms10/report-dms10.component';
 
 const routes: Routes = [
   {
@@ -44,6 +46,8 @@ const routes: Routes = [
       { path: 'report-dms6', component: ReportDms6Component },
       { path: 'report-dms7', component: ReportDms7Component },
       { path: 'report-dms8', component: ReportDms8Component },
+      { path: 'report-dms9', component: ReportDms9Component },
+      { path: 'report-dms10', component: ReportDms10Component },
       { path: 'report-review-homework', component: ReportReviewHomeworkComponent },
     ]
   }

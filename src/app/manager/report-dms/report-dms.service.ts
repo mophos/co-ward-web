@@ -80,22 +80,22 @@ export class ReportDmsService {
     const url = `${this.apiUrl}/v1/manager/report-dms/report8/excel?date=${date}&sector=${sector}`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
-  async getReport9(date) {
-    const url = `${this.apiUrl}/v1/manager/report-dms/report9?date=${date}`;
+  async getReport9(date, sector) {
+    const url = `${this.apiUrl}/v1/manager/report-dms/report9?date=${date}&sector=${sector}`;
     return await this.http.get(url).toPromise();
   }
 
-  async getReport9Excel(date) {
-    const url = `${this.apiUrl}/v1/manager/report-dms/report9/excel?date=${date}`;
+  async getReport9Excel(date, sector) {
+    const url = `${this.apiUrl}/v1/manager/report-dms/report9/excel?date=${date}&sector=${sector}`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
-  async getReport10(date) {
-    const url = `${this.apiUrl}/v1/manager/report-dms/report10?date=${date}`;
+  async getReport10(date, sector) {
+    const url = `${this.apiUrl}/v1/manager/report-dms/report10?date=${date}&sector=${sector}`;
     return await this.http.get(url).toPromise();
   }
 
-  async getReport10Excel(date) {
-    const url = `${this.apiUrl}/v1/manager/report-dms/report10/excel?date=${date}`;
+  async getReport10Excel(date, sector) {
+    const url = `${this.apiUrl}/v1/manager/report-dms/report10/excel?date=${date}&sector=${sector}`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 
