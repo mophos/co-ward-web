@@ -84,8 +84,8 @@ export class LayoutComponent implements OnInit {
   }
 
   async  ngOnInit() {
-    await this.initialSocket();
     await this.getSystems();
+    await this.initialSocket();
   }
 
   async getSystems() {
