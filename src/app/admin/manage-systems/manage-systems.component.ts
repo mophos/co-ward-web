@@ -54,7 +54,7 @@ export class ManageSystemsComponent implements OnInit {
 
   connectMqtt() {
     try {
-      this.mqttClient = mqttClient.connect('ws://203.157.104.220:8080', {
+      this.mqttClient = mqttClient.connect('wss://203.157.104.220:8080', {
         clienId: Math.floor(Math.random() * 10000),
         username: 'mqtt',
         password: '##Mqtt'
