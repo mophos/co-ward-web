@@ -1,3 +1,4 @@
+import { RequestProductsComponent } from './request-products/request-products.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReportPatientAdmitComponent } from './report-patient-admit/report-patient-admit.component';
 import { CovidCaseOldComponent } from './covid-case/covid-case-old/covid-case-old.component';
@@ -76,6 +77,7 @@ const routes: Routes = [
       { path: 'receive-products', canActivate: [AuthStockProductsService], component: ReceivesComponent },
       { path: 'surgical-sphp', canActivate: [AuthPayService], component: SurgicalMaskShphComponent },
       { path: 'supplies', canActivate: [AuthStockSuppliesService], component: SuppliesComponent },
+      { path: 'request-products',  component: RequestProductsComponent },
       {
         path: 'tracking',
         canActivate: [AuthTrackingService],

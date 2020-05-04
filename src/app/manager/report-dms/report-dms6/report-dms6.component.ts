@@ -5,6 +5,7 @@ import { AlertService } from '../../../help/alert.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import * as moment from 'moment';
 import { sumBy } from 'lodash';
+import { IMyOptions } from 'mydatepicker-th';
 
 @Component({
   selector: 'app-report-dms6',
@@ -34,7 +35,12 @@ export class ReportDms6Component implements OnInit {
   @ViewChild('loading') loading: any;
 
   public jwtHelper = new JwtHelperService();
-
+  myDatePickerOptions: IMyOptions = {
+    inline: false,
+    dateFormat: 'dd mmm yyyy',
+    editableDateField: false,
+    showClearDateBtn: false
+  };
   constructor(
     private reportService: ReportDmsService,
     private alertService: AlertService,
