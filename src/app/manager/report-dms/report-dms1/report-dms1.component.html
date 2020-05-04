@@ -34,7 +34,7 @@
   <tr>
     <th class="right td-border" style="position: sticky; top: 0;" >รวม</th>
     <th class="right td-border" style="position: sticky; top: 0;" >{{qtyHosp}}</th>
-    <th class="right td-border" style="position: sticky; top: 0;" >{{qtyBed}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;" >{{qty1+qty2+qty3+qty4+qty5}}</th>
     <th class="right td-border" style="position: sticky; top: 0;" >{{qty1}}</th>
     <th class="right td-border" style="position: sticky; top: 0;" >{{qty2}}</th>
     <th class="right td-border" style="position: sticky; top: 0;" >{{qty3}}</th>
@@ -45,7 +45,7 @@
   <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
     <td class="left td-border" >{{h.sub_ministry_name}}</td>
     <td class="right td-border" >{{h.hospital_qty}}</td>
-    <td class="right td-border" >{{h.bed_qty}}</td>
+    <td class="right td-border" >{{h.aiir_qty+h.modified_aiir_qty+h.isolate_qty+h.cohort_qty+h.hospitel_qty}}</td>
     <td class="right td-border" >{{h.aiir_qty}}</td>
     <td class="right td-border" >{{h.modified_aiir_qty}}</td>
     <td class="right td-border" >{{h.isolate_qty}}</td>

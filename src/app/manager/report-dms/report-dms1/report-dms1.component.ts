@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportDmsService } from '../report-dms.service';
 import { AlertService } from '../../../help/alert.service';
 import { sumBy } from 'lodash';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-report-dms1',
   templateUrl: './report-dms1.component.html',
@@ -20,6 +20,7 @@ export class ReportDms1Component implements OnInit {
   qty4: any;
   qty5: any;
   sector: any;
+  date: any;
   @ViewChild('loading') loading: any;
 
   constructor(
@@ -32,13 +33,21 @@ export class ReportDms1Component implements OnInit {
   }
 
   ngOnInit() {
+    this.date = {
+      date: {
+        year: moment().get('year'),
+        month: moment().get('month') + 1,
+        day: moment().get('date')
+      }
+    };
     this.getList();
   }
 
   async getList() {
     this.loading.show();
     try {
-      const rs: any = await this.reportService.getReport1(this.sector);
+      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
+      const rs: any = await this.reportService.getReport1(date, this.sector);
       if (rs.ok) {
         this.qtyHosp = sumBy(rs.rows, 'hospital_qty');
         this.qtyBed = sumBy(rs.rows, 'bed_qty');
@@ -63,7 +72,8 @@ export class ReportDms1Component implements OnInit {
   async doExportExcel() {
     this.loading.show();
     try {
-      const rs: any = await this.reportService.getReport1Excel(this.sector);
+      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
+      const rs: any = await this.reportService.getReport1Excel(date, this.sector);
       console.log(rs);
       if (!rs) {
         this.loading.hide();
