@@ -101,3 +101,16 @@
     -webkit-background-size: cover;
     background-size: cover;
 }
+
+.td-border {
+    border-right: 1px solid #eee;
+}
+
+.sticky-row {
+    position: sticky;
+    position: -webkit-sticky;
+    left: 0;
+    top: 23px;
+    color: white;
+    z-index: 3;
+  }

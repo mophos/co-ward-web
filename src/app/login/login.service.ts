@@ -37,4 +37,9 @@ export class LoginService {
     return this.http.post(url, { id, passwordNew }).toPromise();
   }
 
+  updatePassword2(id, cid, passwordNew) {
+    const url = `${this.url}/v1/login/update-password2`;
+    return this.http.post(url, { id, cid, passwordNew }).toPromise();
+  }
+
 }

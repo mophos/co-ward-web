@@ -20,6 +20,7 @@ import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { HelpModule } from './help/help.module';
 import { RegisterDrugComponent } from './register-drug/register-drug.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 export function tokenGetter() {
   return sessionStorage.getItem('token');
@@ -31,7 +32,8 @@ export function tokenGetter() {
     PageNotFoundComponent,
     RegisterComponent,
     RegisterDrugComponent,
-    Register2Component
+    Register2Component,
+    ResetPasswordComponent
   ],
   imports: [
     AppRoutingModule,

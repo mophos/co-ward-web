@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertService } from 'src/app/help/alert.service';
 import { ReportDmsService } from '../report-dms.service';
@@ -26,9 +27,15 @@ export class ReportDms3Component implements OnInit {
     editableDateField: false,
     showClearDateBtn: false
   };
+  sector: any;
   constructor(
     private alertService: AlertService,
-    private reportService: ReportDmsService, ) { }
+    private reportService: ReportDmsService,
+    private route: ActivatedRoute
+    ) {
+    const params = this.route.snapshot.params;
+    this.sector = params.sector;
+  }
 
   async ngOnInit() {
     this.date = {
@@ -45,7 +52,7 @@ export class ReportDms3Component implements OnInit {
     this.loading.show();
     try {
       const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
-      const rs: any = await this.reportService.getReport3(date);
+      const rs: any = await this.reportService.getReport3(date, this.sector);
       if (rs.ok) {
         this.list = rs.rows;
         this.sum = {
@@ -58,7 +65,7 @@ export class ReportDms3Component implements OnInit {
         this.loading.hide();
       } else {
         this.loading.hide();
-        this.alertService.error();
+        this.alertService.error(rs.error);
       }
     } catch (error) {
       this.loading.hide();
@@ -68,7 +75,7 @@ export class ReportDms3Component implements OnInit {
   async onClickExport() {
     this.loading.show();
     try {
-      const rs: any = await this.reportService.getReport3Excel(`${this.date.date.year}-${this.date.date.month}-29`);
+      const rs: any = await this.reportService.getReport3Excel(`${this.date.date.year}-${this.date.date.month}-29`,this.sector);
       console.log(rs);
       if (!rs) {
         this.loading.hide();
@@ -78,7 +85,7 @@ export class ReportDms3Component implements OnInit {
       }
     } catch (error) {
       console.log(error);
-      this.alertService.error();
+      this.alertService.error(error);
       this.loading.hide();
     }
   }
@@ -105,7 +112,7 @@ export class ReportDms3Component implements OnInit {
       a.remove(); // remove the element
     } catch (error) {
       console.log(error);
-      this.alertService.error();
+      this.alertService.error(error);
     }
   }
 }

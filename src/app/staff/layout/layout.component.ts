@@ -132,7 +132,7 @@ export class LayoutComponent implements OnInit {
   subscribeMqtt() {
     const that = this;
     this.mqttClient.on('connect', () => {
-      that.mqttClient.subscribe([`${this.topic}co-ward-close`, `${this.topic}co-ward-alert`], (err) => {
+      that.mqttClient.subscribe([`${this.topic}co-ward-close`, `${this.topic}co-ward-alert`, `${this.topic}co-ward-restart`], (err) => {
         if (err) {
           console.log('Subscribe Error!!');
         } else {
@@ -145,6 +145,7 @@ export class LayoutComponent implements OnInit {
 
   messageMqtt() {
     this.mqttClient.on('message', (topic, payload) => {
+      console.log(topic, payload);
       if (topic === `${this.topic}co-ward-close`) {
         if (payload.toString() === 'CLOSE') {
           this.modalClose = true;
@@ -154,6 +155,12 @@ export class LayoutComponent implements OnInit {
       } else if (topic === `${this.topic}co-ward-alert`) {
         this.message = payload.toString();
         this.modalAlert = true;
+      } else if (topic === `${this.topic}co-ward-restart`) {
+        if (payload.toString() === 'RESTART') {
+          console.log('asd');
+
+          window.location.reload();
+        }
       }
     });
   }

@@ -19,7 +19,7 @@ export class FulfillSurgicalMaskComponent implements OnInit {
   hospitalTypeCode: any = [];
   week: any;
 
-  list: any;
+  list: any = [];
   constructor(
     private fulfillService: FulfillService,
     private alertService: AlertService,

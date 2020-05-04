@@ -1,3 +1,5 @@
+import { ReportDms8Component } from './report-dms/report-dms8/report-dms8.component';
+import { ReportDms5Component } from './report-dms/report-dms5/report-dms5.component';
 import { HelpModule } from 'src/app/help/help.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -27,6 +29,8 @@ import { ReportDms4Component } from './report-dms/report-dms4/report-dms4.compon
 import { ReportDms1Component } from './report-dms/report-dms1/report-dms1.component';
 import { ReportDms6Component } from './report-dms/report-dms6/report-dms6.component';
 import { ReportDms7Component } from './report-dms/report-dms7/report-dms7.component';
+import { ReportReviewHomeworkComponent } from './report-dms/report-review-homework/report-review-homework.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -43,12 +47,16 @@ import { ReportDms7Component } from './report-dms/report-dms7/report-dms7.compon
     ReportSuppliesSummaryComponent,
     ReportMedicalsComponent,
     PatientInfoComponent,
+    ReportDms1Component,
     ReportDms2Component,
     ReportDms3Component,
     ReportDms4Component,
-    ReportDms1Component,
+    ReportDms5Component,
     ReportDms6Component,
-    ReportDms7Component
+    ReportDms7Component,
+    ReportDms8Component,
+    ReportReviewHomeworkComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,

@@ -5,6 +5,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { IMyOptions } from 'mydatepicker-th';
 import * as moment from 'moment';
 import { sumBy } from 'lodash';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-report-dms2',
   templateUrl: './report-dms2.component.html',
@@ -28,11 +29,15 @@ export class ReportDms2Component implements OnInit {
   @ViewChild('loading') loading: any;
 
   public jwtHelper = new JwtHelperService();
-
+  sector: any;
   constructor(
     private reportService: ReportDmsService,
-    private alertService: AlertService
-  ) { }
+    private alertService: AlertService,
+    private route: ActivatedRoute
+  ) {
+    const params = this.route.snapshot.params;
+    this.sector = params.sector;
+  }
 
   async ngOnInit() {
     this.date = {
@@ -49,7 +54,7 @@ export class ReportDms2Component implements OnInit {
     this.loading.show();
     try {
       const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
-      const rs: any = await this.reportService.getReport2(date);
+      const rs: any = await this.reportService.getReport2(date, this.sector);
       if (rs.ok) {
         this.sCase = sumBy(rs.rows, 'severe');
         this.mCase = sumBy(rs.rows, 'moderate');
@@ -83,7 +88,7 @@ export class ReportDms2Component implements OnInit {
     this.loading.show();
     try {
       const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
-      const rs: any = await this.reportService.getReport2Excel(date);
+      const rs: any = await this.reportService.getReport2Excel(date, this.sector);
       console.log(rs);
       if (!rs) {
         this.loading.hide();
