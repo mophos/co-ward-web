@@ -54,7 +54,7 @@ export class ReportDmsService {
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
   async getReport6(date) {
-    const url = `${this.apiUrl}/v1/report/admin/get-bed`;
+    const url = `${this.apiUrl}/v1/manager/report-dms/report6?date=${date}`;
     return await this.http.get(url).toPromise();
   }
 
