@@ -453,10 +453,6 @@ export class CovidCaseNewComponent implements OnInit {
       this.gcsId = null;
       this.bedId = null;
       this.medicalSupplieId = null;
-      this.s1 = null;
-      this.s2 = null;
-      this.s3 = null;
-      this.s4 = null;
       this.houseNo = '';
       this.roomNo = '';
       this.village = '';
