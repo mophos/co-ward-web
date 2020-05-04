@@ -52,21 +52,21 @@
     </tr>
     <tr>
       <th class="right td-border" style="position: sticky; top: 0;">รวม</th>
-      <th class="right td-border" style="position: sticky; top: 0;">{{infectiousDiseaseQty1 || 0}}</th>
-      <th class="right td-border" style="position: sticky; top: 0;">{{infectiousDiseaseQty2 || 0}}</th>
-      <th class="right td-border" style="position: sticky; top: 0;">{{infectiousDiseaseQty3 || 0}}</th>
-      <th class="right td-border" style="position: sticky; top: 0;">{{pulmonaryMedicineQty1 || 0}}</th>
-      <th class="right td-border" style="position: sticky; top: 0;">{{pulmonaryMedicineQty2 || 0}}</th>
-      <th class="right td-border" style="position: sticky; top: 0;">{{pulmonaryMedicineQty3 || 0}}</th>
-      <th class="right td-border" style="position: sticky; top: 0;">{{divisionOfCriticalCareQty1 || 0}}</th>
-      <th class="right td-border" style="position: sticky; top: 0;">{{divisionOfCriticalCareQty2 || 0}}</th>
-      <th class="right td-border" style="position: sticky; top: 0;">{{divisionOfCriticalCareQty3 || 0}}</th>
-      <th class="right td-border" style="position: sticky; top: 0;">{{all1 || 0}}</th>
-      <th class="right td-border" style="position: sticky; top: 0;">{{all2 || 0}}</th>
-      <th class="right td-border" style="position: sticky; top: 0;">{{all3 || 0}}</th>
-      <th class="right td-border" style="position: sticky; top: 0;">{{anesthesiologistQty1 || 0}}</th>
-      <th class="right td-border" style="position: sticky; top: 0;">{{anesthesiologistQty2 || 0}}</th>
-      <th class="right" style="position: sticky; top: 0;">{{anesthesiologistQty3 || 0}}</th>
+      <th class="right td-border" style="position: sticky; top: 0;">{{anesthetistNurseQty1 || 0}}</th>
+      <th class="right td-border" style="position: sticky; top: 0;">{{anesthetistNurseQty2 || 0}}</th>
+      <th class="right td-border" style="position: sticky; top: 0;">{{anesthetistNurseQty3 || 0}}</th>
+      <th class="right td-border" style="position: sticky; top: 0;">{{infectiousDiseaseNurseQty1 || 0}}</th>
+      <th class="right td-border" style="position: sticky; top: 0;">{{infectiousDiseaseNurseQty2 || 0}}</th>
+      <th class="right td-border" style="position: sticky; top: 0;">{{infectiousDiseaseNurseQty3 || 0}}</th>
+      <th class="right td-border" style="position: sticky; top: 0;">{{intensiveCareUnitQty1 || 0}}</th>
+      <th class="right td-border" style="position: sticky; top: 0;">{{intensiveCareUnitQty2 || 0}}</th>
+      <th class="right td-border" style="position: sticky; top: 0;">{{intensiveCareUnitQty3 || 0}}</th>
+      <th class="right td-border" style="position: sticky; top: 0;">{{criticalCareMedicineQty1 || 0}}</th>
+      <th class="right td-border" style="position: sticky; top: 0;">{{criticalCareMedicineQty2 || 0}}</th>
+      <th class="right td-border" style="position: sticky; top: 0;">{{criticalCareMedicineQty3 || 0}}</th>
+      <th class="right td-border" style="position: sticky; top: 0;">{{nurseQty1 || 0}}</th>
+      <th class="right td-border" style="position: sticky; top: 0;">{{nurseQty2 || 0}}</th>
+      <th class="right" style="position: sticky; top: 0;">{{nurseQty3 || 0}}</th>
     </tr>
     <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
       <td class="left td-border">{{h.hospname}}</td>
