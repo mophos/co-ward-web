@@ -184,6 +184,7 @@ export class CovidCaseEditComponent implements OnInit {
           hn: this.hn,
           an: this.an,
           titleId: this.titleId,
+          genderId: this.genderId,
           fname: this.fname,
           lname: this.lname,
           tel: this.tel,

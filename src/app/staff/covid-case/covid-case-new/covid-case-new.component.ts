@@ -434,6 +434,9 @@ export class CovidCaseNewComponent implements OnInit {
 
   clear() {
     try {
+      this.modalCIDCidError = false;
+      this.cid = null;
+      this.passport = null;
       this.an = '';
       this.hn = '';
       this.fname = '';

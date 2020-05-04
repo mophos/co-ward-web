@@ -8,13 +8,13 @@ export class ReportDmsService {
 
   constructor(private http: HttpClient, @Inject('API_URL') private apiUrl: string) { }
 
-  async getReport1(sector) {
-    const url = `${this.apiUrl}/v1/manager/report-dms/report1?sector=${sector}`;
+  async getReport1(date, sector) {
+    const url = `${this.apiUrl}/v1/manager/report-dms/report1?date=${date}&sector=${sector}`;
     return await this.http.get(url).toPromise();
   }
 
-  async getReport1Excel(sector) {
-    const url = `${this.apiUrl}/v1/manager/report-dms/report1/excel?sector=${sector}`;
+  async getReport1Excel(date, sector) {
+    const url = `${this.apiUrl}/v1/manager/report-dms/report1/excel?date=${date}&sector=${sector}`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
   async getReport2(date, sector) {
@@ -35,13 +35,13 @@ export class ReportDmsService {
     const url = `${this.apiUrl}/v1/manager/report-dms/report3/excel?date=${date}&sector=${sector}`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
-  async getReport4(date) {
-    const url = `${this.apiUrl}/v1/manager/report-dms/report4?date=${date}`;
+  async getReport4(date, sector) {
+    const url = `${this.apiUrl}/v1/manager/report-dms/report4?date=${date}&sector=${sector}`;
     return await this.http.get(url).toPromise();
   }
 
-  async getReport4Excel(date) {
-    const url = `${this.apiUrl}/v1/manager/report-dms/report4/excel?date=${date}`;
+  async getReport4Excel(date, sector) {
+    const url = `${this.apiUrl}/v1/manager/report-dms/report4/excel?date=${date}&sector=${sector}`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
   async getReport5(date, sector) {

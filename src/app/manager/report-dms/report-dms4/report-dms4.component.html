@@ -43,26 +43,29 @@
     <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">Discharge <br> ส่ง Hospitel</th>
     <th class="right" style="position: sticky; top: 0;">Discharge ตายสะสม</th>
   </tr>
-  <!-- <tr>
+  <tr>
       <th class="right" style="position: sticky; top: 0;">รวม</th>
-      <th class="right" style="position: sticky; top: 0;">{{sCase}}</th>
-      <th class="right" style="position: sticky; top: 0;">{{mCase}}</th>
-      <th class="right" style="position: sticky; top: 0;">{{mdCase}}</th>
-      <th class="right" style="position: sticky; top: 0;">{{aCase}}</th>
-      <th class="right" style="position: sticky; top: 0;">{{pCase}}</th>
+      <th class="right" style="position: sticky; top: 0;">{{admit}}</th>
+      <th class="right" style="position: sticky; top: 0;">{{discharge}}</th>
+      <th class="right" style="position: sticky; top: 0;">{{dischargeHospitel}}</th>
+      <th class="right" style="position: sticky; top: 0;">{{dischargeDeath}}</th>
+      <th class="right" style="position: sticky; top: 0;">{{puiAdmit}}</th>
+      <th class="right" style="position: sticky; top: 0;">{{puiDischarge}}</th>
+      <th class="right" style="position: sticky; top: 0;">{{puiDischargeHospitel}}</th>
+      <th class="right" style="position: sticky; top: 0;">{{puiDischargeDeath}}</th>
       <th class="right" style="position: sticky; top: 0;"></th>
-    </tr> -->
+    </tr>
   <tr *ngFor="let h of list ; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
-      <td class="left">{{h.hospname}}</td>
-      <td class="right">{{h['admit'] }}</td>
-      <td class="right">{{h['discharge_total'] }}</td>
-      <td class="right">{{h['discharge_refer_hospitel'] }}</td>
-      <td class="right">{{h['discharge_death'] }}</td>
-      <td class="right">{{h['pui_admit'] }}</td>
-      <td class="right">{{h['pui_discharge_total'] }}</td>
-      <td class="right">{{h['pui_discharge_refer_hospitel'] }}</td>
-      <td class="right">{{h['pui_death'] }}</td>
-      <td class="right">{{h['sub_ministry_name'] }}</td>
+      <td class="left td-border">{{h.hospname}}</td>
+      <td class="right td-border">{{h['admit']||0 }}</td>
+      <td class="right td-border">{{h['discharge']||0 }}</td>
+      <td class="right td-border">{{h['discharge_hospitel']||0 }}</td>
+      <td class="right td-border">{{h['discharge_death']||0 }}</td>
+      <td class="right td-border">{{h['pui_admit']||0 }}</td>
+      <td class="right td-border">{{h['pui_discharge']||0 }}</td>
+      <td class="right td-border">{{h['pui_discharge_hospitel']||0 }}</td>
+      <td class="right td-border">{{h['pui_discharge_death']||0 }}</td>
+      <td class="right">{{h['sub_ministry_name']||0 }}</td>
     </tr>
 </table>
 
