@@ -1,0 +1,72 @@
+<nav class="breadcrumb">
+  <!-- <a class="breadcrumb-item" href="javascript://" routerLink="/staff/requisition-supplies">การใช้เวชภัณฑ์</a> -->
+  <span class="breadcrumb-item active">สถานะเวชภัณฑ์</span>
+</nav>
+<div class="clr-row">
+  <div class="clr-col-3">
+    <div class="clr-row">
+      <div class="clr-col-12">
+        <button class="btn btn-sm btn-success" (click)="onClickAdd()" [disabled]="isSave">
+          <clr-icon shape="plus"></clr-icon> เพิ่มรายการ
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="clr-col-9">
+    <h4 *ngIf="date != null">บันทึกข้อมูลประจำวันที่ {{date | dateTh:'DD/MM/YYYY'}}</h4>
+  </div>
+</div>
+<div class="clr-row">
+  <div class="clr-col-3">
+    <div class="clr-row">
+      <div class="clr-col-12">
+        <clr-datagrid [clrDgLoading]="loading" [style.height.px]="700">
+          <clr-dg-column>วันที่</clr-dg-column>
+          <clr-dg-column>ชื่อผู้บันทึก</clr-dg-column>
+
+          <clr-dg-row *ngFor="let l of list; let idx=index;" (click)="getListDetail(l.id);listId=l.id;" [ngClass]="{ 'isSuccess': l.id == listId }">
+            <clr-dg-cell>
+              <label for="" *ngIf="l.update_date == null">
+                {{l.create_date | dateTh:'DD/MM/YYYY hh:mm'}}
+              </label>
+              <label for="" *ngIf="l.update_date != null">
+                {{l.update_date | dateTh:'DD/MM/YYYY hh:mm'}}
+              </label>
+            </clr-dg-cell>
+            <clr-dg-cell>{{l.name}}{{l.fname}} {{l.lname}}</clr-dg-cell>
+          </clr-dg-row>
+        </clr-datagrid>
+      </div>
+    </div>
+  </div>
+  <div class="clr-col-9">
+    <clr-datagrid [clrDgLoading]="loading" [style.height.px]="700">
+      <clr-dg-column>#</clr-dg-column>
+      <clr-dg-column>รายการ</clr-dg-column>
+      <clr-dg-column>จำนวนยาคงคลัง</clr-dg-column>
+      <clr-dg-column>อัตราการใช้ต่อเดือน</clr-dg-column>
+      <clr-dg-column>หน่วย</clr-dg-column>
+
+      <clr-dg-row *ngFor="let l of listDetail; let idx=index;">
+        <clr-dg-cell>{{idx+1}}</clr-dg-cell>
+        <clr-dg-cell>{{l.name}}</clr-dg-cell>
+        <clr-dg-cell>
+          <input [disabled]="isUpdate" type="number" style="text-align: right;" name="qty" [(ngModel)]="l.qty" class="clr-col-9 clr-input width-fit"
+            value="{{l.qty}}">
+        </clr-dg-cell>
+        <clr-dg-cell>
+          <input [disabled]="isUpdate" type="number" style="text-align: right;" name="month_usage_qty" [(ngModel)]="l.month_usage_qty"
+            class="clr-col-9 clr-input width-fit" value="{{l.month_usage_qty}}">
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.unit_name}}</clr-dg-cell>
+      </clr-dg-row>
+      <clr-dg-row *ngIf="listDetail.length && !isUpdate">
+        <clr-dg-cell>
+          <button type="button" class="btn btn-success  btn-block" (click)="save()" [disabled]="isSave">
+            บันทึก
+          </button>
+        </clr-dg-cell>
+      </clr-dg-row>
+    </clr-datagrid>
+  </div>
+</div>
