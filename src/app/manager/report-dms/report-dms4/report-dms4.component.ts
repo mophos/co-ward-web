@@ -99,7 +99,7 @@ export class ReportDms4Component implements OnInit {
     this.getList();
   }
 
-  async doExportExcel() {
+  async onClickExport() {
     this.loading.show();
     try {
       const rs: any = await this.reportService.getReport4Excel(moment(this.date).format('YYYY-MM-DD'), this.sector);
