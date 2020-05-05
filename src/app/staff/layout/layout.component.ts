@@ -117,7 +117,7 @@ export class LayoutComponent implements OnInit {
   connectMqtt() {
     try {
       // this.mqttClient  = mqttClient.connect('mqtt://test.mosquitto.org')
-      this.mqttClient = mqttClient.connect('wss://api-covid19.moph.go.th:8080', {
+      this.mqttClient = mqttClient.connect('https://api-covid19.moph.go.th:8080', {
         clienId: Math.floor(Math.random() * 10000),
         username: 'mqtt',
         password: '##Mqtt'
