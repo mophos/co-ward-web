@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ReportDms7Component implements OnInit {
 
-  list: any;
+  list: any = [];
   date: any;
   nivQty: any;
   nivCovid: any;
@@ -61,6 +61,7 @@ export class ReportDms7Component implements OnInit {
       const rs: any = await this.reportService.getReport7(date, this.sector);
       if (rs.ok) {
         this.list = rs.rows;
+        console.log(this.list);
         this.nivQty = sumBy(rs.rows, 'non_invasive_qty');
         this.nivCovid = sumBy(rs.rows, 'non_invasive_covid_qty');
         this.nivAll = sumBy(rs.rows, 'non_invasive_qty') + sumBy(rs.rows, 'non_invasive_covid_qty');

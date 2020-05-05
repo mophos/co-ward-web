@@ -39,12 +39,13 @@ export class ReportDms3Component implements OnInit {
   }
 
   async ngOnInit() {
+    this.date = moment().format('DD/MM/YYYY');
     await this.dates();
     await this.getList();
   }
 
   dates() {
-    for (let v = 1; v <= 10; v++) {
+    for (let v = 0; v < 10; v++) {
       this.arDates.push(moment().subtract(v, 'days').format('DD/MM/YYYY'));
     }
   }
@@ -57,7 +58,7 @@ export class ReportDms3Component implements OnInit {
   async getList() {
     this.loading.show();
     try {
-      const rs: any = await this.reportService.getReport3(this.date, this.sector);
+      const rs: any = await this.reportService.getReport3(moment(this.date).format('YYYY-MM-DD'), this.sector);
       if (rs.ok) {
         this.list = rs.rows;
         this.sum = {
@@ -80,7 +81,7 @@ export class ReportDms3Component implements OnInit {
   async onClickExport() {
     this.loading.show();
     try {
-      const rs: any = await this.reportService.getReport3Excel(`${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`, this.sector);
+      const rs: any = await this.reportService.getReport3Excel(moment(this.date).format('YYYY-MM-DD'), this.sector);
       console.log(rs);
       if (!rs) {
         this.loading.hide();

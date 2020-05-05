@@ -11,14 +11,11 @@ import * as moment from 'moment';
 })
 export class ReportDms5Component implements OnInit {
 
-  list: any;
-  qtyHosp: any;
-  qtyBed: any;
-  qty1: any;
-  qty2: any;
-  qty3: any;
-  qty4: any;
-  qty5: any;
+  list: any = [];
+  admitQty: any;
+  totalQty: any;
+  spareQty: any;
+  standbyQty: any;
   sector: any;
   date: any;
   @ViewChild('loading') loading: any;
@@ -49,14 +46,12 @@ export class ReportDms5Component implements OnInit {
       const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
       const rs: any = await this.reportService.getReport5(date, this.sector);
       if (rs.ok) {
-        this.qtyHosp = sumBy(rs.rows, 'hospital_qty');
-        this.qtyBed = sumBy(rs.rows, 'bed_qty');
-        this.qty1 = sumBy(rs.rows, 'aiir_qty');
-        this.qty2 = sumBy(rs.rows, 'modified_aiir_qty');
-        this.qty3 = sumBy(rs.rows, 'isolate_qty');
-        this.qty4 = sumBy(rs.rows, 'cohort_qty');
-        this.qty5 = sumBy(rs.rows, 'hospitel_qty');
+        this.totalQty = sumBy(rs.rows, 'aiir_qty') || 0 + sumBy(rs.rows, 'modified_aiir_qty') || 0 + sumBy(rs.rows, 'isolate_qty') || 0 + sumBy(rs.rows, 'cohort_qty') || 0;
+        this.admitQty = sumBy(rs.rows, 'aiir_usage_qty') || 0 + sumBy(rs.rows, 'modified_aiir_usage_qty') || 0 + sumBy(rs.rows, 'isolate_usage_qty') || 0 + sumBy(rs.rows, 'cohort_usage_qty') || 0;
+        this.spareQty = sumBy(rs.rows, 'aiir_spare_qty') || 0 + sumBy(rs.rows, 'modified_aiir_spare_qty') || 0 + sumBy(rs.rows, 'isolate_spare_qty') || 0 + sumBy(rs.rows, 'cohort_spare_qty') || 0;
+        this.standbyQty = (sumBy(rs.rows, 'aiir_qty') || 0 + sumBy(rs.rows, 'modified_aiir_qty') || 0 + sumBy(rs.rows, 'isolate_qty') || 0 + sumBy(rs.rows, 'cohort_qty') || 0) - (sumBy(rs.rows, 'aiir_usage_qty') || 0 + sumBy(rs.rows, 'modified_aiir_usage_qty') || 0 + sumBy(rs.rows, 'isolate_usage_qty') || 0 + sumBy(rs.rows, 'cohort_usage_qty') || 0) - (sumBy(rs.rows, 'aiir_spare_qty') || 0 + sumBy(rs.rows, 'modified_aiir_spare_qty') || 0 + sumBy(rs.rows, 'isolate_spare_qty') || 0 + sumBy(rs.rows, 'cohort_spare_qty') || 0);
         this.list = rs.rows;
+        console.log(this.list);
 
         this.loading.hide();
       } else {
