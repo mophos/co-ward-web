@@ -32,7 +32,7 @@ export class ReportDms3Component implements OnInit {
     private alertService: AlertService,
     private reportService: ReportDmsService,
     private route: ActivatedRoute
-    ) {
+  ) {
     const params = this.route.snapshot.params;
     this.sector = params.sector;
   }
@@ -75,7 +75,7 @@ export class ReportDms3Component implements OnInit {
   async onClickExport() {
     this.loading.show();
     try {
-      const rs: any = await this.reportService.getReport3Excel(`${this.date.date.year}-${this.date.date.month}-29`,this.sector);
+      const rs: any = await this.reportService.getReport3Excel(`${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`, this.sector);
       console.log(rs);
       if (!rs) {
         this.loading.hide();

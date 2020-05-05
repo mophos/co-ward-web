@@ -78,7 +78,7 @@ export class ReportDms5Component implements OnInit {
       if (!rs) {
         this.loading.hide();
       } else {
-        this.downloadFile('report-dms1', 'xlsx', rs);
+        this.downloadFile('report-dms5', 'xlsx', rs);
         // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
         this.loading.hide();
       }
