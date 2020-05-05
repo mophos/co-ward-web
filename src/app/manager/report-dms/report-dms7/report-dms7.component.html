@@ -1,5 +1,5 @@
 <nav class="breadcrumb">
-  <span class="breadcrumb-item active">รายงานจำนวนประเภทเครื่องช่วยหายใจ</span>
+  <span class="breadcrumb-item active">รายงานจำนวนประเภทเครื่องช่วยหายใจ ณ. วันที่ {{date | dateTh:'D MMM YYYY'}}</span>
 </nav>
 <br>
 <div class="clr-row">
@@ -34,8 +34,8 @@
     <th class="td-border">ว่างพร้อมใช้งานทั้งโรงพยาบาล</th>
     <th class="td-border">ทั้งหมด</th>
   </tr>
-  <tr >
-    <th class="left td-border"รวม></th>
+  <tr>
+    <th class="left td-border" รวม></th>
     <th class="td-border">{{nivCovid}}</th>
     <th class="td-border">{{nivQty}}</th>
     <th class="td-border">{{nivAll}}</th>
@@ -45,7 +45,12 @@
     <th></th>
   </tr>
   <tr *ngFor="let i of list">
-    <td class="left td-border">{{i.hospname}}</td>
+    <td class="left td-border">{{i.hospname}}
+      <!-- <br>
+      <label style="color: red;">
+        ข้อมูลล่าสุด: {{ h.updated_entry | dateTh:'DD/MM/YYYY hh:mm'}}
+      </label> -->
+    </td>
     <td class="td-border">{{i.non_invasive_covid_qty}}</td>
     <td class="td-border">{{i.non_invasive_qty}}</td>
     <td class="td-border">{{i.non_invasive_qty+i.non_invasive_covid_qty}}</td>
@@ -55,4 +60,6 @@
     <td>{{i.sub_ministry_name}}</td>
   </tr>
 </table>
+<label>{{list.length}} รายการ</label>
+
 <app-loadding #loading></app-loadding>

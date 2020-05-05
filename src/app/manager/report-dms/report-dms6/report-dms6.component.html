@@ -1,17 +1,17 @@
 <nav class="breadcrumb">
-  <span class="breadcrumb-item active">รายงานเตียงว่างแยกประเภท</span>
+  <span class="breadcrumb-item active">รายงานเตียงว่างแยกประเภท ณ. วันที่ {{date | dateTh:'D MMM YYYY'}}</span>
 </nav>
 <br>
 <div class="clr-row">
   <div class="clr-col-4">
-    <!-- รายงานจำนวนเตียงผู้ป่วย ณ วันที่ {{date | dateTh:'D MMM YYYY'}} -->
-    <my-date-picker-th name="date" [options]="myDatePickerOptions" [(ngModel)]="date" required>
-    </my-date-picker-th>
+    <!-- รายงานจำนวนเตียงผู้ป่วย  -->
+    <!-- <my-date-picker-th name="date" [options]="myDatePickerOptions" [(ngModel)]="date" required>
+    </my-date-picker-th> -->
   </div>
   <div class="clr-col-1">
-    <button class="btn btn-sm btn-primary" (click)="doEnter()">
+    <!-- <button class="btn btn-sm btn-primary" (click)="doEnter()">
       <clr-icon shape="search"></clr-icon>
-    </button>
+    </button> -->
   </div>
   <div class="clr-col-7" style="text-align: right;">
     <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
@@ -69,24 +69,29 @@
     <th class="right" style="position: sticky; top: 0;">{{host3 || 0}}</th>
   </tr>
   <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
-    <td class="left td-border" >{{h.hospname}}</td>
-    <td class="right td-border" >{{h['aiir_qty'] }}</td>
-    <td class="right td-border" >{{h['aiir_usage_qty'] || 0 }}</td>
-    <td class="right td-border" >{{h['aiir_qty'] - h['aiir_usage_qty'] || 0}}</td>
-    <td class="right td-border" >{{h['modified_aiir_qty'] }}</td>
-    <td class="right td-border" >{{h['modified_aiir_usage_qty']||0 }}</td>
-    <td class="right td-border" >{{h['modified_aiir_qty'] - h['modified_aiir_usage_qty'] || 0}}</td>
-    <td class="right td-border" >{{h['isolate_qty'] }}</td>
-    <td class="right td-border" >{{h['isolate_usage_qty']||0 }}</td>
-    <td class="right td-border" >{{h['isolate_qty'] - h['isolate_usage_qty'] || 0}}</td>
-    <td class="right td-border" >{{h['cohort_qty'] }}</td>
-    <td class="right td-border" >{{h['cohort_usage_qty']||0 }}</td>
-    <td class="right td-border" >{{h['cohort_qty'] - h['cohort_usage_qty'] || 0}}</td>
-    <td class="right td-border" >{{h['hospitel_qty'] }}</td>
-    <td class="right td-border" >{{h['hospitel_usage_qty']||0 }}</td>
+    <td class="left td-border">{{h.hospname}}<br>
+      <label style="color: red;">
+        ข้อมูลล่าสุด: {{ h.updated_entry | dateTh:'DD/MM/YYYY hh:mm'}}
+      </label>
+    </td>
+    <td class="right td-border">{{h['aiir_qty'] }}</td>
+    <td class="right td-border">{{h['aiir_usage_qty'] || 0 }}</td>
+    <td class="right td-border">{{h['aiir_qty'] - h['aiir_usage_qty'] || 0}}</td>
+    <td class="right td-border">{{h['modified_aiir_qty'] }}</td>
+    <td class="right td-border">{{h['modified_aiir_usage_qty']||0 }}</td>
+    <td class="right td-border">{{h['modified_aiir_qty'] - h['modified_aiir_usage_qty'] || 0}}</td>
+    <td class="right td-border">{{h['isolate_qty'] }}</td>
+    <td class="right td-border">{{h['isolate_usage_qty']||0 }}</td>
+    <td class="right td-border">{{h['isolate_qty'] - h['isolate_usage_qty'] || 0}}</td>
+    <td class="right td-border">{{h['cohort_qty'] }}</td>
+    <td class="right td-border">{{h['cohort_usage_qty']||0 }}</td>
+    <td class="right td-border">{{h['cohort_qty'] - h['cohort_usage_qty'] || 0}}</td>
+    <td class="right td-border">{{h['hospitel_qty'] }}</td>
+    <td class="right td-border">{{h['hospitel_usage_qty']||0 }}</td>
     <td class="right">{{h['hospitel_qty'] - h['hospitel_usage_qty'] || 0}}</td>
-    <td class="left td-border" >{{h.sub_ministry_name}}</td>
+    <td class="left td-border">{{h.sub_ministry_name}}</td>
   </tr>
 </table>
+<label>{{list.length}} รายการ</label>
 
 <app-loadding #loading></app-loadding>

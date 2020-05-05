@@ -13,7 +13,7 @@ import { IMyOptions } from 'mydatepicker-th';
   styles: []
 })
 export class ReportDms6Component implements OnInit {
-  list: any;
+  list: any = [];
   zone: any = '';
   date: any;
   aiir1: any;
@@ -51,21 +51,14 @@ export class ReportDms6Component implements OnInit {
   }
 
   async ngOnInit() {
-    this.date = {
-      date: {
-        year: moment().get('year'),
-        month: moment().get('month') + 1,
-        day: moment().get('date')
-      }
-    };
+    this.date = moment().format('YYYY-MM-DD');
     await this.getList();
   }
 
   async getList() {
     this.loading.show();
     try {
-      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
-      const rs: any = await this.reportService.getReport6(date, this.sector);
+      const rs: any = await this.reportService.getReport6(this.date, this.sector);
       if (rs.ok) {
         this.aiir1 = sumBy(rs.rows, 'aiir_qty');
         this.aiir2 = sumBy(rs.rows, 'aiir_usage_qty');
@@ -109,8 +102,7 @@ export class ReportDms6Component implements OnInit {
   async doExportExcel() {
     this.loading.show();
     try {
-      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
-      const rs: any = await this.reportService.getReport6Excel(date, this.sector);
+      const rs: any = await this.reportService.getReport6Excel(this.date, this.sector);
       console.log(rs);
       if (!rs) {
         this.loading.hide();

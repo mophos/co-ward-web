@@ -1,26 +1,17 @@
 <nav class="breadcrumb">
-  <span class="breadcrumb-item active">ยอดผู้ป่วยสะสมรวมที่รับไว้รักษาในโรงพยาบาล
+  <span class="breadcrumb-item active">ยอดผู้ป่วยสะสมรวมที่รับไว้รักษาในโรงพยาบาล {{date}}
   </span>
 </nav>
 <br>
 <div class="clr-row">
-  <div class="clr-col-4">
-    <!-- รายงานจำนวนเตียงผู้ป่วย ณ วันที่ {{date | dateTh:'D MMM YYYY'}} -->
-    <my-date-picker-th name="date" [options]="myDatePickerOptions" [(ngModel)]="date" required>
-    </my-date-picker-th>
+  <div class="clr-col-10">
+    <button [ngClass]="{'btn-primary': date==d,'btn-primary-outline': date!=d}" class="btn btn-sm" *ngFor="let d of arDates"
+      (click)="selectDate(d)">วันที่ {{d}}</button>
   </div>
-  <div class="clr-col-1">
-    <button class="btn btn-sm btn-primary" (click)="doEnter()">
-      <clr-icon shape="search"></clr-icon>
-    </button>
-  </div>
-  <div class="clr-col-7" style="text-align: right;">
-    <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
+  <div class="clr-col-2" style="text-align: right;">
+    <button class="btn btn-sm btn-primary" (click)="onClickExport()">
       <clr-icon shape="download"></clr-icon>export excel
     </button>
-    <!-- <button class="btn btn-sm btn-success" (click)="doExportCsv()">
-          <clr-icon shape="download"></clr-icon>export csv
-        </button> -->
   </div>
 </div>
 
@@ -44,29 +35,30 @@
     <th class="right" style="position: sticky; top: 0;">Discharge ตายสะสม</th>
   </tr>
   <tr>
-      <th class="right" style="position: sticky; top: 0;">รวม</th>
-      <th class="right" style="position: sticky; top: 0;">{{admit}}</th>
-      <th class="right" style="position: sticky; top: 0;">{{discharge}}</th>
-      <th class="right" style="position: sticky; top: 0;">{{dischargeHospitel}}</th>
-      <th class="right" style="position: sticky; top: 0;">{{dischargeDeath}}</th>
-      <th class="right" style="position: sticky; top: 0;">{{puiAdmit}}</th>
-      <th class="right" style="position: sticky; top: 0;">{{puiDischarge}}</th>
-      <th class="right" style="position: sticky; top: 0;">{{puiDischargeHospitel}}</th>
-      <th class="right" style="position: sticky; top: 0;">{{puiDischargeDeath}}</th>
-      <th class="right" style="position: sticky; top: 0;"></th>
-    </tr>
+    <th class="right" style="position: sticky; top: 0;">รวม</th>
+    <th class="right" style="position: sticky; top: 0;">{{admit}}</th>
+    <th class="right" style="position: sticky; top: 0;">{{discharge}}</th>
+    <th class="right" style="position: sticky; top: 0;">{{dischargeHospitel}}</th>
+    <th class="right" style="position: sticky; top: 0;">{{dischargeDeath}}</th>
+    <th class="right" style="position: sticky; top: 0;">{{puiAdmit}}</th>
+    <th class="right" style="position: sticky; top: 0;">{{puiDischarge}}</th>
+    <th class="right" style="position: sticky; top: 0;">{{puiDischargeHospitel}}</th>
+    <th class="right" style="position: sticky; top: 0;">{{puiDischargeDeath}}</th>
+    <th class="right" style="position: sticky; top: 0;"></th>
+  </tr>
   <tr *ngFor="let h of list ; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
-      <td class="left td-border">{{h.hospname}}</td>
-      <td class="right td-border">{{h['admit']||0 }}</td>
-      <td class="right td-border">{{h['discharge']||0 }}</td>
-      <td class="right td-border">{{h['discharge_hospitel']||0 }}</td>
-      <td class="right td-border">{{h['discharge_death']||0 }}</td>
-      <td class="right td-border">{{h['pui_admit']||0 }}</td>
-      <td class="right td-border">{{h['pui_discharge']||0 }}</td>
-      <td class="right td-border">{{h['pui_discharge_hospitel']||0 }}</td>
-      <td class="right td-border">{{h['pui_discharge_death']||0 }}</td>
-      <td class="right">{{h['sub_ministry_name']||0 }}</td>
-    </tr>
+    <td class="left td-border">{{h.hospname}}</td>
+    <td class="right td-border">{{h['admit']||0 }}</td>
+    <td class="right td-border">{{h['discharge']||0 }}</td>
+    <td class="right td-border">{{h['discharge_hospitel']||0 }}</td>
+    <td class="right td-border">{{h['discharge_death']||0 }}</td>
+    <td class="right td-border">{{h['pui_admit']||0 }}</td>
+    <td class="right td-border">{{h['pui_discharge']||0 }}</td>
+    <td class="right td-border">{{h['pui_discharge_hospitel']||0 }}</td>
+    <td class="right td-border">{{h['pui_discharge_death']||0 }}</td>
+    <td class="right">{{h['sub_ministry_name']||0 }}</td>
+  </tr>
 </table>
+<label>{{list.length}} รายการ</label>
 
 <app-loadding #loading></app-loadding>

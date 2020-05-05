@@ -13,9 +13,10 @@ import { ActivatedRoute } from '@angular/router';
   styles: []
 })
 export class ReportDms4Component implements OnInit {
-  list: any;
+  list: any = [];
   zone: any = '';
   date: any;
+  arDates: any = [];
   admit: any;
   discharge: any;
   dischargeHospitel: any;
@@ -45,21 +46,26 @@ export class ReportDms4Component implements OnInit {
   }
 
   async ngOnInit() {
-    this.date = {
-      date: {
-        year: moment().get('year'),
-        month: moment().get('month') + 1,
-        day: moment().get('date')
-      }
-    };
+    this.date = moment().format('DD/MM/YYYY');
+    await this.dates();
     await this.getList();
+  }
+
+  dates() {
+    for (let v = 0; v < 10; v++) {
+      this.arDates.push(moment().subtract(v, 'days').format('DD/MM/YYYY'));
+    }
+  }
+
+  selectDate(date) {
+    this.date = date;
+    this.getList();
   }
 
   async getList() {
     this.loading.show();
     try {
-      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
-      const rs: any = await this.reportService.getReport4(date, this.sector);
+      const rs: any = await this.reportService.getReport4(moment(this.date).format('YYYY-MM-DD'), this.sector);
       if (rs.ok) {
         this.admit = sumBy(rs.rows, 'admit');
         this.discharge = sumBy(rs.rows, 'discharge');
@@ -96,8 +102,7 @@ export class ReportDms4Component implements OnInit {
   async doExportExcel() {
     this.loading.show();
     try {
-      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
-      const rs: any = await this.reportService.getReport4Excel(date, this.sector);
+      const rs: any = await this.reportService.getReport4Excel(moment(this.date).format('YYYY-MM-DD'), this.sector);
       console.log(rs);
       if (!rs) {
         this.loading.hide();
