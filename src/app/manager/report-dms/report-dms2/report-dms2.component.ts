@@ -12,9 +12,10 @@ import { ActivatedRoute } from '@angular/router';
   styles: []
 })
 export class ReportDms2Component implements OnInit {
-  list: any;
+  list: any = [];
   zone: any = '';
   date: any;
+  dateShow: any;
   sCase: any;
   mCase: any;
   mdCase: any;
@@ -53,8 +54,8 @@ export class ReportDms2Component implements OnInit {
   async getList() {
     this.loading.show();
     try {
-      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
-      const rs: any = await this.reportService.getReport2(date, this.sector);
+      this.dateShow = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
+      const rs: any = await this.reportService.getReport2(this.dateShow, this.sector);
       if (rs.ok) {
         this.sCase = sumBy(rs.rows, 'severe');
         this.mCase = sumBy(rs.rows, 'moderate');
@@ -87,8 +88,8 @@ export class ReportDms2Component implements OnInit {
   async doExportExcel() {
     this.loading.show();
     try {
-      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
-      const rs: any = await this.reportService.getReport2Excel(date, this.sector);
+      this.dateShow = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
+      const rs: any = await this.reportService.getReport2Excel(this.dateShow, this.sector);
       console.log(rs);
       if (!rs) {
         this.loading.hide();

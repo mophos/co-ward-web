@@ -12,8 +12,9 @@ import { sumBy, map } from 'lodash';
 })
 export class ReportDms3Component implements OnInit {
   @ViewChild('loading') public loading;
-  list: any;
+  list: any = [];
   date: any;
+  arDates: any = [];
   sum = {
     ip_pui: '-',
     asymptomatic: '-',
@@ -38,21 +39,25 @@ export class ReportDms3Component implements OnInit {
   }
 
   async ngOnInit() {
-    this.date = {
-      date: {
-        year: moment().get('year'),
-        month: moment().get('month') + 1,
-        day: moment().get('date')
-      }
-    };
+    await this.dates();
     await this.getList();
+  }
+
+  dates() {
+    for (let v = 1; v <= 10; v++) {
+      this.arDates.push(moment().subtract(v, 'days').format('DD/MM/YYYY'));
+    }
+  }
+
+  selectDate(date) {
+    this.date = date;
+    this.getList();
   }
 
   async getList() {
     this.loading.show();
     try {
-      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
-      const rs: any = await this.reportService.getReport3(date, this.sector);
+      const rs: any = await this.reportService.getReport3(this.date, this.sector);
       if (rs.ok) {
         this.list = rs.rows;
         this.sum = {

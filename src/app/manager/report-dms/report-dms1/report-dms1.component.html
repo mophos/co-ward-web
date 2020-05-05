@@ -1,5 +1,5 @@
 <nav class="breadcrumb">
-  <span class="breadcrumb-item active">รายงานเตียงตามสังกัดหน่วยงาน ณ. วันที่ {{date | dateTh:'D MMM YYYY'}}</span>
+  <span class="breadcrumb-item active">รายงานเตียงตามสังกัดหน่วยงาน ณ. วันที่ {{dateShow | dateTh:'D MMM YYYY'}}</span>
 </nav>
 <br>
 <div class="clr-row">
@@ -20,10 +20,10 @@
   </tr>
 
   <tr>
-    <th  rowspan="2" class="td-border">(1) AIIR-ICU</th>
-    <th  colspan="2" class="td-border">Isolate Room</th>
-    <th  rowspan="2" class="td-border">(4) Cohort ward (bed)</th>
-    <th  rowspan="2">(5) Hospitel (room)</th>
+    <th rowspan="2" class="td-border">(1) AIIR-ICU</th>
+    <th colspan="2" class="td-border">Isolate Room</th>
+    <th rowspan="2" class="td-border">(4) Cohort ward (bed)</th>
+    <th rowspan="2">(5) Hospitel (room)</th>
   </tr>
 
   <tr>
@@ -32,26 +32,38 @@
   </tr>
 
   <tr>
-    <th class="right td-border" style="position: sticky; top: 0;" >รวม</th>
-    <th class="right td-border" style="position: sticky; top: 0;" >{{qtyHosp}}</th>
-    <th class="right td-border" style="position: sticky; top: 0;" >{{qty1+qty2+qty3+qty4+qty5}}</th>
-    <th class="right td-border" style="position: sticky; top: 0;" >{{qty1}}</th>
-    <th class="right td-border" style="position: sticky; top: 0;" >{{qty2}}</th>
-    <th class="right td-border" style="position: sticky; top: 0;" >{{qty3}}</th>
-    <th class="right td-border" style="position: sticky; top: 0;" >{{qty4}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">รวม</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{qtyHosp}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{qty1+qty2+qty3+qty4+qty5}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{qty1}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{qty2}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{qty3}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{qty4}}</th>
     <th class="right td-border" style="position: sticky; top: 0;">{{qty5}}</th>
   </tr>
 
   <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
-    <td class="left td-border" >{{h.sub_ministry_name}}</td>
-    <td class="right td-border" >{{h.hospital_qty}}</td>
-    <td class="right td-border" >{{h.aiir_qty+h.modified_aiir_qty+h.isolate_qty+h.cohort_qty+h.hospitel_qty}}</td>
-    <td class="right td-border" >{{h.aiir_qty}}</td>
-    <td class="right td-border" >{{h.modified_aiir_qty}}</td>
-    <td class="right td-border" >{{h.isolate_qty}}</td>
-    <td class="right td-border" >{{h.cohort_qty}}</td>
+    <td class="left td-border">{{h.sub_ministry_name}}</td>
+    <td class="right td-border">{{h.hospital_qty}}</td>
+    <td class="right td-border">{{h.aiir_qty+h.modified_aiir_qty+h.isolate_qty+h.cohort_qty+h.hospitel_qty}}</td>
+    <td class="right td-border">{{h.aiir_qty}}</td>
+    <td class="right td-border">{{h.modified_aiir_qty}}</td>
+    <td class="right td-border">{{h.isolate_qty}}</td>
+    <td class="right td-border">{{h.cohort_qty}}</td>
     <td class="right td-border">{{h.hospitel_qty}}</td>
   </tr>
+
+  <tr>
+    <th class="right td-border" style="position: sticky; top: 0;">รวม</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{qtyHosp}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{qty1+qty2+qty3+qty4+qty5}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{qty1}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{qty2}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{qty3}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{qty4}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{qty5}}</th>
+  </tr>
 </table>
+<label>{{list.length}} รายการ</label>
 
 <app-loadding #loading></app-loadding>

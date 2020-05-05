@@ -1,17 +1,18 @@
 <nav class="breadcrumb">
-  <span class="breadcrumb-item active">ประเภทความรุนแรงของผู้ป่วยที่ยังรักษาตัวอยู่</span>
+  <span class="breadcrumb-item active">ประเภทความรุนแรงของผู้ป่วยที่ยังรักษาตัวอยู่ ณ. วันที่ {{dateShow | dateTh:'D
+    MMM YYYY'}}</span>
 </nav>
 <br>
 <div class="clr-row">
   <div class="clr-col-4">
-    <!-- รายงานจำนวนเตียงผู้ป่วย ณ วันที่ {{date | dateTh:'D MMM YYYY'}} -->
+    <!-- รายงานจำนวนเตียงผู้ป่วย ณ วันที่ {{date | dateTh:'D MMM YYYY'}}
     <my-date-picker-th name="date" [options]="myDatePickerOptions" [(ngModel)]="date" required>
-    </my-date-picker-th>
+    </my-date-picker-th> -->
   </div>
   <div class="clr-col-1">
-    <button class="btn btn-sm btn-primary" (click)="doEnter()">
+    <!-- <button class="btn btn-sm btn-primary" (click)="doEnter()">
       <clr-icon shape="search"></clr-icon>
-    </button>
+    </button> -->
   </div>
   <div class="clr-col-7" style="text-align: right;">
     <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
@@ -46,14 +47,28 @@
     <th class="right" style="position: sticky; top: 0;"></th>
   </tr>
   <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
-    <td class="left td-border" >{{h.hospname}} <br>ข้อมูลล่าสุด: {{ h.updated_entry | dateTh:'DD/MM/YYYY hh:mm'}}</td>
-    <td class="right td-border" >{{h['severe'] }}</td>
-    <td class="right td-border" >{{h['moderate'] }}</td>
-    <td class="right td-border" >{{h['mild'] }}</td>
-    <td class="right td-border" >{{h['asymptomatic'] }}</td>
-    <td class="right td-border" >{{h['ip_pui'] }}</td>
+    <td class="left td-border">{{h.hospname}} <br>
+      <div for="" style="color: red;">
+        ข้อมูลล่าสุด: {{ h.updated_entry | dateTh:'DD/MM/YYYY hh:mm'}}
+      </div>
+    </td>
+    <td class="right td-border">{{h['severe'] }}</td>
+    <td class="right td-border">{{h['moderate'] }}</td>
+    <td class="right td-border">{{h['mild'] }}</td>
+    <td class="right td-border">{{h['asymptomatic'] }}</td>
+    <td class="right td-border">{{h['ip_pui'] }}</td>
     <td class="right">{{h['sub_ministry_name'] }}</td>
   </tr>
+  <tr>
+    <th class="right td-border" style="position: sticky; top: 0; ">รวม</th>
+    <th class="right td-border" style="position: sticky; top: 0; ">{{sCase}}</th>
+    <th class="right td-border" style="position: sticky; top: 0; ">{{mCase}}</th>
+    <th class="right td-border" style="position: sticky; top: 0; ">{{mdCase}}</th>
+    <th class="right td-border" style="position: sticky; top: 0; ">{{aCase}}</th>
+    <th class="right td-border" style="position: sticky; top: 0; ">{{pCase}}</th>
+    <th class="right" style="position: sticky; top: 0;"></th>
+  </tr>
 </table>
+<label>{{list.length}} รายการ</label>
 
 <app-loadding #loading></app-loadding>
