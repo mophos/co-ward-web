@@ -103,4 +103,9 @@ export class ReportDmsService {
     const url = `${this.apiUrl}/v1/manager/report-dms/report-homework?sector=${sector}`;
     return await this.http.get(url).toPromise();
   }
+
+  async getReportReviewHomeworkExcel( sector) {
+    const url = `${this.apiUrl}/v1/manager/report-dms/report-homework/excel?sector=${sector}`;
+    return await this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
 }
