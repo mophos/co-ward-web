@@ -45,10 +45,11 @@
     <th></th>
   </tr>
   <tr *ngFor="let i of list">
-    <td class="left td-border">{{i.hospname}}<br>
+    <td class="left td-border">{{i.hospname}}
+      <!-- <br>
       <label style="color: red;">
         ข้อมูลล่าสุด: {{ h.updated_entry | dateTh:'DD/MM/YYYY hh:mm'}}
-      </label>
+      </label> -->
     </td>
     <td class="td-border">{{i.non_invasive_covid_qty}}</td>
     <td class="td-border">{{i.non_invasive_qty}}</td>

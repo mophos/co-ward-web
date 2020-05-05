@@ -60,15 +60,14 @@ export class ReportDms7Component implements OnInit {
       const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
       const rs: any = await this.reportService.getReport7(date, this.sector);
       if (rs.ok) {
+        this.loading.hide();
         this.list = rs.rows;
-        console.log(this.list);
         this.nivQty = sumBy(rs.rows, 'non_invasive_qty');
         this.nivCovid = sumBy(rs.rows, 'non_invasive_covid_qty');
         this.nivAll = sumBy(rs.rows, 'non_invasive_qty') + sumBy(rs.rows, 'non_invasive_covid_qty');
         this.ivQty = sumBy(rs.rows, 'invasive_qty');
         this.ivCovid = sumBy(rs.rows, 'invasive_covid_qty');
         this.ivAll = sumBy(rs.rows, 'invasive_qty') + sumBy(rs.rows, 'invasive_covid_qty');
-        this.loading.hide();
       } else {
         this.loading.hide();
         this.alertService.error();
