@@ -60,9 +60,14 @@ export class ReportService {
     const url = `${this.apiUrl}/v1/report/admin/get-bed/exce`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
-  
+
   async getReportBedCsv() {
     const url = `${this.apiUrl}/v1/report/admin/get-bed/csv`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+
+  async provinceCaseDate(startDate, endDate) {
+    const url = `${this.apiUrl}/v1/report/province-case-date?startDate=${startDate}&endDate=${endDate}`;
+    return await this.http.get(url).toPromise();
   }
 }

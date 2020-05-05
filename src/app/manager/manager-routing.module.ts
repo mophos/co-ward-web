@@ -1,3 +1,4 @@
+import { ReportPatientsProvincesComponent } from './report-patients-provinces/report-patients-provinces.component';
 import { ReportDms8Component } from './report-dms/report-dms8/report-dms8.component';
 import { ReportDms5Component } from './report-dms/report-dms5/report-dms5.component';
 import { HomeComponent } from './home/home.component';
@@ -34,6 +35,7 @@ const routes: Routes = [
       { path: 'report-supplies-summary', component: ReportSuppliesSummaryComponent },
       { path: 'report-supplies', component: ReportSuppliesComponent },
       { path: 'report-patients', component: ReportPatientsComponent },
+      { path: 'report-patients-provinces', component: ReportPatientsProvincesComponent },
       { path: 'report-beds', component: ReportBedsComponent },
       { path: 'report-professionals', component: ReportProfessionalsComponent },
       { path: 'report-medicals', component: ReportMedicalsComponent },

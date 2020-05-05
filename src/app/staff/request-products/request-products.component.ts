@@ -1,9 +1,9 @@
+import { RequestProductsService } from './../services/request-products.service';
 import { BasicService } from './../services/basic.service';
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from '../../help/alert.service';
 import { IMyOptions } from 'mydatepicker-th';
 import * as findIndex from 'lodash/findIndex';
-import { SupplieService } from '../supplie.service';
 @Component({
   selector: 'app-request-products',
   templateUrl: './request-products.component.html',
@@ -27,7 +27,7 @@ export class RequestProductsComponent implements OnInit {
   isSave = false;
   isUpdate = false;
   constructor(
-    private supplieService: SupplieService,
+    private requestProductsService: RequestProductsService,
     private alertService: AlertService,
     private basicService: BasicService
   ) { }
@@ -49,7 +49,7 @@ export class RequestProductsComponent implements OnInit {
   async onClickAdd() {
     try {
       this.isUpdate = false;
-      const rs: any = await this.supplieService.getSupplies();
+      const rs: any = await this.requestProductsService.getList();
       if (rs.ok) {
         this.listDetail = rs.rows;
       } else {
@@ -65,7 +65,7 @@ export class RequestProductsComponent implements OnInit {
   async getList() {
     this.loading = true;
     try {
-      const rs: any = await this.supplieService.getSupplieStock();
+      const rs: any = await this.requestProductsService.getList();
       if (rs.ok) {
         this.list = rs.rows;
       } else {
@@ -85,7 +85,7 @@ export class RequestProductsComponent implements OnInit {
       const idx = findIndex(this.list, { id: this.listId });
       this.date = this.list[idx].created_at;
       this.loading = true;
-      const rs: any = await this.supplieService.getSupplieDetails(id);
+      const rs: any = await this.requestProductsService.getSupplieDetails(id);
       if (rs.ok) {
         this.listDetail = rs.rows;
       } else {
@@ -111,7 +111,7 @@ export class RequestProductsComponent implements OnInit {
           obj.month_usage_qty = v.month_usage_qty || null;
           data.push(obj);
         }
-        const rs: any = await this.supplieService.save(data);
+        const rs: any = await this.requestProductsService.save(data);
         if (rs.ok) {
           this.alertService.success();
           this.listDetail = [];

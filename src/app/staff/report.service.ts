@@ -17,17 +17,28 @@ export class ReportService {
   }
 
 
-  async getAdmitPatients(date,query) {
+  async getAdmitPatients(date, query) {
     const url = `${this.apiUrl}/v1/report/get-gcs-admit?date=${date}&query=${query}`;
     return await this.http.get(url).toPromise();
   }
 
-  async getPatients(date,query) {
+  async getPatients(date, query) {
     const url = `${this.apiUrl}/v1/report/get-gcs?date=${date}&query=${query}`;
     return await this.http.get(url).toPromise();
   }
-  async getSupplies(date,query) {
+  async getSupplies(date, query) {
     const url = `${this.apiUrl}/v1/report/get-supplies?date=${date}&query=${query}`;
     return await this.http.get(url).toPromise();
   }
+
+  async getBed(date) {
+    const url = `${this.apiUrl}/v1/staff/report/bed?date=${date}`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async getBedExport(date) {
+    const url = `${this.apiUrl}/v1/staff/report/bed/excel?date=${date}`;
+    return await this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+
 }
