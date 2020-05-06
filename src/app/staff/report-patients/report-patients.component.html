@@ -7,12 +7,20 @@
 <div class="clr-row">
   <div class="clr-col-2">วันที่แสดงข้อมูล</div>
   <div class="clr-col-2">
-    <my-date-picker-th name="date" [options]="myDatePickerOptions" (dateChanged)="onChangeDate($event)"
-      [(ngModel)]="date" required>
+    <my-date-picker-th name="date" [options]="myDatePickerOptions" (dateChanged)="onChangeDate($event)" [(ngModel)]="date"
+      required>
     </my-date-picker-th>
   </div>
+  <div class="clr-col-8">
+    <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
+      <clr-icon shape="download"></clr-icon>export excel
+    </button>
+  </div>
+</div>
+<div class="clr-row">
   <div class="clr-col-8"><span class="required">*</span> หมายเหตุ หากดูรายงานวันปัจจุบัน ข้อมูลอาจเปลี่ยนแปลง
-    เพราะรพ.สามารถแก้ไขข้อมูลในวันปัจจุบันได้</div>
+    เพราะรพ.สามารถแก้ไขข้อมูลในวันปัจจุบันได้
+  </div>
 </div>
 <!-- <clr-datagrid>
   <clr-dg-column>เขตสุขภาพ</clr-dg-column>
@@ -74,7 +82,7 @@
             <tr *ngFor="let d of h.details">
               <td width="20%"></td>
               <td class="left" width="10%">{{d.hn}}</td>
-              <td class="left" >{{d.date_admit | dateTh:'D MMM YYYY'}}</td>
+              <td class="left">{{d.date_admit | dateTh:'D MMM YYYY'}}</td>
               <td class="left">{{d.status}}</td>
             </tr>
           </table>

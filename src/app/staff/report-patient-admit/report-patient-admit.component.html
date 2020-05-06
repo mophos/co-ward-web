@@ -32,10 +32,21 @@
 <div class="clr-row">
   <div class="clr-col-2">วันที่แสดงข้อมูล</div>
   <div class="clr-col-2">
-    <my-date-picker-th name="date" [options]="myDatePickerOptions" (dateChanged)="onChangeDate()" [(ngModel)]="date" required>
+    <my-date-picker-th name="date" [options]="myDatePickerOptions" (dateChanged)="onChangeDate()" [(ngModel)]="date"
+      required>
     </my-date-picker-th>
   </div>
-  <div class="clr-col-8"><span class="required">*</span> หมายเหตุ หากดูรายงานวันปัจจุบัน ข้อมูลอาจเปลี่ยนแปลง เพราะรพ.สามารถแก้ไขข้อมูลได้ในวันปัจจุบัน</div>
+  <div class="clr-col-8">
+    <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
+      <clr-icon shape="download"></clr-icon>export excel
+    </button>
+  </div>
+</div>
+<div class="clr-row">
+  <div class="clr-col-12">
+    <span class="required">*</span> หมายเหตุ หากดูรายงานวันปัจจุบัน ข้อมูลอาจเปลี่ยนแปลง
+    เพราะรพ.สามารถแก้ไขข้อมูลได้ในวันปัจจุบัน
+  </div>
 </div>
 <!-- <clr-datagrid>
   <clr-dg-column>เขตสุขภาพ</clr-dg-column>

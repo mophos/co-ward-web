@@ -22,12 +22,28 @@ export class ReportService {
     return await this.http.get(url).toPromise();
   }
 
+  async getAdmitPatientExport(date) {
+    const url = `${this.apiUrl}/v1/report/get-gcs-admit/excel?date=${date}`;
+    return await this.http.get(url).toPromise();
+  }
+
   async getPatients(date, query) {
     const url = `${this.apiUrl}/v1/report/get-gcs?date=${date}&query=${query}`;
     return await this.http.get(url).toPromise();
   }
+
+  async getPatientExport(date) {
+    const url = `${this.apiUrl}/v1/report/get-gcs/export?date=${date}`;
+    return await this.http.get(url).toPromise();
+  }
+
   async getSupplies(date, query) {
     const url = `${this.apiUrl}/v1/report/get-supplies?date=${date}&query=${query}`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async getSupplieExport(date) {
+    const url = `${this.apiUrl}/v1/report/get-supplie/export?date=${date}`;
     return await this.http.get(url).toPromise();
   }
 
