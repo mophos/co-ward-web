@@ -75,11 +75,10 @@ export class ReportDms1Component implements OnInit {
     try {
       this.dateShow = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
       const rs: any = await this.reportService.getReport1Excel(this.dateShow, this.sector);
-      console.log(rs);
       if (!rs) {
         this.loading.hide();
       } else {
-        this.downloadFile('report-dms1', 'xlsx', rs);
+        this.downloadFile('1.รายงานเตียงตามสังกัดหน่วยงาน', 'xlsx', rs);
         // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
         this.loading.hide();
       }

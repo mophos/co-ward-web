@@ -90,11 +90,10 @@ export class ReportDms2Component implements OnInit {
     try {
       this.dateShow = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
       const rs: any = await this.reportService.getReport2Excel(this.dateShow, this.sector);
-      console.log(rs);
       if (!rs) {
         this.loading.hide();
       } else {
-        this.downloadFile('report-dms2', 'xlsx', rs);
+        this.downloadFile('2.ประเภทความรุนแรงของผู้ป่วยที่ยังรักษาตัวอยู่', 'xlsx', rs);
         // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
         this.loading.hide();
       }
