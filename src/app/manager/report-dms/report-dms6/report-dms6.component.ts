@@ -107,7 +107,7 @@ export class ReportDms6Component implements OnInit {
       if (!rs) {
         this.loading.hide();
       } else {
-        this.downloadFile('report-dms6', 'xlsx', rs);
+        this.downloadFile('6.รายงานเตียงว่างแยกประเภท', 'xlsx', rs);
         // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
         this.loading.hide();
       }

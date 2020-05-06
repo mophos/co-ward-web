@@ -82,11 +82,10 @@ export class ReportDms3Component implements OnInit {
     this.loading.show();
     try {
       const rs: any = await this.reportService.getReport3Excel(moment(this.date).format('YYYY-MM-DD'), this.sector);
-      console.log(rs);
       if (!rs) {
         this.loading.hide();
       } else {
-        this.downloadFile('รายงานการแจ้งจำนวนผู้ป่วยเพื่อเบิกเวชภัณฑ์​สิ้นเปลืองประจำวัน', 'xlsx', rs);
+        this.downloadFile('3.รายงานการแจ้งจำนวนผู้ป่วยเพื่อเบิกเวชภัณฑ์​สิ้นเปลืองประจำวัน', 'xlsx', rs);
         this.loading.hide();
       }
     } catch (error) {

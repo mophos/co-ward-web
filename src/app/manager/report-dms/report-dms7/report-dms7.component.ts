@@ -82,7 +82,7 @@ export class ReportDms7Component implements OnInit {
       if (!rs) {
         this.loading.hide();
       } else {
-        this.downloadFile('report-dms2', 'xlsx', rs);
+        this.downloadFile('7.รายงานจำนวนประเภทเครื่องช่วยหายใจ', 'xlsx', rs);
         // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
         this.loading.hide();
       }

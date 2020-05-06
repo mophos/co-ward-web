@@ -107,7 +107,7 @@ export class ReportDms4Component implements OnInit {
       if (!rs) {
         this.loading.hide();
       } else {
-        this.downloadFile('report-dms4', 'xlsx', rs);
+        this.downloadFile('4.ยอดผู้ป่วยสะสมรวมที่รับไว้รักษาในโรงพยาบาล', 'xlsx', rs);
         // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
         this.loading.hide();
       }

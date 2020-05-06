@@ -96,12 +96,12 @@ export class ReportDms10Component implements OnInit {
   async doExportExcel() {
     this.loading.show();
     try {
-      const rs: any = await this.reportService.getReport6Excel(moment(this.date).format('YYYY-MM-DD'), this.sector);
+      const rs: any = await this.reportService.getReport10Excel(moment(this.date).format('YYYY-MM-DD'), this.sector);
       console.log(rs);
       if (!rs) {
         this.loading.hide();
       } else {
-        this.downloadFile('report-dms6', 'xlsx', rs);
+        this.downloadFile('10.รายงานจำนวนบุคลากร (พยาบาล) นับจำนวนทั้งหมดไม่นับเป็นเวร', 'xlsx', rs);
         // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
         this.loading.hide();
       }
