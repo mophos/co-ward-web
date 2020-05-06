@@ -103,12 +103,12 @@
       <tr *ngFor="let h of p.hospitals">
         <td class="left">{{h.hospname}}</td>
         <td class="right">
-          {{h.sum || 0}}</td>
-        <td class="right">{{h['Severe'] }}</td>
-        <td class="right">{{h['Moderate']}}</td>
-        <td class="right">{{h['Mild']}}</td>
-        <td class="right">{{h['Asymptomatic']}}</td>
-        <td class="right">{{h['IP PUI']}}</td>
+          {{h.countCase || 0}}</td>
+        <td class="right">{{h['severe'] }}</td>
+        <td class="right">{{h['moderate']}}</td>
+        <td class="right">{{h['mild']}}</td>
+        <td class="right">{{h['asymptomatic']}}</td>
+        <td class="right">{{h['ip_pui']}}</td>
       </tr>
       <!-- <tr>
         <td class="right" style="font-weight: bold;">รวม</td>
