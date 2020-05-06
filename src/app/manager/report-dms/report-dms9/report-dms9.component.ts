@@ -12,7 +12,7 @@ import { sumBy } from 'lodash';
   styles: []
 })
 export class ReportDms9Component implements OnInit {
-  list: any;
+  list: any = [];
   zone: any = '';
   date: any;
   infectiousDiseaseQty1: any;
@@ -45,21 +45,14 @@ export class ReportDms9Component implements OnInit {
   }
 
   async ngOnInit() {
-    this.date = {
-      date: {
-        year: moment().get('year'),
-        month: moment().get('month') + 1,
-        day: moment().get('date')
-      }
-    };
+    this.date = moment().format('DD/MM/YYYY');
     await this.getList();
   }
 
   async getList() {
     this.loading.show();
     try {
-      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
-      const rs: any = await this.reportService.getReport9(date, this.sector);
+      const rs: any = await this.reportService.getReport9(moment(this.date).format('YYYY-MM-DD'), this.sector);
       if (rs.ok) {
         this.infectiousDiseaseQty1 = sumBy(rs.rows, 'infectious_disease_qty') + sumBy(rs.rows, 'infectious_disease_support_qty');
         this.infectiousDiseaseQty2 = sumBy(rs.rows, 'infectious_disease_qty');
@@ -103,8 +96,7 @@ export class ReportDms9Component implements OnInit {
   async doExportExcel() {
     this.loading.show();
     try {
-      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
-      const rs: any = await this.reportService.getReport6Excel(date, this.sector);
+      const rs: any = await this.reportService.getReport6Excel(moment(this.date).format('YYYY-MM-DD'), this.sector);
       console.log(rs);
       if (!rs) {
         this.loading.hide();

@@ -1,5 +1,5 @@
 <nav class="breadcrumb">
-  <span class="breadcrumb-item active">รายงานจำนวนบุคลากร (แพทย์)</span>
+  <span class="breadcrumb-item active">รายงานจำนวนบุคลากร (แพทย์) ณ. วันที่ {{date | dateTh:'D MMM YYYY'}}</span>
 </nav>
 <br>
 <div class="clr-row">
@@ -69,7 +69,12 @@
     <th class="right" style="position: sticky; top: 0;">{{anesthesiologistQty3 || 0}}</th>
   </tr>
   <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
-    <td class="left td-border">{{h.hospname}}</td>
+    <td class="left td-border">{{h.hospname}}
+      <br>
+      <label style="color: red;">
+        ข้อมูลล่าสุด: {{ h.update_date | dateTh:'DD/MM/YYYY hh:mm'}}
+      </label>
+    </td>
 
     <td class="right td-border">{{h['infectious_disease_qty'] || 0 + h['infectious_disease_support_qty'] || 0}}</td>
     <td class="right td-border">{{h['infectious_disease_qty'] || 0 }}</td>
@@ -79,11 +84,13 @@
     <td class="right td-border">{{h['pulmonary_medicine_qty']||0 }}</td>
     <td class="right td-border">{{h['pulmonary_medicine_support_qty'] || 0}}</td>
 
-    <td class="right td-border">{{h['division_of_critical_care_qty'] || 0 + h['division_of_critical_care_support_qty'] || 0}}</td>
+    <td class="right td-border">{{h['division_of_critical_care_qty'] || 0 + h['division_of_critical_care_support_qty']
+      || 0}}</td>
     <td class="right td-border">{{h['division_of_critical_care_qty']||0 }}</td>
     <td class="right td-border">{{h['division_of_critical_care_support_qty'] || 0}}</td>
 
-    <td class="right td-border">{{h['internal_medicine_total_qty'] || 0 + h['internal_medicine_support_total_qty'] || 0}}</td>
+    <td class="right td-border">{{h['internal_medicine_total_qty'] || 0 + h['internal_medicine_support_total_qty'] ||
+      0}}</td>
     <td class="right td-border">{{h['internal_medicine_total_qty'] ||0 }}</td>
     <td class="right td-border">{{h['internal_medicine_support_total_qty'] || 0}}</td>
 
@@ -94,5 +101,6 @@
     <td class="left td-border">{{h.sub_ministry_name}}</td>
   </tr>
 </table>
+<label>{{list.length}} รายการ</label>
 
 <app-loadding #loading></app-loadding>

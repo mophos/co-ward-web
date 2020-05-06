@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ReportDms8Component implements OnInit {
 
-  list: any;
+  list: any = [];
   date: any;
   n95: any;
   surgicalMask: any;
@@ -42,23 +42,18 @@ export class ReportDms8Component implements OnInit {
   }
 
   async ngOnInit() {
-    this.date = {
-      date: {
-        year: moment().get('year'),
-        month: moment().get('month') + 1,
-        day: moment().get('date')
-      }
-    };
+    this.date = moment().format('DD/MM/YYYY');
     await this.getList();
   }
 
   async getList() {
     this.loading.show();
     try {
-      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
-      const rs: any = await this.reportService.getReport8(date, this.sector);
+      const rs: any = await this.reportService.getReport8(moment(this.date).format('YYYY-MM-DD'), this.sector);
       if (rs.ok) {
         this.list = rs.rows;
+        console.log(this.list);
+        
         this.n95 = sumBy(rs.rows, 'n95_qty');
         this.surgicalMask = sumBy(rs.rows, 'surgical_mask_qty');
         this.coverAll = sumBy(rs.rows, 'cover_all2_qty');
@@ -81,8 +76,7 @@ export class ReportDms8Component implements OnInit {
   async doExportExcel() {
     this.loading.show();
     try {
-      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
-      const rs: any = await this.reportService.getReport8Excel(date, this.sector);
+      const rs: any = await this.reportService.getReport8Excel(moment(this.date).format('YYYY-MM-DD'), this.sector);
       if (!rs) {
         this.loading.hide();
       } else {

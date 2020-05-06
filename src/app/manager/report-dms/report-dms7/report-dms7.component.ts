@@ -44,23 +44,15 @@ export class ReportDms7Component implements OnInit {
   }
 
   async ngOnInit() {
-    this.date = {
-      date: {
-        year: moment().get('year'),
-        month: moment().get('month') + 1,
-        day: moment().get('date')
-      }
-    };
+    this.date = moment().format('DD/MM/YYYY');
     await this.getList();
   }
 
   async getList() {
     this.loading.show();
     try {
-      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
-      const rs: any = await this.reportService.getReport7(date, this.sector);
+      const rs: any = await this.reportService.getReport7(moment(this.date).format('YYYY-MM-DD'), this.sector);
       if (rs.ok) {
-        this.loading.hide();
         this.list = rs.rows;
         this.nivQty = sumBy(rs.rows, 'non_invasive_qty');
         this.nivCovid = sumBy(rs.rows, 'non_invasive_covid_qty');
@@ -68,6 +60,7 @@ export class ReportDms7Component implements OnInit {
         this.ivQty = sumBy(rs.rows, 'invasive_qty');
         this.ivCovid = sumBy(rs.rows, 'invasive_covid_qty');
         this.ivAll = sumBy(rs.rows, 'invasive_qty') + sumBy(rs.rows, 'invasive_covid_qty');
+        this.loading.hide();
       } else {
         this.loading.hide();
         this.alertService.error();
@@ -85,8 +78,7 @@ export class ReportDms7Component implements OnInit {
   async doExportExcel() {
     this.loading.show();
     try {
-      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
-      const rs: any = await this.reportService.getReport7Excel(date, this.sector);
+      const rs: any = await this.reportService.getReport7Excel(moment(this.date).format('YYYY-MM-DD'), this.sector);
       if (!rs) {
         this.loading.hide();
       } else {

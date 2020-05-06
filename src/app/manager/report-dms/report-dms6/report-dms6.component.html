@@ -71,7 +71,7 @@
   <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
     <td class="left td-border">{{h.hospname}}<br>
       <label style="color: red;">
-        ข้อมูลล่าสุด: {{ h.updated_entry | dateTh:'DD/MM/YYYY hh:mm'}}
+        ข้อมูลล่าสุด: {{ h.entry_date | dateTh:'DD/MM/YYYY hh:mm'}}
       </label>
     </td>
     <td class="right td-border">{{h['aiir_qty'] }}</td>
