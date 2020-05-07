@@ -43,6 +43,7 @@ export class Register2Component implements OnInit {
   isSupplies: any = false;
   hospName: any = '';
   redirect: any;
+  hospitalId: any;
   @ViewChild('hospital') hosp: AutocompleteHospitalComponent;
   constructor(
     private alertService: AlertService,
@@ -106,6 +107,7 @@ export class Register2Component implements OnInit {
             username: this.username,
             password: this.password,
             hospcode: this.onSelectHospcode,
+            hospitalId: this.hospitalId,
             cid: this.cid,
             titleId: this.title,
             fname: this.firstName,
@@ -146,6 +148,7 @@ export class Register2Component implements OnInit {
       this.onSelectHospcode = e.hospcode;
       this.hospName = e.hospname;
       this.province = e.hosptype_id === '1' ? 'Y' : 'N';
+      this.hospitalId = e.id;
       const id = e.id;
       try {
         const rs: any = await this.registerService.getNodeDrugs(id);
