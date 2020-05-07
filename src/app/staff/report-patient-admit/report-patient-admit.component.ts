@@ -63,10 +63,11 @@ export class ReportPatientAdmitComponent implements OnInit {
     }
   }
 
-  onChangeDate() {
-    this.getGcs();
-    // console.log(e);
-
+  onChangeDate(e: any) {
+    if (e.formatted !== '') {
+      this.date = { date: e.date };
+      this.getGcs();
+    }
   }
 
   async doExportExcel() {
