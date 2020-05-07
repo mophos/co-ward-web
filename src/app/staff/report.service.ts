@@ -24,7 +24,7 @@ export class ReportService {
 
   async getAdmitPatientExport(date) {
     const url = `${this.apiUrl}/v1/report/get-gcs-admit/excel?date=${date}`;
-    return await this.http.get(url).toPromise();
+    return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 
   async getPatients(date, query) {
@@ -34,7 +34,7 @@ export class ReportService {
 
   async getPatientExport(date) {
     const url = `${this.apiUrl}/v1/report/get-gcs/export?date=${date}`;
-    return await this.http.get(url).toPromise();
+    return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 
   async getSupplies(date, query) {
@@ -43,8 +43,8 @@ export class ReportService {
   }
 
   async getSupplieExport(date) {
-    const url = `${this.apiUrl}/v1/report/get-supplie/export?date=${date}`;
-    return await this.http.get(url).toPromise();
+    const url = `${this.apiUrl}/v1/report/get-supplies/export?date=${date}`;
+    return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 
   async getBed(date) {
