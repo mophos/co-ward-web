@@ -93,7 +93,7 @@ export class LayoutComponent implements OnInit {
       const rs: any = await this.basicService.getSystems();
       if (rs.ok) {
         if (rs.rows === 'CLOSE') {
-          // this.modalClose = true;
+          this.modalClose = true;
 
         }
       }
@@ -117,12 +117,19 @@ export class LayoutComponent implements OnInit {
   connectMqtt() {
     try {
       // this.mqttClient  = mqttClient.connect('mqtt://test.mosquitto.org')
-      this.mqttClient = mqttClient.connect('https://api-covid19.moph.go.th:8080', {
+      this.mqttClient = mqttClient.connect('wss://api-covid19.moph.go.th:8080', {
         clienId: Math.floor(Math.random() * 10000),
         username: 'mqtt',
         password: '##Mqtt'
       });
-      console.log('success');
+      // this.mqttClient.on('connect', (err) => {
+      //   if (err) {
+      //     console.log('Subscribe Error!!');
+      //   } else {
+      //     console.log('Connect Mqtt success');
+
+      //   }
+      // });
 
     } catch (error) {
       console.log(error);
@@ -148,9 +155,9 @@ export class LayoutComponent implements OnInit {
       console.log(topic, payload);
       if (topic === `${this.topic}co-ward-close`) {
         if (payload.toString() === 'CLOSE') {
-          // this.modalClose = true;
+          this.modalClose = true;
         } else if (payload.toString() === 'OPEN') {
-          // this.modalClose = false;
+          this.modalClose = false;
         }
       } else if (topic === `${this.topic}co-ward-alert`) {
         this.message = payload.toString();
