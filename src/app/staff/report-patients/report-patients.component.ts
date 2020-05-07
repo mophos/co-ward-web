@@ -64,8 +64,10 @@ export class ReportPatientsComponent implements OnInit {
   }
 
   async onChangeDate(e) {
-    const date = e.date.year + '-' + e.date.month + '-' + e.date.day;
-    await this.getGcs(date);
+    if (e.formatted !== '') {
+      const date = e.date.year + '-' + e.date.month + '-' + e.date.day;
+      await this.getGcs(date);
+    }
     // console.log(e);
 
   }

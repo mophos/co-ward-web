@@ -93,7 +93,7 @@ export class LayoutComponent implements OnInit {
       const rs: any = await this.basicService.getSystems();
       if (rs.ok) {
         if (rs.rows === 'CLOSE') {
-          this.modalClose = true;
+          // this.modalClose = true;
 
         }
       }
@@ -155,9 +155,9 @@ export class LayoutComponent implements OnInit {
       console.log(topic, payload);
       if (topic === `${this.topic}co-ward-close`) {
         if (payload.toString() === 'CLOSE') {
-          this.modalClose = true;
+          // this.modalClose = true;
         } else if (payload.toString() === 'OPEN') {
-          this.modalClose = false;
+          // this.modalClose = false;
         }
       } else if (topic === `${this.topic}co-ward-alert`) {
         this.message = payload.toString();
