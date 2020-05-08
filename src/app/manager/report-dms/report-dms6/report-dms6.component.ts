@@ -77,7 +77,6 @@ export class ReportDms6Component implements OnInit {
         this.host3 = sumBy(rs.rows, 'hospitel_qty') - sumBy(rs.rows, 'hospitel_usage_qty');
 
         this.list = rs.rows;
-        console.log(this.list);
 
         this.loading.hide();
       } else {

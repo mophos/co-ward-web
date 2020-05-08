@@ -103,7 +103,6 @@ export class ReportDms4Component implements OnInit {
     this.loading.show();
     try {
       const rs: any = await this.reportService.getReport4Excel(moment(this.date).format('YYYY-MM-DD'), this.sector);
-      console.log(rs);
       if (!rs) {
         this.loading.hide();
       } else {

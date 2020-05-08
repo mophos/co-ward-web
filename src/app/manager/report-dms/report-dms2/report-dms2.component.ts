@@ -63,7 +63,6 @@ export class ReportDms2Component implements OnInit {
         this.aCase = sumBy(rs.rows, 'asymptomatic');
         this.pCase = sumBy(rs.rows, 'ip_pui');
         this.list = rs.rows;
-        console.log(this.list);
 
         this.loading.hide();
       } else {
