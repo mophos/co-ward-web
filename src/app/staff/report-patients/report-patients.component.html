@@ -75,14 +75,16 @@
           <table style="width:100%">
             <tr>
               <td class="left" width="20%">{{h.hospname}}</td>
-              <td class="left" width="10%">{{ h.details.length ? 'HN':''}}</td>
-              <td class="left">{{ h.details.length ? 'Admit date':''}}</td>
-              <td class="left">{{ h.details.length ? 'Status':''}}</td>
+              <td class="left" width="10%">{{ h.details.length ? 'เลขที่ HN':''}}</td>
+              <td class="left">{{ h.details.length ? 'วันที่ Admit':''}}</td>
+              <td class="left">{{ h.details.length ? 'ระดับความรุนแรง':''}}</td>
+              <td class="left">{{ h.details.length ? 'สถานะ':''}}</td>
             </tr>
             <tr *ngFor="let d of h.details">
               <td width="20%"></td>
               <td class="left" width="10%">{{d.hn}}</td>
               <td class="left">{{d.date_admit | dateTh:'D MMM YYYY'}}</td>
+              <td class="left">{{d.gcs_name}}</td>
               <td class="left">{{d.status}}</td>
             </tr>
           </table>
