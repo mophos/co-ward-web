@@ -117,19 +117,20 @@ export class LayoutComponent implements OnInit {
   connectMqtt() {
     try {
       // this.mqttClient  = mqttClient.connect('mqtt://test.mosquitto.org')
-      this.mqttClient = mqttClient.connect('wss://api-covid19.moph.go.th:8080', {
+      this.mqttClient = mqttClient.connect('mqtt://api-covid19.moph.go.th', {
+        port: 1883,
         clienId: Math.floor(Math.random() * 10000),
         username: 'mqtt',
         password: '##Mqtt'
       });
-      // this.mqttClient.on('connect', (err) => {
-      //   if (err) {
-      //     console.log('Subscribe Error!!');
-      //   } else {
-      //     console.log('Connect Mqtt success');
+      this.mqttClient.on('connect', (err) => {
+        if (err) {
+          console.log('Subscribe Error!!');
+        } else {
+          console.log('Connect Mqtt success');
 
-      //   }
-      // });
+        }
+      });
 
     } catch (error) {
       console.log(error);
