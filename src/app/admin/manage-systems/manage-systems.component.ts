@@ -54,7 +54,7 @@ export class ManageSystemsComponent implements OnInit {
 
   connectMqtt() {
     try {
-      this.mqttClient = mqttClient.connect('mqtt://api-covid19.moph.go.th', {
+      this.mqttClient = mqttClient.connect('ws://api-covid19.moph.go.th:8080', {
         clienId: Math.floor(Math.random() * 10000),
         username: 'mqtt',
         password: '##Mqtt'
