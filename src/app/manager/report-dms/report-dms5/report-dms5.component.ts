@@ -47,9 +47,9 @@ export class ReportDms5Component implements OnInit {
       const rs: any = await this.reportService.getReport5(date, this.sector);
       if (rs.ok) {
         this.totalQty = (sumBy(rs.rows, 'aiir_qty') || 0) + (sumBy(rs.rows, 'modified_aiir_qty') || 0) + (sumBy(rs.rows, 'isolate_qty') || 0) + (sumBy(rs.rows, 'cohort_qty') || 0);
-        this.admitQty = (sumBy(rs.rows, 'aiir_usage_qty') || 0) + (sumBy(rs.rows, 'modified_aiir_usage_qty') || 0) + (sumBy(rs.rows, 'isolate_usage_qty') || 0) + (sumBy(rs.rows, 'cohort_usage_qty') || 0);
+        this.admitQty = (sumBy(rs.rows, 'sum') || 0);
         this.spareQty = (sumBy(rs.rows, 'aiir_spare_qty') || 0) + (sumBy(rs.rows, 'modified_aiir_spare_qty') || 0) + (sumBy(rs.rows, 'isolate_spare_qty') || 0) + (sumBy(rs.rows, 'cohort_spare_qty') || 0);
-        this.standbyQty = ((sumBy(rs.rows, 'aiir_qty') || 0) + (sumBy(rs.rows, 'modified_aiir_qty') || 0) + (sumBy(rs.rows, 'isolate_qty') || 0) + (sumBy(rs.rows, 'cohort_qty') || 0)) - ((sumBy(rs.rows, 'aiir_usage_qty') || 0) + (sumBy(rs.rows, 'modified_aiir_usage_qty') || 0) + (sumBy(rs.rows, 'isolate_usage_qty') || 0) + (sumBy(rs.rows, 'cohort_usage_qty') || 0)) - ((sumBy(rs.rows, 'aiir_spare_qty') || 0) + sumBy(rs.rows, 'modified_aiir_spare_qty') || 0 + sumBy(rs.rows, 'isolate_spare_qty') || 0 + (sumBy(rs.rows, 'cohort_spare_qty') || 0));
+        this.standbyQty = ((sumBy(rs.rows, 'aiir_qty') || 0) + (sumBy(rs.rows, 'modified_aiir_qty') || 0) + (sumBy(rs.rows, 'isolate_qty') || 0) + (sumBy(rs.rows, 'cohort_qty') || 0)) - (sumBy(rs.rows, 'sum') || 0) - ((sumBy(rs.rows, 'aiir_spare_qty') || 0) + sumBy(rs.rows, 'modified_aiir_spare_qty') || 0 + sumBy(rs.rows, 'isolate_spare_qty') || 0 + (sumBy(rs.rows, 'cohort_spare_qty') || 0));
         this.list = rs.rows;
         this.loading.hide();
       } else {
