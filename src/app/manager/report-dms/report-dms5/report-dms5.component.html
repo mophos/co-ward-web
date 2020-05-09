@@ -13,26 +13,26 @@
 <table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
 
   <tr>
-    <th rowspan="2" class="td-border">โรงพยาบาล</th>
-    <th colspan="4" class="td-border">จำนวนเตียง (ไม่รวม Hospitel)</th>
-    <th rowspan="2" class="td-border">หน่วยงาน</th>
+    <th rowspan="2" class="td-border" style="position: sticky; top: 0;">โรงพยาบาล</th>
+    <th colspan="4" class="td-border" style="position: sticky; top: 0;">จำนวนเตียง (ไม่รวม Hospitel)</th>
+    <th rowspan="2" class="td-border" style="position: sticky; top: 0;">หน่วยงาน</th>
   </tr>
 
   <tr>
-    <th class="td-border">จำนวนเตียงทั้งหมด</th>
-    <th class="td-border">Admit รวม</th>
-    <th class="td-border">สำรองเตียงรอรับย้าย</th>
-    <th class="td-border">ว่าง</th>
+    <th class="td-border" style="position: sticky; top: 0;">จำนวนเตียงทั้งหมด</th>
+    <th class="td-border" style="position: sticky; top: 0;">Admit รวม</th>
+    <th class="td-border" style="position: sticky; top: 0;">สำรองเตียงรอรับย้าย</th>
+    <th class="td-border" style="position: sticky; top: 0;">ว่าง</th>
   </tr>
 
 
   <tr>
-    <th class=" td-border" style="position: sticky; top: 0;">รวม</th>
-    <th class="text-right  td-border" style="position: sticky; top: 0;">{{totalQty}}</th>
-    <th class="text-right  td-border" style="position: sticky; top: 0;">{{admitQty}}</th>
-    <th class="text-right  td-border" style="position: sticky; top: 0;">{{spareQty}}</th>
-    <th class="text-right  td-border" style="position: sticky; top: 0;">{{standbyQty}}</th>
-    <th class="text-right  td-border" style="position: sticky; top: 0;"></th>
+    <th class=" td-border" >รวม</th>
+    <th class="text-right  td-border" >{{totalQty}}</th>
+    <th class="text-right  td-border" >{{admitQty}}</th>
+    <th class="text-right  td-border" >{{spareQty}}</th>
+    <th class="text-right  td-border" >{{standbyQty}}</th>
+    <th class="text-right  td-border" ></th>
   </tr>
 
   <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
@@ -52,12 +52,12 @@
   </tr>
 
   <tr>
-    <th class="text-right  td-border" style="position: sticky; top: 0;">รวม</th>
-    <th class="text-right  td-border" style="position: sticky; top: 0;">{{totalQty}}</th>
-    <th class="text-right  td-border" style="position: sticky; top: 0;">{{admitQty}}</th>
-    <th class="text-right  td-border" style="position: sticky; top: 0;">{{spareQty}}</th>
-    <th class="text-right  td-border" style="position: sticky; top: 0;">{{standbyQty}}</th>
-    <th class="text-right  td-border" style="position: sticky; top: 0;"></th>
+    <th class="text-right  td-border" >รวม</th>
+    <th class="text-right  td-border" >{{totalQty}}</th>
+    <th class="text-right  td-border" >{{admitQty}}</th>
+    <th class="text-right  td-border" >{{spareQty}}</th>
+    <th class="text-right  td-border" >{{standbyQty}}</th>
+    <th class="text-right  td-border" ></th>
   </tr>
 </table>
 <label>{{list.length}} รายการ</label>

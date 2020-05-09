@@ -51,22 +51,22 @@
     <th class="right" style="position: sticky; top: 0;">คงเหลือ</th>
   </tr>
   <tr>
-    <th class="td-border" style="position: sticky; top: 0;">รวม</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{aiir1}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{aiir2}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{aiir3 || 0}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{modi1}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{modi2}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{modi3 || 0}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{iso1}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{iso2}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{iso3 || 0}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{coh1}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{coh2}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{coh3 || 0}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{host1}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{host2}}</th>
-    <th class="text-right" style="position: sticky; top: 0;">{{host3 || 0}}</th>
+    <th class="td-border" >รวม</th>
+    <th class="text-right td-border" >{{aiir1}}</th>
+    <th class="text-right td-border" >{{aiir2}}</th>
+    <th class="text-right td-border" >{{aiir3 || 0}}</th>
+    <th class="text-right td-border" >{{modi1}}</th>
+    <th class="text-right td-border" >{{modi2}}</th>
+    <th class="text-right td-border" >{{modi3 || 0}}</th>
+    <th class="text-right td-border" >{{iso1}}</th>
+    <th class="text-right td-border" >{{iso2}}</th>
+    <th class="text-right td-border" >{{iso3 || 0}}</th>
+    <th class="text-right td-border" >{{coh1}}</th>
+    <th class="text-right td-border" >{{coh2}}</th>
+    <th class="text-right td-border" >{{coh3 || 0}}</th>
+    <th class="text-right td-border" >{{host1}}</th>
+    <th class="text-right td-border" >{{host2}}</th>
+    <th class="text-right" >{{host3 || 0}}</th>
   </tr>
   <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
     <td class="left td-border">{{h.hospname}}<br>
