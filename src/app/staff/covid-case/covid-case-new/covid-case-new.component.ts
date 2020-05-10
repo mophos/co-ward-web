@@ -616,32 +616,42 @@ export class CovidCaseNewComponent implements OnInit {
     }
   }
 
-  async dateAdmit() {
-    this.admitDetail = [];
-    const rs: any = await this.basicService.getDate();
-    const aDate: any = this.admitDate.date.year + '-' + this.admitDate.date.month + '-' + this.admitDate.date.day;
-    if (moment(aDate).format('YYYY-MM-DD') > moment(rs.rows).format('YYYY-MM-DD')) {
-      this.alertService.error('ไม่อนุญาตให้เลือกวันที่เกินปัจจุบัน');
-    } else {
-      try {
-        this.diffDate = moment(moment(rs.rows).format('YYYY-MM-DD')).diff(moment(aDate), 'days');
-        let startDate = moment(aDate, 'YYYY-MM-DD');
-        let id = 1;
-        while (!startDate.isSame(moment(rs.rows).add(1, 'days').format('YYYY-MM-DD'))) {
-          const obj: any = {};
-          obj.date = startDate.format('YYYY-MM-DD');
-          obj.id = id;
-          obj.gcs_id = null;
-          obj.bed_id = null;
-          obj.medical_supplie_id = null;
+  async dateAdmit(e) {
+    if (e) {
+      this.admitDate = e;
+      this.admitDetail = [];
+      const rs: any = await this.basicService.getDate();
+      const aDate: any = this.admitDate.date.year + '-' + this.admitDate.date.month + '-' + this.admitDate.date.day;
+      if (moment(aDate, 'YYYY-M-D').isSameOrAfter(moment(rs.rows, 'YYYY-MM-DD HH:mm:ss'))) {
+        this.admitDate = {
+          date: {
+            year: +moment().format('YYYY'),
+            month: +moment().format('M'),
+            day: +moment().format('D'),
+          }
+        };
+        this.alertService.error('ไม่อนุญาตให้เลือกวันที่เกินปัจจุบัน');
+      } else {
+        try {
+          this.diffDate = moment(moment(rs.rows).format('YYYY-MM-DD')).diff(moment(aDate), 'days');
+          let startDate = moment(aDate, 'YYYY-MM-DD');
+          let id = 1;
+          while (!startDate.isSame(moment(rs.rows).add(1, 'days').format('YYYY-MM-DD'))) {
+            const obj: any = {};
+            obj.date = startDate.format('YYYY-MM-DD');
+            obj.id = id;
+            obj.gcs_id = null;
+            obj.bed_id = null;
+            obj.medical_supplie_id = null;
 
-          obj.drugs = [];
-          startDate = startDate.add(1, 'days');
-          this.admitDetail.push(obj);
-          id++;
+            obj.drugs = [];
+            startDate = startDate.add(1, 'days');
+            this.admitDetail.push(obj);
+            id++;
+          }
+        } catch (error) {
+          this.alertService.error(error);
         }
-      } catch (error) {
-        this.alertService.error(error);
       }
     }
   }

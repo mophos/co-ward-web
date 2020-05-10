@@ -342,7 +342,7 @@
                 <label for="example" class="clr-control-label">วันที่ Admit <span class="required">*</span></label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <my-date-picker-th (dateChanged)="dateAdmit()" name="admitDate" [options]="myDatePickerOptions"
+                    <my-date-picker-th (dateChanged)="dateAdmit($event)" name="admitDate" [options]="myDatePickerOptions"
                       [(ngModel)]="admitDate" required>
                     </my-date-picker-th>
                   </div>

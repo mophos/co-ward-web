@@ -117,28 +117,38 @@ export class LayoutComponent implements OnInit {
   connectMqtt() {
     try {
       // this.mqttClient  = mqttClient.connect('mqtt://test.mosquitto.org')
-      this.mqttClient = mqttClient.connect('wss://api-covid19.moph.go.th:8080', {
+      this.mqttClient = mqttClient.connect('ws://api-covid19.moph.go.th:8080', {
         clienId: Math.floor(Math.random() * 10000),
         username: 'mqtt',
         password: '##Mqtt'
       });
-      // this.mqttClient.on('connect', (err) => {
-      //   if (err) {
-      //     console.log('Subscribe Error!!');
-      //   } else {
-      //     console.log('Connect Mqtt success');
-
-      //   }
-      // });
+      console.log('connect');
 
     } catch (error) {
       console.log(error);
     }
   }
 
+  checkMqtt() {
+    console.log('check');
+    
+    this.mqttClient.on('connect', (error) => {
+      if (error) {
+        console.log('Subscribe Error!!');
+      } else {
+        console.log('Connect Mqtt success');
+      }
+    });
+  }
   subscribeMqtt() {
     const that = this;
-    this.mqttClient.on('connect', () => {
+    this.mqttClient.on('connect', (error) => {
+      if (error) {
+        console.log('Subscribe Error!!');
+      } else {
+        console.log('Connect Mqtt success');
+
+      }
       that.mqttClient.subscribe([`${this.topic}co-ward-close`, `${this.topic}co-ward-alert`, `${this.topic}co-ward-restart`], (err) => {
         if (err) {
           console.log('Subscribe Error!!');
