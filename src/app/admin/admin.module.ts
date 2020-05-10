@@ -36,6 +36,7 @@ import { FulfillSurgicalMaskComponent } from './fulfill-surgical-mask/fulfill-su
 import { FulfillSurgicalMaskListComponent } from './fulfill-surgical-mask-list/fulfill-surgical-mask-list.component';
 import { FulfillSuppliesComponent } from './fulfill-supplies/fulfill-supplies.component';
 import { ManageMinMaxSuppliesComponent } from './manage-min-max-supplies/manage-min-max-supplies.component';
+import { ManageNodeSurgicalComponent } from './manage-node-surgical/manage-node-surgical.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { ManageMinMaxSuppliesComponent } from './manage-min-max-supplies/manage-
     FulfillSurgicalMaskComponent,
     FulfillSurgicalMaskListComponent,
     FulfillSuppliesComponent,
-    ManageMinMaxSuppliesComponent
+    ManageMinMaxSuppliesComponent,
+    ManageNodeSurgicalComponent
   ],
   imports: [
     HelpModule,
