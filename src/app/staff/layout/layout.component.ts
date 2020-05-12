@@ -6,6 +6,7 @@ import * as findIndex from 'lodash/findIndex';
 
 import * as mqttClient from '../../../vendor/mqtt.min.js';
 import { MqttClient } from 'mqtt';
+
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -83,6 +84,7 @@ export class LayoutComponent implements OnInit {
     this.settingUserMenu = findIndex(this.rights, { name: 'STAFF_SETTING_USERS' }) === -1 ? false : true;
   }
 
+
   async  ngOnInit() {
     await this.getSystems();
     await this.initialSocket();
@@ -116,11 +118,11 @@ export class LayoutComponent implements OnInit {
 
   connectMqtt() {
     try {
-      // this.mqttClient  = mqttClient.connect('mqtt://test.mosquitto.org')
-      this.mqttClient = mqttClient.connect('wss://api-covid19.moph.go.th:8080', {
+      // this.mqttClient = mqttClient.connect('mqtt://test.mosquitto.org', {
+      this.mqttClient = mqttClient.connect('mqtt://api-covid19.moph.go.th:1883', {
         clienId: Math.floor(Math.random() * 10000),
-        username: 'mqtt',
-        password: '##Mqtt'
+        username: 'q4u',
+        password: 'q4u'
       });
       console.log('connect');
 
@@ -131,7 +133,7 @@ export class LayoutComponent implements OnInit {
 
   checkMqtt() {
     console.log('check');
-    
+
     this.mqttClient.on('connect', (error) => {
       if (error) {
         console.log('Subscribe Error!!');
