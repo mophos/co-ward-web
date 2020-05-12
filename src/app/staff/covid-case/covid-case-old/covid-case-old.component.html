@@ -10,7 +10,7 @@
   <div class="clr-col-12">
     <div class="card" style="margin-top: 0;">
       <div class="card-header">
-        ข้อมูลผู้ป่วย
+        ข้อมูลผู้ป่วย (บันทึกเฉพาะผู้ป่วย POSITIVE ที่ Discharge ไปแล้วเท่านั้น)
       </div>
       <div class="card-block">
         <div class="card-text">
@@ -42,8 +42,8 @@
                 <label for="example" class="clr-control-label">เลขที่บัตรประชาชน <span class="required">*</span></label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper ">
-                    <input type="text" id="example" name="cid" maxlength="13" [(ngModel)]="cid" class="clr-input width-fit"
-                      readonly>
+                    <input type="text" id="example" name="cid" maxlength="13" [(ngModel)]="cid"
+                      class="clr-input width-fit" readonly>
                   </div>
                 </div>
               </div>
@@ -160,7 +160,8 @@
                 <label for="example" class="clr-control-label">เบอร์โทรศัพท์</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <input type="text" name="tel" appNumberOnly maxlength="10" [(ngModel)]="tel" class="clr-input  width-fit">
+                    <input type="text" name="tel" appNumberOnly maxlength="10" [(ngModel)]="tel"
+                      class="clr-input  width-fit">
                   </div>
                 </div>
               </div>
@@ -204,7 +205,8 @@
                 <label class="clr-control-label">ประเทศ</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <app-autocomplete-countries style="padding: 0px" #countries [query]="'ไทย'" (onselect)="onSelectCountry($event)">
+                    <app-autocomplete-countries style="padding: 0px" #countries [query]="'ไทย'"
+                      (onselect)="onSelectCountry($event)">
                     </app-autocomplete-countries>
                   </div>
                 </div>
@@ -366,10 +368,10 @@
               <input type="radio" clrRadio value="HOME" name="modalDischargeType" [(ngModel)]="modalDischargeType" />
               <label>รักษาหาย กลับบ้าน</label>
             </clr-radio-wrapper>
-            <clr-radio-wrapper>
+            <!-- <clr-radio-wrapper>
               <input type="radio" clrRadio value="NEGATIVE" name="modalDischargeType" [(ngModel)]="modalDischargeType" />
               <label>ตรวจไม่พบเชื้อ</label>
-            </clr-radio-wrapper>
+            </clr-radio-wrapper> -->
             <clr-radio-wrapper>
               <input type="radio" clrRadio value="DEATH" name="modalDischargeType" [(ngModel)]="modalDischargeType" />
               <label>เสียชีวิต</label>
@@ -398,7 +400,8 @@
                   </option>
                 </select>
                 <span style="padding-right: 1em;padding-left: 1em;"> : </span>
-                <select name="minute" class="clr-select width-fit" [(ngModel)]="minute" name="minute" style="width: 30%;">
+                <select name="minute" class="clr-select width-fit" [(ngModel)]="minute" name="minute"
+                  style="width: 30%;">
                   <option *ngFor="let i of minutes" [value]="i">
                     <span *ngIf="i < 10">0</span>{{ i }}
                   </option>
@@ -423,7 +426,8 @@
                   </option>
                 </select>
                 <span style="padding-right: 1em;padding-left: 1em;"> : </span>
-                <select name="minute" class="clr-select width-fit" [(ngModel)]="minute" name="minute" style="width: 30%;">
+                <select name="minute" class="clr-select width-fit" [(ngModel)]="minute" name="minute"
+                  style="width: 30%;">
                   <option *ngFor="let i of minutes" [value]="i">
                     <span *ngIf="i < 10">0</span>{{ i }}
                   </option>
@@ -448,7 +452,8 @@
                   </option>
                 </select>
                 <span style="padding-right: 1em;padding-left: 1em;"> : </span>
-                <select name="minute" class="clr-select width-fit" [(ngModel)]="minute" name="minute" style="width: 30%;">
+                <select name="minute" class="clr-select width-fit" [(ngModel)]="minute" name="minute"
+                  style="width: 30%;">
                   <option *ngFor="let i of minutes" [value]="i">
                     <span *ngIf="i < 10">0</span>{{ i }}
                   </option>
@@ -468,12 +473,13 @@
               </div>
               <div class="clr-col-12">
                 <label for="basic" class="clr-control-label">โรงพยาบาลที่ส่งต่อ</label>
-                <app-autocomplete-hospital style="padding: 0px; width: 100%;" #hospital (onchange)="onSelectHosp($event)"
-                  (onselect)="onSelectHosp($event)">
+                <app-autocomplete-hospital style="padding: 0px; width: 100%;" #hospital
+                  (onchange)="onSelectHosp($event)" (onselect)="onSelectHosp($event)">
                 </app-autocomplete-hospital>
-                <label for="basic" class="clr-control-label" style="padding-top: 1rem; padding-bottom: 0.2rem;">สาเหตุที่ส่งต่อ</label>
-                <input type="text" name="reason" style="padding: 0px; width: 100%;" [(ngModel)]="reason" class="clr-col-9 clr-input width-fit"
-                  placeholder="สาเหตุที่ส่งต่อ">
+                <label for="basic" class="clr-control-label"
+                  style="padding-top: 1rem; padding-bottom: 0.2rem;">สาเหตุที่ส่งต่อ</label>
+                <input type="text" name="reason" style="padding: 0px; width: 100%;" [(ngModel)]="reason"
+                  class="clr-col-9 clr-input width-fit" placeholder="สาเหตุที่ส่งต่อ">
               </div>
             </div>
           </div>
@@ -485,13 +491,14 @@
 
 <div class="clr-row" [ngClass]="{hidden: !isKey}">
   <div class="clr-col-12">
-    <button class="btn btn-success btn-block" *ngIf="modalDischargeType !='NEGATIVE'" (click)="onClickSave()" title="บันทึก"
+    <button class="btn btn-success btn-block" *ngIf="modalDischargeType !='NEGATIVE'" (click)="onClickSave()"
+      title="บันทึก"
       [disabled]="!admitDate || isSave || (!hospitalId && modalDischargeType=='REFER') || ((!hour || !minute )&& modalDischargeType!='REFER') ">
       <clr-icon shape="floppy"></clr-icon> บันทึก
     </button>
 
-    <button class="btn btn-success btn-block" *ngIf="modalDischargeType =='NEGATIVE'" (click)="onClickSave()" title="บันทึก"
-      [disabled]="!admitDate || isSave || (!dateDischarge && modalDischargeType=='NEGATIVE')">
+    <button class="btn btn-success btn-block" *ngIf="modalDischargeType =='NEGATIVE'" (click)="onClickSave()"
+      title="บันทึก" [disabled]="!admitDate || isSave || (!dateDischarge && modalDischargeType=='NEGATIVE')">
       <clr-icon shape="floppy"></clr-icon> บันทึก
     </button>
   </div>
@@ -499,7 +506,7 @@
 
 
 
-<clr-modal [(clrModalOpen)]="modalCID"  [clrModalStaticBackdrop]="false">
+<clr-modal [(clrModalOpen)]="modalCID" [clrModalStaticBackdrop]="false">
   <h3 class="modal-title">ผู้ป่วยเก่าสำหรับผู้ป่วยที่ DISCHARGE ไปแล้ว</h3>
   <div class="modal-body">
     <clr-radio-container clrInline>
@@ -523,8 +530,8 @@
       <label for="basic" class="clr-control-label">เลขที่บัตรประชาชน</label>
       <div class="clr-control-container">
         <div class="clr-input-wrapper" style="max-height: 3rem !important;">
-          <input type="text" id="basic" class="clr-input" appNumberOnly maxlength="13" style="height:3rem !important;font-size: 1.3rem;"
-            name="modalCIDCid" [(ngModel)]="modalCIDCid">
+          <input type="text" id="basic" class="clr-input" appNumberOnly maxlength="13"
+            style="height:3rem !important;font-size: 1.3rem;" name="modalCIDCid" [(ngModel)]="modalCIDCid">
           <clr-icon shape="exclamation-circle" size="36" *ngIf="modalCIDCidError"></clr-icon>
         </div>
         <span *ngIf="modalCIDCidError" class="clr-subtext">เลขที่บัตรประชาชนผิด</span>
