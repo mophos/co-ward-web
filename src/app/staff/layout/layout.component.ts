@@ -5,8 +5,7 @@ import { Router } from '@angular/router';
 import * as findIndex from 'lodash/findIndex';
 
 import * as mqttClient from '../../../vendor/mqtt.min.js';
-import { MqttClient, connect } from 'mqtt';
-// const mqtt = require('mqtt');
+import { MqttClient } from 'mqtt';
 
 @Component({
   selector: 'app-layout',
@@ -87,9 +86,6 @@ export class LayoutComponent implements OnInit {
 
 
   async  ngOnInit() {
-
-    // const client = mqtt.connect('mqtt://api-covid19.moph.go.th');
-
     await this.getSystems();
     await this.initialSocket();
   }
