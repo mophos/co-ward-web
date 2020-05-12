@@ -1,3 +1,4 @@
+import { ReportAdmitConfirmCaseComponent } from './report-admit-confirm-case/report-admit-confirm-case.component';
 import { ReportPatientsProvincesComponent } from './report-patients-provinces/report-patients-provinces.component';
 import { ReportDms8Component } from './report-dms/report-dms8/report-dms8.component';
 import { ReportDms5Component } from './report-dms/report-dms5/report-dms5.component';
@@ -62,6 +63,7 @@ const routes: Routes = [
       { path: 'report-dms9-private', component: ReportDms9Component },
       { path: 'report-dms10-private', component: ReportDms10Component },
       { path: 'report-review-homework-private', component: ReportReviewHomeworkComponent },
+      { path: 'report-admit-confirm-case', component: ReportAdmitConfirmCaseComponent },
     ]
   }
 ];

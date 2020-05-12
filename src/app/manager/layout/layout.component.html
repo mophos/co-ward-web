@@ -26,6 +26,11 @@
       <router-outlet></router-outlet>
     </div>
     <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
+      <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager/report-admit-confirm-case" title="รายงานผู้ป่วย ADMIT"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="folder-open" class="is-solid"></clr-icon>
+        รายงานผู้ป่วย ADMIT ทั้งหมด
+      </a>
       <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager/report-supplies-summary" title="รายงานเวชภัณฑ์"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="folder-open" class="is-solid"></clr-icon>

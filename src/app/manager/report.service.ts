@@ -70,4 +70,9 @@ export class ReportService {
     const url = `${this.apiUrl}/v1/report/province-case-date?startDate=${startDate}&endDate=${endDate}`;
     return await this.http.get(url).toPromise();
   }
+  
+  async admitConfirmCase() {
+    const url = `${this.apiUrl}/v1/report/admit-confirm-case`;
+    return await this.http.get(url).toPromise();
+  }
 }

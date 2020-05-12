@@ -1,0 +1,51 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">รายงานผู้ป่วย ADMIT</span>
+</nav>
+
+<table class="table table-compact" style="position: relative; border-collapse: collapse;">
+  <thead>
+    <tr>
+      <th class="text-left td-border" style="position: sticky; top: 0;">เขต</th>
+      <th class="text-left td-border" style="position: sticky; top: 0;">จังหวัด</th>
+      <th class="text-left td-border" style="position: sticky; top: 0;">โรงพยาบาล</th>
+      <th class="text-left td-border" style="position: sticky; top: 0;">HN</th>
+      <th class="text-left td-border" style="position: sticky; top: 0;">วันที่ ADMIT</th>
+      <th class="text-left td-border" style="position: sticky; top: 0;">ความรุนแรง</th>
+      <th class="text-left td-border" style="position: sticky; top: 0;">เตียง</th>
+      <th class="text-left td-border" style="position: sticky; top: 0;">เครื่องช่วยหายใจ</th>
+      <th class="text-left td-border" style="position: sticky; top: 0;">วันที่บันทึกล่าสุด</th>
+      <th class="text-left td-border" style="position: sticky; top: 0;">ไม่ได้บันทึกมา</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let l of list">
+      <td class="text-left td-border">{{l.zone_code}}</td>
+      <td class="text-left td-border">{{l.province_name}}</td>
+      <td class="text-left td-border">{{l.hospname}}</td>
+      <td class="text-left td-border"> {{l.hn}}</td>
+      <td class="text-left td-border"> {{l.date_admit | dateTh:'DD/MM/YYYY'}}</td>
+      <td class="text-left td-border"> {{l.gcs_name}}</td>
+      <td class="text-left td-border"> {{l.bed_name}}</td>
+      <td class="text-left td-border"> {{l.medical_supplies_name}}</td>
+      <td class="text-left"> {{l.updated_entry_last| dateTh:'DD/MM/YYYY'}}</td>
+      <td class="text-left td-border"> {{l.days}} วัน</td>
+    </tr>
+    <!-- <tr>
+        <td class="right" style="font-weight: bold;">รวม</td>
+        <td class="right" style="font-weight: bold;">{{l.count}}</td>
+        <td class="right" style="font-weight: bold;">{{l.severe}}</td>
+        <td class="right" style="font-weight: bold;">{{l.moderate}}</td>
+        <td class="right" style="font-weight: bold;">{{l.mild}}</td>
+        <td class="right" style="font-weight: bold;">{{l.asymptomatic}}</td>
+        <td class="right" style="font-weight: bold;">{{l.ippui}}</td>
+      </tr> -->
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="10">{{list.length}} รายการ</td>
+    </tr>
+  </tfoot>
+</table>
+
+<app-loadding #loading></app-loadding>
