@@ -24,9 +24,13 @@
     <th rowspan="2" class="td-border">โรงพยาบาล</th>
     <th colspan="3" class="td-border">Non-invasive ventilator (NIV)</th>
     <th colspan="3" class="td-border">Invasive ventilator</th>
+    <th colspan="3" class="td-border">High Flow</th>
     <th rowspan="2">หน่วยงาน</th>
   </tr>
   <tr>
+    <th class="td-border">ใช้กับผู้ป่วย Covid</th>
+    <th class="td-border">ว่างพร้อมใช้งานทั้งโรงพยาบาล</th>
+    <th class="td-border">ทั้งหมด</th>
     <th class="td-border">ใช้กับผู้ป่วย Covid</th>
     <th class="td-border">ว่างพร้อมใช้งานทั้งโรงพยาบาล</th>
     <th class="td-border">ทั้งหมด</th>
@@ -42,21 +46,27 @@
     <th class="td-border">{{ivCovid}}</th>
     <th class="td-border">{{ivQty}}</th>
     <th class="td-border">{{ivAll}}</th>
+    <th class="td-border">{{hfCovid}}</th>
+    <th class="td-border">{{hfQty}}</th>
+    <th class="td-border">{{hfAll}}</th>
     <th></th>
   </tr>
-  <tr *ngFor="let i of list">
+  <tr *ngFor="let i of list;let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}"> 
     <td class="left td-border">{{i.hospname}}
       <br>
       <label style="color: red;">
         ข้อมูลล่าสุด: {{ i.updated_entry | dateTh:'DD/MM/YYYY hh:mm'}}
       </label>
     </td>
-    <td class="td-border">{{i.non_invasive_covid_qty}}</td>
+    <td class="td-border">{{i.non_invasive_ventilator}}</td>
+    <td class="td-border">{{i.non_invasive_qty-i.non_invasive_ventilator}}</td>
     <td class="td-border">{{i.non_invasive_qty}}</td>
-    <td class="td-border">{{i.non_invasive_qty+i.non_invasive_covid_qty}}</td>
-    <td class="td-border">{{i.invasive_covid_qty}}</td>
+    <td class="td-border">{{i.invasive_ventilator}}</td>
+    <td class="td-border">{{i.invasive_qty-i.invasive_ventilator}}</td>
     <td class="td-border">{{i.invasive_qty}}</td>
-    <td class="td-border">{{i.invasive_qty+i.invasive_covid_qty}}</td>
+    <td class="td-border">{{i.high_flow}}</td>
+    <td class="td-border">{{i.high_flow_qty-i.high_flow}}</td>
+    <td class="td-border">{{i.high_flow_qty}}</td>
     <td>{{i.sub_ministry_name}}</td>
   </tr>
   <tr>
@@ -67,6 +77,9 @@
     <th class="td-border">{{ivCovid}}</th>
     <th class="td-border">{{ivQty}}</th>
     <th class="td-border">{{ivAll}}</th>
+    <th class="td-border">{{hfCovid}}</th>
+    <th class="td-border">{{hfQty}}</th>
+    <th class="td-border">{{hfAll}}</th>
     <th></th>
   </tr>
 </table>
