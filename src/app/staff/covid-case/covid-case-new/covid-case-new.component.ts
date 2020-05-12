@@ -152,6 +152,8 @@ export class CovidCaseNewComponent implements OnInit {
   }
 
   async setData() {
+    console.log(this.data);
+    
     try {
       this.satCode = this.data.sat_id;
       this.covidCaseId = this.data.covid_case_id;
@@ -165,7 +167,9 @@ export class CovidCaseNewComponent implements OnInit {
       this.lname = this.data.last_name;
       this.genderId = this.data.gender_id.toString();
 
-      if (this.data.birth_date) {
+      if (this.data.birth_date === 'empty') {
+        this.data.birth_date = null;
+      } else {
         this.birthDate = {
           date: {
             year: +moment(this.data.birth_date).format('YYYY'),
