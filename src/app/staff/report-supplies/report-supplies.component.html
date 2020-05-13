@@ -29,12 +29,13 @@
   <table class="table" *ngFor="let p of l.provinces">
     <thead>
       <tr>
-        <th colspan="11" style="text-align: left;">
+        <th colspan="12" style="text-align: left;">
           <h3>{{p.province_name}}</h3>
         </th>
       </tr>
       <tr>
         <th class="right">โรงพยาบาล</th>
+        <th class="right">วันที่บันทึกล่าสุด</th>
         <th class="right">Surgical Gown</th>
         <th class="right">Cover All-1</th>
         <th class="right">Cover All-2</th>
@@ -50,6 +51,7 @@
     <tbody>
       <tr *ngFor="let h of p.hospitals">
         <td class="left">{{h.hospname}}</td>
+        <td class="left">{{h.date | dateTh:'DD/MM/YYYY'}}</td>
         <td class="right">{{h['9'] }}</td>
         <td class="right">{{h['10']}}</td>
         <td class="right">{{h['11']}}</td>
