@@ -1,9 +1,10 @@
+import { ReportReviewHomeworkComponent } from './report-review-homework/report-review-homework.component';
 import { ReportAdmitConfirmCaseComponent } from './report-admit-confirm-case/report-admit-confirm-case.component';
 import { ReportPatientsProvincesComponent } from './report-patients-provinces/report-patients-provinces.component';
 import { ReportDms8Component } from './report-dms/report-dms8/report-dms8.component';
 import { ReportDms5Component } from './report-dms/report-dms5/report-dms5.component';
 import { HomeComponent } from './home/home.component';
-import { ReportReviewHomeworkComponent } from './report-dms/report-review-homework/report-review-homework.component';
+import { ReportReviewHomeworkDmsComponent } from './report-dms/report-review-homework-dms/report-review-homework-dms.component';
 import { ReportSuppliesSummaryComponent } from './report-supplies-summary/report-supplies-summary.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -41,8 +42,9 @@ const routes: Routes = [
       { path: 'report-professionals', component: ReportProfessionalsComponent },
       { path: 'report-medicals', component: ReportMedicalsComponent },
       { path: 'patient-info', canActivate: [AuthSearchPatient], component: PatientInfoComponent },
-      { path: 'report-review-homework-goverment', component: ReportReviewHomeworkComponent },
-      { path: 'report-dms1-goverment', component: ReportDms1Component},
+      { path: 'report-review-homework', component: ReportReviewHomeworkComponent },
+      { path: 'report-review-homework-goverment', component: ReportReviewHomeworkDmsComponent },
+      { path: 'report-dms1-goverment', component: ReportDms1Component },
       { path: 'report-dms2-goverment', component: ReportDms2Component },
       { path: 'report-dms3-goverment', component: ReportDms3Component },
       { path: 'report-dms4-goverment', component: ReportDms4Component },
@@ -52,7 +54,7 @@ const routes: Routes = [
       { path: 'report-dms8-goverment', component: ReportDms8Component },
       { path: 'report-dms9-goverment', component: ReportDms9Component },
       { path: 'report-dms10-goverment', component: ReportDms10Component },
-      { path: 'report-dms1-private', component: ReportDms1Component},
+      { path: 'report-dms1-private', component: ReportDms1Component },
       { path: 'report-dms2-private', component: ReportDms2Component },
       { path: 'report-dms3-private', component: ReportDms3Component },
       { path: 'report-dms4-private', component: ReportDms4Component },
@@ -62,7 +64,7 @@ const routes: Routes = [
       { path: 'report-dms8-private', component: ReportDms8Component },
       { path: 'report-dms9-private', component: ReportDms9Component },
       { path: 'report-dms10-private', component: ReportDms10Component },
-      { path: 'report-review-homework-private', component: ReportReviewHomeworkComponent },
+      { path: 'report-review-homework-private', component: ReportReviewHomeworkDmsComponent },
       { path: 'report-admit-confirm-case', component: ReportAdmitConfirmCaseComponent },
     ]
   }

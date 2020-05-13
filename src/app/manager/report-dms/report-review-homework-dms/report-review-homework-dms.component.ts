@@ -5,11 +5,11 @@ import { AlertService } from '../../../help/alert.service';
 // import { sumBy } from 'lodash';
 
 @Component({
-  selector: 'app-report-review-homework',
-  templateUrl: './report-review-homework.component.html',
+  selector: 'app-report-review-homework-dms',
+  templateUrl: './report-review-homework-dms.component.html',
   styles: []
 })
-export class ReportReviewHomeworkComponent implements OnInit {
+export class ReportReviewHomeworkDmsComponent implements OnInit {
 
   @ViewChild('loading') loading: any;
 
@@ -37,7 +37,7 @@ export class ReportReviewHomeworkComponent implements OnInit {
   async getList() {
     try {
       this.loading.show();
-      const rs: any = await this.reportService.getReportReviewHomework(this.sector);
+      const rs: any = await this.reportService.getReportReviewHomeworkDms(this.sector);
       if (rs.ok) {
         this.list = rs.rows;
         for (const i of rs.rows) {
@@ -59,7 +59,7 @@ export class ReportReviewHomeworkComponent implements OnInit {
   async doExportExcel() {
     this.loading.show();
     try {
-      const rs: any = await this.reportService.getReportReviewHomeworkExcel(this.sector);
+      const rs: any = await this.reportService.getReportReviewHomeworkDmsExcel(this.sector);
       console.log(rs);
       if (!rs) {
         this.loading.hide();

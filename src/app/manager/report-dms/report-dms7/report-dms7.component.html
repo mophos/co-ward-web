@@ -1,5 +1,5 @@
 <nav class="breadcrumb">
-  <span class="breadcrumb-item active">รายงานจำนวนประเภทเครื่องช่วยหายใจ ณ. วันที่ {{date | dateTh:'D MMM YYYY'}}</span>
+  <span class="breadcrumb-item active">รายงานจำนวนประเภทเครื่องช่วยหายใจ ณ. วันที่ {{date | dateTh:'DD/MM/YYYY'}}</span>
 </nav>
 <br>
 <div class="clr-row">
@@ -22,32 +22,32 @@
 <table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
   <tr>
     <th rowspan="2" class="td-border">โรงพยาบาล</th>
-    <th colspan="3" class="td-border">Non-invasive ventilator (NIV)</th>
-    <th colspan="3" class="td-border">Invasive ventilator</th>
-    <th colspan="3" class="td-border">High Flow</th>
+    <th colspan="2" class="td-border">Non-invasive ventilator (NIV)</th>
+    <th colspan="2" class="td-border">Invasive ventilator</th>
+    <th colspan="2" class="td-border">High Flow</th>
     <th rowspan="2">หน่วยงาน</th>
   </tr>
   <tr>
     <th class="td-border">ใช้กับผู้ป่วย Covid</th>
-    <th class="td-border">ว่างพร้อมใช้งานทั้งโรงพยาบาล</th>
+    <!-- <th class="td-border">ว่างพร้อมใช้งานทั้งโรงพยาบาล</th> -->
     <th class="td-border">ทั้งหมด</th>
     <th class="td-border">ใช้กับผู้ป่วย Covid</th>
-    <th class="td-border">ว่างพร้อมใช้งานทั้งโรงพยาบาล</th>
+    <!-- <th class="td-border">ว่างพร้อมใช้งานทั้งโรงพยาบาล</th> -->
     <th class="td-border">ทั้งหมด</th>
     <th class="td-border">ใช้กับผู้ป่วย Covid</th>
-    <th class="td-border">ว่างพร้อมใช้งานทั้งโรงพยาบาล</th>
+    <!-- <th class="td-border">ว่างพร้อมใช้งานทั้งโรงพยาบาล</th> -->
     <th class="td-border">ทั้งหมด</th>
   </tr>
   <tr>
     <th class="left td-border" รวม></th>
     <th class="td-border">{{nivCovid}}</th>
-    <th class="td-border">{{nivQty}}</th>
+    <!-- <th class="td-border">{{nivQty}}</th> -->
     <th class="td-border">{{nivAll}}</th>
     <th class="td-border">{{ivCovid}}</th>
-    <th class="td-border">{{ivQty}}</th>
+    <!-- <th class="td-border">{{ivQty}}</th> -->
     <th class="td-border">{{ivAll}}</th>
     <th class="td-border">{{hfCovid}}</th>
-    <th class="td-border">{{hfQty}}</th>
+    <!-- <th class="td-border">{{hfQty}}</th> -->
     <th class="td-border">{{hfAll}}</th>
     <th></th>
   </tr>
@@ -59,26 +59,26 @@
       </label>
     </td>
     <td class="td-border">{{i.non_invasive_ventilator}}</td>
-    <td class="td-border">{{i.non_invasive_qty-i.non_invasive_ventilator}}</td>
+    <!-- <td class="td-border">{{i.non_invasive_qty-i.non_invasive_ventilator}}</td> -->
     <td class="td-border">{{i.non_invasive_qty}}</td>
     <td class="td-border">{{i.invasive_ventilator}}</td>
-    <td class="td-border">{{i.invasive_qty-i.invasive_ventilator}}</td>
+    <!-- <td class="td-border">{{i.invasive_qty-i.invasive_ventilator}}</td> -->
     <td class="td-border">{{i.invasive_qty}}</td>
     <td class="td-border">{{i.high_flow}}</td>
-    <td class="td-border">{{i.high_flow_qty-i.high_flow}}</td>
+    <!-- <td class="td-border">{{i.high_flow_qty-i.high_flow}}</td> -->
     <td class="td-border">{{i.high_flow_qty}}</td>
     <td>{{i.sub_ministry_name}}</td>
   </tr>
   <tr>
     <th class="left td-border" รวม></th>
     <th class="td-border">{{nivCovid}}</th>
-    <th class="td-border">{{nivQty}}</th>
+    <!-- <th class="td-border">{{nivQty}}</th> -->
     <th class="td-border">{{nivAll}}</th>
     <th class="td-border">{{ivCovid}}</th>
-    <th class="td-border">{{ivQty}}</th>
+    <!-- <th class="td-border">{{ivQty}}</th> -->
     <th class="td-border">{{ivAll}}</th>
     <th class="td-border">{{hfCovid}}</th>
-    <th class="td-border">{{hfQty}}</th>
+    <!-- <th class="td-border">{{hfQty}}</th> -->
     <th class="td-border">{{hfAll}}</th>
     <th></th>
   </tr>

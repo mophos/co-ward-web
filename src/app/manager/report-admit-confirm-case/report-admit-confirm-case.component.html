@@ -2,50 +2,112 @@
   <span class="breadcrumb-item active">รายงานผู้ป่วย ADMIT ทั้งหมด</span>
 </nav>
 
-<table class="table table-compact" style="position: relative; border-collapse: collapse;">
+<table class="table table-compact" style="border-collapse: collapse;">
   <thead>
     <tr>
-      <th class="text-left td-border" style="position: sticky; top: 0;">เขต</th>
-      <th class="text-left td-border" style="position: sticky; top: 0;">จังหวัด</th>
-      <th class="text-left td-border" style="position: sticky; top: 0;">โรงพยาบาล</th>
-      <th class="text-left td-border" style="position: sticky; top: 0;">HN</th>
-      <th class="text-left td-border" style="position: sticky; top: 0;">วันที่ ADMIT</th>
-      <th class="text-left td-border" style="position: sticky; top: 0;">ความรุนแรง</th>
-      <th class="text-left td-border" style="position: sticky; top: 0;">เตียง</th>
-      <th class="text-left td-border" style="position: sticky; top: 0;">เครื่องช่วยหายใจ</th>
-      <th class="text-left td-border" style="position: sticky; top: 0;">วันที่บันทึกล่าสุด</th>
-      <th class="text-left td-border" style="position: sticky; top: 0;">ไม่ได้บันทึกมา</th>
+      <th class="text-left td-border">เขต</th>
+      <th class="text-left td-border">รวม</th>
+      <th class="text-left td-border">Severe</th>
+      <th class="text-left td-border">moderate</th>
+      <th class="text-left td-border">mild</th>
+      <th class="text-left td-border">asymptomatic</th>
+      <th class="text-left td-border">aiir</th>
+      <th class="text-left td-border">modified_aiir</th>
+      <th class="text-left td-border">isolate</th>
+      <th class="text-left td-border">cohort</th>
+      <th class="text-left td-border">hospitel</th>
+      <th class="text-left td-border">invasive</th>
+      <th class="text-left td-border">noninvasive</th>
+      <th class="text-left td-border">high_flow</th>
 
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let l of list">
+    <tr *ngFor="let l of summary; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
       <td class="text-left td-border">{{l.zone_code}}</td>
-      <td class="text-left td-border">{{l.province_name}}</td>
-      <td class="text-left td-border">{{l.hospname}}</td>
-      <td class="text-left td-border"> {{l.hn}}</td>
-      <td class="text-left td-border"> {{l.date_admit | dateTh:'DD/MM/YYYY'}}</td>
-      <td class="text-left td-border"> {{l.gcs_name}}</td>
-      <td class="text-left td-border"> {{l.bed_name}}</td>
-      <td class="text-left td-border"> {{l.medical_supplies_name}}</td>
-      <td class="text-left"> {{l.updated_entry_last| dateTh:'DD/MM/YYYY'}}</td>
-      <td class="text-left td-border"> {{l.days}} วัน</td>
+      <td class="text-right td-border">{{l.confirm || 0}}</td>
+      <td class="text-right td-border">{{l.severe || 0}}</td>
+      <td class="text-right td-border"> {{l.moderate || 0}}</td>
+      <td class="text-right td-border"> {{l.mild || 0}}</td>
+      <td class="text-right td-border"> {{l.asymptomatic || 0}}</td>
+      <td class="text-right td-border"> {{l.aiir || 0}}</td>
+      <td class="text-right td-border"> {{l.modified_aiir || 0}}</td>
+      <td class="text-right td-border"> {{l.isolate || 0}}</td>
+      <td class="text-right td-border"> {{l.cohort || 0}}</td>
+      <td class="text-right td-border"> {{l.hospitel || 0}}</td>
+      <td class="text-right td-border"> {{l.invasive || 0}}</td>
+      <td class="text-right td-border"> {{l.noninvasive || 0}}</td>
+      <td class="text-right td-border"> {{l.high_flow || 0}}</td>
     </tr>
-    <!-- <tr>
-        <td class="right" style="font-weight: bold;">รวม</td>
-        <td class="right" style="font-weight: bold;">{{l.count}}</td>
-        <td class="right" style="font-weight: bold;">{{l.severe}}</td>
-        <td class="right" style="font-weight: bold;">{{l.moderate}}</td>
-        <td class="right" style="font-weight: bold;">{{l.mild}}</td>
-        <td class="right" style="font-weight: bold;">{{l.asymptomatic}}</td>
-        <td class="right" style="font-weight: bold;">{{l.ippui}}</td>
-      </tr> -->
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="10">{{list.length}} รายการ</td>
+      <td class="text-left td-border">รวม</td>
+      <td class="text-right td-border">{{total}}</td>
+      <td class="text-right td-border">{{severe}}</td>
+      <td class="text-right td-border"> {{moderate}}</td>
+      <td class="text-right td-border"> {{mild}}</td>
+      <td class="text-right td-border"> {{asymptomatic}}</td>
+      <td class="text-right td-border"> {{aiir}}</td>
+      <td class="text-right td-border"> {{modifiedAiir}}</td>
+      <td class="text-right td-border"> {{isolate}}</td>
+      <td class="text-right td-border"> {{cohort}}</td>
+      <td class="text-right td-border"> {{hospitel}}</td>
+      <td class="text-right td-border"> {{invasive}}</td>
+      <td class="text-right td-border"> {{noninvasive}}</td>
+      <td class="text-right td-border"> {{highFlow}}</td>
+
     </tr>
   </tfoot>
 </table>
-
+<br>
+<div style="overflow-y:auto;height:700px">
+  <table class="table table-compact" style="position: relative; border-collapse: collapse;">
+    <thead>
+      <tr>
+        <th class="text-left td-border" style="position: sticky; top: 0;">เขต</th>
+        <th class="text-left td-border" style="position: sticky; top: 0;">จังหวัด</th>
+        <th class="text-left td-border" style="position: sticky; top: 0;">โรงพยาบาล</th>
+        <th class="text-left td-border" style="position: sticky; top: 0;">HN/AN</th>
+        <th class="text-left td-border" style="position: sticky; top: 0;">วันที่ ADMIT</th>
+        <th class="text-left td-border" style="position: sticky; top: 0;">ความรุนแรง</th>
+        <th class="text-left td-border" style="position: sticky; top: 0;">เตียง</th>
+        <th class="text-left td-border" style="position: sticky; top: 0;">เครื่องช่วยหายใจ</th>
+        <th class="text-left td-border" style="position: sticky; top: 0;">วันที่บันทึกล่าสุด</th>
+        <th class="text-left td-border" style="position: sticky; top: 0;">ไม่ได้บันทึกมา</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let l of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+        <td class="text-left td-border">{{l.zone_code}}</td>
+        <td class="text-left td-border">{{l.province_name}}</td>
+        <td class="text-left td-border">{{l.hospname}}</td>
+        <td class="text-left td-border"> {{l.hn}}/{{l.an}}</td>
+        <td class="text-left td-border"> {{l.date_admit | dateTh:'DD/MM/YYYY'}}</td>
+        <td class="text-left td-border"> {{l.gcs_name}}</td>
+        <td class="text-left td-border"> {{l.bed_name}}</td>
+        <td class="text-left td-border"> {{l.medical_supplies_name}}</td>
+        <td class="text-left"> {{l.updated_entry_last| dateTh:'DD/MM/YYYY'}}</td>
+        <td class="text-right td-border"> {{l.days}} วัน</td>
+      </tr>
+      <!-- <tr>
+        <td class="text-left td-border">รวม</td>
+        <td class="text-left td-border">{{l.province_name}}</td>
+        <td class="text-left td-border">{{l.hospname}}</td>
+        <td class="text-left td-border"> {{l.hn}}</td>
+        <td class="text-left td-border"> {{l.date_admit | dateTh:'DD/MM/YYYY'}}</td>
+        <td class="text-left td-border"> {{l.gcs_name}}</td>
+        <td class="text-left td-border"> {{l.bed_name}}</td>
+        <td class="text-left td-border"> {{l.medical_supplies_name}}</td>
+        <td class="text-left"> {{l.updated_entry_last| dateTh:'DD/MM/YYYY'}}</td>
+        <td class="text-right td-border"> {{l.days}} วัน</td>
+      </tr> -->
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="10">{{list.length}} รายการ</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
 <app-loadding #loading></app-loadding>

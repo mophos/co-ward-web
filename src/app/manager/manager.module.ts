@@ -29,12 +29,13 @@ import { ReportDms4Component } from './report-dms/report-dms4/report-dms4.compon
 import { ReportDms1Component } from './report-dms/report-dms1/report-dms1.component';
 import { ReportDms6Component } from './report-dms/report-dms6/report-dms6.component';
 import { ReportDms7Component } from './report-dms/report-dms7/report-dms7.component';
-import { ReportReviewHomeworkComponent } from './report-dms/report-review-homework/report-review-homework.component';
+import { ReportReviewHomeworkDmsComponent } from './report-dms/report-review-homework-dms/report-review-homework-dms.component';
 import { HomeComponent } from './home/home.component';
 import { ReportDms9Component } from './report-dms/report-dms9/report-dms9.component';
 import { ReportDms10Component } from './report-dms/report-dms10/report-dms10.component';
 import { ReportPatientsProvincesComponent } from './report-patients-provinces/report-patients-provinces.component';
 import { ReportAdmitConfirmCaseComponent } from './report-admit-confirm-case/report-admit-confirm-case.component';
+import { ReportReviewHomeworkComponent } from './report-review-homework/report-review-homework.component';
 
 @NgModule({
   declarations: [
@@ -59,12 +60,13 @@ import { ReportAdmitConfirmCaseComponent } from './report-admit-confirm-case/rep
     ReportDms6Component,
     ReportDms7Component,
     ReportDms8Component,
-    ReportReviewHomeworkComponent,
+    ReportReviewHomeworkDmsComponent,
     HomeComponent,
     ReportDms9Component,
     ReportDms10Component,
     ReportPatientsProvincesComponent,
-    ReportAdmitConfirmCaseComponent
+    ReportAdmitConfirmCaseComponent,
+    ReportReviewHomeworkComponent
   ],
   imports: [
     CommonModule,
