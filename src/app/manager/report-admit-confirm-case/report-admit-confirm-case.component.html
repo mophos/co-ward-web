@@ -24,7 +24,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let l of summary; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
-      <td class="text-left td-border">{{l.zone_code}}</td>
+      <td class="text-left td-border">{{+l.zone_code}}</td>
       <td class="text-right td-border">{{l.confirm || 0}}</td>
       <td class="text-right td-border">{{l.severe || 0}}</td>
       <td class="text-right td-border"> {{l.moderate || 0}}</td>
@@ -86,7 +86,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let l of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
-        <td class="text-left td-border">{{l.zone_code}}</td>
+        <td class="text-left td-border">{{+l.zone_code}}</td>
         <td class="text-left td-border">{{l.province_name}}</td>
         <td class="text-left td-border">{{l.hospname}}</td>
         <td class="text-left td-border"> {{l.hn}}/{{l.an}}</td>
