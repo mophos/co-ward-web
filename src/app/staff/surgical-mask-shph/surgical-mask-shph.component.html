@@ -19,7 +19,7 @@
       <!-- <clr-dg-column>วันที่ตัดรอบ</clr-dg-column> -->
       <clr-dg-column></clr-dg-column>
 
-      <clr-dg-row *ngFor="let l of list">
+      <clr-dg-row *clrDgItems="let l of list">
         <clr-dg-cell>{{l.hospname}}</clr-dg-cell>
         <clr-dg-cell>ผ้าปิดจมูกใยสังเคราะห์ 3 ชั้น (Surgical Mask)</clr-dg-cell>
         <clr-dg-cell>{{l.qty}} ชิ้น</clr-dg-cell>
