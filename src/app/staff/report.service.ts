@@ -48,7 +48,7 @@ export class ReportService {
   }
 
   async getBed(date) {
-    const url = `${this.apiUrl}/v1/staff/report/bed?date=${date}`;
+    const url = `${this.apiUrl}/v1/report/get-bed?date=${date}`;
     return await this.http.get(url).toPromise();
   }
 
