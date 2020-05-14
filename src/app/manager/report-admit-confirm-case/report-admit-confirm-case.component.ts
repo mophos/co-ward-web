@@ -25,7 +25,13 @@ export class ReportAdmitConfirmCaseComponent implements OnInit {
   invasive = 0;
   noninvasive = 0;
   highFlow = 0;
-
+  d1 = 0;
+  d2 = 0;
+  d3 = 0;
+  d4 = 0;
+  d5 = 0;
+  d7 = 0;
+  d8 = 0;
 
   @ViewChild('loading') loading: any;
   constructor(
@@ -72,6 +78,14 @@ export class ReportAdmitConfirmCaseComponent implements OnInit {
         this.invasive = sumBy(rs.rows, 'invasive');
         this.noninvasive = sumBy(rs.rows, 'noninvasive');
         this.highFlow = sumBy(rs.rows, 'high_flow');
+        this.d1 = sumBy(rs.rows, 'd1');
+        this.d2 = sumBy(rs.rows, 'd2');
+        this.d3 = sumBy(rs.rows, 'd3');
+        this.d4 = sumBy(rs.rows, 'd4');
+        this.d5 = sumBy(rs.rows, 'd5');
+        this.d7 = sumBy(rs.rows, 'd7');
+        this.d8 = sumBy(rs.rows, 'd8');
+
       } else {
         this.alertService.error(rs.error);
       }
