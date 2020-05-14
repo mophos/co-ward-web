@@ -43,20 +43,22 @@
 <br>
 <table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
   <tr>
+    <th class="td-border">เขต</th>
+    <th class="td-border">จังหวัด</th>
     <th class="td-border">รหัสโรงพยาบาล</th>
     <th class="td-border">โรงพยาบาล</th>
     <th class="td-border">วันที่ลงทะเบียนล่าสุด</th>
     <th class="td-border">สังกัด</th>
-    <th class="td-border">จังหวัด</th>
   </tr>
 
 
   <tr *ngFor="let h of details; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+    <td class="left td-border" >{{+h.zone_code}}</td>
+    <td class="left td-border" >{{h.province_name}}</td>
     <td class="left td-border" >{{h.hospcode}}</td>
     <td class="left td-border" >{{h.hospname}}</td>
     <td class="right td-border" >{{h.register_last_date | dateTh:'DD/MM/YYYY hh:mm'}}</td>
     <td class="left td-border" >{{h.sub_ministry_name}}</td>
-    <td class="left td-border" >{{h.province_name}}</td>
   </tr>
 
 </table>
