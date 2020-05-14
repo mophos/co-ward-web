@@ -51,17 +51,17 @@
     <tbody>
       <tr *ngFor="let h of p.hospitals">
         <td class="left">{{h.hospname}}</td>
-        <td class="left">{{h.date | dateTh:'DD/MM/YYYY'}}</td>
-        <td class="right">{{h['9'] }}</td>
-        <td class="right">{{h['10']}}</td>
-        <td class="right">{{h['11']}}</td>
-        <td class="right">{{h['12']}}</td>
-        <td class="right">{{h['13']}}</td>
-        <td class="right">{{h['14']}}</td>
-        <td class="right">{{h['15']}}</td>
-        <td class="right">{{h['16']}}</td>
-        <td class="right">{{h['17']}}</td>
-        <td class="right">{{h['18']}}</td>
+        <td class="left">{{h.entry_date | dateTh:'DD/MM/YYYY'}}</td>
+        <td class="right">{{h.surgical_gown_qty }}</td>
+        <td class="right">{{h.cover_all1_qty}}</td>
+        <td class="right">{{h.cover_all2_qty}}</td>
+        <td class="right">{{h.n95_qty}}</td>
+        <td class="right">{{h.shoe_cover_qty}}</td>
+        <td class="right">{{h.surgical_hood_qty}}</td>
+        <td class="right">{{h.long_glove_qty}}</td>
+        <td class="right">{{h.face_shield_qty}}</td>
+        <td class="right">{{h.surgical_mask_qty}}</td>
+        <td class="right">{{h.powered_air_qty}}</td>
       </tr>
       <!-- <tr>
         <td class="right" style="font-weight: bold;">รวม</td>
