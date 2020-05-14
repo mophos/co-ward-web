@@ -73,12 +73,12 @@
               อัพเดทล่าสุด
             </div>
             <div>
-              <span *ngIf="l.updated_date">
+              <span >
                 : {{l.updated_date | dateTh:'DD/MM/YYYY hh:mm'}}
               </span>
-              <span *ngIf="!(l.updated_date)">
+              <!-- <span *ngIf="!(l.updated_date)">
                 : {{l.create_date | dateTh:'DD/MM/YYYY hh:mm'}}
-              </span>
+              </span> -->
             </div>
           </td>
           <td class="left">
