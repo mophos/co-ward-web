@@ -75,6 +75,13 @@
         <th class="text-left td-border" style="position: sticky; top: 0;">เครื่องช่วยหายใจ</th>
         <th class="text-left td-border" style="position: sticky; top: 0;">วันที่บันทึกล่าสุด</th>
         <th class="text-left td-border" style="position: sticky; top: 0;">ไม่ได้บันทึกมา</th>
+        <th class="text-left td-border" style="position: sticky; top: 0;">Hydroxychloroquine 200 mg.</th>
+        <th class="text-left td-border" style="position: sticky; top: 0;">Chloroquine 250 mg.</th>
+        <th class="text-left td-border" style="position: sticky; top: 0;">Darunavir 600 mg.</th>
+        <th class="text-left td-border" style="position: sticky; top: 0;">Lopinavir 200 mg./Ritonavir 50 mg.</th>
+        <th class="text-left td-border" style="position: sticky; top: 0;">Ritonavir 100 mg.</th>
+        <th class="text-left td-border" style="position: sticky; top: 0;">Azithromycin 250 mg.</th>
+        <th class="text-left td-border" style="position: sticky; top: 0;">Favipiravi</th>
       </tr>
     </thead>
     <tbody>
@@ -89,6 +96,34 @@
         <td class="text-left td-border"> {{l.medical_supplies_name}}</td>
         <td class="text-left"> {{l.updated_entry_last| dateTh:'DD/MM/YYYY'}}</td>
         <td class="text-right td-border"> {{l.days}} วัน</td>
+        <td class="text-right td-border">
+          <clr-icon shape="times" class="is-error" *ngIf='!l.d1 || l.d1 == 0'></clr-icon>
+          <clr-icon shape="check" class="is-success" *ngIf='l.d1 > 0'></clr-icon>
+        </td>
+        <td class="text-right td-border">
+          <clr-icon shape="times" class="is-error" *ngIf='!l.d2 || l.d2 == 0'></clr-icon>
+          <clr-icon shape="check" class="is-success" *ngIf='l.d2 > 0'></clr-icon>
+        </td>
+        <td class="text-right td-border">
+          <clr-icon shape="times" class="is-error" *ngIf='!l.d3 || l.d3 == 0'></clr-icon>
+          <clr-icon shape="check" class="is-success" *ngIf='l.d3 > 0'></clr-icon>
+        </td>
+        <td class="text-right td-border">
+          <clr-icon shape="times" class="is-error" *ngIf='!l.d4 || l.d4 == 0'></clr-icon>
+          <clr-icon shape="check" class="is-success" *ngIf='l.d4 > 0'></clr-icon>
+        </td>
+        <td class="text-right td-border">
+          <clr-icon shape="times" class="is-error" *ngIf='!l.d5 || l.d5 == 0'></clr-icon>
+          <clr-icon shape="check" class="is-success" *ngIf='l.d5 > 0'></clr-icon>
+        </td>
+        <td class="text-right td-border">
+          <clr-icon shape="times" class="is-error" *ngIf='!l.d7 || l.d7 == 0'></clr-icon>
+          <clr-icon shape="check" class="is-success" *ngIf='l.d7 > 0'></clr-icon>
+        </td>
+        <td class="text-right td-border">
+          <clr-icon shape="times" class="is-error" *ngIf='!l.d8 || l.d8 == 0'></clr-icon>
+          <clr-icon shape="check" class="is-success" *ngIf='l.d8 > 0'></clr-icon>
+        </td>
       </tr>
       <!-- <tr>
         <td class="text-left td-border">รวม</td>
