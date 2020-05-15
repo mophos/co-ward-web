@@ -319,13 +319,13 @@ export class CovidCaseNewComponent implements OnInit {
       if (!this.admitDate) {
         this.errorAdmit = true;
       }
-      console.log(this.birthDate);
-      if (this.birthDate == undefined || this.birthDate == null) {
-        this.errorBirthDate = true;
-      }
-      if (!moment(this.birthDate.date).isValid()) {
-        this.errorBirthDate = true;
-      }
+      // console.log(this.birthDate);
+      // if (this.birthDate == undefined || this.birthDate == null) {
+      //   this.errorBirthDate = true;
+      // }
+      // if (!moment(this.birthDate.date).isValid()) {
+      //   this.errorBirthDate = true;
+      // }
 
       if (
         this.errorGender ||
