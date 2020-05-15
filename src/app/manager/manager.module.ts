@@ -36,6 +36,7 @@ import { ReportDms10Component } from './report-dms/report-dms10/report-dms10.com
 import { ReportPatientsProvincesComponent } from './report-patients-provinces/report-patients-provinces.component';
 import { ReportAdmitConfirmCaseComponent } from './report-admit-confirm-case/report-admit-confirm-case.component';
 import { ReportReviewHomeworkComponent } from './report-review-homework/report-review-homework.component';
+import { ReportRecordsComponent } from './report-records/report-records.component';
 import { ReportReviewHomeworkAllComponent } from './report-all/report-review-homework-all/report-review-homework-all.component';
 import { Report1Component } from './report-all/report-1/report-1.component';
 import { Report2Component } from './report-all/report-2/report-2.component';
@@ -88,7 +89,8 @@ import { Report10Component } from './report-all/report-10/report-10.component';
     HomeComponent,
     ReportPatientsProvincesComponent,
     ReportAdmitConfirmCaseComponent,
-    ReportReviewHomeworkComponent
+    ReportReviewHomeworkComponent,
+    ReportRecordsComponent
   ],
   imports: [
     CommonModule,

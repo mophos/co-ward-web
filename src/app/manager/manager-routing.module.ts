@@ -27,7 +27,6 @@ import { ReportDms8Component } from './report-dms/report-dms8/report-dms8.compon
 import { ReportDms9Component } from './report-dms/report-dms9/report-dms9.component';
 import { ReportDms10Component } from './report-dms/report-dms10/report-dms10.component';
 import { ReportReviewHomeworkDmsComponent } from './report-dms/report-review-homework-dms/report-review-homework-dms.component';
-
 import { Report1Component } from './report-all/report-1/report-1.component';
 import { Report2Component } from './report-all/report-2/report-2.component';
 import { Report3Component } from './report-all/report-3/report-3.component';
@@ -39,6 +38,7 @@ import { Report8Component } from './report-all/report-8/report-8.component';
 import { Report9Component } from './report-all/report-9/report-9.component';
 import { Report10Component } from './report-all/report-10/report-10.component';
 import { ReportReviewHomeworkAllComponent } from './report-all/report-review-homework-all/report-review-homework-all.component';
+import { ReportRecordsComponent } from './report-records/report-records.component';
 
 
 const routes: Routes = [
@@ -96,6 +96,7 @@ const routes: Routes = [
       { path: 'report/10', component: Report10Component },
 
       { path: 'report-admit-confirm-case', component: ReportAdmitConfirmCaseComponent },
+      { path: 'report-records', component: ReportRecordsComponent },
     ]
   }
 ];

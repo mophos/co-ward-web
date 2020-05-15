@@ -36,6 +36,11 @@
         <clr-icon clrVerticalNavIcon shape="folder-open" class="is-solid"></clr-icon>
         รายงานการลงทะเบียน
       </a>
+      <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager/report-records" title="รายงานการบันทึกข้อมูลในระบบ CO-ward"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="folder-open" class="is-solid"></clr-icon>
+        รายงานการบันทึกข้อมูลในระบบ CO-ward
+      </a>
       <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager/report-supplies-summary" title="รายงานเวชภัณฑ์"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="folder-open" class="is-solid"></clr-icon>
