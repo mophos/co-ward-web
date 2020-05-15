@@ -36,6 +36,17 @@ import { ReportDms10Component } from './report-dms/report-dms10/report-dms10.com
 import { ReportPatientsProvincesComponent } from './report-patients-provinces/report-patients-provinces.component';
 import { ReportAdmitConfirmCaseComponent } from './report-admit-confirm-case/report-admit-confirm-case.component';
 import { ReportReviewHomeworkComponent } from './report-review-homework/report-review-homework.component';
+import { ReportReviewHomeworkAllComponent } from './report-all/report-review-homework-all/report-review-homework-all.component';
+import { Report1Component } from './report-all/report-1/report-1.component';
+import { Report2Component } from './report-all/report-2/report-2.component';
+import { Report3Component } from './report-all/report-3/report-3.component';
+import { Report4Component } from './report-all/report-4/report-4.component';
+import { Report5Component } from './report-all/report-5/report-5.component';
+import { Report6Component } from './report-all/report-6/report-6.component';
+import { Report7Component } from './report-all/report-7/report-7.component';
+import { Report8Component } from './report-all/report-8/report-8.component';
+import { Report9Component } from './report-all/report-9/report-9.component';
+import { Report10Component } from './report-all/report-10/report-10.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +63,7 @@ import { ReportReviewHomeworkComponent } from './report-review-homework/report-r
     ReportSuppliesSummaryComponent,
     ReportMedicalsComponent,
     PatientInfoComponent,
+    ReportReviewHomeworkDmsComponent,
     ReportDms1Component,
     ReportDms2Component,
     ReportDms3Component,
@@ -60,10 +72,20 @@ import { ReportReviewHomeworkComponent } from './report-review-homework/report-r
     ReportDms6Component,
     ReportDms7Component,
     ReportDms8Component,
-    ReportReviewHomeworkDmsComponent,
-    HomeComponent,
     ReportDms9Component,
     ReportDms10Component,
+    ReportReviewHomeworkAllComponent,
+    Report1Component,
+    Report2Component,
+    Report3Component,
+    Report4Component,
+    Report5Component,
+    Report6Component,
+    Report7Component,
+    Report8Component,
+    Report9Component,
+    Report10Component,
+    HomeComponent,
     ReportPatientsProvincesComponent,
     ReportAdmitConfirmCaseComponent,
     ReportReviewHomeworkComponent

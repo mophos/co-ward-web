@@ -1,0 +1,63 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">รายงานการแจ้งจำนวนผู้ป่วยเพื่อเบิกเวชภัณฑ์​สิ้นเปลืองประจำวัน</span>
+</nav>
+<br>
+<div class="clr-row">
+  <div class="clr-col-10">
+    <button [ngClass]="{'btn-primary': date==d,'btn-primary-outline': date!=d}" class="btn btn-sm" *ngFor="let d of arDates"
+      (click)="selectDate(d)">วันที่ {{d}}</button>
+  </div>
+  <div class="clr-col-2" style="text-align: right;">
+    <button class="btn btn-sm btn-primary" (click)="onClickExport()">
+      <clr-icon shape="download"></clr-icon>export excel
+    </button>
+    <!-- <button class="btn btn-sm btn-success" (click)="doExportCsv()">
+          <clr-icon shape="download"></clr-icon>export csv
+        </button> -->
+  </div>
+</div>
+
+<table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
+  <tr>
+    <th rowspan="2" class="right td-border" style="position: sticky; top: 0; ">โรงพยาบาล</th>
+    <th colspan="4" class="right td-border" style="position: sticky; top: 0; ">ผู้ป่วยยืนยัน (Confirm Case)</th>
+    <th rowspan="2" class="right td-border" style="position: sticky; top: 0; ">ผู้ป่วยเข้าเกณฑ์สงสัย PUI</th>
+    <th rowspan="2" class="right" style="position: sticky; top: 0;">หน่วยงาน</th>
+  </tr>
+  <tr>
+    <th class="right td-border" style="position: sticky; top: 0; ">อาการรุนแรง <br> (Severe Case)</th>
+    <th class="right td-border" style="position: sticky; top: 0; ">อาการรุนแรงปานกลาง <br> (Moderate Case)</th>
+    <th class="right td-border" style="position: sticky; top: 0; ">อาการไม่รุนแรง <br> (Mild Case)</th>
+    <th class="right" style="position: sticky; top: 0;">ผู้ป่วยผลบวกไม่มีอาการ <br> (Asymptomatic)</th>
+  </tr>
+  <tr>
+    <th class=" td-border" style="position: sticky; top: 0; ">รวม</th>
+    <th class="text-right  td-border" style="position: sticky; top: 0; ">{{sum.severe}}</th>
+    <th class="text-right  td-border" style="position: sticky; top: 0; ">{{sum.moderate}}</th>
+    <th class="text-right  td-border" style="position: sticky; top: 0; ">{{sum.mild}}</th>
+    <th class="text-right  td-border" style="position: sticky; top: 0; ">{{sum.asymptomatic}}</th>
+    <th class="text-right  td-border" style="position: sticky; top: 0; ">{{sum.ip_pui}}</th>
+    <th class="text-right " style="position: sticky; top: 0;"></th>
+  </tr>
+  <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+    <td class="left td-border">{{h.hospname}} <br>ข้อมูลล่าสุด: {{ h.updated_entry | dateTh:'DD/MM/YYYY hh:mm'}}</td>
+    <td class="text-right  td-border">{{h['severe'] }}</td>
+    <td class="text-right  td-border">{{h['moderate'] }}</td>
+    <td class="text-right  td-border">{{h['mild'] }}</td>
+    <td class="text-right  td-border">{{h['asymptomatic'] }}</td>
+    <td class="text-right  td-border">{{h['ip_pui'] }}</td>
+    <td class="text-right ">{{h['sub_ministry_name'] }}</td>
+  </tr>
+  <tr>
+    <th class="td-border" style="position: sticky; top: 0; ">รวม</th>
+    <th class="text-right  td-border" style="position: sticky; top: 0; ">{{sum.severe}}</th>
+    <th class="text-right  td-border" style="position: sticky; top: 0; ">{{sum.moderate}}</th>
+    <th class="text-right  td-border" style="position: sticky; top: 0; ">{{sum.mild}}</th>
+    <th class="text-right  td-border" style="position: sticky; top: 0; ">{{sum.asymptomatic}}</th>
+    <th class="text-right  td-border" style="position: sticky; top: 0; ">{{sum.ip_pui}}</th>
+    <th class="text-right " style="position: sticky; top: 0;"></th>
+  </tr>
+</table>
+<label>{{list.length}} รายการ</label>
+
+<app-loadding #loading></app-loadding>
