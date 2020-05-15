@@ -39,7 +39,7 @@ export class CovidCaseNewComponent implements OnInit {
   genderId: any;
   birthDate: any;
   tel = '';
-  peopleType: any;
+  peopleType: any = null;
 
   admitDate: any;
   diffDate: any;
@@ -77,6 +77,7 @@ export class CovidCaseNewComponent implements OnInit {
   drugId: any;
 
   errorHN = false;
+  errorBirthDate = false;
   errorTitleName = false;
   errorFname = false;
   errorLname = false;
@@ -153,7 +154,7 @@ export class CovidCaseNewComponent implements OnInit {
 
   async setData() {
     console.log(this.data);
-    
+
     try {
       this.satCode = this.data.sat_id;
       this.covidCaseId = this.data.covid_case_id;
@@ -289,6 +290,7 @@ export class CovidCaseNewComponent implements OnInit {
     this.errorTel = false;
     this.errorAdmit = false;
     this.errorGender = false;
+    this.errorBirthDate = false;
   }
 
   verifyInput() {
@@ -317,6 +319,13 @@ export class CovidCaseNewComponent implements OnInit {
       if (!this.admitDate) {
         this.errorAdmit = true;
       }
+      console.log(this.birthDate);
+      if (this.birthDate == undefined || this.birthDate == null) {
+        this.errorBirthDate = true;
+      }
+      if (!moment(this.birthDate).isValid()) {
+        this.errorBirthDate = true;
+      }
 
       if (
         this.errorGender ||
@@ -325,7 +334,8 @@ export class CovidCaseNewComponent implements OnInit {
         this.errorFname ||
         this.errorLname ||
         this.errorTel ||
-        this.errorAdmit) {
+        this.errorAdmit ||
+        this.errorBirthDate) {
         return false;
       } else {
         return true;
