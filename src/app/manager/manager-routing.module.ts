@@ -25,6 +25,7 @@ import { ReportDms6Component } from './report-dms/report-dms6/report-dms6.compon
 import { ReportDms7Component } from './report-dms/report-dms7/report-dms7.component';
 import { ReportDms9Component } from './report-dms/report-dms9/report-dms9.component';
 import { ReportDms10Component } from './report-dms/report-dms10/report-dms10.component';
+import { ReportRecordsComponent } from './report-records/report-records.component';
 
 const routes: Routes = [
   {
@@ -66,6 +67,7 @@ const routes: Routes = [
       { path: 'report-dms10-private', component: ReportDms10Component },
       { path: 'report-review-homework-private', component: ReportReviewHomeworkDmsComponent },
       { path: 'report-admit-confirm-case', component: ReportAdmitConfirmCaseComponent },
+      { path: 'report-records', component: ReportRecordsComponent },
     ]
   }
 ];

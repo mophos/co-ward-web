@@ -1,0 +1,42 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">การบันทึกข้อมูลในระบบ CO-ward</span>
+</nav>
+<!-- 
+<div class="clr-row">
+  <div class="clr-col-12" style="text-align: right;">
+    <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
+      <clr-icon shape="download"></clr-icon>export excel
+    </button>
+  </div>
+</div> -->
+
+<table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
+  <tr>
+    <th rowspan="2" class="td-border">เขต</th>
+    <th colspan="2" class="td-border">Co-Ward สะสม</th>
+    <th colspan="2" class="td-border">Case เก่า สะสม</th>
+    <th colspan="2" class="td-border">รวมสะสม</th>
+    <th class="td-border">Co-Ward ตาย</th>
+  </tr>
+  <tr>
+    <th class="td-border">คน</th>
+    <th class="td-border">ครั้ง</th>
+    <th class="td-border">คน</th>
+    <th class="td-border">ครั้ง</th>
+    <th class="td-border">คน</th>
+    <th class="td-border">ครั้ง</th>
+    <th class="td-border">คน</th>
+  </tr>
+
+  <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+    <td class="text-left td-border" class="center">{{h.zone_code}}</td>
+    <td class="text-right td-border">{{h.person}}</td>
+    <td class="text-right td-border">{{h.person_time}}</td>
+    <td class="text-right td-border">{{h.person_old}}</td>
+    <td class="text-right td-border">{{h.person_old_time}}</td>
+    <td class="text-right td-border">{{h.person_total}}</td>
+    <td class="text-right td-border">{{h.person_time_total}}</td>
+    <td class="text-right td-border">{{h.person_death}}</td>
+  </tr>
+</table>
+<app-loadding #loading></app-loadding>

@@ -36,6 +36,7 @@ import { ReportDms10Component } from './report-dms/report-dms10/report-dms10.com
 import { ReportPatientsProvincesComponent } from './report-patients-provinces/report-patients-provinces.component';
 import { ReportAdmitConfirmCaseComponent } from './report-admit-confirm-case/report-admit-confirm-case.component';
 import { ReportReviewHomeworkComponent } from './report-review-homework/report-review-homework.component';
+import { ReportRecordsComponent } from './report-records/report-records.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { ReportReviewHomeworkComponent } from './report-review-homework/report-r
     ReportDms10Component,
     ReportPatientsProvincesComponent,
     ReportAdmitConfirmCaseComponent,
-    ReportReviewHomeworkComponent
+    ReportReviewHomeworkComponent,
+    ReportRecordsComponent
   ],
   imports: [
     CommonModule,
