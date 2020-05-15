@@ -33,37 +33,37 @@
 
   <tr>
     <th class="td-border" style="position: sticky; top: 0;">รวม</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{qtyHosp}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty1+qty2+qty3+qty4+qty5}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty1}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty2}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty3}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty4}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty5}}</th>
+    <th class="text-right td-border" style="position: sticky; top: 0;">{{qtyHosp | number:'1.0-0'}}</th>
+    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty1+qty2+qty3+qty4+qty5| number:'1.0-0'}}</th>
+    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty1| number:'1.0-0'}}</th>
+    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty2| number:'1.0-0'}}</th>
+    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty3| number:'1.0-0'}}</th>
+    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty4| number:'1.0-0'}}</th>
+    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty5| number:'1.0-0'}}</th>
   </tr>
 
   <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
     <td class="left td-border">{{h.sub_ministry_name}}</td>
-    <td class="text-right td-border">{{h.hospital_qty}}</td>
-    <td class="text-right td-border">{{h.aiir_qty+h.modified_aiir_qty+h.isolate_qty+h.cohort_qty+h.hospitel_qty}}</td>
-    <td class="text-right td-border">{{h.aiir_qty}}</td>
-    <td class="text-right td-border">{{h.modified_aiir_qty}}</td>
-    <td class="text-right td-border">{{h.isolate_qty}}</td>
-    <td class="text-right td-border">{{h.cohort_qty}}</td>
-    <td class="text-right td-border">{{h.hospitel_qty}}</td>
+    <td class="text-right td-border">{{h.hospital_qty| number:'1.0-0'}}</td>
+    <td class="text-right td-border">
+      {{h.aiir_qty+h.modified_aiir_qty+h.isolate_qty+h.cohort_qty+h.hospitel_qty| number:'1.0-0'}}</td>
+    <td class="text-right td-border">{{h.aiir_qty| number:'1.0-0'}}</td>
+    <td class="text-right td-border">{{h.modified_aiir_qty| number:'1.0-0'}}</td>
+    <td class="text-right td-border">{{h.isolate_qty| number:'1.0-0'}}</td>
+    <td class="text-right td-border">{{h.cohort_qty| number:'1.0-0'}}</td>
+    <td class="text-right td-border">{{h.hospitel_qty| number:'1.0-0'}}</td>
   </tr>
-
   <tr>
     <th class=" td-border" style="position: sticky; top: 0;">รวม</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{qtyHosp}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty1+qty2+qty3+qty4+qty5}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty1}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty2}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty3}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty4}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty5}}</th>
+    <th class="text-right td-border" style="position: sticky; top: 0;">{{qtyHosp| number:'1.0-0'}}</th>
+    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty1+qty2+qty3+qty4+qty5| number:'1.0-0'}}</th>
+    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty1| number:'1.0-0'}}</th>
+    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty2| number:'1.0-0'}}</th>
+    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty3| number:'1.0-0'}}</th>
+    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty4| number:'1.0-0'}}</th>
+    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty5| number:'1.0-0'}}</th>
   </tr>
 </table>
-<label>{{list.length}} รายการ</label>
+<label>{{list.length | number:'1.0-0' }} รายการ</label>
 
 <app-loadding #loading></app-loadding>
