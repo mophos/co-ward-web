@@ -323,7 +323,7 @@ export class CovidCaseNewComponent implements OnInit {
       if (this.birthDate == undefined || this.birthDate == null) {
         this.errorBirthDate = true;
       }
-      if (!moment(this.birthDate).isValid()) {
+      if (!moment(this.birthDate.date).isValid()) {
         this.errorBirthDate = true;
       }
 
