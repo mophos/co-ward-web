@@ -1,0 +1,76 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">รายงานจำนวนประเภทเครื่องช่วยหายใจ ณ. วันที่ {{date | dateTh:'DD/MM/YYYY'}}</span>
+</nav>
+<br>
+<div class="clr-row">
+  <div class="clr-col-4">
+    <!-- <my-date-picker-th name="date" [options]="myDatePickerOptions" [(ngModel)]="date" required>
+    </my-date-picker-th> -->
+  </div>
+  <div class="clr-col-1">
+    <!-- <button class="btn btn-sm btn-primary" (click)="doEnter()">
+      <clr-icon shape="search"></clr-icon>
+    </button> -->
+  </div>
+  <div class="clr-col-7" style="text-align: right;">
+    <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
+      <clr-icon shape="download"></clr-icon>export excel
+    </button>
+  </div>
+</div>
+
+<table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
+  <tr>
+    <th rowspan="2" class="td-border">โรงพยาบาล</th>
+    <th colspan="2" class="td-border">Non-invasive ventilator (NIV)</th>
+    <th colspan="2" class="td-border">Invasive ventilator</th>
+    <th colspan="2" class="td-border">High Flow</th>
+    <th rowspan="2">หน่วยงาน</th>
+  </tr>
+  <tr>
+    <th class="td-border">ใช้กับผู้ป่วย Covid</th>
+    <th class="td-border">ทั้งหมด</th>
+    <th class="td-border">ใช้กับผู้ป่วย Covid</th>
+    <th class="td-border">ทั้งหมด</th>
+    <th class="td-border">ใช้กับผู้ป่วย Covid</th>
+    <th class="td-border">ทั้งหมด</th>
+  </tr>
+  <tr>
+    <th class="left td-border" รวม></th>
+    <th class="td-border text-right">{{nivCovid| number:'1.0-0'}}</th>
+    <th class="td-border text-right">{{nivAll| number:'1.0-0'}}</th>
+    <th class="td-border text-right">{{ivCovid| number:'1.0-0'}}</th>
+    <th class="td-border text-right">{{ivAll| number:'1.0-0'}}</th>
+    <th class="td-border text-right">{{hfCovid| number:'1.0-0'}}</th>
+    <th class="td-border text-right">{{hfAll| number:'1.0-0'}}</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let i of list;let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}"> 
+    <td class="text-left td-border">{{i.hospname}}
+      <br>
+      <label style="color: red;">
+        ข้อมูลล่าสุด: {{ i.updated_entry | dateTh:'DD/MM/YYYY hh:mm'}}
+      </label>
+    </td>
+    <td class="td-border text-right">{{i.non_invasive_ventilator| number:'1.0-0'}}</td>
+    <td class="td-border text-right">{{i.non_invasive_qty| number:'1.0-0'}}</td>
+    <td class="td-border text-right">{{i.invasive_ventilator| number:'1.0-0'}}</td>
+    <td class="td-border text-right">{{i.invasive_qty| number:'1.0-0'}}</td>
+    <td class="td-border text-right">{{i.high_flow| number:'1.0-0'}}</td>
+    <td class="td-border text-right">{{i.high_flow_qty| number:'1.0-0'}}</td>
+    <td>{{i.sub_ministry_name}}</td>
+  </tr>
+  <tr>
+    <th class="text-left td-border" รวม></th>
+    <th class="td-border text-right">{{nivCovid| number:'1.0-0'}}</th>
+    <th class="td-border text-right">{{nivAll| number:'1.0-0'}}</th>
+    <th class="td-border text-right">{{ivCovid| number:'1.0-0'}}</th>
+    <th class="td-border text-right">{{ivAll| number:'1.0-0'}}</th>
+    <th class="td-border text-right">{{hfCovid| number:'1.0-0'}}</th>
+    <th class="td-border text-right">{{hfAll| number:'1.0-0'}}</th>
+    <th></th>
+  </tr>
+</table>
+<label>{{list.length | number:'1.0-0' }} รายการ</label>
+
+<app-loadding #loading></app-loadding>

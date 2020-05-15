@@ -18,9 +18,9 @@ export class ReportReviewHomeworkComponent implements OnInit {
     private alertService: AlertService
   ) { }
 
-  ngOnInit() {
-    this.getList();
-    this.getDetail();
+  async ngOnInit() {
+    await this.getList();
+    // await this.getDetail();
   }
 
   async getList() {
@@ -29,10 +29,11 @@ export class ReportReviewHomeworkComponent implements OnInit {
       const rs: any = await this.reportService.homework();
       if (rs.ok) {
         this.list = rs.rows;
+        await this.getDetail();
       } else {
         this.alertService.error(rs.error);
       }
-      this.loading.hide();
+      // this.loading.hide();
     } catch (error) {
       this.loading.hide();
       this.alertService.error(error);

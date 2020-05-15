@@ -29,7 +29,7 @@
     <clr-dg-cell>{{l.village}} {{l.village_no}} {{l.house_no}} {{l.road}} {{l.tambon_name}} {{l.ampur_name}} {{l.province_name}}</clr-dg-cell>
   </clr-dg-row>
 
-  <clr-dg-footer>{{list.length}} รายการ</clr-dg-footer>
+  <clr-dg-footer>{{list.length | number:'1.0-0' }} รายการ</clr-dg-footer>
 </clr-datagrid>
 
 <app-loadding #modalLoading></app-loadding>

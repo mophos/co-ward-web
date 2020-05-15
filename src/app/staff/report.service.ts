@@ -48,13 +48,23 @@ export class ReportService {
   }
 
   async getBed(date) {
-    const url = `${this.apiUrl}/v1/staff/report/bed?date=${date}`;
+    const url = `${this.apiUrl}/v1/report/get-bed?date=${date}`;
     return await this.http.get(url).toPromise();
   }
 
   async getBedExport(date) {
     const url = `${this.apiUrl}/v1/report/get-bed/excel?date=${date}`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+
+  async admitConfirmCase() {
+    const url = `${this.apiUrl}/v1/report/admit-confirm-case`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async admitConfirmCaseSummary() {
+    const url = `${this.apiUrl}/v1/report/admit-confirm-case-summary`;
+    return await this.http.get(url).toPromise();
   }
 
 }

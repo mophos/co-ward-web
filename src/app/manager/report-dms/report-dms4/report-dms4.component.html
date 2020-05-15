@@ -59,6 +59,6 @@
     <td class="text-right ">{{h['sub_ministry_name']||0 }}</td>
   </tr>
 </table>
-<label>{{list.length}} รายการ</label>
+<label>{{list.length | number:'1.0-0' }} รายการ</label>
 
 <app-loadding #loading></app-loadding>

@@ -33,7 +33,7 @@
       </div>
     </clr-dg-cell>
   </clr-dg-row>
-  <clr-dg-footer>{{list.length}} users</clr-dg-footer>
+  <clr-dg-footer>{{list.length | number:'1.0-0' }} users</clr-dg-footer>
   <!-- <clr-dg-footer>
     <clr-dg-pagination #pagination [clrDgTotalItems]="total" [clrDgPageSize]="limit">
       <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
