@@ -90,4 +90,9 @@ export class ReportService {
     const url = `${this.apiUrl}/v1/report/homework-detail`;
     return await this.http.get(url).toPromise();
   }
+
+  async getRecords() {
+    const url = `${this.apiUrl}/v1/report/records`;
+    return await this.http.get(url).toPromise();
+  }
 }

@@ -57,4 +57,14 @@ export class ReportService {
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 
+  async admitConfirmCase() {
+    const url = `${this.apiUrl}/v1/report/admit-confirm-case`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async admitConfirmCaseSummary() {
+    const url = `${this.apiUrl}/v1/report/admit-confirm-case-summary`;
+    return await this.http.get(url).toPromise();
+  }
+
 }

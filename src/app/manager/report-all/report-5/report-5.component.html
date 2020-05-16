@@ -28,10 +28,10 @@
 
   <tr>
     <th class=" td-border" >รวม</th>
-    <th class="text-right  td-border" >{{totalQty}}</th>
-    <th class="text-right  td-border" >{{admitQty}}</th>
-    <th class="text-right  td-border" >{{spareQty}}</th>
-    <th class="text-right  td-border" >{{standbyQty}}</th>
+    <th class="text-right  td-border" >{{totalQty| number:'1.0-0'}}</th>
+    <th class="text-right  td-border" >{{admitQty| number:'1.0-0'}}</th>
+    <th class="text-right  td-border" >{{spareQty| number:'1.0-0'}}</th>
+    <th class="text-right  td-border" >{{standbyQty| number:'1.0-0'}}</th>
     <th class="text-right  td-border" ></th>
   </tr>
 
@@ -41,25 +41,25 @@
         ข้อมูลล่าสุด: {{ h.updated_entry | dateTh:'DD/MM/YYYY hh:mm'}}
       </label>
     </td>
-    <td class="text-right  td-border">{{(h.aiir_qty || 0)+(h.modified_aiir_qty || 0)+(h.isolate_qty || 0)+(h.cohort_qty || 0)}}</td>
-    <td class="text-right  td-border">{{(h.sum || 0)}}</td>
+    <td class="text-right  td-border">{{(h.aiir_qty || 0)+(h.modified_aiir_qty || 0)+(h.isolate_qty || 0)+(h.cohort_qty || 0)| number:'1.0-0'}}</td>
+    <td class="text-right  td-border">{{(h.sum || 0)| number:'1.0-0'}}</td>
     <td class="text-right  td-border">{{(h.aiir_spare_qty || 0)+(h.modified_aiir_spare_qty || 0)+(h.isolate_spare_qty ||
-      0)+(h.cohort_spare_qty || 0)}}</td>
+      0)+(h.cohort_spare_qty || 0)| number:'1.0-0'}}</td>
     <td class="text-right  td-border">{{((h.aiir_qty || 0)+(h.modified_aiir_qty || 0)+(h.isolate_qty || 0)+(h.cohort_qty ||
       0))-(h.sum)-((h.aiir_spare_qty || 0)+(h.modified_aiir_spare_qty || 0)+(h.isolate_spare_qty || 0)+(h.cohort_spare_qty ||
-      0))}}</td>
+      0))| number:'1.0-0'}}</td>
     <td class="left td-border">{{h.sub_ministry_name}}</td>
   </tr>
 
   <tr>
     <th class="text-right  td-border" >รวม</th>
-    <th class="text-right  td-border" >{{totalQty}}</th>
-    <th class="text-right  td-border" >{{admitQty}}</th>
-    <th class="text-right  td-border" >{{spareQty}}</th>
-    <th class="text-right  td-border" >{{standbyQty}}</th>
+    <th class="text-right  td-border" >{{totalQty | number:'1.0-0'}}</th>
+    <th class="text-right  td-border" >{{admitQty | number:'1.0-0'}}</th>
+    <th class="text-right  td-border" >{{spareQty | number:'1.0-0'}}</th>
+    <th class="text-right  td-border" >{{standbyQty | number:'1.0-0'}}</th>
     <th class="text-right  td-border" ></th>
   </tr>
 </table>
-<label>{{list.length}} รายการ</label>
+<label>{{list.length | number:'1.0-0' }} รายการ</label>
 
 <app-loadding #loading></app-loadding>

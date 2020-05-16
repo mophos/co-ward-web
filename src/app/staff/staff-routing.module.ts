@@ -1,3 +1,4 @@
+import { ReportAdmitConfirmCaseComponent } from './report-admit-confirm-case/report-admit-confirm-case.component';
 import { RequestProductsComponent } from './request-products/request-products.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReportPatientAdmitComponent } from './report-patient-admit/report-patient-admit.component';
@@ -93,6 +94,7 @@ const routes: Routes = [
       { path: 'report-patient', component: ReportPatientsComponent },
       { path: 'report-bed', component: ReportBedComponent },
       { path: 'report-supplies', component: ReportSuppliesComponent },
+      { path: 'report-admit-confirm-case', component: ReportAdmitConfirmCaseComponent },
       // ----------------------------------------------------------------------------------------------------------
       {
         path: 'setting',

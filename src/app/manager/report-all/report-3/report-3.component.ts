@@ -16,11 +16,11 @@ export class Report3Component implements OnInit {
   date: any;
   arDates: any = [];
   sum = {
-    ip_pui: '-',
-    asymptomatic: '-',
-    mild: '-',
-    moderate: '-',
-    severe: '-'
+    ip_pui: 0,
+    asymptomatic: 0,
+    mild: 0,
+    moderate: 0,
+    severe: 0
   };
   myDatePickerOptions: IMyOptions = {
     inline: false,

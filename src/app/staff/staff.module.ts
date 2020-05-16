@@ -63,6 +63,7 @@ import { ReportPatientAdmitComponent } from './report-patient-admit/report-patie
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReceivesComponent } from './receives/receives.component';
 import { RequestProductsComponent } from './request-products/request-products.component';
+import { ReportAdmitConfirmCaseComponent } from './report-admit-confirm-case/report-admit-confirm-case.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -96,6 +97,7 @@ import { RequestProductsComponent } from './request-products/request-products.co
     ReportBedComponent,
     ReportSuppliesComponent,
     ReportPatientAdmitComponent,
+    ReportAdmitConfirmCaseComponent,
     DashboardComponent,
     ReceivesComponent,
     RequestProductsComponent

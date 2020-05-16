@@ -36,10 +36,10 @@
   </tr>
   <tr>
     <th class="left td-border">รวม</th>
-    <th class="right td-border">{{n95| number}}</th>
-    <th class="right td-border">{{surgicalMask| number}}</th>
-    <th class="right td-border">{{coverAll| number}}</th>
-    <th class="right td-border">{{surgicalGown| number}}</th>
+    <th class="text-right td-border">{{n95| number}}</th>
+    <th class="text-right td-border">{{surgicalMask| number}}</th>
+    <th class="text-right td-border">{{coverAll| number}}</th>
+    <th class="text-right td-border">{{surgicalGown| number}}</th>
     <th></th>
   </tr>
   <tr *ngFor="let i of list">
@@ -49,21 +49,21 @@
         ข้อมูลล่าสุด: {{ i.update_date | dateTh:'DD/MM/YYYY hh:mm'}}
       </label>
     </td>
-    <td class="right td-border">{{i.n95_qty | number}}</td>
-    <td class="right td-border">{{i.surgical_mask_qty| number}}</td>
-    <td class="right td-border">{{i.cover_all2_qty| number}}</td>
-    <td class="right td-border">{{i.surgical_gown_qty| number}}</td>
+    <td class="text-right td-border">{{i.n95_qty | number}}</td>
+    <td class="text-right td-border">{{i.surgical_mask_qty| number}}</td>
+    <td class="text-right td-border">{{i.cover_all2_qty| number}}</td>
+    <td class="text-right td-border">{{i.surgical_gown_qty| number}}</td>
     <td>{{i.sub_ministry_name}}</td>
   </tr>
   <tr>
     <th class="left td-border">รวม</th>
-    <th class="right td-border">{{n95| number}}</th>
-    <th class="right td-border">{{surgicalMask| number}}</th>
-    <th class="right td-border">{{coverAll| number}}</th>
-    <th class="right td-border">{{surgicalGown| number}}</th>
+    <th class="text-right td-border">{{n95| number}}</th>
+    <th class="text-right td-border">{{surgicalMask| number}}</th>
+    <th class="text-right td-border">{{coverAll| number}}</th>
+    <th class="text-right td-border">{{surgicalGown| number}}</th>
     <th></th>
   </tr>
 </table>
-<label>{{list.length}} รายการ</label>
+<label>{{list.length | number:'1.0-0' }} รายการ</label>
 
 <app-loadding #loading></app-loadding>
