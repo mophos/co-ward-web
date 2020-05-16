@@ -1,3 +1,4 @@
+import { AlertService } from 'src/app/help/alert.service';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -14,47 +15,63 @@ export class LoginDashboardComponent implements OnInit {
   otp: any;
   transactionId: any;
   ref: any;
-
+  isSave = false;
   loginErr = false;
   tellErr = false;
   public jwtHelper = new JwtHelperService();
   constructor(
     private route: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {
   }
 
   async getOtp() {
-    const rs: any = await this.loginService.requisOtp(this.tel);
-    console.log(rs);
-    if (rs.ok) {
-      this.otpResp = true;
-      this.ref = rs.ref_code;
-      this.transactionId = rs.transactionID;
-      this.tellErr = false;
-    } else {
-      this.tellErr = true;
-      this.loginErr = false;
+    try {
+      this.isSave = true;
+      const rs: any = await this.loginService.requisOtp(this.tel);
+      console.log(rs);
+      if (rs.ok) {
+        this.otpResp = true;
+        this.ref = rs.ref_code;
+        this.transactionId = rs.transactionID;
+        this.tellErr = false;
+      } else {
+        this.tellErr = true;
+        this.loginErr = false;
+      }
+      this.isSave = false;
+    } catch (error) {
+      this.isSave = false;
+      this.alertService.serverError();
+
     }
   }
 
   async verifyOtp() {
-    const rs: any = await this.loginService.verifyOtp(this.tel, this.transactionId, this.otp);
-    if (rs.ok) {
-      sessionStorage.setItem('token', rs.token);
-      this.loginErr = false;
-      const decoded = this.jwtHelper.decodeToken(rs.token);
-      console.log(rs);
-      if (decoded.type === 'MANAGER') {
-        this.route.navigate(['/manager']);
+    try {
+      this.isSave = true;
+      const rs: any = await this.loginService.verifyOtp(this.tel, this.transactionId, this.otp);
+      if (rs.ok) {
+        sessionStorage.setItem('token', rs.token);
+        this.loginErr = false;
+        const decoded = this.jwtHelper.decodeToken(rs.token);
+        if (decoded.type === 'MANAGER') {
+          this.route.navigate(['/manager']);
+        }
+      } else {
+        this.tellErr = false;
+        this.loginErr = true;
       }
-    } else {
-      this.tellErr = false;
-      this.loginErr = true;
+      this.isSave = false;
+    } catch (error) {
+      this.isSave = false;
+      this.alertService.serverError();
     }
   }
+
   async back() {
     this.otpResp = false;
     this.ref = null;

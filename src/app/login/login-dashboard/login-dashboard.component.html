@@ -21,14 +21,16 @@
                   <div class="clr-row clr-align-items-center"
                     style="height: 100%; display: flex;justify-content: center;">
                     <div class="clr-col-12" style="display: flex;justify-content: center;">
-                      <h1>ระบบรายงานผลการบริหาร<br>ทรัพยากรทางการแพทย์<br>ในสถานการณ์ COVID-19
+                      <h1>ระบบรายงานผลการบริหารทรัพยากรทางการแพทย์ในสถานการณ์ COVID-19<br>
+                        <span style="font-weight: bold;">(ปิดปรับปรุงชั่วคราว)</span><br>
+                        <span style="font-size: 0.8rem;">สามารถเข้าสู่ระบบเพื่อดูรายงานจาก CO-ward ได้แทน</span>
                       </h1>
 
                     </div>
-                    
+
                   </div>
                 </div>
-                <div class="clr-col-12" style="display: flex;justify-content: center;">
+                <div class="clr-col-12" style="display: flex;justify-content: left;">
                   <p class="fontErr">โปรดเข้าสู่ระบบเพื่อดูข้อมูล</p>
                 </div>
                 <div *ngIf="tellErr" class="clr-col-12 " style="display: flex;justify-content: center;">
@@ -36,7 +38,7 @@
                     <div class="clr-col-2">
                       <clr-icon class="is-error" shape="times-circle"></clr-icon>
                     </div>
-                    <div class="clr-col-10">
+                    <div class="clr-col-10" style="display: flex;justify-content: left;">
                       <p class="fontErr" style="color: #e02200;">ไม่พบเบอร์โทรศัพท์</p>
                     </div>
                   </div>
@@ -48,38 +50,40 @@
                       <clr-icon class="is-error" shape="times-circle"></clr-icon>
                     </div>
                     <div class="clr-col-9">
-                      <p class="fontErr"style="color: #e02200;">OTP ไม่ถูกต้อง</p>
+                      <p class="fontErr" style="color: #e02200;">OTP ไม่ถูกต้อง</p>
                     </div>
                   </div>
                 </div>
                 <div class="clr-col-12" style="display: flex;justify-content: center;">
                   <div class="clr-row clr-align-items-center"
-                    style="height: 100%; display: flex;justify-content: center;">
-                    <div class="clr-col-12" style="display: flex;justify-content: center;">
-                      <div class="clr-row ">
-                        <div class="clr-col-2">
-                          <clr-icon *ngIf='!otpResp' shape="phone-handset"></clr-icon>
-                          <clr-icon *ngIf='otpResp' shape="login"></clr-icon>
-                        </div>
-                        <div class="clr-col-10">
-                          <input *ngIf='!otpResp' placeholder="เบอร์โทรศัพท์" class="clr-input" [(ngModel)]="tel"
-                            name="tel" required />
-                          <input *ngIf='otpResp' placeholder="กรุณากรอก OTP" class="clr-input" [(ngModel)]="otp"
-                            name="otp" required />
-                        </div>
-                      </div>
+                    style="height: 100%; display: flex;justify-content: center;width:100%">
+                    <!-- <div class="clr-col-12" style="display: flex;justify-content: center;padding:0;">
+                      <div class="clr-row " style="padding:0"> -->
+                    <div class="clr-col-1">
+                      <clr-icon *ngIf='!otpResp' shape="phone-handset"></clr-icon>
+                      <clr-icon *ngIf='otpResp' shape="login"></clr-icon>
                     </div>
+                    <div class="clr-col-11 clr-form" style="padding:0">
+                      <input *ngIf='!otpResp' style="width: 90%;" placeholder="เบอร์โทรศัพท์" class="clr-input"
+                        [(ngModel)]="tel" name="tel" required />
+                      <input *ngIf='otpResp' style="width: 90%;" placeholder="กรุณากรอก OTP" class="clr-input"
+                        [(ngModel)]="otp" name="otp" required />
+                    </div>
+                    <!-- </div>
+                    </div> -->
                     <div *ngIf='!otpResp' class="clr-col-12" style="display: flex;justify-content: center;">
-                      <button class="btn btn-primary btn-block" (click)="getOtp()">เข้าสู่ระบบ</button>
+                      <button class="btn btn-primary btn-block" [disabled]="isSave"
+                        (click)="getOtp()">เข้าสู่ระบบ</button>
                     </div>
                     <div *ngIf='otpResp' class="clr-col-12" style="display: flex;justify-content: center;">
                       <p class="fontErr">ระบบได้ส่งหมายเลข OTP ไปยังหมายเลขโทรศัพท์ของท่านแล้ว (Ref. {{ref}})</p>
                     </div>
-                    <div *ngIf='otpResp' class="clr-col-12 " style="display: flex;justify-content: center;">
-                      <button class="btn btn-primary-outline btn-block buttomTop" (click)="back()">ย้อนกลับ</button>
+                    <div *ngIf='otpResp' class="clr-col-6 " style="display: flex;justify-content: center;">
+                      <button class="btn btn-primary btn-block buttomTop" [disabled]="isSave"
+                        (click)="verifyOtp()">ยืนยัน</button>
                     </div>
-                    <div *ngIf='otpResp' class="clr-col-12 " style="display: flex;justify-content: center;">
-                      <button class="btn btn-primary btn-block buttomBottom" (click)="verifyOtp()">ยืนยัน</button>
+                    <div *ngIf='otpResp' class="clr-col-6 " style="display: flex;justify-content: center;">
+                      <button class="btn btn-primary-outline btn-block buttomTop" (click)="back()">ย้อนกลับ</button>
                     </div>
                     <div *ngIf='otpResp' class="clr-col-12" style="display: flex;justify-content: left;">
                       <p class="fontErr">หากท่านไม่ได้รับ OTP ภายใน 5 นาที <br>
