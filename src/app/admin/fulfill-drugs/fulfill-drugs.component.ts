@@ -11,6 +11,7 @@ import { ReportService } from '../report.service';
 export class FulfillDrugsComponent implements OnInit {
   @ViewChild('modalLoading') public modalLoading;
 
+  nodes = [];
   selected = [];
   selectedFulfills = [];
   products = [];
@@ -140,5 +141,18 @@ export class FulfillDrugsComponent implements OnInit {
     }
     this.countApprove = approveCount;
     this.countExport = exportCount;
+  }
+
+  async getNode() {
+    try {
+      const rs: any = await this.fulfillService.getNodeDrugs();
+      if (rs.ok) {
+          this.nodes = rs.rows;
+      } else {
+        this.alertService.error(rs.error);
+      }
+    } catch (error) {
+      this.alertService.error(error);
+    }
   }
 }

@@ -45,7 +45,7 @@ export class ReportDms10Component implements OnInit {
   }
 
   async ngOnInit() {
-    this.date = moment().format('DD/MM/YYYY');
+    this.date = moment().format('YYYY-MM-DD');
     await this.getList();
   }
 

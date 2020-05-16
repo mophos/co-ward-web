@@ -41,12 +41,12 @@
         ข้อมูลล่าสุด: {{ h.updated_entry | dateTh:'DD/MM/YYYY hh:mm'}}
       </label>
     </td>
-    <td class="text-right  td-border">{{(h.aiir_qty || 0)+(h.modified_aiir_qty || 0)+(h.isolate_qty || 0)+(h.cohort_qty || 0)}}</td>
+    <td class="text-right  td-border">{{(h.aiir_qty || 0)+(h.modified_aiir_qty || 0)+(h.isolate_qty || 0)+(h.cohort_qty || 0)+(h.hospitel_qty || 0)}}</td>
     <td class="text-right  td-border">{{(h.sum || 0)}}</td>
     <td class="text-right  td-border">{{(h.aiir_spare_qty || 0)+(h.modified_aiir_spare_qty || 0)+(h.isolate_spare_qty ||
       0)+(h.cohort_spare_qty || 0)}}</td>
     <td class="text-right  td-border">{{((h.aiir_qty || 0)+(h.modified_aiir_qty || 0)+(h.isolate_qty || 0)+(h.cohort_qty ||
-      0))-(h.sum)-((h.aiir_spare_qty || 0)+(h.modified_aiir_spare_qty || 0)+(h.isolate_spare_qty || 0)+(h.cohort_spare_qty ||
+      0)+(h.hospitel_qty || 0))-(h.sum)-((h.aiir_spare_qty || 0)+(h.modified_aiir_spare_qty || 0)+(h.isolate_spare_qty || 0)+(h.cohort_spare_qty ||
       0))}}</td>
     <td class="left td-border">{{h.sub_ministry_name}}</td>
   </tr>

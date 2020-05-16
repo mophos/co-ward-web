@@ -48,6 +48,29 @@
     </clr-tab-content>
   </clr-tab>
   <clr-tab>
+    <button clrTabLink id="link1" (click)="getProducts()">เติมยา(รายรพ.)</button>
+    <clr-tab-content id="content1" *clrIfActive>
+
+      <!-- <button class="btn btn-success btn-sm" (click)="onClickFulFill()">เติมยา {{selected.length+' รายการ'}}</button> -->
+      <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800" [(clrDgSelected)]="selected">
+        <clr-dg-column>โรงพยาบาล</clr-dg-column>
+
+        <clr-dg-row *clrDgItems="let i of nodes" [clrDgItem]="i">
+          <clr-dg-cell>{{i.hospname}}</clr-dg-cell>
+          <clr-dg-cell>
+            <input type="text" appNumberOnly name="{{i.fill_qty}}" [(ngModel)]="i.fill_qty">
+          </clr-dg-cell>
+        </clr-dg-row>
+        <!-- <clr-dg-footer>
+            <clr-dg-pagination #pagination [clrDgTotalItems]="total" [clrDgPageSize]="limit">
+              <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
+              {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} จาก {{pagination.totalItems}} รายการ
+            </clr-dg-pagination>
+          </clr-dg-footer> -->
+      </clr-datagrid>
+    </clr-tab-content>
+  </clr-tab>
+  <clr-tab>
     <button clrTabLink>รายการเติมยา</button>
     <clr-tab-content *clrIfActive>
       <button class="btn btn-primary btn-sm" (click)="onClickExport()">Export {{countExport+' รายการ'}}</button>
