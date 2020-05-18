@@ -361,7 +361,7 @@ export class CovidCaseNewComponent implements OnInit {
       if (this.diffDate < 0) {
         this.alertService.error('ไม่อนุญาตให้คีย์ Admit ล่วงหน้า');
       } else {
-        // this.isSave = true;
+        this.isSave = true;
         try {
           if (await this.verifyInput()) {
             const drugs = [];
@@ -428,36 +428,37 @@ export class CovidCaseNewComponent implements OnInit {
             if (positive) {
               let titleName: any;
               const idx = findIndex(this.titles, { id: +this.titleId });
-              console.log(idx, this.titleId);
               if (idx > -1) {
                 titleName = await this.titles[idx].name;
               }
               const confirm = await this.alertService.confirm(titleName + ' ' + this.fname + ' ' + this.lname + ' เป็นผู้ป่วยยืนยัน และมีผลแล็บ covid-19 positive แล้ว');
               if (confirm) {
-                // const rs: any = await this.covidCaseService.saveNewCase(obj);
-                // if (rs.ok) {
-                //   this.clear();
-                //   this.isKey = false;
-                //   this.isSave = false;
-                //   this.alertService.success();
-                //   this.onClickOpenModalCid();
-                // } else {
-                //   this.isSave = false;
-                //   this.alertService.error(rs.error);
-                // }
+                const rs: any = await this.covidCaseService.saveNewCase(obj);
+                if (rs.ok) {
+                  this.clear();
+                  this.isKey = false;
+                  this.isSave = false;
+                  this.alertService.success();
+                  this.onClickOpenModalCid();
+                } else {
+                  this.isSave = false;
+                  this.alertService.error(rs.error);
+                }
+              } else {
+                this.isSave = false;
               }
             } else {
-              // const rs: any = await this.covidCaseService.saveNewCase(obj);
-              // if (rs.ok) {
-              //   this.clear();
-              //   this.isKey = false;
-              //   this.isSave = false;
-              //   this.alertService.success();
-              //   this.onClickOpenModalCid();
-              // } else {
-              //   this.isSave = false;
-              //   this.alertService.error(rs.error);
-              // }
+              const rs: any = await this.covidCaseService.saveNewCase(obj);
+              if (rs.ok) {
+                this.clear();
+                this.isKey = false;
+                this.isSave = false;
+                this.alertService.success();
+                this.onClickOpenModalCid();
+              } else {
+                this.isSave = false;
+                this.alertService.error(rs.error);
+              }
             }
           } else {
             this.isSave = false;
