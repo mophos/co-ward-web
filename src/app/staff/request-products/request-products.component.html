@@ -6,7 +6,7 @@
   <div class="clr-col-3">
     <div class="clr-row">
       <div class="clr-col-12">
-        <button class="btn btn-sm btn-success" (click)="onClickAdd()" [disabled]="isSave">
+        <button class="btn btn-sm btn-success" [routerLink]="['/staff/request-products/new']" routerLinkActive="router-link-active"  [disabled]="isSave">
           <clr-icon shape="plus"></clr-icon> เพิ่มรายการ
         </button>
       </div>
