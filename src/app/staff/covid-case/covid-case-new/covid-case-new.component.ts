@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AutocompleteHospitalComponent } from 'src/app/help/autocomplete-hospital/autocomplete-hospital.component';
 import { IMyOptions } from 'mydatepicker-th';
-import { findIndex } from 'lodash';
+import { findIndex, find } from 'lodash';
 import { AutocompleteProvinceComponent } from '../../../help/autocomplete-address/autocomplete-province/autocomplete-province.component';
 import { AutocompleteDistrictComponent } from '../../../help/autocomplete-address/autocomplete-district/autocomplete-district.component';
 import { AutocompleteSubdistrictComponent } from '../../../help/autocomplete-address/autocomplete-subdistrict/autocomplete-subdistrict.component';
@@ -347,17 +347,21 @@ export class CovidCaseNewComponent implements OnInit {
   }
 
   async onClickSave() {
+    let positive = false;
     let checkNull = false;
     for (const v of this.admitDetail) {
       if (v.gcs_id === null || v.bed_id === null) {
         checkNull = true;
+      }
+      if (v.gcs_id !== 5) {
+        positive = true;
       }
     }
     if (!checkNull) {
       if (this.diffDate < 0) {
         this.alertService.error('ไม่อนุญาตให้คีย์ Admit ล่วงหน้า');
       } else {
-        this.isSave = true;
+        // this.isSave = true;
         try {
           if (await this.verifyInput()) {
             const drugs = [];
@@ -421,16 +425,39 @@ export class CovidCaseNewComponent implements OnInit {
               obj.birthDate = `${this.birthDate.date.year}-${this.birthDate.date.month}-${this.birthDate.date.day}`;
             }
 
-            const rs: any = await this.covidCaseService.saveNewCase(obj);
-            if (rs.ok) {
-              this.clear();
-              this.isKey = false;
-              this.isSave = false;
-              this.alertService.success();
-              this.onClickOpenModalCid();
+            if (positive) {
+              let titleName: any;
+              const idx = findIndex(this.titles, { id: +this.titleId });
+              console.log(idx, this.titleId);
+              if (idx > -1) {
+                titleName = await this.titles[idx].name;
+              }
+              const confirm = await this.alertService.confirm(titleName + ' ' + this.fname + ' ' + this.lname + ' เป็นผู้ป่วยยืนยัน และมีผลแล็บ covid-19 positive แล้ว');
+              if (confirm) {
+                // const rs: any = await this.covidCaseService.saveNewCase(obj);
+                // if (rs.ok) {
+                //   this.clear();
+                //   this.isKey = false;
+                //   this.isSave = false;
+                //   this.alertService.success();
+                //   this.onClickOpenModalCid();
+                // } else {
+                //   this.isSave = false;
+                //   this.alertService.error(rs.error);
+                // }
+              }
             } else {
-              this.isSave = false;
-              this.alertService.error(rs.error);
+              // const rs: any = await this.covidCaseService.saveNewCase(obj);
+              // if (rs.ok) {
+              //   this.clear();
+              //   this.isKey = false;
+              //   this.isSave = false;
+              //   this.alertService.success();
+              //   this.onClickOpenModalCid();
+              // } else {
+              //   this.isSave = false;
+              //   this.alertService.error(rs.error);
+              // }
             }
           } else {
             this.isSave = false;
@@ -683,6 +710,48 @@ export class CovidCaseNewComponent implements OnInit {
       this.admitDetail[listId - 1].drugs.splice(idx, 1);
     }
     this.admitDetail[listId - 1].drugs.push({ set: type, generic_id: generic });
+  }
+
+  async checkGcs(i, l) {
+    if (i.id === 5 && l.medical_supplie_id !== null) {
+      const idx = findIndex(this.medicalSupplies, { id: l.medical_supplie_id });
+      let name: any;
+      if (idx > -1) {
+        name = await this.medicalSupplies[idx].name;
+      }
+      const confirm = await this.alertService.confirm('ความรุนแรงของผู้ป่วยเป็น IP PUI และใช้เครื่องช่วยหายใจ แบบ ' + name + ' ใช่หรือไม่');
+      if (confirm) {
+      } else {
+        l.gcs_id = null;
+      }
+    } else if (i.id === 1 && l.medical_supplie_id === null) {
+      const confirm = await this.alertService.confirm('ความรุนแรงของผู้ป่วยเป็น Severe และไม่ใช้เครื่องช่วยหายใจ ใช่หรือไม่');
+      if (confirm) {
+      } else {
+        l.gcs_id = 5;
+      }
+    }
+  }
+
+  async checkMedicalSupplies(i, l) {
+    if (l.gcs_id === 5 && i.id !== null) {
+      let name: any;
+      const idx = await findIndex(this.medicalSupplies, { id: i.id });
+      if (idx > -1) {
+        name = this.medicalSupplies[idx].name;
+      }
+      const confirm = await this.alertService.confirm('ความรุนแรงของผู้ป่วยเป็น IP PUI และใช้เครื่องช่วยหายใจ แบบ ' + name + ' ใช่หรือไม่');
+      if (confirm) {
+      } else {
+        l.gcs_id = null;
+      }
+    } else if (l.gcs_id === 1 && i.id === null) {
+      const confirm = await this.alertService.confirm('ความรุนแรงของผู้ป่วยเป็น Severe และไม่ใช้เครื่องช่วยหายใจ ใช่หรือไม่');
+      if (confirm) {
+      } else {
+        l.gcs_id = 5;
+      }
+    }
   }
 
 }
