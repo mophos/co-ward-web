@@ -70,12 +70,13 @@
   <table class="table" *ngFor="let p of l.provinces">
     <thead>
       <tr>
-        <th colspan="11" style="text-align: left;">
+        <th colspan="12" style="text-align: left;">
           <h3>{{p.province_name}}</h3>
         </th>
       </tr>
       <tr>
         <th class="right">โรงพยาบาล</th>
+        <th class="right">วันที่บันทึกล่าสุด</th>
         <th class="right">Surgical Gown</th>
         <th class="right">Cover All-1</th>
         <th class="right">Cover All-2</th>
@@ -91,16 +92,17 @@
     <tbody>
       <tr *ngFor="let h of p.hospitals">
         <td class="left">{{h.hospname}}</td>
-        <td class="right">{{h['9'] }}</td>
-        <td class="right">{{h['10']}}</td>
-        <td class="right">{{h['11']}}</td>
-        <td class="right">{{h['12']}}</td>
-        <td class="right">{{h['13']}}</td>
-        <td class="right">{{h['14']}}</td>
-        <td class="right">{{h['15']}}</td>
-        <td class="right">{{h['16']}}</td>
-        <td class="right">{{h['17']}}</td>
-        <td class="right">{{h['18']}}</td>
+        <td class="left">{{h.entry_date | dateTh:'DD/MM/YYYY'}}</td>
+        <td class="right">{{h.surgical_gown_qty }}</td>
+        <td class="right">{{h.cover_all1_qty}}</td>
+        <td class="right">{{h.cover_all2_qty}}</td>
+        <td class="right">{{h.n95_qty}}</td>
+        <td class="right">{{h.shoe_cover_qty}}</td>
+        <td class="right">{{h.surgical_hood_qty}}</td>
+        <td class="right">{{h.long_glove_qty}}</td>
+        <td class="right">{{h.face_shield_qty}}</td>
+        <td class="right">{{h.surgical_mask_qty}}</td>
+        <td class="right">{{h.powered_air_qty}}</td>
       </tr>
       <!-- <tr>
         <td class="right" style="font-weight: bold;">รวม</td>

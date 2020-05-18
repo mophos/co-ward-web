@@ -27,6 +27,7 @@ export class FulfillDrugsComponent implements OnInit {
   ngOnInit() {
     this.getProducts();
     this.getFulfills();
+    this.getNode();
   }
 
   async getProducts() {

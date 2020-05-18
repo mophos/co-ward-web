@@ -54,12 +54,29 @@
       <!-- <button class="btn btn-success btn-sm" (click)="onClickFulFill()">เติมยา {{selected.length+' รายการ'}}</button> -->
       <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800" [(clrDgSelected)]="selected">
         <clr-dg-column>โรงพยาบาล</clr-dg-column>
+        <clr-dg-column>hydroxychloroquine</clr-dg-column>
+        <clr-dg-column>chloroquine</clr-dg-column>
+        <clr-dg-column>darunavir</clr-dg-column>
+        <clr-dg-column>lopinavir_ritonavir</clr-dg-column>
+        <clr-dg-column>ritonavir</clr-dg-column>
+        <clr-dg-column>azithromycin</clr-dg-column>
 
         <clr-dg-row *clrDgItems="let i of nodes" [clrDgItem]="i">
-          <clr-dg-cell>{{i.hospname}}</clr-dg-cell>
-          <clr-dg-cell>
-            <input type="text" appNumberOnly name="{{i.fill_qty}}" [(ngModel)]="i.fill_qty">
+          <clr-dg-cell>{{i.hospname}}
+
           </clr-dg-cell>
+          <clr-dg-cell>
+            <div class="clr-row">
+              <div class="clr-col-6">{{i.hydroxychloroquine}}</div>
+              <div class="clr-col-6"> <input class="clr-input width-fit" type="text" name="" id=""></div>
+            </div>
+          </clr-dg-cell>
+          <clr-dg-cell>{{i.chloroquine}}</clr-dg-cell>
+          <clr-dg-cell>{{i.darunavir}}</clr-dg-cell>
+          <clr-dg-cell>{{i.lopinavir_ritonavir}}</clr-dg-cell>
+          <clr-dg-cell>{{i.ritonavir}}</clr-dg-cell>
+          <clr-dg-cell>{{i.azithromycin}}</clr-dg-cell>
+
         </clr-dg-row>
         <!-- <clr-dg-footer>
             <clr-dg-pagination #pagination [clrDgTotalItems]="total" [clrDgPageSize]="limit">
@@ -75,7 +92,8 @@
     <clr-tab-content *clrIfActive>
       <button class="btn btn-primary btn-sm" (click)="onClickExport()">Export {{countExport+' รายการ'}}</button>
       <button class="btn btn-success btn-sm" (click)="onClickApprove()">อนุมัติ {{countApprove+' รายการ'}}</button>
-      <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800" [(clrDgSelected)]="selectedFulfills"  (clrDgSelectedChange)="selectionChanged($event)">
+      <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800" [(clrDgSelected)]="selectedFulfills"
+        (clrDgSelectedChange)="selectionChanged($event)">
         <clr-dg-column>ใบเติม</clr-dg-column>
         <clr-dg-column>วันที่เติม</clr-dg-column>
         <clr-dg-column>ผู้เติม</clr-dg-column>
@@ -87,7 +105,8 @@
           <clr-dg-cell>{{i.created_date | dateTh:'D MMM YYYY'}}</clr-dg-cell>
           <clr-dg-cell>{{i.fname}} {{i.lname}}</clr-dg-cell>
           <clr-dg-cell>{{i.is_approved == 'Y' ? 'อนุมัติแล้ว':'รออนุมัติ'}}</clr-dg-cell>
-          <app-fulfill-drug-details [id]="i.id" *clrIfExpanded ngProjectAs="clr-dg-row-detail"></app-fulfill-drug-details>
+          <app-fulfill-drug-details [id]="i.id" *clrIfExpanded ngProjectAs="clr-dg-row-detail">
+          </app-fulfill-drug-details>
           <!-- <clr-dg-cell>
             <input type="text" appNumberOnly name="{{i.fill_qty}}" [(ngModel)]="i.fill_qty">
           </clr-dg-cell> -->

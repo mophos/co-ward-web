@@ -1,3 +1,4 @@
+import { RequestProductNewComponent } from './request-products/request-product-new/request-product-new.component';
 import { ReportAdmitConfirmCaseComponent } from './report-admit-confirm-case/report-admit-confirm-case.component';
 import { RequestProductsComponent } from './request-products/request-products.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -78,7 +79,14 @@ const routes: Routes = [
       { path: 'receive-products', canActivate: [AuthStockProductsService], component: ReceivesComponent },
       { path: 'surgical-sphp', canActivate: [AuthPayService], component: SurgicalMaskShphComponent },
       { path: 'supplies', canActivate: [AuthStockSuppliesService], component: SuppliesComponent },
-      { path: 'request-products',  component: RequestProductsComponent },
+      // { path: 'request-products',  component: RequestProductsComponent },
+      {
+        path: 'request-products',
+        children: [
+          { path: '', component: RequestProductsComponent },
+          { path: 'new', component: RequestProductNewComponent },
+        ]
+      },
       {
         path: 'tracking',
         canActivate: [AuthTrackingService],

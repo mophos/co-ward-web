@@ -64,6 +64,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReceivesComponent } from './receives/receives.component';
 import { RequestProductsComponent } from './request-products/request-products.component';
 import { ReportAdmitConfirmCaseComponent } from './report-admit-confirm-case/report-admit-confirm-case.component';
+import { RequestProductNewComponent } from './request-products/request-product-new/request-product-new.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -100,7 +101,8 @@ import { ReportAdmitConfirmCaseComponent } from './report-admit-confirm-case/rep
     ReportAdmitConfirmCaseComponent,
     DashboardComponent,
     ReceivesComponent,
-    RequestProductsComponent
+    RequestProductsComponent,
+    RequestProductNewComponent
   ],
   imports: [
     HelpModule,
