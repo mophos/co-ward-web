@@ -65,7 +65,7 @@ export class Report4Component implements OnInit {
   async getList() {
     this.loading.show();
     try {
-      const rs: any = await this.reportService.getReport4(moment(this.date).format('YYYY-MM-DD'), this.sector);
+      const rs: any = await this.reportService.getReport4(moment(this.date,'DD/MM/YYYY').format('YYYY-MM-DD'), this.sector);
       if (rs.ok) {
         this.admit = sumBy(rs.rows, 'admit');
         this.discharge = sumBy(rs.rows, 'discharge');

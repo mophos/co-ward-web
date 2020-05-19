@@ -42,4 +42,17 @@ export class LoginService {
     return this.http.post(url, { id, cid, passwordNew }).toPromise();
   }
 
+  requisOtp(tel) {
+    const url = `${this.url}/v1/login/requis-otp`;
+    return this.http.post(url, {
+      tel
+    }).toPromise();
+  }
+
+  verifyOtp(tel, transactionId, otp) {
+    const url = `${this.url}/v1/login/verify-otp`;
+    return this.http.post(url, {
+      tel, transactionId, otp
+    }).toPromise();
+  }
 }

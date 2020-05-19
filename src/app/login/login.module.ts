@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from './login.service';
 import { HelpModule } from '../help/help.module';
+import { LoginDashboardComponent } from './login-dashboard/login-dashboard.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { HelpModule } from '../help/help.module';
     HelpModule,
     ClarityModule
   ],
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, LoginDashboardComponent],
   providers: [LoginService]
 })
 export class LoginModule { }

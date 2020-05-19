@@ -76,22 +76,22 @@
         ข้อมูลล่าสุด: {{ h.update_date | dateTh:'DD/MM/YYYY hh:mm'}}
       </label>
     </td>
-    <td class="right td-border">{{h['anesthetist_nurse_qty'] || 0 + h['anesthetist_nurse_support_qty'] || 0}}</td>
-    <td class="right td-border">{{h['anesthetist_nurse_qty'] || 0 }}</td>
-    <td class="right td-border">{{h['anesthetist_nurse_support_qty'] || 0}}</td>
-    <td class="right td-border">{{h['infectious_disease_nurse_qty'] || 0 + h['infectious_disease_nurse_support_qty'] ||
+    <td class="right td-border">{{h.anesthetist_nurse_qty || 0 + h.anesthetist_nurse_support_qty || 0}}</td>
+    <td class="right td-border">{{h.anesthetist_nurse_qty || 0 }}</td>
+    <td class="right td-border">{{h.anesthetist_nurse_support_qty || 0}}</td>
+    <td class="right td-border">{{h.infectious_disease_nurse_qty || 0 + h.infectious_disease_nurse_support_qty ||
       0}}</td>
-    <td class="right td-border">{{h['infectious_disease_nurse_qty']||0 }}</td>
-    <td class="right td-border">{{h['infectious_disease_nurse_support_qty'] || 0}}</td>
-    <td class="right td-border">{{h['intensive_care_unit_qty'] || 0 + h['intensive_care_unit_support_qty'] || 0}}</td>
-    <td class="right td-border">{{h['intensive_care_unit_qty']||0 }}</td>
-    <td class="right td-border">{{h['intensive_care_unit_support_qty'] || 0}}</td>
-    <td class="right td-border">{{h['critical_care_medicine_qty'] || 0 + h['critical_care_medicine_support_qty'] || 0}}</td>
-    <td class="right td-border">{{h['critical_care_medicine_qty'] ||0 }}</td>
-    <td class="right td-border">{{h['critical_care_medicine_support_qty'] || 0}}</td>
-    <td class="right td-border">{{h['nurse_qty'] || 0 + h['nurse_support_qty'] || 0}}</td>
-    <td class="right td-border">{{h['nurse_qty'] || 0 }}</td>
-    <td class="right">{{h['nurse_support_qty'] || 0}}</td>
+    <td class="right td-border">{{h.infectious_disease_nurse_qty||0 }}</td>
+    <td class="right td-border">{{h.infectious_disease_nurse_support_qty || 0}}</td>
+    <td class="right td-border">{{h.intensive_care_unit_qty || 0 + h.intensive_care_unit_support_qty || 0}}</td>
+    <td class="right td-border">{{h.intensive_care_unit_qty||0 }}</td>
+    <td class="right td-border">{{h.intensive_care_unit_support_qty || 0}}</td>
+    <td class="right td-border">{{h.critical_care_medicine_qty || 0 + h.critical_care_medicine_support_qty || 0}}</td>
+    <td class="right td-border">{{h.critical_care_medicine_qty ||0 }}</td>
+    <td class="right td-border">{{h.critical_care_medicine_support_qty || 0}}</td>
+    <td class="right td-border">{{h.nurse_qty || 0 + h.nurse_support_qty || 0}}</td>
+    <td class="right td-border">{{h.nurse_qty || 0 }}</td>
+    <td class="right">{{h.nurse_support_qty || 0}}</td>
     <td class="left td-border">{{h.sub_ministry_name}}</td>
   </tr>
   <tr>
