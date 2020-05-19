@@ -10,9 +10,19 @@ export class RequestProductsService {
     @Inject('API_URL') private apiUrl: string
   ) { }
 
-  
+
   async getList() {
     const url = `${this.apiUrl}/v1/staff/request-products`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async getProductType() {
+    const url = `${this.apiUrl}/v1/staff/request-products/product-types`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async getProducts(typeId) {
+    const url = `${this.apiUrl}/v1/staff/request-products/products?typeId=${typeId}`;
     return await this.http.get(url).toPromise();
   }
 

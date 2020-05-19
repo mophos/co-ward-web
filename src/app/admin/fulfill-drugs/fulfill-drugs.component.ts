@@ -12,12 +12,14 @@ export class FulfillDrugsComponent implements OnInit {
   @ViewChild('modalLoading') public modalLoading;
 
   nodes = [];
+  generics = [];
   selected = [];
   selectedFulfills = [];
   products = [];
   fulfills = [];
   countExport = 0;
   countApprove = 0;
+  hospitalId = null;
   constructor(
     private fulfillService: FulfillService,
     private alertService: AlertService,
@@ -35,6 +37,19 @@ export class FulfillDrugsComponent implements OnInit {
       const rs: any = await this.fulfillService.getList('DRUG');
       if (rs.ok) {
         this.products = rs.rows;
+      } else {
+        this.alertService.error(rs.error);
+      }
+    } catch (error) {
+      this.alertService.error(error);
+    }
+  }
+
+  async getBalanceDrugs(hospitalId) {
+    try {
+      const rs: any = await this.fulfillService.getBalanceDrugs(hospitalId);
+      if (rs.ok) {
+        this.generics = rs.rows;
       } else {
         this.alertService.error(rs.error);
       }
@@ -80,12 +95,12 @@ export class FulfillDrugsComponent implements OnInit {
       const rs: any = await this.reportService.getFulFillDrugs(this.selectedFulfills);
       console.log(rs);
       if (!rs) {
-      this.modalLoading.hide();
-    } else {
-      this.downloadFile('รายการเติมยา', 'xlsx', rs);
-      // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
-      this.modalLoading.hide();
-    }
+        this.modalLoading.hide();
+      } else {
+        this.downloadFile('รายการเติมยา', 'xlsx', rs);
+        // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
+        this.modalLoading.hide();
+      }
     } catch (error) {
       console.log(error);
       this.alertService.error();
@@ -148,7 +163,7 @@ export class FulfillDrugsComponent implements OnInit {
     try {
       const rs: any = await this.fulfillService.getNodeDrugs();
       if (rs.ok) {
-          this.nodes = rs.rows;
+        this.nodes = rs.rows;
       } else {
         this.alertService.error(rs.error);
       }
