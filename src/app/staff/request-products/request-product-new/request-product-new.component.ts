@@ -14,6 +14,7 @@ export class RequestProductNewComponent implements OnInit {
   typeId = null;
   total = 0;
   requests = [];
+  loading = false;
   constructor(
     private alertService: AlertService,
     private requestProductsService: RequestProductsService
