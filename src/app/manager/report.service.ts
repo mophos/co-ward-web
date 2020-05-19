@@ -36,9 +36,15 @@ export class ReportService {
     return await this.http.get(url).toPromise();
   }
 
-  async getSupplies(date, query, zone) {
+  async getSupplies(date, query = '', zone = '') {
     const url = `${this.apiUrl}/v1/report/get-supplies?date=${date}&query=${query}&zone=${zone}`;
     return await this.http.get(url).toPromise();
+  }
+
+
+  async getSupplieExport(date, query = '', zone = '') {
+    const url = `${this.apiUrl}/v1/report/get-supplies/export?date=${date}&query=${query}&zone=${zone}`;
+    return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 
   async getTotal() {
@@ -85,7 +91,7 @@ export class ReportService {
     const url = `${this.apiUrl}/v1/report/homework`;
     return await this.http.get(url).toPromise();
   }
-  
+
   async homeworkDetail() {
     const url = `${this.apiUrl}/v1/report/homework-detail`;
     return await this.http.get(url).toPromise();
