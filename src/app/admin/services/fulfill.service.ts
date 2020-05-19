@@ -107,8 +107,14 @@ export class FulfillService {
     const url = `${this.url}/v1/admin/fulfill/detail/surgical-mask-details?id=${id}`;
     return this.http.get(url).toPromise();
   }
+
   getNodeDrugs() {
     const url = `${this.url}/v1/admin/fulfill/node/drugs`;
+    return this.http.get(url).toPromise();
+  }
+
+  getBalanceDrugs(hospitalId) {
+    const url = `${this.url}/v1/admin/fulfill/balance/drugs?hospitalId=${hospitalId}`;
     return this.http.get(url).toPromise();
   }
 }
