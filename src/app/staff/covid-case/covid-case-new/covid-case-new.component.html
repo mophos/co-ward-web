@@ -343,8 +343,8 @@
                 <label for="example" class="clr-control-label">วันที่ Admit <span class="required">*</span></label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <my-date-picker-th (dateChanged)="dateAdmit($event)" name="admitDate" [options]="myDatePickerOptions"
-                      [(ngModel)]="admitDate" required>
+                    <my-date-picker-th (dateChanged)="dateAdmit($event)" name="admitDate"
+                      [options]="myDatePickerOptions" [(ngModel)]="admitDate" required>
                     </my-date-picker-th>
                   </div>
                 </div>
@@ -378,7 +378,8 @@
           </td>
           <td class="left">
             <div *ngFor="let i of gcs">
-              <input type="radio" name="gcs-{{l.id}}" id="gcs-{{i.id}}-{{l.id}}" [(ngModel)]="l.gcs_id" [value]="i.id">
+              <input type="radio" name="gcs-{{l.id}}" id="gcs-{{i.id}}-{{l.id}}" (click)="checkGcs(i,l)"
+                [(ngModel)]="l.gcs_id" [value]="i.id">
               <label [title]="i.name" class="pointer" for="gcs-{{i.id}}-{{l.id}}">
                 {{i.name}}
               </label>
@@ -394,8 +395,9 @@
           </td>
           <td class="left">
             <div *ngFor="let i of medicalSupplies">
-              <input type="radio" (click)='uncheckRadioMedicalSupplies(l.id,i.id)' name="medicalSupplie-id-{{l.id}}"
-                id="medicalSupplie-{{i.id}}-{{l.id}}" [(ngModel)]="l.medical_supplie_id" [value]="i.id">
+              <input type="radio" (click)='uncheckRadioMedicalSupplies(l.id,i.id)' (click)="checkMedicalSupplies(i,l)"
+                name="medicalSupplie-id-{{l.id}}" id="medicalSupplie-{{i.id}}-{{l.id}}"
+                [(ngModel)]="l.medical_supplie_id" [value]="i.id">
               <label [title]="i.name" class="pointer" for="medicalSupplie-{{i.id}}-{{l.id}}">
                 {{i.name}}
               </label>

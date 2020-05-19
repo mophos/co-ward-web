@@ -457,4 +457,46 @@ export class CovidCaseStatusComponent implements OnInit {
     }
   }
 
+  async checkGcs(i, l) {
+    if (i.id === 5 && l.medical_supplie_id !== null) {
+      const idx = findIndex(this.medicalSupplies, { id: l.medical_supplie_id });
+      let name: any;
+      if (idx > -1) {
+        name = await this.medicalSupplies[idx].name;
+      }
+      const confirm = await this.alertService.confirm('ความรุนแรงของผู้ป่วยเป็น IP PUI และใช้เครื่องช่วยหายใจ แบบ ' + name + ' ใช่หรือไม่');
+      if (confirm) {
+      } else {
+        l.gcs_id = null;
+      }
+    } else if (i.id === 1 && l.medical_supplie_id === null) {
+      const confirm = await this.alertService.confirm('ความรุนแรงของผู้ป่วยเป็น Severe และไม่ใช้เครื่องช่วยหายใจ ใช่หรือไม่');
+      if (confirm) {
+      } else {
+        l.gcs_id = 5;
+      }
+    }
+  }
+
+  async checkMedicalSupplies(i, l) {
+    if (l.gcs_id === 5 && i.id !== null) {
+      let name: any;
+      const idx = await findIndex(this.medicalSupplies, { id: i.id });
+      if (idx > -1) {
+        name = this.medicalSupplies[idx].name;
+      }
+      const confirm = await this.alertService.confirm('ความรุนแรงของผู้ป่วยเป็น IP PUI และใช้เครื่องช่วยหายใจ แบบ ' + name + ' ใช่หรือไม่');
+      if (confirm) {
+      } else {
+        l.gcs_id = null;
+      }
+    } else if (l.gcs_id === 1 && i.id === null) {
+      const confirm = await this.alertService.confirm('ความรุนแรงของผู้ป่วยเป็น Severe และไม่ใช้เครื่องช่วยหายใจ ใช่หรือไม่');
+      if (confirm) {
+      } else {
+        l.gcs_id = 5;
+      }
+    }
+  }
+
 }

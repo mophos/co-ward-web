@@ -84,7 +84,7 @@
           <td class="left">
             <div *ngFor="let i of gcs">
               <input [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)" type="radio" name="gcs-{{l.id}}" id="gcs-{{i.id}}-{{l.id}}"
-                [(ngModel)]="l.gcs_id" [value]="i.id">
+                [(ngModel)]="l.gcs_id" [value]="i.id" (click)="checkGcs(i,l)">
               <label [title]="i.name" class="pointer" for="gcs-{{i.id}}-{{l.id}}">
                 {{i.name}}
               </label>
@@ -93,7 +93,7 @@
           <td class="left">
             <div *ngFor="let i of beds">
               <input [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)" type="radio" name="bed-{{l.id}}" id="bed-{{i.id}}-{{l.id}}"
-                [(ngModel)]="l.bed_id" [value]="i.id">
+                [(ngModel)]="l.bed_id" [value]="i.id" (click)="checkMedicalSupplies(i,l)">
               <label [title]="i.name" class="pointer" for="bed-{{i.id}}-{{l.id}}">
                 {{i.name}}
               </label>
