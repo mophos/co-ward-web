@@ -2,6 +2,7 @@ import { RequestProductsService } from './../../services/request-products.servic
 import { AlertService } from 'src/app/help/alert.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { findIndex } from 'lodash';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-request-product-new',
   templateUrl: './request-product-new.component.html',
@@ -19,7 +20,8 @@ export class RequestProductNewComponent implements OnInit {
   @ViewChild('loading') loadingPage: any;
   constructor(
     private alertService: AlertService,
-    private requestProductsService: RequestProductsService
+    private requestProductsService: RequestProductsService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -86,9 +88,22 @@ export class RequestProductNewComponent implements OnInit {
 
   async onClickSave() {
     try {
-      const confirm = await this.alertService.confirm();
+      if (this.requests.length > 0) {
+        const confirm = await this.alertService.confirm();
+        if (confirm) {
+          const rs: any = await this.requestProductsService.save(this.requests);
+          if (rs.ok) {
+            this.alertService.success();
+            this.router.navigate(['/staff/request-products']);
+          } else {
+            this.alertService.error();
+          }
+        }
+      } else {
+        this.alertService.error('กรุณาระบุจำนวน');
+      }
     } catch (error) {
-
+      this.alertService.error(error);
     }
   }
 }
