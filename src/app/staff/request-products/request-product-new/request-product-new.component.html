@@ -9,7 +9,7 @@
 </div>
 <div class="clr-row">
   <div class="clr-col-3">
-    <clr-datagrid [clrDgLoading]="loading" [style.height.px]="700">
+    <clr-datagrid  [style.height.px]="700">
       <clr-dg-column>หมวดหมู่</clr-dg-column>
 
       <clr-dg-row (click)="getProducts(null);typeId=null;" [ngClass]="{ 'isSuccess': null == typeId }">
@@ -53,3 +53,4 @@
 
   </div>
 </div>
+<app-loadding #loading></app-loadding>

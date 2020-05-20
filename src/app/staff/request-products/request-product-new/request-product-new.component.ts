@@ -1,6 +1,6 @@
 import { RequestProductsService } from './../../services/request-products.service';
 import { AlertService } from 'src/app/help/alert.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { findIndex } from 'lodash';
 @Component({
   selector: 'app-request-product-new',
@@ -15,6 +15,8 @@ export class RequestProductNewComponent implements OnInit {
   total = 0;
   requests = [];
   loading = false;
+
+  @ViewChild('loading') loadingPage: any;
   constructor(
     private alertService: AlertService,
     private requestProductsService: RequestProductsService
@@ -22,24 +24,28 @@ export class RequestProductNewComponent implements OnInit {
 
   ngOnInit() {
     this.getProductType();
-    this.getProducts(null);
+    // this.getProducts(null);
   }
 
   async getProductType() {
     try {
+      this.loadingPage.show();
       const rs: any = await this.requestProductsService.getProductType();
       if (rs.ok) {
         this.productTypes = rs.rows;
+        this.getProducts(null);
       } else {
         this.alertService.error(rs.error);
       }
     } catch (error) {
+      this.loadingPage.hide();
       this.alertService.error(error);
     }
   }
 
   async getProducts(typeId) {
     try {
+      this.loadingPage.show();
       const rs: any = await this.requestProductsService.getProducts(typeId);
       if (rs.ok) {
         this.products = rs.rows;
@@ -52,7 +58,9 @@ export class RequestProductNewComponent implements OnInit {
       } else {
         this.alertService.error(rs.error);
       }
+      this.loadingPage.hide();
     } catch (error) {
+      this.loadingPage.hide();
       this.alertService.error(error);
     }
   }

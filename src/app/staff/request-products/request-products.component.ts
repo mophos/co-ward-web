@@ -1,6 +1,6 @@
 import { RequestProductsService } from './../services/request-products.service';
 import { BasicService } from './../services/basic.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertService } from '../../help/alert.service';
 import { IMyOptions } from 'mydatepicker-th';
 import * as findIndex from 'lodash/findIndex';
@@ -25,7 +25,6 @@ export class RequestProductsComponent implements OnInit {
     showClearDateBtn: false
   };
   isSave = false;
-  isUpdate = false;
   constructor(
     private requestProductsService: RequestProductsService,
     private alertService: AlertService,
@@ -34,33 +33,8 @@ export class RequestProductsComponent implements OnInit {
 
   ngOnInit() {
     this.getList();
-    this.checkTimeCut();
   }
 
-
-  async checkTimeCut() {
-    try {
-      const rs: any = await this.basicService.checkTimeCut();
-      this.isSave = !rs;
-    } catch (error) {
-
-    }
-  }
-  async onClickAdd() {
-    try {
-      this.isUpdate = false;
-      const rs: any = await this.requestProductsService.getList();
-      if (rs.ok) {
-        this.listDetail = rs.rows;
-      } else {
-        this.alertService.error();
-      }
-      this.loading = false;
-    } catch (error) {
-      this.loading = false;
-      this.alertService.error(error);
-    }
-  }
 
   async getList() {
     this.loading = true;
@@ -80,11 +54,10 @@ export class RequestProductsComponent implements OnInit {
 
   async getListDetail(id) {
     try {
-      this.isUpdate = true;
+      this.loading = true;
       this.listId = id;
       const idx = findIndex(this.list, { id: this.listId });
       this.date = this.list[idx].created_at;
-      this.loading = true;
       const rs: any = await this.requestProductsService.getSupplieDetails(id);
       if (rs.ok) {
         this.listDetail = rs.rows;
@@ -98,32 +71,4 @@ export class RequestProductsComponent implements OnInit {
     }
   }
 
-  async save() {
-    this.isSave = true;
-    const confirm = await this.alertService.confirm();
-    if (confirm) {
-      try {
-        const data = [];
-        for (const v of this.listDetail) {
-          const obj: any = {};
-          obj.generic_id = v.id;
-          obj.qty = v.qty || null;
-          obj.month_usage_qty = v.month_usage_qty || null;
-          data.push(obj);
-        }
-        const rs: any = await this.requestProductsService.save(data);
-        if (rs.ok) {
-          this.alertService.success();
-          this.listDetail = [];
-          this.getList();
-        } else {
-          this.alertService.error(rs.error);
-        }
-        this.isSave = false;
-      } catch (error) {
-        this.isSave = false;
-        this.alertService.error(error);
-      }
-    }
-  }
 }
