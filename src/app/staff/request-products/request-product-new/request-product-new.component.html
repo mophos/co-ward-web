@@ -4,12 +4,12 @@
     ความต้องการ {{requests.length}} รายการ
   </div>
   <div class="clr-col-3" style="text-align: right;">
-    <button class="btn btn-sm btn-success">บันทึกความต้องการ</button>
+    <button class="btn btn-sm btn-success" (click)="onClickSave()">บันทึกความต้องการ</button>
   </div>
 </div>
 <div class="clr-row">
   <div class="clr-col-3">
-    <clr-datagrid  [style.height.px]="700">
+    <clr-datagrid [style.height.px]="700">
       <clr-dg-column>หมวดหมู่</clr-dg-column>
 
       <clr-dg-row (click)="getProducts(null);typeId=null;" [ngClass]="{ 'isSuccess': null == typeId }">
@@ -17,8 +17,7 @@
           ทั้งหมด
         </clr-dg-cell>
       </clr-dg-row>
-      <clr-dg-row *ngFor="let l of productTypes;" (click)="getProducts(l.id);typeId=l.id;"
-        [ngClass]="{ 'isSuccess': l.id == typeId }">
+      <clr-dg-row *ngFor="let l of productTypes;" (click)="getProducts(l.id);typeId=l.id;" [ngClass]="{ 'isSuccess': l.id == typeId }">
         <clr-dg-cell>
           {{l.name_th}}
         </clr-dg-cell>

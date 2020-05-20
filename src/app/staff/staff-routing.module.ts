@@ -55,6 +55,7 @@ import { ReportPatientsComponent } from './report-patients/report-patients.compo
 import { ReportBedComponent } from './report-bed/report-bed.component';
 import { AuthReportPatientsService } from '../auth-staff/auth-report-patients.service';
 import { ReceivesComponent } from '../staff/receives/receives.component';
+import { CovidCaseUpdateComponent } from './covid-case/covid-case-update/covid-case-update.component';
 
 const routes: Routes = [
   {
@@ -69,6 +70,7 @@ const routes: Routes = [
       { path: 'covid-case-new', canActivate: [AuthCovidCaseService], component: CovidCaseNewComponent },
       { path: 'covid-case-edit', canActivate: [AuthCovidCaseService], component: CovidCaseEditComponent },
       { path: 'covid-case-old', canActivate: [AuthCovidCaseService], component: CovidCaseOldComponent },
+      { path: 'covid-case-update', canActivate: [AuthCovidCaseService], component: CovidCaseUpdateComponent },
       { path: 'covid-case-status', canActivate: [AuthCovidCaseStatusService], component: CovidCaseStatusComponent },
       { path: 'covid-case-approved-drugs', canActivate: [AuthApprovedDrugsService], component: ApproveDrugsComponent },
       { path: 'covid-case-approved-supplies', canActivate: [AuthApprovedSuppliesService], component: CovidCaseApprovedComponent },

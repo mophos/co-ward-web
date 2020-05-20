@@ -65,6 +65,7 @@ import { ReceivesComponent } from './receives/receives.component';
 import { RequestProductsComponent } from './request-products/request-products.component';
 import { ReportAdmitConfirmCaseComponent } from './report-admit-confirm-case/report-admit-confirm-case.component';
 import { RequestProductNewComponent } from './request-products/request-product-new/request-product-new.component';
+import { CovidCaseUpdateComponent } from './covid-case/covid-case-update/covid-case-update.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -102,7 +103,8 @@ import { RequestProductNewComponent } from './request-products/request-product-n
     DashboardComponent,
     ReceivesComponent,
     RequestProductsComponent,
-    RequestProductNewComponent
+    RequestProductNewComponent,
+    CovidCaseUpdateComponent
   ],
   imports: [
     HelpModule,

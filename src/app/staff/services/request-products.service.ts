@@ -32,12 +32,12 @@ export class RequestProductsService {
   }
 
   async save(data) {
-    const url = `${this.apiUrl}/v1/staff/supplies`;
+    const url = `${this.apiUrl}/v1/staff/request-products`;
     return await this.http.post(url, { data }).toPromise();
   }
 
   async getSupplieDetails(id) {
-    const url = `${this.apiUrl}/v1/staff/supplies/details/${id}`;
+    const url = `${this.apiUrl}/v1/staff/request-products/details/${id}`;
     return await this.http.get(url).toPromise();
   }
 

@@ -35,7 +35,6 @@ export class RequestProductsComponent implements OnInit {
     this.getList();
   }
 
-
   async getList() {
     this.loading = true;
     try {
