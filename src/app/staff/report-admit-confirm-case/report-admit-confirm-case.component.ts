@@ -62,6 +62,7 @@ export class ReportAdmitConfirmCaseComponent implements OnInit {
 
   async getSummary() {
     try {
+      this.loading.show();
       const rs: any = await this.reportService.admitConfirmCaseSummary();
       if (rs.ok) {
         this.summary = rs.rows;
@@ -85,11 +86,12 @@ export class ReportAdmitConfirmCaseComponent implements OnInit {
         this.d5 = sumBy(rs.rows, 'd5');
         this.d7 = sumBy(rs.rows, 'd7');
         this.d8 = sumBy(rs.rows, 'd8');
-
       } else {
         this.alertService.error(rs.error);
       }
+      this.loading.hide();
     } catch (error) {
+      this.loading.hide();
       this.alertService.error(error);
     }
   }

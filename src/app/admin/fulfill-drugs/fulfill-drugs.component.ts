@@ -2,7 +2,7 @@ import { AlertService } from '../../help/alert.service';
 import { FulfillService } from '../services/fulfill.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportService } from '../report.service';
-
+import { sumBy } from 'lodash';
 @Component({
   selector: 'app-fulfill-drugs',
   templateUrl: './fulfill-drugs.component.html',
@@ -20,6 +20,13 @@ export class FulfillDrugsComponent implements OnInit {
   countExport = 0;
   countApprove = 0;
   hospitalId = null;
+
+  hcqFill = 0;
+  cqFill = 0;
+  drvFill = 0;
+  rtvFill = 0;
+  lpvFill = 0;
+  azitFill = 0;
   constructor(
     private fulfillService: FulfillService,
     private alertService: AlertService,
@@ -37,6 +44,12 @@ export class FulfillDrugsComponent implements OnInit {
       const rs: any = await this.fulfillService.getList('DRUG');
       if (rs.ok) {
         this.products = rs.rows;
+        this.hcqFill = sumBy(this.products, 'hydroxy_chloroquine_recomment_qty');
+        this.cqFill = sumBy(this.products, 'chloroquine_recomment_qty');
+        this.drvFill = sumBy(this.products, 'darunavir_recomment_qty');
+        this.rtvFill = sumBy(this.products, 'ritonavir_recomment_qty');
+        this.lpvFill = sumBy(this.products, 'lopinavir_recomment_qty');
+        this.azitFill = sumBy(this.products, 'azithromycin_recomment_qty');
       } else {
         this.alertService.error(rs.error);
       }
@@ -73,9 +86,11 @@ export class FulfillDrugsComponent implements OnInit {
 
   async onClickFulFill() {
     try {
-      const confirm = await this.alertService.confirm(`คุณต้องการเติมยา ${this.selected.length} รายการ ใช่หรือไม่?`);
+      console.log(this.products);
+      
+      const confirm = await this.alertService.confirm(`คุณต้องการเติมยาใช่หรือไม่?`);
       if (confirm) {
-        const rs: any = await this.fulfillService.saveFulFillDrug(this.selected);
+        const rs: any = await this.fulfillService.saveFulFillDrug(this.products);
         if (rs.ok) {
           this.alertService.success();
           await this.getProducts();
