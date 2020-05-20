@@ -13,6 +13,16 @@ export class CovidCaseService {
     return await this.http.get(url).toPromise();
   }
 
+  async getListOldPatients() {
+    const url = `${this.apiUrl}/v1/staff/covid-case/list/old-patient`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async getListOldPatientDetails(covidCaseId) {
+    const url = `${this.apiUrl}/v1/staff/covid-case/list/old-patient/details?id=${covidCaseId}`;
+    return await this.http.get(url).toPromise();
+  }
+
   async getCovidCasePresent(query) {
     const url = `${this.apiUrl}/v1/staff/covid-case/present?query=${query}`;
     return await this.http.get(url).toPromise();
@@ -105,6 +115,11 @@ export class CovidCaseService {
   async approved(data, dataReqId) {
     const url = `${this.apiUrl}/v1/staff/covid-case/requisition`;
     return await this.http.post(url, { data, dataReqId }).toPromise();
+  }
+
+  async updateOldPatient(data) {
+    const url = `${this.apiUrl}/v1/staff/covid-case/update/old-patient`;
+    return await this.http.post(url, { data }).toPromise();
   }
 
   async getListApprovedDetauls(id) {

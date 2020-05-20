@@ -18,6 +18,80 @@
           <td>Azithromycin 250 mg.<br>0 Tab</td>
         </tr>
       </table>
+      <div style="overflow-x: scroll;width: 100%;">
+        <table class="table table-compact" style="width:max-content;max-width: max-content;border-collapse: collapse;">
+          <thead>
+            <tr>
+              <th class="td-border" rowspan="2">เขต</th>
+              <th class="td-border" rowspan="2">จังหวัด</th>
+              <th class="td-border" colspan="4">CQ</th>
+              <th class="td-border" colspan="4">HCQ</th>
+              <th class="td-border" colspan="4">DRV</th>
+              <th class="td-border" colspan="4">RTV</th>
+              <th class="td-border" colspan="4">LPV/r</th>
+              <th class="td-border" colspan="4">Azithromycin</th>
+            </tr>
+            <tr>
+              <th class="td-border">รับเข้า</th>
+              <th class="td-border">ใช้ไป</th>
+              <th class="td-border">คงเหลือ</th>
+              <th class="td-border">เติมยา</th>
+              <th class="td-border">รับเข้า</th>
+              <th class="td-border">ใช้ไป</th>
+              <th class="td-border">คงเหลือ</th>
+              <th class="td-border">เติมยา</th>
+              <th class="td-border">รับเข้า</th>
+              <th class="td-border">ใช้ไป</th>
+              <th class="td-border">คงเหลือ</th>
+              <th class="td-border">เติมยา</th>
+              <th class="td-border">รับเข้า</th>
+              <th class="td-border">ใช้ไป</th>
+              <th class="td-border">คงเหลือ</th>
+              <th class="td-border">เติมยา</th>
+              <th class="td-border">รับเข้า</th>
+              <th class="td-border">ใช้ไป</th>
+              <th class="td-border">คงเหลือ</th>
+              <th class="td-border">เติมยา</th>
+              <th class="td-border">รับเข้า</th>
+              <th class="td-border">ใช้ไป</th>
+              <th class="td-border">คงเหลือ</th>
+              <th class="td-border">เติมยา</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let i of products">
+              <td class="td-border">{{i.zone_code}}</td>
+              <td class="td-border text-left">{{i.hospital_name}}</td>
+              <td class="td-border text-left">{{i.hydroxy_chloroquine_total_qty}}</td>
+              <td class="td-border text-left"></td>
+              <td class="td-border text-left">{{i.hydroxy_chloroquine_qty}}</td>
+              <td class="td-border text-left"><input type="text" class="clr-input" style="width: 50px;"
+                  [value]="i.hydroxy_chloroquine_recomment_qty"></td>
+              <td class="td-border"></td>
+              <td class="td-border"></td>
+              <td class="td-border"></td>
+              <td class="td-border"></td>
+              <td class="td-border"></td>
+              <td class="td-border"></td>
+              <td class="td-border"></td>
+              <td class="td-border"></td>
+              <td class="td-border"></td>
+              <td class="td-border"></td>
+              <td class="td-border"></td>
+              <td class="td-border"></td>
+              <td class="td-border"></td>
+              <td class="td-border"></td>
+              <td class="td-border"></td>
+              <td class="td-border"></td>
+              <td class="td-border"></td>
+              <td class="td-border"></td>
+              <td class="td-border"></td>
+              <td class="td-border"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800" [(clrDgSelected)]="selected">
         <clr-dg-column>โรงพยาบาล</clr-dg-column>
         <clr-dg-column>ชื่อยา</clr-dg-column>
@@ -52,15 +126,16 @@
     <clr-tab-content id="content1" *clrIfActive>
       <div class="clr-row">
         <div class="clr-col-3">
-          <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800" >
+          <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
             <clr-dg-column>โรงพยาบาล</clr-dg-column>
-            <clr-dg-row *clrDgItems="let i of nodes" [clrDgItem]="i" [ngClass]="{isSuccess: hospitalId==i.hospital_id}" (click)="getBalanceDrugs(i.hospital_id);hospitalId=i.hospital_id">
+            <clr-dg-row *clrDgItems="let i of nodes" [clrDgItem]="i" [ngClass]="{isSuccess: hospitalId==i.hospital_id}"
+              (click)="getBalanceDrugs(i.hospital_id);hospitalId=i.hospital_id">
               <clr-dg-cell>{{i.hospname}}</clr-dg-cell>
             </clr-dg-row>
           </clr-datagrid>
         </div>
         <div class="clr-col-9">
-          <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800" >
+          <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
             <clr-dg-column>ชื่อยา</clr-dg-column>
             <clr-dg-column>คงคลัง</clr-dg-column>
             <clr-dg-column>min/max</clr-dg-column>
