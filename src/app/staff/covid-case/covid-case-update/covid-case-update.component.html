@@ -3,13 +3,13 @@
   <span>แก้ไขข้อมูลผู้ป่วยเก่า</span>
 </nav>
 
-<clr-datagrid [clrDgLoading]="loading" [style.height.px]="800" [(clrDgSelected)]="selected">
+<clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
   <clr-dg-column>HN</clr-dg-column>
   <clr-dg-column>AN</clr-dg-column>
   <clr-dg-column>ชื่อ-นามสกุล</clr-dg-column>
   <clr-dg-column></clr-dg-column>
 
-  <clr-dg-row *clrDgItems="let l of list" [clrDgItem]="i">
+  <clr-dg-row *clrDgItems="let l of list">
     <clr-dg-cell>{{l.hn}}</clr-dg-cell>
     <clr-dg-cell>{{l.an}}</clr-dg-cell>
     <clr-dg-cell>{{l.first_name}} {{l.last_name}}</clr-dg-cell>
@@ -78,6 +78,25 @@
       บันทึก
     </button>
     <button type="button" class="btn btn-danger" (click)="modal = false">
+      ปิด
+    </button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="modalDate" [clrModalClosable]="false" [clrModalSize]="'md'" style="height: 400px;">
+  <!-- <h3 class="modal-title"></h3> -->
+  <div class="modal-body">
+    วันที่ Admit : <my-date-picker-th name="dateAdmit" [options]="myDatePickerOptions" [(ngModel)]="dateAdmit" required>
+    </my-date-picker-th>
+    วันที่ Discharge : <my-date-picker-th name="dateDischarge" [options]="myDatePickerOptions" [(ngModel)]="dateDischarge"
+      required>
+    </my-date-picker-th>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="saveDates()" [disabled]="isSave">
+      บันทึก
+    </button>
+    <button type="button" class="btn btn-danger" (click)="modalDate = false">
       ปิด
     </button>
   </div>
