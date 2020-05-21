@@ -7,12 +7,16 @@
   <clr-dg-column>HN</clr-dg-column>
   <clr-dg-column>AN</clr-dg-column>
   <clr-dg-column>ชื่อ-นามสกุล</clr-dg-column>
+  <clr-dg-column>วันที่ Admit</clr-dg-column>
+  <clr-dg-column>วันที่ Discharge</clr-dg-column>
   <clr-dg-column></clr-dg-column>
 
   <clr-dg-row *clrDgItems="let l of list">
     <clr-dg-cell>{{l.hn}}</clr-dg-cell>
     <clr-dg-cell>{{l.an}}</clr-dg-cell>
     <clr-dg-cell>{{l.first_name}} {{l.last_name}}</clr-dg-cell>
+    <clr-dg-cell>{{l.date_admit | dateTh:'D MMM YYYY'}}</clr-dg-cell>
+    <clr-dg-cell>{{l.date_discharge | dateTh:'D MMM YYYY'}}</clr-dg-cell>
     <clr-dg-cell>
       <button class="btn btn-sm btn-success" (click)="onClickEdit(l)" title="แก้ไข">
         <clr-icon shape="note"></clr-icon>

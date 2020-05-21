@@ -32,6 +32,8 @@ export class CovidCaseUpdateComponent implements OnInit {
     showClearDateBtn: false
   };
 
+  isNull: any = false;
+
   modalDate: any = false;
   constructor(
     private alertService: AlertService,
@@ -60,11 +62,13 @@ export class CovidCaseUpdateComponent implements OnInit {
   }
 
   async onClickEdit(l) {
-    console.log(l);
-
-    this.data = [];
     try {
       this.patientId = l.patient_id;
+      this.covidCaseId = l.covid_case_id;
+      this.dateAdmit = null;
+      this.dateDischarge = null;
+      this.data = [];
+
       const rs: any = await this.covidCaseService.getListOldPatientDetails(l.covid_case_id);
       if (rs.ok) {
         const detail = rs.rows[0];
@@ -88,11 +92,22 @@ export class CovidCaseUpdateComponent implements OnInit {
               }
             };
           }
-          this.covidCaseId = l.covid_case_id;
           this.modalDate = true;
         } else {
-          await this.getDates(detail.date_admit, detail.date_discharge, l.covid_case_id);
-          this.modal = true;
+          if (moment(detail.date_admit, 'YYYY-MM-DD').isSameOrAfter(moment(detail.date_discharge, 'YYYY-MM-DD'))) {
+            this.alertService.error('ไม่อนุญาตให้วันที่ DISCHARGE อยู่ก่อนหน้าวันที่ ADMIT กรุณาแก้ไข');
+            this.dateAdmit = {
+              date: {
+                year: moment(detail.date_admit).get('year'),
+                month: moment(detail.date_admit).get('month') + 1,
+                day: moment(detail.date_admit).get('date')
+              }
+            };
+            this.modalDate = true;
+          } else {
+            await this.getDates(detail.date_admit, detail.date_discharge, l.covid_case_id);
+            this.modal = true;
+          }
         }
       } else {
         this.alertService.error(rs.error);
@@ -196,17 +211,27 @@ export class CovidCaseUpdateComponent implements OnInit {
 
   async save() {
     try {
-      this.isSave = true;
-      const rs: any = await this.covidCaseService.updateOldPatient(this.data);
-      if (rs.ok) {
-        this.alertService.success();
-        this.modal = false;
-        this.getList();
-      } else {
-        this.modal = false;
-        this.alertService.error(rs.message);
+      this.isNull = false;
+      for (const v of this.data) {
+        if (v.gcs_id == null || v.bed_id == null) {
+          this.isNull = true;
+        }
       }
-      this.isSave = false;
+      if (!this.isNull) {
+        this.isSave = true;
+        const rs: any = await this.covidCaseService.updateOldPatient(this.data);
+        if (rs.ok) {
+          this.alertService.success();
+          this.modal = false;
+          this.getList();
+        } else {
+          this.modal = false;
+          this.alertService.error(rs.message);
+        }
+        this.isSave = false;
+      } else {
+        this.alertService.error('กรุณากรอกข้อมูลให้ครบถ้วน');
+      }
     } catch (error) {
       this.isSave = false;
       this.modal = false;
@@ -220,7 +245,10 @@ export class CovidCaseUpdateComponent implements OnInit {
     let startDate = moment(dateAdmit, 'YYYY-MM-DD').add(1, 'days');
     const endDate = moment(dateDischarge, 'YYYY-MM-DD').add(1, 'days');
     let id = 1;
-    while (!startDate.isSame(moment(endDate).add(1, 'days'))) {
+
+    console.log(startDate.isSame(moment(endDate)));
+    console.log(startDate, endDate);
+    while (!startDate.isSame(moment(endDate))) {
       const obj: any = {};
       obj.date = startDate.format('YYYY-MM-DD');
       obj.id = id;
@@ -235,11 +263,10 @@ export class CovidCaseUpdateComponent implements OnInit {
   }
 
   async saveDates() {
-
     const admit = this.dateAdmit.date.year + '-' + this.dateAdmit.date.month + '-' + this.dateAdmit.date.day;
     const disCharge = this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day;
     if (moment(admit, 'YYYY-MM-DD').isSameOrAfter(moment(disCharge, 'YYYY-MM-DD'))) {
-      this.alertService.error('ไม่อนุญาตให้เลือกวันที่ก่อนหน้า ADMIT');
+      this.alertService.error('ไม่อนุญาตให้เลือกวันที่ DISCHARGE ก่อนหน้า ADMIT');
     } else {
       this.modalDate = false;
       await this.getDates(admit, disCharge, this.covidCaseId);
