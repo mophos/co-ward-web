@@ -51,7 +51,7 @@ export class CovidCaseUpdateComponent implements OnInit {
 
     this.data = [];
     try {
-      this.patientId = l.id;
+      this.patientId = l.patient_id;
       const rs: any = await this.covidCaseService.getListOldPatientDetails(l.covid_case_id);
       if (rs.ok) {
         const detail = rs.rows[0];
@@ -59,7 +59,6 @@ export class CovidCaseUpdateComponent implements OnInit {
           let startDate = moment(detail.date_admit, 'YYYY-MM-DD').add(1, 'days');
           const endDate = moment(detail.date_discharge, 'YYYY-MM-DD').add(1, 'days');
           let id = 1;
-          console.log(startDate, endDate);
           while (!startDate.isSame(endDate)) {
             const obj: any = {};
             obj.date = startDate.format('YYYY-MM-DD');
