@@ -8,8 +8,8 @@ export class FulfillService {
 
   constructor(private http: HttpClient, @Inject('API_URL') private url: string) { }
 
-  getList(type) {
-    const url = `${this.url}/v1/admin/fulfill?type=${type}`;
+  getList(type, orderType = null, orderSort = null) {
+    const url = `${this.url}/v1/admin/fulfill?type=${type}&orderType=${orderType}&orderSort=${orderSort}`;
     return this.http.get(url).toPromise();
   }
 

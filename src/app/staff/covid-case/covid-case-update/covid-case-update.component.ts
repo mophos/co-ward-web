@@ -11,15 +11,15 @@ import { findIndex } from 'lodash';
 })
 export class CovidCaseUpdateComponent implements OnInit {
   patientId: any;
-
+  selected = [];
   list: any = [];
   data: any = [];
   gcs: any = [];
   beds: any = [];
   medicalSupplies: any = [];
-
+  isSave = false;
   modal = false;
-
+  loading = false;
   constructor(
     private alertService: AlertService,
     private covidCaseService: CovidCaseService,
@@ -178,6 +178,7 @@ export class CovidCaseUpdateComponent implements OnInit {
 
   async save() {
     try {
+      this.isSave = true;
       const rs: any = await this.covidCaseService.updateOldPatient(this.data);
       if (rs.ok) {
         this.alertService.success();
@@ -187,7 +188,9 @@ export class CovidCaseUpdateComponent implements OnInit {
         this.modal = false;
         this.alertService.error(rs.message);
       }
+      this.isSave = false;
     } catch (error) {
+      this.isSave = false;
       this.modal = false;
       this.alertService.error(error);
     }

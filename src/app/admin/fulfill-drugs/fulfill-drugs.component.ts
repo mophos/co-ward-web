@@ -27,6 +27,8 @@ export class FulfillDrugsComponent implements OnInit {
   rtvFill = 0;
   lpvFill = 0;
   azitFill = 0;
+  sortFulfill: any;
+
   constructor(
     private fulfillService: FulfillService,
     private alertService: AlertService,
@@ -41,7 +43,7 @@ export class FulfillDrugsComponent implements OnInit {
 
   async getProducts() {
     try {
-      const rs: any = await this.fulfillService.getList('DRUG');
+      const rs: any = await this.fulfillService.getList('DRUG', this.sortFulfill.type, this.sortFulfill.order);
       if (rs.ok) {
         this.products = rs.rows;
         this.hcqFill = sumBy(this.products, 'hydroxy_chloroquine_recomment_qty');
@@ -86,8 +88,6 @@ export class FulfillDrugsComponent implements OnInit {
 
   async onClickFulFill() {
     try {
-      console.log(this.products);
-      
       const confirm = await this.alertService.confirm(`คุณต้องการเติมยาใช่หรือไม่?`);
       if (confirm) {
         const rs: any = await this.fulfillService.saveFulFillDrug(this.products);
@@ -186,4 +186,19 @@ export class FulfillDrugsComponent implements OnInit {
       this.alertService.error(error);
     }
   }
+
+  sort(type) {
+    if (this.sortFulfill.type === type) {
+      if (this.sortFulfill.order === 'DESC') {
+        this.sortFulfill.order = 'ASC';
+      } else {
+        this.sortFulfill.order = 'DESC';
+      }
+    } else {
+      this.sortFulfill.type = type;
+      this.sortFulfill.order = 'ASC';
+    }
+
+  }
+
 }
