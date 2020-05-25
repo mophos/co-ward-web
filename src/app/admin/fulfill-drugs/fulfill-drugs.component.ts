@@ -2,7 +2,7 @@ import { AlertService } from '../../help/alert.service';
 import { FulfillService } from '../services/fulfill.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportService } from '../report.service';
-import { sumBy } from 'lodash';
+import { sumBy, orderBy } from 'lodash';
 @Component({
   selector: 'app-fulfill-drugs',
   templateUrl: './fulfill-drugs.component.html',
@@ -27,7 +27,10 @@ export class FulfillDrugsComponent implements OnInit {
   rtvFill = 0;
   lpvFill = 0;
   azitFill = 0;
-  sortFulfill: any;
+  sortFulfill = {
+    type: 'zone_code',
+    order: 'asc'
+  };
 
   constructor(
     private fulfillService: FulfillService,
@@ -58,6 +61,15 @@ export class FulfillDrugsComponent implements OnInit {
     } catch (error) {
       this.alertService.error(error);
     }
+  }
+
+  sumProduct(){
+    this.hcqFill = sumBy(this.products, 'hydroxy_chloroquine_recomment_qty');
+    this.cqFill = sumBy(this.products, 'chloroquine_recomment_qty');
+    this.drvFill = sumBy(this.products, 'darunavir_recomment_qty');
+    this.rtvFill = sumBy(this.products, 'ritonavir_recomment_qty');
+    this.lpvFill = sumBy(this.products, 'lopinavir_recomment_qty');
+    this.azitFill = sumBy(this.products, 'azithromycin_recomment_qty');
   }
 
   async getBalanceDrugs(hospitalId) {
@@ -188,15 +200,24 @@ export class FulfillDrugsComponent implements OnInit {
   }
 
   sort(type) {
-    if (this.sortFulfill.type === type) {
-      if (this.sortFulfill.order === 'DESC') {
-        this.sortFulfill.order = 'ASC';
+    try {
+      if (this.sortFulfill.type === type) {
+        if (this.sortFulfill.order === 'desc') {
+          this.sortFulfill.order = 'asc';
+        } else {
+          this.sortFulfill.order = 'desc';
+        }
       } else {
-        this.sortFulfill.order = 'DESC';
+        this.sortFulfill.type = type;
+        this.sortFulfill.order = 'asc';
       }
-    } else {
-      this.sortFulfill.type = type;
-      this.sortFulfill.order = 'ASC';
+
+      console.log(this.sortFulfill);
+      
+      this.products = orderBy(this.products, [this.sortFulfill.type], [this.sortFulfill.order]);
+      // this.getProducts();
+    } catch (error) {
+      this.alertService.error(error);
     }
 
   }
