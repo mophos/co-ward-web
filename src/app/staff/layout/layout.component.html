@@ -42,7 +42,8 @@
         <clr-icon clrVerticalNavIcon shape="helix" class="is-solid"></clr-icon>
         แก้ไขข้อมูลผู้ป่วยเก่า
       </a> -->
-      <a *ngIf="covidCaseMenu" clrVerticalNavLink routerLink="/staff/covid-case" title="Case COVID" routerLinkActive="active">
+      <a *ngIf="covidCaseMenu" clrVerticalNavLink routerLink="/staff/covid-case" title="Case COVID"
+        routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="helix"></clr-icon>
         ผู้ป่วยทั้งหมด
       </a>
@@ -56,8 +57,8 @@
         <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
         จ่ายยา
       </a>
-      <a *ngIf="covidApproveSuppliesMenu" clrVerticalNavLink routerLink="/staff/covid-case-approved-supplies" title="จ่ายเวชภัณฑ์"
-        routerLinkActive="active">
+      <a *ngIf="covidApproveSuppliesMenu" clrVerticalNavLink routerLink="/staff/covid-case-approved-supplies"
+        title="จ่ายเวชภัณฑ์" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
         จ่ายเวชภัณฑ์
       </a>
@@ -71,8 +72,8 @@
       <div clrVerticalNavLink routerLinkActive="active" style="background-color: rgba(165, 165, 165,0.2);">
 
       </div>
-      <a *ngIf="covidCaseRequisitionMenu" clrVerticalNavLink routerLink="/staff/covid-case-requisition" title="รายการเบิก"
-        routerLinkActive="active">
+      <a *ngIf="covidCaseRequisitionMenu" clrVerticalNavLink routerLink="/staff/covid-case-requisition"
+        title="รายการเบิก" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
         รายการเบิก
       </a>
@@ -96,11 +97,11 @@
         <clr-icon clrVerticalNavIcon shape="cursor-hand-open"></clr-icon>
         บันทึกเวชภัณฑ์คงคลัง
       </a>
-      <!-- <a  clrVerticalNavLink routerLink="/staff/request-products" title="บันทึกความต้องการสินค้า"
+      <a clrVerticalNavLink routerLink="/staff/request-products" title="บันทึกความต้องการสินค้า"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="cursor-hand-open"></clr-icon>
         บันทึกความต้องการสินค้า
-      </a> -->
+      </a>
       <!-- <a *ngIf="trackingMenu" clrVerticalNavLink routerLink="/staff/tracking" title="สถานะของ" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         ติดตามสถานะสินค้า
@@ -132,11 +133,13 @@
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         รายงานเวชภัณฑ์
       </a>
-      <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff/report-bed" title="รายงานเตียง" routerLinkActive="active">
+      <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff/report-bed" title="รายงานเตียง"
+        routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         รายงานเตียง
       </a>
-      <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff/dashboard" title="Dashboard" routerLinkActive="active">
+      <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff/dashboard" title="Dashboard"
+        routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="file"></clr-icon>
         Dashboard
       </a>
