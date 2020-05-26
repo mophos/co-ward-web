@@ -116,11 +116,35 @@ export class FulfillDrugsComponent implements OnInit {
     }
   }
 
-  async onClickExport() {
+  async onClickExport1() {
     this.modalLoading.show();
     try {
       if (this.selectedFulfills.length) {
-        const rs: any = await this.reportService.getFulFillDrugs(this.selectedFulfills);
+        const rs: any = await this.reportService.getFulFillDrugs1(this.selectedFulfills);
+        console.log(rs);
+        if (!rs) {
+          this.modalLoading.hide();
+        } else {
+          this.downloadFile('รายการเติมยา', 'xlsx', rs);
+          // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
+          this.modalLoading.hide();
+        }
+      } else {
+        this.modalLoading.hide();
+        this.alertService.error('กรุณาเลือกรายการ');
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.error();
+      this.modalLoading.hide();
+    }
+  }
+
+  async onClickExport2() {
+    this.modalLoading.show();
+    try {
+      if (this.selectedFulfills.length) {
+        const rs: any = await this.reportService.getFulFillDrugs2(this.selectedFulfills);
         console.log(rs);
         if (!rs) {
           this.modalLoading.hide();
