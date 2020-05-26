@@ -35,7 +35,8 @@
           <thead>
             <tr>
               <th class="td-border" rowspan="2" (click)="sort('zone_code')"><span class="pointer"> เขต<clr-icon shape="sort-by"></clr-icon></span></th>
-              <th class="td-border" rowspan="2" (click)="sort('hospital_name')"><span class="pointer"> โรงพยาบาล<clr-icon shape="sort-by"></clr-icon></span></th>
+              <th class="td-border" rowspan="2" (click)="sort('hospital_name')"><span class="pointer"> โรงพยาบาล<clr-icon
+                    shape="sort-by"></clr-icon></span></th>
               <th class="td-border" colspan="4">HCQ</th>
               <th class="td-border" colspan="4">CQ</th>
               <th class="td-border" colspan="4">DRV</th>
@@ -47,27 +48,33 @@
               <th class="td-border">รับเข้า</th>
               <th class="td-border">ใช้ไป</th>
               <th class="td-border">คงเหลือ</th>
-              <th class="td-border" (click)="sort('hydroxy_chloroquine_recomment_qty')"><span class="pointer"> เติมยา<clr-icon shape="sort-by"></clr-icon></span></th>
+              <th class="td-border" (click)="sort('hydroxy_chloroquine_recomment_qty')"><span class="pointer"> เติมยา<clr-icon
+                    shape="sort-by"></clr-icon></span></th>
               <th class="td-border">รับเข้า</th>
               <th class="td-border">ใช้ไป</th>
               <th class="td-border">คงเหลือ</th>
-              <th class="td-border" (click)="sort('chloroquine_recomment_qty')"><span class="pointer"> เติมยา<clr-icon shape="sort-by"></clr-icon></span></th>
+              <th class="td-border" (click)="sort('chloroquine_recomment_qty')"><span class="pointer"> เติมยา<clr-icon
+                    shape="sort-by"></clr-icon></span></th>
               <th class="td-border">รับเข้า</th>
               <th class="td-border">ใช้ไป</th>
               <th class="td-border">คงเหลือ</th>
-              <th class="td-border" (click)="sort('darunavir_recomment_qty')"><span class="pointer"> เติมยา<clr-icon shape="sort-by"></clr-icon></span></th>
+              <th class="td-border" (click)="sort('darunavir_recomment_qty')"><span class="pointer"> เติมยา<clr-icon
+                    shape="sort-by"></clr-icon></span></th>
               <th class="td-border">รับเข้า</th>
               <th class="td-border">ใช้ไป</th>
               <th class="td-border">คงเหลือ</th>
-              <th class="td-border" (click)="sort('lopinavir_recomment_qty')"><span class="pointer"> เติมยา<clr-icon shape="sort-by"></clr-icon></span></th>
+              <th class="td-border" (click)="sort('lopinavir_recomment_qty')"><span class="pointer"> เติมยา<clr-icon
+                    shape="sort-by"></clr-icon></span></th>
               <th class="td-border">รับเข้า</th>
               <th class="td-border">ใช้ไป</th>
               <th class="td-border">คงเหลือ</th>
-              <th class="td-border" (click)="sort('ritonavir_recomment_qty')"><span class="pointer"> เติมยา<clr-icon shape="sort-by"></clr-icon></span></th>
+              <th class="td-border" (click)="sort('ritonavir_recomment_qty')"><span class="pointer"> เติมยา<clr-icon
+                    shape="sort-by"></clr-icon></span></th>
               <th class="td-border">รับเข้า</th>
               <th class="td-border">ใช้ไป</th>
               <th class="td-border">คงเหลือ</th>
-              <th class="td-border" (click)="sort('azithromycin_recomment_qty')"><span class="pointer"> เติมยา<clr-icon shape="sort-by"></clr-icon></span></th>
+              <th class="td-border" (click)="sort('azithromycin_recomment_qty')"><span class="pointer"> เติมยา<clr-icon
+                    shape="sort-by"></clr-icon></span></th>
             </tr>
           </thead>
           <tbody>
@@ -75,17 +82,13 @@
               <td class="td-border">{{i.zone_code}}</td>
               <td class="td-border text-left">{{i.hospital_name}}</td>
 
-              <td class="td-border text-left"
-                [ngClass]="{isError: i.hydroxy_chloroquine_qty < i.hydroxy_chloroquine_min_qty,isWarning: i.hydroxy_chloroquine_qty >= i.hydroxy_chloroquine_min_qty}">
+              <td class="td-border text-left" [ngClass]="{isError: i.hydroxy_chloroquine_qty < i.hydroxy_chloroquine_min_qty,isWarning: i.hydroxy_chloroquine_qty >= i.hydroxy_chloroquine_min_qty}">
                 {{i.hydroxy_chloroquine_total_qty ||0}}</td>
-              <td class="td-border text-left"
-                [ngClass]="{isError: i.hydroxy_chloroquine_qty < i.hydroxy_chloroquine_min_qty,isWarning: i.hydroxy_chloroquine_qty >= i.hydroxy_chloroquine_min_qty}">
+              <td class="td-border text-left" [ngClass]="{isError: i.hydroxy_chloroquine_qty < i.hydroxy_chloroquine_min_qty,isWarning: i.hydroxy_chloroquine_qty >= i.hydroxy_chloroquine_min_qty}">
                 {{i.hydroxy_chloroquine_req_qty || 0}}</td>
-              <td class="td-border text-left"
-                [ngClass]="{isError: i.hydroxy_chloroquine_qty < i.hydroxy_chloroquine_min_qty,isWarning: i.hydroxy_chloroquine_qty >= i.hydroxy_chloroquine_min_qty}">
+              <td class="td-border text-left" [ngClass]="{isError: i.hydroxy_chloroquine_qty < i.hydroxy_chloroquine_min_qty,isWarning: i.hydroxy_chloroquine_qty >= i.hydroxy_chloroquine_min_qty}">
                 {{i.hydroxy_chloroquine_qty ||0}}(+{{i.hydroxy_chloroquine_reserve_qty ||0}})</td>
-              <td class="td-border text-left"
-                [ngClass]="{isError: i.hydroxy_chloroquine_qty < i.hydroxy_chloroquine_min_qty,isWarning: i.hydroxy_chloroquine_qty >= i.hydroxy_chloroquine_min_qty}">
+              <td class="td-border text-left" [ngClass]="{isError: i.hydroxy_chloroquine_qty < i.hydroxy_chloroquine_min_qty,isWarning: i.hydroxy_chloroquine_qty >= i.hydroxy_chloroquine_min_qty}">
                 <input type="number" (keyup)="sumProduct()" class="clr-input" appNumberOnly style="width: 50px;"
                   [value]="i.hydroxy_chloroquine_recomment_qty" [(ngModel)]="i.hydroxy_chloroquine_recomment_qty"></td>
 
@@ -99,17 +102,13 @@
                   type="number" (keyup)="sumProduct()" class="clr-input" appNumberOnly style="width: 50px;" [value]="i.chloroquine_recomment_qty"
                   [(ngModel)]="i.chloroquine_recomment_qty"></td>
 
-              <td class="td-border text-left"
-                [ngClass]="{isError: i.darunavir_qty < i.darunavir_min_qty,isWarning: i.darunavir_qty >= i.darunavir_min_qty}">
+              <td class="td-border text-left" [ngClass]="{isError: i.darunavir_qty < i.darunavir_min_qty,isWarning: i.darunavir_qty >= i.darunavir_min_qty}">
                 {{i.darunavir_total_qty ||0}}</td>
-              <td class="td-border text-left"
-                [ngClass]="{isError: i.darunavir_qty < i.darunavir_min_qty,isWarning: i.darunavir_qty >= i.darunavir_min_qty}">
+              <td class="td-border text-left" [ngClass]="{isError: i.darunavir_qty < i.darunavir_min_qty,isWarning: i.darunavir_qty >= i.darunavir_min_qty}">
                 {{i.darunavir_req_qty || 0}}</td>
-              <td class="td-border text-left"
-                [ngClass]="{isError: i.darunavir_qty < i.darunavir_min_qty,isWarning: i.darunavir_qty >= i.darunavir_min_qty}">
+              <td class="td-border text-left" [ngClass]="{isError: i.darunavir_qty < i.darunavir_min_qty,isWarning: i.darunavir_qty >= i.darunavir_min_qty}">
                 {{i.darunavir_qty ||0}}</td>
-              <td class="td-border text-left"
-                [ngClass]="{isError: i.darunavir_qty < i.darunavir_min_qty,isWarning: i.darunavir_qty >= i.darunavir_min_qty}">
+              <td class="td-border text-left" [ngClass]="{isError: i.darunavir_qty < i.darunavir_min_qty,isWarning: i.darunavir_qty >= i.darunavir_min_qty}">
                 <input type="number" (keyup)="sumProduct()" class="clr-input" appNumberOnly style="width: 50px;"
                   [value]="i.darunavir_recomment_qty" [(ngModel)]="i.darunavir_recomment_qty"></td>
 
@@ -119,21 +118,17 @@
                 {{i.lopinavir_req_qty || 0}}</td>
               <td class="td-border text-left" [ngClass]="{isError: i.lopinavir_qty < i.lopinavir_min_qty}">
                 {{i.lopinavir_qty ||0}}</td>
-              <td class="td-border text-left" [ngClass]="{isError: i.lopinavir_qty < i.lopinavir_min_qty}"><input
-                  type="number" (keyup)="sumProduct()" class="clr-input" appNumberOnly style="width: 50px;" [value]="i.lopinavir_recomment_qty"
+              <td class="td-border text-left" [ngClass]="{isError: i.lopinavir_qty < i.lopinavir_min_qty}"><input type="number"
+                  (keyup)="sumProduct()" class="clr-input" appNumberOnly style="width: 50px;" [value]="i.lopinavir_recomment_qty"
                   [(ngModel)]="i.lopinavir_recomment_qty"></td>
 
-              <td class="td-border text-left"
-                [ngClass]="{isError: i.ritonavir_qty < i.ritonavir_min_qty,isWarning: i.ritonavir_qty >= i.ritonavir_min_qty}">
+              <td class="td-border text-left" [ngClass]="{isError: i.ritonavir_qty < i.ritonavir_min_qty,isWarning: i.ritonavir_qty >= i.ritonavir_min_qty}">
                 {{i.ritonavir_total_qty ||0}}</td>
-              <td class="td-border text-left"
-                [ngClass]="{isError: i.ritonavir_qty < i.ritonavir_min_qty,isWarning: i.ritonavir_qty >= i.ritonavir_min_qty}">
+              <td class="td-border text-left" [ngClass]="{isError: i.ritonavir_qty < i.ritonavir_min_qty,isWarning: i.ritonavir_qty >= i.ritonavir_min_qty}">
                 {{i.ritonavir_req_qty || 0}}</td>
-              <td class="td-border text-left"
-                [ngClass]="{isError: i.ritonavir_qty < i.ritonavir_min_qty,isWarning: i.ritonavir_qty >= i.ritonavir_min_qty}">
+              <td class="td-border text-left" [ngClass]="{isError: i.ritonavir_qty < i.ritonavir_min_qty,isWarning: i.ritonavir_qty >= i.ritonavir_min_qty}">
                 {{i.ritonavir_qty ||0}}</td>
-              <td class="td-border text-left"
-                [ngClass]="{isError: i.ritonavir_qty < i.ritonavir_min_qty,isWarning: i.ritonavir_qty >= i.ritonavir_min_qty}">
+              <td class="td-border text-left" [ngClass]="{isError: i.ritonavir_qty < i.ritonavir_min_qty,isWarning: i.ritonavir_qty >= i.ritonavir_min_qty}">
                 <input type="number" (keyup)="sumProduct()" class="clr-input" appNumberOnly style="width: 50px;"
                   [value]="i.ritonavir_recomment_qty" [(ngModel)]="i.ritonavir_recomment_qty"></td>
 
@@ -144,8 +139,8 @@
               <td class="td-border text-left" [ngClass]="{isError: i.azithromycin_qty < i.azithromycin_min_qty}">
                 {{i.azithromycin_qty ||0}}</td>
               <td class="td-border text-left" [ngClass]="{isError: i.azithromycin_qty < i.azithromycin_min_qty}"><input
-                  type="number" (keyup)="sumProduct()" class="clr-input" appNumberOnly style="width: 50px;"
-                  [value]="i.azithromycin_recomment_qty" [(ngModel)]="i.azithromycin_recomment_qty"></td>
+                  type="number" (keyup)="sumProduct()" class="clr-input" appNumberOnly style="width: 50px;" [value]="i.azithromycin_recomment_qty"
+                  [(ngModel)]="i.azithromycin_recomment_qty"></td>
 
             </tr>
           </tbody>
@@ -193,8 +188,11 @@
   <clr-tab>
     <button clrTabLink>รายการเติมยา</button>
     <clr-tab-content *clrIfActive>
-      <button class="btn btn-primary btn-sm" (click)="onClickExport()">Export {{countExport+' รายการ'}}</button>
       <button class="btn btn-success btn-sm" (click)="onClickApprove()">อนุมัติ {{countApprove+' รายการ'}}</button>
+      <button class="btn btn-primary btn-sm right" (click)="onClickExport1()">ส่งออกรายงานที่ 1 ({{countExport+'
+        รายการ'}})</button>
+      <button class="btn btn-primary btn-sm right" (click)="onClickExport2()">ส่งออกรายงานที่ 2 ({{countExport+'
+        รายการ'}})</button>
       <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800" [(clrDgSelected)]="selectedFulfills"
         (clrDgSelectedChange)="selectionChanged($event)">
         <clr-dg-column>ใบเติม</clr-dg-column>

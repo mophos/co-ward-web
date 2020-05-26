@@ -56,8 +56,13 @@ export class ReportService {
     return await this.http.get(url).toPromise();
   }
 
-  async getFulFillDrugs(id) {
-    const url = `${this.apiUrl}/v1/report/fulfill-drugs?id=` + map(id, 'id').join('&id=');
+  async getFulFillDrugs1(id) {
+    const url = `${this.apiUrl}/v1/report/fulfill-drugs-1?id=` + map(id, 'id').join('&id=');
+    return await this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+
+  async getFulFillDrugs2(id) {
+    const url = `${this.apiUrl}/v1/report/fulfill-drugs-2?id=` + map(id, 'id').join('&id=');
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 

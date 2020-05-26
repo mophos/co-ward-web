@@ -63,7 +63,7 @@ export class FulfillDrugsComponent implements OnInit {
     }
   }
 
-  sumProduct(){
+  sumProduct() {
     this.hcqFill = sumBy(this.products, 'hydroxy_chloroquine_recomment_qty');
     this.cqFill = sumBy(this.products, 'chloroquine_recomment_qty');
     this.drvFill = sumBy(this.products, 'darunavir_recomment_qty');
@@ -116,17 +116,46 @@ export class FulfillDrugsComponent implements OnInit {
     }
   }
 
-  async onClickExport() {
+  async onClickExport1() {
     this.modalLoading.show();
     try {
-      const rs: any = await this.reportService.getFulFillDrugs(this.selectedFulfills);
-      console.log(rs);
-      if (!rs) {
-        this.modalLoading.hide();
+      if (this.selectedFulfills.length) {
+        const rs: any = await this.reportService.getFulFillDrugs1(this.selectedFulfills);
+        console.log(rs);
+        if (!rs) {
+          this.modalLoading.hide();
+        } else {
+          this.downloadFile('รายการเติมยา', 'xlsx', rs);
+          // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
+          this.modalLoading.hide();
+        }
       } else {
-        this.downloadFile('รายการเติมยา', 'xlsx', rs);
-        // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
         this.modalLoading.hide();
+        this.alertService.error('กรุณาเลือกรายการ');
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.error();
+      this.modalLoading.hide();
+    }
+  }
+
+  async onClickExport2() {
+    this.modalLoading.show();
+    try {
+      if (this.selectedFulfills.length) {
+        const rs: any = await this.reportService.getFulFillDrugs2(this.selectedFulfills);
+        console.log(rs);
+        if (!rs) {
+          this.modalLoading.hide();
+        } else {
+          this.downloadFile('รายการเติมยา', 'xlsx', rs);
+          // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
+          this.modalLoading.hide();
+        }
+      } else {
+        this.modalLoading.hide();
+        this.alertService.error('กรุณาเลือกรายการ');
       }
     } catch (error) {
       console.log(error);
@@ -213,7 +242,7 @@ export class FulfillDrugsComponent implements OnInit {
       }
 
       console.log(this.sortFulfill);
-      
+
       this.products = orderBy(this.products, [this.sortFulfill.type], [this.sortFulfill.order]);
       // this.getProducts();
     } catch (error) {
