@@ -85,13 +85,13 @@
     <tbody>
       <tr *ngFor="let h of p.hospitals">
         <td class="left">{{h.hospname}}</td>
-        <td class="right">{{h['severe'] || 0 + h['moderate']|| 0 + h['mild']|| 0 + h['asymptomatic']|| 0 + h['ip_pui']
-          || 0}}</td>
-        <td class="right">{{h['severe'] || 0}}</td>
-        <td class="right">{{h['moderate'] || 0}}</td>
-        <td class="right">{{h['mild'] || 0}}</td>
-        <td class="right">{{h['asymptomatic'] || 0}}</td>
-        <td class="right">{{h['ip_pui'] || 0}}</td>
+        <td class="right">
+          {{(h.severe || 0) + (h.moderate || 0) + (h.mild || 0) +( h.asymptomatic || 0) + (h.ip_pui || 0)}}</td>
+        <td class="right">{{h.severe || 0}}</td>
+        <td class="right">{{h.moderate || 0}}</td>
+        <td class="right">{{h.mild || 0}}</td>
+        <td class="right">{{h.asymptomatic || 0}}</td>
+        <td class="right">{{h.ip_pui || 0}}</td>
       </tr>
       <!-- <tr>
           <td class="right" style="font-weight: bold;">รวม</td>
