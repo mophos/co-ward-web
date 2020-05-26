@@ -193,8 +193,8 @@
   <clr-tab>
     <button clrTabLink>รายการเติมยา</button>
     <clr-tab-content *clrIfActive>
-      <button class="btn btn-primary btn-sm" (click)="onClickExport()">Export {{countExport+' รายการ'}}</button>
       <button class="btn btn-success btn-sm" (click)="onClickApprove()">อนุมัติ {{countApprove+' รายการ'}}</button>
+      <button class="btn btn-primary btn-sm right" (click)="onClickExport()">Export {{countExport+' รายการ'}}</button>
       <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800" [(clrDgSelected)]="selectedFulfills"
         (clrDgSelectedChange)="selectionChanged($event)">
         <clr-dg-column>ใบเติม</clr-dg-column>
