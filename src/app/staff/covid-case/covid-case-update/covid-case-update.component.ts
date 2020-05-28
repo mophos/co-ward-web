@@ -3,7 +3,7 @@ import { AlertService } from './../../../help/alert.service';
 import { CovidCaseService } from './../../services/covid-case.service';
 import { BasicAuthService } from './../../services/basic-auth.service';
 import { IMyOptions } from 'mydatepicker-th';
-import { findIndex } from 'lodash';
+import { findIndex, filter } from 'lodash';
 import * as moment from 'moment';
 @Component({
   selector: 'app-covid-case-update',
@@ -240,8 +240,6 @@ export class CovidCaseUpdateComponent implements OnInit {
   }
 
   async getDates(dateAdmit, dateDischarge, covidCaseId) {
-    console.log(dateAdmit, dateDischarge, covidCaseId);
-
     let startDate = moment(dateAdmit, 'YYYY-MM-DD').add(1, 'days');
     const endDate = moment(dateDischarge, 'YYYY-MM-DD').add(1, 'days');
     let id = 1;
@@ -259,6 +257,38 @@ export class CovidCaseUpdateComponent implements OnInit {
       startDate = startDate.add(1, 'days');
       this.data.push(obj);
       id++;
+    }
+
+    const rs: any = await this.covidCaseService.splitDates(covidCaseId);
+    const arIdx: any = [];
+    for (const v of this.data) {
+      const idxG: any = findIndex(rs.rows, { entry_date: v.date, gcs_id: null });
+      const idxB: any = findIndex(rs.rows, { entry_date: v.date, bed_id: null });
+      if (idxG > -1 && idxB > -1) {
+        arIdx.push(idxG);
+      }
+      if (idxB > -1 && idxG === -1) {
+        arIdx.push(idxB);
+      }
+    }
+
+    if (arIdx.length) {
+      let temp: any;
+      temp = this.data;
+      this.data = [];
+
+      for (const v of arIdx) {
+        this.data.push(temp[v]);
+      }
+    }
+
+    if (this.data.length > rs.rows.length) {
+      for (const v of rs.rows) {
+        const idx: any = findIndex(this.data, { date: v.entry_date });
+        if (idx > -1) {
+          this.data.splice(idx, 1);
+        }
+      }
     }
   }
 
