@@ -78,11 +78,11 @@
             <input type="number" (keyup)="sumProduct()" class="clr-input" appNumberOnly style="width: 50px;"
               [value]="i.surgical_gown_recomment_qty" [(ngModel)]="i.surgical_gown_recomment_qty"></td>
 
-          <td *ngIf="g10" class="td-border text-left" [ngClass]="{isError: i.cover_all1_qty < i.cover_all1_min_qty}">
+          <td *ngIf="g10" class="td-border text-left" >
             {{i.cover_all1_req_qty || 0}}</td>
-          <td *ngIf="g10" class="td-border text-left" [ngClass]="{isError: i.cover_all1_qty < i.cover_all1_min_qty}">
+          <td *ngIf="g10" class="td-border text-left" >
             {{i.cover_all1_qty ||0}}(+{{i.cover_all1_reserve_qty ||0}})</td>
-          <td *ngIf="g10" class="td-border text-left" [ngClass]="{isError: i.cover_all1_qty < i.cover_all1_min_qty}">
+          <td *ngIf="g10" class="td-border text-left" >
             <input type="number" (keyup)="sumProduct()" class="clr-input" appNumberOnly style="width: 50px;"
               [value]="i.cover_all1_recomment_qty" [(ngModel)]="i.cover_all1_recomment_qty"></td>
 

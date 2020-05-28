@@ -37,7 +37,7 @@ export class FulfillSuppliesNewComponent implements OnInit {
   }
 
 
-  onClickAll(e) {
+  onClickAll() {
     console.log(this.gAll);
 
     if (!this.gAll) {
