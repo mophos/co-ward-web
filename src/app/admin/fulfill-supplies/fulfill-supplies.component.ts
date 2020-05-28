@@ -13,10 +13,10 @@ export class FulfillSuppliesComponent implements OnInit {
 
   selected = [];
   selectedFulfills = [];
-  products = [];
   fulfills = [];
   countExport = 0;
   countApprove = 0;
+  isFulFull = false;
   constructor(
     private fulfillService: FulfillService,
     private alertService: AlertService,
@@ -24,22 +24,11 @@ export class FulfillSuppliesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getProducts();
+    // this.getProducts();
     this.getFulfills();
   }
 
-  async getProducts() {
-    try {
-      const rs: any = await this.fulfillService.getList('SUPPLIES');
-      if (rs.ok) {
-        this.products = rs.rows;
-      } else {
-        this.alertService.error(rs.error);
-      }
-    } catch (error) {
-      this.alertService.error(error);
-    }
-  }
+
 
   async getFulfills() {
     try {
@@ -54,37 +43,18 @@ export class FulfillSuppliesComponent implements OnInit {
     }
   }
 
-  async onClickFulFill() {
-    try {
-      const confirm = await this.alertService.confirm(`คุณต้องการเติมยา ${this.selected.length} รายการ ใช่หรือไม่?`);
-      if (confirm) {
-        const rs: any = await this.fulfillService.saveFulFillSupplies(this.selected);
-        if (rs.ok) {
-          this.alertService.success();
-          await this.getProducts();
-          await this.getFulfills();
-        } else {
-          this.alertService.error(rs.error);
-        }
-      }
-    } catch (error) {
-      this.alertService.error(error);
-    }
-  }
-
-
   async onClickExport() {
     this.modalLoading.show();
     try {
       const rs: any = await this.reportService.getFulFillSuppiles(this.selectedFulfills);
       console.log(rs);
       if (!rs) {
-      this.modalLoading.hide();
-    } else {
-      this.downloadFile('รายการเติมเวชภัณฑ์', 'xlsx', rs);
-      // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
-      this.modalLoading.hide();
-    }
+        this.modalLoading.hide();
+      } else {
+        this.downloadFile('รายการเติมเวชภัณฑ์', 'xlsx', rs);
+        // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
+        this.modalLoading.hide();
+      }
     } catch (error) {
       console.log(error);
       this.alertService.error();

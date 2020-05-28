@@ -46,7 +46,7 @@ export class FulfillDrugsComponent implements OnInit {
 
   async getProducts() {
     try {
-      const rs: any = await this.fulfillService.getList('DRUG', this.sortFulfill.type, this.sortFulfill.order);
+      const rs: any = await this.fulfillService.getListDrugs(this.sortFulfill.type, this.sortFulfill.order);
       if (rs.ok) {
         this.products = rs.rows;
         this.hcqFill = sumBy(this.products, 'hydroxy_chloroquine_recomment_qty');

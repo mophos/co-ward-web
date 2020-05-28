@@ -1,3 +1,4 @@
+import { FulfillSuppliesNewComponent } from './fulfill-supplies/fulfill-supplies-new/fulfill-supplies-new.component';
 import { ManageMinMaxSuppliesComponent } from './manage-min-max-supplies/manage-min-max-supplies.component';
 import { FulfillSuppliesComponent } from './fulfill-supplies/fulfill-supplies.component';
 import { ManageSystemsComponent } from './manage-systems/manage-systems.component';
@@ -77,7 +78,13 @@ const routes: Routes = [
           { path: 'fulfill-surgical-masks', component: FulfillSurgicalMaskComponent }
         ]
       },
-      { path: 'fulfill-supplies', component: FulfillSuppliesComponent },
+      {
+        path: 'fulfill-supplies',
+        children: [
+          { path: '', component: FulfillSuppliesComponent },
+          { path: 'new', component: FulfillSuppliesNewComponent }
+        ]
+      },
       { path: 'min-max-drugs', component: ManageMinMaxDrugsComponent },
       { path: 'min-max-supplies', component: ManageMinMaxSuppliesComponent },
       { path: 'systems', component: ManageSystemsComponent },
