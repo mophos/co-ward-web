@@ -1,3 +1,4 @@
+import { LoaddingComponent } from './../../help/loadding/loadding.component';
 import { AlertService } from '../../help/alert.service';
 import { FulfillService } from '../services/fulfill.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -31,7 +32,7 @@ export class FulfillDrugsComponent implements OnInit {
     type: 'zone_code',
     order: 'asc'
   };
-
+  @ViewChild('modalLoading') loadding: LoaddingComponent;
   constructor(
     private fulfillService: FulfillService,
     private alertService: AlertService,
@@ -46,6 +47,7 @@ export class FulfillDrugsComponent implements OnInit {
 
   async getProducts() {
     try {
+      this.loadding.show();
       const rs: any = await this.fulfillService.getListDrugs(this.sortFulfill.type, this.sortFulfill.order);
       if (rs.ok) {
         this.products = rs.rows;
@@ -58,7 +60,9 @@ export class FulfillDrugsComponent implements OnInit {
       } else {
         this.alertService.error(rs.error);
       }
+      this.loadding.hide();
     } catch (error) {
+      this.loadding.hide();
       this.alertService.error(error);
     }
   }
@@ -230,6 +234,7 @@ export class FulfillDrugsComponent implements OnInit {
 
   sort(type) {
     try {
+      this.loadding.show();
       if (this.sortFulfill.type === type) {
         if (this.sortFulfill.order === 'desc') {
           this.sortFulfill.order = 'asc';
@@ -245,7 +250,9 @@ export class FulfillDrugsComponent implements OnInit {
 
       this.products = orderBy(this.products, [this.sortFulfill.type], [this.sortFulfill.order]);
       // this.getProducts();
+      this.loadding.hide();
     } catch (error) {
+      this.loadding.hide();
       this.alertService.error(error);
     }
 
