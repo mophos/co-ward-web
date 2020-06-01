@@ -57,6 +57,14 @@ export class ReportAllService {
     const url = `${this.apiUrl}/v1/manager/report-all/report6?date=${date}`;
     return await this.http.get(url).toPromise();
   }
+  async getReport6Ministry(date, sector) {
+    const url = `${this.apiUrl}/v1/manager/report-all/report6-ministry?date=${date}`;
+    return await this.http.get(url).toPromise();
+  }
+  async getReport6Sector(date, sector) {
+    const url = `${this.apiUrl}/v1/manager/report-all/report6-sector?date=${date}`;
+    return await this.http.get(url).toPromise();
+  }
 
   async getReport6Excel(date, sector) {
     const url = `${this.apiUrl}/v1/manager/report-all/report6/excel?date=${date}`;
@@ -64,6 +72,14 @@ export class ReportAllService {
   }
   async getReport7(date, sector) {
     const url = `${this.apiUrl}/v1/manager/report-all/report7?date=${date}`;
+    return await this.http.get(url).toPromise();
+  }
+  async getReport7Ministry(date, sector) {
+    const url = `${this.apiUrl}/v1/manager/report-all/report7-ministry?date=${date}`;
+    return await this.http.get(url).toPromise();
+  }
+  async getReport7Sector(date, sector) {
+    const url = `${this.apiUrl}/v1/manager/report-all/report7-sector?date=${date}`;
     return await this.http.get(url).toPromise();
   }
 

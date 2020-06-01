@@ -2,115 +2,343 @@
   <span class="breadcrumb-item active">รายงานเตียงว่างแยกประเภท ณ. วันที่ {{date | dateTh:'D MMM YYYY'}}</span>
 </nav>
 <br>
-<div class="clr-row">
-  <div class="clr-col-4">
-    <!-- รายงานจำนวนเตียงผู้ป่วย  -->
-    <!-- <my-date-picker-th name="date" [options]="myDatePickerOptions" [(ngModel)]="date" required>
+<clr-tabs>
+  <clr-tab>
+    <button clrTabLink id="link1">รายงานเตียงว่างแยกประเภท(เขต)</button>
+    <clr-tab-content id="content1" *clrIfActive="true">
+      <div class="clr-row">
+        <div class="clr-col-4">
+          <!-- รายงานจำนวนเตียงผู้ป่วย  -->
+          <!-- <my-date-picker-th name="date" [options]="myDatePickerOptions" [(ngModel)]="date" required>
     </my-date-picker-th> -->
-  </div>
-  <div class="clr-col-1">
-    <!-- <button class="btn btn-sm btn-primary" (click)="doEnter()">
+        </div>
+        <div class="clr-col-1">
+          <!-- <button class="btn btn-sm btn-primary" (click)="doEnter()">
       <clr-icon shape="search"></clr-icon>
     </button> -->
-  </div>
-  <div class="clr-col-7" style="text-align: right;">
-    <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
-      <clr-icon shape="download"></clr-icon>export excel
-    </button>
-    <!-- <button class="btn btn-sm btn-success" (click)="doExportCsv()">
+        </div>
+        <div class="clr-col-7" style="text-align: right;">
+          <button class="btn btn-sm btn-primary" (click)="doExportExcel1()">
+            <clr-icon shape="download"></clr-icon>export excel
+          </button>
+          <!-- <button class="btn btn-sm btn-success" (click)="doExportCsv()">
               <clr-icon shape="download"></clr-icon>export csv
             </button> -->
-  </div>
-</div>
+        </div>
+      </div>
+      <table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
+        <tr>
+          <th rowspan="2" class="right td-border" style="position: sticky; top: 0; ">เขต</th>
+          <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">AIIR</th>
+          <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Modified AIIR</th>
+          <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Isolate</th>
+          <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Cohort</th>
+          <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Hospitel</th>
+        </tr>
+        <tr>
+          <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+          <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+          <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+          <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+          <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+          <th class="right" style="position: sticky; top: 0;">คงเหลือ</th>
+        </tr>
+        <tr>
+          <th class="td-border">รวม</th>
+          <th class="text-right td-border">{{aiir1| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{aiir2| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{aiir3 || 0| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{modi1| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{modi2| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{modi3 || 0| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{iso1| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{iso2| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{iso3 || 0| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{coh1| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{coh2| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{coh3 || 0| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{host1| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{host2| number:'1.0-0'}}</th>
+          <th class="text-right">{{host3 || 0| number:'1.0-0'}}</th>
+        </tr>
+        <tr *ngFor="let h of listSector; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+          <td class="left td-border">{{h.zone_code}}<br>
+          </td>
+          <td class="text-right td-border">{{h['aiir_qty'] ||0| number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['aiir_usage_qty'] || 0 | number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['aiir_qty'] - h['aiir_usage_qty'] || 0| number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['modified_aiir_qty'] ||0| number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['modified_aiir_usage_qty']||0 | number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['modified_aiir_qty'] - h['modified_aiir_usage_qty'] || 0|
+            number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['isolate_qty'] ||0| number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['isolate_usage_qty']||0 | number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['isolate_qty'] - h['isolate_usage_qty'] || 0| number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['cohort_qty'] ||0| number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['cohort_usage_qty']||0 | number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['cohort_qty'] - h['cohort_usage_qty'] || 0| number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['hospitel_qty'] ||0| number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['hospitel_usage_qty']||0 | number:'1.0-0'}}</td>
+          <td class="text-right">{{h['hospitel_qty'] - h['hospitel_usage_qty'] || 0| number:'1.0-0'}}</td>
+        </tr>
+        <tr>
+          <th class=" td-border" style="position: sticky; top: 0;">รวม</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{aiir1| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{aiir2| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{aiir3 || 0| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{modi1| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{modi2| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{modi3 || 0| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{iso1| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{iso2| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{iso3 || 0| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{coh1| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{coh2| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{coh3 || 0| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{host1| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{host2| number:'1.0-0'}}</th>
+          <th class="text-right" style="position: sticky; top: 0;">{{host3 || 0| number:'1.0-0'}}</th>
+          <th></th>
+        </tr>
+      </table>
+      <label>{{listSector.length | number:'1.0-0' }} รายการ</label>
+    </clr-tab-content>
+  </clr-tab>
+  <clr-tab>
+    <button clrTabLink>รายงานเตียงว่างแยกประเภท(สังกัด)</button>
+    <clr-tab-content *clrIfActive>
+      <div class="clr-row">
+        <div class="clr-col-4">
+          <!-- รายงานจำนวนเตียงผู้ป่วย  -->
+          <!-- <my-date-picker-th name="date" [options]="myDatePickerOptions" [(ngModel)]="date" required>
+    </my-date-picker-th> -->
+        </div>
+        <div class="clr-col-1">
+          <!-- <button class="btn btn-sm btn-primary" (click)="doEnter()">
+      <clr-icon shape="search"></clr-icon>
+    </button> -->
+        </div>
+        <div class="clr-col-7" style="text-align: right;">
+          <button class="btn btn-sm btn-primary" (click)="doExportExcel2()">
+            <clr-icon shape="download"></clr-icon>export excel
+          </button>
+          <!-- <button class="btn btn-sm btn-success" (click)="doExportCsv()">
+              <clr-icon shape="download"></clr-icon>export csv
+            </button> -->
+        </div>
+      </div>
+      <table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
+        <tr>
+          <th rowspan="2" class="right td-border" style="position: sticky; top: 0; ">เขต</th>
+          <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">AIIR</th>
+          <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Modified AIIR</th>
+          <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Isolate</th>
+          <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Cohort</th>
+          <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Hospitel</th>
+        </tr>
+        <tr>
+          <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+          <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+          <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+          <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+          <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+          <th class="right" style="position: sticky; top: 0;">คงเหลือ</th>
+        </tr>
+        <tr>
+          <th class="td-border">รวม</th>
+          <th class="text-right td-border">{{aiir1| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{aiir2| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{aiir3 || 0| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{modi1| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{modi2| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{modi3 || 0| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{iso1| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{iso2| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{iso3 || 0| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{coh1| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{coh2| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{coh3 || 0| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{host1| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{host2| number:'1.0-0'}}</th>
+          <th class="text-right">{{host3 || 0| number:'1.0-0'}}</th>
+        </tr>
+        <tr *ngFor="let h of listMinistry; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+          <td class="left td-border">{{h.sub_ministry_name}}<br>
+          </td>
+          <td class="text-right td-border">{{h['aiir_qty'] ||0| number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['aiir_usage_qty'] || 0 | number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['aiir_qty'] - h['aiir_usage_qty'] || 0| number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['modified_aiir_qty'] ||0| number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['modified_aiir_usage_qty']||0 | number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['modified_aiir_qty'] - h['modified_aiir_usage_qty'] || 0|
+            number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['isolate_qty'] ||0| number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['isolate_usage_qty']||0 | number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['isolate_qty'] - h['isolate_usage_qty'] || 0| number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['cohort_qty'] ||0| number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['cohort_usage_qty']||0 | number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['cohort_qty'] - h['cohort_usage_qty'] || 0| number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['hospitel_qty'] ||0| number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['hospitel_usage_qty']||0 | number:'1.0-0'}}</td>
+          <td class="text-right">{{h['hospitel_qty'] - h['hospitel_usage_qty'] || 0| number:'1.0-0'}}</td>
+        </tr>
+        <tr>
+          <th class=" td-border" style="position: sticky; top: 0;">รวม</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{aiir1| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{aiir2| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{aiir3 || 0| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{modi1| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{modi2| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{modi3 || 0| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{iso1| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{iso2| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{iso3 || 0| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{coh1| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{coh2| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{coh3 || 0| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{host1| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{host2| number:'1.0-0'}}</th>
+          <th class="text-right" style="position: sticky; top: 0;">{{host3 || 0| number:'1.0-0'}}</th>
+          <th></th>
+        </tr>
+      </table>
+      <label>{{listMinistry.length | number:'1.0-0' }} รายการ</label>
+    </clr-tab-content>
+  </clr-tab>
+  <clr-tab>
+    <button clrTabLink>รายงานเตียงว่างแยกประเภท(โรงพยาบาล)</button>
+    <clr-tab-content *clrIfActive>
+      <div class="clr-row">
+        <div class="clr-col-4">
+          <!-- รายงานจำนวนเตียงผู้ป่วย  -->
+          <!-- <my-date-picker-th name="date" [options]="myDatePickerOptions" [(ngModel)]="date" required>
+    </my-date-picker-th> -->
+        </div>
+        <div class="clr-col-1">
+          <!-- <button class="btn btn-sm btn-primary" (click)="doEnter()">
+      <clr-icon shape="search"></clr-icon>
+    </button> -->
+        </div>
+        <div class="clr-col-7" style="text-align: right;">
+          <button class="btn btn-sm btn-primary" (click)="doExportExcel3()">
+            <clr-icon shape="download"></clr-icon>export excel
+          </button>
+          <!-- <button class="btn btn-sm btn-success" (click)="doExportCsv()">
+              <clr-icon shape="download"></clr-icon>export csv
+            </button> -->
+        </div>
+      </div>
 
-<table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
-  <tr>
-    <th rowspan="2" class="right td-border" style="position: sticky; top: 0; ">โรงพยาบาล</th>
-    <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">AIIR</th>
-    <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Modified AIIR</th>
-    <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Isolate</th>
-    <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Cohort</th>
-    <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Hospitel</th>
-    <th rowspan="3" class="right" style="position: sticky; top: 0;">หน่วยงาน</th>
-  </tr>
-  <tr>
-    <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
-    <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
-    <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
-    <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
-    <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
-    <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
-    <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
-    <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
-    <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
-    <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
-    <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
-    <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
-    <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
-    <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
-    <th class="right" style="position: sticky; top: 0;">คงเหลือ</th>
-  </tr>
-  <tr>
-    <th class="td-border" >รวม</th>
-    <th class="text-right td-border" >{{aiir1| number:'1.0-0'}}</th>
-    <th class="text-right td-border" >{{aiir2| number:'1.0-0'}}</th>
-    <th class="text-right td-border" >{{aiir3 || 0| number:'1.0-0'}}</th>
-    <th class="text-right td-border" >{{modi1| number:'1.0-0'}}</th>
-    <th class="text-right td-border" >{{modi2| number:'1.0-0'}}</th>
-    <th class="text-right td-border" >{{modi3 || 0| number:'1.0-0'}}</th>
-    <th class="text-right td-border" >{{iso1| number:'1.0-0'}}</th>
-    <th class="text-right td-border" >{{iso2| number:'1.0-0'}}</th>
-    <th class="text-right td-border" >{{iso3 || 0| number:'1.0-0'}}</th>
-    <th class="text-right td-border" >{{coh1| number:'1.0-0'}}</th>
-    <th class="text-right td-border" >{{coh2| number:'1.0-0'}}</th>
-    <th class="text-right td-border" >{{coh3 || 0| number:'1.0-0'}}</th>
-    <th class="text-right td-border" >{{host1| number:'1.0-0'}}</th>
-    <th class="text-right td-border" >{{host2| number:'1.0-0'}}</th>
-    <th class="text-right" >{{host3 || 0| number:'1.0-0'}}</th>
-  </tr>
-  <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
-    <td class="left td-border">{{h.hospname}}<br>
-      <label style="color: red;">
-        ข้อมูลล่าสุด: {{ h.updated_entry | dateTh:'DD/MM/YYYY hh:mm'}}
-      </label>
-    </td>
-    <td class="text-right td-border">{{h['aiir_qty'] ||0| number:'1.0-0'}}</td>
-    <td class="text-right td-border">{{h['aiir_usage_qty'] || 0 | number:'1.0-0'}}</td>
-    <td class="text-right td-border">{{h['aiir_qty'] - h['aiir_usage_qty'] || 0| number:'1.0-0'}}</td>
-    <td class="text-right td-border">{{h['modified_aiir_qty'] ||0| number:'1.0-0'}}</td>
-    <td class="text-right td-border">{{h['modified_aiir_usage_qty']||0 | number:'1.0-0'}}</td>
-    <td class="text-right td-border">{{h['modified_aiir_qty'] - h['modified_aiir_usage_qty'] || 0| number:'1.0-0'}}</td>
-    <td class="text-right td-border">{{h['isolate_qty'] ||0| number:'1.0-0'}}</td>
-    <td class="text-right td-border">{{h['isolate_usage_qty']||0 | number:'1.0-0'}}</td>
-    <td class="text-right td-border">{{h['isolate_qty'] - h['isolate_usage_qty'] || 0| number:'1.0-0'}}</td>
-    <td class="text-right td-border">{{h['cohort_qty'] ||0| number:'1.0-0'}}</td>
-    <td class="text-right td-border">{{h['cohort_usage_qty']||0 | number:'1.0-0'}}</td>
-    <td class="text-right td-border">{{h['cohort_qty'] - h['cohort_usage_qty'] || 0| number:'1.0-0'}}</td>
-    <td class="text-right td-border">{{h['hospitel_qty'] ||0| number:'1.0-0'}}</td>
-    <td class="text-right td-border">{{h['hospitel_usage_qty']||0 | number:'1.0-0'}}</td>
-    <td class="text-right">{{h['hospitel_qty'] - h['hospitel_usage_qty'] || 0| number:'1.0-0'}}</td>
-    <td class="left td-border">{{h.sub_ministry_name}}</td>
-  </tr>
-  <tr>
-    <th class=" td-border" style="position: sticky; top: 0;">รวม</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{aiir1| number:'1.0-0'}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{aiir2| number:'1.0-0'}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{aiir3 || 0| number:'1.0-0'}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{modi1| number:'1.0-0'}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{modi2| number:'1.0-0'}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{modi3 || 0| number:'1.0-0'}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{iso1| number:'1.0-0'}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{iso2| number:'1.0-0'}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{iso3 || 0| number:'1.0-0'}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{coh1| number:'1.0-0'}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{coh2| number:'1.0-0'}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{coh3 || 0| number:'1.0-0'}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{host1| number:'1.0-0'}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{host2| number:'1.0-0'}}</th>
-    <th class="text-right" style="position: sticky; top: 0;">{{host3 || 0| number:'1.0-0'}}</th>
-    <th></th>
-  </tr>
-</table>
-<label>{{list.length | number:'1.0-0' }} รายการ</label>
+      <table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
+        <tr>
+          <th rowspan="2" class="right td-border" style="position: sticky; top: 0; ">โรงพยาบาล</th>
+          <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">AIIR</th>
+          <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Modified AIIR</th>
+          <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Isolate</th>
+          <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Cohort</th>
+          <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Hospitel</th>
+          <th rowspan="3" class="right" style="position: sticky; top: 0;">หน่วยงาน</th>
+        </tr>
+        <tr>
+          <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+          <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+          <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+          <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+          <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+          <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+          <th class="right" style="position: sticky; top: 0;">คงเหลือ</th>
+        </tr>
+        <tr>
+          <th class="td-border">รวม</th>
+          <th class="text-right td-border">{{aiir1| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{aiir2| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{aiir3 || 0| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{modi1| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{modi2| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{modi3 || 0| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{iso1| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{iso2| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{iso3 || 0| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{coh1| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{coh2| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{coh3 || 0| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{host1| number:'1.0-0'}}</th>
+          <th class="text-right td-border">{{host2| number:'1.0-0'}}</th>
+          <th class="text-right">{{host3 || 0| number:'1.0-0'}}</th>
+        </tr>
+        <tr *ngFor="let h of listHospital; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+          <td class="left td-border">{{h.hospname}}<br>
+            <label style="color: red;">
+              ข้อมูลล่าสุด: {{ h.updated_entry | dateTh:'DD/MM/YYYY hh:mm'}}
+            </label>
+          </td>
+          <td class="text-right td-border">{{h['aiir_qty'] ||0| number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['aiir_usage_qty'] || 0 | number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['aiir_qty'] - h['aiir_usage_qty'] || 0| number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['modified_aiir_qty'] ||0| number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['modified_aiir_usage_qty']||0 | number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['modified_aiir_qty'] - h['modified_aiir_usage_qty'] || 0|
+            number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['isolate_qty'] ||0| number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['isolate_usage_qty']||0 | number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['isolate_qty'] - h['isolate_usage_qty'] || 0| number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['cohort_qty'] ||0| number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['cohort_usage_qty']||0 | number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['cohort_qty'] - h['cohort_usage_qty'] || 0| number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['hospitel_qty'] ||0| number:'1.0-0'}}</td>
+          <td class="text-right td-border">{{h['hospitel_usage_qty']||0 | number:'1.0-0'}}</td>
+          <td class="text-right">{{h['hospitel_qty'] - h['hospitel_usage_qty'] || 0| number:'1.0-0'}}</td>
+          <td class="left td-border">{{h.sub_ministry_name}}</td>
+        </tr>
+        <tr>
+          <th class=" td-border" style="position: sticky; top: 0;">รวม</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{aiir1| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{aiir2| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{aiir3 || 0| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{modi1| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{modi2| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{modi3 || 0| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{iso1| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{iso2| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{iso3 || 0| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{coh1| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{coh2| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{coh3 || 0| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{host1| number:'1.0-0'}}</th>
+          <th class="text-right td-border" style="position: sticky; top: 0;">{{host2| number:'1.0-0'}}</th>
+          <th class="text-right" style="position: sticky; top: 0;">{{host3 || 0| number:'1.0-0'}}</th>
+          <th></th>
+        </tr>
+      </table>
+      <label>{{listHospital.length | number:'1.0-0' }} รายการ</label>
+    </clr-tab-content>
+  </clr-tab>
+</clr-tabs>
 
 <app-loadding #loading></app-loadding>

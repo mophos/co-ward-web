@@ -14,7 +14,9 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class Report7Component implements OnInit {
 
-  list: any = [];
+  listHospital: any = [];
+  listMinistry: any = [];
+  listSector: any = [];
   date: any;
 
   nivQty: any;
@@ -51,15 +53,73 @@ export class Report7Component implements OnInit {
 
   async ngOnInit() {
     this.date = moment();
-    await this.getList();
+    await this.getList1();
+    await this.getList2();
+    await this.getList3();
   }
 
-  async getList() {
+  async getList1() {
     this.loading.show();
     try {
       const rs: any = await this.reportService.getReport7(moment(this.date).format('YYYY-MM-DD'), this.sector);
       if (rs.ok) {
-        this.list = rs.rows;
+        this.listHospital = rs.rows;
+        this.nivCovid = sumBy(rs.rows, 'non_invasive_ventilator');
+        this.nivQty = sumBy(rs.rows, 'non_invasive_qty') - sumBy(rs.rows, 'non_invasive_ventilator');
+        this.nivAll = sumBy(rs.rows, 'non_invasive_qty');
+
+        this.ivCovid = sumBy(rs.rows, 'invasive_ventilator');
+        this.ivQty = sumBy(rs.rows, 'invasive_qty') - sumBy(rs.rows, 'invasive_ventilator');
+        this.ivAll = sumBy(rs.rows, 'invasive_qty');
+
+        this.hfCovid = sumBy(rs.rows, 'high_flow');
+        this.hfQty = sumBy(rs.rows, 'high_flow_qty') - sumBy(rs.rows, 'high_flow');
+        this.hfAll = sumBy(rs.rows, 'high_flow_qty');
+        this.loading.hide();
+      } else {
+        this.loading.hide();
+        this.alertService.error();
+      }
+    } catch (error) {
+      this.loading.hide();
+      this.alertService.error(error);
+    }
+  }
+
+  async getList2() {
+    this.loading.show();
+    try {
+      const rs: any = await this.reportService.getReport7Ministry(moment(this.date).format('YYYY-MM-DD'), this.sector);
+      if (rs.ok) {
+        this.listMinistry = rs.rows;
+        this.nivCovid = sumBy(rs.rows, 'non_invasive_ventilator');
+        this.nivQty = sumBy(rs.rows, 'non_invasive_qty') - sumBy(rs.rows, 'non_invasive_ventilator');
+        this.nivAll = sumBy(rs.rows, 'non_invasive_qty');
+
+        this.ivCovid = sumBy(rs.rows, 'invasive_ventilator');
+        this.ivQty = sumBy(rs.rows, 'invasive_qty') - sumBy(rs.rows, 'invasive_ventilator');
+        this.ivAll = sumBy(rs.rows, 'invasive_qty');
+
+        this.hfCovid = sumBy(rs.rows, 'high_flow');
+        this.hfQty = sumBy(rs.rows, 'high_flow_qty') - sumBy(rs.rows, 'high_flow');
+        this.hfAll = sumBy(rs.rows, 'high_flow_qty');
+        this.loading.hide();
+      } else {
+        this.loading.hide();
+        this.alertService.error();
+      }
+    } catch (error) {
+      this.loading.hide();
+      this.alertService.error(error);
+    }
+  }
+
+  async getList3() {
+    this.loading.show();
+    try {
+      const rs: any = await this.reportService.getReport7Sector(moment(this.date).format('YYYY-MM-DD'), this.sector);
+      if (rs.ok) {
+        this.listSector = rs.rows;
         this.nivCovid = sumBy(rs.rows, 'non_invasive_ventilator');
         this.nivQty = sumBy(rs.rows, 'non_invasive_qty') - sumBy(rs.rows, 'non_invasive_ventilator');
         this.nivAll = sumBy(rs.rows, 'non_invasive_qty');
@@ -83,7 +143,9 @@ export class Report7Component implements OnInit {
   }
 
   async doEnter() {
-    await this.getList();
+    await this.getList1();
+    await this.getList2();
+    await this.getList3();
   }
 
   async doExportExcel() {
