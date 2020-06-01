@@ -148,14 +148,50 @@ export class Report7Component implements OnInit {
     await this.getList3();
   }
 
-  async doExportExcel() {
+  async doExportExcel1() {
+    this.loading.show();
+    try {
+      const rs: any = await this.reportService.getReport7SectorExcel(moment(this.date).format('YYYY-MM-DD'), this.sector);
+      if (!rs) {
+        this.loading.hide();
+      } else {
+        this.downloadFile('7.รายงานจำนวนประเภทเครื่องช่วยหายใจ(เขต)', 'xlsx', rs);
+        // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
+        this.loading.hide();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.error();
+      this.loading.hide();
+    }
+  }
+
+  async doExportExcel2() {
+    this.loading.show();
+    try {
+      const rs: any = await this.reportService.getReport7MinistryExcel(moment(this.date).format('YYYY-MM-DD'), this.sector);
+      if (!rs) {
+        this.loading.hide();
+      } else {
+        this.downloadFile('7.รายงานจำนวนประเภทเครื่องช่วยหายใจ(สังกัด)', 'xlsx', rs);
+        // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
+        this.loading.hide();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.error();
+      this.loading.hide();
+    }
+  }
+
+  async doExportExcel3() {
     this.loading.show();
     try {
       const rs: any = await this.reportService.getReport7Excel(moment(this.date).format('YYYY-MM-DD'), this.sector);
       if (!rs) {
         this.loading.hide();
       } else {
-        this.downloadFile('7.รายงานจำนวนประเภทเครื่องช่วยหายใจ', 'xlsx', rs);
+        this.downloadFile('7.รายงานจำนวนประเภทเครื่องช่วยหายใจ(โรงพยาบาล)', 'xlsx', rs);
         // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
         this.loading.hide();
       }
