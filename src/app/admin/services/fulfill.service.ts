@@ -8,8 +8,13 @@ export class FulfillService {
 
   constructor(private http: HttpClient, @Inject('API_URL') private url: string) { }
 
-  getList(type, orderType = null, orderSort = null) {
-    const url = `${this.url}/v1/admin/fulfill?type=${type}&orderType=${orderType}&orderSort=${orderSort}`;
+  getListDrugs(orderType = null, orderSort = null) {
+    const url = `${this.url}/v1/admin/fulfill/product/drugs?orderType=${orderType}&orderSort=${orderSort}`;
+    return this.http.get(url).toPromise();
+  }
+
+  getListSupplies(orderType = null, orderSort = null) {
+    const url = `${this.url}/v1/admin/fulfill/product/supplies?orderType=${orderType}&orderSort=${orderSort}`;
     return this.http.get(url).toPromise();
   }
 
@@ -36,9 +41,9 @@ export class FulfillService {
     const url = `${this.url}/v1/admin/fulfill/drugs`;
     return this.http.get(url).toPromise();
   }
-  saveFulFillSupplies(data: any) {
+  saveFulFillSupplies(data: any, list: any) {
     const url = `${this.url}/v1/admin/fulfill/supplies`;
-    return this.http.post(url, { data }).toPromise();
+    return this.http.post(url, { data, list }).toPromise();
   }
   getFulFillSupplies() {
     const url = `${this.url}/v1/admin/fulfill/supplies`;

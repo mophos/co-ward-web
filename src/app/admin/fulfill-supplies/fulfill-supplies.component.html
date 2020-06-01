@@ -5,52 +5,14 @@
 
 <clr-tabs>
   <clr-tab>
-    <button clrTabLink id="link1" (click)="getProducts()">เติมเวชภัณฑ์</button>
-    <clr-tab-content id="content1" *clrIfActive>
-
-      <button class="btn btn-success btn-sm" (click)="onClickFulFill()">เติมเวชภัณฑ์ {{selected.length+' รายการ'}}</button>
-      <table class="table" style="width:100%">
-        <tr>
-          <td>N95 <br>0 ชิ้น</td>
-          <td>COVER ALL <br>0 ชิ้น</td>
-          <td>Surgical gown<br>0 ชิ้น</td>
-        </tr>
-      </table>
-      <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800" [(clrDgSelected)]="selected">
-        <clr-dg-column>โรงพยาบาล</clr-dg-column>
-        <clr-dg-column>ชื่อยา</clr-dg-column>
-        <clr-dg-column>คงคลัง</clr-dg-column>
-        <clr-dg-column>min/max</clr-dg-column>
-        <clr-dg-column>safety stock</clr-dg-column>
-        <clr-dg-column>ยอดแนะนำ</clr-dg-column>
-        <clr-dg-column>ยอดเติม</clr-dg-column>
-
-        <clr-dg-row *clrDgItems="let i of products" [clrDgItem]="i">
-          <clr-dg-cell>{{i.hospital_name}}</clr-dg-cell>
-          <clr-dg-cell>{{i.generic_name}}</clr-dg-cell>
-          <clr-dg-cell>{{i.qty}} {{i.reserve_qty? '(+'+i.reserve_qty+')' : ''}}</clr-dg-cell>
-          <clr-dg-cell>{{i.min}}/{{i.max}}</clr-dg-cell>
-          <clr-dg-cell>{{i.safety_stock}}</clr-dg-cell>
-          <clr-dg-cell>{{i.recommend_fill_qty}}</clr-dg-cell>
-          <clr-dg-cell>
-            <input type="text" appNumberOnly name="{{i.fill_qty}}" [(ngModel)]="i.fill_qty">
-          </clr-dg-cell>
-        </clr-dg-row>
-        <!-- <clr-dg-footer>
-            <clr-dg-pagination #pagination [clrDgTotalItems]="total" [clrDgPageSize]="limit">
-              <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
-              {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} จาก {{pagination.totalItems}} รายการ
-            </clr-dg-pagination>
-          </clr-dg-footer> -->
-      </clr-datagrid>
-    </clr-tab-content>
-  </clr-tab>
-  <clr-tab>
-    <button clrTabLink>รายการเติมเวชภัณฑ์</button>
+    <button clrTabLink>รายการรออนุมัติ</button>
     <clr-tab-content *clrIfActive>
+
+      <button class="btn btn-success btn-sm" [routerLink]="['/admin/fulfill-supplies/new']" routerLinkActive="router-link-active" >สร้างใบเติม</button>
       <button class="btn btn-primary btn-sm" (click)="onClickExport()">Export {{countExport+' รายการ'}}</button>
       <button class="btn btn-success btn-sm" (click)="onClickApprove()">อนุมัติ {{countApprove+' รายการ'}}</button>
-      <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800" [(clrDgSelected)]="selectedFulfills"  (clrDgSelectedChange)="selectionChanged($event)">
+      <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800" [(clrDgSelected)]="selectedFulfills"
+        (clrDgSelectedChange)="selectionChanged($event)">
         <clr-dg-column>ใบเติม</clr-dg-column>
         <clr-dg-column>วันที่เติม</clr-dg-column>
         <clr-dg-column>ผู้เติม</clr-dg-column>
@@ -62,7 +24,8 @@
           <clr-dg-cell>{{i.created_date | dateTh:'D MMM YYYY'}}</clr-dg-cell>
           <clr-dg-cell>{{i.fname}} {{i.lname}}</clr-dg-cell>
           <clr-dg-cell>{{i.is_approved == 'Y' ? 'อนุมัติแล้ว':'รออนุมัติ'}}</clr-dg-cell>
-          <app-fulfill-supplies-details [id]="i.id" *clrIfExpanded ngProjectAs="clr-dg-row-detail"></app-fulfill-supplies-details>
+          <app-fulfill-supplies-details [id]="i.id" *clrIfExpanded ngProjectAs="clr-dg-row-detail">
+          </app-fulfill-supplies-details>
           <!-- <clr-dg-cell>
             <input type="text" appNumberOnly name="{{i.fill_qty}}" [(ngModel)]="i.fill_qty">
           </clr-dg-cell> -->
@@ -74,6 +37,16 @@
             </clr-dg-pagination>
           </clr-dg-footer> -->
       </clr-datagrid>
+    </clr-tab-content>
+  </clr-tab>
+  <clr-tab>
+    <button clrTabLink>รายการค้างจ่าย</button>
+    <clr-tab-content *clrIfActive>
+    </clr-tab-content>
+  </clr-tab>
+  <clr-tab>
+    <button clrTabLink>รายการผ่านการอนุมัติ</button>
+    <clr-tab-content *clrIfActive>
     </clr-tab-content>
   </clr-tab>
 </clr-tabs>
