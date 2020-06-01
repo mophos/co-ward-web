@@ -132,7 +132,7 @@ export class FulfillSuppliesNewComponent implements OnInit {
         const rs: any = await this.fulfillService.saveFulFillSupplies(this.products, list);
         if (rs.ok) {
           this.alertService.success();
-          await this.getProducts();
+          // await this.getProducts();
         } else {
           this.alertService.error(rs.error);
         }

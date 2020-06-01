@@ -1,3 +1,7 @@
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="javascript://" routerLink="/admin/fulfill-supplies">รายการเติมเวชภัณฑ์</a>
+  <span>เติมเวชภัณฑ์</span>
+</nav>
 <div [ngClass]="{hidden: isModal}">
   <!-- <table class="table" style="width:100%">
     <tr>
@@ -8,7 +12,7 @@
   </table> -->
 
   <div style="overflow-x: scroll;width: 100%;">
-    <button class="btn btn-success btn-sm" (click)="onClickFulFill()">บันทึก</button>
+   
     <table class="table table-compact" style="width:max-content;max-width: max-content;border-collapse: collapse;">
       <thead>
         <tr>
@@ -159,6 +163,7 @@
         </tr>
       </tbody>
     </table>
+    <button class="btn btn-success btn-sm btn-block" (click)="onClickFulFill()">บันทึก</button>
   </div>
 </div>
 
