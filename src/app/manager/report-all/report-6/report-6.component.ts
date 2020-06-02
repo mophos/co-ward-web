@@ -172,15 +172,15 @@ export class Report6Component implements OnInit {
     this.getList1();
   }
 
-  async doExportExcel() {
+  async doExportExcel1() {
     this.loading.show();
     try {
-      const rs: any = await this.reportService.getReport6Excel(this.date, this.sector);
+      const rs: any = await this.reportService.getReport6SectorExcel(this.date, this.sector);
       console.log(rs);
       if (!rs) {
         this.loading.hide();
       } else {
-        this.downloadFile('6.รายงานเตียงว่างแยกประเภท', 'xlsx', rs);
+        this.downloadFile('6.รายงานเตียงว่างแยกประเภท(เขต)', 'xlsx', rs);
         // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
         this.loading.hide();
       }
@@ -191,24 +191,43 @@ export class Report6Component implements OnInit {
     }
   }
 
-  // async doExportCsv() {
-  //   this.loading.show();
-  //   try {
-  //     const rs: any = await this.reportService.getReportBedCsv();
-  //     console.log(rs);
-  //     if (!rs) {
-  //       this.loading.hide();
-  //     } else {
-  //       this.downloadFile('รายการเติมยา', 'csv', rs);
-  //       // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
-  //       this.loading.hide();
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     this.alertService.error();
-  //     this.loading.hide();
-  //   }
-  // }
+  async doExportExcel2() {
+    this.loading.show();
+    try {
+      const rs: any = await this.reportService.getReport6MinistryExcel(this.date, this.sector);
+      console.log(rs);
+      if (!rs) {
+        this.loading.hide();
+      } else {
+        this.downloadFile('6.รายงานเตียงว่างแยกประเภท(สังกัด)', 'xlsx', rs);
+        // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
+        this.loading.hide();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.error();
+      this.loading.hide();
+    }
+  }
+
+  async doExportExcel3() {
+    this.loading.show();
+    try {
+      const rs: any = await this.reportService.getReport6Excel(this.date, this.sector);
+      console.log(rs);
+      if (!rs) {
+        this.loading.hide();
+      } else {
+        this.downloadFile('6.รายงานเตียงว่างแยกประเภท(โรงพยาบาล)', 'xlsx', rs);
+        // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
+        this.loading.hide();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.error();
+      this.loading.hide();
+    }
+  }
 
   downloadFile(name, type, data: any) {
     try {
