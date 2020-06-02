@@ -57,13 +57,38 @@ export class ReportAllService {
     const url = `${this.apiUrl}/v1/manager/report-all/report6?date=${date}`;
     return await this.http.get(url).toPromise();
   }
+  async getReport6Ministry(date, sector) {
+    const url = `${this.apiUrl}/v1/manager/report-all/report6-ministry?date=${date}`;
+    return await this.http.get(url).toPromise();
+  }
+  async getReport6Sector(date, sector) {
+    const url = `${this.apiUrl}/v1/manager/report-all/report6-sector?date=${date}`;
+    return await this.http.get(url).toPromise();
+  }
 
   async getReport6Excel(date, sector) {
     const url = `${this.apiUrl}/v1/manager/report-all/report6/excel?date=${date}`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
+  async getReport6MinistryExcel(date, sector) {
+    const url = `${this.apiUrl}/v1/manager/report-all/report6-ministry/excel?date=${date}`;
+    return await this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+  async getReport6SectorExcel(date, sector) {
+    const url = `${this.apiUrl}/v1/manager/report-all/report6-sector/excel?date=${date}`;
+    return await this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+
   async getReport7(date, sector) {
     const url = `${this.apiUrl}/v1/manager/report-all/report7?date=${date}`;
+    return await this.http.get(url).toPromise();
+  }
+  async getReport7Ministry(date, sector) {
+    const url = `${this.apiUrl}/v1/manager/report-all/report7-ministry?date=${date}`;
+    return await this.http.get(url).toPromise();
+  }
+  async getReport7Sector(date, sector) {
+    const url = `${this.apiUrl}/v1/manager/report-all/report7-sector?date=${date}`;
     return await this.http.get(url).toPromise();
   }
 
@@ -71,6 +96,15 @@ export class ReportAllService {
     const url = `${this.apiUrl}/v1/manager/report-all/report7/excel?date=${date}`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
+  async getReport7MinistryExcel(date, sector) {
+    const url = `${this.apiUrl}/v1/manager/report-all/report7-ministry/excel?date=${date}`;
+    return await this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+  async getReport7SectorExcel(date, sector) {
+    const url = `${this.apiUrl}/v1/manager/report-all/report7-sector/excel?date=${date}`;
+    return await this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+  
   async getReport8(date, sector) {
     const url = `${this.apiUrl}/v1/manager/report-all/report8?date=${date}`;
     return await this.http.get(url).toPromise();

@@ -101,4 +101,9 @@ export class ReportService {
     const url = `${this.apiUrl}/v1/report/records`;
     return await this.http.get(url).toPromise();
   }
+
+  async getLocalQuarantine() {
+    const url = `${this.apiUrl}/v1/report/local-quarantine`;
+    return await this.http.get(url).toPromise();
+  }
 }

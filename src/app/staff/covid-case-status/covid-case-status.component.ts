@@ -398,42 +398,44 @@ export class CovidCaseStatusComponent implements OnInit {
   async save() {
     const confirm = await this.alertService.confirm();
     if (confirm) {
-      // if (this.hour !== undefined && this.minute !== undefined) {
-      try {
-        const obj: any = {};
-        let status = null;
-        if (this.modalDischargeType === 'HOME') {
-          status = 'DISCHARGE';
-        } else if (this.modalDischargeType === 'DEATH') {
-          status = 'DEATH';
-        } else if (this.modalDischargeType === 'REFER') {
-          status = 'REFER';
-          obj.hospitalId = this.hospitalId;
-          obj.reason = this.reason;
-        } else if (this.modalDischargeType === 'NEGATIVE') {
-          status = 'NEGATIVE';
-        }
-        obj.dateDischarge = this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day + ' ' + this.hour + ':' + this.minute + ':00';
-        obj.covidCaseId = this.selected.covid_case_id;
-        obj.status = status;
+      if (this.dateDischarge != null) {
+        try {
+          const obj: any = {};
+          let status = null;
+          if (this.modalDischargeType === 'HOME') {
+            status = 'DISCHARGE';
+          } else if (this.modalDischargeType === 'DEATH') {
+            status = 'DEATH';
+          } else if (this.modalDischargeType === 'REFER') {
+            status = 'REFER';
+            obj.hospitalId = this.hospitalId;
+            obj.reason = this.reason;
+          } else if (this.modalDischargeType === 'NEGATIVE') {
+            status = 'NEGATIVE';
+          }
+          obj.dateDischarge = this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day + ' ' + this.hour + ':' + this.minute + ':00';
+          obj.covidCaseId = this.selected.covid_case_id;
+          obj.status = status;
 
-        const rs: any = await this.covidCaseService.updateDischarge(obj, this.selected);
-        if (rs.ok) {
-          this.modalDischarge = false;
-          this.getList();
-          this.getGCSSum();
-          this.getBedSum();
-          this.getMedicalSuppliesSum();
-          this.alertService.success();
-        } else {
-          console.log(rs.error);
+          const rs: any = await this.covidCaseService.updateDischarge(obj, this.selected);
+          if (rs.ok) {
+            this.modalDischarge = false;
+            this.getList();
+            this.getGCSSum();
+            this.getBedSum();
+            this.getMedicalSuppliesSum();
+            this.alertService.success();
+          } else {
+            console.log(rs.error);
+            this.alertService.serverError();
+          }
+        } catch (error) {
+          console.log(error);
           this.alertService.serverError();
         }
-      } catch (error) {
-        console.log(error);
-        this.alertService.serverError();
+      } else {
+        this.alertService.error('กรุณาระบุวันที่');
       }
-      // }
     }
   }
 

@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '../../../node_modules/@angular/router';
 import { LoginService } from '../login/login.service';
-import * as findIndex from 'lodash/findIndex';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import * as moment from 'moment';
 import { RegisterService } from '../register/register.service';

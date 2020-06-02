@@ -1,0 +1,24 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">รายงาน Local Quarantine</span>
+</nav>
+
+<h4>รวม {{total}} คน</h4>
+<table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
+  <tr>
+    <th class="right td-border" style="position: sticky; top: 0;">ชื่อ</th>
+    <th class="right td-border" style="position: sticky; top: 0;">เบอร์โทรศัพท์</th>
+    <th class="right td-border" style="position: sticky; top: 0;">วันที่ Check In</th>
+    <th class="right td-border" style="position: sticky; top: 0;">วันที่ Check Out</th>
+    <th class="right td-border" style="position: sticky; top: 0;">สาเหตุที่ Check Out</th>
+    <th class="right td-border" style="position: sticky; top: 0;">จังหวัดล่าสุด</th>
+  </tr>
+  <tr *ngFor="let h of listL; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+    <td class="left td-border">{{h.thTitle}} {{h.thFullName}}</td>
+    <td class="right td-border">{{h.tel}}</td>
+    <td class="right td-border">{{h.checkInDate | dateTh:'D MMM YYYY'}}</td>
+    <td class="right td-border">{{h.checkOutDate | dateTh:'D MMM YYYY'}}</td>
+    <td class="right td-border">{{h.causeOfCheckOut | dateTh:'D MMM YYYY'}}</td>
+    <td class="right td-border">{{h.lastQuarantineProvince}}</td>
+  </tr>
+</table>
+<app-loadding #modalLoading></app-loadding>
