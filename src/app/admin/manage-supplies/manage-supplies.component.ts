@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SuppliesService } from '../services/supplies.service';
 import { AlertService } from '../../help/alert.service';
-import * as findIndex from 'lodash/findIndex';
+import { findIndex } from 'lodash';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({

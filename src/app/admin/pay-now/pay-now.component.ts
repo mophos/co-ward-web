@@ -4,7 +4,7 @@ import { AlertService } from '../../help/alert.service';
 import { RestockService } from '../services/restock.service';
 import { Router } from '@angular/router';
 
-import * as findIndex from 'lodash/findIndex';
+import { findIndex } from 'lodash';
 import * as XLSX from 'ts-xlsx';
 @Component({
   selector: 'app-pay-now',

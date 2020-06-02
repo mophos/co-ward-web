@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { AlertService } from '../../help/alert.service';
-import * as findIndex from 'lodash/findIndex';
+import { findIndex } from 'lodash';
 import { ClrDatagridStateInterface } from '@clr/angular';
 
 @Component({

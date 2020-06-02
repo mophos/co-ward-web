@@ -2,7 +2,7 @@ import { BasicService } from './../services/basic.service';
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from '../../help/alert.service';
 import { IMyOptions } from 'mydatepicker-th';
-import * as findIndex from 'lodash/findIndex';
+import { findIndex } from 'lodash';
 import { SupplieService } from '../supplie.service';
 @Component({
   selector: 'app-supplies',

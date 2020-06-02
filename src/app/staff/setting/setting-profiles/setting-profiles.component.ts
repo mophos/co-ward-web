@@ -2,7 +2,7 @@ import { RegisterService } from './../../../register/register.service';
 import { SettingService } from './../../setting.service';
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from '../../../help/alert.service';
-import * as findIndex from 'lodash/findIndex';
+import { findIndex } from 'lodash';
 
 @Component({
   selector: 'app-setting-profiles',

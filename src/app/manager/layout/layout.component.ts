@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
-import * as findIndex from 'lodash/findIndex';
+import { findIndex } from 'lodash';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',

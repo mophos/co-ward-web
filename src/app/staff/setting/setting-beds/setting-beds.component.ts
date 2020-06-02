@@ -1,7 +1,7 @@
 import { SettingService } from './../../setting.service';
 import { AlertService } from './../../../help/alert.service';
 import { Component, OnInit } from '@angular/core';
-import * as findIndex from 'lodash/findIndex';
+import { findIndex } from 'lodash';
 
 @Component({
   selector: 'app-setting-beds',

@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { PayService } from '../pay.service';
 import { IMyOptions } from 'mydatepicker-th';
 import { SelectedHospitalChildNodeComponent } from 'src/app/help/selected-hospital-child-node/selected-hospital-child-node.component';
-import * as findIndex from 'lodash/findIndex';
+import { findIndex } from 'lodash';
 import { BasicService } from '../services/basic.service';
 import * as moment from 'moment';
 

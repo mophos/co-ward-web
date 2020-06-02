@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { SettingService } from '../setting.service';
 import { RegisterService } from '../../register/register.service';
 import { AlertService } from '../../help/alert.service';
-import * as findIndex from 'lodash/findIndex';
+import { findIndex } from 'lodash';
 import { AutocompleteProvinceComponent } from '../../help/autocomplete-address/autocomplete-province/autocomplete-province.component';
 import { AutocompleteDistrictComponent } from '../../help/autocomplete-address/autocomplete-district/autocomplete-district.component';
 import { AutocompleteSubdistrictComponent } from '../../help/autocomplete-address/autocomplete-subdistrict/autocomplete-subdistrict.component';
