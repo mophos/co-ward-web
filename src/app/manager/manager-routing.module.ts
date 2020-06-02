@@ -39,6 +39,7 @@ import { Report9Component } from './report-all/report-9/report-9.component';
 import { Report10Component } from './report-all/report-10/report-10.component';
 import { ReportReviewHomeworkAllComponent } from './report-all/report-review-homework-all/report-review-homework-all.component';
 import { ReportRecordsComponent } from './report-records/report-records.component';
+import { ReportLocalQuarantineComponent } from './report-local-quarantine/report-local-quarantine.component';
 
 
 const routes: Routes = [
@@ -97,6 +98,7 @@ const routes: Routes = [
 
       { path: 'report-admit-confirm-case', component: ReportAdmitConfirmCaseComponent },
       { path: 'report-records', component: ReportRecordsComponent },
+      { path: 'report-local-quarantine', component: ReportLocalQuarantineComponent },
     ]
   }
 ];

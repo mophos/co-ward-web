@@ -41,6 +41,11 @@
         <clr-icon clrVerticalNavIcon shape="folder-open" class="is-solid"></clr-icon>
         รายงานการบันทึกข้อมูลในระบบ CO-ward
       </a>
+      <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager/report-local-quarantine" title="รายงาน Local Quarantine"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="folder-open" class="is-solid"></clr-icon>
+        รายงาน Local Quarantine
+      </a>
       <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager/report-supplies-summary" title="รายงานเวชภัณฑ์"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="folder-open" class="is-solid"></clr-icon>

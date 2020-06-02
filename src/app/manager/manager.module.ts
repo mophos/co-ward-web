@@ -48,6 +48,7 @@ import { Report7Component } from './report-all/report-7/report-7.component';
 import { Report8Component } from './report-all/report-8/report-8.component';
 import { Report9Component } from './report-all/report-9/report-9.component';
 import { Report10Component } from './report-all/report-10/report-10.component';
+import { ReportLocalQuarantineComponent } from './report-local-quarantine/report-local-quarantine.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +91,8 @@ import { Report10Component } from './report-all/report-10/report-10.component';
     ReportPatientsProvincesComponent,
     ReportAdmitConfirmCaseComponent,
     ReportReviewHomeworkComponent,
-    ReportRecordsComponent
+    ReportRecordsComponent,
+    ReportLocalQuarantineComponent
   ],
   imports: [
     CommonModule,
