@@ -42,6 +42,7 @@ export class LayoutComponent implements OnInit {
   settingProvinceSubUserMenu: any;
   // ---------------------------------
   reportMenu: any;
+  reportAll: any;
   mqttClient: MqttClient;
   modalClose = false;
   modalAlert = false;
@@ -75,6 +76,12 @@ export class LayoutComponent implements OnInit {
       this.reportMenu = true;
     } else {
       this.reportMenu = false;
+    }
+
+    if (decoded.providerType === 'ZONE') {
+      this.reportAll = true;
+    } else {
+      this.reportAll = false;
     }
     // ---------------------------------------------------------------------------------------------------
     this.settingBasicMenu = findIndex(this.rights, { name: 'STAFF_SETTING_BASIC' }) === -1 ? false : true;

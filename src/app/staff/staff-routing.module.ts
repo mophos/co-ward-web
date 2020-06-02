@@ -56,6 +56,16 @@ import { ReportBedComponent } from './report-bed/report-bed.component';
 import { AuthReportPatientsService } from '../auth-staff/auth-report-patients.service';
 import { ReceivesComponent } from '../staff/receives/receives.component';
 import { CovidCaseUpdateComponent } from './covid-case/covid-case-update/covid-case-update.component';
+import { Report1Component } from '../manager/report-all/report-1/report-1.component';
+import { Report2Component } from '../manager/report-all/report-2/report-2.component';
+import { Report3Component } from '../manager/report-all/report-3/report-3.component';
+import { Report4Component } from '../manager/report-all/report-4/report-4.component';
+import { Report5Component } from '../manager/report-all/report-5/report-5.component';
+import { Report6Component } from '../manager/report-all/report-6/report-6.component';
+import { Report7Component } from '../manager/report-all/report-7/report-7.component';
+import { Report8Component } from '../manager/report-all/report-8/report-8.component';
+import { Report9Component } from '../manager/report-all/report-9/report-9.component';
+import { Report10Component } from '../manager/report-all/report-10/report-10.component';
 
 const routes: Routes = [
   {
@@ -116,6 +126,16 @@ const routes: Routes = [
           { path: 'users', canActivate: [AuthSettinUserService], component: SettingUsersComponent },
         ]
       },
+      { path: 'report/1', component: Report1Component },
+      { path: 'report/2', component: Report2Component },
+      { path: 'report/3', component: Report3Component },
+      { path: 'report/4', component: Report4Component },
+      { path: 'report/5', component: Report5Component },
+      { path: 'report/6', component: Report6Component },
+      { path: 'report/7', component: Report7Component },
+      { path: 'report/8', component: Report8Component },
+      { path: 'report/9', component: Report9Component },
+      { path: 'report/10', component: Report10Component },
     ]
   }
 ];
