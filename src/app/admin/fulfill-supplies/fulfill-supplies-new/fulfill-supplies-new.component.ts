@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FulfillService } from '../../services/fulfill.service';
 import { AlertService } from 'src/app/help/alert.service';
-import { sumBy, orderBy } from 'lodash';
+import { orderBy } from 'lodash';
 
 @Component({
   selector: 'app-fulfill-supplies-new',

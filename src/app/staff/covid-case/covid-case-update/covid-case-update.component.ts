@@ -3,7 +3,7 @@ import { AlertService } from './../../../help/alert.service';
 import { CovidCaseService } from './../../services/covid-case.service';
 import { BasicAuthService } from './../../services/basic-auth.service';
 import { IMyOptions } from 'mydatepicker-th';
-import { findIndex, filter } from 'lodash';
+import { findIndex } from 'lodash';
 import * as moment from 'moment';
 @Component({
   selector: 'app-covid-case-update',
