@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../user.service';
 import { RegisterService } from '../../../register/register.service';
 import { AlertService } from '../../../help/alert.service';
-import * as findIndex from 'lodash/findIndex';
+import { findIndex } from 'lodash';
 
 @Component({
   selector: 'app-setting-users',

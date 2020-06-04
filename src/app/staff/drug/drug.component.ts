@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DrugService } from '../drug.service';
 import { AlertService } from '../../help/alert.service';
-import * as findIndex from 'lodash/findIndex';
+import { findIndex } from 'lodash';
 import { IMyOptions } from 'mydatepicker-th';
 import * as moment from 'moment';
 @Component({

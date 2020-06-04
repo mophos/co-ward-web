@@ -2,7 +2,7 @@ import { BasicService } from './../services/basic.service';
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
-import * as findIndex from 'lodash/findIndex';
+import { findIndex } from 'lodash';
 
 import * as mqttClient from '../../../vendor/mqtt.min.js';
 import { MqttClient } from 'mqtt';

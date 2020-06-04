@@ -3,7 +3,7 @@ import { BasicService } from './../services/basic.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertService } from '../../help/alert.service';
 import { IMyOptions } from 'mydatepicker-th';
-import * as findIndex from 'lodash/findIndex';
+import { findIndex } from 'lodash';
 @Component({
   selector: 'app-request-products',
   templateUrl: './request-products.component.html',

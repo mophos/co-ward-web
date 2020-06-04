@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BedService } from '../bed.service';
 import { AlertService } from '../../help/alert.service';
 import { IMyOptions } from 'mydatepicker-th';
-import * as findIndex from 'lodash/findIndex';
+import { findIndex } from 'lodash';
 import * as moment from 'moment';
 @Component({
   selector: 'app-bed',

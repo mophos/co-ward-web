@@ -24,13 +24,16 @@ export class ReportPatientAdmitComponent implements OnInit {
     editableDateField: false,
     showClearDateBtn: false
   };
-
+  providerType: any;
   constructor(
     private service: ReportService,
     private alertService: AlertService
   ) {
     const token = sessionStorage.getItem('token');
     const decoded = this.jwtHelper.decodeToken(token);
+    this.providerType = decoded.providerType;
+    console.log(this.providerType);
+
   }
 
   async ngOnInit() {
@@ -48,9 +51,9 @@ export class ReportPatientAdmitComponent implements OnInit {
     this.loading.show();
     try {
       const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
-      const rs: any = await this.service.getAdmitPatients(date, null);
+      const rs: any = await this.service.getPatients(date, null);
       if (rs.ok) {
-        this.list = rs.rows;
+        this.list = rs.rows[0].provinces;
         console.log(this.list);
         this.loading.hide();
       } else {
