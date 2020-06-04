@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
   checkPassword: any;
   checkPasswordConfirm: any;
   demo = '';
+  transactionID: any;
   @ViewChild('loading') loading: any;
 
   public jwtHelper = new JwtHelperService();
@@ -206,6 +207,7 @@ export class LoginComponent implements OnInit {
           const rs: any = await this.registerService.requestOTP(this.phoneNumber);
           if (rs.ok) {
             this.refCode = rs.ref_code;
+            this.transactionID = rs.transactionID;
           }
         } else {
           this.alertService.error('กรุณารอ 5 นาที');
@@ -220,7 +222,7 @@ export class LoginComponent implements OnInit {
   async verifyOTP() {
     try {
       if (this.otp) {
-        const rs: any = await this.registerService.verifyOTP(this.refCode, this.otp);
+        const rs: any = await this.registerService.verifyOTP(this.phoneNumber, this.otp, this.transactionID);
         if (rs.ok) {
           this.alertService.success('ยืนยันสำเร็จ');
           this.isVerify = true;
