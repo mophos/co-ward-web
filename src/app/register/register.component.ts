@@ -50,6 +50,7 @@ export class RegisterComponent implements OnInit {
   modalOTP = false;
 
   refCode = false;
+  transactionID: any;
   dateOtp: any = 0;
   otp = '';
   @ViewChild('hospital') hosp: AutocompleteHospitalComponent;
@@ -234,6 +235,7 @@ export class RegisterComponent implements OnInit {
         this.dateOtp = date + 5;
         const rs: any = await this.registerService.requestOTP(this.phoneNumber);
         if (rs.ok) {
+          this.transactionID = rs.transactionID;
           this.refCode = rs.ref_code;
         }
       } else {
@@ -246,7 +248,7 @@ export class RegisterComponent implements OnInit {
 
   async verifyOTP() {
     try {
-      const rs: any = await this.registerService.verifyOTP(this.refCode, this.otp);
+      const rs: any = await this.registerService.verifyOTP(this.phoneNumber, this.otp, this.transactionID);
       if (rs.ok) {
         this.modalOTP = false;
         this.isVerify = true;
