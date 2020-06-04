@@ -13,10 +13,17 @@ export class ReportLocalQuarantineComponent implements OnInit {
   total: any;
   summaryZone: any = [];
   summaryProvince: any = [];
+  listL2: any;
 
   sumLocal: any = 0;
   sumCoward: any = 0;
   sumCowardAdmit: any = 0;
+
+  sum3: any = 0;
+  sum4: any = 0;
+  sum5: any = 0;
+  sum6: any = 0;
+  sum7: any = 0;
 
   @ViewChild('modalLoading') loading: any;
   constructor(
@@ -27,6 +34,7 @@ export class ReportLocalQuarantineComponent implements OnInit {
   async ngOnInit() {
     await this.listLocal();
     await this.listLocalSummaryZone();
+    await this.listLocalSummaryZone2();
     await this.listLocalSummaryProvince();
   }
 
@@ -62,6 +70,30 @@ export class ReportLocalQuarantineComponent implements OnInit {
           this.sumLocal += v.local_q;
           this.sumCoward += v.person_total;
           this.sumCowardAdmit += v.admit;
+        }
+        this.loading.hide();
+      } else {
+        this.loading.hide();
+        this.alertService.error();
+      }
+    } catch (error) {
+      this.loading.hide();
+      this.alertService.error(error);
+    }
+  }
+
+  async listLocalSummaryZone2() {
+    this.loading.show();
+    try {
+      const rs: any = await this.reportService.summaryLocalQuarantineZone2();
+      if (rs.ok) {
+        this.listL2 = rs.rows;
+        for (const v of this.listL2) {
+          this.sum3 += v.m3;
+          this.sum4 += v.m4;
+          this.sum5 += v.m5;
+          this.sum6 += v.m6;
+          this.sum7 += v.m7;
         }
         this.loading.hide();
       } else {
