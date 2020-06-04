@@ -106,4 +106,19 @@ export class ReportService {
     const url = `${this.apiUrl}/v1/report/local-quarantine`;
     return await this.http.get(url).toPromise();
   }
+
+  async summaryLocalQuarantineZone() {
+    const url = `${this.apiUrl}/v1/report/summary-local-quarantine-zone`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async summaryLocalQuarantineZone2() {
+    const url = `${this.apiUrl}/v1/report/summary-local-quarantine-zone/2`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async summaryLocalQuarantineProvince() {
+    const url = `${this.apiUrl}/v1/report/summary-local-quarantine-province`;
+    return await this.http.get(url).toPromise();
+  }
 }
