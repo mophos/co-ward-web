@@ -63,6 +63,29 @@
           <td class="right td-border" style="text-align: right;">{{sum7 | number:'1.0-0'}}</td>
         </tr>
       </table>
+      <h3 for="">
+        1.3 ตารางผู้ป่วย LQ รวมทุกประเภทจำแนกรายเขต
+      </h3>
+      <table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
+        <tr>
+          <th class="right td-border" style="position: sticky; top: 0;">เขต</th>
+          <th class="right td-border" style="position: sticky; top: 0;">Local Quarantine<br>รวมทุกประเภท (แห่ง)</th>
+          <th class="right td-border" style="position: sticky; top: 0;">รองรับได้ (คน)</th>
+          <th class="right td-border" style="position: sticky; top: 0;">จำนวนผู้กักกัน (คน)</th>
+        </tr>
+        <tr *ngFor="let h of listPlace; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+          <td class="left td-border" style="text-align: right;">{{h.zone_code}}</td>
+          <td class="right td-border" style="text-align: right;">{{h.qty | number:'1.0-0'}}</td>
+          <td class="right td-border" style="text-align: right;">{{h.total_capacity | number:'1.0-0'}}</td>
+          <td class="right td-border" style="text-align: right;">{{h.person_qty | number:'1.0-0'}}</td>
+        </tr>
+        <tr>
+          <td class="left td-border">รวม</td>
+          <td class="right td-border" style="text-align: right;">{{sumPlace | number:'1.0-0'}}</td>
+          <td class="right td-border" style="text-align: right;">{{sumTotalCapacity | number:'1.0-0'}}</td>
+          <td class="right td-border" style="text-align: right;">{{sumPerson | number:'1.0-0'}}</td>
+        </tr>
+      </table>
     </clr-tab-content>
   </clr-tab>
   <clr-tab>

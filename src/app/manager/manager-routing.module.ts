@@ -98,7 +98,7 @@ const routes: Routes = [
 
       { path: 'report-admit-confirm-case', component: ReportAdmitConfirmCaseComponent },
       { path: 'report-records', component: ReportRecordsComponent },
-      { path: 'report-local-quarantine', component: ReportLocalQuarantineComponent },
+      { path: 'report-local-quarantine', component: ReportLocalQuarantineComponent }
     ]
   }
 ];

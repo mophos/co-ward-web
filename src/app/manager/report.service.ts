@@ -107,6 +107,11 @@ export class ReportService {
     return await this.http.get(url).toPromise();
   }
 
+  async getLocalQuarantineHotel() {
+    const url = `${this.apiUrl}/v1/report/local-quarantine-hotel`;
+    return await this.http.get(url).toPromise();
+  }
+
   async summaryLocalQuarantineZone() {
     const url = `${this.apiUrl}/v1/report/summary-local-quarantine-zone`;
     return await this.http.get(url).toPromise();
