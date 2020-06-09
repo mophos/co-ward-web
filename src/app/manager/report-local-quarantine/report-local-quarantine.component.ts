@@ -14,10 +14,14 @@ export class ReportLocalQuarantineComponent implements OnInit {
   summaryZone: any = [];
   summaryProvince: any = [];
   listL2: any;
+  listPlace: any;
 
   sumLocal: any = 0;
   sumCoward: any = 0;
   sumCowardAdmit: any = 0;
+  sumPlace: any = 0;
+  sumTotalCapacity: any = 0;
+  sumPerson: any = 0;
 
   sum3: any = 0;
   sum4: any = 0;
@@ -33,6 +37,7 @@ export class ReportLocalQuarantineComponent implements OnInit {
 
   async ngOnInit() {
     await this.listLocal();
+    await this.listLocalHotel();
     await this.listLocalSummaryZone();
     await this.listLocalSummaryZone2();
     await this.listLocalSummaryProvince();
@@ -48,6 +53,28 @@ export class ReportLocalQuarantineComponent implements OnInit {
         for (const v of this.listL) {
           v.checkInDate = moment(v.checkInDate).format('YYYY-MM-DD');
           v.checkOutDate = moment(v.checkOutDate).format('YYYY-MM-DD');
+        }
+        this.loading.hide();
+      } else {
+        this.loading.hide();
+        this.alertService.error();
+      }
+    } catch (error) {
+      this.loading.hide();
+      this.alertService.error(error);
+    }
+  }
+
+  async listLocalHotel() {
+    this.loading.show();
+    try {
+      const rs: any = await this.reportService.getLocalQuarantineHotel();
+      if (rs.ok) {
+        this.listPlace = rs.rows;
+        for (const v of this.listPlace) {
+          this.sumPlace += v.qty;
+          this.sumTotalCapacity += v.total_capacity;
+          this.sumPerson += v.person_qty;
         }
         this.loading.hide();
       } else {

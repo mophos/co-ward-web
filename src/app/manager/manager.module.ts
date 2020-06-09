@@ -92,7 +92,7 @@ import { ReportLocalQuarantineComponent } from './report-local-quarantine/report
     ReportAdmitConfirmCaseComponent,
     ReportReviewHomeworkComponent,
     ReportRecordsComponent,
-    ReportLocalQuarantineComponent
+    ReportLocalQuarantineComponent,
   ],
   imports: [
     CommonModule,
