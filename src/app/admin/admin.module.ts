@@ -38,6 +38,7 @@ import { FulfillSuppliesComponent } from './fulfill-supplies/fulfill-supplies.co
 import { ManageMinMaxSuppliesComponent } from './manage-min-max-supplies/manage-min-max-supplies.component';
 import { ManageNodeSurgicalComponent } from './manage-node-surgical/manage-node-surgical.component';
 import { FulfillSuppliesNewComponent } from './fulfill-supplies/fulfill-supplies-new/fulfill-supplies-new.component';
+import { ExportComponent } from './export/export.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { FulfillSuppliesNewComponent } from './fulfill-supplies/fulfill-supplies
     FulfillSuppliesComponent,
     ManageMinMaxSuppliesComponent,
     ManageNodeSurgicalComponent,
-    FulfillSuppliesNewComponent
+    FulfillSuppliesNewComponent,
+    ExportComponent
   ],
   imports: [
     HelpModule,
