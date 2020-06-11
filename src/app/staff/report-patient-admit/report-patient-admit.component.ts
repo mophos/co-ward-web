@@ -77,13 +77,12 @@ export class ReportPatientAdmitComponent implements OnInit {
     this.loading.show();
     try {
       const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
-      const rs: any = await this.service.getAdmitPatientExport(date);
+      const rs: any = await this.service.getPatientExport(date);
       console.log(rs);
       if (!rs) {
         this.loading.hide();
       } else {
         this.downloadFile('report-patient-admit', 'xlsx', rs);
-        // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
         this.loading.hide();
       }
     } catch (error) {

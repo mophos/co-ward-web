@@ -30,6 +30,7 @@ import { ManageMinMaxDrugsComponent } from './manage-min-max-drugs/manage-min-ma
 import { FulfillSurgicalMaskComponent } from './fulfill-surgical-mask/fulfill-surgical-mask.component';
 import { FulfillSurgicalMaskListComponent } from './fulfill-surgical-mask-list/fulfill-surgical-mask-list.component';
 import { ManageNodeSurgicalComponent } from './manage-node-surgical/manage-node-surgical.component'
+import { ExportComponent } from './export/export.component';
 
 const routes: Routes = [
   {
@@ -89,6 +90,7 @@ const routes: Routes = [
       { path: 'min-max-supplies', component: ManageMinMaxSuppliesComponent },
       { path: 'systems', component: ManageSystemsComponent },
       { path: 'manage-node-surgical', component: ManageNodeSurgicalComponent },
+      { path: 'export', component: ExportComponent },
     ]
   }
 ];
