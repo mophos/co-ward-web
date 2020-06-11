@@ -41,6 +41,13 @@
 </table>
 <br>
 <br>
+<div class="clr-select-wrapper">
+  <select class="clr-select" [(ngModel)]="selectRegister" (change)="onSelectRegister()">
+    <option value="all">ทั้งหมด</option>
+    <option value="register">ลงทะเบียน</option>
+    <option value="nonregister">ไม่ได้ลงทะเบียน</option>
+  </select>
+</div>
 <table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
   <tr>
     <th class="td-border">เขต</th>
@@ -53,12 +60,12 @@
 
 
   <tr *ngFor="let h of details; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
-    <td class="left td-border" >{{+h.zone_code}}</td>
-    <td class="left td-border" >{{h.province_name}}</td>
-    <td class="left td-border" >{{h.hospcode}}</td>
-    <td class="left td-border" >{{h.hospname}}</td>
-    <td class="right td-border" >{{h.register_last_date | dateTh:'DD/MM/YYYY hh:mm'}}</td>
-    <td class="left td-border" >{{h.sub_ministry_name}}</td>
+    <td class="left td-border">{{+h.zone_code}}</td>
+    <td class="left td-border">{{h.province_name}}</td>
+    <td class="left td-border">{{h.hospcode}}</td>
+    <td class="left td-border">{{h.hospname}}</td>
+    <td class="right td-border">{{h.register_last_date | dateTh:'DD/MM/YYYY hh:mm'}}</td>
+    <td class="left td-border">{{h.sub_ministry_name}}</td>
   </tr>
 
 </table>

@@ -92,8 +92,8 @@ export class ReportService {
     return await this.http.get(url).toPromise();
   }
 
-  async homeworkDetail() {
-    const url = `${this.apiUrl}/v1/report/homework-detail`;
+  async homeworkDetail(filter = 'all') {
+    const url = `${this.apiUrl}/v1/report/homework-detail?filter=${filter}`;
     return await this.http.get(url).toPromise();
   }
 

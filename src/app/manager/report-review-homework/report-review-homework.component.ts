@@ -13,6 +13,7 @@ export class ReportReviewHomeworkComponent implements OnInit {
   @ViewChild('loading') loading: any;
   list = [];
   details = [];
+  selectRegister = 'all';
   constructor(
     private reportService: ReportService,
     private alertService: AlertService
@@ -23,6 +24,9 @@ export class ReportReviewHomeworkComponent implements OnInit {
     // await this.getDetail();
   }
 
+  onSelectRegister() {
+    this.getDetail();
+  }
   async getList() {
     try {
       this.loading.show();
@@ -43,7 +47,7 @@ export class ReportReviewHomeworkComponent implements OnInit {
   async getDetail() {
     try {
       this.loading.show();
-      const rs: any = await this.reportService.homeworkDetail();
+      const rs: any = await this.reportService.homeworkDetail(this.selectRegister);
       if (rs.ok) {
         this.details = rs.rows;
       } else {
