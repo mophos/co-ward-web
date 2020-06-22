@@ -30,13 +30,23 @@
 
   <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
     <td class="text-left td-border" class="center">{{h.zone_code}}</td>
-    <td class="text-right td-border">{{h.person}}</td>
-    <td class="text-right td-border">{{h.person_time}}</td>
-    <td class="text-right td-border">{{h.person_old}}</td>
-    <td class="text-right td-border">{{h.person_old_time}}</td>
-    <td class="text-right td-border">{{h.person_total}}</td>
-    <td class="text-right td-border">{{h.person_time_total}}</td>
-    <td class="text-right td-border">{{h.person_death}}</td>
+    <td class="text-right td-border">{{h.person| number:'1.0-0'}}</td>
+    <td class="text-right td-border">{{h.person_time| number:'1.0-0'}}</td>
+    <td class="text-right td-border">{{h.person_old| number:'1.0-0'}}</td>
+    <td class="text-right td-border">{{h.person_old_time| number:'1.0-0'}}</td>
+    <td class="text-right td-border">{{h.person_total| number:'1.0-0'}}</td>
+    <td class="text-right td-border">{{h.person_time_total| number:'1.0-0'}}</td>
+    <td class="text-right td-border">{{h.person_death| number:'1.0-0'}}</td>
+  </tr>
+  <tr>
+    <td class="text-left td-border" class="center">รวม</td>
+    <td class="text-right td-border">{{person| number:'1.0-0'}}</td>
+    <td class="text-right td-border">{{personTime| number:'1.0-0'}}</td>
+    <td class="text-right td-border">{{personOld| number:'1.0-0'}}</td>
+    <td class="text-right td-border">{{personOldTime| number:'1.0-0'}}</td>
+    <td class="text-right td-border">{{personTotal| number:'1.0-0'}}</td>
+    <td class="text-right td-border">{{personTimeTotal| number:'1.0-0'}}</td>
+    <td class="text-right td-border">{{personDeath| number:'1.0-0'}}</td>
   </tr>
 </table>
 <app-loadding #loading></app-loadding>
