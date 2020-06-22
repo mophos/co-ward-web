@@ -166,7 +166,9 @@ export class CovidCaseNewComponent implements OnInit {
       this.fname = this.data.first_name;
       this.mname = this.data.middle_name;
       this.lname = this.data.last_name;
-      this.genderId = this.data.gender_id.toString();
+      if (this.data.gender_id != null) {
+        this.genderId = this.data.gender_id.toString();
+      }
 
       if (this.data.birth_date === 'empty') {
         this.data.birth_date = null;
@@ -191,6 +193,7 @@ export class CovidCaseNewComponent implements OnInit {
       this.provinceId = this.data.province_code;
       this.zipcode = this.data.zipcode;
       this.countryId = this.data.country_code;
+
 
       if (this.data.country_name) {
         this.countries.setQuery(this.data.country_name);
