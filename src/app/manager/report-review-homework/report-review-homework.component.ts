@@ -1,6 +1,7 @@
 import { AlertService } from 'src/app/help/alert.service';
 import { ReportService } from './../report.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { sumBy } from 'lodash';
 
 @Component({
   selector: 'app-report-review-homework',
@@ -14,6 +15,13 @@ export class ReportReviewHomeworkComponent implements OnInit {
   list = [];
   details = [];
   selectRegister = 'all';
+
+  government = 0;
+  governmentRegister = 0;
+  governmentPer = 0;
+  private = 0;
+  privateRegister = 0;
+  privatePer = 0;
   constructor(
     private reportService: ReportService,
     private alertService: AlertService
@@ -27,12 +35,19 @@ export class ReportReviewHomeworkComponent implements OnInit {
   onSelectRegister() {
     this.getDetail();
   }
+
   async getList() {
     try {
       this.loading.show();
       const rs: any = await this.reportService.homework();
       if (rs.ok) {
         this.list = rs.rows;
+        this.government = sumBy(rs.rows, 'government');
+        this.governmentRegister = sumBy(rs.rows, 'government_register');
+        this.governmentPer = sumBy(rs.rows, 'government_register') / sumBy(rs.rows, 'government') * 100;
+        this.private = sumBy(rs.rows, 'private');
+        this.privateRegister = sumBy(rs.rows, 'private_register');
+        this.privatePer = sumBy(rs.rows, 'private_register') / sumBy(rs.rows, 'private') * 100;
         await this.getDetail();
       } else {
         this.alertService.error(rs.error);

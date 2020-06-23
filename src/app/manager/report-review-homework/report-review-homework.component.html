@@ -31,6 +31,15 @@
     <td class="text-right td-border">{{h.private_register |number:'1.0-0'}}</td>
     <td class="text-right td-border">{{h.private_register /h.private * 100 |number:'1.0-0'}}%</td>
   </tr>
+  <tr >
+    <td class="text-left td-border">รวม</td>
+    <td class="text-right td-border">{{government |number:'1.0-0'}}</td>
+    <td class="text-right td-border">{{governmentRegister |number:'1.0-0'}}</td>
+    <td class="text-right td-border">{{ governmentPer|number:'1.0-0'}}%</td>
+    <td class="text-right td-border">{{private |number:'1.0-0'}}</td>
+    <td class="text-right td-border">{{privateRegister |number:'1.0-0'}}</td>
+    <td class="text-right td-border">{{privatePer|number:'1.0-0'}}%</td>
+  </tr>
   <!-- <tr  class="isProblem">
     <td class="left td-border" ></td>
     <td class="left td-border" ></td>
