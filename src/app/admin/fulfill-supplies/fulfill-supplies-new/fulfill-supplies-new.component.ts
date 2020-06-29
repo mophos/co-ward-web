@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FulfillService } from '../../services/fulfill.service';
 import { AlertService } from 'src/app/help/alert.service';
-import { orderBy } from 'lodash';
+import { orderBy, sumBy } from 'lodash';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-fulfill-supplies-new',
@@ -27,10 +28,21 @@ export class FulfillSuppliesNewComponent implements OnInit {
     type: 'zone_code',
     order: 'asc'
   };
+
+  g9Fill = 0;
+  g10Fill = 0;
+  g11Fill = 0;
+  g12Fill = 0;
+  g13Fill = 0;
+  g14Fill = 0;
+  g15Fill = 0;
+  g16Fill = 0;
+  g17Fill = 0;
   @ViewChild('modalLoading') loading: any;
   constructor(
     private fulfillService: FulfillService,
     private alertService: AlertService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -38,8 +50,6 @@ export class FulfillSuppliesNewComponent implements OnInit {
 
 
   onClickAll() {
-    console.log(this.gAll);
-
     if (!this.gAll) {
       this.g9 = true;
       this.g10 = true;
@@ -64,15 +74,6 @@ export class FulfillSuppliesNewComponent implements OnInit {
   }
   onClickSelect() {
     this.isModal = false;
-    console.log(this.g9,
-      this.g10,
-      this.g11,
-      this.g12,
-      this.g13,
-      this.g14,
-      this.g15,
-      this.g16,
-      this.g17);
     this.getProducts();
   }
 
@@ -129,17 +130,32 @@ export class FulfillSuppliesNewComponent implements OnInit {
           g16: this.g16,
           g17: this.g17
         };
+        this.loading.show();
         const rs: any = await this.fulfillService.saveFulFillSupplies(this.products, list);
         if (rs.ok) {
           this.alertService.success();
+          this.router.navigate(['/admin/fulfill-supplies']);
           // await this.getProducts();
         } else {
           this.alertService.error(rs.error);
         }
       }
+      this.loading.hide();
     } catch (error) {
+      this.loading.hide();
       this.alertService.error(error);
     }
   }
 
+  sumProduct() {
+    this.g9Fill = sumBy(this.products, 'surgical_gown_recomment_qty');
+    this.g10Fill = sumBy(this.products, 'cover_all1_recomment_qty');
+    this.g11Fill = sumBy(this.products, 'cover_all2_recomment_qty');
+    this.g12Fill = sumBy(this.products, 'n95_recomment_qty');
+    this.g13Fill = sumBy(this.products, 'shoe_cover_recomment_qty');
+    this.g14Fill = sumBy(this.products, 'surgical_hood_recomment_qty');
+    this.g15Fill = sumBy(this.products, 'long_glove_recomment_qty');
+    this.g16Fill = sumBy(this.products, 'face_shield_recomment_qty');
+    this.g17Fill = sumBy(this.products, 'surgical_mask_recomment_qty');
+  }
 }

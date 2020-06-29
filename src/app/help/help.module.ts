@@ -22,6 +22,7 @@ import { CheckCutTimePipe } from './check-cut-time.pipe';
 import { FulfillDrugDetailsComponent } from './fulfill-drug-details/fulfill-drug-details.component';
 import { FulfillSuppliesDetailsComponent } from './fulfill-supplies-details/fulfill-supplies-details.component';
 import { FulfillSurgicalMaskDetailsComponent } from './fulfill-surgical-mask-details/fulfill-surgical-mask-details.component';
+import { HpvcComponent } from './hpvc/hpvc.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { FulfillSurgicalMaskDetailsComponent } from './fulfill-surgical-mask-det
     CheckCutTimePipe,
     FulfillDrugDetailsComponent,
     FulfillSuppliesDetailsComponent,
-    FulfillSurgicalMaskDetailsComponent
+    FulfillSurgicalMaskDetailsComponent,
+    HpvcComponent
   ],
   imports: [
     CommonModule,
@@ -70,7 +72,8 @@ import { FulfillSurgicalMaskDetailsComponent } from './fulfill-surgical-mask-det
     SafePipe,
     FulfillDrugDetailsComponent,
     FulfillSuppliesDetailsComponent,
-    FulfillSurgicalMaskDetailsComponent
+    FulfillSurgicalMaskDetailsComponent,
+    HpvcComponent
   ],
   providers: [
     HelpService

@@ -14,6 +14,7 @@ export class FulfillSuppliesComponent implements OnInit {
   selected = [];
   selectedFulfills = [];
   fulfills = [];
+  unpaids = [];
   countExport = 0;
   countApprove = 0;
   isFulFull = false;
@@ -26,6 +27,7 @@ export class FulfillSuppliesComponent implements OnInit {
   ngOnInit() {
     // this.getProducts();
     this.getFulfills();
+    this.getUnpadis();
   }
 
 
@@ -35,6 +37,20 @@ export class FulfillSuppliesComponent implements OnInit {
       const rs: any = await this.fulfillService.getFulFillSupplies();
       if (rs.ok) {
         this.fulfills = rs.rows;
+      } else {
+        this.alertService.error(rs.error);
+      }
+    } catch (error) {
+      this.alertService.error(error);
+    }
+  }
+
+
+  async getUnpadis() {
+    try {
+      const rs: any = await this.fulfillService.getFulFillUnpaidSupplies();
+      if (rs.ok) {
+        this.unpaids = rs.rows;
       } else {
         this.alertService.error(rs.error);
       }

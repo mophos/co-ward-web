@@ -13,6 +13,11 @@ export class HelpService {
     return this.http.get(url).toPromise();
   }
 
+  getHPVC() {
+    const url = `${this.url}/v1/basic-auth/hpvc`;
+    return this.http.get(url).toPromise();
+  }
+
   async getDateCut() {
     const url = `${this.url}/date-time-cut`;
     return await this.http.get(url).toPromise();

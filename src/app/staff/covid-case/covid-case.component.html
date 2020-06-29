@@ -99,7 +99,13 @@
             </div>
           </div>
           <br>
-          ประวัติการรักษา
+          
+          <div class="clr-row">
+            <div class="clr-col-6">ประวัติการรักษา</div>
+            <div class="clr-col-6" style="text-align: right;">
+              <button class="btn btn-danger btn-sm" (click)="onClickHPVC()" *ngIf="data.covid_case_id">บันทึกแพ้ยา</button>
+            </div>
+          </div>
           <clr-datagrid [clrDgLoading]="isLoadding">
             <clr-dg-column>AN</clr-dg-column>
             <clr-dg-column>วันที่ Admit</clr-dg-column>
@@ -181,3 +187,5 @@
   <div class="modal-footer">
   </div>
 </clr-modal>
+
+<app-hpvc #modalHPVC></app-hpvc>

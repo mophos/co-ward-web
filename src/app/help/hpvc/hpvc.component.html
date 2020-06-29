@@ -1,0 +1,32 @@
+
+<clr-modal [(clrModalOpen)]="isModal">
+  <h3 class="modal-title">บันทึกการแพ้ยา</h3>
+  <div class="modal-body">
+
+    <!-- <clr-datagrid [clrDgLoading]="isLoadding">
+      <clr-dg-column>วันที่บันทึก</clr-dg-column>
+      <clr-dg-column>อาการไม่พึงประสงค์</clr-dg-column>
+      <clr-dg-column>ผู้บันทึก</clr-dg-column>
+      <clr-dg-column></clr-dg-column>
+      <clr-dg-row *ngFor="let l of list;let idx=index;">
+        <clr-dg-cell>{{l.an}}</clr-dg-cell>
+        <clr-dg-cell>{{l.date_admit | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
+        <clr-dg-cell>{{l.confirm_date | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
+        <clr-dg-cell>
+          <button type="button" class="btn btn-icon btn-primary" (click)="getDetails(l)" aria-label="settings">
+            <clr-icon shape="search"></clr-icon>
+          </button>
+        </clr-dg-cell>
+      </clr-dg-row>
+      <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
+    </clr-datagrid> -->
+
+<div class="clr-row">
+  <div class="clr-col-6" *ngFor="let c of choice">{{c.name}}</div>
+</div>
+  </div>
+  <div class="modal-footer">
+    <!-- <button type="button" class="btn btn-success" (click)="onClickSelect()">Ok</button> -->
+    <!-- <button type="button" class="btn btn-danger" [routerLink]="['/admin/fulfill-supplies']">Cancel</button> -->
+  </div>
+</clr-modal>

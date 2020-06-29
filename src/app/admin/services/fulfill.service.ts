@@ -49,6 +49,12 @@ export class FulfillService {
     const url = `${this.url}/v1/admin/fulfill/supplies`;
     return this.http.get(url).toPromise();
   }
+
+  getFulFillUnpaidSupplies() {
+    const url = `${this.url}/v1/admin/fulfill/supplies/unpaids`;
+    return this.http.get(url).toPromise();
+  }
+
   approvedDrugs(data) {
     const url = `${this.url}/v1/admin/fulfill/drugs/approved`;
     return this.http.post(url, { data }).toPromise();

@@ -1,7 +1,8 @@
+import { HpvcComponent } from './../../help/hpvc/hpvc.component';
 import { Router } from '@angular/router';
 import { AlertService } from './../../help/alert.service';
 import { CovidCaseService } from './../services/covid-case.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import thaiIdCard from 'thai-id-card';
 import { IMyOptions } from 'mydatepicker-th';
 import * as moment from 'moment';
@@ -36,6 +37,8 @@ export class CovidCaseComponent implements OnInit {
   data: any = {};
   id: any;
   isLoadding = false;
+
+  @ViewChild('modalHPVC') modalHPVC: HpvcComponent;
   constructor(
     private covidCaseService: CovidCaseService,
     private alertService: AlertService,
@@ -103,7 +106,6 @@ export class CovidCaseComponent implements OnInit {
 
   async getDetails(l) {
     this.modalDetails = true;
-    console.log(l.covid_case_id);
     try {
       const rs: any = await this.covidCaseService.getCovidCaseDetails(l.covid_case_id);
       console.log(rs);
@@ -166,5 +168,9 @@ export class CovidCaseComponent implements OnInit {
       this.alertService.error(error);
 
     }
+  }
+
+  onClickHPVC() {
+    this.modalHPVC.openModal();
   }
 }

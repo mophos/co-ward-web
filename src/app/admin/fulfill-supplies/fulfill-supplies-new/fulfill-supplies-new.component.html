@@ -10,7 +10,19 @@
       <td>Surgical gown<br>0 ชิ้น</td>
     </tr>
   </table> -->
-
+<table class="table">
+  <tr>
+    <td>{{g9Fill}}</td>
+    <td>{{g10Fill}}</td>
+    <td>{{g11Fill}}</td>
+    <td>{{g12Fill}}</td>
+    <td>{{g13Fill}}</td>
+    <td>{{g14Fill}}</td>
+    <td>{{g15Fill}}</td>
+    <td>{{g16Fill}}</td>
+    <td>{{g17Fill}}</td>
+  </tr>
+</table>
   <div style="overflow-x: scroll;width: 100%;">
    
     <table class="table table-compact" style="width:max-content;max-width: max-content;border-collapse: collapse;">
@@ -20,15 +32,15 @@
                 shape="sort-by"></clr-icon></span></th>
           <th class="td-border" rowspan="2" (click)="sort('hospital_name')"><span class="pointer"> โรงพยาบาล
               <clr-icon shape="sort-by"></clr-icon></span></th>
-          <th class="td-border" *ngIf="g9" colspan="4">surgical gown</th>
-          <th class="td-border" *ngIf="g10" colspan="4">cover all 1</th>
-          <th class="td-border" *ngIf="g11" colspan="4">cover all 2</th>
-          <th class="td-border" *ngIf="g12" colspan="4">n95</th>
-          <th class="td-border" *ngIf="g13" colspan="4">shoe cover</th>
-          <th class="td-border" *ngIf="g14" colspan="4">surgical hood</th>
-          <th class="td-border" *ngIf="g15" colspan="4">long glove</th>
-          <th class="td-border" *ngIf="g16" colspan="4">face shield</th>
-          <th class="td-border" *ngIf="g17" colspan="4">surgical mask</th>
+          <th class="td-border" *ngIf="g9" colspan="3">surgical gown</th>
+          <th class="td-border" *ngIf="g10" colspan="3">cover all 1</th>
+          <th class="td-border" *ngIf="g11" colspan="3">cover all 2</th>
+          <th class="td-border" *ngIf="g12" colspan="3">n95</th>
+          <th class="td-border" *ngIf="g13" colspan="3">shoe cover</th>
+          <th class="td-border" *ngIf="g14" colspan="3">surgical hood</th>
+          <th class="td-border" *ngIf="g15" colspan="3">long glove</th>
+          <th class="td-border" *ngIf="g16" colspan="3">face shield</th>
+          <th class="td-border" *ngIf="g17" colspan="3">surgical mask</th>
         </tr>
         <tr>
           <th class="td-border" *ngIf="g9">ยอดเบิก</th>
