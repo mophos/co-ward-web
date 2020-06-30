@@ -153,7 +153,6 @@ export class CovidCaseNewComponent implements OnInit {
   }
 
   async setData() {
-    console.log(this.data);
 
     try {
       this.satCode = this.data.sat_id;
@@ -415,6 +414,9 @@ export class CovidCaseNewComponent implements OnInit {
               tambonCode: this.tambonId,
               ampurCode: this.ampurId,
               provinceCode: this.provinceId,
+              tambon_name: this.tambonName,
+              ampur_name: this.ampurName,
+              province_name: this.provinceName,
               zipcode: this.zipcode,
               countryId: this.countryId,
               detail: this.admitDetail
@@ -510,6 +512,9 @@ export class CovidCaseNewComponent implements OnInit {
       this.modalCIDCid = '';
       this.modalCIDPassport = '';
       this.modalCIDType = 'CID';
+      this.tambonName = '';
+      this.ampurName = '';
+      this.provinceName = '';
       this.tambon.setQuery('');
       this.ampur.setQuery('');
       this.province.setQuery('');
