@@ -216,6 +216,9 @@ export class CovidCaseOldComponent implements OnInit {
       this.ampurId = this.data.ampur_code;
       this.tambonId = this.data.tambon_code;
       this.provinceId = this.data.province_code;
+      this.tambonName = this.data.tambon_name;
+      this.ampurName = this.data.ampur_name;
+      this.provinceName = this.data.province_name;
       this.zipcode = this.data.zipcode;
       this.houseNoCurr = this.data.current_house_no || null;
       this.roomNoCurr = this.data.current_room_no || null;
@@ -436,6 +439,9 @@ export class CovidCaseOldComponent implements OnInit {
               tambonCode: this.tambonId,
               ampurCode: this.ampurId,
               provinceCode: this.provinceId,
+              tambon_name: this.tambonName,
+              ampur_name: this.ampurName,
+              province_name: this.provinceName,
               zipcode: this.zipcode,
               houseNoCurr: this.houseNoCurr,
               roomNoCurr: this.roomNoCurr,
@@ -539,6 +545,12 @@ export class CovidCaseOldComponent implements OnInit {
       this.tambonIdCurr = null;
       this.ampurIdCurr = null;
       this.provinceIdCurr = null;
+      this.tambonName = '';
+      this.ampurName = '';
+      this.provinceName = '';
+      this.tambonNameCurr = '';
+      this.ampurNameCurr = '';
+      this.provinceNameCurr = '';
       this.countryId = 20;
       this.modalCIDCid = '';
       this.modalCIDPassport = '';
