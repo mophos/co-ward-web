@@ -312,7 +312,7 @@
           </div>
         </div>
       </div>
-      <div class="card-block" >
+      <div class="card-block">
         <div class="card-text">
           <div class="clr-row">
             <div class="clr-col-2 ">
@@ -379,72 +379,91 @@
                 </div>
               </div>
             </div>
-            <div class="clr-col-2"></div>
-            <div class="clr-col-2 form">
+            <div class="clr-col-2 form" *ngIf="countryId == 20">
               <div class="clr-form-control" style="margin-top: 0;">
                 <label class="clr-control-label">ตำบล</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <div [ngClass]="{hidden: countryId != 20}">
-                      <app-autocomplete-subdistrict  style="padding: 0px" #tambonCurr
+                    <app-autocomplete-subdistrict style="padding: 0px" #tambonCurr
                       (onselect)="onSelectTambonCurr($event)">
                     </app-autocomplete-subdistrict>
-                    </div>
-                    <div [ngClass]="{hidden: countryId == 20}">
-                      <input type="text" name="tambonNameCurr"  [(ngModel)]="tambonNameCurr"
-                      class="clr-input  width-fit">
-                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="clr-col-2 form">
+            <div class="clr-col-2 form" *ngIf="countryId != 20">
+              <div class="clr-form-control" style="margin-top: 0;">
+                <label class="clr-control-label">ตำบล</label>
+                <div class="clr-control-container clr-error width-fit">
+                  <div class="clr-input-wrapper">
+                    <input type="text" name="tambonNameCurrn" [(ngModel)]="tambonNameCurr" class="clr-input  width-fit">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clr-col-2 form" *ngIf="countryId == 20">
               <div class="clr-form-control" style="margin-top: 0;">
                 <label class="clr-control-label">อำเภอ</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <div [ngClass]="{hidden: countryId != 20}">
                       <app-autocomplete-district style="padding: 0px" #ampurCurr (onselect)="onSelectAmpurCurr($event)">
                       </app-autocomplete-district>
-                    </div>
-                    <div [ngClass]="{hidden: countryId == 20}">
-                      <input type="text" name="ampurNameCurr" [(ngModel)]="ampurNameCurr" class="clr-input  width-fit">
-                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="clr-col-2 form">
+            <div class="clr-col-2 form" *ngIf="countryId != 20">
+              <div class="clr-form-control" style="margin-top: 0;">
+                <label class="clr-control-label">อำเภอ</label>
+                <div class="clr-control-container clr-error width-fit">
+                  <div class="clr-input-wrapper">
+                      <input type="text" name="ampurNameCurrn" [(ngModel)]="ampurNameCurr" class="clr-input  width-fit">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clr-col-2 form" *ngIf="countryId == 20">
               <div class="clr-form-control" style="margin-top: 0;">
                 <label class="clr-control-label">จังหวัด</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <div [ngClass]="{hidden: countryId != 20}">
                       <app-autocomplete-province style="padding: 0px" #provinceCurr
                         (onselect)="onSelectProvinceCurr($event)">
                       </app-autocomplete-province>
-                    </div>
-                    <div [ngClass]="{hidden: countryId == 20}">
-                      <input type="text" name="provinceNameCurr" [(ngModel)]="provinceNameCurr"
-                        class="clr-input  width-fit">
-                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="clr-col-2 form">
+            <div class="clr-col-2 form" *ngIf="countryId != 20">
+              <div class="clr-form-control" style="margin-top: 0;">
+                <label class="clr-control-label">จังหวัด</label>
+                <div class="clr-control-container clr-error width-fit">
+                  <div class="clr-input-wrapper">
+                      <input type="text" name="provinceNameCurrn" [(ngModel)]="provinceNameCurr"
+                        class="clr-input  width-fit">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clr-col-2 form" *ngIf="countryId == 20">
               <div class="clr-form-control" style="margin-top: 0;">
                 <label class="clr-control-label">รหัสไปรษณีย์</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <div [ngClass]="{hidden: countryId != 20}">
                       <app-autocomplete-zipcode style="padding: 0px" #zipcodeCurr
                         (onselect)="onSelectZipcodeCurr($event)">
                       </app-autocomplete-zipcode>
-                    </div>
-                    <div [ngClass]="{hidden: countryId == 20}">
-                      <input type="text" name="zipcodeCurr" [(ngModel)]="zipcodeCurr" class="clr-input  width-fit">
-                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clr-col-2 form" *ngIf="countryId != 20">
+              <div class="clr-form-control" style="margin-top: 0;">
+                <label class="clr-control-label">รหัสไปรษณีย์</label>
+                <div class="clr-control-container clr-error width-fit">
+                  <div class="clr-input-wrapper">
+                      
+                      <input type="text" name="zipcodeCurrn" [(ngModel)]="zipcodeCurr" class="clr-input  width-fit">
                   </div>
                 </div>
               </div>

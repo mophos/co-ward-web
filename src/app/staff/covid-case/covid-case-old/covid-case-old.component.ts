@@ -326,8 +326,10 @@ export class CovidCaseOldComponent implements OnInit {
 
   async onSelectCountry(e) {
     this.countryId = e.id;
-    this.setValue();
-    this.setValueCurr();
+    if ( this.countryId === 20) {
+      this.setValue();
+      this.setValueCurr();
+    }
   }
 
   clearError() {
@@ -444,6 +446,9 @@ export class CovidCaseOldComponent implements OnInit {
               ampurCodeCurr: this.ampurIdCurr,
               provinceCodeCurr: this.provinceIdCurr,
               zipcodeCurr: this.zipcodeCurr,
+              tambonNameCurr: this.tambonNameCurr,
+              ampurNameCurr: this.ampurNameCurr,
+              provinceNameCurr: this.provinceNameCurr,
               countryId: this.countryId,
             };
             console.log(obj);
