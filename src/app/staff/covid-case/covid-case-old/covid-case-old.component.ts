@@ -14,7 +14,7 @@ import { AutocompleteCountriesComponent } from 'src/app/help/autocomplete-countr
 import * as moment from 'moment';
 import thaiIdCard from 'thai-id-card';
 import { start } from 'repl';
-
+import { cloneDeep } from 'lodash';
 @Component({
   selector: 'app-covid-case-old',
   templateUrl: './covid-case-old.component.html',
@@ -58,6 +58,21 @@ export class CovidCaseOldComponent implements OnInit {
   countryId: any = 20;
   zipcode: any;
   countryName: any;
+
+  houseNoCurr: any;
+  roomNoCurr: any;
+  villageCurr: any;
+  villageNameCurr: any;
+  roadCurr: any;
+  tambonIdCurr: any;
+  tambonNameCurr: any;
+  ampurIdCurr: any;
+  ampurNameCurr: any;
+  provinceIdCurr: any;
+  provinceNameCurr: any;
+  zipcodeCurr: any;
+
+  addNow = false;
   // -------------------
 
   titles: any = [];
@@ -127,6 +142,10 @@ export class CovidCaseOldComponent implements OnInit {
   @ViewChild('ampur') ampur: AutocompleteDistrictComponent;
   @ViewChild('tambon') tambon: AutocompleteSubdistrictComponent;
   @ViewChild('zipcode') zipc: AutocompleteZipcodeComponent;
+  @ViewChild('provinceCurr') provinceCurr: AutocompleteProvinceComponent;
+  @ViewChild('ampurCurr') ampurCurr: AutocompleteDistrictComponent;
+  @ViewChild('tambonCurr') tambonCurr: AutocompleteSubdistrictComponent;
+  @ViewChild('zipcodeCurr') zipcCurr: AutocompleteZipcodeComponent;
   @ViewChild('loading') loading: any;
 
   constructor(
@@ -198,6 +217,15 @@ export class CovidCaseOldComponent implements OnInit {
       this.tambonId = this.data.tambon_code;
       this.provinceId = this.data.province_code;
       this.zipcode = this.data.zipcode;
+      this.houseNoCurr = this.data.current_house_no || null;
+      this.roomNoCurr = this.data.current_room_no || null;
+      this.villageCurr = this.data.current_village || null;
+      this.villageNameCurr = this.data.current_village_name || null;
+      this.roadCurr = this.data.current_road || null;
+      this.ampurIdCurr = this.data.current_ampur_code || null;
+      this.tambonIdCurr = this.data.current_tambon_code || null;
+      this.provinceIdCurr = this.data.current_province_code || null;
+      this.zipcodeCurr = this.data.current_zipcode || null;
       this.countryId = this.data.country_code;
 
       if (this.data.country_name) {
@@ -207,6 +235,17 @@ export class CovidCaseOldComponent implements OnInit {
           this.tambon.setQuery(this.data.tambon_name);
           this.province.setQuery(this.data.province_name);
           this.zipc.setQuery(this.data.zipcode);
+          const address: any = await this.basicService.getAddCode(this.data.tambon_name, this.data.ampur_name, this.data.province_name, this.data.zipcode);
+          this.ampurName = this.data.ampur_name;
+          this.tambonName = this.data.tambon_name;
+          this.provinceName = this.data.province_name;
+          this.ampurId = address.rows[0].ampur_code;
+          this.tambonId = address.rows[0].tambon_code;
+          this.provinceId = address.rows[0].province_code;
+          this.ampurCurr.setQuery(this.data.current_ampur_name || null);
+          this.tambonCurr.setQuery(this.data.current_tambon_name || null);
+          this.provinceCurr.setQuery(this.data.current_province_name || null);
+          this.zipcCurr.setQuery(this.data.current_zipcode || null);
         }
       }
     } catch (error) {
@@ -287,6 +326,8 @@ export class CovidCaseOldComponent implements OnInit {
 
   async onSelectCountry(e) {
     this.countryId = e.id;
+    this.setValue();
+    this.setValueCurr();
   }
 
   clearError() {
@@ -394,6 +435,15 @@ export class CovidCaseOldComponent implements OnInit {
               ampurCode: this.ampurId,
               provinceCode: this.provinceId,
               zipcode: this.zipcode,
+              houseNoCurr: this.houseNoCurr,
+              roomNoCurr: this.roomNoCurr,
+              villageCurr: this.villageCurr,
+              villageNameCurr: this.villageNameCurr,
+              roadCurr: this.roadCurr,
+              tambonCodeCurr: this.tambonIdCurr,
+              ampurCodeCurr: this.ampurIdCurr,
+              provinceCodeCurr: this.provinceIdCurr,
+              zipcodeCurr: this.zipcodeCurr,
               countryId: this.countryId,
             };
             console.log(obj);
@@ -476,6 +526,14 @@ export class CovidCaseOldComponent implements OnInit {
       this.tambonId = null;
       this.ampurId = null;
       this.provinceId = null;
+      this.houseNoCurr = '';
+      this.roomNoCurr = '';
+      this.villageCurr = '';
+      this.villageNameCurr = '';
+      this.roadCurr = '';
+      this.tambonIdCurr = null;
+      this.ampurIdCurr = null;
+      this.provinceIdCurr = null;
       this.countryId = 20;
       this.modalCIDCid = '';
       this.modalCIDPassport = '';
@@ -484,6 +542,10 @@ export class CovidCaseOldComponent implements OnInit {
       this.ampur.setQuery('');
       this.province.setQuery('');
       this.zipc.setQuery('');
+      this.tambonCurr.setQuery('');
+      this.ampurCurr.setQuery('');
+      this.provinceCurr.setQuery('');
+      this.zipcCurr.setQuery('');
       this.countries.setQuery('ไทย');
       this.drugDay = null;
     } catch (error) {
@@ -540,6 +602,88 @@ export class CovidCaseOldComponent implements OnInit {
     this.ampur.setQuery(this.ampurName);
     this.tambon.setQuery(this.tambonName);
     this.zipc.setQuery(this.zipcode);
+  }
+
+  onSelectProvinceCurr(e) {
+    this.tambonIdCurr = e.tambon_code;
+    this.tambonNameCurr = e.tambon_name;
+    this.ampurIdCurr = e.ampur_code;
+    this.ampurNameCurr = e.ampur_name;
+    this.provinceIdCurr = e.province_code;
+    this.provinceNameCurr = e.province_name;
+    this.zipcodeCurr = e.zip_code;
+    this.setValueCurr();
+  }
+
+  onSelectAmpurCurr(e) {
+    this.tambonIdCurr = e.tambon_code;
+    this.tambonNameCurr = e.tambon_name;
+    this.ampurIdCurr = e.ampur_code;
+    this.ampurNameCurr = e.ampur_name;
+    this.provinceIdCurr = e.province_code;
+    this.provinceNameCurr = e.province_name;
+    this.zipcodeCurr = e.zip_code;
+    this.setValueCurr();
+  }
+
+  onSelectTambonCurr(e) {
+    this.tambonIdCurr = e.tambon_code;
+    this.tambonNameCurr = e.tambon_name;
+    this.ampurIdCurr = e.ampur_code;
+    this.ampurNameCurr = e.ampur_name;
+    this.provinceIdCurr = e.province_code;
+    this.provinceNameCurr = e.province_name;
+    this.zipcodeCurr = e.zip_code;
+    this.setValueCurr();
+  }
+
+  onSelectZipcodeCurr(e) {
+    this.tambonIdCurr = e.tambon_code;
+    this.tambonNameCurr = e.tambon_name;
+    this.ampurIdCurr = e.ampur_code;
+    this.ampurNameCurr = e.ampur_name;
+    this.provinceIdCurr = e.province_code;
+    this.provinceNameCurr = e.province_name;
+    this.zipcodeCurr = e.zip_code;
+    this.setValueCurr();
+  }
+
+  setValueCurr() {
+    this.provinceCurr.setQuery(this.provinceNameCurr);
+    this.ampurCurr.setQuery(this.ampurNameCurr);
+    this.tambonCurr.setQuery(this.tambonNameCurr);
+    this.zipcCurr.setQuery(this.zipcodeCurr);
+  }
+
+  checkAddNow() {
+    if (this.addNow) {
+      this.houseNoCurr = cloneDeep(this.houseNo);
+      this.roomNoCurr = cloneDeep(this.roomNo);
+      this.villageCurr = cloneDeep(this.village);
+      this.villageNameCurr = cloneDeep(this.villageName);
+      this.roadCurr = cloneDeep(this.road);
+      this.tambonIdCurr = cloneDeep(this.tambonId);
+      this.tambonNameCurr = cloneDeep(this.tambonName);
+      this.ampurIdCurr = cloneDeep(this.ampurId);
+      this.ampurNameCurr = cloneDeep(this.ampurName);
+      this.provinceIdCurr = cloneDeep(this.provinceId);
+      this.provinceNameCurr = cloneDeep(this.provinceName);
+      this.zipcodeCurr = cloneDeep(this.zipcode);
+      this.setValueCurr();
+    } else {
+      this.houseNoCurr = '';
+      this.roomNoCurr = '';
+      this.villageCurr = '';
+      this.villageNameCurr = '';
+      this.roadCurr = '';
+      this.tambonIdCurr = null;
+      this.ampurIdCurr = null;
+      this.provinceIdCurr = null;
+      this.tambonCurr.setQuery('');
+      this.ampurCurr.setQuery('');
+      this.provinceCurr.setQuery('');
+      this.zipcCurr.setQuery('');
+    }
   }
 
   uncheckRadio(type, id) {
