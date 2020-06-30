@@ -195,7 +195,7 @@
   <div class="clr-col-12">
     <div class="card" style="margin-top: 0;">
       <div class="card-header">
-        ที่อยู่
+        ที่อยู่ตามบัตรประชาชน/พาสปอร์ต
       </div>
       <div class="card-block">
         <div class="card-text">
@@ -312,13 +312,13 @@
           </div>
         </div>
       </div>
-      <div class="card-block" *ngIf="countryId == 20">
+      <div class="card-block" >
         <div class="card-text">
           <div class="clr-row">
             <div class="clr-col-2 ">
               <label class="clr-control-label">ที่อยู่ปัจจุบัน</label>
             </div>
-            <div class="clr-col-6 ">
+            <div class="clr-col-6 " *ngIf="countryId == 20">
               <clr-checkbox-wrapper>
                 <input type="checkbox" clrCheckbox [(ngModel)]="addNow" value="addNow" name="addNow"
                   (change)="checkAddNow()" />
