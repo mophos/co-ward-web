@@ -66,6 +66,8 @@ import { RequestProductsComponent } from './request-products/request-products.co
 import { ReportAdmitConfirmCaseComponent } from './report-admit-confirm-case/report-admit-confirm-case.component';
 import { RequestProductNewComponent } from './request-products/request-product-new/request-product-new.component';
 import { CovidCaseUpdateComponent } from './covid-case/covid-case-update/covid-case-update.component';
+
+import { NgSelectModule } from '@ng-select/ng-select';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -114,7 +116,8 @@ import { CovidCaseUpdateComponent } from './covid-case/covid-case-update/covid-c
     ClarityModule,
     BrowserAnimationsModule,
     FormsModule,
-    MyDatePickerTHModule
+    MyDatePickerTHModule,
+    NgSelectModule
   ],
   exports: [
     TrackingDetailComponent

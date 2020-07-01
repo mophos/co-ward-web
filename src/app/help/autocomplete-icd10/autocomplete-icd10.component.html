@@ -1,0 +1,6 @@
+
+          <input class="clr-input  width-fit" type="text" autocomplete="off" (keyup)="onKey($event)" [disabled]="disabled" [(ngModel)]="query" name="query" style="width: 100%; padding:0"
+          placeholder="ค้นชื่อ ICD10" agxTypeahead [taUrl]="searchUrl" taApi="http" [taItemTpl]="itemTpl" (taSelected)="handleResultSelected($event)">
+<ng-template #itemTpl let-result>
+<span>{{ result.result.code }} - {{ result.result.term }}</span>
+</ng-template>

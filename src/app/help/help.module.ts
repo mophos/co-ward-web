@@ -23,6 +23,8 @@ import { FulfillDrugDetailsComponent } from './fulfill-drug-details/fulfill-drug
 import { FulfillSuppliesDetailsComponent } from './fulfill-supplies-details/fulfill-supplies-details.component';
 import { FulfillSurgicalMaskDetailsComponent } from './fulfill-surgical-mask-details/fulfill-surgical-mask-details.component';
 import { HpvcComponent } from './hpvc/hpvc.component';
+import { AutocompleteIcd10Component } from './autocomplete-icd10/autocomplete-icd10.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -45,13 +47,15 @@ import { HpvcComponent } from './hpvc/hpvc.component';
     FulfillDrugDetailsComponent,
     FulfillSuppliesDetailsComponent,
     FulfillSurgicalMaskDetailsComponent,
-    HpvcComponent
+    HpvcComponent,
+    AutocompleteIcd10Component
   ],
   imports: [
     CommonModule,
     ClarityModule,
     FormsModule,
-    AgxTypeaheadModule
+    AgxTypeaheadModule,
+    NgSelectModule
   ],
   exports: [
     DateThPipe,
@@ -73,7 +77,8 @@ import { HpvcComponent } from './hpvc/hpvc.component';
     FulfillDrugDetailsComponent,
     FulfillSuppliesDetailsComponent,
     FulfillSurgicalMaskDetailsComponent,
-    HpvcComponent
+    HpvcComponent,
+    AutocompleteIcd10Component
   ],
   providers: [
     HelpService

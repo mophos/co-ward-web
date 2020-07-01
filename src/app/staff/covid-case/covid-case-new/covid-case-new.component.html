@@ -400,21 +400,47 @@
 <div class="clr-row" [ngClass]="{hidden: !isKey}">
   <div class="clr-col-12">
     <div class="card" style="margin-top: 0;">
-      <!-- <div class="card-header">
-        กลับจากตปทแต่ป่วย
-      </div> -->
+      <div class="card-header">
+        ข้อมูลการกลับจากต่างประเทศ
+      </div>
       <div class="card-block">
         <div class="card-text">
           <div class="clr-row">
-            <div class="clr-col-3 clr-form">
-             <input type="checkbox">กลับจากตปท Covid
-             <input type="checkbox">กลับจากตปทมีอาการป่วยอื่นๆ
+            <div class="clr-col-4 clr-form">
+              <clr-radio-container clrInline style="margin: 0;">
+                <clr-radio-wrapper>
+                  <input type="radio" clrRadio value="covid" (click)="uncheckRadioReturn()" name="returnFromAbroad"
+                    [(ngModel)]="returnFromAbroad" />
+                  <label>กลับจากต่างประเทศด้วยเชื้อ Covid</label>
+                </clr-radio-wrapper>
+                <clr-radio-wrapper>
+                  <input type="radio" clrRadio value="other" (click)="uncheckRadioReturn()" name="returnFromAbroad"
+                    [(ngModel)]="returnFromAbroad" />
+                  <label>กลับจากต่างประเทศ มีอาการป่วยอื่นๆ</label>
+                </clr-radio-wrapper>
+              </clr-radio-container>
             </div>
-            <div class="clr-col-3 clr-form">
-             <input type="text" class="clr-input" placeholder="ชื่อโรค">
+            <div class="clr-col-2 clr-form">
+              <label for="basic" class="clr-control-label">อาการ</label>
+              <div class="clr-control-container  width-fit">
+                <div class="clr-input-wrapper">
+                  <input type="text" id="basic" class="clr-input width-fit" name="icdName" [(ngModel)]="icdName">
+                </div>
+              </div>
+
+              <!-- <input type="text" class="clr-input" placeholder="ชื่อโรค"> -->
             </div>
-            <div class="clr-col-3 clr-form">
-             <input type="text" class="clr-input" placeholder="ICD10 Code">
+            <div class="clr-col-1"></div>
+            <div class="clr-col-2 clr-form">
+              <label for="basic" class="clr-control-label">ICD10</label>
+              <div class="clr-control-container  width-fit">
+                <div class="clr-input-wrapper" style="max-height: 3rem;">
+                  <app-autocomplete-icd10></app-autocomplete-icd10>
+
+                </div>
+              </div>
+
+
             </div>
           </div>
         </div>
@@ -444,8 +470,10 @@
           </td>
           <td class="left">
             <div *ngFor="let i of gcs">
-              <input type="radio" name="gcs-{{l.id}}" id="gcs-{{i.id}}-{{l.id}}" (click)="checkGcs(i,l)"
-                [(ngModel)]="l.gcs_id" [value]="i.id">
+              <input type="radio"
+                [disabled]="!(returnFromAbroad == 'covid' || returnFromAbroad == 'other') && i.id == 6"
+                name="gcs-{{l.id}}" id="gcs-{{i.id}}-{{l.id}}" (click)="checkGcs(i,l)" [(ngModel)]="l.gcs_id"
+                [value]="i.id">
               <label [title]="i.name" class="pointer" for="gcs-{{i.id}}-{{l.id}}">
                 {{i.name}}
               </label>

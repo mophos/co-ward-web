@@ -18,6 +18,11 @@ export class BasicAuthService {
     return await this.http.get(url).toPromise();
   }
 
+  async getICD10(query) {
+    const url = `${this.apiUrl}/v1/basic-auth/icd10?query=${query}`;
+    return await this.http.get(url).toPromise();
+  }
+
   async getMedicalSupplies() {
     const url = `${this.apiUrl}/v1/basic-auth/medical-supplies`;
     return await this.http.get(url).toPromise();

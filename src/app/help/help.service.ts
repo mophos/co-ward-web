@@ -18,6 +18,11 @@ export class HelpService {
     return this.http.get(url).toPromise();
   }
 
+  getListHpvc(personId) {
+    const url = `${this.url}/v1/staff/hpvc?personId=${personId}`;
+    return this.http.get(url).toPromise();
+  }
+
   async getDateCut() {
     const url = `${this.url}/date-time-cut`;
     return await this.http.get(url).toPromise();

@@ -92,7 +92,7 @@ export class CovidCaseNewComponent implements OnInit {
     showClearDateBtn: false,
     height: '25px'
   };
-
+  returnFromAbroad: any;
   s1 = [{ generic: 1, name: 'Hydroxychloroquine 200 mg.' }, { generic: 2, name: 'Chloroquine 250 mg.' }];
   s2 = [{ generic: 3, name: 'Darunavir 600mg+Ritonavir100 mg.' }, { generic: 4, name: 'Lopinavir 200 mg/Ritonavir 50 mg.' }];
   s3 = [{ generic: 7, name: 'Azithromycin 250 mg.' }];
@@ -117,7 +117,7 @@ export class CovidCaseNewComponent implements OnInit {
   @ViewChild('tambon') tambon: AutocompleteSubdistrictComponent;
   @ViewChild('zipcode') zipc: AutocompleteZipcodeComponent;
   @ViewChild('loading') loading: any;
-
+  people: any = [{ a: 1 }, { a: 2 }];
   constructor(
     private route: ActivatedRoute,
     private alertService: AlertService,
@@ -581,6 +581,9 @@ export class CovidCaseNewComponent implements OnInit {
     this.zipc.setQuery(this.zipcode);
   }
 
+  uncheckRadioReturn() {
+    this.returnFromAbroad = null;
+  }
   // uncheckRadio(type, id) {
   //   if ('GCS' === type && this.gcsId === id) {
   //     this.gcsId = null;

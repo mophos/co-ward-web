@@ -22,6 +22,7 @@ export class CovidCaseComponent implements OnInit {
   // modalCIDCidError = false;
 
   // modalCIDPassport: any;
+  personId: any;
   confirmDate: any;
   myDatePickerOptions: IMyOptions = {
     inline: false,
@@ -170,7 +171,10 @@ export class CovidCaseComponent implements OnInit {
     }
   }
 
-  onClickHPVC() {
-    this.modalHPVC.openModal();
+  onClickHPVC(e) {
+    console.log(e);
+    
+    this.personId = e.person_id;
+    this.modalHPVC.openModal(e.person_id);
   }
 }

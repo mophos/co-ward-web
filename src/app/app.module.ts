@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
 import { HelpModule } from './help/help.module';
 import { RegisterDrugComponent } from './register-drug/register-drug.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 export function tokenGetter() {
   return sessionStorage.getItem('token');
@@ -46,7 +47,8 @@ export function tokenGetter() {
     ManagerModule,
     StaffModule,
     FormsModule,
-    HelpModule
+    HelpModule,
+    NgSelectModule
   ],
   providers: [
     { provide: 'API_URL', useValue: environment.apiUrl },

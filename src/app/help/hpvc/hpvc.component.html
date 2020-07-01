@@ -1,29 +1,35 @@
 
-<clr-modal [(clrModalOpen)]="isModal">
+<clr-modal [(clrModalOpen)]="isModal" [clrModalSize]="'lg'">
   <h3 class="modal-title">บันทึกการแพ้ยา</h3>
   <div class="modal-body">
-
-    <!-- <clr-datagrid [clrDgLoading]="isLoadding">
+<button class="btn btn-sm btn-success" (click)="onClickAdd()">เพิ่ม</button>
+<div *ngIf="isAdd">
+  <div class="clr-row">
+    <div class="clr-col-6" *ngFor="let c of choice">
+      <input type="checkbox" name="" id="">
+      {{c.name}}</div>
+  </div>
+  <button class="btn btn-sm btn-success" (click)="onClickAdd()">บันทึก</button>
+</div>
+    <clr-datagrid [clrDgLoading]="isLoadding">
       <clr-dg-column>วันที่บันทึก</clr-dg-column>
       <clr-dg-column>อาการไม่พึงประสงค์</clr-dg-column>
       <clr-dg-column>ผู้บันทึก</clr-dg-column>
       <clr-dg-column></clr-dg-column>
       <clr-dg-row *ngFor="let l of list;let idx=index;">
-        <clr-dg-cell>{{l.an}}</clr-dg-cell>
-        <clr-dg-cell>{{l.date_admit | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
-        <clr-dg-cell>{{l.confirm_date | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
-        <clr-dg-cell>
+        <clr-dg-cell>{{l.created_date | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
+        <clr-dg-cell>{{l.hpvc_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.fname}}</clr-dg-cell>
+        <!-- <clr-dg-cell>
           <button type="button" class="btn btn-icon btn-primary" (click)="getDetails(l)" aria-label="settings">
             <clr-icon shape="search"></clr-icon>
           </button>
-        </clr-dg-cell>
+        </clr-dg-cell> -->
       </clr-dg-row>
       <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
-    </clr-datagrid> -->
+    </clr-datagrid>
 
-<div class="clr-row">
-  <div class="clr-col-6" *ngFor="let c of choice">{{c.name}}</div>
-</div>
+
   </div>
   <div class="modal-footer">
     <!-- <button type="button" class="btn btn-success" (click)="onClickSelect()">Ok</button> -->
