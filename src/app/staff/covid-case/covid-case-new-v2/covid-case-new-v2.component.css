@@ -1,0 +1,7 @@
+.container {
+    position: relative;
+    vertical-align: middle;
+    display: table-cell;
+    height: 80vh;
+    width: 80rem;
+}

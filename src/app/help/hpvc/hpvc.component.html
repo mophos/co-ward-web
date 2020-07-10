@@ -5,11 +5,17 @@
 <button class="btn btn-sm btn-success" (click)="onClickAdd()">เพิ่ม</button>
 <div *ngIf="isAdd">
   <div class="clr-row">
-    <div class="clr-col-6" *ngFor="let c of choice">
+    <div class="clr-col-6" *ngFor="let c of products">
       <input type="checkbox" name="" id="">
       {{c.name}}</div>
   </div>
-  <button class="btn btn-sm btn-success" (click)="onClickAdd()">บันทึก</button>
+  <hr>
+  <div class="clr-row">
+    <div class="clr-col-6" *ngFor="let c of choice">
+      <input type="checkbox" name="" id="c-{{c.id}}" [(ngModel)]="symptom">
+      {{c.name}}</div>
+  </div>
+  <button class="btn btn-sm btn-success" (click)="onClickSave()">บันทึก</button>
 </div>
     <clr-datagrid [clrDgLoading]="isLoadding">
       <clr-dg-column>วันที่บันทึก</clr-dg-column>

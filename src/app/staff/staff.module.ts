@@ -68,6 +68,7 @@ import { RequestProductNewComponent } from './request-products/request-product-n
 import { CovidCaseUpdateComponent } from './covid-case/covid-case-update/covid-case-update.component';
 
 import { NgSelectModule } from '@ng-select/ng-select';
+import { CovidCaseNewV2Component } from './covid-case/covid-case-new-v2/covid-case-new-v2.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -106,7 +107,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ReceivesComponent,
     RequestProductsComponent,
     RequestProductNewComponent,
-    CovidCaseUpdateComponent
+    CovidCaseUpdateComponent,
+    CovidCaseNewV2Component
   ],
   imports: [
     HelpModule,

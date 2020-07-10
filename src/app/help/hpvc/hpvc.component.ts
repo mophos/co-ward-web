@@ -12,8 +12,10 @@ export class HpvcComponent implements OnInit {
   isModal = false;
   list: any = [];
   choice: any = [];
+  products: any = [];
   personId: any;
   isAdd = false;
+  symptom: any;
   constructor(
     private helpService: HelpService,
     private alertService: AlertService
@@ -21,6 +23,7 @@ export class HpvcComponent implements OnInit {
 
   ngOnInit() {
     this.getChoice();
+    this.getProduct();
   }
 
   openModal(personId) {
@@ -33,13 +36,27 @@ export class HpvcComponent implements OnInit {
     this.isAdd = true;
   }
 
+  async getProduct() {
+    try {
+      const rs: any = await this.helpService.getHpvcProduct();
+      if (rs.ok) {
+        this.products = rs.rows;
+
+      } else {
+        this.alertService.error(rs.error);
+      }
+    } catch (error) {
+      this.alertService.error(error);
+    }
+  }
+
   async getChoice() {
     try {
       const rs: any = await this.helpService.getHPVC();
       if (rs.ok) {
         console.log(rs);
         this.choice = rs.rows;
-        
+
       } else {
         this.alertService.error(rs.error);
       }
@@ -59,5 +76,10 @@ export class HpvcComponent implements OnInit {
     } catch (error) {
       this.alertService.error(error);
     }
+  }
+
+  onClickSave() {
+    console.log(this.symptom);
+
   }
 }

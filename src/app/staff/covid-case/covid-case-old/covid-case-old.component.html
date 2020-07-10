@@ -213,7 +213,7 @@
               </div>
             </div>
           </div>
-          <div class="clr-row" [ngClass]="{hidden: countryId != 20}">
+          <div class="clr-row">
             <div class="clr-col-2 form">
               <div class="clr-form-control" style="margin-top: 0;">
                 <label for="example" class="clr-control-label">บ้านเลขที่</label>
@@ -265,7 +265,7 @@
               </div>
             </div>
             <div class="clr-col-2"></div>
-            <div class="clr-col-2 form">
+            <div class="clr-col-2 form" *ngIf="countryId == 20">
               <div class="clr-form-control" style="margin-top: 0;">
                 <label class="clr-control-label">ตำบล</label>
                 <div class="clr-control-container clr-error width-fit">
@@ -276,7 +276,7 @@
                 </div>
               </div>
             </div>
-            <div class="clr-col-2 form">
+            <div class="clr-col-2 form" *ngIf="countryId == 20">
               <div class="clr-form-control" style="margin-top: 0;">
                 <label class="clr-control-label">อำเภอ</label>
                 <div class="clr-control-container clr-error width-fit">
@@ -287,7 +287,7 @@
                 </div>
               </div>
             </div>
-            <div class="clr-col-2 form">
+            <div class="clr-col-2 form" *ngIf="countryId == 20">
               <div class="clr-form-control" style="margin-top: 0;">
                 <label class="clr-control-label">จังหวัด</label>
                 <div class="clr-control-container clr-error width-fit">
@@ -298,13 +298,212 @@
                 </div>
               </div>
             </div>
-            <div class="clr-col-2 form">
+            <div class="clr-col-2 form" *ngIf="countryId == 20">
               <div class="clr-form-control" style="margin-top: 0;">
                 <label class="clr-control-label">รหัสไปรษณีย์</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
                     <app-autocomplete-zipcode style="padding: 0px" #zipcode (onselect)="onSelectZipcode($event)">
                     </app-autocomplete-zipcode>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clr-col-2 form" *ngIf="countryId != 20">
+              <div class="clr-form-control" style="margin-top: 0;">
+                <label class="clr-control-label">ตำบล</label>
+                <div class="clr-control-container clr-error width-fit">
+                  <div class="clr-input-wrapper">
+                    <input type="text" name="tambonName" [(ngModel)]="tambonName" class="clr-input  width-fit">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clr-col-2 form" *ngIf="countryId != 20">
+              <div class="clr-form-control" style="margin-top: 0;">
+                <label class="clr-control-label">อำเภอ</label>
+                <div class="clr-control-container clr-error width-fit">
+                  <div class="clr-input-wrapper">
+                    <input type="text" name="ampurName" [(ngModel)]="ampurName" class="clr-input  width-fit">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clr-col-2 form" *ngIf="countryId != 20">
+              <div class="clr-form-control" style="margin-top: 0;">
+                <label class="clr-control-label">จังหวัด</label>
+                <div class="clr-control-container clr-error width-fit">
+                  <div class="clr-input-wrapper">
+                    <input type="text" name="provinceName" [(ngModel)]="provinceName" class="clr-input  width-fit">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clr-col-2 form" *ngIf="countryId != 20">
+              <div class="clr-form-control" style="margin-top: 0;">
+                <label class="clr-control-label">รหัสไปรษณีย์</label>
+                <div class="clr-control-container clr-error width-fit">
+                  <div class="clr-input-wrapper">
+                    <input type="text" name="zipcode" [(ngModel)]="zipcode" class="clr-input  width-fit">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-block">
+        <div class="card-text">
+          <div class="clr-row">
+            <div class="clr-col-2 ">
+              <label class="clr-control-label">ที่อยู่ปัจจุบัน</label>
+            </div>
+            <div class="clr-col-6 " *ngIf="countryId == 20">
+              <clr-checkbox-wrapper>
+                <input type="checkbox" clrCheckbox [(ngModel)]="addNow" value="addNow" name="addNow"
+                  (change)="checkAddNow()" />
+                <label>ตามบัตรประชาชน</label>
+              </clr-checkbox-wrapper>
+            </div>
+          </div>
+          <div class="clr-row">
+            <div class="clr-col-2 form">
+              <div class="clr-form-control" style="margin-top: 0;">
+                <label for="example" class="clr-control-label">บ้านเลขที่</label>
+                <div class="clr-control-container clr-error width-fit">
+                  <div class="clr-input-wrapper">
+                    <input type="text" id="example" name="houseNoCurr" [(ngModel)]="houseNoCurr"
+                      class="clr-input  width-fit">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clr-col-2 form">
+              <div class="clr-form-control" style="margin-top: 0;">
+                <label class="clr-control-label">หมายเลขห้อง</label>
+                <div class="clr-control-container clr-error width-fit">
+                  <div class="clr-input-wrapper">
+                    <input type="text" name="roomNoCurr" [(ngModel)]="roomNoCurr" class="clr-input  width-fit">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clr-col-2 form">
+              <div class="clr-form-control" style="margin-top: 0;">
+                <label class="clr-control-label">หมู่ที่</label>
+                <div class="clr-control-container clr-error width-fit">
+                  <div class="clr-input-wrapper">
+                    <input type="text" name="villageCurr" [(ngModel)]="villageCurr" class="clr-input  width-fit">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clr-col-2 form">
+              <div class="clr-form-control" style="margin-top: 0;">
+                <label class="clr-control-label">ชื่อหมู่บ้าน</label>
+                <div class="clr-control-container clr-error width-fit">
+                  <div class="clr-input-wrapper">
+                    <input type="text" name="villageNameCurr" [(ngModel)]="villageNameCurr"
+                      class="clr-input  width-fit">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clr-col-2 form">
+              <div class="clr-form-control" style="margin-top: 0;">
+                <label class="clr-control-label">ชื่อถนน</label>
+                <div class="clr-control-container clr-error width-fit">
+                  <div class="clr-input-wrapper">
+                    <input type="text" name="roadCurr" [(ngModel)]="roadCurr" class="clr-input  width-fit">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clr-col-2 form" *ngIf="countryId == 20">
+              <div class="clr-form-control" style="margin-top: 0;">
+                <label class="clr-control-label">ตำบล</label>
+                <div class="clr-control-container clr-error width-fit">
+                  <div class="clr-input-wrapper">
+                    <app-autocomplete-subdistrict style="padding: 0px" #tambonCurr
+                      (onselect)="onSelectTambonCurr($event)">
+                    </app-autocomplete-subdistrict>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clr-col-2 form" *ngIf="countryId != 20">
+              <div class="clr-form-control" style="margin-top: 0;">
+                <label class="clr-control-label">ตำบล</label>
+                <div class="clr-control-container clr-error width-fit">
+                  <div class="clr-input-wrapper">
+                    <input type="text" name="tambonNameCurrn" [(ngModel)]="tambonNameCurr" class="clr-input  width-fit">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clr-col-2 form" *ngIf="countryId == 20">
+              <div class="clr-form-control" style="margin-top: 0;">
+                <label class="clr-control-label">อำเภอ</label>
+                <div class="clr-control-container clr-error width-fit">
+                  <div class="clr-input-wrapper">
+                      <app-autocomplete-district style="padding: 0px" #ampurCurr (onselect)="onSelectAmpurCurr($event)">
+                      </app-autocomplete-district>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clr-col-2 form" *ngIf="countryId != 20">
+              <div class="clr-form-control" style="margin-top: 0;">
+                <label class="clr-control-label">อำเภอ</label>
+                <div class="clr-control-container clr-error width-fit">
+                  <div class="clr-input-wrapper">
+                      <input type="text" name="ampurNameCurrn" [(ngModel)]="ampurNameCurr" class="clr-input  width-fit">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clr-col-2 form" *ngIf="countryId == 20">
+              <div class="clr-form-control" style="margin-top: 0;">
+                <label class="clr-control-label">จังหวัด</label>
+                <div class="clr-control-container clr-error width-fit">
+                  <div class="clr-input-wrapper">
+                      <app-autocomplete-province style="padding: 0px" #provinceCurr
+                        (onselect)="onSelectProvinceCurr($event)">
+                      </app-autocomplete-province>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clr-col-2 form" *ngIf="countryId != 20">
+              <div class="clr-form-control" style="margin-top: 0;">
+                <label class="clr-control-label">จังหวัด</label>
+                <div class="clr-control-container clr-error width-fit">
+                  <div class="clr-input-wrapper">
+                      <input type="text" name="provinceNameCurrn" [(ngModel)]="provinceNameCurr"
+                        class="clr-input  width-fit">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clr-col-2 form" *ngIf="countryId == 20">
+              <div class="clr-form-control" style="margin-top: 0;">
+                <label class="clr-control-label">รหัสไปรษณีย์</label>
+                <div class="clr-control-container clr-error width-fit">
+                  <div class="clr-input-wrapper">
+                      <app-autocomplete-zipcode style="padding: 0px" #zipcodeCurr
+                        (onselect)="onSelectZipcodeCurr($event)">
+                      </app-autocomplete-zipcode>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clr-col-2 form" *ngIf="countryId != 20">
+              <div class="clr-form-control" style="margin-top: 0;">
+                <label class="clr-control-label">รหัสไปรษณีย์</label>
+                <div class="clr-control-container clr-error width-fit">
+                  <div class="clr-input-wrapper">
+                      
+                      <input type="text" name="zipcodeCurrn" [(ngModel)]="zipcodeCurr" class="clr-input  width-fit">
                   </div>
                 </div>
               </div>

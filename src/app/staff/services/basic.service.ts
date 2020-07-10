@@ -33,5 +33,9 @@ export class BasicService {
     return await this.http.get(url).toPromise();
   }
 
+  async getAddCode(t, a, p, z) {
+    const url = `${this.apiUrl}/v1/basic/getAddCode?t=${t}&a=${a}&p=${p}&z=${z}`;
+    return await this.http.get(url).toPromise();
+  }
 
 }

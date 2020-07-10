@@ -23,6 +23,10 @@ export class HelpService {
     return this.http.get(url).toPromise();
   }
 
+  getHpvcProduct() {
+    const url = `${this.url}/v1/staff/hpvc/products`;
+    return this.http.get(url).toPromise();
+  }
   async getDateCut() {
     const url = `${this.url}/date-time-cut`;
     return await this.http.get(url).toPromise();

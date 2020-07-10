@@ -1,3 +1,4 @@
+import { CovidCaseNewV2Component } from './covid-case/covid-case-new-v2/covid-case-new-v2.component';
 import { RequestProductNewComponent } from './request-products/request-product-new/request-product-new.component';
 import { ReportAdmitConfirmCaseComponent } from './report-admit-confirm-case/report-admit-confirm-case.component';
 import { RequestProductsComponent } from './request-products/request-products.component';
@@ -78,6 +79,7 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'covid-case', canActivate: [AuthCovidCaseService], component: CovidCaseComponent },
       { path: 'covid-case-new', canActivate: [AuthCovidCaseService], component: CovidCaseNewComponent },
+      { path: 'covid-case-new-v2', canActivate: [AuthCovidCaseService], component: CovidCaseNewV2Component },
       { path: 'covid-case-edit', canActivate: [AuthCovidCaseService], component: CovidCaseEditComponent },
       { path: 'covid-case-old', canActivate: [AuthCovidCaseService], component: CovidCaseOldComponent },
       { path: 'covid-case-update', canActivate: [AuthCovidCaseService], component: CovidCaseUpdateComponent },

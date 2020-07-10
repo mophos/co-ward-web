@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AutocompleteHospitalComponent } from 'src/app/help/autocomplete-hospital/autocomplete-hospital.component';
 import { IMyOptions } from 'mydatepicker-th';
-import { findIndex } from 'lodash';
+import { findIndex, cloneDeep } from 'lodash';
 import { AutocompleteProvinceComponent } from '../../../help/autocomplete-address/autocomplete-province/autocomplete-province.component';
 import { AutocompleteDistrictComponent } from '../../../help/autocomplete-address/autocomplete-district/autocomplete-district.component';
 import { AutocompleteSubdistrictComponent } from '../../../help/autocomplete-address/autocomplete-subdistrict/autocomplete-subdistrict.component';
@@ -60,6 +60,21 @@ export class CovidCaseNewComponent implements OnInit {
   countryId: any = 20;
   zipcode: any;
   countryName: any;
+
+  houseNoCurr: any;
+  roomNoCurr: any;
+  villageCurr: any;
+  villageNameCurr: any;
+  roadCurr: any;
+  tambonIdCurr: any;
+  tambonNameCurr: any;
+  ampurIdCurr: any;
+  ampurNameCurr: any;
+  provinceIdCurr: any;
+  provinceNameCurr: any;
+  zipcodeCurr: any;
+
+  addNow = false;
   // -------------------
 
   titles: any = [];
@@ -116,8 +131,13 @@ export class CovidCaseNewComponent implements OnInit {
   @ViewChild('ampur') ampur: AutocompleteDistrictComponent;
   @ViewChild('tambon') tambon: AutocompleteSubdistrictComponent;
   @ViewChild('zipcode') zipc: AutocompleteZipcodeComponent;
+  @ViewChild('provinceCurr') provinceCurr: AutocompleteProvinceComponent;
+  @ViewChild('ampurCurr') ampurCurr: AutocompleteDistrictComponent;
+  @ViewChild('tambonCurr') tambonCurr: AutocompleteSubdistrictComponent;
+  @ViewChild('zipcodeCurr') zipcCurr: AutocompleteZipcodeComponent;
   @ViewChild('loading') loading: any;
-  people: any = [{ a: 1 }, { a: 2 }];
+  icdName: any;
+  icdCode: any;
   constructor(
     private route: ActivatedRoute,
     private alertService: AlertService,
@@ -150,6 +170,10 @@ export class CovidCaseNewComponent implements OnInit {
 
     // await this.getGenericSet();
     // await this.setDrugs();
+  }
+
+  onSelectIcdCode(e) {
+    this.icdCode = e.code;
   }
 
   async setData() {
@@ -191,6 +215,15 @@ export class CovidCaseNewComponent implements OnInit {
       this.tambonId = this.data.tambon_code;
       this.provinceId = this.data.province_code;
       this.zipcode = this.data.zipcode;
+      this.houseNoCurr = this.data.current_house_no || null;
+      this.roomNoCurr = this.data.current_room_no || null;
+      this.villageCurr = this.data.current_village || null;
+      this.villageNameCurr = this.data.current_village_name || null;
+      this.roadCurr = this.data.current_road || null;
+      this.ampurIdCurr = this.data.current_ampur_code || null;
+      this.tambonIdCurr = this.data.current_tambon_code || null;
+      this.provinceIdCurr = this.data.current_province_code || null;
+      this.zipcodeCurr = this.data.current_zipcode || null;
       this.countryId = this.data.country_code;
 
 
@@ -201,6 +234,17 @@ export class CovidCaseNewComponent implements OnInit {
           this.tambon.setQuery(this.data.tambon_name);
           this.province.setQuery(this.data.province_name);
           this.zipc.setQuery(this.data.zipcode);
+          const address: any = await this.basicService.getAddCode(this.data.tambon_name, this.data.ampur_name, this.data.province_name, this.data.zipcode);
+          this.ampurName = this.data.ampur_name;
+          this.tambonName = this.data.tambon_name;
+          this.provinceName = this.data.province_name;
+          this.ampurId = address.rows[0].ampur_code;
+          this.tambonId = address.rows[0].tambon_code;
+          this.provinceId = address.rows[0].province_code;
+          this.ampurCurr.setQuery(this.data.current_ampur_name || null);
+          this.tambonCurr.setQuery(this.data.current_tambon_name || null);
+          this.provinceCurr.setQuery(this.data.current_province_name || null);
+          this.zipcCurr.setQuery(this.data.current_zipcode || null);
         }
       }
     } catch (error) {
@@ -282,6 +326,10 @@ export class CovidCaseNewComponent implements OnInit {
 
   async onSelectCountry(e) {
     this.countryId = e.id;
+    if (this.countryId === 20) {
+      this.setValue();
+      this.setValueCurr();
+    }
   }
 
   clearError() {
@@ -418,8 +466,23 @@ export class CovidCaseNewComponent implements OnInit {
               ampur_name: this.ampurName,
               province_name: this.provinceName,
               zipcode: this.zipcode,
+              houseNoCurr: this.houseNoCurr,
+              roomNoCurr: this.roomNoCurr,
+              villageCurr: this.villageCurr,
+              villageNameCurr: this.villageNameCurr,
+              roadCurr: this.roadCurr,
+              tambonCodeCurr: this.tambonIdCurr,
+              ampurCodeCurr: this.ampurIdCurr,
+              provinceCodeCurr: this.provinceIdCurr,
+              tambonNameCurr: this.tambonNameCurr,
+              ampurNameCurr: this.ampurNameCurr,
+              provinceNameCurr: this.provinceNameCurr,
+              zipcodeCurr: this.zipcodeCurr,
               countryId: this.countryId,
-              detail: this.admitDetail
+              detail: this.admitDetail,
+              returnFromAbroad: this.returnFromAbroad,
+              icdCode: this.icdCode,
+              icdName: this.icdName
               // drugs
             };
 
@@ -508,6 +571,14 @@ export class CovidCaseNewComponent implements OnInit {
       this.tambonId = null;
       this.ampurId = null;
       this.provinceId = null;
+      this.houseNoCurr = '';
+      this.roomNoCurr = '';
+      this.villageCurr = '';
+      this.villageNameCurr = '';
+      this.roadCurr = '';
+      this.tambonIdCurr = null;
+      this.ampurIdCurr = null;
+      this.provinceIdCurr = null;
       this.countryId = 20;
       this.modalCIDCid = '';
       this.modalCIDPassport = '';
@@ -519,12 +590,19 @@ export class CovidCaseNewComponent implements OnInit {
       this.ampur.setQuery('');
       this.province.setQuery('');
       this.zipc.setQuery('');
+      this.tambonCurr.setQuery('');
+      this.ampurCurr.setQuery('');
+      this.provinceCurr.setQuery('');
+      this.zipcCurr.setQuery('');
       this.countries.setQuery('ไทย');
       this.drugDay = null;
       this.personId = null;
       this.covidCaseId = null;
       this.typeRegister = null;
       this.admitDetail = [];
+      this.returnFromAbroad = null;
+      this.icdCode = null;
+      this.icdName = null;
     } catch (error) {
       console.log(error);
     }
@@ -582,8 +660,92 @@ export class CovidCaseNewComponent implements OnInit {
   }
 
   uncheckRadioReturn() {
-    this.returnFromAbroad = null;
+    if (this.returnFromAbroad === 'other' || this.returnFromAbroad === 'covid') {
+      this.returnFromAbroad = null;
+    }
   }
+  onSelectProvinceCurr(e) {
+    this.tambonIdCurr = e.tambon_code;
+    this.tambonNameCurr = e.tambon_name;
+    this.ampurIdCurr = e.ampur_code;
+    this.ampurNameCurr = e.ampur_name;
+    this.provinceIdCurr = e.province_code;
+    this.provinceNameCurr = e.province_name;
+    this.zipcodeCurr = e.zip_code;
+    this.setValueCurr();
+  }
+
+  onSelectAmpurCurr(e) {
+    this.tambonIdCurr = e.tambon_code;
+    this.tambonNameCurr = e.tambon_name;
+    this.ampurIdCurr = e.ampur_code;
+    this.ampurNameCurr = e.ampur_name;
+    this.provinceIdCurr = e.province_code;
+    this.provinceNameCurr = e.province_name;
+    this.zipcodeCurr = e.zip_code;
+    this.setValueCurr();
+  }
+
+  onSelectTambonCurr(e) {
+    this.tambonIdCurr = e.tambon_code;
+    this.tambonNameCurr = e.tambon_name;
+    this.ampurIdCurr = e.ampur_code;
+    this.ampurNameCurr = e.ampur_name;
+    this.provinceIdCurr = e.province_code;
+    this.provinceNameCurr = e.province_name;
+    this.zipcodeCurr = e.zip_code;
+    this.setValueCurr();
+  }
+
+  onSelectZipcodeCurr(e) {
+    this.tambonIdCurr = e.tambon_code;
+    this.tambonNameCurr = e.tambon_name;
+    this.ampurIdCurr = e.ampur_code;
+    this.ampurNameCurr = e.ampur_name;
+    this.provinceIdCurr = e.province_code;
+    this.provinceNameCurr = e.province_name;
+    this.zipcodeCurr = e.zip_code;
+    this.setValueCurr();
+  }
+
+  setValueCurr() {
+    this.provinceCurr.setQuery(this.provinceNameCurr);
+    this.ampurCurr.setQuery(this.ampurNameCurr);
+    this.tambonCurr.setQuery(this.tambonNameCurr);
+    this.zipcCurr.setQuery(this.zipcodeCurr);
+  }
+
+  checkAddNow() {
+    if (this.addNow) {
+      this.houseNoCurr = cloneDeep(this.houseNo);
+      this.roomNoCurr = cloneDeep(this.roomNo);
+      this.villageCurr = cloneDeep(this.village);
+      this.villageNameCurr = cloneDeep(this.villageName);
+      this.roadCurr = cloneDeep(this.road);
+      this.tambonIdCurr = cloneDeep(this.tambonId);
+      this.tambonNameCurr = cloneDeep(this.tambonName);
+      this.ampurIdCurr = cloneDeep(this.ampurId);
+      this.ampurNameCurr = cloneDeep(this.ampurName);
+      this.provinceIdCurr = cloneDeep(this.provinceId);
+      this.provinceNameCurr = cloneDeep(this.provinceName);
+      this.zipcodeCurr = cloneDeep(this.zipcode);
+      this.setValueCurr();
+    } else {
+      this.houseNoCurr = '';
+      this.roomNoCurr = '';
+      this.villageCurr = '';
+      this.villageNameCurr = '';
+      this.roadCurr = '';
+      this.tambonIdCurr = null;
+      this.ampurIdCurr = null;
+      this.provinceIdCurr = null;
+      this.tambonCurr.setQuery('');
+      this.ampurCurr.setQuery('');
+      this.provinceCurr.setQuery('');
+      this.zipcCurr.setQuery('');
+    }
+  }
+
   // uncheckRadio(type, id) {
   //   if ('GCS' === type && this.gcsId === id) {
   //     this.gcsId = null;
