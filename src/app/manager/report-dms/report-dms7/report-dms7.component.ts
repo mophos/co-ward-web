@@ -60,15 +60,15 @@ export class ReportDms7Component implements OnInit {
       const rs: any = await this.reportService.getReport7(moment(this.date).format('YYYY-MM-DD'), this.sector);
       if (rs.ok) {
         this.list = rs.rows;
-        this.nivCovid = sumBy(rs.rows, 'non_invasive_covid_qty');
+        this.nivCovid = sumBy(rs.rows, 'non_invasive_ventilator');
         this.nivQty = sumBy(rs.rows, 'non_invasive_qty') - sumBy(rs.rows, 'non_invasive_ventilator');
         this.nivAll = sumBy(rs.rows, 'non_invasive_qty');
 
-        this.ivCovid = sumBy(rs.rows, 'invasive_covid_qty');
+        this.ivCovid = sumBy(rs.rows, 'invasive_ventilator');
         this.ivQty = sumBy(rs.rows, 'invasive_qty') - sumBy(rs.rows, 'invasive_ventilator');
         this.ivAll = sumBy(rs.rows, 'invasive_qty');
 
-        this.hfCovid = sumBy(rs.rows, 'high_flow_covid_qty');
+        this.hfCovid = sumBy(rs.rows, 'high_flow');
         this.hfQty = sumBy(rs.rows, 'high_flow_qty') - sumBy(rs.rows, 'high_flow');
         this.hfAll = sumBy(rs.rows, 'high_flow_qty');
         this.loading.hide();
