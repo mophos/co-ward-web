@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AutocompleteHospitalComponent } from 'src/app/help/autocomplete-hospital/autocomplete-hospital.component';
 import { IMyOptions } from 'mydatepicker-th';
-import { findIndex, cloneDeep } from 'lodash';
+import { findIndex, cloneDeep, filter } from 'lodash';
 import { AutocompleteProvinceComponent } from '../../../help/autocomplete-address/autocomplete-province/autocomplete-province.component';
 import { AutocompleteDistrictComponent } from '../../../help/autocomplete-address/autocomplete-district/autocomplete-district.component';
 import { AutocompleteSubdistrictComponent } from '../../../help/autocomplete-address/autocomplete-subdistrict/autocomplete-subdistrict.component';
@@ -14,7 +14,6 @@ import { AutocompleteZipcodeComponent } from '../../../help/autocomplete-address
 import { AutocompleteCountriesComponent } from 'src/app/help/autocomplete-countries/autocomplete-countries.component';
 import * as moment from 'moment';
 import thaiIdCard from 'thai-id-card';
-
 @Component({
   selector: 'app-covid-case-new',
   templateUrl: './covid-case-new.component.html',
@@ -40,6 +39,9 @@ export class CovidCaseNewComponent implements OnInit {
   birthDate: any;
   tel = '';
   peopleType: any = null;
+  peopleCaseType: any = null;
+  provinceType: any;
+  caseStatus: any;
 
   admitDate: any;
   diffDate: any;
@@ -124,7 +126,7 @@ export class CovidCaseNewComponent implements OnInit {
   modalCIDCidError = false;
 
   modalCIDPassport: any;
-  isKey = false;
+  isKey = true;
   @ViewChild('hospital') hospitals: AutocompleteHospitalComponent;
   @ViewChild('countries') countries: AutocompleteCountriesComponent;
   @ViewChild('province') province: AutocompleteProvinceComponent;
@@ -143,33 +145,35 @@ export class CovidCaseNewComponent implements OnInit {
     private alertService: AlertService,
     private basicService: BasicService,
     private basicAuthService: BasicAuthService,
-    private covidCaseService: CovidCaseService
+    private covidCaseService: CovidCaseService,
+    private router: Router
   ) {
     const params = this.route.snapshot.params;
     this.isRefer = params.isRefer;
-    this.typeRegister = params.type;
+    this.provinceType = params.province;
+    this.caseStatus = params.caseStatus;
+    this.peopleCaseType = params.peopleType;
+    this.typeRegister = params.typeRegister;
     this.cid = params.cid;
     this.passport = params.passport;
     this.data = params.data ? JSON.parse(params.data) : null;
   }
 
   async ngOnInit() {
-    // this.countries.setQuery('ไทย');
-    this.loading.show();
+    // this.loading.show();
     await this.getTitle();
     await this.getGCS();
     await this.getBeds();
     await this.getMedicalSupplies();
-    // console.log(this.data);
 
-    if (this.data) {
-      await this.setData();
+    if (this.peopleCaseType === 'THAI') {
+      this.infoCid(this.cid);
     }
+    // if (this.data.cid) {
+    //   await this.setData();
+    // }
     this.loading.hide();
-    this.modalCID = true;
-
-    // await this.getGenericSet();
-    // await this.setDrugs();
+    // this.modalCID = true;
   }
 
   onSelectIcdCode(e) {
@@ -285,7 +289,11 @@ export class CovidCaseNewComponent implements OnInit {
     try {
       const rs: any = await this.basicAuthService.getGCS();
       if (rs.ok) {
-        this.gcs = rs.rows;
+        if (this.caseStatus === 'OBSERVE') {
+          this.gcs = filter(rs.rows, { name: 'Observe (Hospital Q)' });
+        } else {
+          this.gcs = rs.rows;
+        }
       } else {
         this.alertService.serverError();
       }
@@ -299,7 +307,11 @@ export class CovidCaseNewComponent implements OnInit {
     try {
       const rs: any = await this.basicAuthService.getBeds();
       if (rs.ok) {
-        this.beds = rs.rows;
+        if (this.caseStatus === 'OBSERVE') {
+          this.beds = filter(rs.rows, { name: 'Hospital Q' });
+        } else {
+          this.beds = rs.rows;
+        }
       } else {
         this.alertService.serverError();
       }
@@ -482,7 +494,8 @@ export class CovidCaseNewComponent implements OnInit {
               detail: this.admitDetail,
               returnFromAbroad: this.returnFromAbroad,
               icdCode: this.icdCode,
-              icdName: this.icdName
+              icdName: this.icdName,
+              provinceType: this.provinceType,
               // drugs
             };
 
@@ -507,7 +520,7 @@ export class CovidCaseNewComponent implements OnInit {
                   this.isKey = false;
                   this.isSave = false;
                   this.alertService.success();
-                  this.onClickOpenModalCid();
+                  this.router.navigate(['/staff/covid-case-new-v2']);
                 } else {
                   this.isSave = false;
                   this.alertService.error(rs.error);
@@ -522,7 +535,7 @@ export class CovidCaseNewComponent implements OnInit {
                 this.isKey = false;
                 this.isSave = false;
                 this.alertService.success();
-                this.onClickOpenModalCid();
+                this.router.navigate(['/staff/covid-case-new-v2']);
               } else {
                 this.isSave = false;
                 this.alertService.error(rs.error);
@@ -767,49 +780,49 @@ export class CovidCaseNewComponent implements OnInit {
 
   // }
 
-  async onSearchModal() {
-    try {
-      this.isModelSearch = true;
-      this.modalCIDCidError = !thaiIdCard.verify(this.modalCIDCid);
-      if (this.modalCIDType !== 'NO') {
-        if ((!this.modalCIDCidError && this.modalCIDType === 'CID') || this.modalCIDType === 'PASSPORT') {
-          const rs: any = await this.covidCaseService.checkNo(this.modalCIDType, this.modalCIDCid, this.modalCIDPassport);
-          if (rs.ok) {
-            if (rs.case === 'NEW') {
-              if (this.modalCIDType === 'CID') {
-                this.typeRegister = 'CID';
-                await this.infoCid(this.modalCIDCid);
-                this.cid = this.modalCIDCid;
-              } else if (this.modalCIDType === 'PASSPORT') {
-                this.typeRegister = 'PASSPORT';
-                this.passport = this.modalCIDPassport;
-              }
-              this.isKey = true;
-              this.modalCID = false;
-            } else if (rs.case === 'REFER') {
-              this.typeRegister = 'REFER';
-              const confirm = await this.alertService.confirm(`คุณรับผู้ป่วย Refer มาจาก ${rs.rows.hospname} ใช่หรือไม่ ?`);
-              if (confirm) {
-                this.isKey = true;
-                this.modalCID = false;
-                this.data = rs.rows;
-                this.setData();
-              }
-            }
-          } else {
-            this.alertService.error(rs.error);
-          }
-        }
-      } else {
-        this.isKey = true;
-        this.modalCID = false;
-      }
-      this.isModelSearch = false;
-    } catch (error) {
-      this.isModelSearch = false;
-      this.alertService.error(error);
-    }
-  }
+  // async onSearchModal() {
+  //   try {
+  //     this.isModelSearch = true;
+  //     this.modalCIDCidError = !thaiIdCard.verify(this.modalCIDCid);
+  //     if (this.modalCIDType !== 'NO') {
+  //       if ((!this.modalCIDCidError && this.modalCIDType === 'CID') || this.modalCIDType === 'PASSPORT') {
+  //         const rs: any = await this.covidCaseService.checkNo(this.modalCIDType, this.modalCIDCid, this.modalCIDPassport);
+  //         if (rs.ok) {
+  //           if (rs.case === 'NEW') {
+  //             if (this.modalCIDType === 'CID') {
+  //               this.typeRegister = 'CID';
+  //               await this.infoCid(this.modalCIDCid);
+  //               this.cid = this.modalCIDCid;
+  //             } else if (this.modalCIDType === 'PASSPORT') {
+  //               this.typeRegister = 'PASSPORT';
+  //               this.passport = this.modalCIDPassport;
+  //             }
+  //             this.isKey = true;
+  //             this.modalCID = false;
+  //           } else if (rs.case === 'REFER') {
+  //             this.typeRegister = 'REFER';
+  //             const confirm = await this.alertService.confirm(`คุณรับผู้ป่วย Refer มาจาก ${rs.rows.hospname} ใช่หรือไม่ ?`);
+  //             if (confirm) {
+  //               this.isKey = true;
+  //               this.modalCID = false;
+  //               this.data = rs.rows;
+  //               this.setData();
+  //             }
+  //           }
+  //         } else {
+  //           this.alertService.error(rs.error);
+  //         }
+  //       }
+  //     } else {
+  //       this.isKey = true;
+  //       this.modalCID = false;
+  //     }
+  //     this.isModelSearch = false;
+  //   } catch (error) {
+  //     this.isModelSearch = false;
+  //     this.alertService.error(error);
+  //   }
+  // }
 
   onClickOpenModalCid() {
     this.modalCID = true;
@@ -855,8 +868,18 @@ export class CovidCaseNewComponent implements OnInit {
             const obj: any = {};
             obj.date = startDate.format('YYYY-MM-DD');
             obj.id = id;
-            obj.gcs_id = null;
-            obj.bed_id = null;
+            if (this.caseStatus === 'IPPUI') {
+              obj.gcs_id = 5;
+            } else if (this.caseStatus === 'OBSERVE') {
+              obj.gcs_id = 6;
+            } else {
+              obj.gcs_id = null;
+            }
+            if (this.caseStatus === 'OBSERVE') {
+              obj.bed_id = 6;
+            } else {
+              obj.bed_id = null;
+            }
             obj.medical_supplie_id = null;
 
             obj.drugs = [];

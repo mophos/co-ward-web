@@ -634,7 +634,7 @@
           <td class="left">
             <div *ngFor="let i of gcs">
               <input type="radio"
-                [disabled]="!(returnFromAbroad == 'covid' || returnFromAbroad == 'other') && i.id == 6"
+                [disabled]="!(returnFromAbroad == 'covid' || returnFromAbroad == 'other') && i.id == 6 || i.id == 5"
                 name="gcs-{{l.id}}" id="gcs-{{i.id}}-{{l.id}}" (click)="checkGcs(i,l)" [(ngModel)]="l.gcs_id"
                 [value]="i.id">
               <label [title]="i.name" class="pointer" for="gcs-{{i.id}}-{{l.id}}">
@@ -644,7 +644,7 @@
           </td>
           <td class="left">
             <div *ngFor="let i of beds">
-              <input type="radio" name="bed-{{l.id}}" id="bed-{{i.id}}-{{l.id}}" [(ngModel)]="l.bed_id" [value]="i.id">
+              <input type="radio" [disabled]="!(returnFromAbroad == 'covid' || returnFromAbroad == 'other') && i.id == 6" name="bed-{{l.id}}" id="bed-{{i.id}}-{{l.id}}" [(ngModel)]="l.bed_id" [value]="i.id">
               <label [title]="i.name" class="pointer" for="bed-{{i.id}}-{{l.id}}">
                 {{i.name}}
               </label>
