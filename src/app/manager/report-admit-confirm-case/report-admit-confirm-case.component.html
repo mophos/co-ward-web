@@ -90,7 +90,9 @@
         <th class="text-left td-border" style="position: sticky; top: 0;">จังหวัด</th>
         <th class="text-left td-border" style="position: sticky; top: 0;">โรงพยาบาล</th>
         <th class="text-left td-border" style="position: sticky; top: 0;">HN/AN</th>
-        <!-- <th class="text-left td-border" style="position: sticky; top: 0;">CID</th> -->
+        <th *ngIf='showPersons' class="text-left td-border" style="position: sticky; top: 0;">CID</th>
+        <th *ngIf='showPersons' class="text-left td-border" style="position: sticky; top: 0;">ชื่อ</th>
+        <th *ngIf='showPersons' class="text-left td-border" style="position: sticky; top: 0;">นามสกุล</th>
         <th class="text-left td-border" style="position: sticky; top: 0;">วันที่ ADMIT</th>
         <th class="text-left td-border" style="position: sticky; top: 0;">ความรุนแรง</th>
         <th class="text-left td-border" style="position: sticky; top: 0;">เตียง</th>
@@ -112,7 +114,9 @@
         <td class="text-left td-border">{{l.province_name}}</td>
         <td class="text-left td-border">{{l.hospname}}</td>
         <td class="text-left td-border"> {{l.hn}}/{{l.an}}</td>
-        <!-- <td class="text-left td-border"> {{l.cid}}</td> -->
+        <td *ngIf='showPersons' class="text-left td-border"> {{l.cid}}</td>
+        <td *ngIf='showPersons' class="text-left td-border"> {{l.first_name}}</td>
+        <td *ngIf='showPersons' class="text-left td-border"> {{l.last_name}}</td>
         <td class="text-left td-border"> {{l.date_admit | dateTh:'DD/MM/YYYY'}}</td>
         <td class="text-left td-border"> {{l.gcs_name}}</td>
         <td class="text-left td-border"> {{l.bed_name}}</td>
