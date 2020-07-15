@@ -1,6 +1,8 @@
 import { AlertService } from 'src/app/help/alert.service';
 import { HelpService } from './../help.service';
 import { Component, OnInit, Input } from '@angular/core';
+import { map, compact } from 'lodash';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-hpvc',
@@ -78,8 +80,43 @@ export class HpvcComponent implements OnInit {
     }
   }
 
-  onClickSave() {
-    console.log(this.symptom);
+  async onClickSave() {
+    const confirm = await this.alertService.confirm('ยืนยันการบันทึกอาการไม่พึงประสงค์ ใช่หรือไม่ ?');
+    if (confirm) {
+      const selectDrug = compact(map(this.products, (v: any) => {
+        if (v.select) {
+          return v.id;
+        }
+      }));
+      const selectHpvc = compact(map(this.choice, (v: any) => {
+        if (v.select) {
+          return v.id;
+        }
+      }));
+      const rs: any = await this.helpService.saveHpvc(this.personId, selectDrug, selectHpvc);
+      if (rs.ok) {
+        await this.getList();
+        await this.getChoice();
+        await this.getProduct();
+        this.alertService.success();
+      } else {
+        this.alertService.error(rs.massage);
+      }
+    }
+
+  }
+
+  async delete(id) {
+    const confirm = await this.alertService.confirm('ต้องการลบอาการไม่พึงประสงค์ ใช่หรือไม่ ?');
+    if (confirm) {
+      const rs: any = await this.helpService.deleteHpvc(id);
+      if (rs.ok) {
+        await this.getList();
+        this.alertService.success();
+      } else {
+        this.alertService.error(rs.massage);
+      }
+    }
 
   }
 }

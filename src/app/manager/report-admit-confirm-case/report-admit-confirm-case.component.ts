@@ -2,6 +2,9 @@ import { AlertService } from './../../help/alert.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportService } from '../report.service';
 import { sumBy } from 'lodash';
+import { findIndex } from 'lodash';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 @Component({
   selector: 'app-report-admit-confirm-case',
   templateUrl: './report-admit-confirm-case.component.html',
@@ -32,12 +35,19 @@ export class ReportAdmitConfirmCaseComponent implements OnInit {
   d5 = 0;
   d7 = 0;
   d8 = 0;
+  showPersons: any;
+  rights: any;
+  public jwtHelper = new JwtHelperService();
 
   @ViewChild('loading') loading: any;
   constructor(
     private reportService: ReportService,
     private alertService: AlertService
-  ) { }
+  ) {
+    const decoded = this.jwtHelper.decodeToken(sessionStorage.getItem('token'));
+    this.rights = decoded.rights;
+    this.showPersons = findIndex(this.rights, { name: 'MANAGER_REPORT_PERSON' }) === -1 ? false : true;
+  }
 
   ngOnInit() {
     this.getList();

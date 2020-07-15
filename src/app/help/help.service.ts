@@ -27,6 +27,15 @@ export class HelpService {
     const url = `${this.url}/v1/staff/hpvc/products`;
     return this.http.get(url).toPromise();
   }
+
+  saveHpvc(personId, drugId, hpvcId) {
+    const url = `${this.url}/v1/staff/hpvc`;
+    return this.http.post(url, { personId, drugId, hpvcId }).toPromise();
+  }
+  deleteHpvc(headId) {
+    const url = `${this.url}/v1/staff/hpvc/${headId}`;
+    return this.http.delete(url).toPromise();
+  }
   async getDateCut() {
     const url = `${this.url}/date-time-cut`;
     return await this.http.get(url).toPromise();
