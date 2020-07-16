@@ -42,6 +42,7 @@ export class CovidCaseNewComponent implements OnInit {
   peopleCaseType: any = null;
   provinceType: any;
   caseStatus: any;
+  icdCodes: any = [];
 
   admitDate: any;
   diffDate: any;
@@ -495,7 +496,8 @@ export class CovidCaseNewComponent implements OnInit {
               returnFromAbroad: this.returnFromAbroad,
               icdCode: this.icdCode,
               icdName: this.icdName,
-              provinceType: this.provinceType,
+              caseStatus: this.caseStatus,
+              icdCodes: this.icdCodes
               // drugs
             };
 
@@ -757,6 +759,14 @@ export class CovidCaseNewComponent implements OnInit {
       this.provinceCurr.setQuery('');
       this.zipcCurr.setQuery('');
     }
+  }
+
+  addIcd() {
+    this.icdCodes.push(this.icdCode);
+  }
+
+  removeIcd(idx) {
+    this.icdCodes.splice(idx, 1);
   }
 
   // uncheckRadio(type, id) {
