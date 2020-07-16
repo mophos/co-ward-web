@@ -308,11 +308,11 @@ export class CovidCaseNewComponent implements OnInit {
     try {
       const rs: any = await this.basicAuthService.getBeds();
       if (rs.ok) {
-        if (this.caseStatus === 'OBSERVE') {
-          this.beds = filter(rs.rows, { name: 'Hospital Q' });
-        } else {
-          this.beds = rs.rows;
-        }
+        // if (this.caseStatus === 'OBSERVE') {
+        //   this.beds = filter(rs.rows, { name: 'Hospital Q' });
+        // } else {
+        // }
+        this.beds = rs.rows;
       } else {
         this.alertService.serverError();
       }
