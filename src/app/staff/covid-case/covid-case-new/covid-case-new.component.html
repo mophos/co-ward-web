@@ -564,9 +564,11 @@
               <div class="clr-col-4 clr-form">
                 <clr-radio-container clrInline style="margin: 0;">
                   <clr-radio-wrapper>
-                    <input type="radio" clrRadio value="covid" (click)="uncheckRadioReturn()" name="returnFromAbroad"
-                      [(ngModel)]="returnFromAbroad" />
-                    <label>กลับจากต่างประเทศด้วยเชื้อ Covid</label>
+                    <div *ngIf="caseStatus === 'OBSERVE'">
+                      <input type="radio" clrRadio value="covid" (click)="uncheckRadioReturn()" name="returnFromAbroad"
+                        [(ngModel)]="returnFromAbroad" />
+                      <label>กลับจากต่างประเทศด้วยเชื้อ Covid</label>
+                    </div>
                   </clr-radio-wrapper>
                   <clr-radio-wrapper>
                     <input type="radio" clrRadio value="other" (click)="uncheckRadioReturn()" name="returnFromAbroad"

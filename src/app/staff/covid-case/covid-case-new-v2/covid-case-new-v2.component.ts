@@ -51,6 +51,13 @@ export class CovidCaseNewV2Component implements OnInit {
     }
   }
 
+  changeProvince(v) {
+    this.province = v;
+    if (this.province === 'IN') {
+      this.peopleType = 'THAI';
+    }
+  }
+
   changePeopleType(v) {
     this.peopleType = v;
     this.cid = '';
