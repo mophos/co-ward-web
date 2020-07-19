@@ -550,60 +550,62 @@
     </div>
   </div>
 </div>
-<br>
-<div class="clr-row" [ngClass]="{hidden: !isKey}">
-  <div class="clr-col-12">
-    <div class="card" style="margin-top: 0;">
-      <div class="card-header">
-        ข้อมูลการกลับจากต่างประเทศ
-      </div>
-      <div class="card-block">
-        <div class="card-text">
-          <div class="clr-row">
-            <div class="clr-col-4 clr-form">
-              <clr-radio-container clrInline style="margin: 0;">
-                <clr-radio-wrapper>
-                  <input type="radio" clrRadio value="covid" (click)="uncheckRadioReturn()" name="returnFromAbroad"
-                    [(ngModel)]="returnFromAbroad" />
-                  <label>กลับจากต่างประเทศด้วยเชื้อ Covid</label>
-                </clr-radio-wrapper>
-                <clr-radio-wrapper>
-                  <input type="radio" clrRadio value="other" (click)="uncheckRadioReturn()" name="returnFromAbroad"
-                    [(ngModel)]="returnFromAbroad" />
-                  <label>กลับจากต่างประเทศ มีอาการป่วยอื่นๆ</label>
-                </clr-radio-wrapper>
-              </clr-radio-container>
-            </div>
-            <div class="clr-col-2 clr-form">
-              <label for="basic" class="clr-control-label">อาการ</label>
-              <div class="clr-control-container  width-fit">
-                <div class="clr-input-wrapper">
-                  <input type="text" id="basic" [disabled]="!(returnFromAbroad == 'covid' || returnFromAbroad == 'other')"
-                    class="clr-input width-fit" name="icdName" [(ngModel)]="icdName">
-                </div>
+<div *ngIf="hide">
+  <br>
+  <div class="clr-row">
+    <div class="clr-col-12">
+      <div class="card" style="margin-top: 0;">
+        <div class="card-header">
+          ข้อมูลการกลับจากต่างประเทศ
+        </div>
+        <div class="card-block">
+          <div class="card-text">
+            <div class="clr-row">
+              <div class="clr-col-4 clr-form">
+                <clr-radio-container clrInline style="margin: 0;">
+                  <clr-radio-wrapper>
+                    <input type="radio" clrRadio value="covid" (click)="uncheckRadioReturn()" name="returnFromAbroad"
+                      [(ngModel)]="returnFromAbroad" />
+                    <label>กลับจากต่างประเทศด้วยเชื้อ Covid</label>
+                  </clr-radio-wrapper>
+                  <clr-radio-wrapper>
+                    <input type="radio" clrRadio value="other" (click)="uncheckRadioReturn()" name="returnFromAbroad"
+                      [(ngModel)]="returnFromAbroad" />
+                    <label>กลับจากต่างประเทศ มีอาการป่วยอื่นๆ</label>
+                  </clr-radio-wrapper>
+                </clr-radio-container>
               </div>
+              <div class="clr-col-2 clr-form">
+                <label for="basic" class="clr-control-label">อาการ</label>
+                <div class="clr-control-container  width-fit">
+                  <div class="clr-input-wrapper">
+                    <input type="text" id="basic" [disabled]="!(returnFromAbroad == 'covid' || returnFromAbroad == 'other')"
+                      class="clr-input width-fit" name="icdName" [(ngModel)]="icdName">
+                  </div>
+                </div>
 
-              <!-- <input type="text" class="clr-input" placeholder="ชื่อโรค"> -->
-            </div>
-            <div class="clr-col-1"></div>
-            <div class="clr-col-4 clr-form">
-              <label for="basic" class="clr-control-label">ICD10</label>
-              <div class="clr-control-container  width-fit">
-                <div class="clr-row">
-                  <div class="clr-col-10">
-                    <div class="clr-input-wrapper" style="max-height: 3rem;">
-                      <app-autocomplete-icd10 [disabled]="!(returnFromAbroad == 'covid' || returnFromAbroad == 'other')"
-                        (onselect)="onSelectIcdCode($event)"></app-autocomplete-icd10>
+                <!-- <input type="text" class="clr-input" placeholder="ชื่อโรค"> -->
+              </div>
+              <div class="clr-col-1"></div>
+              <div class="clr-col-4 clr-form">
+                <label for="basic" class="clr-control-label">ICD10</label>
+                <div class="clr-control-container  width-fit">
+                  <div class="clr-row">
+                    <div class="clr-col-10">
+                      <div class="clr-input-wrapper" style="max-height: 3rem;">
+                        <app-autocomplete-icd10 #icd [disabled]="!(returnFromAbroad == 'covid' || returnFromAbroad == 'other')"
+                          (onselect)="onSelectIcdCode($event)"></app-autocomplete-icd10>
+                      </div>
+                    </div>
+                    <div class="clr-col-2">
+                      <clr-icon (click)="addIcd()" class="alert-icon" shape="plus-circle"></clr-icon>
                     </div>
                   </div>
-                  <div class="clr-col-2">
-                    <clr-icon (click)="addIcd()" class="alert-icon" shape="plus-circle"></clr-icon>
-                  </div>
-                </div>
-                <div class="clr-row">
-                  <div class="clr-col-12">
-                    <span *ngFor="let i of icdCodes; let idx=index;">{{i}} <clr-icon (click)="removeIcd(idx)" class="alert-icon"
-                        shape="minus-circle"></clr-icon></span>
+                  <div class="clr-row">
+                    <div class="clr-col-12">
+                      <span *ngFor="let i of icdCodes; let idx=index;">{{i}} <clr-icon (click)="removeIcd(idx)" class="alert-icon"
+                          shape="minus-circle"></clr-icon></span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -613,8 +615,8 @@
       </div>
     </div>
   </div>
+  <br>
 </div>
-<br>
 <div class="clr-row" [ngClass]="{hidden: !isKey}">
   <div class="clr-col-12">
     <table class="table">

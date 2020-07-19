@@ -42,6 +42,15 @@ export class CovidCaseNewV2Component implements OnInit {
     }
   }
 
+  onKeyPassport(e) {
+    const passpost = e.target.value;
+    if (passpost.length >= 10) {
+      this.cidError = false;
+    } else {
+      this.cidError = true;
+    }
+  }
+
   changePeopleType(v) {
     this.peopleType = v;
     this.cid = '';

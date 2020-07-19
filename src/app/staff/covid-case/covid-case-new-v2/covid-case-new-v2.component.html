@@ -69,7 +69,7 @@
         <label for="basic" class="clr-control-label">เลขที่หนังสือเดินทาง</label>
         <div class="clr-control-container">
           <div class="clr-input-wrapper" style="max-height: 3rem !important;">
-            <input type="text" id="basic" class="clr-input" appNumberOnly maxlength="13"
+            <input type="text" id="basic" class="clr-input" (keyup)="onKeyPassport($event)" maxlength="13"
               style="height:3rem !important;font-size: 1.3rem;" name="passpost" [(ngModel)]="passpost">
             <!-- <clr-icon shape="exclamation-circle" size="36" *ngIf="passpostError"></clr-icon> -->
           </div>

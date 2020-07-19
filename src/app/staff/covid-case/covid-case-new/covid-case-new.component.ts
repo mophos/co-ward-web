@@ -14,6 +14,7 @@ import { AutocompleteZipcodeComponent } from '../../../help/autocomplete-address
 import { AutocompleteCountriesComponent } from 'src/app/help/autocomplete-countries/autocomplete-countries.component';
 import * as moment from 'moment';
 import thaiIdCard from 'thai-id-card';
+import { AutocompleteIcd10Component } from 'src/app/help/autocomplete-icd10/autocomplete-icd10.component';
 @Component({
   selector: 'app-covid-case-new',
   templateUrl: './covid-case-new.component.html',
@@ -128,7 +129,9 @@ export class CovidCaseNewComponent implements OnInit {
 
   modalCIDPassport: any;
   isKey = true;
+  hide = true;
   @ViewChild('hospital') hospitals: AutocompleteHospitalComponent;
+  @ViewChild('icd') icd: AutocompleteIcd10Component;
   @ViewChild('countries') countries: AutocompleteCountriesComponent;
   @ViewChild('province') province: AutocompleteProvinceComponent;
   @ViewChild('ampur') ampur: AutocompleteDistrictComponent;
@@ -140,7 +143,7 @@ export class CovidCaseNewComponent implements OnInit {
   @ViewChild('zipcodeCurr') zipcCurr: AutocompleteZipcodeComponent;
   @ViewChild('loading') loading: any;
   icdName: any;
-  icdCode: any;
+  icdCode: any = null;
   constructor(
     private route: ActivatedRoute,
     private alertService: AlertService,
@@ -162,6 +165,10 @@ export class CovidCaseNewComponent implements OnInit {
 
   async ngOnInit() {
     // this.loading.show();
+
+    if (this.provinceType === 'IN' && this.peopleCaseType === 'THAI') {
+      this.hide = false;
+    }
     await this.getTitle();
     await this.getGCS();
     await this.getBeds();
@@ -292,6 +299,8 @@ export class CovidCaseNewComponent implements OnInit {
       if (rs.ok) {
         if (this.caseStatus === 'OBSERVE') {
           this.gcs = filter(rs.rows, { name: 'Observe (Hospital Q)' });
+        } else if (this.caseStatus === 'IPPUI') {
+          this.gcs = filter(rs.rows, { name: 'IP PUI' });
         } else {
           this.gcs = rs.rows;
         }
@@ -514,7 +523,8 @@ export class CovidCaseNewComponent implements OnInit {
               if (idx > -1) {
                 titleName = await this.titles[idx].name;
               }
-              const confirm = await this.alertService.confirm(titleName + ' ' + this.fname + ' ' + this.lname + ' เป็นผู้ป่วยยืนยัน และมีผลแล็บ covid-19 positive แล้ว');
+              const alert = this.caseStatus === 'OBSERVE' ? titleName + ' ' + this.fname + ' ' + this.lname + ' เป็นผู้ป่วยกลับจากต่างประเภท กักตัว 14 วัน' : titleName + ' ' + this.fname + ' ' + this.lname + ' เป็นผู้ป่วยยืนยัน และมีผลแล็บ covid-19 positive แล้ว';
+              const confirm = await this.alertService.confirm(alert);
               if (confirm) {
                 const rs: any = await this.covidCaseService.saveNewCase(obj);
                 if (rs.ok) {
@@ -762,7 +772,11 @@ export class CovidCaseNewComponent implements OnInit {
   }
 
   addIcd() {
-    this.icdCodes.push(this.icdCode);
+    if (this.icdCode !== null) {
+      this.icdCodes.push(this.icdCode);
+      this.icd.setQuery('');
+      this.icdCode = null;
+    }
   }
 
   removeIcd(idx) {
