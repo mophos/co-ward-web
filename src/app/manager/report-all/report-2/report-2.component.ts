@@ -21,6 +21,7 @@ export class Report2Component implements OnInit {
   mdCase: any;
   aCase: any;
   pCase: any;
+  oCase: any;
   myDatePickerOptions: IMyOptions = {
     inline: false,
     dateFormat: 'dd mmm yyyy',
@@ -62,6 +63,7 @@ export class Report2Component implements OnInit {
         this.mdCase = sumBy(rs.rows, 'mild');
         this.aCase = sumBy(rs.rows, 'asymptomatic');
         this.pCase = sumBy(rs.rows, 'ip_pui');
+        this.oCase = sumBy(rs.rows, 'observe');
         this.list = rs.rows;
 
         this.loading.hide();

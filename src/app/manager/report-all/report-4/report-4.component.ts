@@ -25,6 +25,7 @@ export class Report4Component implements OnInit {
   puiDischarge: any;
   puiDischargeHospitel: any;
   puiDischargeDeath: any;
+  observe: any;
 
   myDatePickerOptions: IMyOptions = {
     inline: false,
@@ -65,7 +66,7 @@ export class Report4Component implements OnInit {
   async getList() {
     this.loading.show();
     try {
-      const rs: any = await this.reportService.getReport4(moment(this.date,'DD/MM/YYYY').format('YYYY-MM-DD'), this.sector);
+      const rs: any = await this.reportService.getReport4(moment(this.date, 'DD/MM/YYYY').format('YYYY-MM-DD'), this.sector);
       if (rs.ok) {
         this.admit = sumBy(rs.rows, 'admit');
         this.discharge = sumBy(rs.rows, 'discharge');
@@ -75,6 +76,7 @@ export class Report4Component implements OnInit {
         this.puiDischarge = sumBy(rs.rows, 'pui_discharge');
         this.puiDischargeHospitel = sumBy(rs.rows, 'pui_discharge_hospitel');
         this.puiDischargeDeath = sumBy(rs.rows, 'pui_discharge_death');
+        this.observe = sumBy(rs.rows, 'observe');
 
         this.list = rs.rows;
         console.log(this.list);

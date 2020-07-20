@@ -25,6 +25,7 @@ export class ReportDms4Component implements OnInit {
   puiDischarge: any;
   puiDischargeHospitel: any;
   puiDischargeDeath: any;
+  observe: any;
 
   myDatePickerOptions: IMyOptions = {
     inline: false,
@@ -75,6 +76,7 @@ export class ReportDms4Component implements OnInit {
         this.puiDischarge = sumBy(rs.rows, 'pui_discharge');
         this.puiDischargeHospitel = sumBy(rs.rows, 'pui_discharge_hospitel');
         this.puiDischargeDeath = sumBy(rs.rows, 'pui_discharge_death');
+        this.observe = sumBy(rs.rows, 'observe');
 
         this.list = rs.rows;
         console.log(this.list);
