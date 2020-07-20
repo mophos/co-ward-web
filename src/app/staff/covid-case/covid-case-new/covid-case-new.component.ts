@@ -166,7 +166,7 @@ export class CovidCaseNewComponent implements OnInit {
   async ngOnInit() {
     // this.loading.show();
 
-    if (this.provinceType === 'IN' && this.peopleCaseType === 'THAI') {
+    if (this.provinceType === 'IN') {
       this.hide = false;
     }
     await this.getTitle();

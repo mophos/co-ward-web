@@ -2,11 +2,11 @@
   <div class="clr-row">
     <div class="clr-col-5 clr-offset-1">
       <button class="btn  btn-block" style="font-size: 1.5rem;height:3rem" [ngClass]="{'btn-success': province === 'IN','btn-outline-success':province != 'IN' }"
-        (click)="changeProvince('IN')">ผู้ป่วยอยู่ในประเทศไทย</button>
+        (click)="province = 'IN'">ผู้ป่วยอยู่ในประเทศไทย</button>
     </div>
     <div class="clr-col-5 ">
       <button class="btn  btn-block" style="font-size: 1.5rem;height:3rem;" [ngClass]="{'btn-success': province === 'OUT','btn-outline-success':province != 'OUT' }"
-        (click)="changeProvince('OUT')">ผู้ป่วยกลับจากต่างประเทศ</button>
+        (click)="province = 'OUT'">ผู้ป่วยกลับจากต่างประเทศ</button>
     </div>
 
   </div>
@@ -18,7 +18,7 @@
         (click)="changePeopleType('THAI')">คนไทย</button>
     </div>
     <div class="clr-col-3 ">
-      <button [ngClass]="{hidden: province === 'IN'}" class="btn  btn-block" style="font-size: 1.5rem;height:3rem;" [ngClass]="{'btn-success': peopleType === 'FOREIGN','btn-outline-success':peopleType != 'FOREIGN' }"
+      <button class="btn  btn-block" style="font-size: 1.5rem;height:3rem;" [ngClass]="{'btn-success': peopleType === 'FOREIGN','btn-outline-success':peopleType != 'FOREIGN' }"
         (click)="changePeopleType('FOREIGN')">คนต่างชาติ</button>
     </div>
   </div>
