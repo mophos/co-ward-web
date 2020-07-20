@@ -30,6 +30,7 @@ export class CovidCaseNewComponent implements OnInit {
   satCode: any;
   passport = '';
   cid = '';
+  cidTemp = '';
   hn = '';
   an = '';
   titleId = null;
@@ -159,6 +160,7 @@ export class CovidCaseNewComponent implements OnInit {
     this.peopleCaseType = params.peopleType;
     this.typeRegister = params.typeRegister;
     this.cid = params.cid;
+    this.cidTemp = params.cid;
     this.passport = params.passport;
     this.data = params.data ? JSON.parse(params.data) : null;
   }
@@ -460,7 +462,7 @@ export class CovidCaseNewComponent implements OnInit {
             const obj: any = {
               covidCaseId: this.covidCaseId,
               type: this.typeRegister,
-              cid: this.cid,
+              cid: this.cid || this.cidTemp,
               personId: this.personId,
               passport: this.passport,
               hn: this.hn,
@@ -509,6 +511,8 @@ export class CovidCaseNewComponent implements OnInit {
               icdCodes: this.icdCodes
               // drugs
             };
+            console.log(obj);
+            
 
             if (this.confirmDate) {
               obj.confirmDate = `${this.confirmDate.date.year}-${this.confirmDate.date.month}-${this.confirmDate.date.day}`;
@@ -525,33 +529,33 @@ export class CovidCaseNewComponent implements OnInit {
               }
               const alert = this.caseStatus === 'OBSERVE' ? titleName + ' ' + this.fname + ' ' + this.lname + ' เป็นผู้ป่วยกลับจากต่างประเภท กักตัว 14 วัน' : titleName + ' ' + this.fname + ' ' + this.lname + ' เป็นผู้ป่วยยืนยัน และมีผลแล็บ covid-19 positive แล้ว';
               const confirm = await this.alertService.confirm(alert);
-              if (confirm) {
-                const rs: any = await this.covidCaseService.saveNewCase(obj);
-                if (rs.ok) {
-                  this.clear();
-                  this.isKey = false;
-                  this.isSave = false;
-                  this.alertService.success();
-                  this.router.navigate(['/staff/covid-case-new-v2']);
-                } else {
-                  this.isSave = false;
-                  this.alertService.error(rs.error);
-                }
-              } else {
-                this.isSave = false;
-              }
-            } else {
-              const rs: any = await this.covidCaseService.saveNewCase(obj);
-              if (rs.ok) {
-                this.clear();
-                this.isKey = false;
-                this.isSave = false;
-                this.alertService.success();
-                this.router.navigate(['/staff/covid-case-new-v2']);
-              } else {
-                this.isSave = false;
-                this.alertService.error(rs.error);
-              }
+            //   if (confirm) {
+            //     const rs: any = await this.covidCaseService.saveNewCase(obj);
+            //     if (rs.ok) {
+            //       this.clear();
+            //       this.isKey = false;
+            //       this.isSave = false;
+            //       this.alertService.success();
+            //       this.router.navigate(['/staff/covid-case-new-v2']);
+            //     } else {
+            //       this.isSave = false;
+            //       this.alertService.error(rs.error);
+            //     }
+            //   } else {
+            //     this.isSave = false;
+            //   }
+            // } else {
+            //   const rs: any = await this.covidCaseService.saveNewCase(obj);
+            //   if (rs.ok) {
+            //     this.clear();
+            //     this.isKey = false;
+            //     this.isSave = false;
+            //     this.alertService.success();
+            //     this.router.navigate(['/staff/covid-case-new-v2']);
+            //   } else {
+            //     this.isSave = false;
+            //     this.alertService.error(rs.error);
+            //   }
             }
           } else {
             this.isSave = false;
@@ -856,6 +860,8 @@ export class CovidCaseNewComponent implements OnInit {
     this.loading.show();
     try {
       const rs: any = await this.covidCaseService.infoCid(cid);
+      console.log(rs);
+      
       if (rs.ok) {
         this.data = rs.rows;
         await this.setData();
