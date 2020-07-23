@@ -69,7 +69,7 @@ export class CovidCaseNewV2Component implements OnInit {
           this.typeRegister = 'REFER';
           const confirm = await this.alertService.confirm(`คุณรับผู้ป่วย Refer มาจาก ${rs.rows.hospname} ใช่หรือไม่ ?`);
           if (confirm) {
-            this.router.navigate(['/staff/covid-case-new', { province: this.province, caseStatus: this.caseType, peopleType: this.peopleType, cid: this.cid, passpost: this.passpost, typeRegister: this.typeRegister }]);
+            this.router.navigate(['/staff/covid-case-new', { province: this.province, caseStatus: this.caseType, peopleType: this.peopleType, cid: this.cid, passpost: this.passpost, typeRegister: this.typeRegister, covidCaseId: rs.rows.covid_case_id }]);
           }
         }
       } else {

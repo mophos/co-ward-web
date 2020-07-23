@@ -49,7 +49,7 @@
         </td>
         <td class="left">
           <div *ngFor="let i of gcs">
-            <input type="radio" name="gcs-{{l.id}}" id="gcs-{{i.id}}-{{l.id}}" (click)="checkGcs(i,l)" [(ngModel)]="l.gcs_id"
+            <input type="radio" *ngIf="(l.gcs_id != 5 && l.gcs_id !=6) && i.id ==5 " name="gcs-{{l.id}}" id="gcs-{{i.id}}-{{l.id}}" (click)="checkGcs(i,l)" [(ngModel)]="l.gcs_id"
               [value]="i.id">
             <label [title]="i.name" class="pointer" for="gcs-{{i.id}}-{{l.id}}">
               {{i.name}}

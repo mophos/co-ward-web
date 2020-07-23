@@ -119,12 +119,12 @@ export class CovidCaseNewComponent implements OnInit {
   s4 = [{ generic: 8, name: 'Favipiravir (เบิกจาก AntiDote) <a target="_BLANK" href="http://drug.nhso.go.th/Antidotes/index.jsp">คลิก</a>' }];
   data: any;
   drugDay = '5';
+  caseId: any;
 
   modalCID = false;
   modalCIDType = 'CID';
   modalCidLoading = false;
   isModelSearch = false;
-
   modalCIDCid: any;
   modalCIDCidError = false;
 
@@ -156,6 +156,7 @@ export class CovidCaseNewComponent implements OnInit {
     const params = this.route.snapshot.params;
     this.isRefer = params.isRefer;
     this.provinceType = params.province;
+    this.caseId = params.covidCaseId;
     this.caseStatus = params.caseStatus;
     this.peopleCaseType = params.peopleType;
     this.typeRegister = params.typeRegister;
@@ -460,8 +461,8 @@ export class CovidCaseNewComponent implements OnInit {
             }
 
             const obj: any = {
-              covidCaseId: this.covidCaseId,
-              type: this.typeRegister,
+              covidCaseId: this.caseId,
+              type: this.peopleCaseType === 'THAI' ? 'CID' : 'PASSPORT',
               cid: this.cid || this.cidTemp,
               personId: this.personId,
               passport: this.passport,
@@ -511,8 +512,6 @@ export class CovidCaseNewComponent implements OnInit {
               icdCodes: this.icdCodes
               // drugs
             };
-            console.log(obj);
-
 
             if (this.confirmDate) {
               obj.confirmDate = `${this.confirmDate.date.year}-${this.confirmDate.date.month}-${this.confirmDate.date.day}`;

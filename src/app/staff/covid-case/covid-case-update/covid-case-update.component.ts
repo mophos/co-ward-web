@@ -53,6 +53,9 @@ export class CovidCaseUpdateComponent implements OnInit {
       const rs: any = await this.covidCaseService.getListOldPatients();
       if (rs.ok) {
         this.list = rs.rows;
+        for (const v of this.list) {
+          v.old_gcs_id = v.gcs_id;
+        }
       } else {
         this.alertService.error();
       }
