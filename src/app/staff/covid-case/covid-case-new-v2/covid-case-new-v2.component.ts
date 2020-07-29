@@ -44,7 +44,7 @@ export class CovidCaseNewV2Component implements OnInit {
 
   onKeyPassport(e) {
     const passpost = e.target.value;
-    if (passpost.length >= 10) {
+    if (passpost.length >= 8) {
       this.cidError = false;
     } else {
       this.cidError = true;
