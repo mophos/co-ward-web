@@ -18,6 +18,7 @@ export class CovidCaseNewV2Component implements OnInit {
   province = null;
   peopleType = null;
   cidError = true;
+  blankPassport = false;
 
   @ViewChild('loading') loading: any;
   constructor(
@@ -27,6 +28,14 @@ export class CovidCaseNewV2Component implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+
+  activeButton() {
+    if (!this.blankPassport) {
+      this.cidError = false;
+    } else {
+      this.cidError = true;
+    }
   }
 
   onKeyCid(e) {
