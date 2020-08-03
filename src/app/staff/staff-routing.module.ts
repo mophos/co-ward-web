@@ -1,3 +1,4 @@
+import { CioCheckPatientComponent } from './cio-check-patient/cio-check-patient.component';
 import { CovidCaseNewV2Component } from './covid-case/covid-case-new-v2/covid-case-new-v2.component';
 import { RequestProductNewComponent } from './request-products/request-product-new/request-product-new.component';
 import { ReportAdmitConfirmCaseComponent } from './report-admit-confirm-case/report-admit-confirm-case.component';
@@ -117,6 +118,8 @@ const routes: Routes = [
       { path: 'report-bed', component: ReportBedComponent },
       { path: 'report-supplies', component: ReportSuppliesComponent },
       { path: 'report-admit-confirm-case', component: ReportAdmitConfirmCaseComponent },
+      { path: 'cio-check-patient', component: CioCheckPatientComponent },
+      
       // ----------------------------------------------------------------------------------------------------------
       {
         path: 'setting',

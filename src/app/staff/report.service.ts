@@ -61,10 +61,19 @@ export class ReportService {
     const url = `${this.apiUrl}/v1/report/admit-confirm-case`;
     return await this.http.get(url).toPromise();
   }
+  async checkAdmitConfirmCase(data) {
+    const url = `${this.apiUrl}/v1/report/check-admit-confirm-case`;
+    return await this.http.post(url, data).toPromise();
+  }
 
   async admitConfirmCaseSummary() {
     const url = `${this.apiUrl}/v1/report/admit-confirm-case-summary`;
     return await this.http.get(url).toPromise();
+  }
+
+  async exportCheckAdmitConfirmCase() {
+    const url = `${this.apiUrl}/v1/report/check-admit-confirm-case/export`;
+    return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 
 }

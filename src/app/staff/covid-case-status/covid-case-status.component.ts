@@ -112,6 +112,9 @@ export class CovidCaseStatusComponent implements OnInit {
     try {
       const rs: any = await this.covidCaseService.getCovidCasePresent(this.query);
       if (rs.ok) {
+        for (const i of rs.rows) {
+          i.old_gcs_id = i.gcs_id;
+        }
         this.list = rs.rows;
         console.log(this.list);
       } else {

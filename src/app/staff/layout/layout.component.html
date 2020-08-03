@@ -113,6 +113,11 @@
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         ตรวจสอบเวชภัณฑ์
       </a> -->
+      <a *ngIf="cioMenu" clrVerticalNavLink routerLink="/staff/cio-check-patient" title="CIO ตรวจความถูกต้องของผู้ป่วย"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        CIO ตรวจความถูกต้องของผู้ป่วย
+      </a>
       <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff/report-admit-confirm-case" title="รายงานผู้ป่วย Admit (Confirm)"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
