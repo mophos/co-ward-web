@@ -68,13 +68,13 @@ export class CioCheckPatientComponent implements OnInit {
   async onClickCheck(l, status) {
     try {
       if (status === 'WRONG') {
-        this.remark = '';
         this.data = l;
         this.status = status;
         this.modalRemark = true;
       } else {
         this.onCheck(l, status);
       }
+      this.remark = '';
     } catch (error) {
       this.alertService.error(error);
     }
