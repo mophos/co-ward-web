@@ -1,0 +1,18 @@
+<clr-datagrid>
+  <clr-dg-column>โรงพยาบาล</clr-dg-column>
+  <clr-dg-column>วันที่ตรวจพบ</clr-dg-column>
+  <clr-dg-column>วันที่ Admit</clr-dg-column>
+  <clr-dg-column>วันที่ D/C</clr-dg-column>
+  <clr-dg-column>สถานะ D/C</clr-dg-column>
+
+  <clr-dg-row *ngFor="let l of list">
+    <clr-dg-cell>{{l.hospname}}</clr-dg-cell>
+    <clr-dg-cell>{{l.confirm_date| dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
+    <clr-dg-cell>{{l.date_admit| dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
+    <clr-dg-cell>{{l.date_discharge| dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
+    <clr-dg-cell>{{l.status}}</clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-footer>{{list.length | number:'1.0-0' }} รายการ</clr-dg-footer>
+</clr-datagrid>
+<!-- 3760100310247 -->

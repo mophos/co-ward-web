@@ -12,4 +12,8 @@ export class PatientInfoService {
     const url = `${this.url}/v1/manager/patient-info?keys=${keys}`;
     return this.http.get(url).toPromise();
   }
+  getListDetail(cid) {
+    const url = `${this.url}/v1/manager/patient-info/cid?cid=${cid}`;
+    return this.http.get(url).toPromise();
+  }
 }
