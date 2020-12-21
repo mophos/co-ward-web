@@ -13,9 +13,11 @@ import * as moment from 'moment';
 })
 export class RegisterComponent implements OnInit {
 
+  isSave = false;
   hospcodeConfirm: any = '';
   onSelectHospcode: any = null;
   cid: any = '';
+  vendor: any;
   position: any = null;
   title: any = null;
   firstName: any = '';
@@ -228,34 +230,39 @@ export class RegisterComponent implements OnInit {
 
   async sendRequestOTP() {
     try {
+      this.isSave = true;
       const date = (+moment().format('h') * 60) + +moment().format('m');
-      console.log(this.dateOtp, date);
-
       if (this.dateOtp < date) {
         this.dateOtp = date + 5;
         const rs: any = await this.registerService.requestOTP(this.phoneNumber);
         if (rs.ok) {
-          this.transactionID = rs.transactionID;
+          this.transactionID = rs.transaction_id;
           this.refCode = rs.ref_code;
+          this.vendor = rs.vendor;
         }
       } else {
         this.alertService.error('กรุณารอ 5 นาที');
       }
+      this.isSave = false;
     } catch (error) {
+      this.isSave = false;
       console.log(error);
     }
   }
 
   async verifyOTP() {
     try {
-      const rs: any = await this.registerService.verifyOTP(this.phoneNumber, this.otp, this.transactionID);
+      this.isSave = true;
+      const rs: any = await this.registerService.verifyOTP(this.phoneNumber, this.otp, this.transactionID, this.vendor);
       if (rs.ok) {
         this.modalOTP = false;
         this.isVerify = true;
       } else {
         this.alertService.error('OTP ไม่ถูกต้อง');
       }
+      this.isSave = false;
     } catch (error) {
+      this.isSave = false;
       console.log(error);
     }
   }

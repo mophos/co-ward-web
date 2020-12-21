@@ -13,6 +13,7 @@ export class LoginDashboardComponent implements OnInit {
   tel: any;
   otpResp = false;
   otp: any;
+  vendor: any;
   transactionId: any;
   ref: any;
   isSave = false;
@@ -36,7 +37,8 @@ export class LoginDashboardComponent implements OnInit {
       if (rs.ok) {
         this.otpResp = true;
         this.ref = rs.ref_code;
-        this.transactionId = rs.transactionID;
+        this.transactionId = rs.transaction_id;
+        this.vendor = rs.vendor;
         this.tellErr = false;
       } else {
         this.tellErr = true;
@@ -53,7 +55,7 @@ export class LoginDashboardComponent implements OnInit {
   async verifyOtp() {
     try {
       this.isSave = true;
-      const rs: any = await this.loginService.verifyOtp(this.tel, this.transactionId, this.otp);
+      const rs: any = await this.loginService.verifyOtp(this.tel, this.transactionId, this.otp, this.vendor);
       if (rs.ok) {
         sessionStorage.setItem('token', rs.token);
         this.loginErr = false;
@@ -77,6 +79,7 @@ export class LoginDashboardComponent implements OnInit {
     this.ref = null;
     this.transactionId = null;
     this.otp = null;
+    this.vendor = null;
     this.tellErr = false;
     this.loginErr = false;
     this.tel = null;

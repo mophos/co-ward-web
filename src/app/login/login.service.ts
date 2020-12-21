@@ -49,7 +49,7 @@ export class LoginService {
     }).toPromise();
   }
 
-  verifyOtp(tel, transactionId, otp) {
+  verifyOtp(tel, transactionId, otp, vendor) {
     const url = `${this.url}/v1/login/verify-otp`;
     return this.http.post(url, {
       tel, transactionId, otp

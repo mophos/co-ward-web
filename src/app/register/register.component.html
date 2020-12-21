@@ -352,8 +352,8 @@
       <div class="clr-row">
         <div class="clr-col-md-12" style="text-align: right;">
           <button class="btn btn-primary" (click)="onClickRequestOTP()" [disabled]="
-        onSelectHospcode != hospcodeConfirm || !checkCid || !position || !title || firstName == '' || lastName == '' ||
-        username == '' || !checkPasswordConfirm || !checkEmail || !checkPhone || !checkImage || isVerify">ขอ
+        ((onSelectHospcode != hospcodeConfirm || !checkCid || !position || !title || firstName == '' || lastName == '' ||
+        username == '' || !checkPasswordConfirm || !checkEmail || !checkPhone || !checkImage || isVerify) && isSave">ขอ
             OTP</button>
 
           <button class="btn btn-success" (click)="save()" [disabled]="
@@ -376,7 +376,7 @@
     <input type="text" name="otp" [(ngModel)]="otp" class="clr-input" placeholder="OTP">
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="verifyOTP()">ยืนยัน</button>
+    <button type="button" class="btn btn-success" (click)="verifyOTP()" [disabled]="isSave">ยืนยัน</button>
     <button type="button" class="btn btn-primary" (click)="sendRequestOTP()">ขอ OTP ใหม่</button>
   </div>
 </clr-modal>

@@ -63,9 +63,9 @@ export class RegisterService {
     return this.http.post(url, { tel }).toPromise();
   }
 
-  verifyOTP(tel, otp, transactionID) {
+  verifyOTP(tel, otp, transactionId, vendor) {
     const url = `${this.url}/v1/register/verify-otp`;
-    return this.http.post(url, { tel, otp, transactionID }).toPromise();
+    return this.http.post(url, { tel, otp, transactionId, vendor }).toPromise();
   }
 
 }
