@@ -50,11 +50,11 @@
 </div>
 
 <div *ngFor="let l of list">
-  <h3> {{l.provinces == 1 ? '' : 'เขต '+l.name}}</h3>
+  <h3> {{l.provinces == 1 ? '' : 'เขต '+l.zone_code}}</h3>
   <table class="table table-compact" style="position: relative; border-collapse: collapse;" *ngFor="let p of l.provinces">
     <thead>
       <tr>
-        <th colspan="13" style="text-align: left;">
+        <th colspan="16" style="text-align: left;">
           <h4>{{p.province_name}}</h4>
         </th>
       </tr>
@@ -72,23 +72,29 @@
         <th class="right" style="position: sticky; top: 0;">พยาบาล</th>
         <th class="right" style="position: sticky; top: 0;">นักเทคนิคการแพทย์</th>
         <th class="right" style="position: sticky; top: 0;">เภสัชกร</th>
+        <th class="right" style="position: sticky; top: 0;">วิสัญญีพยาบาล</th>
+        <th class="right" style="position: sticky; top: 0;">พยาบาลโรคติดเชื้อ</th>
+        <th class="right" style="position: sticky; top: 0;">แพทย์เฉพาะทางด้านเวชบำบัดวิกฤติ</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let h of p.hospitals">
         <td class="left">{{h.hospname}}</td>
-        <td class="right">{{h['p_1'] }}</td>
-        <td class="right">{{h['p_2'] }}</td>
-        <td class="right">{{h['p_3'] }}</td>
-        <td class="right">{{h['p_4'] }}</td>
-        <td class="right">{{h['p_5'] }}</td>
-        <td class="right">{{h['p_6'] }}</td>
-        <td class="right">{{h['p_7'] }}</td>
-        <td class="right">{{h['p_8'] }}</td>
-        <td class="right">{{h['p_9'] }}</td>
-        <td class="right">{{h['p_10'] }}</td>
-        <td class="right">{{h['p_11'] }}</td>
-        <td class="right">{{h['p_12'] }}</td>
+        <td class="right">{{h['อายุรศาสตร์โรคติดเชื้อ'] }}</td>
+        <td class="right">{{h['อายุรศาสตร์เวชบำบัดวิกฤติ'] }}</td>
+        <td class="right">{{h['วิสัญญีแพทย์'] }}</td>
+        <td class="right">{{h['แพทย์อายุรศาสตร์โรคระบบการหายใจ'] }}</td>
+        <td class="right">{{h['แพทย์อายุรกรรม'] }}</td>
+        <td class="right">{{h['แพทย์รังสี'] }}</td>
+        <td class="right">{{h['แพทย์เวชปฏิบัติทั่วไป'] }}</td>
+        <td class="right">{{h['พยาบาลผู้ป่วยวิกฤติ(ICU)'] }}</td>
+        <td class="right">{{h['พยาบาลเฉพาะทางด้านเวชบำบัดวิกฤติ'] }}</td>
+        <td class="right">{{h['พยาบาล'] }}</td>
+        <td class="right">{{h['นักเทคนิคการแพทย์'] }}</td>
+        <td class="right">{{h['เภสัชกร'] }}</td>
+        <td class="right">{{h['วิสัญญีพยาบาล'] }}</td>
+        <td class="right">{{h['พยาบาลโรคติดเชื้อ'] }}</td>
+        <td class="right">{{h['แพทย์เฉพาะทางด้านเวชบำบัดวิกฤติ'] }}</td>
       </tr>
       <!-- <tr>
         <td class="right" style="font-weight: bold;">รวม</td>
