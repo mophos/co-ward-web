@@ -54,7 +54,7 @@ const routes: Routes = [
       { path: 'report-supplies', component: ReportSuppliesComponent },
       { path: 'report-patients', component: ReportPatientsComponent },
       { path: 'report-patients-provinces', component: ReportPatientsProvincesComponent },
-      // { path: 'report-beds', component: ReportBedsComponent },
+      { path: 'report-beds', component: ReportBedsComponent },
       { path: 'report-professionals', component: ReportProfessionalsComponent },
       { path: 'report-medicals', component: ReportMedicalsComponent },
       { path: 'patient-info', canActivate: [AuthSearchPatient], component: PatientInfoComponent },
