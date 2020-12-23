@@ -63,7 +63,7 @@ export class ReportService {
   }
 
   async getReportBedExcel() {
-    const url = `${this.apiUrl}/v1/report/admin/get-bed/exce`;
+    const url = `${this.apiUrl}/v1/report/get-bed/excel/new`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 
