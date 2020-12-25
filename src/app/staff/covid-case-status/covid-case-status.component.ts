@@ -90,11 +90,11 @@ export class CovidCaseStatusComponent implements OnInit {
     await this.getDateCut();
     await this.getList();
     await this.getGCS();
-    await this.getGCSSum();
+    // await this.getGCSSum();
     await this.getBeds();
-    await this.getBedSum();
+    // await this.getBedSum();
     await this.getMedicalSupplies();
-    await this.getMedicalSuppliesSum();
+    // await this.getMedicalSuppliesSum();
 
     this.dateDischarge = {
       date: {
