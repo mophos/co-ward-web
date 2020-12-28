@@ -2,7 +2,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportAllService } from '../report-all.service';
 import { AlertService } from '../../../help/alert.service';
-import { sumBy } from 'lodash';
+import { sumBy, filter } from 'lodash';
 import * as moment from 'moment';
 @Component({
   selector: 'app-report-1',
@@ -11,7 +11,14 @@ import * as moment from 'moment';
 })
 export class Report1Component implements OnInit {
 
+  zone: any = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13'];
+  selectedZone: any = 'all';
+  selectedProvince: any = 'all';
+  province: any;
+  listProvince: any;
+
   list: any = [];
+  listFilter: any = [];
   qtyHosp: any;
   qtyBed: any;
   qty1: any;
@@ -34,6 +41,7 @@ export class Report1Component implements OnInit {
   }
 
   ngOnInit() {
+    this.getProvince();
     this.date = {
       date: {
         year: moment().get('year'),
@@ -44,11 +52,28 @@ export class Report1Component implements OnInit {
     this.getList();
   }
 
+  async getProvince() {
+    try {
+      const rs: any = await this.reportService.getProvince();
+      if (rs.ok) {
+        this.province = rs.rows;
+        this.listProvince = rs.rows;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  onChangeZone() {
+    this.listProvince = filter(this.province, { zone_code: this.selectedZone });
+  }
+
   async getList() {
     this.loading.show();
     try {
       this.dateShow = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
       const rs: any = await this.reportService.getReport1(this.dateShow, this.sector);
+      console.log(rs.rows);
       if (rs.ok) {
         this.qtyHosp = sumBy(rs.rows, 'hospital_qty');
         this.qtyBed = sumBy(rs.rows, 'bed_qty');
@@ -58,6 +83,7 @@ export class Report1Component implements OnInit {
         this.qty4 = sumBy(rs.rows, 'cohort_qty');
         this.qty5 = sumBy(rs.rows, 'hospitel_qty');
         this.list = rs.rows;
+        this.listFilter = rs.rows;
 
         this.loading.hide();
       } else {
@@ -68,6 +94,47 @@ export class Report1Component implements OnInit {
       this.loading.hide();
       this.alertService.error(error);
     }
+  }
+
+  async onClickSearch() {
+    if (this.selectedZone === 'all' && this.selectedProvince === 'all') {
+      this.listFilter = this.list;
+      this.qtyHosp = sumBy(this.listFilter, 'hospital_qty');
+      this.qtyBed = sumBy(this.listFilter, 'bed_qty');
+      this.qty1 = sumBy(this.listFilter, 'aiir_qty');
+      this.qty2 = sumBy(this.listFilter, 'modified_aiir_qty');
+      this.qty3 = sumBy(this.listFilter, 'isolate_qty');
+      this.qty4 = sumBy(this.listFilter, 'cohort_qty');
+      this.qty5 = sumBy(this.listFilter, 'hospitel_qty');
+    } else if (this.selectedZone !== 'all' && this.selectedProvince === 'all') {
+      this.listFilter = filter(this.list, { zone_code: this.selectedZone });
+      this.qtyHosp = sumBy(this.listFilter, 'hospital_qty');
+      this.qtyBed = sumBy(this.listFilter, 'bed_qty');
+      this.qty1 = sumBy(this.listFilter, 'aiir_qty');
+      this.qty2 = sumBy(this.listFilter, 'modified_aiir_qty');
+      this.qty3 = sumBy(this.listFilter, 'isolate_qty');
+      this.qty4 = sumBy(this.listFilter, 'cohort_qty');
+      this.qty5 = sumBy(this.listFilter, 'hospitel_qty');
+    } else if (this.selectedZone !== 'all' && this.selectedProvince !== 'all') {
+      this.listFilter = filter(this.list, { zone_code: this.selectedZone, province_code: this.selectedProvince });
+      this.qtyHosp = sumBy(this.listFilter, 'hospital_qty');
+      this.qtyBed = sumBy(this.listFilter, 'bed_qty');
+      this.qty1 = sumBy(this.listFilter, 'aiir_qty');
+      this.qty2 = sumBy(this.listFilter, 'modified_aiir_qty');
+      this.qty3 = sumBy(this.listFilter, 'isolate_qty');
+      this.qty4 = sumBy(this.listFilter, 'cohort_qty');
+      this.qty5 = sumBy(this.listFilter, 'hospitel_qty');
+    } else {
+      this.listFilter = this.list;
+      this.qtyHosp = sumBy(this.listFilter, 'hospital_qty');
+      this.qtyBed = sumBy(this.listFilter, 'bed_qty');
+      this.qty1 = sumBy(this.listFilter, 'aiir_qty');
+      this.qty2 = sumBy(this.listFilter, 'modified_aiir_qty');
+      this.qty3 = sumBy(this.listFilter, 'isolate_qty');
+      this.qty4 = sumBy(this.listFilter, 'cohort_qty');
+      this.qty5 = sumBy(this.listFilter, 'hospitel_qty');
+    }
+    console.log(this.selectedZone, this.selectedProvince);
   }
 
   async doExportExcel() {

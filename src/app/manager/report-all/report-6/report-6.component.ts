@@ -4,7 +4,7 @@ import { ReportAllService } from '../report-all.service';
 import { AlertService } from '../../../help/alert.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import * as moment from 'moment';
-import { sumBy } from 'lodash';
+import { sumBy, filter } from 'lodash';
 import { IMyOptions } from 'mydatepicker-th';
 
 @Component({
@@ -13,11 +13,20 @@ import { IMyOptions } from 'mydatepicker-th';
   styles: []
 })
 export class Report6Component implements OnInit {
+  zone: any = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13'];
+  selectedZone: any = 'all';
+  selectedProvince: any = 'all';
+  province: any;
+  listProvince: any;
+
   listHospital: any = [];
   listMinistry: any = [];
   listSector: any = [];
-  zone: any = '';
+  listHospitalFilter: any = [];
+  listMinistryFilter: any = [];
+  listSectorFilter: any = [];
   date: any;
+  tab: any;
 
   aiir1: any;
   aiir2: any;
@@ -34,7 +43,7 @@ export class Report6Component implements OnInit {
   host1: any;
   host2: any;
   host3: any;
-  
+
   sector: any;
   @ViewChild('loading') loading: any;
 
@@ -55,10 +64,99 @@ export class Report6Component implements OnInit {
   }
 
   async ngOnInit() {
+    await this.getProvince();
     this.date = moment().format('YYYY-MM-DD');
     await this.getList1();
     await this.getList2();
     await this.getList3();
+  }
+
+  async getProvince() {
+    try {
+      const rs: any = await this.reportService.getProvince();
+      if (rs.ok) {
+        this.province = rs.rows;
+        this.listProvince = rs.rows;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  onChangeZone() {
+    this.listProvince = filter(this.province, { zone_code: this.selectedZone });
+  }
+
+  async onChangeTab(v) {
+    this.tab = v;
+    await this.onClickSearch();
+  }
+
+  async sumByReport(rows) {
+    this.aiir1 = sumBy(rows, 'aiir_qty');
+    this.aiir2 = sumBy(rows, 'aiir_usage_qty');
+    this.aiir3 = sumBy(rows, 'aiir_qty') - sumBy(rows, 'aiir_usage_qty');
+    this.modi1 = sumBy(rows, 'modified_aiir_qty');
+    this.modi2 = sumBy(rows, 'modified_aiir_usage_qty');
+    this.modi3 = sumBy(rows, 'modified_aiir_qty') - sumBy(rows, 'modified_aiir_usage_qty');
+    this.iso1 = sumBy(rows, 'isolate_qty');
+    this.iso2 = sumBy(rows, 'isolate_usage_qty');
+    this.iso3 = sumBy(rows, 'isolate_qty') - sumBy(rows, 'isolate_usage_qty');
+    this.coh1 = sumBy(rows, 'cohort_qty');
+    this.coh2 = sumBy(rows, 'cohort_usage_qty');
+    this.coh3 = sumBy(rows, 'cohort_qty') - sumBy(rows, 'cohort_usage_qty');
+    this.host1 = sumBy(rows, 'hospitel_qty');
+    this.host2 = sumBy(rows, 'hospitel_usage_qty');
+    this.host3 = sumBy(rows, 'hospitel_qty') - sumBy(rows, 'hospitel_usage_qty');
+  }
+
+  async onClickSearch() {
+    if (this.selectedZone === 'all' && this.selectedProvince === 'all') {
+      this.listHospitalFilter = this.listHospital;
+      this.listSectorFilter = this.listSector;
+      this.listMinistryFilter = this.listMinistry;
+      if (this.tab === 1) {
+        await this.sumByReport(this.listSectorFilter);
+      } else if (this.tab === 2) {
+        await this.sumByReport(this.listMinistryFilter);
+      } else if (this.tab === 3) {
+        await this.sumByReport(this.listHospitalFilter);
+      }
+    } else if (this.selectedZone !== 'all' && this.selectedProvince === 'all') {
+      this.listHospitalFilter = filter(this.listHospital, { zone_code: this.selectedZone });
+      this.listSectorFilter = filter(this.listSector, { zone_code: this.selectedZone });
+      this.listMinistryFilter = filter(this.listMinistry, { zone_code: this.selectedZone });
+      if (this.tab === 1) {
+        await this.sumByReport(this.listSectorFilter);
+      } else if (this.tab === 2) {
+        await this.sumByReport(this.listMinistryFilter);
+      } else if (this.tab === 3) {
+        await this.sumByReport(this.listHospitalFilter);
+      }
+    } else if (this.selectedZone !== 'all' && this.selectedProvince !== 'all') {
+      this.listHospitalFilter = filter(this.listHospital, { zone_code: this.selectedZone, province_code: this.selectedProvince });
+      this.listSectorFilter = filter(this.listSector, { zone_code: this.selectedZone, province_code: this.selectedProvince });
+      this.listMinistryFilter = filter(this.listMinistry, { zone_code: this.selectedZone, province_code: this.selectedProvince });
+      if (this.tab === 1) {
+        await this.sumByReport(this.listSectorFilter);
+      } else if (this.tab === 2) {
+        await this.sumByReport(this.listMinistryFilter);
+      } else if (this.tab === 3) {
+        await this.sumByReport(this.listHospitalFilter);
+      }
+    } else {
+      this.listHospitalFilter = this.listHospital;
+      this.listSectorFilter = this.listSector;
+      this.listMinistryFilter = this.listMinistry;
+      if (this.tab === 1) {
+        await this.sumByReport(this.listSectorFilter);
+      } else if (this.tab === 2) {
+        await this.sumByReport(this.listMinistryFilter);
+      } else if (this.tab === 3) {
+        await this.sumByReport(this.listHospitalFilter);
+      }
+    }
+    console.log(this.selectedZone, this.selectedProvince);
   }
 
   async getList1() {
@@ -83,6 +181,7 @@ export class Report6Component implements OnInit {
         this.host3 = sumBy(rs.rows, 'hospitel_qty') - sumBy(rs.rows, 'hospitel_usage_qty');
 
         this.listHospital = rs.rows;
+        this.listHospitalFilter = rs.rows;
 
         this.loading.hide();
       } else {
@@ -117,6 +216,7 @@ export class Report6Component implements OnInit {
         this.host3 = sumBy(rs.rows, 'hospitel_qty') - sumBy(rs.rows, 'hospitel_usage_qty');
 
         this.listMinistry = rs.rows;
+        this.listMinistryFilter = rs.rows;
 
         this.loading.hide();
       } else {
@@ -151,6 +251,7 @@ export class Report6Component implements OnInit {
         this.host3 = sumBy(rs.rows, 'hospitel_qty') - sumBy(rs.rows, 'hospitel_usage_qty');
 
         this.listSector = rs.rows;
+        this.listSectorFilter = rs.rows;
 
         this.loading.hide();
       } else {

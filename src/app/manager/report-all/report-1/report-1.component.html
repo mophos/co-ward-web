@@ -3,6 +3,36 @@
 </nav>
 <br>
 <div class="clr-row">
+  <div class="clr-col-1">
+    <span>ค้นหาเขตสุขภาพ</span>
+  </div>
+  <div class="clr-col-2">
+    <div class="clr-select-wrapper" style="width: 100%;">
+      <select name="zone" class="clr-select" [(ngModel)]="selectedZone" style="width: 100%;" (change)="onChangeZone()">
+        <option value="all">เลือกเขต</option>
+        <option *ngFor="let v of zone" [value]="v">เขต {{v}}</option>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="clr-row">
+  <div class="clr-col-1">
+    <span>ค้นหาจังหวัด</span>
+  </div>
+  <div class="clr-col-2">
+    <div class="clr-select-wrapper" style="width: 100%;">
+      <select name="province" class="clr-select" [(ngModel)]="selectedProvince" style="width: 100%;">
+        <option value="all">เลือกจังหวัด</option>
+        <option *ngFor="let v of listProvince" [value]="v.code">{{v.name_th}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="clr-col-2">
+    <button [disabled]="!selectedZone" class="btn btn-primary btn-outline btn-sm" (click)="onClickSearch()">ค้นหา <clr-icon shape="search">
+      </clr-icon></button>
+  </div>
+</div>
+<div class="clr-row">
   <div class="clr-col-12" style="text-align: right;">
     <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
       <clr-icon shape="download"></clr-icon>export excel
@@ -42,7 +72,7 @@
     <th class="text-right td-border" style="position: sticky; top: 0;">{{qty5| number:'1.0-0'}}</th>
   </tr>
 
-  <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+  <tr *ngFor="let h of listFilter; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
     <td class="left td-border">{{h.sub_ministry_name}}</td>
     <td class="text-right td-border">{{h.hospital_qty| number:'1.0-0'}}</td>
     <td class="text-right td-border">
@@ -64,6 +94,6 @@
     <th class="text-right td-border" style="position: sticky; top: 0;">{{qty5| number:'1.0-0'}}</th>
   </tr>
 </table>
-<label>{{list.length | number:'1.0-0' }} รายการ</label>
+<label>{{listFilter.length | number:'1.0-0' }} รายการ</label>
 
 <app-loadding #loading></app-loadding>

@@ -4,8 +4,8 @@
 <br>
 <div class="clr-row">
   <div class="clr-col-10">
-    <button [ngClass]="{'btn-primary': date==d,'btn-primary-outline': date!=d}" class="btn btn-sm" *ngFor="let d of arDates"
-      (click)="selectDate(d)">วันที่ {{d}}</button>
+    <button [ngClass]="{'btn-primary': date==d,'btn-primary-outline': date!=d}" class="btn btn-sm"
+      *ngFor="let d of arDates" (click)="selectDate(d)">วันที่ {{d}}</button>
   </div>
   <div class="clr-col-2" style="text-align: right;">
     <button class="btn btn-sm btn-primary" (click)="onClickExport()">
@@ -14,6 +14,38 @@
     <!-- <button class="btn btn-sm btn-success" (click)="doExportCsv()">
           <clr-icon shape="download"></clr-icon>export csv
         </button> -->
+  </div>
+</div>
+<div class="clr-row">
+  <div class="clr-col-1">
+    <span>ค้นหาเขตสุขภาพ</span>
+  </div>
+  <div class="clr-col-2">
+    <div class="clr-select-wrapper" style="width: 100%;">
+      <select name="zone" class="clr-select" [(ngModel)]="selectedZone" style="width: 100%;" (change)="onChangeZone()">
+        <option value="all">เลือกเขต</option>
+        <option *ngFor="let v of zone" [value]="v">เขต {{v}}</option>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="clr-row">
+  <div class="clr-col-1">
+    <span>ค้นหาจังหวัด</span>
+  </div>
+  <div class="clr-col-2">
+    <div class="clr-select-wrapper" style="width: 100%;">
+      <select name="province" class="clr-select" [(ngModel)]="selectedProvince" style="width: 100%;">
+        <option value="all">เลือกจังหวัด</option>
+        <option *ngFor="let v of listProvince" [value]="v.code">{{v.name_th}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="clr-col-2">
+    <button [disabled]="!selectedZone" class="btn btn-primary btn-outline btn-sm" (click)="onClickSearch()">ค้นหา
+      <clr-icon shape="search">
+      </clr-icon>
+    </button>
   </div>
 </div>
 
@@ -39,7 +71,7 @@
     <th class="text-right  td-border" style="position: sticky; top: 0; ">{{sum.ip_pui| number:'1.0-0'}}</th>
     <th class="text-right " style="position: sticky; top: 0;"></th>
   </tr>
-  <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+  <tr *ngFor="let h of listFilter; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
     <td class="left td-border">{{h.hospname}} <br>ข้อมูลล่าสุด: {{ h.updated_entry | dateTh:'DD/MM/YYYY hh:mm'}}</td>
     <td class="text-right  td-border">{{h['severe'] | number:'1.0-0'}}</td>
     <td class="text-right  td-border">{{h['moderate'] | number:'1.0-0'}}</td>
@@ -58,6 +90,6 @@
     <th class="text-right " style="position: sticky; top: 0;"></th>
   </tr>
 </table>
-<label>{{list.length | number:'1.0-0' }} รายการ</label>
+<label>{{listFilter.length | number:'1.0-0' }} รายการ</label>
 
 <app-loadding #loading></app-loadding>

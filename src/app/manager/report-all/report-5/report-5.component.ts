@@ -2,7 +2,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportAllService } from '../report-all.service';
 import { AlertService } from '../../../help/alert.service';
-import { sumBy } from 'lodash';
+import { sumBy, filter } from 'lodash';
 import * as moment from 'moment';
 @Component({
   selector: 'app-report-5',
@@ -11,7 +11,14 @@ import * as moment from 'moment';
 })
 export class Report5Component implements OnInit {
 
+  zone: any = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13'];
+  selectedZone: any = 'all';
+  selectedProvince: any = 'all';
+  province: any;
+  listProvince: any;
+
   list: any = [];
+  listFilter: any = [];
   admitQty: any;
   totalQty: any;
   spareQty: any;
@@ -30,6 +37,7 @@ export class Report5Component implements OnInit {
   }
 
   ngOnInit() {
+    this.getProvince();
     this.date = {
       date: {
         year: moment().get('year'),
@@ -38,6 +46,39 @@ export class Report5Component implements OnInit {
       }
     };
     this.getList();
+  }
+
+  async getProvince() {
+    try {
+      const rs: any = await this.reportService.getProvince();
+      if (rs.ok) {
+        this.province = rs.rows;
+        this.listProvince = rs.rows;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  onChangeZone() {
+    this.listProvince = filter(this.province, { zone_code: this.selectedZone });
+  }
+
+  async onClickSearch() {
+    if (this.selectedZone === 'all' && this.selectedProvince === 'all') {
+      this.listFilter = this.list;
+      this.totalQty = (sumBy(this.listFilter, 'aiir_qty') || 0) + (sumBy(this.listFilter, 'modified_aiir_qty') || 0) + (sumBy(this.listFilter, 'isolate_qty') || 0) + (sumBy(this.listFilter, 'cohort_qty') || 0);
+    } else if (this.selectedZone !== 'all' && this.selectedProvince === 'all') {
+      this.listFilter = filter(this.list, { zone_code: this.selectedZone });
+      this.admitQty = (sumBy(this.listFilter, 'sum') || 0);
+    } else if (this.selectedZone !== 'all' && this.selectedProvince !== 'all') {
+      this.listFilter = filter(this.list, { zone_code: this.selectedZone, province_code: this.selectedProvince });
+      this.spareQty = (sumBy(this.listFilter, 'aiir_spare_qty') || 0) + (sumBy(this.listFilter, 'modified_aiir_spare_qty') || 0) + (sumBy(this.listFilter, 'isolate_spare_qty') || 0) + (sumBy(this.listFilter, 'cohort_spare_qty') || 0);
+    } else {
+      this.listFilter = this.list;
+      this.standbyQty = ((sumBy(this.listFilter, 'aiir_qty') || 0) + (sumBy(this.listFilter, 'modified_aiir_qty') || 0) + (sumBy(this.listFilter, 'isolate_qty') || 0) + (sumBy(this.listFilter, 'cohort_qty') || 0)) - (sumBy(this.listFilter, 'sum') || 0) - ((sumBy(this.listFilter, 'aiir_spare_qty') || 0) + sumBy(this.listFilter, 'modified_aiir_spare_qty') || 0 + sumBy(this.listFilter, 'isolate_spare_qty') || 0 + (sumBy(this.listFilter, 'cohort_spare_qty') || 0));
+    }
+    console.log(this.selectedZone, this.selectedProvince);
   }
 
   async getList() {
@@ -51,6 +92,7 @@ export class Report5Component implements OnInit {
         this.spareQty = (sumBy(rs.rows, 'aiir_spare_qty') || 0) + (sumBy(rs.rows, 'modified_aiir_spare_qty') || 0) + (sumBy(rs.rows, 'isolate_spare_qty') || 0) + (sumBy(rs.rows, 'cohort_spare_qty') || 0);
         this.standbyQty = ((sumBy(rs.rows, 'aiir_qty') || 0) + (sumBy(rs.rows, 'modified_aiir_qty') || 0) + (sumBy(rs.rows, 'isolate_qty') || 0) + (sumBy(rs.rows, 'cohort_qty') || 0)) - (sumBy(rs.rows, 'sum') || 0) - ((sumBy(rs.rows, 'aiir_spare_qty') || 0) + sumBy(rs.rows, 'modified_aiir_spare_qty') || 0 + sumBy(rs.rows, 'isolate_spare_qty') || 0 + (sumBy(rs.rows, 'cohort_spare_qty') || 0));
         this.list = rs.rows;
+        this.listFilter = rs.rows;
         this.loading.hide();
       } else {
         this.loading.hide();
