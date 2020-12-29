@@ -4,7 +4,7 @@ import { AlertService } from '../../../help/alert.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { IMyOptions } from 'mydatepicker-th';
 import * as moment from 'moment';
-import { sumBy } from 'lodash';
+import { sumBy, filter } from 'lodash';
 import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-report-2',
@@ -12,8 +12,14 @@ import { ActivatedRoute } from '@angular/router';
   styles: []
 })
 export class Report2Component implements OnInit {
+  zone: any = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13'];
+  selectedZone: any = 'all';
+  selectedProvince: any = 'all';
+  province: any;
+  listProvince: any;
+
   list: any = [];
-  zone: any = '';
+  listFilter: any = [];
   date: any;
   dateShow: any;
   sCase: any;
@@ -21,6 +27,7 @@ export class Report2Component implements OnInit {
   mdCase: any;
   aCase: any;
   pCase: any;
+  oCase: any;
   myDatePickerOptions: IMyOptions = {
     inline: false,
     dateFormat: 'dd mmm yyyy',
@@ -41,6 +48,7 @@ export class Report2Component implements OnInit {
   }
 
   async ngOnInit() {
+    await this.getProvince();
     this.date = {
       date: {
         year: moment().get('year'),
@@ -49,6 +57,22 @@ export class Report2Component implements OnInit {
       }
     };
     await this.getList();
+  }
+
+  async getProvince() {
+    try {
+      const rs: any = await this.reportService.getProvince();
+      if (rs.ok) {
+        this.province = rs.rows;
+        this.listProvince = rs.rows;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  onChangeZone() {
+    this.selectedProvince = 'all';
+    this.listProvince = filter(this.province, { zone_code: this.selectedZone });
   }
 
   async getList() {
@@ -62,7 +86,9 @@ export class Report2Component implements OnInit {
         this.mdCase = sumBy(rs.rows, 'mild');
         this.aCase = sumBy(rs.rows, 'asymptomatic');
         this.pCase = sumBy(rs.rows, 'ip_pui');
+        this.oCase = sumBy(rs.rows, 'observe');
         this.list = rs.rows;
+        this.listFilter = rs.rows;
 
         this.loading.hide();
       } else {
@@ -75,10 +101,44 @@ export class Report2Component implements OnInit {
     }
   }
 
-  // async click(z) {
-  //   this.zone = z;
-  //   this.getList();
-  // }
+  async onClickSearch() {
+    console.log(this.list);
+    
+    if (this.selectedZone === 'all' && this.selectedProvince === 'all') {
+      this.listFilter = this.list;
+      this.sCase = sumBy(this.listFilter, 'severe');
+      this.mCase = sumBy(this.listFilter, 'moderate');
+      this.mdCase = sumBy(this.listFilter, 'mild');
+      this.aCase = sumBy(this.listFilter, 'asymptomatic');
+      this.pCase = sumBy(this.listFilter, 'ip_pui');
+      this.oCase = sumBy(this.listFilter, 'observe');
+    } else if (this.selectedZone !== 'all' && this.selectedProvince === 'all') {
+      this.listFilter = filter(this.list, { zone_code: this.selectedZone });
+      this.sCase = sumBy(this.listFilter, 'severe');
+      this.mCase = sumBy(this.listFilter, 'moderate');
+      this.mdCase = sumBy(this.listFilter, 'mild');
+      this.aCase = sumBy(this.listFilter, 'asymptomatic');
+      this.pCase = sumBy(this.listFilter, 'ip_pui');
+      this.oCase = sumBy(this.listFilter, 'observe');
+    } else if (this.selectedZone !== 'all' && this.selectedProvince !== 'all') {
+      this.listFilter = filter(this.list, { zone_code: this.selectedZone, province_code: this.selectedProvince });
+      this.sCase = sumBy(this.listFilter, 'severe');
+      this.mCase = sumBy(this.listFilter, 'moderate');
+      this.mdCase = sumBy(this.listFilter, 'mild');
+      this.aCase = sumBy(this.listFilter, 'asymptomatic');
+      this.pCase = sumBy(this.listFilter, 'ip_pui');
+      this.oCase = sumBy(this.listFilter, 'observe');
+    } else {
+      this.listFilter = this.list;
+      this.sCase = sumBy(this.listFilter, 'severe');
+      this.mCase = sumBy(this.listFilter, 'moderate');
+      this.mdCase = sumBy(this.listFilter, 'mild');
+      this.aCase = sumBy(this.listFilter, 'asymptomatic');
+      this.pCase = sumBy(this.listFilter, 'ip_pui');
+      this.oCase = sumBy(this.listFilter, 'observe');
+    }
+    console.log(this.selectedZone, this.selectedProvince);
+  }
 
   doEnter() {
     this.getList();

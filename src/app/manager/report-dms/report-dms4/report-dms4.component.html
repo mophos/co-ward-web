@@ -5,8 +5,8 @@
 <br>
 <div class="clr-row">
   <div class="clr-col-10">
-    <button [ngClass]="{'btn-primary': date==d,'btn-primary-outline': date!=d}" class="btn btn-sm" *ngFor="let d of arDates"
-      (click)="selectDate(d)">วันที่ {{d}}</button>
+    <button [ngClass]="{'btn-primary': date==d,'btn-primary-outline': date!=d}" class="btn btn-sm"
+      *ngFor="let d of arDates" (click)="selectDate(d)">วันที่ {{d}}</button>
   </div>
   <div class="clr-col-2" style="text-align: right;">
     <button class="btn btn-sm btn-primary" (click)="onClickExport()">
@@ -20,18 +20,19 @@
     <th rowspan="2" class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">โรงพยาบาล</th>
     <th colspan="4" class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">Positive ยอดสะสม</th>
     <th colspan="4" class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">PUI ยอดสะสม</th>
+    <th rowspan="2" class="right" style="position: sticky; top: 0;  border-right: 1px gray solid;">Hospital Quarantine</th>
     <th rowspan="2" class="right" style="position: sticky; top: 0;">หน่วยงาน</th>
   </tr>
   <tr>
     <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">Admit</th>
     <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">Discharge รวมสะสม <br> (รวมส่ง
-      Hospitel รวมตาย)</th>
-    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">Discharge <br> ส่ง Hospitel</th>
+      ศูนย์ รวมตาย)</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">Discharge <br> ส่ง ศูนย์</th>
     <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">Discharge ตายสะสม</th>
     <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">Admit</th>
     <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">Discharge รวมสะสม <br> (รวมส่ง
-      Hospitel รวมตาย)</th>
-    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">Discharge <br> ส่ง Hospitel</th>
+      ศูนย์ รวมตาย)</th>
+    <th class="right" style="position: sticky; top: 0; border-right: 1px gray solid;">Discharge <br> ส่ง ศูนย์</th>
     <th class="right" style="position: sticky; top: 0;">Discharge ตายสะสม</th>
   </tr>
   <tr>
@@ -44,6 +45,7 @@
     <th class="text-right td-border" style="position: sticky; top: 0;">{{puiDischarge}}</th>
     <th class="text-right td-border" style="position: sticky; top: 0;">{{puiDischargeHospitel}}</th>
     <th class="text-right td-border" style="position: sticky; top: 0;">{{puiDischargeDeath}}</th>
+    <th class="text-right td-border" style="position: sticky; top: 0;">{{observe}}</th>
     <th class="text-right " style="position: sticky; top: 0;"></th>
   </tr>
   <tr *ngFor="let h of list ; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
@@ -56,6 +58,7 @@
     <td class="text-right  td-border">{{h['pui_discharge']||0 }}</td>
     <td class="text-right  td-border">{{h['pui_discharge_hospitel']||0 }}</td>
     <td class="text-right  td-border">{{h['pui_discharge_death']||0 }}</td>
+    <td class="text-right ">{{h['observe']||0 }}</td>
     <td class="text-right ">{{h['sub_ministry_name']||0 }}</td>
   </tr>
 </table>

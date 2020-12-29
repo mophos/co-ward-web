@@ -4,17 +4,50 @@
 </nav>
 <br>
 <div class="clr-row">
-  <div class="clr-col-4">
-    <!-- รายงานจำนวนเตียงผู้ป่วย ณ วันที่ {{date | dateTh:'D MMM YYYY'}}
+  <div class="clr-col-1">
+    <span>ค้นหาเขตสุขภาพ</span>
+  </div>
+  <div class="clr-col-2">
+    <div class="clr-select-wrapper" style="width: 100%;">
+      <select name="zone" class="clr-select" [(ngModel)]="selectedZone" style="width: 100%;" (change)="onChangeZone()">
+        <option value="all">เลือกเขต</option>
+        <option *ngFor="let v of zone" [value]="v">เขต {{v}}</option>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="clr-row">
+  <div class="clr-col-1">
+    <span>ค้นหาจังหวัด</span>
+  </div>
+  <div class="clr-col-2">
+    <div class="clr-select-wrapper" style="width: 100%;">
+      <select name="province" class="clr-select" [(ngModel)]="selectedProvince" style="width: 100%;">
+        <option value="all">เลือกจังหวัด</option>
+        <option *ngFor="let v of listProvince" [value]="v.code">{{v.name_th}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="clr-col-2">
+    <button [disabled]="!selectedZone" class="btn btn-primary btn-outline btn-sm" (click)="onClickSearch()">ค้นหา
+      <clr-icon shape="search">
+      </clr-icon>
+    </button>
+  </div>
+</div>
+
+<div class="clr-row">
+  <!-- <div class="clr-col-4"> -->
+  <!-- รายงานจำนวนเตียงผู้ป่วย ณ วันที่ {{date | dateTh:'D MMM YYYY'}}
     <my-date-picker-th name="date" [options]="myDatePickerOptions" [(ngModel)]="date" required>
     </my-date-picker-th> -->
-  </div>
-  <div class="clr-col-1">
-    <!-- <button class="btn btn-sm btn-primary" (click)="doEnter()">
+  <!-- </div>
+  <div class="clr-col-1"> -->
+  <!-- <button class="btn btn-sm btn-primary" (click)="doEnter()">
       <clr-icon shape="search"></clr-icon>
     </button> -->
-  </div>
-  <div class="clr-col-7" style="text-align: right;">
+  <!-- </div> -->
+  <div class="clr-col-12" style="text-align: right;">
     <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
       <clr-icon shape="download"></clr-icon>export excel
     </button>
@@ -29,6 +62,7 @@
     <th rowspan="2" class="right td-border" style="position: sticky; top: 0; ">โรงพยาบาล</th>
     <th colspan="4" class="right td-border" style="position: sticky; top: 0; ">ผู้ป่วยยืนยัน (Confirm Case)</th>
     <th rowspan="2" class="right td-border" style="position: sticky; top: 0; ">ผู้ป่วยเข้าเกณฑ์สงสัย PUI</th>
+    <th rowspan="2" class="right td-border" style="position: sticky; top: 0; ">Hospital Quarantine</th>
     <th rowspan="2" class="right" style="position: sticky; top: 0;">หน่วยงาน</th>
   </tr>
   <tr>
@@ -38,15 +72,16 @@
     <th class="right" style="position: sticky; top: 0;">ผู้ป่วยผลบวกไม่มีอาการ <br> (Asymptomatic)</th>
   </tr>
   <tr>
-    <th class="td-border" >รวม</th>
-    <th class="text-right td-border" >{{sCase| number:'1.0-0'}}</th>
-    <th class="text-right td-border" >{{mCase| number:'1.0-0'}}</th>
-    <th class="text-right td-border" >{{mdCase| number:'1.0-0'}}</th>
-    <th class="text-right td-border" >{{aCase| number:'1.0-0'}}</th>
-    <th class="text-right td-border" >{{pCase| number:'1.0-0'}}</th>
-    <th class="text-right" ></th>
+    <th class="td-border">รวม</th>
+    <th class="text-right td-border">{{sCase| number:'1.0-0'}}</th>
+    <th class="text-right td-border">{{mCase| number:'1.0-0'}}</th>
+    <th class="text-right td-border">{{mdCase| number:'1.0-0'}}</th>
+    <th class="text-right td-border">{{aCase| number:'1.0-0'}}</th>
+    <th class="text-right td-border">{{pCase| number:'1.0-0'}}</th>
+    <th class="text-right td-border">{{oCase| number:'1.0-0'}}</th>
+    <th class="text-right"></th>
   </tr>
-  <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+  <tr *ngFor="let h of listFilter; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
     <td class="left td-border">{{h.hospname}} <br>
       <div for="" style="color: red;">
         ข้อมูลล่าสุด: {{ h.updated_entry | dateTh:'DD/MM/YYYY hh:mm'}}
@@ -57,6 +92,7 @@
     <td class="text-right td-border">{{h['mild'] | number:'1.0-0'}}</td>
     <td class="text-right td-border">{{h['asymptomatic'] | number:'1.0-0'}}</td>
     <td class="text-right td-border">{{h['ip_pui'] | number:'1.0-0'}}</td>
+    <td class="text-right td-border">{{h['observe'] | number:'1.0-0'}}</td>
     <td class="text-right">{{h['sub_ministry_name'] }}</td>
   </tr>
   <tr>
@@ -66,9 +102,10 @@
     <th class="text-right td-border" style="position: sticky; top: 0; ">{{mdCase| number:'1.0-0'}}</th>
     <th class="text-right td-border" style="position: sticky; top: 0; ">{{aCase| number:'1.0-0'}}</th>
     <th class="text-right td-border" style="position: sticky; top: 0; ">{{pCase| number:'1.0-0'}}</th>
+    <th class="text-right td-border" style="position: sticky; top: 0; ">{{oCase| number:'1.0-0'}}</th>
     <th class="text-right" style="position: sticky; top: 0;"></th>
   </tr>
 </table>
-<label>{{list.length | number:'1.0-0' }} รายการ</label>
-
+<label>{{listFilter.length | number:'1.0-0' }} รายการ</label>
+<p>*ข้อมูลอัพเดตทุก 20 นาที</p>
 <app-loadding #loading></app-loadding>

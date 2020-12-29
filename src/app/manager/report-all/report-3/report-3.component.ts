@@ -4,7 +4,7 @@ import { AlertService } from 'src/app/help/alert.service';
 import { ReportAllService } from '../report-all.service';
 import { IMyOptions } from 'mydatepicker-th';
 import * as moment from 'moment';
-import { sumBy, map } from 'lodash';
+import { sumBy, filter } from 'lodash';
 @Component({
   selector: 'app-report-3',
   templateUrl: './report-3.component.html',
@@ -12,7 +12,14 @@ import { sumBy, map } from 'lodash';
 })
 export class Report3Component implements OnInit {
   @ViewChild('loading') public loading;
+  zone: any = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13'];
+  selectedZone: any = 'all';
+  selectedProvince: any = 'all';
+  province: any;
+  listProvince: any;
+
   list: any = [];
+  listFilter: any = [];
   date: any;
   arDates: any = [];
   sum = {
@@ -39,6 +46,7 @@ export class Report3Component implements OnInit {
   }
 
   async ngOnInit() {
+    await this.getProvince();
     this.date = moment().format('DD/MM/YYYY');
     await this.dates();
     await this.getList();
@@ -58,9 +66,10 @@ export class Report3Component implements OnInit {
   async getList() {
     this.loading.show();
     try {
-      const rs: any = await this.reportService.getReport3(moment(this.date,'DD/MM/YYYY').format('YYYY-MM-DD'), this.sector);
+      const rs: any = await this.reportService.getReport3(moment(this.date, 'DD/MM/YYYY').format('YYYY-MM-DD'), this.sector);
       if (rs.ok) {
         this.list = rs.rows;
+        this.listFilter = rs.rows;
         this.sum = {
           ip_pui: sumBy(this.list, 'ip_pui'),
           asymptomatic: sumBy(this.list, 'asymptomatic'),
@@ -78,6 +87,19 @@ export class Report3Component implements OnInit {
       this.alertService.error(error);
     }
   }
+
+  async getProvince() {
+    try {
+      const rs: any = await this.reportService.getProvince();
+      if (rs.ok) {
+        this.province = rs.rows;
+        this.listProvince = rs.rows;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async onClickExport() {
     this.loading.show();
     try {
@@ -94,7 +116,51 @@ export class Report3Component implements OnInit {
       this.loading.hide();
     }
   }
+  onChangeZone() {
+    this.selectedProvince = 'all';
+    this.listProvince = filter(this.province, { zone_code: this.selectedZone });
+  }
 
+  async onClickSearch() {
+    if (this.selectedZone === 'all' && this.selectedProvince === 'all') {
+      this.listFilter = this.list;
+      this.sum = {
+        ip_pui: sumBy(this.listFilter, 'ip_pui'),
+        asymptomatic: sumBy(this.listFilter, 'asymptomatic'),
+        mild: sumBy(this.listFilter, 'mild'),
+        moderate: sumBy(this.listFilter, 'moderate'),
+        severe: sumBy(this.listFilter, 'severe'),
+      };
+    } else if (this.selectedZone !== 'all' && this.selectedProvince === 'all') {
+      this.listFilter = filter(this.list, { zone_code: this.selectedZone });
+      this.sum = {
+        ip_pui: sumBy(this.listFilter, 'ip_pui'),
+        asymptomatic: sumBy(this.listFilter, 'asymptomatic'),
+        mild: sumBy(this.listFilter, 'mild'),
+        moderate: sumBy(this.listFilter, 'moderate'),
+        severe: sumBy(this.listFilter, 'severe'),
+      };
+    } else if (this.selectedZone !== 'all' && this.selectedProvince !== 'all') {
+      this.listFilter = filter(this.list, { zone_code: this.selectedZone, province_code: this.selectedProvince });
+      this.sum = {
+        ip_pui: sumBy(this.listFilter, 'ip_pui'),
+        asymptomatic: sumBy(this.listFilter, 'asymptomatic'),
+        mild: sumBy(this.listFilter, 'mild'),
+        moderate: sumBy(this.listFilter, 'moderate'),
+        severe: sumBy(this.listFilter, 'severe'),
+      };
+    } else {
+      this.listFilter = this.list;
+      this.sum = {
+        ip_pui: sumBy(this.listFilter, 'ip_pui'),
+        asymptomatic: sumBy(this.listFilter, 'asymptomatic'),
+        mild: sumBy(this.listFilter, 'mild'),
+        moderate: sumBy(this.listFilter, 'moderate'),
+        severe: sumBy(this.listFilter, 'severe'),
+      };
+    }
+    console.log(this.selectedZone, this.selectedProvince);
+  }
 
   doEnter() {
     this.getList();

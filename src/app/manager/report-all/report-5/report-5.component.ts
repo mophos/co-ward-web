@@ -2,7 +2,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportAllService } from '../report-all.service';
 import { AlertService } from '../../../help/alert.service';
-import { sumBy } from 'lodash';
+import { sumBy, filter } from 'lodash';
 import * as moment from 'moment';
 @Component({
   selector: 'app-report-5',
@@ -11,7 +11,14 @@ import * as moment from 'moment';
 })
 export class Report5Component implements OnInit {
 
+  zone: any = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13'];
+  selectedZone: any = 'all';
+  selectedProvince: any = 'all';
+  province: any;
+  listProvince: any;
+
   list: any = [];
+  listFilter: any = [];
   admitQty: any;
   totalQty: any;
   spareQty: any;
@@ -30,6 +37,7 @@ export class Report5Component implements OnInit {
   }
 
   ngOnInit() {
+    this.getProvince();
     this.date = {
       date: {
         year: moment().get('year'),
@@ -38,6 +46,55 @@ export class Report5Component implements OnInit {
       }
     };
     this.getList();
+  }
+
+  async getProvince() {
+    try {
+      const rs: any = await this.reportService.getProvince();
+      if (rs.ok) {
+        this.province = rs.rows;
+        this.listProvince = rs.rows;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  onChangeZone() {
+    this.selectedProvince = 'all';
+    this.listProvince = filter(this.province, { zone_code: this.selectedZone });
+  }
+
+  async calTotal(rows) {
+    this.totalQty = (sumBy(rows, 'aiir_qty') || 0) + (sumBy(rows, 'modified_aiir_qty') || 0) + (sumBy(rows, 'isolate_qty') || 0) + (sumBy(rows, 'cohort_qty') || 0);
+    this.admitQty = (sumBy(rows, 'sum') || 0);
+
+    this.spareQty = (sumBy(rows, 'aiir_spare_qty') || 0) + (sumBy(rows, 'modified_aiir_spare_qty') || 0) + (sumBy(rows, 'isolate_spare_qty') || 0) + (sumBy(rows, 'cohort_spare_qty') || 0);
+
+    this.standbyQty = ((sumBy(rows, 'aiir_qty') || 0) + (sumBy(rows, 'modified_aiir_qty') || 0) + (sumBy(rows, 'isolate_qty') || 0) + (sumBy(rows, 'cohort_qty') || 0)) - (sumBy(rows, 'sum') || 0) - ((sumBy(rows, 'aiir_spare_qty') || 0) + sumBy(rows, 'modified_aiir_spare_qty') || 0 + sumBy(rows, 'isolate_spare_qty') || 0 + (sumBy(rows, 'cohort_spare_qty') || 0));
+  }
+
+  async onClickSearch() {
+    console.log(this.list);
+
+    if (this.selectedZone === 'all' && this.selectedProvince === 'all') {
+      this.listFilter = this.list;
+      await this.calTotal(this.listFilter);
+
+    } else if (this.selectedZone !== 'all' && this.selectedProvince === 'all') {
+      this.listFilter = filter(this.list, { zone_code: this.selectedZone });
+      await this.calTotal(this.listFilter);
+
+    } else if (this.selectedZone !== 'all' && this.selectedProvince !== 'all') {
+      this.listFilter = filter(this.list, { zone_code: this.selectedZone, province_code: this.selectedProvince });
+      await this.calTotal(this.listFilter);
+
+    } else {
+      this.listFilter = this.list;
+      await this.calTotal(this.listFilter);
+
+    }
+    console.log(this.selectedZone, this.selectedProvince);
   }
 
   async getList() {
@@ -51,6 +108,7 @@ export class Report5Component implements OnInit {
         this.spareQty = (sumBy(rs.rows, 'aiir_spare_qty') || 0) + (sumBy(rs.rows, 'modified_aiir_spare_qty') || 0) + (sumBy(rs.rows, 'isolate_spare_qty') || 0) + (sumBy(rs.rows, 'cohort_spare_qty') || 0);
         this.standbyQty = ((sumBy(rs.rows, 'aiir_qty') || 0) + (sumBy(rs.rows, 'modified_aiir_qty') || 0) + (sumBy(rs.rows, 'isolate_qty') || 0) + (sumBy(rs.rows, 'cohort_qty') || 0)) - (sumBy(rs.rows, 'sum') || 0) - ((sumBy(rs.rows, 'aiir_spare_qty') || 0) + sumBy(rs.rows, 'modified_aiir_spare_qty') || 0 + sumBy(rs.rows, 'isolate_spare_qty') || 0 + (sumBy(rs.rows, 'cohort_spare_qty') || 0));
         this.list = rs.rows;
+        this.listFilter = rs.rows;
         this.loading.hide();
       } else {
         this.loading.hide();

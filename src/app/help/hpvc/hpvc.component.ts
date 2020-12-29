@@ -17,6 +17,7 @@ export class HpvcComponent implements OnInit {
   products: any = [];
   personId: any;
   isAdd = false;
+  isLoadding = false;
   symptom: any;
   constructor(
     private helpService: HelpService,

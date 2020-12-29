@@ -2,9 +2,50 @@
   <span class="breadcrumb-item active">รายงานเตียงว่างแยกประเภท ณ. วันที่ {{date | dateTh:'D MMM YYYY'}}</span>
 </nav>
 <br>
+<div *ngIf="tab!=2">
+  <div class="clr-row">
+    <div class="clr-col-1">
+      <span>ค้นหาเขตสุขภาพ</span>
+    </div>
+    <div class="clr-col-2">
+      <div class="clr-select-wrapper" style="width: 100%;">
+        <select name="zone" class="clr-select" [(ngModel)]="selectedZone" style="width: 100%;"
+          (change)="onChangeZone()">
+          <option value="all">เลือกเขต</option>
+          <option *ngFor="let v of zone" [value]="v">เขต {{v}}</option>
+        </select>
+      </div>
+    </div>
+    <div *ngIf="tab==1" class="clr-col-2">
+      <button [disabled]="!selectedZone" class="btn btn-primary btn-outline btn-sm" (click)="onClickSearch()">ค้นหา
+        <clr-icon shape="search">
+        </clr-icon>
+      </button>
+    </div>
+  </div>
+  <div *ngIf="tab!=1" class="clr-row">
+    <div class="clr-col-1">
+      <span>ค้นหาจังหวัด</span>
+    </div>
+    <div class="clr-col-2">
+      <div class="clr-select-wrapper" style="width: 100%;">
+        <select name="province" class="clr-select" [(ngModel)]="selectedProvince" style="width: 100%;">
+          <option value="all">เลือกจังหวัด</option>
+          <option *ngFor="let v of listProvince" [value]="v.code">{{v.name_th}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="clr-col-2">
+      <button [disabled]="!selectedZone" class="btn btn-primary btn-outline btn-sm" (click)="onClickSearch()">ค้นหา
+        <clr-icon shape="search">
+        </clr-icon>
+      </button>
+    </div>
+  </div>
+</div>
 <clr-tabs>
   <clr-tab>
-    <button clrTabLink id="link1">รายงานเตียงว่างแยกประเภท(เขต)</button>
+    <button clrTabLink id="link1" (click)="onChangeTab(1)">รายงานเตียงว่างแยกประเภท(เขต)</button>
     <clr-tab-content id="content1" *clrIfActive="true">
       <div class="clr-row">
         <div class="clr-col-4">
@@ -33,7 +74,7 @@
           <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Modified AIIR</th>
           <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Isolate</th>
           <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Cohort</th>
-          <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Hospitel</th>
+          <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">ศูนย์</th>
         </tr>
         <tr>
           <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
@@ -70,7 +111,7 @@
           <th class="text-right td-border">{{host2| number:'1.0-0'}}</th>
           <th class="text-right">{{host3 || 0| number:'1.0-0'}}</th>
         </tr>
-        <tr *ngFor="let h of listSector; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+        <tr *ngFor="let h of listSectorFilter; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
           <td class="left td-border">{{h.zone_code}}<br>
           </td>
           <td class="text-right td-border">{{h['aiir_qty'] ||0| number:'1.0-0'}}</td>
@@ -110,11 +151,11 @@
           <th></th>
         </tr>
       </table>
-      <label>{{listSector.length | number:'1.0-0' }} รายการ</label>
+      <label>{{listSectorFilter.length | number:'1.0-0' }} รายการ</label>
     </clr-tab-content>
   </clr-tab>
   <clr-tab>
-    <button clrTabLink>รายงานเตียงว่างแยกประเภท(สังกัด)</button>
+    <button clrTabLink (click)="onChangeTab(2)">รายงานเตียงว่างแยกประเภท(สังกัด)</button>
     <clr-tab-content *clrIfActive>
       <div class="clr-row">
         <div class="clr-col-4">
@@ -143,7 +184,7 @@
           <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Modified AIIR</th>
           <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Isolate</th>
           <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Cohort</th>
-          <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Hospitel</th>
+          <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">ศูนย์</th>
         </tr>
         <tr>
           <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
@@ -180,7 +221,7 @@
           <th class="text-right td-border">{{host2| number:'1.0-0'}}</th>
           <th class="text-right">{{host3 || 0| number:'1.0-0'}}</th>
         </tr>
-        <tr *ngFor="let h of listMinistry; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+        <tr *ngFor="let h of listMinistryFilter; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
           <td class="left td-border">{{h.sub_ministry_name}}<br>
           </td>
           <td class="text-right td-border">{{h['aiir_qty'] ||0| number:'1.0-0'}}</td>
@@ -220,11 +261,11 @@
           <th></th>
         </tr>
       </table>
-      <label>{{listMinistry.length | number:'1.0-0' }} รายการ</label>
+      <label>{{listMinistryFilter.length | number:'1.0-0' }} รายการ</label>
     </clr-tab-content>
   </clr-tab>
   <clr-tab>
-    <button clrTabLink>รายงานเตียงว่างแยกประเภท(โรงพยาบาล)</button>
+    <button clrTabLink (click)="onChangeTab(3)">รายงานเตียงว่างแยกประเภท(โรงพยาบาล)</button>
     <clr-tab-content *clrIfActive>
       <div class="clr-row">
         <div class="clr-col-4">
@@ -254,7 +295,7 @@
           <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Modified AIIR</th>
           <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Isolate</th>
           <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Cohort</th>
-          <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Hospitel</th>
+          <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">ศูนย์</th>
           <th rowspan="3" class="right" style="position: sticky; top: 0;">หน่วยงาน</th>
         </tr>
         <tr>
@@ -292,7 +333,7 @@
           <th class="text-right td-border">{{host2| number:'1.0-0'}}</th>
           <th class="text-right">{{host3 || 0| number:'1.0-0'}}</th>
         </tr>
-        <tr *ngFor="let h of listHospital; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+        <tr *ngFor="let h of listHospitalFilter; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
           <td class="left td-border">{{h.hospname}}<br>
             <label style="color: red;">
               ข้อมูลล่าสุด: {{ h.updated_entry | dateTh:'DD/MM/YYYY hh:mm'}}
@@ -336,7 +377,7 @@
           <th></th>
         </tr>
       </table>
-      <label>{{listHospital.length | number:'1.0-0' }} รายการ</label>
+      <label>{{listHospitalFilter.length | number:'1.0-0' }} รายการ</label>
     </clr-tab-content>
   </clr-tab>
 </clr-tabs>

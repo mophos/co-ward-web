@@ -58,7 +58,7 @@ export class ReportDms3Component implements OnInit {
   async getList() {
     this.loading.show();
     try {
-      const rs: any = await this.reportService.getReport3(moment(this.date,'DD/MM/YYYY').format('YYYY-MM-DD'), this.sector);
+      const rs: any = await this.reportService.getReport3(moment(this.date, 'DD/MM/YYYY').format('YYYY-MM-DD'), this.sector);
       if (rs.ok) {
         this.list = rs.rows;
         this.sum = {

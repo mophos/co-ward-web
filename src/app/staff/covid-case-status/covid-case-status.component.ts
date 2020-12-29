@@ -90,11 +90,11 @@ export class CovidCaseStatusComponent implements OnInit {
     await this.getDateCut();
     await this.getList();
     await this.getGCS();
-    await this.getGCSSum();
+    // await this.getGCSSum();
     await this.getBeds();
-    await this.getBedSum();
+    // await this.getBedSum();
     await this.getMedicalSupplies();
-    await this.getMedicalSuppliesSum();
+    // await this.getMedicalSuppliesSum();
 
     this.dateDischarge = {
       date: {
@@ -112,6 +112,9 @@ export class CovidCaseStatusComponent implements OnInit {
     try {
       const rs: any = await this.covidCaseService.getCovidCasePresent(this.query);
       if (rs.ok) {
+        for (const i of rs.rows) {
+          i.old_gcs_id = i.gcs_id;
+        }
         this.list = rs.rows;
         console.log(this.list);
       } else {

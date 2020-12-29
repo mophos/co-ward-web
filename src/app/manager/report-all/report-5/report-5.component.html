@@ -3,6 +3,38 @@
 </nav>
 <br>
 <div class="clr-row">
+  <div class="clr-col-1">
+    <span>ค้นหาเขตสุขภาพ</span>
+  </div>
+  <div class="clr-col-2">
+    <div class="clr-select-wrapper" style="width: 100%;">
+      <select name="zone" class="clr-select" [(ngModel)]="selectedZone" style="width: 100%;" (change)="onChangeZone()">
+        <option value="all">เลือกเขต</option>
+        <option *ngFor="let v of zone" [value]="v">เขต {{v}}</option>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="clr-row">
+  <div class="clr-col-1">
+    <span>ค้นหาจังหวัด</span>
+  </div>
+  <div class="clr-col-2">
+    <div class="clr-select-wrapper" style="width: 100%;">
+      <select name="province" class="clr-select" [(ngModel)]="selectedProvince" style="width: 100%;">
+        <option value="all">เลือกจังหวัด</option>
+        <option *ngFor="let v of listProvince" [value]="v.code">{{v.name_th}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="clr-col-2">
+    <button [disabled]="!selectedZone" class="btn btn-primary btn-outline btn-sm" (click)="onClickSearch()">ค้นหา
+      <clr-icon shape="search">
+      </clr-icon>
+    </button>
+  </div>
+</div>
+<div class="clr-row">
   <div class="clr-col-12" style="text-align: right;">
     <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
       <clr-icon shape="download"></clr-icon>export excel
@@ -14,7 +46,7 @@
 
   <tr>
     <th rowspan="2" class="td-border" style="position: sticky; top: 0;">โรงพยาบาล</th>
-    <th colspan="4" class="td-border" style="position: sticky; top: 0;">จำนวนเตียง (ไม่รวม Hospitel)</th>
+    <th colspan="4" class="td-border" style="position: sticky; top: 0;">จำนวนเตียง (ไม่รวม ศูนย์)</th>
     <th rowspan="2" class="td-border" style="position: sticky; top: 0;">หน่วยงาน</th>
   </tr>
 
@@ -27,39 +59,42 @@
 
 
   <tr>
-    <th class=" td-border" >รวม</th>
-    <th class="text-right  td-border" >{{totalQty| number:'1.0-0'}}</th>
-    <th class="text-right  td-border" >{{admitQty| number:'1.0-0'}}</th>
-    <th class="text-right  td-border" >{{spareQty| number:'1.0-0'}}</th>
-    <th class="text-right  td-border" >{{standbyQty| number:'1.0-0'}}</th>
-    <th class="text-right  td-border" ></th>
+    <th class=" td-border">รวม</th>
+    <th class="text-right  td-border">{{totalQty| number:'1.0-0'}}</th>
+    <th class="text-right  td-border">{{admitQty| number:'1.0-0'}}</th>
+    <th class="text-right  td-border">{{spareQty| number:'1.0-0'}}</th>
+    <th class="text-right  td-border">{{standbyQty| number:'1.0-0'}}</th>
+    <th class="text-right  td-border"></th>
   </tr>
 
-  <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+  <tr *ngFor="let h of listFilter; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
     <td class="left td-border">{{h.hospname}}<br>
       <label style="color: red;">
         ข้อมูลล่าสุด: {{ h.updated_entry | dateTh:'DD/MM/YYYY hh:mm'}}
       </label>
     </td>
-    <td class="text-right  td-border">{{(h.aiir_qty || 0)+(h.modified_aiir_qty || 0)+(h.isolate_qty || 0)+(h.cohort_qty || 0)| number:'1.0-0'}}</td>
+    <td class="text-right  td-border">{{(h.aiir_qty || 0)+(h.modified_aiir_qty || 0)+(h.isolate_qty || 0)+(h.cohort_qty
+      || 0)| number:'1.0-0'}}</td>
     <td class="text-right  td-border">{{(h.sum || 0)| number:'1.0-0'}}</td>
     <td class="text-right  td-border">{{(h.aiir_spare_qty || 0)+(h.modified_aiir_spare_qty || 0)+(h.isolate_spare_qty ||
       0)+(h.cohort_spare_qty || 0)| number:'1.0-0'}}</td>
-    <td class="text-right  td-border">{{((h.aiir_qty || 0)+(h.modified_aiir_qty || 0)+(h.isolate_qty || 0)+(h.cohort_qty ||
-      0))-(h.sum)-((h.aiir_spare_qty || 0)+(h.modified_aiir_spare_qty || 0)+(h.isolate_spare_qty || 0)+(h.cohort_spare_qty ||
+    <td class="text-right  td-border">{{((h.aiir_qty || 0)+(h.modified_aiir_qty || 0)+(h.isolate_qty || 0)+(h.cohort_qty
+      ||
+      0))-(h.sum)-((h.aiir_spare_qty || 0)+(h.modified_aiir_spare_qty || 0)+(h.isolate_spare_qty ||
+      0)+(h.cohort_spare_qty ||
       0))| number:'1.0-0'}}</td>
     <td class="left td-border">{{h.sub_ministry_name}}</td>
   </tr>
 
   <tr>
-    <th class="text-right  td-border" >รวม</th>
-    <th class="text-right  td-border" >{{totalQty | number:'1.0-0'}}</th>
-    <th class="text-right  td-border" >{{admitQty | number:'1.0-0'}}</th>
-    <th class="text-right  td-border" >{{spareQty | number:'1.0-0'}}</th>
-    <th class="text-right  td-border" >{{standbyQty | number:'1.0-0'}}</th>
-    <th class="text-right  td-border" ></th>
+    <th class="text-right  td-border">รวม</th>
+    <th class="text-right  td-border">{{totalQty | number:'1.0-0'}}</th>
+    <th class="text-right  td-border">{{admitQty | number:'1.0-0'}}</th>
+    <th class="text-right  td-border">{{spareQty | number:'1.0-0'}}</th>
+    <th class="text-right  td-border">{{standbyQty | number:'1.0-0'}}</th>
+    <th class="text-right  td-border"></th>
   </tr>
 </table>
-<label>{{list.length | number:'1.0-0' }} รายการ</label>
+<label>{{listFilter.length | number:'1.0-0' }} รายการ</label>
 
 <app-loadding #loading></app-loadding>

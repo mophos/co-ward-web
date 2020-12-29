@@ -4,7 +4,7 @@ import { AlertService } from '../../../help/alert.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { IMyOptions } from 'mydatepicker-th';
 import * as moment from 'moment';
-import { sumBy } from 'lodash';
+import { sumBy, filter } from 'lodash';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -13,8 +13,14 @@ import { ActivatedRoute } from '@angular/router';
   styles: []
 })
 export class Report4Component implements OnInit {
+  zone: any = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13'];
+  selectedZone: any = 'all';
+  selectedProvince: any = 'all';
+  province: any;
+  listProvince: any;
+
   list: any = [];
-  zone: any = '';
+  listFilter: any = [];
   date: any;
   arDates: any = [];
   admit: any;
@@ -25,6 +31,7 @@ export class Report4Component implements OnInit {
   puiDischarge: any;
   puiDischargeHospitel: any;
   puiDischargeDeath: any;
+  observe: any;
 
   myDatePickerOptions: IMyOptions = {
     inline: false,
@@ -46,6 +53,7 @@ export class Report4Component implements OnInit {
   }
 
   async ngOnInit() {
+    await this.getProvince();
     this.date = moment().format('DD/MM/YYYY');
     await this.dates();
     await this.getList();
@@ -65,7 +73,7 @@ export class Report4Component implements OnInit {
   async getList() {
     this.loading.show();
     try {
-      const rs: any = await this.reportService.getReport4(moment(this.date,'DD/MM/YYYY').format('YYYY-MM-DD'), this.sector);
+      const rs: any = await this.reportService.getReport4(moment(this.date, 'DD/MM/YYYY').format('YYYY-MM-DD'), this.sector);
       if (rs.ok) {
         this.admit = sumBy(rs.rows, 'admit');
         this.discharge = sumBy(rs.rows, 'discharge');
@@ -75,8 +83,10 @@ export class Report4Component implements OnInit {
         this.puiDischarge = sumBy(rs.rows, 'pui_discharge');
         this.puiDischargeHospitel = sumBy(rs.rows, 'pui_discharge_hospitel');
         this.puiDischargeDeath = sumBy(rs.rows, 'pui_discharge_death');
+        this.observe = sumBy(rs.rows, 'observe');
 
         this.list = rs.rows;
+        this.listFilter = rs.rows;
         console.log(this.list);
 
         this.loading.hide();
@@ -89,12 +99,17 @@ export class Report4Component implements OnInit {
       this.alertService.error(error);
     }
   }
-
-  // async click(z) {
-  //   this.zone = z;
-  //   this.getList();
-  // }
-
+  async getProvince() {
+    try {
+      const rs: any = await this.reportService.getProvince();
+      if (rs.ok) {
+        this.province = rs.rows;
+        this.listProvince = rs.rows;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   doEnter() {
     this.getList();
   }
@@ -117,24 +132,59 @@ export class Report4Component implements OnInit {
     }
   }
 
-  // async doExportCsv() {
-  //   this.loading.show();
-  //   try {
-  //     const rs: any = await this.reportService.getReportBedCsv();
-  //     console.log(rs);
-  //     if (!rs) {
-  //       this.loading.hide();
-  //     } else {
-  //       this.downloadFile('report-dms2', 'csv', rs);
-  //       // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
-  //       this.loading.hide();
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     this.alertService.error();
-  //     this.loading.hide();
-  //   }
-  // }
+  onChangeZone() {
+    this.selectedProvince = 'all';
+    this.listProvince = filter(this.province, { zone_code: this.selectedZone });
+  }
+
+  async onClickSearch() {
+    if (this.selectedZone === 'all' && this.selectedProvince === 'all') {
+      this.listFilter = this.list;
+      this.admit = sumBy(this.listFilter, 'admit');
+      this.discharge = sumBy(this.listFilter, 'discharge');
+      this.dischargeHospitel = sumBy(this.listFilter, 'discharge_hospitel');
+      this.dischargeDeath = sumBy(this.listFilter, 'discharge_death');
+      this.puiAdmit = sumBy(this.listFilter, 'pui_admit');
+      this.puiDischarge = sumBy(this.listFilter, 'pui_discharge');
+      this.puiDischargeHospitel = sumBy(this.listFilter, 'pui_discharge_hospitel');
+      this.puiDischargeDeath = sumBy(this.listFilter, 'pui_discharge_death');
+      this.observe = sumBy(this.listFilter, 'observe');
+    } else if (this.selectedZone !== 'all' && this.selectedProvince === 'all') {
+      this.listFilter = filter(this.list, { zone_code: this.selectedZone });
+      this.admit = sumBy(this.listFilter, 'admit');
+      this.discharge = sumBy(this.listFilter, 'discharge');
+      this.dischargeHospitel = sumBy(this.listFilter, 'discharge_hospitel');
+      this.dischargeDeath = sumBy(this.listFilter, 'discharge_death');
+      this.puiAdmit = sumBy(this.listFilter, 'pui_admit');
+      this.puiDischarge = sumBy(this.listFilter, 'pui_discharge');
+      this.puiDischargeHospitel = sumBy(this.listFilter, 'pui_discharge_hospitel');
+      this.puiDischargeDeath = sumBy(this.listFilter, 'pui_discharge_death');
+      this.observe = sumBy(this.listFilter, 'observe');
+    } else if (this.selectedZone !== 'all' && this.selectedProvince !== 'all') {
+      this.listFilter = filter(this.list, { zone_code: this.selectedZone, province_code: this.selectedProvince });
+      this.admit = sumBy(this.listFilter, 'admit');
+      this.discharge = sumBy(this.listFilter, 'discharge');
+      this.dischargeHospitel = sumBy(this.listFilter, 'discharge_hospitel');
+      this.dischargeDeath = sumBy(this.listFilter, 'discharge_death');
+      this.puiAdmit = sumBy(this.listFilter, 'pui_admit');
+      this.puiDischarge = sumBy(this.listFilter, 'pui_discharge');
+      this.puiDischargeHospitel = sumBy(this.listFilter, 'pui_discharge_hospitel');
+      this.puiDischargeDeath = sumBy(this.listFilter, 'pui_discharge_death');
+      this.observe = sumBy(this.listFilter, 'observe');
+    } else {
+      this.listFilter = this.list;
+      this.admit = sumBy(this.listFilter, 'admit');
+      this.discharge = sumBy(this.listFilter, 'discharge');
+      this.dischargeHospitel = sumBy(this.listFilter, 'discharge_hospitel');
+      this.dischargeDeath = sumBy(this.listFilter, 'discharge_death');
+      this.puiAdmit = sumBy(this.listFilter, 'pui_admit');
+      this.puiDischarge = sumBy(this.listFilter, 'pui_discharge');
+      this.puiDischargeHospitel = sumBy(this.listFilter, 'pui_discharge_hospitel');
+      this.puiDischargeDeath = sumBy(this.listFilter, 'pui_discharge_death');
+      this.observe = sumBy(this.listFilter, 'observe');
+    }
+    console.log(this.selectedZone, this.selectedProvince);
+  }
 
   downloadFile(name, type, data: any) {
     try {

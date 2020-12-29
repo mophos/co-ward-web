@@ -41,7 +41,6 @@ import { ReportReviewHomeworkAllComponent } from './report-all/report-review-hom
 import { ReportRecordsComponent } from './report-records/report-records.component';
 import { ReportLocalQuarantineComponent } from './report-local-quarantine/report-local-quarantine.component';
 
-
 const routes: Routes = [
   {
     path: 'manager',
@@ -83,6 +82,14 @@ const routes: Routes = [
       { path: 'report-dms8-private', component: ReportDms8Component },
       { path: 'report-dms9-private', component: ReportDms9Component },
       { path: 'report-dms10-private', component: ReportDms10Component },
+
+      { path: 'report-dms1-smk', component: ReportDms1Component },
+      { path: 'report-dms2-smk', component: ReportDms2Component },
+      { path: 'report-dms3-smk', component: ReportDms3Component },
+      { path: 'report-dms4-smk', component: ReportDms4Component },
+      { path: 'report-dms5-smk', component: ReportDms5Component },
+      { path: 'report-dms6-smk', component: ReportDms6Component },
+      { path: 'report-dms7-smk', component: ReportDms7Component },
 
       { path: 'report-review-homework-all', component: ReportReviewHomeworkAllComponent },
       { path: 'report/1', component: Report1Component },

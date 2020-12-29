@@ -6,44 +6,40 @@
 <table class="table table-compact">
   <thead>
     <tr>
-      <th rowspan="2">รายการ</th>
       <th colspan="14">{{dateShow | dateTh:'DD/MM/YYYY'}}</th>
     </tr>
     <tr>
       <!-- <th rowspan="2">รายการ</th> -->
-      <th style="text-align: right;">เขต 1</th>
-      <th style="text-align: right;">เขต 2</th>
-      <th style="text-align: right;">เขต 3</th>
-      <th style="text-align: right;">เขต 4</th>
-      <th style="text-align: right;">เขต 5</th>
-      <th style="text-align: right;">เขต 6</th>
-      <th style="text-align: right;">เขต 7</th>
-      <th style="text-align: right;">เขต 8</th>
-      <th style="text-align: right;">เขต 9</th>
-      <th style="text-align: right;">เขต 10</th>
-      <th style="text-align: right;">เขต 11</th>
-      <th style="text-align: right;">เขต 12</th>
-      <th style="text-align: right;">เขต 13</th>
-      <th>รวม</th>
+      <th style="text-align: right;">เขตสุขภาพ</th>
+      <th style="text-align: right;">surgical gown</th>
+      <th style="text-align: right;">cover all1</th>
+      <th style="text-align: right;">cover all2</th>
+      <th style="text-align: right;">n95</th>
+      <th style="text-align: right;">shoe cover</th>
+      <th style="text-align: right;">surgical hood</th>
+      <th style="text-align: right;">long glove</th>
+      <th style="text-align: right;">face shield</th>
+      <th style="text-align: right;">surgical mask</th>
+      <th style="text-align: right;">alcohol 70%</th>
+      <th style="text-align: right;">alcohol 95%</th>
+      <th style="text-align: right;">alcohol gel%</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let l of total;">
-      <td class="left">{{l.supplies}}</td>
-      <td style="text-align: right;">{{l.zone1 | number:'1.0-0'}}</td>
-      <td style="text-align: right;">{{l.zone2 | number:'1.0-0'}}</td>
-      <td style="text-align: right;">{{l.zone3 | number:'1.0-0'}}</td>
-      <td style="text-align: right;">{{l.zone4 | number:'1.0-0'}}</td>
-      <td style="text-align: right;">{{l.zone5 | number:'1.0-0'}}</td>
-      <td style="text-align: right;">{{l.zone6 | number:'1.0-0'}}</td>
-      <td style="text-align: right;">{{l.zone7 | number:'1.0-0'}}</td>
-      <td style="text-align: right;">{{l.zone8 | number:'1.0-0'}}</td>
-      <td style="text-align: right;">{{l.zone9 | number:'1.0-0'}}</td>
-      <td style="text-align: right;">{{l.zone10 | number:'1.0-0'}}</td>
-      <td style="text-align: right;">{{l.zone11 | number:'1.0-0'}}</td>
-      <td style="text-align: right;">{{l.zone12 | number:'1.0-0'}}</td>
-      <td style="text-align: right;">{{l.zone13 | number:'1.0-0'}}</td>
-      <td style="text-align: right;">{{l.total | number:'1.0-0'}}</td>
+      <td class="left">{{l.zone_code}}</td>
+      <td style="text-align: right;">{{l.surgical_gown_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.cover_all1_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.cover_all2_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.n95_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.shoe_cover_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.surgical_hood_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.long_glove_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.face_shield_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.surgical_mask_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.alcohol_70_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.alcohol_95_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.alcohol_gel_qty | number:'1.0-0'}}</td>
     </tr>
   </tbody>
 </table>

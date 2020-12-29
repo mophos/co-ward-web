@@ -49,7 +49,7 @@ import { Report8Component } from './report-all/report-8/report-8.component';
 import { Report9Component } from './report-all/report-9/report-9.component';
 import { Report10Component } from './report-all/report-10/report-10.component';
 import { ReportLocalQuarantineComponent } from './report-local-quarantine/report-local-quarantine.component';
-
+import { PatientInfoDetailsComponent } from './patient-info-details/patient-info-details.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -93,6 +93,7 @@ import { ReportLocalQuarantineComponent } from './report-local-quarantine/report
     ReportReviewHomeworkComponent,
     ReportRecordsComponent,
     ReportLocalQuarantineComponent,
+    PatientInfoDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -103,6 +104,9 @@ import { ReportLocalQuarantineComponent } from './report-local-quarantine/report
     FormsModule,
     HelpModule,
     MyDatePickerTHModule
+  ],
+  exports: [
+    PatientInfoDetailsComponent
   ]
 })
 export class ManagerModule { }

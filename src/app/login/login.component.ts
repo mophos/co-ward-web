@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
   userTypeId: any;
+  vendor: any;
   errorMessage: string = null;
   isError = false;
   version: any;
@@ -38,7 +39,7 @@ export class LoginComponent implements OnInit {
   isVerify = false;
   otp = '';
   userId = '';
-
+  isSave = false;
   passwordConfirm: any = '';
   checkPassword: any;
   checkPasswordConfirm: any;
@@ -177,17 +178,20 @@ export class LoginComponent implements OnInit {
   async onClickRequestOTP() {
     if (this.checkCid && this.checkPhone) {
       try {
+        this.isSave = true;
         const rs: any = await this.loginService.getUsername(this.cid, this.phoneNumber);
         if (rs.rows.length) {
-          this.usernameShow = rs.rows[0].username
-          this.userId = rs.rows[0].id
+          this.usernameShow = rs.rows[0].username;
+          this.userId = rs.rows[0].id;
           await this.sendRequestOTP();
           this.modalCheck = false;
           this.modalOTP = true;
         } else {
           this.alertService.error('ไม่พบเลขบัตรประชาชน หรือ เบอร์มือถือ ในระบบ');
         }
+        this.isSave = false;
       } catch (error) {
+        this.isSave = false;
         this.alertService.error();
       }
     } else {
@@ -201,20 +205,22 @@ export class LoginComponent implements OnInit {
     try {
       if (this.phoneNumber) {
         const date = (+moment().format('h') * 60) + +moment().format('m');
-
+        this.isSave = true;
         if (this.dateOtp < date) {
           this.dateOtp = date + 5;
           const rs: any = await this.registerService.requestOTP(this.phoneNumber);
           if (rs.ok) {
             this.refCode = rs.ref_code;
-            this.transactionID = rs.transactionID;
+            this.transactionID = rs.transaction_id;
+            this.vendor = rs.vendor;
           }
         } else {
           this.alertService.error('กรุณารอ 5 นาที');
         }
       }
-
+      this.isSave = false;
     } catch (error) {
+      this.isSave = false;
       console.log(error);
     }
   }
@@ -222,7 +228,8 @@ export class LoginComponent implements OnInit {
   async verifyOTP() {
     try {
       if (this.otp) {
-        const rs: any = await this.registerService.verifyOTP(this.phoneNumber, this.otp, this.transactionID);
+        this.isSave = true;
+        const rs: any = await this.registerService.verifyOTP(this.phoneNumber, this.otp, this.transactionID, this.vendor);
         if (rs.ok) {
           this.alertService.success('ยืนยันสำเร็จ');
           this.isVerify = true;
@@ -232,7 +239,9 @@ export class LoginComponent implements OnInit {
       } else {
         this.alertService.error('กรอก OTP');
       }
+      this.isSave = false;
     } catch (error) {
+      this.isSave = false;
       console.log(error);
     }
   }

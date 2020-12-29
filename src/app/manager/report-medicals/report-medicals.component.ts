@@ -44,7 +44,7 @@ export class ReportMedicalsComponent implements OnInit {
     this.loading.show();
     try {
       const date = this.dateset.date.year + '-' + this.dateset.date.month + '-' + this.dateset.date.day;
-      const rs: any = await this.service.getMedicals(this.zone, date);
+      const rs: any = await this.service.getMedicals(this.zone);
       if (rs.ok) {
         this.list = rs.rows;
         console.log(this.list);

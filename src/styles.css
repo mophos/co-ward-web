@@ -60,6 +60,9 @@
     background-color: #FFE5C9;
 }
 
+.isPrimary {
+    background-color: #0079b8;
+}
 .editLine {
     border-bottom: 2px solid #E62700;
     background-color: #FFF0EE;

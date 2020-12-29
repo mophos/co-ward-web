@@ -51,12 +51,8 @@
 <br>
 <div class="clr-row">
   <div class="clr-col-3">
-    <my-date-picker-th name="dateset" [options]="myDatePickerOptions" [(ngModel)]="dateset" required>
-    </my-date-picker-th>
-  </div>
-  <div class="clr-col-1">
-    <button class="btn btn-sm btn-primary" (click)="doEnter()">
-      <clr-icon shape="search"></clr-icon>
+    <button class="btn btn-sm btn-success" (click)="export()">
+      Export
     </button>
   </div>
 </div>
@@ -81,8 +77,8 @@
         <th class="right" style="position: sticky; top: 0;">Isolate ใช้ไปแล้ว</th>
         <th class="right" style="position: sticky; top: 0;">Cohort ทั้งหมด</th>
         <th class="right" style="position: sticky; top: 0;">Cohort ใช้ไปแล้ว</th>
-        <th class="right" style="position: sticky; top: 0;">Hospitel ทั้งหมด</th>
-        <th class="right" style="position: sticky; top: 0;">Hospitel ใช้ไปแล้ว</th>
+        <th class="right" style="position: sticky; top: 0;">ศูนย์ ทั้งหมด</th>
+        <th class="right" style="position: sticky; top: 0;">ศูนย์ ใช้ไปแล้ว</th>
       </tr>
     </thead>
     <tbody>
@@ -99,15 +95,6 @@
         <td class="right">{{h.hospitel_qty }}</td>
         <td class="right">{{h.hospitel_usage_qty }}</td>
       </tr>
-      <!-- <tr>
-          <td class="right" style="font-weight: bold;">รวม</td>
-          <td class="right" style="font-weight: bold;">{{l.count}}</td>
-          <td class="right" style="font-weight: bold;">{{l.severe}}</td>
-          <td class="right" style="font-weight: bold;">{{l.moderate}}</td>
-          <td class="right" style="font-weight: bold;">{{l.mild}}</td>
-          <td class="right" style="font-weight: bold;">{{l.asymptomatic}}</td>
-          <td class="right" style="font-weight: bold;">{{l.ippui}}</td>
-        </tr> -->
     </tbody>
   </table>
 </div>

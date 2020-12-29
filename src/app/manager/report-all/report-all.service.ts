@@ -104,7 +104,7 @@ export class ReportAllService {
     const url = `${this.apiUrl}/v1/manager/report-all/report7-sector/excel?date=${date}`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
-  
+
   async getReport8(date, sector) {
     const url = `${this.apiUrl}/v1/manager/report-all/report8?date=${date}`;
     return await this.http.get(url).toPromise();
@@ -138,9 +138,14 @@ export class ReportAllService {
     return await this.http.get(url).toPromise();
   }
 
-  async getReportReviewHomeworkExcel( sector) {
+  async getReportReviewHomeworkExcel(sector) {
     const url = `${this.apiUrl}/v1/manager/report-all/report-homework/excel`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+
+  async getProvince() {
+    const url = `${this.apiUrl}/v1/manager/report-all/list/province`;
+    return await this.http.get(url).toPromise();
   }
 
 }

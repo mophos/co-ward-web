@@ -48,6 +48,7 @@ export class LayoutComponent implements OnInit {
   modalAlert = false;
   message: any;
   topic: any;
+  cioMenu = false;
   public jwtHelper = new JwtHelperService();
   constructor(
     private route: Router,
@@ -64,6 +65,7 @@ export class LayoutComponent implements OnInit {
     this.covidApproveDrugsMenu = findIndex(this.rights, { name: 'STAFF_APPROVED_DRUGS' }) === -1 ? false : true;
     this.covidApproveSuppliesMenu = findIndex(this.rights, { name: 'STAFF_APPROVED_SUPPLIES' }) === -1 ? false : true;
     this.settingProvinceSubUserMenu = findIndex(this.rights, { name: 'STAFF_PROVINCE_SET_SUPER_USER' }) === -1 ? false : true;
+    this.cioMenu = findIndex(this.rights, { name: 'CIO_CHECK_PATIENT' }) === -1 ? false : true;
     // ---------------------------------------------------------------------------------------------------
     this.covidCaseRequisitionMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE_REQUISITION' }) === -1 ? false : true;
     this.covidProductStock = findIndex(this.rights, { name: 'STAFF_STOCK_PRODUCTS' }) === -1 ? false : true;

@@ -62,13 +62,15 @@
                 class="btn btn-danger">ลืมรหัสผ่าน</button>
             </div> -->
           </div>
-          <br>
           <div>
             <a style="text-align:center;cursor: pointer;" (click)="forgotpPassword()">ลืมรหัสผ่าน</a>
+            <br>
             <br>
             <a href="https://drive.google.com/drive/folders/13C86_2bF7jYdkpx_u0r0mAgSfGX3Pak9?usp=sharing" target="_BLANK">คู่มือ</a>
             &nbsp;&nbsp;&nbsp;
             <a href="https://ops.moph.go.th/public/uploads/files/pdf/Q-A_COward.pdf" target="_BLANK">คำถามที่พบบ่อย</a>
+            <br>สอบถามเพิ่มเติม 02-5902185 ต่อ 416-418,421-426
+            , 083-067-7279 มือถือ
           </div>
           <br>
         </div>
@@ -164,7 +166,7 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" (click)="onClickRequestOTP()"
-      [disabled]="!this.checkCid || !this.checkPhone">ขอ OTP</button>
+      [disabled]="(!this.checkCid || !this.checkPhone) && isSave">ขอ OTP</button>
   </div>
 </clr-modal>
 
