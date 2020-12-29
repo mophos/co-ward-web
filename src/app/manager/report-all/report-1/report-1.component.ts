@@ -65,6 +65,7 @@ export class Report1Component implements OnInit {
   }
 
   onChangeZone() {
+    this.selectedProvince = 'all';
     this.listProvince = filter(this.province, { zone_code: this.selectedZone });
   }
 

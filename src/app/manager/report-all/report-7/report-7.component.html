@@ -2,7 +2,47 @@
   <span class="breadcrumb-item active">รายงานจำนวนประเภทเครื่องช่วยหายใจ ณ. วันที่ {{date | dateTh:'DD/MM/YYYY'}}</span>
 </nav>
 <br>
-
+<div *ngIf="tab!=2">
+  <div class="clr-row">
+    <div class="clr-col-1">
+      <span>ค้นหาเขตสุขภาพ</span>
+    </div>
+    <div class="clr-col-2">
+      <div class="clr-select-wrapper" style="width: 100%;">
+        <select name="zone" class="clr-select" [(ngModel)]="selectedZone" style="width: 100%;"
+          (change)="onChangeZone()">
+          <option value="all">เลือกเขต</option>
+          <option *ngFor="let v of zone" [value]="v">เขต {{v}}</option>
+        </select>
+      </div>
+    </div>
+    <div *ngIf="tab==1" class="clr-col-2">
+      <button [disabled]="!selectedZone" class="btn btn-primary btn-outline btn-sm" (click)="onClickSearch()">ค้นหา
+        <clr-icon shape="search">
+        </clr-icon>
+      </button>
+    </div>
+  </div>
+  <div *ngIf="tab!=1" class="clr-row">
+    <div class="clr-col-1">
+      <span>ค้นหาจังหวัด</span>
+    </div>
+    <div class="clr-col-2">
+      <div class="clr-select-wrapper" style="width: 100%;">
+        <select name="province" class="clr-select" [(ngModel)]="selectedProvince" style="width: 100%;">
+          <option value="all">เลือกจังหวัด</option>
+          <option *ngFor="let v of listProvince" [value]="v.code">{{v.name_th}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="clr-col-2">
+      <button [disabled]="!selectedZone" class="btn btn-primary btn-outline btn-sm" (click)="onClickSearch()">ค้นหา
+        <clr-icon shape="search">
+        </clr-icon>
+      </button>
+    </div>
+  </div>
+</div>
 <clr-tabs>
   <clr-tab>
     <button clrTabLink id="link1">รายงานจำนวนประเภทเครื่องช่วยหายใจ(เขต)</button>
@@ -48,7 +88,7 @@
           <th class="td-border text-right">{{hfCovid| number:'1.0-0'}}</th>
           <th class="td-border text-right">{{hfAll| number:'1.0-0'}}</th>
         </tr>
-        <tr *ngFor="let i of listSector;let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+        <tr *ngFor="let i of listSectorFilter;let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
           <td class="text-left td-border">{{i.zone_code}}
           </td>
           <td class="td-border text-right">{{i.non_invasive_ventilator| number:'1.0-0'}}</td>
@@ -68,7 +108,7 @@
           <th class="td-border text-right">{{hfAll| number:'1.0-0'}}</th>
         </tr>
       </table>
-      <label>{{listSector.length | number:'1.0-0' }} รายการ</label>
+      <label>{{listSectorFilter.length | number:'1.0-0' }} รายการ</label>
 
     </clr-tab-content>
   </clr-tab>
@@ -117,7 +157,7 @@
           <th class="td-border text-right">{{hfAll| number:'1.0-0'}}</th>
           
         </tr>
-        <tr *ngFor="let i of listMinistry;let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+        <tr *ngFor="let i of listMinistryFilter;let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
           <td class="text-left td-border">{{i.sub_ministry_name}}
           </td>
           <td class="td-border text-right">{{i.non_invasive_ventilator| number:'1.0-0'}}</td>
@@ -138,7 +178,7 @@
           
         </tr>
       </table>
-      <label>{{listMinistry.length | number:'1.0-0' }} รายการ</label>
+      <label>{{listMinistryFilter.length | number:'1.0-0' }} รายการ</label>
 
     </clr-tab-content>
   </clr-tab>
@@ -188,7 +228,7 @@
           <th class="td-border text-right">{{hfAll| number:'1.0-0'}}</th>
           <th></th>
         </tr>
-        <tr *ngFor="let i of listHospital;let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+        <tr *ngFor="let i of listHospitalFilter;let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
           <td class="text-left td-border">{{i.hospname}}
             <br>
             <label style="color: red;">
@@ -214,7 +254,7 @@
           <th></th>
         </tr>
       </table>
-      <label>{{listHospital.length | number:'1.0-0' }} รายการ</label>
+      <label>{{listHospitalFilter.length | number:'1.0-0' }} รายการ</label>
 
     </clr-tab-content>
   </clr-tab>

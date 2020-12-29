@@ -26,7 +26,7 @@ export class Report6Component implements OnInit {
   listMinistryFilter: any = [];
   listSectorFilter: any = [];
   date: any;
-  tab: any;
+  tab: any = 1;
 
   aiir1: any;
   aiir2: any;
@@ -66,9 +66,9 @@ export class Report6Component implements OnInit {
   async ngOnInit() {
     await this.getProvince();
     this.date = moment().format('YYYY-MM-DD');
-    await this.getList1();
-    await this.getList2();
     await this.getList3();
+    await this.getList2();
+    await this.getList1();
   }
 
   async getProvince() {
@@ -84,12 +84,17 @@ export class Report6Component implements OnInit {
   }
 
   onChangeZone() {
+    this.selectedProvince = 'all';
     this.listProvince = filter(this.province, { zone_code: this.selectedZone });
   }
 
   async onChangeTab(v) {
+    await this.loading.show();
+    this.selectedZone = 'all';
+    this.selectedProvince = 'all';
     this.tab = v;
     await this.onClickSearch();
+    await this.loading.hide();
   }
 
   async sumByReport(rows) {
@@ -111,6 +116,8 @@ export class Report6Component implements OnInit {
   }
 
   async onClickSearch() {
+    console.log(this.listSector, this.listMinistry, this.listHospital);
+
     if (this.selectedZone === 'all' && this.selectedProvince === 'all') {
       this.listHospitalFilter = this.listHospital;
       this.listSectorFilter = this.listSector;
@@ -252,6 +259,8 @@ export class Report6Component implements OnInit {
 
         this.listSector = rs.rows;
         this.listSectorFilter = rs.rows;
+        console.log(rs.rows);
+
 
         this.loading.hide();
       } else {

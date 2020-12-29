@@ -2,36 +2,45 @@
   <span class="breadcrumb-item active">รายงานเตียงว่างแยกประเภท ณ. วันที่ {{date | dateTh:'D MMM YYYY'}}</span>
 </nav>
 <br>
-<div class="clr-row">
-  <div class="clr-col-1">
-    <span>ค้นหาเขตสุขภาพ</span>
-  </div>
-  <div class="clr-col-2">
-    <div class="clr-select-wrapper" style="width: 100%;">
-      <select name="zone" class="clr-select" [(ngModel)]="selectedZone" style="width: 100%;" (change)="onChangeZone()">
-        <option value="all">เลือกเขต</option>
-        <option *ngFor="let v of zone" [value]="v">เขต {{v}}</option>
-      </select>
+<div *ngIf="tab!=2">
+  <div class="clr-row">
+    <div class="clr-col-1">
+      <span>ค้นหาเขตสุขภาพ</span>
+    </div>
+    <div class="clr-col-2">
+      <div class="clr-select-wrapper" style="width: 100%;">
+        <select name="zone" class="clr-select" [(ngModel)]="selectedZone" style="width: 100%;"
+          (change)="onChangeZone()">
+          <option value="all">เลือกเขต</option>
+          <option *ngFor="let v of zone" [value]="v">เขต {{v}}</option>
+        </select>
+      </div>
+    </div>
+    <div *ngIf="tab==1" class="clr-col-2">
+      <button [disabled]="!selectedZone" class="btn btn-primary btn-outline btn-sm" (click)="onClickSearch()">ค้นหา
+        <clr-icon shape="search">
+        </clr-icon>
+      </button>
     </div>
   </div>
-</div>
-<div class="clr-row">
-  <div class="clr-col-1">
-    <span>ค้นหาจังหวัด</span>
-  </div>
-  <div class="clr-col-2">
-    <div class="clr-select-wrapper" style="width: 100%;">
-      <select name="province" class="clr-select" [(ngModel)]="selectedProvince" style="width: 100%;">
-        <option value="all">เลือกจังหวัด</option>
-        <option *ngFor="let v of listProvince" [value]="v.code">{{v.name_th}}</option>
-      </select>
+  <div *ngIf="tab!=1" class="clr-row">
+    <div class="clr-col-1">
+      <span>ค้นหาจังหวัด</span>
     </div>
-  </div>
-  <div class="clr-col-2">
-    <button [disabled]="!selectedZone" class="btn btn-primary btn-outline btn-sm" (click)="onClickSearch()">ค้นหา
-      <clr-icon shape="search">
-      </clr-icon>
-    </button>
+    <div class="clr-col-2">
+      <div class="clr-select-wrapper" style="width: 100%;">
+        <select name="province" class="clr-select" [(ngModel)]="selectedProvince" style="width: 100%;">
+          <option value="all">เลือกจังหวัด</option>
+          <option *ngFor="let v of listProvince" [value]="v.code">{{v.name_th}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="clr-col-2">
+      <button [disabled]="!selectedZone" class="btn btn-primary btn-outline btn-sm" (click)="onClickSearch()">ค้นหา
+        <clr-icon shape="search">
+        </clr-icon>
+      </button>
+    </div>
   </div>
 </div>
 <clr-tabs>

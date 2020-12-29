@@ -61,22 +61,38 @@ export class Report5Component implements OnInit {
   }
 
   onChangeZone() {
+    this.selectedProvince = 'all';
     this.listProvince = filter(this.province, { zone_code: this.selectedZone });
   }
 
+  async calTotal(rows) {
+    this.totalQty = (sumBy(rows, 'aiir_qty') || 0) + (sumBy(rows, 'modified_aiir_qty') || 0) + (sumBy(rows, 'isolate_qty') || 0) + (sumBy(rows, 'cohort_qty') || 0);
+    this.admitQty = (sumBy(rows, 'sum') || 0);
+
+    this.spareQty = (sumBy(rows, 'aiir_spare_qty') || 0) + (sumBy(rows, 'modified_aiir_spare_qty') || 0) + (sumBy(rows, 'isolate_spare_qty') || 0) + (sumBy(rows, 'cohort_spare_qty') || 0);
+
+    this.standbyQty = ((sumBy(rows, 'aiir_qty') || 0) + (sumBy(rows, 'modified_aiir_qty') || 0) + (sumBy(rows, 'isolate_qty') || 0) + (sumBy(rows, 'cohort_qty') || 0)) - (sumBy(rows, 'sum') || 0) - ((sumBy(rows, 'aiir_spare_qty') || 0) + sumBy(rows, 'modified_aiir_spare_qty') || 0 + sumBy(rows, 'isolate_spare_qty') || 0 + (sumBy(rows, 'cohort_spare_qty') || 0));
+  }
+
   async onClickSearch() {
+    console.log(this.list);
+
     if (this.selectedZone === 'all' && this.selectedProvince === 'all') {
       this.listFilter = this.list;
-      this.totalQty = (sumBy(this.listFilter, 'aiir_qty') || 0) + (sumBy(this.listFilter, 'modified_aiir_qty') || 0) + (sumBy(this.listFilter, 'isolate_qty') || 0) + (sumBy(this.listFilter, 'cohort_qty') || 0);
+      await this.calTotal(this.listFilter);
+
     } else if (this.selectedZone !== 'all' && this.selectedProvince === 'all') {
       this.listFilter = filter(this.list, { zone_code: this.selectedZone });
-      this.admitQty = (sumBy(this.listFilter, 'sum') || 0);
+      await this.calTotal(this.listFilter);
+
     } else if (this.selectedZone !== 'all' && this.selectedProvince !== 'all') {
       this.listFilter = filter(this.list, { zone_code: this.selectedZone, province_code: this.selectedProvince });
-      this.spareQty = (sumBy(this.listFilter, 'aiir_spare_qty') || 0) + (sumBy(this.listFilter, 'modified_aiir_spare_qty') || 0) + (sumBy(this.listFilter, 'isolate_spare_qty') || 0) + (sumBy(this.listFilter, 'cohort_spare_qty') || 0);
+      await this.calTotal(this.listFilter);
+
     } else {
       this.listFilter = this.list;
-      this.standbyQty = ((sumBy(this.listFilter, 'aiir_qty') || 0) + (sumBy(this.listFilter, 'modified_aiir_qty') || 0) + (sumBy(this.listFilter, 'isolate_qty') || 0) + (sumBy(this.listFilter, 'cohort_qty') || 0)) - (sumBy(this.listFilter, 'sum') || 0) - ((sumBy(this.listFilter, 'aiir_spare_qty') || 0) + sumBy(this.listFilter, 'modified_aiir_spare_qty') || 0 + sumBy(this.listFilter, 'isolate_spare_qty') || 0 + (sumBy(this.listFilter, 'cohort_spare_qty') || 0));
+      await this.calTotal(this.listFilter);
+
     }
     console.log(this.selectedZone, this.selectedProvince);
   }

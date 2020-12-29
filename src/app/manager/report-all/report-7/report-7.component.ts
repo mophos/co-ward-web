@@ -4,7 +4,7 @@ import { AlertService } from '../../../help/alert.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { IMyOptions } from 'mydatepicker-th';
 import * as moment from 'moment';
-import { sumBy } from 'lodash';
+import { sumBy, filter } from 'lodash';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -13,10 +13,18 @@ import { ActivatedRoute } from '@angular/router';
   styles: []
 })
 export class Report7Component implements OnInit {
+  zone: any = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13'];
+  selectedZone: any = 'all';
+  selectedProvince: any = 'all';
+  province: any;
+  listProvince: any;
 
   listHospital: any = [];
   listMinistry: any = [];
   listSector: any = [];
+  listHospitalFilter: any = [];
+  listMinistryFilter: any = [];
+  listSectorFilter: any = [];
   date: any;
 
   nivQty: any;
@@ -30,6 +38,8 @@ export class Report7Component implements OnInit {
   hfQty: any;
   hfCovid: any;
   hfAll: any;
+
+  tab: any = 1;
 
   myDatePickerOptions: IMyOptions = {
     inline: false,
@@ -52,10 +62,30 @@ export class Report7Component implements OnInit {
   }
 
   async ngOnInit() {
+    await this.loading.show();
+    await this.getProvince();
     this.date = moment();
     await this.getList1();
     await this.getList2();
     await this.getList3();
+    await this.loading.hide();
+  }
+
+  async getProvince() {
+    try {
+      const rs: any = await this.reportService.getProvince();
+      if (rs.ok) {
+        this.province = rs.rows;
+        this.listProvince = rs.rows;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  onChangeZone() {
+    this.selectedProvince = 'all';
+    this.listProvince = filter(this.province, { zone_code: this.selectedZone });
   }
 
   async getList1() {
@@ -64,6 +94,7 @@ export class Report7Component implements OnInit {
       const rs: any = await this.reportService.getReport7(moment(this.date).format('YYYY-MM-DD'), this.sector);
       if (rs.ok) {
         this.listHospital = rs.rows;
+        this.listHospitalFilter = rs.rows;
         this.nivCovid = sumBy(rs.rows, 'non_invasive_ventilator');
         this.nivQty = sumBy(rs.rows, 'non_invasive_qty') - sumBy(rs.rows, 'non_invasive_ventilator');
         this.nivAll = sumBy(rs.rows, 'non_invasive_qty');
@@ -92,6 +123,7 @@ export class Report7Component implements OnInit {
       const rs: any = await this.reportService.getReport7Ministry(moment(this.date).format('YYYY-MM-DD'), this.sector);
       if (rs.ok) {
         this.listMinistry = rs.rows;
+        this.listMinistryFilter = rs.rows;
         this.nivCovid = sumBy(rs.rows, 'non_invasive_ventilator');
         this.nivQty = sumBy(rs.rows, 'non_invasive_qty') - sumBy(rs.rows, 'non_invasive_ventilator');
         this.nivAll = sumBy(rs.rows, 'non_invasive_qty');
@@ -120,6 +152,7 @@ export class Report7Component implements OnInit {
       const rs: any = await this.reportService.getReport7Sector(moment(this.date).format('YYYY-MM-DD'), this.sector);
       if (rs.ok) {
         this.listSector = rs.rows;
+        this.listSectorFilter = rs.rows;
         this.nivCovid = sumBy(rs.rows, 'non_invasive_ventilator');
         this.nivQty = sumBy(rs.rows, 'non_invasive_qty') - sumBy(rs.rows, 'non_invasive_ventilator');
         this.nivAll = sumBy(rs.rows, 'non_invasive_qty');
@@ -140,6 +173,80 @@ export class Report7Component implements OnInit {
       this.loading.hide();
       this.alertService.error(error);
     }
+  }
+
+  async sumByReport(rows) {
+    this.nivCovid = sumBy(rows, 'non_invasive_ventilator');
+    this.nivQty = sumBy(rows, 'non_invasive_qty') - sumBy(rows, 'non_invasive_ventilator');
+    this.nivAll = sumBy(rows, 'non_invasive_qty');
+
+    this.ivCovid = sumBy(rows, 'invasive_ventilator');
+    this.ivQty = sumBy(rows, 'invasive_qty') - sumBy(rows, 'invasive_ventilator');
+    this.ivAll = sumBy(rows, 'invasive_qty');
+
+    this.hfCovid = sumBy(rows, 'high_flow');
+    this.hfQty = sumBy(rows, 'high_flow_qty') - sumBy(rows, 'high_flow');
+    this.hfAll = sumBy(rows, 'high_flow_qty');
+  }
+
+  async onChangeTab(v) {
+    await this.loading.show();
+    this.selectedZone = 'all';
+    this.selectedProvince = 'all';
+    this.tab = v;
+    await this.onClickSearch();
+    await this.loading.hide();
+  }
+
+  async onClickSearch() {
+    console.log(this.listHospital, this.listSector, this.listMinistry);
+
+    if (this.selectedZone === 'all' && this.selectedProvince === 'all') {
+      this.listHospitalFilter = this.listHospital;
+      this.listSectorFilter = this.listSector;
+      this.listMinistryFilter = this.listMinistry;
+      if (this.tab === 1) {
+        await this.sumByReport(this.listSectorFilter);
+      } else if (this.tab === 2) {
+        await this.sumByReport(this.listMinistryFilter);
+      } else if (this.tab === 3) {
+        await this.sumByReport(this.listHospitalFilter);
+      }
+    } else if (this.selectedZone !== 'all' && this.selectedProvince === 'all') {
+      this.listHospitalFilter = filter(this.listHospital, { zone_code: this.selectedZone });
+      this.listSectorFilter = filter(this.listSector, { zone_code: this.selectedZone });
+      this.listMinistryFilter = filter(this.listMinistry, { zone_code: this.selectedZone });
+      if (this.tab === 1) {
+        await this.sumByReport(this.listSectorFilter);
+      } else if (this.tab === 2) {
+        await this.sumByReport(this.listMinistryFilter);
+      } else if (this.tab === 3) {
+        await this.sumByReport(this.listHospitalFilter);
+      }
+    } else if (this.selectedZone !== 'all' && this.selectedProvince !== 'all') {
+      this.listHospitalFilter = filter(this.listHospital, { zone_code: this.selectedZone, province_code: this.selectedProvince });
+      this.listSectorFilter = filter(this.listSector, { zone_code: this.selectedZone, province_code: this.selectedProvince });
+      this.listMinistryFilter = filter(this.listMinistry, { zone_code: this.selectedZone, province_code: this.selectedProvince });
+      if (this.tab === 1) {
+        await this.sumByReport(this.listSectorFilter);
+      } else if (this.tab === 2) {
+        await this.sumByReport(this.listMinistryFilter);
+      } else if (this.tab === 3) {
+        await this.sumByReport(this.listHospitalFilter);
+      }
+    } else {
+      this.listHospitalFilter = this.listHospital;
+      this.listSectorFilter = this.listSector;
+      this.listMinistryFilter = this.listMinistry;
+      if (this.tab === 1) {
+        await this.sumByReport(this.listSectorFilter);
+      } else if (this.tab === 2) {
+        await this.sumByReport(this.listMinistryFilter);
+      } else if (this.tab === 3) {
+        await this.sumByReport(this.listHospitalFilter);
+      }
+    }
+    console.log(this.selectedZone, this.selectedProvince);
   }
 
   async doEnter() {
