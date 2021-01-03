@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportService } from '../report.service';
 import { AlertService } from 'src/app/help/alert.service';
 import { sumBy } from 'lodash';
@@ -18,7 +18,7 @@ export class ReportRecordsComponent implements OnInit {
   personTotal = 0;
   personTimeTotal = 0;
   personDeath = 0;
-
+  @ViewChild('loading') loading: any;
   constructor(
     private reportService: ReportService,
     private alertService: AlertService
@@ -30,6 +30,7 @@ export class ReportRecordsComponent implements OnInit {
 
   async getList() {
     try {
+      this.loading.show();
       const rs: any = await this.reportService.getRecords();
       if (rs.ok) {
         this.list = rs.rows;
@@ -43,7 +44,9 @@ export class ReportRecordsComponent implements OnInit {
       } else {
         this.alertService.error(rs.error);
       }
+      this.loading.hide();
     } catch (error) {
+      this.loading.hide();
       console.log(error);
       this.alertService.error(error);
     }

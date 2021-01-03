@@ -66,11 +66,11 @@
         <clr-icon clrVerticalNavIcon shape="user" class="is-solid"></clr-icon>
         รายงานยอดผู้ป่วย(รพ.)
       </a>
-      <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager/report-patients-provinces"
+      <!-- <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager/report-patients-provinces"
         title="รายงานยอดผู้ป่วย" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="user" class="is-solid"></clr-icon>
         รายงานยอดผู้ป่วย(จังหวัด)
-      </a>
+      </a> -->
       <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager/report-beds" title="รายงานเตียงผู้ป่วย"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
@@ -244,11 +244,11 @@
             <clr-icon shape="folder-open" class="is-solid"></clr-icon>
             3. รายงานการแจ้งจำนวนผู้ป่วยเพื่อเบิกเวชภัณฑ์​สิ้นเปลืองประจำวัน
           </a>
-          <a *ngIf="reportBed" clrVerticalNavLink [routerLink]="['/manager/report/4']"
+          <!-- <a *ngIf="reportBed" clrVerticalNavLink [routerLink]="['/manager/report/4']"
             title="ยอดผู้ป่วยสะสมรวมที่รับไว้รักษาในโรงพยาบาล" routerLinkActive="active">
             <clr-icon shape="folder-open" class="is-solid"></clr-icon>
             4. ยอดผู้ป่วยสะสมรวมที่รับไว้รักษาในโรงพยาบาล
-          </a>
+          </a> -->
           <a *ngIf="reportBed" clrVerticalNavLink [routerLink]="['/manager/report/5']" title="รายงานการใช้เตียง"
             routerLinkActive="active">
             <clr-icon shape="folder-open" class="is-solid"></clr-icon>

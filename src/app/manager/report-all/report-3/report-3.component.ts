@@ -53,7 +53,7 @@ export class Report3Component implements OnInit {
   }
 
   dates() {
-    for (let v = 0; v < 10; v++) {
+    for (let v = 1; v < 10; v++) {
       this.arDates.push(moment().subtract(v, 'days').format('DD/MM/YYYY'));
     }
   }

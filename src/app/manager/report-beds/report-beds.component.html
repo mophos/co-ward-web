@@ -84,16 +84,16 @@
     <tbody>
       <tr *ngFor="let h of p.hospitals">
         <td class="left">{{h.hospname}}</td>
-        <td class="right">{{h.aiir_qty }}</td>
-        <td class="right">{{h.aiir_usage_qty }}</td>
-        <td class="right">{{h.modified_aiir_qty }}</td>
-        <td class="right">{{h.modified_aiir_usage_qty }}</td>
-        <td class="right">{{h.isolate_qty }}</td>
-        <td class="right">{{h.isolate_usage_qty }}</td>
-        <td class="right">{{h.cohort_qty }}</td>
-        <td class="right">{{h.cohort_usage_qty }}</td>
-        <td class="right">{{h.hospitel_qty }}</td>
-        <td class="right">{{h.hospitel_usage_qty }}</td>
+        <td class="right">{{h.aiir_covid_qty == null ? '-' : h.aiir_qty}}</td>
+        <td class="right">{{h.aiir_usage_qty == null ? '-' : h.aiir_usage_qty}}</td>
+        <td class="right">{{h.modified_aiir_covid_qty == null ? '-' : h.modified_aiir_qty}}</td>
+        <td class="right">{{h.modified_aiir_usage_qty == null ? '-' : h.modified_aiir_usage_qty}}</td>
+        <td class="right">{{h.isolate_covid_qty == null ? '-' : h.isolate_qty}}</td>
+        <td class="right">{{h.isolate_usage_qty == null ? '-' : h.isolate_usage_qty}}</td>
+        <td class="right">{{h.cohort_covid_qty == null ? '-' : h.cohort_qty}}</td>
+        <td class="right">{{h.cohort_usage_qty == null ? '-' : h.cohort_usage_qty}}</td>
+        <td class="right">{{h.hospitel_covid_qty == null ? '-' : h.hospitel_qty}}</td>
+        <td class="right">{{h.hospitel_usage_qty == null ? '-' : h.hospitel_usage_qty}}</td>
       </tr>
     </tbody>
   </table>
