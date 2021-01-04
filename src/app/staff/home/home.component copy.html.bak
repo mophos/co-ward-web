@@ -8,11 +8,15 @@
 			</div>
 			<div class="card-block">
 				<div class="card-title">
+					<!-- <h1>กรุณาใช้ Google chrome เท่านั้น</h1> -->
 				</div>
 				<div class="card-text" style="text-align:center;">
-					<h2 *ngIf="alertBed">โรงพยาบาลของคุณยังไม่ตั้งค่าเตียง!!!</h2>
-					<h3 *ngIf="alertBed" (click)="goToBed()"><a>ไปที่เมนูตั้งค่าเตียงทันที</a></h3>
-
+					<!-- <h1 style="color: red;">
+						ประกาศ!!! </h1> -->
+					<!-- <h1>ปิดปรับปรุงระบบ วันที่ 24/12/63(วันนี้) เวลา 19.00-24.00 น.</h1> -->
+					<h2>กรุณาใช้ Google chrome เท่านั้น</h2>
+					<!-- <h2 style="color: red;">
+						ประกาศ!!! </h2> -->
 						<br>
 					<h4>ระบบมีการปรับปรุงเมนู "บันทึกผู้ป่วยใหม่" เพื่อรองรับสถานการณ์ COVID-19 ในระยะที่ 2 ดังนี้</h4>
 
