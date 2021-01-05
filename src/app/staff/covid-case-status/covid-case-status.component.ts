@@ -74,6 +74,7 @@ export class CovidCaseStatusComponent implements OnInit {
     height: '25px',
     width: '200px'
   };
+  @ViewChild('loading') loading: any;
 
   @ViewChild('hospital') hosp: AutocompleteHospitalComponent;
   dateCut: string;
@@ -110,6 +111,7 @@ export class CovidCaseStatusComponent implements OnInit {
 
   async getList() {
     try {
+      this.loading.show();
       const rs: any = await this.covidCaseService.getCovidCasePresent(this.query);
       if (rs.ok) {
         for (const i of rs.rows) {
@@ -120,7 +122,9 @@ export class CovidCaseStatusComponent implements OnInit {
       } else {
         this.alertService.error(rs.error);
       }
+      this.loading.hide();
     } catch (error) {
+      this.loading.hide();
       this.alertService.error(error);
     }
   }
