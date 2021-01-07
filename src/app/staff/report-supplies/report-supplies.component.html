@@ -29,7 +29,7 @@
   <table class="table" *ngFor="let p of l.provinces">
     <thead>
       <tr>
-        <th colspan="15" style="text-align: left;">
+        <th colspan="16" style="text-align: left;">
           <h3>{{p.province_name}}</h3>
         </th>
       </tr>
@@ -49,6 +49,7 @@
         <th class="right">Alcohol 70%</th>
         <th class="right">Alcohol 95%</th>
         <th class="right">Alcohol Gel</th>
+        <th class="right">Disposable Glove (latex,nonsterile)</th>
       </tr>
     </thead>
     <tbody>
@@ -68,6 +69,7 @@
         <td class="right">{{h.alcohol_70_qty}}</td>
         <td class="right">{{h.alcohol_95_qty}}</td>
         <td class="right">{{h.alcohol_gel_qty}}</td>
+        <td class="right">{{h.disposable_glove_qty}}</td>
       </tr>
       <!-- <tr>
         <td class="right" style="font-weight: bold;">รวม</td>
