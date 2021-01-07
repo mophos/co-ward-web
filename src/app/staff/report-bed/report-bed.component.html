@@ -78,24 +78,29 @@
       <tr *ngFor="let h of p.hospitals; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
         <td class="left td-border">{{h.hospname}}</td>
         <td class="left td-border">{{h.updated_entry |  dateTh:'DD/MM/YYYY'}}</td>
-        <td class="right td-border">{{h['aiir_qty'] || 0}}</td>
+        <td class="right td-border">{{h['aiir_covid_qty'] || 0}}</td>
         <td class="right td-border">{{h['aiir_usage_qty'] || 0 }}</td>
-        <td class="right td-border">{{h['aiir_qty'] - h['aiir_usage_qty'] || 0}}</td>
-        <td class="right td-border">{{h['modified_aiir_qty'] || 0}}</td>
+        <td class="right td-border">{{h['aiir_covid_qty'] - h['aiir_usage_qty'] || 0}}</td>
+        <td class="right td-border">{{h['modified_aiir_covid_qty'] || 0}}</td>
         <td class="right td-border">{{h['modified_aiir_usage_qty']||0 }}</td>
-        <td class="right td-border">{{h['modified_aiir_qty'] - h['modified_aiir_usage_qty'] || 0}}</td>
-        <td class="right td-border">{{h['isolate_qty'] || 0}}</td>
+        <td class="right td-border">{{h['modified_aiir_covid_qty'] - h['modified_aiir_usage_qty'] || 0}}</td>
+        <td class="right td-border">{{h['isolate_covid_qty'] || 0}}</td>
         <td class="right td-border">{{h['isolate_usage_qty']||0 }}</td>
-        <td class="right td-border">{{h['isolate_qty'] - h['isolate_usage_qty'] || 0}}</td>
-        <td class="right td-border">{{h['cohort_qty'] || 0}}</td>
+        <td class="right td-border">{{h['isolate_covid_qty'] - h['isolate_usage_qty'] || 0}}</td>
+        <td class="right td-border">{{h['cohort_covid_qty'] || 0}}</td>
         <td class="right td-border">{{h['cohort_usage_qty']||0 }}</td>
-        <td class="right td-border">{{h['cohort_qty'] - h['cohort_usage_qty'] || 0}}</td>
-        <td class="right td-border">{{h['hospitel_qty'] || 0}}</td>
+        <td class="right td-border">{{h['cohort_covid_qty'] - h['cohort_usage_qty'] || 0}}</td>
+        <td class="right td-border">{{h['hospitel_covid_qty'] || 0}}</td>
         <td class="right td-border">{{h['hospitel_usage_qty']||0 }}</td>
-        <td class="right">{{h['hospitel_qty'] - h['hospitel_usage_qty'] || 0}}</td>
+        <td class="right">{{h['hospitel_covid_qty'] - h['hospitel_usage_qty'] || 0}}</td>
         <td class="left td-border">{{h.sub_ministry_name}}</td>
       </tr>
     </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="18" style="text-align:left">*เตียง = เตียงสำหรับ covid</td>
+      </tr>
+    </tfoot>
   </table>
 </div>
 <app-loadding #loading></app-loadding>

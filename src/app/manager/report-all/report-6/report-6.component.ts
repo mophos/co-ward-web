@@ -98,21 +98,21 @@ export class Report6Component implements OnInit {
   }
 
   async sumByReport(rows) {
-    this.aiir1 = sumBy(rows, 'aiir_qty');
+    this.aiir1 = sumBy(rows, 'aiir_covid_qty');
     this.aiir2 = sumBy(rows, 'aiir_usage_qty');
-    this.aiir3 = sumBy(rows, 'aiir_qty') - sumBy(rows, 'aiir_usage_qty');
-    this.modi1 = sumBy(rows, 'modified_aiir_qty');
+    this.aiir3 = sumBy(rows, 'aiir_covid_qty') - sumBy(rows, 'aiir_usage_qty');
+    this.modi1 = sumBy(rows, 'modified_aiir_covid_qty');
     this.modi2 = sumBy(rows, 'modified_aiir_usage_qty');
-    this.modi3 = sumBy(rows, 'modified_aiir_qty') - sumBy(rows, 'modified_aiir_usage_qty');
-    this.iso1 = sumBy(rows, 'isolate_qty');
+    this.modi3 = sumBy(rows, 'modified_aiir_covid_qty') - sumBy(rows, 'modified_aiir_usage_qty');
+    this.iso1 = sumBy(rows, 'isolate_covid_qty');
     this.iso2 = sumBy(rows, 'isolate_usage_qty');
-    this.iso3 = sumBy(rows, 'isolate_qty') - sumBy(rows, 'isolate_usage_qty');
-    this.coh1 = sumBy(rows, 'cohort_qty');
+    this.iso3 = sumBy(rows, 'isolate_covid_qty') - sumBy(rows, 'isolate_usage_qty');
+    this.coh1 = sumBy(rows, 'cohort_covid_qty');
     this.coh2 = sumBy(rows, 'cohort_usage_qty');
-    this.coh3 = sumBy(rows, 'cohort_qty') - sumBy(rows, 'cohort_usage_qty');
-    this.host1 = sumBy(rows, 'hospitel_qty');
+    this.coh3 = sumBy(rows, 'cohort_covid_qty') - sumBy(rows, 'cohort_usage_qty');
+    this.host1 = sumBy(rows, 'hospitel_covid_qty');
     this.host2 = sumBy(rows, 'hospitel_usage_qty');
-    this.host3 = sumBy(rows, 'hospitel_qty') - sumBy(rows, 'hospitel_usage_qty');
+    this.host3 = sumBy(rows, 'hospitel_covid_qty') - sumBy(rows, 'hospitel_usage_qty');
   }
 
   async onClickSearch() {
@@ -171,21 +171,21 @@ export class Report6Component implements OnInit {
     try {
       const rs: any = await this.reportService.getReport6(this.date, this.sector);
       if (rs.ok) {
-        this.aiir1 = sumBy(rs.rows, 'aiir_qty');
+        this.aiir1 = sumBy(rs.rows, 'aiir_covid_qty');
         this.aiir2 = sumBy(rs.rows, 'aiir_usage_qty');
-        this.aiir3 = sumBy(rs.rows, 'aiir_qty') - sumBy(rs.rows, 'aiir_usage_qty');
-        this.modi1 = sumBy(rs.rows, 'modified_aiir_qty');
+        this.aiir3 = sumBy(rs.rows, 'aiir_covid_qty') - sumBy(rs.rows, 'aiir_usage_qty');
+        this.modi1 = sumBy(rs.rows, 'modified_aiir_covid_qty');
         this.modi2 = sumBy(rs.rows, 'modified_aiir_usage_qty');
-        this.modi3 = sumBy(rs.rows, 'modified_aiir_qty') - sumBy(rs.rows, 'modified_aiir_usage_qty');
-        this.iso1 = sumBy(rs.rows, 'isolate_qty');
+        this.modi3 = sumBy(rs.rows, 'modified_aiir_covid_qty') - sumBy(rs.rows, 'modified_aiir_usage_qty');
+        this.iso1 = sumBy(rs.rows, 'isolate_covid_qty');
         this.iso2 = sumBy(rs.rows, 'isolate_usage_qty');
-        this.iso3 = sumBy(rs.rows, 'isolate_qty') - sumBy(rs.rows, 'isolate_usage_qty');
-        this.coh1 = sumBy(rs.rows, 'cohort_qty');
+        this.iso3 = sumBy(rs.rows, 'isolate_covid_qty') - sumBy(rs.rows, 'isolate_usage_qty');
+        this.coh1 = sumBy(rs.rows, 'cohort_covid_qty');
         this.coh2 = sumBy(rs.rows, 'cohort_usage_qty');
-        this.coh3 = sumBy(rs.rows, 'cohort_qty') - sumBy(rs.rows, 'cohort_usage_qty');
-        this.host1 = sumBy(rs.rows, 'hospitel_qty');
+        this.coh3 = sumBy(rs.rows, 'cohort_covid_qty') - sumBy(rs.rows, 'cohort_usage_qty');
+        this.host1 = sumBy(rs.rows, 'hospitel_covid_qty');
         this.host2 = sumBy(rs.rows, 'hospitel_usage_qty');
-        this.host3 = sumBy(rs.rows, 'hospitel_qty') - sumBy(rs.rows, 'hospitel_usage_qty');
+        this.host3 = sumBy(rs.rows, 'hospitel_covid_qty') - sumBy(rs.rows, 'hospitel_usage_qty');
 
         this.listHospital = rs.rows;
         this.listHospitalFilter = rs.rows;
@@ -206,21 +206,21 @@ export class Report6Component implements OnInit {
     try {
       const rs: any = await this.reportService.getReport6Ministry(this.date, this.sector);
       if (rs.ok) {
-        this.aiir1 = sumBy(rs.rows, 'aiir_qty');
+        this.aiir1 = sumBy(rs.rows, 'aiir_covid_qty');
         this.aiir2 = sumBy(rs.rows, 'aiir_usage_qty');
-        this.aiir3 = sumBy(rs.rows, 'aiir_qty') - sumBy(rs.rows, 'aiir_usage_qty');
-        this.modi1 = sumBy(rs.rows, 'modified_aiir_qty');
+        this.aiir3 = sumBy(rs.rows, 'aiir_covid_qty') - sumBy(rs.rows, 'aiir_usage_qty');
+        this.modi1 = sumBy(rs.rows, 'modified_aiir_covid_qty');
         this.modi2 = sumBy(rs.rows, 'modified_aiir_usage_qty');
-        this.modi3 = sumBy(rs.rows, 'modified_aiir_qty') - sumBy(rs.rows, 'modified_aiir_usage_qty');
-        this.iso1 = sumBy(rs.rows, 'isolate_qty');
+        this.modi3 = sumBy(rs.rows, 'modified_aiir_covid_qty') - sumBy(rs.rows, 'modified_aiir_usage_qty');
+        this.iso1 = sumBy(rs.rows, 'isolate_covid_qty');
         this.iso2 = sumBy(rs.rows, 'isolate_usage_qty');
-        this.iso3 = sumBy(rs.rows, 'isolate_qty') - sumBy(rs.rows, 'isolate_usage_qty');
-        this.coh1 = sumBy(rs.rows, 'cohort_qty');
+        this.iso3 = sumBy(rs.rows, 'isolate_covid_qty') - sumBy(rs.rows, 'isolate_usage_qty');
+        this.coh1 = sumBy(rs.rows, 'cohort_covid_qty');
         this.coh2 = sumBy(rs.rows, 'cohort_usage_qty');
-        this.coh3 = sumBy(rs.rows, 'cohort_qty') - sumBy(rs.rows, 'cohort_usage_qty');
-        this.host1 = sumBy(rs.rows, 'hospitel_qty');
+        this.coh3 = sumBy(rs.rows, 'cohort_covid_qty') - sumBy(rs.rows, 'cohort_usage_qty');
+        this.host1 = sumBy(rs.rows, 'hospitel_covid_qty');
         this.host2 = sumBy(rs.rows, 'hospitel_usage_qty');
-        this.host3 = sumBy(rs.rows, 'hospitel_qty') - sumBy(rs.rows, 'hospitel_usage_qty');
+        this.host3 = sumBy(rs.rows, 'hospitel_covid_qty') - sumBy(rs.rows, 'hospitel_usage_qty');
 
         this.listMinistry = rs.rows;
         this.listMinistryFilter = rs.rows;
@@ -241,21 +241,21 @@ export class Report6Component implements OnInit {
     try {
       const rs: any = await this.reportService.getReport6Sector(this.date, this.sector);
       if (rs.ok) {
-        this.aiir1 = sumBy(rs.rows, 'aiir_qty');
+        this.aiir1 = sumBy(rs.rows, 'aiir_covid_qty');
         this.aiir2 = sumBy(rs.rows, 'aiir_usage_qty');
-        this.aiir3 = sumBy(rs.rows, 'aiir_qty') - sumBy(rs.rows, 'aiir_usage_qty');
-        this.modi1 = sumBy(rs.rows, 'modified_aiir_qty');
+        this.aiir3 = sumBy(rs.rows, 'aiir_covid_qty') - sumBy(rs.rows, 'aiir_usage_qty');
+        this.modi1 = sumBy(rs.rows, 'modified_aiir_covid_qty');
         this.modi2 = sumBy(rs.rows, 'modified_aiir_usage_qty');
-        this.modi3 = sumBy(rs.rows, 'modified_aiir_qty') - sumBy(rs.rows, 'modified_aiir_usage_qty');
-        this.iso1 = sumBy(rs.rows, 'isolate_qty');
+        this.modi3 = sumBy(rs.rows, 'modified_aiir_covid_qty') - sumBy(rs.rows, 'modified_aiir_usage_qty');
+        this.iso1 = sumBy(rs.rows, 'isolate_covid_qty');
         this.iso2 = sumBy(rs.rows, 'isolate_usage_qty');
-        this.iso3 = sumBy(rs.rows, 'isolate_qty') - sumBy(rs.rows, 'isolate_usage_qty');
-        this.coh1 = sumBy(rs.rows, 'cohort_qty');
+        this.iso3 = sumBy(rs.rows, 'isolate_covid_qty') - sumBy(rs.rows, 'isolate_usage_qty');
+        this.coh1 = sumBy(rs.rows, 'cohort_covid_qty');
         this.coh2 = sumBy(rs.rows, 'cohort_usage_qty');
-        this.coh3 = sumBy(rs.rows, 'cohort_qty') - sumBy(rs.rows, 'cohort_usage_qty');
-        this.host1 = sumBy(rs.rows, 'hospitel_qty');
+        this.coh3 = sumBy(rs.rows, 'cohort_covid_qty') - sumBy(rs.rows, 'cohort_usage_qty');
+        this.host1 = sumBy(rs.rows, 'hospitel_covid_qty');
         this.host2 = sumBy(rs.rows, 'hospitel_usage_qty');
-        this.host3 = sumBy(rs.rows, 'hospitel_qty') - sumBy(rs.rows, 'hospitel_usage_qty');
+        this.host3 = sumBy(rs.rows, 'hospitel_covid_qty') - sumBy(rs.rows, 'hospitel_usage_qty');
 
         this.listSector = rs.rows;
         this.listSectorFilter = rs.rows;
