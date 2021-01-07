@@ -7,6 +7,7 @@ import { IMyOptions } from 'mydatepicker-th';
 import { findIndex } from 'lodash';
 import * as moment from 'moment';
 import { AutocompleteHospitalComponent } from '../../help/autocomplete-hospital/autocomplete-hospital.component';
+import { JwtHelperService } from '@auth0/angular-jwt';
 @Component({
   selector: 'app-covid-case-status',
   templateUrl: './covid-case-status.component.html',
@@ -78,13 +79,20 @@ export class CovidCaseStatusComponent implements OnInit {
 
   @ViewChild('hospital') hosp: AutocompleteHospitalComponent;
   dateCut: string;
-
+  public jwtHelper = new JwtHelperService();
+  hospitalType: any;
+  demo: string;
   constructor(
     private covidCaseService: CovidCaseService,
     private alertService: AlertService,
     private basicService: BasicService,
     private basicAuthService: BasicAuthService
-  ) { }
+  ) {
+    const token = sessionStorage.getItem('token');
+    const decodedToken = this.jwtHelper.decodeToken(token);
+    this.hospitalType = decodedToken.hospitalType;
+    this.demo = sessionStorage.getItem('demo');
+  }
 
   async ngOnInit() {
     await this.getDate();
@@ -508,4 +516,23 @@ export class CovidCaseStatusComponent implements OnInit {
     }
   }
 
+
+  async onClickSaveAll() {
+    const confirm = await this.alertService.confirm('ระบบจะทำการบันทึกอาการคนไข้ทั้งหมด ที่ยังไม่ได้บันทึกอาการ โดยตั้งเป็นอาการเดิมทั้งหมด');
+    if (confirm) {
+      this.loading.show();
+      const rs: any = await this.covidCaseService.updateAllCase();
+      if (rs.ok) {
+        console.log(rs.rows);
+        this.getList();
+        this.getGCSSum();
+        this.getBedSum();
+        this.getMedicalSuppliesSum();
+        this.alertService.success();
+      } else {
+        this.alertService.error(rs.error);
+      }
+    }
+    this.loading.hide();
+  }
 }
