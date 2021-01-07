@@ -164,4 +164,9 @@ export class CovidCaseService {
     const url = `${this.apiUrl}/v1/staff/covid-case/detail/split-dates?covidCaseId=${covidCaseId}`;
     return await this.http.get(url).toPromise();
   }
+
+  async updateAllCase() {
+    const url = `${this.apiUrl}/v1/staff/covid-case/update/all-case`;
+    return await this.http.get(url).toPromise();
+  }
 }
