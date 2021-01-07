@@ -74,21 +74,21 @@
         ข้อมูลล่าสุด: {{ h.updated_entry | dateTh:'DD/MM/YYYY hh:mm'}}
       </label>
     </td>
-    <td class="text-right td-border">{{h['aiir_qty'] ||0}}</td>
+    <td class="text-right td-border">{{h['aiir_covid_qty'] ||0}}</td>
     <td class="text-right td-border">{{h['aiir_usage_qty'] || 0 }}</td>
-    <td class="text-right td-border">{{h['aiir_qty'] - h['aiir_usage_qty'] || 0}}</td>
-    <td class="text-right td-border">{{h['modified_aiir_qty'] ||0}}</td>
+    <td class="text-right td-border">{{h['aiir_covid_qty'] - h['aiir_usage_qty'] || 0}}</td>
+    <td class="text-right td-border">{{h['modified_aiir_covid_qty'] ||0}}</td>
     <td class="text-right td-border">{{h['modified_aiir_usage_qty']||0 }}</td>
-    <td class="text-right td-border">{{h['modified_aiir_qty'] - h['modified_aiir_usage_qty'] || 0}}</td>
-    <td class="text-right td-border">{{h['isolate_qty'] ||0}}</td>
+    <td class="text-right td-border">{{h['modified_aiir_covid_qty'] - h['modified_aiir_usage_qty'] || 0}}</td>
+    <td class="text-right td-border">{{h['isolate_covid_qty'] ||0}}</td>
     <td class="text-right td-border">{{h['isolate_usage_qty']||0 }}</td>
-    <td class="text-right td-border">{{h['isolate_qty'] - h['isolate_usage_qty'] || 0}}</td>
-    <td class="text-right td-border">{{h['cohort_qty'] ||0}}</td>
+    <td class="text-right td-border">{{h['isolate_covid_qty'] - h['isolate_usage_qty'] || 0}}</td>
+    <td class="text-right td-border">{{h['cohort_covid_qty'] ||0}}</td>
     <td class="text-right td-border">{{h['cohort_usage_qty']||0 }}</td>
-    <td class="text-right td-border">{{h['cohort_qty'] - h['cohort_usage_qty'] || 0}}</td>
-    <td class="text-right td-border">{{h['hospitel_qty'] ||0}}</td>
+    <td class="text-right td-border">{{h['cohort_covid_qty'] - h['cohort_usage_qty'] || 0}}</td>
+    <td class="text-right td-border">{{h['hospitel_covid_qty'] ||0}}</td>
     <td class="text-right td-border">{{h['hospitel_usage_qty']||0 }}</td>
-    <td class="text-right">{{h['hospitel_qty'] - h['hospitel_usage_qty'] || 0}}</td>
+    <td class="text-right">{{h['hospitel_covid_qty'] - h['hospitel_usage_qty'] || 0}}</td>
     <td class="left td-border">{{h.sub_ministry_name}}</td>
   </tr>
   <tr>

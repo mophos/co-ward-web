@@ -60,21 +60,21 @@ export class ReportDms6Component implements OnInit {
     try {
       const rs: any = await this.reportService.getReport6(this.date, this.sector);
       if (rs.ok) {
-        this.aiir1 = sumBy(rs.rows, 'aiir_qty');
+        this.aiir1 = sumBy(rs.rows, 'aiir_covid_qty');
         this.aiir2 = sumBy(rs.rows, 'aiir_usage_qty');
-        this.aiir3 = sumBy(rs.rows, 'aiir_qty') - sumBy(rs.rows, 'aiir_usage_qty');
-        this.modi1 = sumBy(rs.rows, 'modified_aiir_qty');
+        this.aiir3 = sumBy(rs.rows, 'aiir_covid_qty') - sumBy(rs.rows, 'aiir_usage_qty');
+        this.modi1 = sumBy(rs.rows, 'modified_aiir_covid_qty');
         this.modi2 = sumBy(rs.rows, 'modified_aiir_usage_qty');
-        this.modi3 = sumBy(rs.rows, 'modified_aiir_qty') - sumBy(rs.rows, 'modified_aiir_usage_qty');
-        this.iso1 = sumBy(rs.rows, 'isolate_qty');
+        this.modi3 = sumBy(rs.rows, 'modified_aiir_covid_qty') - sumBy(rs.rows, 'modified_aiir_usage_qty');
+        this.iso1 = sumBy(rs.rows, 'isolate_covid_qty');
         this.iso2 = sumBy(rs.rows, 'isolate_usage_qty');
-        this.iso3 = sumBy(rs.rows, 'isolate_qty') - sumBy(rs.rows, 'isolate_usage_qty');
-        this.coh1 = sumBy(rs.rows, 'cohort_qty');
+        this.iso3 = sumBy(rs.rows, 'isolate_covid_qty') - sumBy(rs.rows, 'isolate_usage_qty');
+        this.coh1 = sumBy(rs.rows, 'cohort_covid_qty');
         this.coh2 = sumBy(rs.rows, 'cohort_usage_qty');
-        this.coh3 = sumBy(rs.rows, 'cohort_qty') - sumBy(rs.rows, 'cohort_usage_qty');
-        this.host1 = sumBy(rs.rows, 'hospitel_qty');
+        this.coh3 = sumBy(rs.rows, 'cohort_covid_qty') - sumBy(rs.rows, 'cohort_usage_qty');
+        this.host1 = sumBy(rs.rows, 'hospitel_covid_qty');
         this.host2 = sumBy(rs.rows, 'hospitel_usage_qty');
-        this.host3 = sumBy(rs.rows, 'hospitel_qty') - sumBy(rs.rows, 'hospitel_usage_qty');
+        this.host3 = sumBy(rs.rows, 'hospitel_covid_qty') - sumBy(rs.rows, 'hospitel_usage_qty');
 
         this.list = rs.rows;
 
