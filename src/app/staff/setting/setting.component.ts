@@ -97,7 +97,7 @@ export class SettingComponent implements OnInit {
         this.lat = rs.rows[0].lat;
         this.long = rs.rows[0].long;
 
-        this.tambonId = rs.rows[0].province_code + rs.rows[0].ampur_code + rs.rows[0].tambon_code;
+        this.tambonId = rs.rows[0].tambon_code;
 
         this.province.setQuery(rs.rows[0].province_name);
         this.ampur.setQuery(rs.rows[0].ampur_name);
