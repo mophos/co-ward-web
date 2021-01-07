@@ -46,10 +46,13 @@
       <div class="clr-col-3">
         <input class="clr-input width-fit" (keyup)="doEnter($event)" name="query" [(ngModel)]="query" placeholder="ระบุ HN,ชื่อ,นามสกุล เพื่อค้นหา" />
       </div>
-      <div class="clr-col-1">
+      <div class="clr-col-2">
         <button class="btn btn-sm btn-primary" (click)="doEnter($event)">
           <clr-icon shape="search"></clr-icon>
         </button>
+      </div>
+      <div class="clr-col-7" style="text-align: right;" *ngIf="hospitalType == 'HOSPITEL' && demo" >
+        <button class="btn btn-sm btn-success"  (click)="onClickSaveAll()">บันทึกทั้งหมด</button>
       </div>
     </div>
     <table class="table">

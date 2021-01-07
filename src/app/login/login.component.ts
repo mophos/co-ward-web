@@ -76,6 +76,7 @@ export class LoginComponent implements OnInit {
       const rs: any = await this.loginService.getDemo();
       if (rs.ok) {
         this.demo = 'Demo ทดสอบ Demo ทดสอบ Demo ';
+        sessionStorage.setItem('demo', this.demo);
       }
     } catch (error) {
 
