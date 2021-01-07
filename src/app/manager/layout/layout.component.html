@@ -31,41 +31,41 @@
         <clr-icon clrVerticalNavIcon shape="folder-open" class="is-solid"></clr-icon>
         รายงานผู้ป่วย ADMIT ทั้งหมด
       </a>
-      <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager/report-review-homework"
+      <!-- <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager/report-review-homework"
         title="รายงานการลงทะเบียน" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="folder-open" class="is-solid"></clr-icon>
         รายงานการลงทะเบียน
-      </a>
+      </a> -->
       <!-- <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager/report-records"
         title="รายงานการบันทึกข้อมูลในระบบ CO-ward" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="folder-open" class="is-solid"></clr-icon>
         รายงานการบันทึกข้อมูลในระบบ CO-ward
       </a> -->
-      <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager/report-local-quarantine"
+      <!-- <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager/report-local-quarantine"
         title="รายงาน Local Quarantine" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="folder-open" class="is-solid"></clr-icon>
         รายงาน Local Quarantine
-      </a>
-      <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager/report-supplies-summary" title="รายงานเวชภัณฑ์"
+      </a> -->
+      <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager/report-supplies-summary" title="รายงานเวชภัณฑ์คงคลังเขตสุขภาพ"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="folder-open" class="is-solid"></clr-icon>
-        รายงานเวชภัณฑ์คงคลัง
+        รายงานเวชภัณฑ์คงคลังเขตสุขภาพ
       </a>
-      <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager/report-supplies" title="รายงานเวชภัณฑ์"
+      <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager/report-supplies" title="รายงานเวชภัณฑ์คงคลังโรงพยาบาล"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="folder-open" class="is-solid"></clr-icon>
-        รายงานเวชภัณฑ์
+        รายงานเวชภัณฑ์คงคลังโรงพยาบาล
       </a>
       <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager/report-medicals" title="รายงานจำนวนการเบิกยา"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="folder-open" class="is-solid"></clr-icon>
         รายงานจำนวนการเบิกยา
       </a>
-      <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager/report-patients" title="รายงานยอดผู้ป่วย"
+      <!-- <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager/report-patients" title="รายงานยอดผู้ป่วย"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="user" class="is-solid"></clr-icon>
         รายงานยอดผู้ป่วย(รพ.)
-      </a>
+      </a> -->
       <!-- <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager/report-patients-provinces"
         title="รายงานยอดผู้ป่วย" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="user" class="is-solid"></clr-icon>
@@ -92,12 +92,12 @@
           รายงาน DMS (ภาครัฐ)
         </a>
         <clr-vertical-nav-group-children *clrIfExpanded="true">
-          <a *ngIf="reportBed" clrVerticalNavLink
+          <!-- <a *ngIf="reportBed" clrVerticalNavLink
             [routerLink]="['/manager/report-review-homework-goverment',{sector:'GOVERNMENT'}]"
             title="รายงานเตียงตามสังกัดหน่วยงาน" routerLinkActive="active">
             <clr-icon shape="folder-open" class="is-solid"></clr-icon>
             รายงานการลงทะเบียน
-          </a>
+          </a> -->
           <a *ngIf="reportBed" clrVerticalNavLink
             [routerLink]="['/manager/report-dms1-goverment',{sector:'GOVERNMENT'}]" title="รายงานเตียงตามสังกัดหน่วยงาน"
             routerLinkActive="active">
@@ -165,12 +165,12 @@
           รายงาน DMS (เอกชน)
         </a>
         <clr-vertical-nav-group-children *clrIfExpanded="true">
-          <a *ngIf="reportBed" clrVerticalNavLink
+          <!-- <a *ngIf="reportBed" clrVerticalNavLink
             [routerLink]="['/manager/report-review-homework-private',{sector:'PRIVATE'}]"
             title="รายงานเตียงตามสังกัดหน่วยงาน" routerLinkActive="active">
             <clr-icon shape="folder-open" class="is-solid"></clr-icon>
             รายงานการลงทะเบียน
-          </a>
+          </a> -->
           <a *ngIf="reportBed" clrVerticalNavLink [routerLink]="['/manager/report-dms1-private',{sector:'PRIVATE'}]"
             title="รายงานเตียงตามสังกัดหน่วยงาน" routerLinkActive="active">
             <clr-icon shape="folder-open" class="is-solid"></clr-icon>
