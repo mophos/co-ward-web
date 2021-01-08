@@ -70,16 +70,16 @@ export class SettingService {
   async changeRightSupUser(id, status) {
     const url = `${this.apiUrl}/v1/staff/setting/change-right-sup-user`;
     return await this.http.put(url, {
-      id: id,
-      status: status
+      id,
+      status
     }).toPromise();
   }
 
   async changeApproved(id, status) {
     const url = `${this.apiUrl}/v1/staff/setting/change-approve-user`;
     return await this.http.put(url, {
-      id: id,
-      status: status
+      id,
+      status
     }).toPromise();
   }
 }

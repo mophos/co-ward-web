@@ -2,85 +2,87 @@
   <span class="breadcrumb-item active">รายงานผู้ป่วย ADMIT ทั้งหมด (Confirm case)</span>
 </nav>
 
-<table class="table table-compact" style="border-collapse: collapse;">
-  <thead>
-    <tr>
-      <th class="text-left td-border">จังหวัด</th>
-      <th class="text-left td-border">รวม</th>
-      <th class="text-left td-border">Severe</th>
-      <th class="text-left td-border">moderate</th>
-      <th class="text-left td-border">mild</th>
-      <th class="text-left td-border">asymptomatic</th>
-      <th class="text-left td-border">aiir</th>
-      <th class="text-left td-border">modified_aiir</th>
-      <th class="text-left td-border">isolate</th>
-      <th class="text-left td-border">cohort</th>
-      <th class="text-left td-border">Hospitel</th>
-      <th class="text-left td-border">invasive</th>
-      <th class="text-left td-border">noninvasive</th>
-      <th class="text-left td-border">high_flow</th>
-      <th class="text-left td-border">Hydroxychloroquine 200 mg.</th>
-      <th class="text-left td-border">Chloroquine 250 mg.</th>
-      <th class="text-left td-border">Darunavir 600 mg.</th>
-      <th class="text-left td-border">Lopinavir 200 mg./Ritonavir 50 mg.</th>
-      <th class="text-left td-border">Ritonavir 100 mg.</th>
-      <th class="text-left td-border">Azithromycin 250 mg.</th>
-      <th class="text-left td-border">Favipiravi</th>
-
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let l of summary; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
-      <td class="text-left td-border">{{l.province_name}}</td>
-      <td class="text-right td-border">{{l.confirm || 0}}</td>
-      <td class="text-right td-border">{{l.severe || 0}}</td>
-      <td class="text-right td-border"> {{l.moderate || 0}}</td>
-      <td class="text-right td-border"> {{l.mild || 0}}</td>
-      <td class="text-right td-border"> {{l.asymptomatic || 0}}</td>
-      <td class="text-right td-border"> {{l.aiir || 0}}</td>
-      <td class="text-right td-border"> {{l.modified_aiir || 0}}</td>
-      <td class="text-right td-border"> {{l.isolate || 0}}</td>
-      <td class="text-right td-border"> {{l.cohort || 0}}</td>
-      <td class="text-right td-border"> {{l.hospitel || 0}}</td>
-      <td class="text-right td-border"> {{l.invasive || 0}}</td>
-      <td class="text-right td-border"> {{l.noninvasive || 0}}</td>
-      <td class="text-right td-border"> {{l.high_flow || 0}}</td>
-      <td class="text-right td-border">{{l.d1 || 0}}</td>
-      <td class="text-right td-border">{{l.d2 || 0}}</td>
-      <td class="text-right td-border">{{l.d3 || 0}}</td>
-      <td class="text-right td-border">{{l.d4 || 0}}</td>
-      <td class="text-right td-border">{{l.d5 || 0}}</td>
-      <td class="text-right td-border">{{l.d7 || 0}}</td>
-      <td class="text-right td-border">{{l.d8 || 0}}</td>
-    </tr>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td class="text-left td-border">รวม</td>
-      <td class="text-right td-border">{{total}}</td>
-      <td class="text-right td-border">{{severe}}</td>
-      <td class="text-right td-border"> {{moderate}}</td>
-      <td class="text-right td-border"> {{mild}}</td>
-      <td class="text-right td-border"> {{asymptomatic}}</td>
-      <td class="text-right td-border"> {{aiir}}</td>
-      <td class="text-right td-border"> {{modifiedAiir}}</td>
-      <td class="text-right td-border"> {{isolate}}</td>
-      <td class="text-right td-border"> {{cohort}}</td>
-      <td class="text-right td-border"> {{hospitel}}</td>
-      <td class="text-right td-border"> {{invasive}}</td>
-      <td class="text-right td-border"> {{noninvasive}}</td>
-      <td class="text-right td-border"> {{highFlow}}</td>
-      <td class="text-right td-border">{{d1}}</td>
-      <td class="text-right td-border">{{d2}}</td>
-      <td class="text-right td-border">{{d3}}</td>
-      <td class="text-right td-border">{{d4}}</td>
-      <td class="text-right td-border">{{d5}}</td>
-      <td class="text-right td-border">{{d7}}</td>
-      <td class="text-right td-border">{{d8}}</td>
-
-    </tr>
-  </tfoot>
-</table>
+<div style="overflow-y:auto;">
+  <table class="table table-compact" style="position: relative; border-collapse: collapse;">
+    <thead>
+      <tr>
+        <th class="text-left td-border">จังหวัด</th>
+        <th class="text-left td-border">รวม</th>
+        <th class="text-left td-border">Severe</th>
+        <th class="text-left td-border">moderate</th>
+        <th class="text-left td-border">mild</th>
+        <th class="text-left td-border">asymptomatic</th>
+        <th class="text-left td-border">aiir</th>
+        <th class="text-left td-border">modified_aiir</th>
+        <th class="text-left td-border">isolate</th>
+        <th class="text-left td-border">cohort</th>
+        <th class="text-left td-border">Hospitel</th>
+        <th class="text-left td-border">invasive</th>
+        <th class="text-left td-border">noninvasive</th>
+        <th class="text-left td-border">high_flow</th>
+        <th class="text-left td-border">Hydroxychloroquine 200 mg.</th>
+        <th class="text-left td-border">Chloroquine 250 mg.</th>
+        <th class="text-left td-border">Darunavir 600 mg.</th>
+        <th class="text-left td-border">Lopinavir 200 mg./Ritonavir 50 mg.</th>
+        <th class="text-left td-border">Ritonavir 100 mg.</th>
+        <th class="text-left td-border">Azithromycin 250 mg.</th>
+        <th class="text-left td-border">Favipiravi</th>
+  
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let l of summary; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+        <td class="text-left td-border">{{l.province_name}}</td>
+        <td class="text-right td-border">{{l.confirm || 0}}</td>
+        <td class="text-right td-border">{{l.severe || 0}}</td>
+        <td class="text-right td-border"> {{l.moderate || 0}}</td>
+        <td class="text-right td-border"> {{l.mild || 0}}</td>
+        <td class="text-right td-border"> {{l.asymptomatic || 0}}</td>
+        <td class="text-right td-border"> {{l.aiir || 0}}</td>
+        <td class="text-right td-border"> {{l.modified_aiir || 0}}</td>
+        <td class="text-right td-border"> {{l.isolate || 0}}</td>
+        <td class="text-right td-border"> {{l.cohort || 0}}</td>
+        <td class="text-right td-border"> {{l.hospitel || 0}}</td>
+        <td class="text-right td-border"> {{l.invasive || 0}}</td>
+        <td class="text-right td-border"> {{l.noninvasive || 0}}</td>
+        <td class="text-right td-border"> {{l.high_flow || 0}}</td>
+        <td class="text-right td-border">{{l.d1 || 0}}</td>
+        <td class="text-right td-border">{{l.d2 || 0}}</td>
+        <td class="text-right td-border">{{l.d3 || 0}}</td>
+        <td class="text-right td-border">{{l.d4 || 0}}</td>
+        <td class="text-right td-border">{{l.d5 || 0}}</td>
+        <td class="text-right td-border">{{l.d7 || 0}}</td>
+        <td class="text-right td-border">{{l.d8 || 0}}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td class="text-left td-border">รวม</td>
+        <td class="text-right td-border">{{total}}</td>
+        <td class="text-right td-border">{{severe}}</td>
+        <td class="text-right td-border"> {{moderate}}</td>
+        <td class="text-right td-border"> {{mild}}</td>
+        <td class="text-right td-border"> {{asymptomatic}}</td>
+        <td class="text-right td-border"> {{aiir}}</td>
+        <td class="text-right td-border"> {{modifiedAiir}}</td>
+        <td class="text-right td-border"> {{isolate}}</td>
+        <td class="text-right td-border"> {{cohort}}</td>
+        <td class="text-right td-border"> {{hospitel}}</td>
+        <td class="text-right td-border"> {{invasive}}</td>
+        <td class="text-right td-border"> {{noninvasive}}</td>
+        <td class="text-right td-border"> {{highFlow}}</td>
+        <td class="text-right td-border">{{d1}}</td>
+        <td class="text-right td-border">{{d2}}</td>
+        <td class="text-right td-border">{{d3}}</td>
+        <td class="text-right td-border">{{d4}}</td>
+        <td class="text-right td-border">{{d5}}</td>
+        <td class="text-right td-border">{{d7}}</td>
+        <td class="text-right td-border">{{d8}}</td>
+  
+      </tr>
+    </tfoot>
+  </table>
+</div>
 <br>
 <div style="overflow-y:auto;height:700px">
   <table class="table table-compact" style="position: relative; border-collapse: collapse;">

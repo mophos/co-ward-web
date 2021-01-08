@@ -69,25 +69,26 @@ export class ReportBedComponent implements OnInit {
       const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
       const rs: any = await this.reportService.getBed(date);
       if (rs.ok) {
-        this.aiir1 = sumBy(rs.rows, 'aiir_qty');
-        this.aiir2 = sumBy(rs.rows, 'aiir_usage_qty');
-        this.aiir3 = sumBy(rs.rows, 'aiir_qty') - sumBy(rs.rows, 'aiir_usage_qty');
-        this.modi1 = sumBy(rs.rows, 'modified_aiir_qty');
-        this.modi2 = sumBy(rs.rows, 'modified_aiir_usage_qty');
-        this.modi3 = sumBy(rs.rows, 'modified_aiir_qty') - sumBy(rs.rows, 'modified_aiir_usage_qty');
-        this.iso1 = sumBy(rs.rows, 'isolate_qty');
-        this.iso2 = sumBy(rs.rows, 'isolate_usage_qty');
-        this.iso3 = sumBy(rs.rows, 'isolate_qty') - sumBy(rs.rows, 'isolate_usage_qty');
-        this.coh1 = sumBy(rs.rows, 'cohort_qty');
-        this.coh2 = sumBy(rs.rows, 'cohort_usage_qty');
-        this.coh3 = sumBy(rs.rows, 'cohort_qty') - sumBy(rs.rows, 'cohort_usage_qty');
-        this.host1 = sumBy(rs.rows, 'hospitel_qty');
-        this.host2 = sumBy(rs.rows, 'hospitel_usage_qty');
-        this.host3 = sumBy(rs.rows, 'hospitel_qty') - sumBy(rs.rows, 'hospitel_usage_qty');
-
         this.list = rs.rows;
-        console.log(this.list);
-
+        for (const i of this.list) {
+          for (const a of i.provinces) {
+            a.sum_aiir_covid_qty = sumBy(a.hospitals, 'aiir_covid_qty');
+            a.sum_aiir_usage_qty = sumBy(a.hospitals, 'aiir_usage_qty');
+            a.sum_aiir_inven_qty = sumBy(a.hospitals, 'aiir_covid_qty') - sumBy(a.hospitals, 'aiir_usage_qty');
+            a.sum_modified_aiir_covid_qty = sumBy(a.hospitals, 'modified_aiir_covid_qty');
+            a.sum_modified_aiir_usage_qty = sumBy(a.hospitals, 'modified_aiir_usage_qty');
+            a.sum_modified_aiir_inven_qty = sumBy(a.hospitals, 'modified_aiir_covid_qty') - sumBy(a.hospitals, 'modified_aiir_usage_qty');
+            a.sum_isolate_covid_qty = sumBy(a.hospitals, 'isolate_covid_qty');
+            a.sum_isolate_usage_qty = sumBy(a.hospitals, 'isolate_usage_qty');
+            a.sum_isolate_inven_qty = sumBy(a.hospitals, 'isolate_covid_qty') - sumBy(a.hospitals, 'isolate_usage_qty');
+            a.sum_cohort_covid_qty = sumBy(a.hospitals, 'cohort_covid_qty');
+            a.sum_cohort_usage_qty = sumBy(a.hospitals, 'cohort_usage_qty');
+            a.sum_cohort_inven_qty = sumBy(a.hospitals, 'cohort_covid_qty') - sumBy(a.hospitals, 'cohort_usage_qty');
+            a.sum_hospitel_covid_qty = sumBy(a.hospitals, 'hospitel_covid_qty');
+            a.sum_hospitel_usage_qty = sumBy(a.hospitals, 'hospitel_usage_qty');
+            a.sum_hospitel_inven_qty = sumBy(a.hospitals, 'hospitel_covid_qty') - sumBy(a.hospitals, 'hospitel_usage_qty');
+          }
+        }
         this.loading.hide();
       } else {
         this.loading.hide();
