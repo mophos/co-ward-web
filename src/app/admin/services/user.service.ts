@@ -32,4 +32,14 @@ export class UserService {
     const url = `${this.url}/v1/admin/user/${id}`;
     return this.http.delete(url).toPromise();
   }
+
+  getTitle() {
+    const url = `${this.url}/v1/basic/title`;
+    return this.http.get(url).toPromise();
+  }
+
+  getPosition() {
+    const url = `${this.url}/v1/basic/position`;
+    return this.http.get(url).toPromise();
+  }
 }

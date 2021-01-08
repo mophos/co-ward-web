@@ -21,8 +21,9 @@ export class ManageUserComponent implements OnInit {
   lname: any;
   position: any;
   email: any;
-  level: any;
+  type: any;
   id: any;
+  telephone: any;
 
   total: any;
   query: any;
@@ -32,15 +33,23 @@ export class ManageUserComponent implements OnInit {
   loading = false;
   isUpdate = false;
   modal = false;
+  titleList: any = [];
+  titleId: any;
+  positionList: any;
+  positionId: any;
+  hospname: any;
 
   constructor(
     private userService: UserService,
     private alertService: AlertService,
   ) { }
 
-  ngOnInit() {
-    this.getTotal();
-    this.getList();
+
+  async ngOnInit() {
+    await this.getTitleName();
+    await this.getPosition();
+    await this.getTotal();
+    await this.getList();
   }
 
   async getTotal() {
@@ -52,6 +61,7 @@ export class ManageUserComponent implements OnInit {
       } else {
         this.alertService.error(rs.error);
       }
+      this.loading = false;
     } catch (error) {
       this.loading = false;
       this.alertService.error(error.message);
@@ -79,6 +89,7 @@ export class ManageUserComponent implements OnInit {
     //         this.total = result.length;
     //         this.loading = false;
     //     });
+
     this.getList();
   }
 
@@ -101,6 +112,7 @@ export class ManageUserComponent implements OnInit {
   async doEnter(e) {
     if (e.keyCode === 13) {
       this.offset = 0;
+      await this.getTotal();
       await this.getList();
     }
   }
@@ -114,33 +126,36 @@ export class ManageUserComponent implements OnInit {
     this.username = null;
     this.password = null;
     this.hospcode = null;
+    this.hospname = null;
     this.prename = null;
     this.fname = null;
     this.lname = null;
     this.position = null;
     this.email = null;
-    this.level = null;
+    this.type = null;
     this.id = null;
+    this.telephone = null;
   }
 
   async save() {
     try {
       const data = {
         username: this.username,
-        password: this.password,
-        hospcode: this.hospcode,
-        prename: this.prename,
+        // password: this.password,
+        // hospcode: this.hospcode,
+        // prename: this.prename,
         fname: this.fname,
         lname: this.lname,
-        position: this.position,
+        // position: this.position,
         email: this.email,
-        type: this.level
+        // type: this.type
+        telephone: this.telephone
       };
       let rs: any;
       if (this.isUpdate) {
-        rs = await this.userService.update(data, this.id);
+          rs = await this.userService.update(data, this.id);
       } else {
-        rs = await this.userService.save(data);
+        rs = { ok: false }; // await this.userService.save(data);
       }
 
       if (rs.ok) {
@@ -157,18 +172,23 @@ export class ManageUserComponent implements OnInit {
   }
 
   async onClickEdit(l) {
+    console.log(l);
     this.modal = true;
     this.isUpdate = true;
     this.id = l.id;
     this.username = l.username;
-    this.password = null;
+    // this.password = null;
     this.hospcode = l.hospcode;
+    this.hospname = l.hospname;
     this.prename = l.prename;
     this.fname = l.fname;
     this.lname = l.lname;
-    this.position = l.position;
+    this.telephone = l.telephone;
+    // this.position = l.position;
     this.email = l.email;
-    this.level = l.level;
+    this.type = l.type;
+    this.titleId = l.title_id;
+    this.positionId = l.position_id;
   }
 
   async onClickRemove(l) {
@@ -187,6 +207,36 @@ export class ManageUserComponent implements OnInit {
       }
     } catch (error) {
       this.alertService.error(error);
+    }
+  }
+
+  async getTitleName() {
+
+    try {
+      const rs: any = await this.userService.getTitle();
+      if (rs.ok) {
+        this.titleList = rs.rows;
+        // this.position = rs.rows[0].id;
+      } else {
+        this.alertService.error(rs.error);
+      }
+    } catch (error) {
+      this.alertService.error(error.message);
+    }
+  }
+
+  async getPosition() {
+    try {
+      const rs: any = await this.userService.getPosition();
+      if (rs.ok) {
+        this.positionList = rs.rows;
+
+        // this.position = rs.rows[0].id;
+      } else {
+        this.alertService.error(rs.error);
+      }
+    } catch (error) {
+      this.alertService.error(error.message);
     }
   }
 }
