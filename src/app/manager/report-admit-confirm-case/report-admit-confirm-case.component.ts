@@ -37,6 +37,8 @@ export class ReportAdmitConfirmCaseComponent implements OnInit {
   d8 = 0;
   showPersons: any;
   rights: any;
+  dataDate1:any;
+  dataDate2:any;
   public jwtHelper = new JwtHelperService();
 
   @ViewChild('loading') loading: any;
@@ -60,6 +62,7 @@ export class ReportAdmitConfirmCaseComponent implements OnInit {
       const rs: any = await this.reportService.admitConfirmCase();
       if (rs.ok) {
         this.list = rs.rows;
+        this.dataDate2 = rs.rows[0].timestamp;
       } else {
         this.alertService.error(rs.error);
       }
@@ -75,6 +78,7 @@ export class ReportAdmitConfirmCaseComponent implements OnInit {
       const rs: any = await this.reportService.admitConfirmCaseSummary();
       if (rs.ok) {
         this.summary = rs.rows;
+        this.dataDate1 = rs.rows[0].timestamp;
         this.total = sumBy(rs.rows, 'confirm');
         this.severe = sumBy(rs.rows, 'severe');
         this.moderate = sumBy(rs.rows, 'moderate');

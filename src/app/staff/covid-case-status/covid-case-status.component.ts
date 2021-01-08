@@ -126,7 +126,6 @@ export class CovidCaseStatusComponent implements OnInit {
           i.old_gcs_id = i.gcs_id;
         }
         this.list = rs.rows;
-        console.log(this.list);
       } else {
         this.alertService.error(rs.error);
       }
