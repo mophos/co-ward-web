@@ -77,7 +77,7 @@
       </tr> -->
       <tr *ngFor="let h of p.hospitals; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
         <td class="left td-border">{{h.hospname}}</td>
-        <td class="left td-border">{{h.updated_entry |  dateTh:'DD/MM/YYYY'}}</td>
+        <td class="left td-border">{{h.updated_entry | dateTh:'DD/MM/YYYY'}}</td>
         <td class="right td-border">{{h['aiir_covid_qty'] || 0}}</td>
         <td class="right td-border">{{h['aiir_usage_qty'] || 0 }}</td>
         <td class="right td-border">{{h['aiir_covid_qty'] - h['aiir_usage_qty'] || 0}}</td>
@@ -94,6 +94,27 @@
         <td class="right td-border">{{h['hospitel_usage_qty']||0 }}</td>
         <td class="right">{{h['hospitel_covid_qty'] - h['hospitel_usage_qty'] || 0}}</td>
         <td class="left td-border">{{h.sub_ministry_name}}</td>
+      </tr>
+
+      <tr>
+        <th class=" td-border" style="position: sticky; top: 0;">รวม</th>
+        <th class=" td-border" style="position: sticky; top: 0;"></th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_aiir_covid_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_aiir_usage_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_aiir_inven_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_modified_aiir_covid_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_modified_aiir_usage_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_modified_aiir_inven_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_isolate_covid_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_isolate_usage_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_isolate_inven_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_cohort_covid_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_cohort_usage_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_cohort_inven_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_hospitel_covid_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_hospitel_usage_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_hospitel_inven_qty}}</th>
+        <th class=" td-border" style="position: sticky; top: 0;"></th>
       </tr>
     </tbody>
     <tfoot>
