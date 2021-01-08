@@ -3,10 +3,10 @@
 </nav>
 
 <h3 style="float: left;">วันที่ {{date | dateTh:'DD/MM/YYYY'}} </h3>
-<h5>&nbsp;สถานะจะต้องบันทึกทุกวัน ก่อนเวลา 23:00 (ไม่สามารถบันทึกย้อนหลังได้)</h5>
+<h5>&nbsp;สถานะจะต้องบันทึกทุกวัน ก่อนเวลา 23:00น. และหลัง 00:00น.เป็นต้นไปเท่านั้น  (เนื่องจาก 23:00-00:00น. เป็นช่วงประมวลผลข้อมูลอาจทำให้ข้อมูลผิดพลาด)</h5>
 
 <!-- <div class="clr-row">
-  <div class="clr-col-4">
+  <div class="clr-col-5">
     <table class="table">
       <tr>
         <td *ngFor="let i of gcsSum">
@@ -28,7 +28,7 @@
       </tr>
     </table>
   </div>
-  <div class="clr-col-4">
+  <div class="clr-col-3">
     <table class="table">
       <tr>
         <td *ngFor="let i of medicalSuppliesSum">

@@ -1,8 +1,10 @@
+import { BasicService } from './../services/basic.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BedService } from './../bed.service';
 import { Component, OnInit } from '@angular/core';
 import { CovidCaseService } from './../services/covid-case.service';
 import { AlertService } from './../../help/alert.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -14,21 +16,41 @@ export class HomeComponent implements OnInit {
   // url: any = 'https://ops.moph.go.th/public/index.php/Portal_covid19_link_staff#';
   url: any = 'https://www.youtube.com/';
 
+  gcsSum = [];
+  BedsSum = [];
+  medicalSuppliesSum = [];
+  date: any;
   constructor(
     private alertService: AlertService,
+    private basicService: BasicService,
     private covidCaseService: CovidCaseService,
     private bedService: BedService,
     private router: Router
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
+    this.getDate();
     this.getList();
     this.getBed();
+    this.getGCSSum();
+    this.getBedSum();
+    this.getMedicalSuppliesSum();
   }
   goToBed() {
     this.router.navigate(['/staff/setting/beds']);
   }
 
+  async getDate() {
+    try {
+      const rs: any = await this.basicService.getDate();
+      if (rs.ok) {
+          this.date = rs.rows;
+      }
+    } catch (error) {
+      this.alertService.error(error);
+    }
+  }
   async getBed() {
     try {
       const rs: any = await this.bedService.getBeds();
@@ -52,6 +74,47 @@ export class HomeComponent implements OnInit {
       }
     } catch (error) {
       this.alertService.error(error);
+    }
+  }
+  async getGCSSum() {
+    try {
+      const rs: any = await this.covidCaseService.getGCS();
+      if (rs.ok) {
+        this.gcsSum = rs.rows;
+      } else {
+        this.alertService.serverError();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.serverError();
+    }
+  }
+
+  async getBedSum() {
+    try {
+      const rs: any = await this.covidCaseService.getBeds();
+      if (rs.ok) {
+        this.BedsSum = rs.rows;
+      } else {
+        this.alertService.serverError();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.serverError();
+    }
+  }
+
+  async getMedicalSuppliesSum() {
+    try {
+      const rs: any = await this.covidCaseService.getVentilators();
+      if (rs.ok) {
+        this.medicalSuppliesSum = rs.rows;
+      } else {
+        this.alertService.serverError();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.serverError();
     }
   }
 
