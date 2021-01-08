@@ -530,12 +530,36 @@ export class CovidCaseNewComponent implements OnInit {
               const confirm = await this.alertService.confirm(alert);
               if (confirm) {
                 const rs: any = await this.covidCaseService.saveNewCase(obj);
+                console.log(rs);
+
                 if (rs.ok) {
                   this.clear();
                   this.isKey = false;
                   this.isSave = false;
                   this.alertService.success();
                   this.router.navigate(['/staff/covid-case-new-v2']);
+                } else if (rs.code === 3301) {
+                  console.log('3301');
+
+                  const message = `ต้องการอัพเดตข้อมูลจาก  ${rs.rows.first_name} ${rs.rows.last_name}เป็น ${obj.fname} ${obj.lname}ใช่มั้ย?(ตัวอย่าง)`;
+                  const c = await this.alertService.confirm(message);
+                  if (c) {
+                    obj.confirm = 'Y';
+                    const rs2: any = await this.covidCaseService.saveNewCase(obj);
+                    if (rs2.ok) {
+                      this.clear();
+                      this.isKey = false;
+                      this.isSave = false;
+                      this.alertService.success();
+                      this.router.navigate(['/staff/covid-case-new-v2']);
+                    } else {
+                      this.isSave = false;
+                      this.alertService.error(rs2.error);
+                    }
+                  } else {
+                    this.isSave = false;
+                  }
+
                 } else {
                   this.isSave = false;
                   this.alertService.error(rs.error);
@@ -551,6 +575,28 @@ export class CovidCaseNewComponent implements OnInit {
                 this.isSave = false;
                 this.alertService.success();
                 this.router.navigate(['/staff/covid-case-new-v2']);
+              } else if (rs.code === 3301) {
+                console.log('3301');
+
+                const message = `ต้องการอัพเดตข้อมูลจาก  ${rs.rows.first_name} ${rs.rows.last_name}เป็น ${obj.fname} ${obj.lname}ใช่มั้ย?(ตัวอย่าง)`;
+                const c = await this.alertService.confirm(message);
+                if (c) {
+                  obj.confirm = 'Y';
+                  const rs2: any = await this.covidCaseService.saveNewCase(obj);
+                  if (rs2.ok) {
+                    this.clear();
+                    this.isKey = false;
+                    this.isSave = false;
+                    this.alertService.success();
+                    this.router.navigate(['/staff/covid-case-new-v2']);
+                  } else {
+                    this.isSave = false;
+                    this.alertService.error(rs2.error);
+                  }
+                } else {
+                  this.isSave = false;
+                }
+
               } else {
                 this.isSave = false;
                 this.alertService.error(rs.error);

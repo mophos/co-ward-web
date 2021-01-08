@@ -455,7 +455,7 @@ export class CovidCaseStatusComponent implements OnInit {
   }
 
   uncheckRadio(listId, generic, type = '') {
-    const idx = findIndex(this.list, { id: listId });
+    const idx = findIndex(this.list, { covid_case_id: listId });
     if (idx > -1 && type) {
       this.list[idx][type] = this.list[idx][type] === generic ? null : generic;
     }
@@ -467,8 +467,14 @@ export class CovidCaseStatusComponent implements OnInit {
     }
   }
 
+  onClickSearch() {
+    this.getList();
+  }
+
   uncheckRadioMedicalSupplies(listId, ms) {
-    const idx = findIndex(this.list, { id: listId });
+    // console.log(listId,ms);
+
+    const idx = findIndex(this.list, { covid_case_id: listId });
     if (idx > -1) {
       this.list[idx].medical_supplie_id = this.list[idx].medical_supplie_id === ms ? null : ms;
     }
