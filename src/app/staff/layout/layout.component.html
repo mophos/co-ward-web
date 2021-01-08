@@ -31,6 +31,11 @@
       <router-outlet></router-outlet>
     </div>
     <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
+      <a  clrVerticalNavLink routerLink="/staff/home" title="หน้าหลัก"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="home" class="is-solid"></clr-icon>
+        หนัาหลัก
+      </a>
       <a *ngIf="covidCaseMenu" clrVerticalNavLink routerLink="/staff/covid-case-new-v2" title="Case COVID"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="helix" class="is-solid"></clr-icon>
