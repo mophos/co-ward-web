@@ -713,3 +713,31 @@
 </div>
 
 <app-loadding #loading></app-loadding>
+
+<clr-modal [(clrModalOpen)]="modalConfirm" [clrModalClosable]="false">
+  <h3 class="modal-title">มีข้อมูลนี้อยู่ในระบบแล้ว ต้องการอัพเดตข้อมูลดังนี้ใช่หรือไม่?</h3>
+  <div class="modal-body">
+     <div class="clr-row">
+       <div class="clr-col-md-2"></div>
+       <div class="clr-col-md-5">ข้อมูลปัจจุบัน</div>
+       <div class="clr-col-md-5">ข้อมูลใหม่</div>
+       <div class="clr-col-md-2">ชื่อ</div>
+       <div class="clr-col-md-5">{{dataOld.first_name}}</div>
+       <div class="clr-col-md-5">{{dataNew.fname}}</div>
+       <div class="clr-col-md-2">ชื่อกลาง</div>
+       <div class="clr-col-md-5">{{dataOld.middle_name}}</div>
+       <div class="clr-col-md-5">{{dataNew.mname}}</div>
+       <div class="clr-col-md-2">นามสกุล</div>
+       <div class="clr-col-md-5">{{dataOld.last_name}}</div>
+       <div class="clr-col-md-5">{{dataNew.lname}}</div>
+     </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="onConfirmModal()">
+       ยืนยัน
+    </button>
+      <button type="button" class="btn btn-danger" (click)="modalConfirm = false;isSave = false">
+         ยกเลืก
+      </button>
+  </div>
+</clr-modal>
