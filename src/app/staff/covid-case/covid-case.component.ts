@@ -153,7 +153,7 @@ export class CovidCaseComponent implements OnInit {
     this.modalConfirmDate = true;
   }
 
-  async saevConfirmDate() {
+  async saveConfirmDate() {
     try {
       const date = `${this.confirmDate.date.year}-${this.confirmDate.date.month}-${this.confirmDate.date.day}`;
       const rs: any = await this.covidCaseService.updateConfrimDate(this.id, date);

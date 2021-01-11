@@ -37,8 +37,8 @@ export class ReportAdmitPuiCaseComponent implements OnInit {
   d8 = 0;
   showPersons: any;
   rights: any;
-  dataDate1:any;
-  dataDate2:any;
+  dataDate1: any;
+  dataDate2: any;
   public jwtHelper = new JwtHelperService();
 
   @ViewChild('loading') loading: any;
@@ -59,7 +59,7 @@ export class ReportAdmitPuiCaseComponent implements OnInit {
   async getList() {
     try {
       this.loading.show();
-      const rs: any = await this.reportService.admitConfirmCase();
+      const rs: any = await this.reportService.admitPuiCase();
       if (rs.ok) {
         this.list = rs.rows;
         this.dataDate2 = rs.rows[0].timestamp;
@@ -75,11 +75,11 @@ export class ReportAdmitPuiCaseComponent implements OnInit {
 
   async getSummary() {
     try {
-      const rs: any = await this.reportService.admitConfirmCaseSummary();
+      const rs: any = await this.reportService.admitPuiCaseSummary();
       if (rs.ok) {
         this.summary = rs.rows;
         this.dataDate1 = rs.rows[0].timestamp;
-        this.total = sumBy(rs.rows, 'confirm');
+        this.total = sumBy(rs.rows, 'pui');
         this.severe = sumBy(rs.rows, 'severe');
         this.moderate = sumBy(rs.rows, 'moderate');
         this.mild = sumBy(rs.rows, 'mild');
