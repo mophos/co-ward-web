@@ -1034,8 +1034,8 @@ export class CovidCaseNewComponent implements OnInit {
   }
 
   async onConfirmModal() {
-    this.dataOld.confirm = 'Y';
-    const rs2: any = await this.covidCaseService.saveNewCase(this.dataOld);
+    this.dataNew.confirm = 'Y';
+    const rs2: any = await this.covidCaseService.saveNewCase(this.dataNew);
     if (rs2.ok) {
       this.clear();
       this.isKey = false;
