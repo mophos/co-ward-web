@@ -333,7 +333,7 @@ export class CovidCaseStatusComponent implements OnInit {
     try {
       const confirm = await this.alertService.confirm();
       if (confirm) {
-        const idx = findIndex(this.list, { id });
+        const idx = findIndex(this.list, { 'covid_case_id': id });
         if (idx > -1) {
           // this.list[idx].create_date = this.dateCut;
           // this.list[idx].entry_date = this.dateCut;
@@ -357,7 +357,7 @@ export class CovidCaseStatusComponent implements OnInit {
   }
 
   async onClickEdit(id) {
-    const idx = findIndex(this.list, { id });
+    const idx = findIndex(this.list, { 'covid_case_id': id });
     if (idx > -1) {
       if ('is_edit' in this.list[idx]) {
         if (this.list[idx].is_edit) {
