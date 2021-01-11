@@ -262,7 +262,7 @@
       </div>
     </div>
     <div class="clr-form-control" *ngIf="modalDischargeType == 'REFER'">
-      <label for="basic" class="clr-control-label">โรงพยาบาลที่ส่งต่อ</label>
+      <label for="basic" class="clr-control-label">โรงพยาบาลปลายทางที่ต้องการส่งต่อ</label>
       <app-autocomplete-hospital style="padding: 0px; width: 100%;" #hospital (onchange)="onSelectHosp($event)"
         (onselect)="onSelectHosp($event)">
       </app-autocomplete-hospital>
