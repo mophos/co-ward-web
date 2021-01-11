@@ -7,10 +7,6 @@
     <tr>
       <th class="text-left td-border">เขต</th>
       <th class="text-left td-border">รวม</th>
-      <th class="text-left td-border">Severe</th>
-      <th class="text-left td-border">moderate</th>
-      <th class="text-left td-border">mild</th>
-      <th class="text-left td-border">asymptomatic</th>
       <th class="text-left td-border">aiir</th>
       <th class="text-left td-border">modified_aiir</th>
       <th class="text-left td-border">isolate</th>
@@ -32,11 +28,7 @@
   <tbody>
     <tr *ngFor="let l of summary; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
       <td class="text-left td-border">{{+l.zone_code}}</td>
-      <td class="text-right td-border">{{l.confirm || 0}}</td>
-      <td class="text-right td-border">{{l.severe || 0}}</td>
-      <td class="text-right td-border"> {{l.moderate || 0}}</td>
-      <td class="text-right td-border"> {{l.mild || 0}}</td>
-      <td class="text-right td-border"> {{l.asymptomatic || 0}}</td>
+      <td class="text-right td-border">{{l.pui || 0}}</td>
       <td class="text-right td-border"> {{l.aiir || 0}}</td>
       <td class="text-right td-border"> {{l.modified_aiir || 0}}</td>
       <td class="text-right td-border"> {{l.isolate || 0}}</td>
@@ -58,10 +50,6 @@
     <tr>
       <td class="text-left td-border">รวม</td>
       <td class="text-right td-border">{{total}}</td>
-      <td class="text-right td-border">{{severe}}</td>
-      <td class="text-right td-border"> {{moderate}}</td>
-      <td class="text-right td-border"> {{mild}}</td>
-      <td class="text-right td-border"> {{asymptomatic}}</td>
       <td class="text-right td-border"> {{aiir}}</td>
       <td class="text-right td-border"> {{modifiedAiir}}</td>
       <td class="text-right td-border"> {{isolate}}</td>
