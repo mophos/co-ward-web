@@ -38,6 +38,11 @@ export class UserService {
     return this.http.get(url).toPromise();
   }
 
+  getGender() {
+    const url = `${this.url}/v1/basic/gender`;
+    return this.http.get(url).toPromise();
+  }
+
   getPosition() {
     const url = `${this.url}/v1/basic/position`;
     return this.http.get(url).toPromise();
