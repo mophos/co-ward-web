@@ -332,7 +332,7 @@ export class CovidCaseStatusComponent implements OnInit {
     try {
       const confirm = await this.alertService.confirm();
       if (confirm) {
-        const idx = findIndex(this.list, { id });
+        const idx = findIndex(this.list, { 'covid_case_id': id });
         if (idx > -1) {
           // this.list[idx].create_date = this.dateCut;
           // this.list[idx].entry_date = this.dateCut;
@@ -356,7 +356,7 @@ export class CovidCaseStatusComponent implements OnInit {
   }
 
   async onClickEdit(id) {
-    const idx = findIndex(this.list, { id });
+    const idx = findIndex(this.list, { 'covid_case_id': id });
     if (idx > -1) {
       if ('is_edit' in this.list[idx]) {
         if (this.list[idx].is_edit) {
@@ -454,7 +454,7 @@ export class CovidCaseStatusComponent implements OnInit {
   }
 
   uncheckRadio(listId, generic, type = '') {
-    const idx = findIndex(this.list, { id: listId });
+    const idx = findIndex(this.list, { covid_case_id: listId });
     if (idx > -1 && type) {
       this.list[idx][type] = this.list[idx][type] === generic ? null : generic;
     }
@@ -466,8 +466,14 @@ export class CovidCaseStatusComponent implements OnInit {
     }
   }
 
+  onClickSearch() {
+    this.getList();
+  }
+
   uncheckRadioMedicalSupplies(listId, ms) {
-    const idx = findIndex(this.list, { id: listId });
+    // console.log(listId,ms);
+
+    const idx = findIndex(this.list, { covid_case_id: listId });
     if (idx > -1) {
       this.list[idx].medical_supplie_id = this.list[idx].medical_supplie_id === ms ? null : ms;
     }

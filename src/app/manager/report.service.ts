@@ -87,6 +87,16 @@ export class ReportService {
     return await this.http.get(url).toPromise();
   }
 
+  async admitPuiCase() {
+    const url = `${this.apiUrl}/v1/report/admit-pui-case`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async admitPuiCaseSummary() {
+    const url = `${this.apiUrl}/v1/report/admit-pui-case-summary`;
+    return await this.http.get(url).toPromise();
+  }
+
   async homework() {
     const url = `${this.apiUrl}/v1/report/homework`;
     return await this.http.get(url).toPromise();
