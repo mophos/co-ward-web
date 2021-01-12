@@ -75,5 +75,9 @@ export class ReportService {
     const url = `${this.apiUrl}/v1/report/check-admit-confirm-case/export`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
+  async medicalSupplies() {
+    const url = `${this.apiUrl}/v1/report/medical-supplies`;
+    return await this.http.get(url).toPromise();
+  }
 
 }
