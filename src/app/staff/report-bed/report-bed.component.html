@@ -2,20 +2,22 @@
   <span class="breadcrumb-item active">รายงานเตียง</span>
 </nav>
 <br>
-<!-- <div class="clr-row">
+<div class="clr-row">
   <div class="clr-col-4">
-    <my-date-picker-th name="date" [options]="myDatePickerOptions" [(ngModel)]="date" required>
-    </my-date-picker-th>
+    <!-- <my-date-picker-th name="date" [options]="myDatePickerOptions" [(ngModel)]="date" required>
+    </my-date-picker-th> -->
   </div>
   <div class="clr-col-1">
-    <button class="btn btn-sm btn-primary" (click)="doEnter()">
+    <!-- <button class="btn btn-sm btn-primary" (click)="doEnter()">
       <clr-icon shape="search"></clr-icon>
-    </button>
+    </button> -->
   </div>
   <div class="clr-col-7" style="text-align: right;">
-
+    <button class="btn btn-sm btn-success" (click)="doExportExcel()">
+      Export
+    </button>
   </div>
-</div> -->
+</div>
 
 <div *ngFor="let l of list">
   <h4> {{l.provinces == 1 ? '' : 'เขต '+l.zone_code}}</h4>

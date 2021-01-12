@@ -52,8 +52,8 @@ export class ReportService {
     return await this.http.get(url).toPromise();
   }
 
-  async getBedExport(date) {
-    const url = `${this.apiUrl}/v1/report/get-bed/excel?date=${date}`;
+  async getBedExport() {
+    const url = `${this.apiUrl}/v1/report/get-bed/excel/new`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 
