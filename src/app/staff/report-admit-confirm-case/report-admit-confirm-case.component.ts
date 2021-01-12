@@ -4,6 +4,7 @@ import { ReportService } from '../report.service';
 import { sumBy } from 'lodash';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { findIndex } from 'lodash';
+import * as moment from 'moment';
 @Component({
   selector: 'app-report-admit-confirm-case',
   templateUrl: './report-admit-confirm-case.component.html',
@@ -57,6 +58,10 @@ export class ReportAdmitConfirmCaseComponent implements OnInit {
       this.loading.show();
       const rs: any = await this.reportService.admitConfirmCase();
       if (rs.ok) {
+        for (const v of rs.rows) {
+          v.birth_date = moment(v.birth_date);
+          v.old = moment().diff(v.birth_date, 'year');
+        }
         this.list = rs.rows;
       } else {
         this.alertService.error(rs.error);
