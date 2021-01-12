@@ -70,6 +70,7 @@ import { CovidCaseUpdateComponent } from './covid-case/covid-case-update/covid-c
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CovidCaseNewV2Component } from './covid-case/covid-case-new-v2/covid-case-new-v2.component';
 import { CioCheckPatientComponent } from './cio-check-patient/cio-check-patient.component';
+import { ReportMedicalSuppliesComponent } from './report-medical-supplies/report-medical-supplies.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -110,7 +111,8 @@ import { CioCheckPatientComponent } from './cio-check-patient/cio-check-patient.
     RequestProductNewComponent,
     CovidCaseUpdateComponent,
     CovidCaseNewV2Component,
-    CioCheckPatientComponent
+    CioCheckPatientComponent,
+    ReportMedicalSuppliesComponent
   ],
   imports: [
     HelpModule,

@@ -53,8 +53,19 @@ export class RegisterService {
     const url = `${this.url}/v1/register/get-node-drugs?id=${id}`;
     return this.http.get(url).toPromise();
   }
+
   getNodeSupplies(id) {
     const url = `${this.url}/v1/register/get-node-supplies?id=${id}`;
+    return this.http.get(url).toPromise();
+  }
+
+  getCid(cid) {
+    const url = `${this.url}/v1/register/get-cid?cid=${cid}`;
+    return this.http.get(url).toPromise();
+  }
+
+  getUsername(username) {
+    const url = `${this.url}/v1/register/get-username?username=${username}`;
     return this.http.get(url).toPromise();
   }
 

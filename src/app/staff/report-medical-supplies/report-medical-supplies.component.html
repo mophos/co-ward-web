@@ -1,0 +1,44 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">รายงานเครื่องช่วยหายใจ</span>
+</nav>
+<br>
+
+
+<div *ngFor="let l of list">
+  <h4> {{l.provinces == 1 ? '' : 'เขต '+l.zone_code}}</h4>
+  <table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;"
+    *ngFor="let p of l.provinces">
+    <thead>
+      <tr>
+        <th colspan="18" style="text-align: left;">
+          <h3>{{p.province_name}}</h3>
+        </th>
+      </tr>
+      <tr>
+        <th  class="right td-border" style="position: sticky; top: 0; ">โรงพยาบาล</th>
+        <th  class="right td-border" style="position: sticky; top: 0; ">วันที่ตั้งค่าเครื่องช่วยหายใจล่าสุด</th>
+        <th  class="right td-border" style="position: sticky; top: 0; ">Invasive</th>
+        <th  class="right td-border" style="position: sticky; top: 0; ">Invasive สำหรับ covid</th>
+        <th  class="right td-border" style="position: sticky; top: 0; ">Non Invasive</th>
+        <th  class="right td-border" style="position: sticky; top: 0; ">Non Invasive สำหรับ covid</th>
+        <th  class="right td-border" style="position: sticky; top: 0; ">High Flow</th>
+        <th  class="right td-border" style="position: sticky; top: 0; ">High Flow สำหรับ covid</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let h of p.hospitals; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+        <td class="left td-border">{{h.hospname}}</td>
+        <td class="left td-border">{{h.updated_entry | dateTh:'DD/MM/YYYY'}}</td>
+        <td class="right td-border">{{h['invasive_qty'] || 0}}</td>
+        <td class="right td-border">{{h['invasive_covid_qty'] || 0 }}</td>
+        <td class="right td-border">{{h['non_invasive_qty'] || 0}}</td>
+        <td class="right td-border">{{h['non_invasive_covid_qty']||0 }}</td>
+        <td class="right td-border">{{h['high_flow_qty'] || 0}}</td>
+        <td class="right td-border">{{h['high_flow_covid_qty']||0 }}</td>
+      </tr>
+
+    </tbody>
+
+  </table>
+</div>
+<app-loadding #loading></app-loadding>

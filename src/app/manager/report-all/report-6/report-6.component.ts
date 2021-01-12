@@ -116,8 +116,6 @@ export class Report6Component implements OnInit {
   }
 
   async onClickSearch() {
-    console.log(this.listSector, this.listMinistry, this.listHospital);
-
     if (this.selectedZone === 'all' && this.selectedProvince === 'all') {
       this.listHospitalFilter = this.listHospital;
       this.listSectorFilter = this.listSector;
@@ -163,7 +161,6 @@ export class Report6Component implements OnInit {
         await this.sumByReport(this.listHospitalFilter);
       }
     }
-    console.log(this.selectedZone, this.selectedProvince);
   }
 
   async getList1() {

@@ -52,8 +52,8 @@ export class ReportService {
     return await this.http.get(url).toPromise();
   }
 
-  async getBedExport(date) {
-    const url = `${this.apiUrl}/v1/report/get-bed/excel?date=${date}`;
+  async getBedExport() {
+    const url = `${this.apiUrl}/v1/report/get-bed/excel/new`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 
@@ -74,6 +74,10 @@ export class ReportService {
   async exportCheckAdmitConfirmCase() {
     const url = `${this.apiUrl}/v1/report/check-admit-confirm-case/export`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+  async medicalSupplies() {
+    const url = `${this.apiUrl}/v1/report/medical-supplies`;
+    return await this.http.get(url).toPromise();
   }
 
 }

@@ -5,7 +5,7 @@
         <!-- <img src="./assets/logo-co-ward.png" alt="logo" style="width: 200px; padding-right: 10px;"> -->
         <span class="title" routerLink="/staff/home">CO-Ward
           <span class="font-version">
-            (Version : 1.6.0)
+            (Version : 1.7.1)
           </span>
         </span>
       </a>
@@ -31,6 +31,11 @@
       <router-outlet></router-outlet>
     </div>
     <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
+      <a  clrVerticalNavLink routerLink="/staff/home" title="หน้าหลัก"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="home" class="is-solid"></clr-icon>
+        หนัาหลัก
+      </a>
       <a *ngIf="covidCaseMenu" clrVerticalNavLink routerLink="/staff/covid-case-new-v2" title="Case COVID"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="helix" class="is-solid"></clr-icon>
@@ -147,6 +152,13 @@
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         รายงานเตียง
       </a>
+      
+      <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff/report-medical" title="รายงานเตียง"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        รายงานเครื่องช่วยหายใจ
+      </a>
+
       <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff/dashboard" title="Dashboard"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="file"></clr-icon>

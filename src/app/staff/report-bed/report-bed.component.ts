@@ -112,8 +112,7 @@ export class ReportBedComponent implements OnInit {
   async doExportExcel() {
     this.loading.show();
     try {
-      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
-      const rs: any = await this.reportService.getBedExport(date);
+      const rs: any = await this.reportService.getBedExport();
       console.log(rs);
       if (!rs) {
         this.loading.hide();

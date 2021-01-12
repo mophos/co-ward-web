@@ -30,7 +30,9 @@ export class RegisterComponent implements OnInit {
   province: any;
 
   checkCid: any;
+  checkDupCid: any;
   checkPassword: any;
+  checkUsername: any;
   checkPasswordConfirm: any;
   checkEmail: any;
   checkPhone: any;
@@ -69,7 +71,16 @@ export class RegisterComponent implements OnInit {
 
   async enterCid() {
     if (this.cid.length === 13) {
-      this.checkCid = thaiIdCard.verify(this.cid);
+      try {
+        this.checkCid = thaiIdCard.verify(this.cid);
+        const rs: any = await this.registerService.getCid(this.cid);
+        this.checkDupCid = rs.ok;
+        if (!this.checkDupCid) {
+          this.checkCid = null;
+        }
+      } catch (error) {
+        console.log(error);
+      }
     } else {
       this.checkCid = false;
     }
@@ -81,6 +92,19 @@ export class RegisterComponent implements OnInit {
       this.checkPasswordConfirm = true;
     } else if (this.password !== this.passwordConfirm) {
       this.checkPasswordConfirm = false;
+    }
+  }
+
+  async enterUsername() {
+    try {
+      if (this.username.length > 1) {
+        const rs: any = await this.registerService.getUsername(this.username);
+        this.checkUsername = rs.ok;
+      } else {
+        this.checkUsername = null;
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 

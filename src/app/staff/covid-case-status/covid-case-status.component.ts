@@ -99,10 +99,10 @@ export class CovidCaseStatusComponent implements OnInit {
     await this.getDateCut();
     await this.getList();
     await this.getGCS();
-    // await this.getGCSSum();
     await this.getBeds();
-    // await this.getBedSum();
     await this.getMedicalSupplies();
+    // await this.getGCSSum();
+    // await this.getBedSum();
     // await this.getMedicalSuppliesSum();
 
     this.dateDischarge = {
@@ -126,7 +126,6 @@ export class CovidCaseStatusComponent implements OnInit {
           i.old_gcs_id = i.gcs_id;
         }
         this.list = rs.rows;
-        console.log(this.list);
       } else {
         this.alertService.error(rs.error);
       }
@@ -178,20 +177,7 @@ export class CovidCaseStatusComponent implements OnInit {
     }
 
   }
-  async getGCSSum() {
-    try {
-      const rs: any = await this.covidCaseService.getGCS();
-      if (rs.ok) {
-        this.gcsSum = rs.rows;
-      } else {
-        this.alertService.serverError();
-      }
-    } catch (error) {
-      console.log(error);
-      this.alertService.serverError();
-    }
-  }
-
+  
   async getBeds() {
     try {
       const rs: any = await this.basicAuthService.getBeds();
@@ -205,21 +191,47 @@ export class CovidCaseStatusComponent implements OnInit {
       this.alertService.serverError();
     }
   }
+  // async getGCSSum() {
+  //   try {
+  //     const rs: any = await this.covidCaseService.getGCS();
+  //     if (rs.ok) {
+  //       this.gcsSum = rs.rows;
+  //     } else {
+  //       this.alertService.serverError();
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     this.alertService.serverError();
+  //   }
+  // }
 
-  async getBedSum() {
-    try {
-      const rs: any = await this.covidCaseService.getBeds();
-      if (rs.ok) {
-        this.BedsSum = rs.rows;
-      } else {
-        this.alertService.serverError();
-      }
-    } catch (error) {
-      console.log(error);
-      this.alertService.serverError();
-    }
-  }
+  // async getBedSum() {
+  //   try {
+  //     const rs: any = await this.covidCaseService.getBeds();
+  //     if (rs.ok) {
+  //       this.BedsSum = rs.rows;
+  //     } else {
+  //       this.alertService.serverError();
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     this.alertService.serverError();
+  //   }
+  // }
 
+  // async getMedicalSuppliesSum() {
+  //   try {
+  //     const rs: any = await this.covidCaseService.getVentilators();
+  //     if (rs.ok) {
+  //       this.medicalSuppliesSum = rs.rows;
+  //     } else {
+  //       this.alertService.serverError();
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     this.alertService.serverError();
+  //   }
+  // }
   async getMedicalSupplies() {
     try {
       const rs: any = await this.basicAuthService.getMedicalSupplies();
@@ -235,19 +247,6 @@ export class CovidCaseStatusComponent implements OnInit {
     }
   }
 
-  async getMedicalSuppliesSum() {
-    try {
-      const rs: any = await this.covidCaseService.getVentilators();
-      if (rs.ok) {
-        this.medicalSuppliesSum = rs.rows;
-      } else {
-        this.alertService.serverError();
-      }
-    } catch (error) {
-      console.log(error);
-      this.alertService.serverError();
-    }
-  }
 
   onSelectGCS(e, id) {
     const idx = findIndex(this.list, { id });
@@ -333,7 +332,7 @@ export class CovidCaseStatusComponent implements OnInit {
     try {
       const confirm = await this.alertService.confirm();
       if (confirm) {
-        const idx = findIndex(this.list, { id });
+        const idx = findIndex(this.list, { 'covid_case_id': id });
         if (idx > -1) {
           // this.list[idx].create_date = this.dateCut;
           // this.list[idx].entry_date = this.dateCut;
@@ -341,9 +340,9 @@ export class CovidCaseStatusComponent implements OnInit {
           const rs: any = await this.covidCaseService.updateStatus(this.list[idx]);
           if (rs.ok) {
             this.getList();
-            this.getGCSSum();
-            this.getBedSum();
-            this.getMedicalSuppliesSum();
+            // this.getGCSSum();
+            // this.getBedSum();
+            // this.getMedicalSuppliesSum();
             this.alertService.success();
           } else {
             this.alertService.error(rs.error);
@@ -357,7 +356,7 @@ export class CovidCaseStatusComponent implements OnInit {
   }
 
   async onClickEdit(id) {
-    const idx = findIndex(this.list, { id });
+    const idx = findIndex(this.list, { 'covid_case_id': id });
     if (idx > -1) {
       if ('is_edit' in this.list[idx]) {
         if (this.list[idx].is_edit) {
@@ -436,9 +435,9 @@ export class CovidCaseStatusComponent implements OnInit {
           if (rs.ok) {
             this.modalDischarge = false;
             this.getList();
-            this.getGCSSum();
-            this.getBedSum();
-            this.getMedicalSuppliesSum();
+            // this.getGCSSum();
+            // this.getBedSum();
+            // this.getMedicalSuppliesSum();
             this.alertService.success();
           } else {
             console.log(rs.error);
@@ -455,7 +454,7 @@ export class CovidCaseStatusComponent implements OnInit {
   }
 
   uncheckRadio(listId, generic, type = '') {
-    const idx = findIndex(this.list, { id: listId });
+    const idx = findIndex(this.list, { covid_case_id: listId });
     if (idx > -1 && type) {
       this.list[idx][type] = this.list[idx][type] === generic ? null : generic;
     }
@@ -467,8 +466,14 @@ export class CovidCaseStatusComponent implements OnInit {
     }
   }
 
+  onClickSearch() {
+    this.getList();
+  }
+
   uncheckRadioMedicalSupplies(listId, ms) {
-    const idx = findIndex(this.list, { id: listId });
+    // console.log(listId,ms);
+
+    const idx = findIndex(this.list, { covid_case_id: listId });
     if (idx > -1) {
       this.list[idx].medical_supplie_id = this.list[idx].medical_supplie_id === ms ? null : ms;
     }
@@ -525,9 +530,9 @@ export class CovidCaseStatusComponent implements OnInit {
       if (rs.ok) {
         console.log(rs.rows);
         this.getList();
-        this.getGCSSum();
-        this.getBedSum();
-        this.getMedicalSuppliesSum();
+        // this.getGCSSum();
+        // this.getBedSum();
+        // this.getMedicalSuppliesSum();
         this.alertService.success();
       } else {
         this.alertService.error(rs.error);

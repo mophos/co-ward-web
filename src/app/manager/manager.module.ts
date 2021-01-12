@@ -50,6 +50,7 @@ import { Report9Component } from './report-all/report-9/report-9.component';
 import { Report10Component } from './report-all/report-10/report-10.component';
 import { ReportLocalQuarantineComponent } from './report-local-quarantine/report-local-quarantine.component';
 import { PatientInfoDetailsComponent } from './patient-info-details/patient-info-details.component';
+import { ReportAdmitPuiCaseComponent } from './report-admit-pui-case/report-admit-pui-case.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -90,6 +91,7 @@ import { PatientInfoDetailsComponent } from './patient-info-details/patient-info
     HomeComponent,
     ReportPatientsProvincesComponent,
     ReportAdmitConfirmCaseComponent,
+    ReportAdmitPuiCaseComponent,
     ReportReviewHomeworkComponent,
     ReportRecordsComponent,
     ReportLocalQuarantineComponent,

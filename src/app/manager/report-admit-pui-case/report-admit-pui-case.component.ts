@@ -1,4 +1,4 @@
-import { AlertService } from './../../help/alert.service';
+import { AlertService } from '../../help/alert.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportService } from '../report.service';
 import { sumBy } from 'lodash';
@@ -6,11 +6,11 @@ import { findIndex } from 'lodash';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
-  selector: 'app-report-admit-confirm-case',
-  templateUrl: './report-admit-confirm-case.component.html',
+  selector: 'app-report-admit-pui-case',
+  templateUrl: './report-admit-pui-case.component.html',
   styles: []
 })
-export class ReportAdmitConfirmCaseComponent implements OnInit {
+export class ReportAdmitPuiCaseComponent implements OnInit {
 
   list = [];
   summary = [];
@@ -37,8 +37,8 @@ export class ReportAdmitConfirmCaseComponent implements OnInit {
   d8 = 0;
   showPersons: any;
   rights: any;
-  dataDate1:any;
-  dataDate2:any;
+  dataDate1: any;
+  dataDate2: any;
   public jwtHelper = new JwtHelperService();
 
   @ViewChild('loading') loading: any;
@@ -59,7 +59,7 @@ export class ReportAdmitConfirmCaseComponent implements OnInit {
   async getList() {
     try {
       this.loading.show();
-      const rs: any = await this.reportService.admitConfirmCase();
+      const rs: any = await this.reportService.admitPuiCase();
       if (rs.ok) {
         this.list = rs.rows;
         this.dataDate2 = rs.rows[0].timestamp;
@@ -75,11 +75,11 @@ export class ReportAdmitConfirmCaseComponent implements OnInit {
 
   async getSummary() {
     try {
-      const rs: any = await this.reportService.admitConfirmCaseSummary();
+      const rs: any = await this.reportService.admitPuiCaseSummary();
       if (rs.ok) {
         this.summary = rs.rows;
         this.dataDate1 = rs.rows[0].timestamp;
-        this.total = sumBy(rs.rows, 'confirm');
+        this.total = sumBy(rs.rows, 'pui');
         this.severe = sumBy(rs.rows, 'severe');
         this.moderate = sumBy(rs.rows, 'moderate');
         this.mild = sumBy(rs.rows, 'mild');
