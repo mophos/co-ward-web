@@ -76,7 +76,7 @@ export class ManagePatientsComponent implements OnInit {
     });
   }
 
-  closeEditInfo(p: any) {
+  closeEditInfo() {
     this.editInfo = !this.editInfo;
     this.editCase = false;
   }
