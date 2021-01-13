@@ -142,7 +142,7 @@ export class ManageUserComponent implements OnInit {
       const data = {
         username: this.username,
         // password: this.password,
-        // hospcode: this.hospcode,
+        hospcode: this.hospcode,
         // prename: this.prename,
         fname: this.fname,
         lname: this.lname,
