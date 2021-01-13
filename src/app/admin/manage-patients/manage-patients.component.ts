@@ -49,9 +49,9 @@ export class ManagePatientsComponent implements OnInit {
     await this.getGender();
     this.disDate = {
       date: {
-        year: moment().startOf('month').get('year'),
-        month: moment().startOf('month').get('month') + 1,
-        day: moment().startOf('month').get('date')
+        year: moment().get('year'),
+        month: moment().get('month') + 1,
+        day: moment().get('date')
       }
     };
   }
@@ -237,8 +237,10 @@ export class ManagePatientsComponent implements OnInit {
       const confirm = await this.alertService.confirm('ต้องการแก้ไข case ผู้ป่วย ใช่หรือไม่');
       if (confirm) {
         this.modalLoading.show();
-        if (this.tmpHis.date_discharge) {
+        if (this.tmpHis.status !== 'ADMIT') {
           this.tmpHis.date_discharge = this.tmpHis.disDate.date.year + '-' + this.tmpHis.disDate.date.month + '-' + this.tmpHis.disDate.date.day + ' ' + this.tmpHis.timeDischarge.h + ':' + this.tmpHis.timeDischarge.m + ':00';
+        } else  {
+          this.tmpHis.date_discharge = null;
         }
         const rs: any = await this.patientsService.saveEditCovidCase(this.tmpHis);
         console.log(rs);
@@ -250,6 +252,7 @@ export class ManagePatientsComponent implements OnInit {
             this.historys[idx].an = this.tmpHis.an;
             this.historys[idx].date_discharge = this.tmpHis.date_discharge;
             this.historys[idx].case_status = this.tmpHis.case_status;
+            this.historys[idx].status = this.tmpHis.status;
           }
 
           this.alertService.success();
@@ -279,14 +282,19 @@ export class ManagePatientsComponent implements OnInit {
     try {
       this.editHis = true;
       this.tmpHis = cloneDeep(l);
-      this.tmpHis.disDate = {
-        date: {
-          year: moment(this.tmpHis.date_discharge).get('year'),
-          month: moment(this.tmpHis.date_discharge).get('month') + 1,
-          day: moment(this.tmpHis.date_discharge).get('date')
-        }
-      };
-      this.tmpHis.timeDischarge = { h: moment(this.tmpHis.date_discharge).format('HH'), m: moment(this.tmpHis.date_discharge).format('mm') };
+      if (l.status !== 'ADMIT') {
+        this.tmpHis.disDate = {
+          date: {
+            year: moment(this.tmpHis.date_discharge).get('year'),
+            month: moment(this.tmpHis.date_discharge).get('month') + 1,
+            day: moment(this.tmpHis.date_discharge).get('date')
+          }
+        };
+        this.tmpHis.timeDischarge = { h: moment(this.tmpHis.date_discharge).format('HH'), m: moment(this.tmpHis.date_discharge).format('mm') };
+      } else {
+        this.tmpHis.disDate = this.disDate;
+        this.tmpHis.timeDischarge = { h: '13', m: '00' };
+      }
     } catch (error) {
       this.alertService.error(error);
     }

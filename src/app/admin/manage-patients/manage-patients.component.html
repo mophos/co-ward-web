@@ -241,16 +241,33 @@
         </div>
       </div>
       <div class="clr-col-3">
+        <label>สถานะล่าสุด: </label>
+      </div>
+      <div class="clr-col-9">
+        <div class="clr-select-wrapper">
+          <select name="caseStatus" [(ngModel)]="tmpHis.status" class="clr-select" style="width: 100%;">
+            <option value="ADMIT">ADMIT</option>
+            <option value="DISCHARGE">DISCHARGE</option>
+            <option value="NEGATIVE">NEGATIVE</option>
+            <option value="REFER" disabled>REFER</option>
+            <option value="DEATH">DEATH</option>
+          </select>
+        </div>
+      </div>
+      <div class="clr-col-3">
         <label>date_discharge: </label>
       </div>
       <div class="clr-col-9">
         <div class="clr-row">
-          <div class="clr-col-6">
+          <div class="clr-col-6" *ngIf='tmpHis.status === "ADMIT"'>
+           -
+          </div>
+          <div class="clr-col-6" *ngIf='tmpHis.status !== "ADMIT"'>
             <!-- {{tmpHis.date_discharge | dateTh:'DD/MM/YYYY'}} -->
             <my-date-picker-th name="sDate" [options]="myDatePickerOptions" [(ngModel)]="tmpHis.disDate" required>
             </my-date-picker-th>
           </div>
-          <div class="clr-col-6" *ngIf='tmpHis.date_discharge'>
+          <div class="clr-col-6" *ngIf='tmpHis.status !== "ADMIT"'>
             <div class="clr-select-wrapper">
               <select name="timeDH" [(ngModel)]="tmpHis.timeDischarge.h" class="clr-select" style="width: 100%;">
                 <option value="01">01</option>
