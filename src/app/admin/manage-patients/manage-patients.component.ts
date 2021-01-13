@@ -4,6 +4,7 @@ import { PatientsService } from '../services/patients.service';
 import { UserService } from '../services/user.service';
 import { find, findIndex, cloneDeep } from 'lodash';
 import * as moment from 'moment';
+import { IMyOptions } from 'mydatepicker-th';
 
 @Component({
   selector: 'app-manage-patients',
@@ -17,7 +18,16 @@ export class ManagePatientsComponent implements OnInit {
   historys: any;
   details: any;
   tmpHis: any;
+  editHisDetail: boolean;
+  tmpHisDetail: any;
 
+  myDatePickerOptions: IMyOptions = {
+    inline: false,
+    dateFormat: 'dd mmm yyyy',
+    editableDateField: false,
+    showClearDateBtn: false
+  };
+  disDate: { date: { year: number; month: number; day: number; }; };
   constructor(
     private patientsService: PatientsService,
     private userService: UserService,
@@ -37,6 +47,13 @@ export class ManagePatientsComponent implements OnInit {
   async ngOnInit() {
     await this.getTitleName();
     await this.getGender();
+    this.disDate = {
+      date: {
+        year: moment().startOf('month').get('year'),
+        month: moment().startOf('month').get('month') + 1,
+        day: moment().startOf('month').get('date')
+      }
+    };
   }
   onEditInfo(p: any) {
     this.editInfo = !this.editInfo;
@@ -194,14 +211,34 @@ export class ManagePatientsComponent implements OnInit {
     }
   }
 
+  async deletedHistory(l) {
+    const confirm = await this.alertService.confirm('ต้องการลบ case ผู้ป่วย ใช่หรือไม่');
+    if (confirm) {
+      this.modalLoading.show();
+      const rs: any = await this.patientsService.deleteCovidCase(l.covid_case_id);
+      if (rs.ok) {
+        const idx = findIndex(this.historys, (v: any) => {
+          return v.covid_case_id === l.covid_case_id;
+        });
+        if (idx > -1) {
+          this.historys.splice(idx, 1);
+        }
+
+        this.alertService.success();
+      } else {
+        this.alertService.error(rs.error);
+      }
+    }
+    this.modalLoading.hide();
+  }
+
   async saveEditHistory() {
     try {
-
       const confirm = await this.alertService.confirm('ต้องการแก้ไข case ผู้ป่วย ใช่หรือไม่');
       if (confirm) {
         this.modalLoading.show();
         if (this.tmpHis.date_discharge) {
-          this.tmpHis.date_discharge = moment(this.tmpHis.date_discharge).format('YYYY-MM-DD') + ' ' + this.tmpHis.timeDischarge.h + ':' + this.tmpHis.timeDischarge.m + ':00'
+          this.tmpHis.date_discharge = this.tmpHis.disDate.date.year + '-' + this.tmpHis.disDate.date.month + '-' + this.tmpHis.disDate.date.day + ' ' + this.tmpHis.timeDischarge.h + ':' + this.tmpHis.timeDischarge.m + ':00';
         }
         const rs: any = await this.patientsService.saveEditCovidCase(this.tmpHis);
         console.log(rs);
@@ -228,37 +265,100 @@ export class ManagePatientsComponent implements OnInit {
     this.editHis = false;
     this.tmpHis = null;
   }
+
   async closeEditHistory() {
     try {
       this.editHis = false;
       this.tmpHis = null;
-      // const rs: any = await this.patientsService.editCovidCase(l.covid_case_id);
-      // console.log(rs);
-      // if (rs.ok) {
-      //   this.details = rs.rows;
-      //   console.log(this.details);
-      // } else {
-      //   this.alertService.error(rs.error);
-      // }
     } catch (error) {
       this.alertService.error(error);
     }
   }
+
   async editHistory(l) {
     try {
       this.editHis = true;
       this.tmpHis = cloneDeep(l);
+      this.tmpHis.disDate = {
+        date: {
+          year: moment(this.tmpHis.date_discharge).get('year'),
+          month: moment(this.tmpHis.date_discharge).get('month') + 1,
+          day: moment(this.tmpHis.date_discharge).get('date')
+        }
+      };
       this.tmpHis.timeDischarge = { h: moment(this.tmpHis.date_discharge).format('HH'), m: moment(this.tmpHis.date_discharge).format('mm') };
-      // const rs: any = await this.patientsService.editCovidCase(l.covid_case_id);
-      // console.log(rs);
-      // if (rs.ok) {
-      //   this.details = rs.rows;
-      //   console.log(this.details);
-      // } else {
-      //   this.alertService.error(rs.error);
-      // }
     } catch (error) {
       this.alertService.error(error);
     }
   }
+
+  async editHistoryDetail(l) {
+    try {
+      this.editHisDetail = true;
+      this.tmpHisDetail = cloneDeep(l);
+    } catch (error) {
+      this.alertService.error(error);
+    }
+  }
+
+
+  async deletedHistoryDetail(l) {
+    const confirm = await this.alertService.confirm('ต้องการลบ case ผู้ป่วย ใช่หรือไม่');
+    if (confirm) {
+      this.modalLoading.show();
+      const rs: any = await this.patientsService.deleteCovidCaseDetail(l.id);
+      if (rs.ok) {
+        const idx = findIndex(this.details, (v: any) => {
+          return v.id === l.id;
+        });
+        if (idx > -1) {
+          this.details.splice(idx, 1);
+        }
+
+        this.alertService.success();
+      } else {
+        this.alertService.error(rs.error);
+      }
+    }
+    this.modalLoading.hide();
+  }
+
+  async saveEditHistoryDetail() {
+    try {
+      const confirm = await this.alertService.confirm('ต้องการแก้ไข detail case ผู้ป่วย ใช่หรือไม่');
+      if (confirm) {
+        this.modalLoading.show();
+        const rs: any = await this.patientsService.saveEditCovidCaseDtail(this.tmpHisDetail);
+        console.log(rs);
+        if (rs.ok) {
+          const idx = findIndex(this.details, (v: any) => {
+            return v.id === this.tmpHisDetail.id;
+          });
+          if (idx > -1) {
+            this.details[idx].status = this.tmpHisDetail.status;
+          }
+
+          this.alertService.success();
+          // this.details = rs.rows;
+        } else {
+          this.alertService.error(rs.error);
+        }
+      }
+    } catch (error) {
+      this.alertService.error(error);
+    }
+    this.modalLoading.hide();
+    this.editHisDetail = false;
+    this.tmpHisDetail = null;
+  }
+
+  async closeEditHistoryDetail() {
+    try {
+      this.editHisDetail = false;
+      this.tmpHisDetail = null;
+    } catch (error) {
+      this.alertService.error(error);
+    }
+  }
+
 }

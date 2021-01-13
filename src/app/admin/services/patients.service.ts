@@ -15,7 +15,7 @@ export class PatientsService {
 
     editInfo(data) {
         const url = `${this.url}/v1/admin/patient/edit-info`;
-        return this.http.post(url, { data }).toPromise();
+        return this.http.put(url, { data }).toPromise();
     }
 
 
@@ -30,8 +30,23 @@ export class PatientsService {
     }
 
     async saveEditCovidCase(data) {
-        const url = `${this.url}/v1/admin/patient/history`;
-        return await this.http.post(url, { data }).toPromise();
+        const url = `${this.url}/v1/admin/patient/covid-case`;
+        return await this.http.put(url, { data }).toPromise();
+    }
+
+    async deleteCovidCase(id) {
+        const url = `${this.url}/v1/admin/patient/covid-case/${id}`;
+        return await this.http.delete(url).toPromise();
+    }
+
+    async saveEditCovidCaseDtail(data) {
+        const url = `${this.url}/v1/admin/patient/covid-case-detail`;
+        return await this.http.put(url, { data }).toPromise();
+    }
+
+    async deleteCovidCaseDetail(id) {
+        const url = `${this.url}/v1/admin/patient/covid-case-detail/${id}`;
+        return await this.http.delete(url).toPromise();
     }
 
 }
