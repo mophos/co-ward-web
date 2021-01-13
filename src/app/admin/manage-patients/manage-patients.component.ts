@@ -35,8 +35,8 @@ export class ManagePatientsComponent implements OnInit {
 
   ) { }
   // queryPerson: string = 'kaka';
-  queryHc: string = '10670';
-  queryHn: string = '1234';
+  queryHc: string;
+  queryHn: string;
 
   patient: any;
   tmpPatient: any;
