@@ -1,9 +1,9 @@
 <div class="clr-row">
-  <div class="clr-col-2">
+  <!-- <div class="clr-col-2">
     <button class="btn btn-sm btn-success" (click)="onClickAdd()">
       <clr-icon shape="plus"></clr-icon> เพิ่มรายการ
     </button>
-  </div>
+  </div> -->
   <div class="clr-col-1">
     ค้นหา :
   </div>
@@ -15,17 +15,23 @@
 <clr-datagrid  (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading" [style.height.px]="800">
   <clr-dg-column>ชื่อผู้ใช้งาน</clr-dg-column>
   <clr-dg-column>โรงพยาบาล</clr-dg-column>
+  <clr-dg-column>cid</clr-dg-column>
   <clr-dg-column>ชื่อ</clr-dg-column>
   <clr-dg-column>นามสกุล</clr-dg-column>
-  <clr-dg-column>ตำแหน่ง</clr-dg-column>
+  <!-- <clr-dg-column>ตำแหน่ง</clr-dg-column> -->
+  <clr-dg-column>เบอร์โทร</clr-dg-column>
+  <clr-dg-column style="width: 20px;">email</clr-dg-column>
   <clr-dg-column></clr-dg-column>
 
   <clr-dg-row *ngFor="let l of list;">
     <clr-dg-cell>{{l.username}}</clr-dg-cell>
     <clr-dg-cell>{{l.hospname}}</clr-dg-cell>
+    <clr-dg-cell>{{l.cid}}</clr-dg-cell>
     <clr-dg-cell>{{l.prename}} {{l.fname}}</clr-dg-cell>
     <clr-dg-cell>{{l.lname}}</clr-dg-cell>
-    <clr-dg-cell>{{l.position}}</clr-dg-cell>
+    <!-- <clr-dg-cell>{{l.position}}</clr-dg-cell> -->
+    <clr-dg-cell>{{l.telephone}}</clr-dg-cell>
+    <clr-dg-cell style=" word-wrap: break-word;" >{{l.email}}</clr-dg-cell>
     <clr-dg-cell style="text-align: center;">
       <div class="btn-group">
         <button class="btn btn-sm btn-success" (click)="onClickEdit(l)" title="แก้ไข">
@@ -55,10 +61,16 @@
           <input type="text" name="username" [(ngModel)]="username" class="clr-col-9 clr-input width-fit">
         </div>
       </div>
-      <div class="clr-col-12">
+      <!-- <div class="clr-col-12">
         <div class="clr-form clr-form-compact clr-row">
           <label class="clr-control-label clr-col-3">รหัสผ่าน</label>
           <input type="text" name="password" [(ngModel)]="password" class="clr-col-9 clr-input width-fit">
+        </div>
+      </div> -->
+      <div class="clr-col-12">
+        <div class="clr-form clr-form-compact clr-row">
+          <label class="clr-control-label clr-col-3">อีเมล</label>
+          <input type="text" name="email" [(ngModel)]="email" class="clr-col-9 clr-input width-fit">
         </div>
       </div>
       <div class="clr-col-12">
@@ -67,10 +79,20 @@
           <input type="text" name="hospcode" [(ngModel)]="hospcode" class="clr-col-9 clr-input width-fit">
         </div>
       </div>
+      <!-- <div class="clr-col-12">
+        <div class="clr-form clr-form-compact clr-row">
+          <label class="clr-control-label clr-col-3">โรงพยาบาล</label>
+          <input disabled type="text" name="hospname" [(ngModel)]="hospname" class="clr-col-9 clr-input width-fit">
+        </div>
+      </div> -->
       <div class="clr-col-12">
         <div class="clr-form clr-form-compact clr-row">
           <label class="clr-control-label clr-col-3">คำนำหน้าชื่อ</label>
-          <input type="text" name="prename" [(ngModel)]="prename" class="clr-col-9 clr-input width-fit">
+          <div class="clr-select-wrapper" >
+            <select name="titleName" disabled [(ngModel)]="titleId" class="clr-select" style="width: 100%;">
+              <option *ngFor="let t of titleList" [value]="t.id">{{t.name}}</option>
+            </select>
+          </div>
         </div>
       </div>
       <div class="clr-col-12">
@@ -87,30 +109,36 @@
       </div>
       <div class="clr-col-12">
         <div class="clr-form clr-form-compact clr-row">
-          <label class="clr-control-label clr-col-3">ตำแหน่ง</label>
-          <input type="text" name="position" [(ngModel)]="position" class="clr-col-9 clr-input width-fit">
+          <label class="clr-control-label clr-col-3">telephone</label>
+          <input type="text" name="telephone" [(ngModel)]="telephone" class="clr-col-9 clr-input width-fit">
         </div>
       </div>
-      <div class="clr-col-12">
+      <!-- <div class="clr-col-12">
         <div class="clr-form clr-form-compact clr-row">
-          <label class="clr-control-label clr-col-3">อีเมล</label>
-          <input type="text" name="email" [(ngModel)]="email" class="clr-col-9 clr-input width-fit">
+          <label class="clr-control-label clr-col-3">ตำแหน่ง</label>
+          <div class="clr-select-wrapper" >
+            <select name="position" [(ngModel)]="positionId" class="clr-select" style="width: 100%;">
+              <option *ngFor="let p of positionList" [value]="p.id">{{p.name}}</option>
+            </select>
+          </div>
         </div>
-      </div>
-      <div class="clr-col-12">
+      </div> -->
+      
+      <!-- <div class="clr-col-12">
         <div class="clr-form clr-form-compact clr-row">
           <label class="clr-control-label clr-col-3">ระดับ</label>
-          <select name="level" [(ngModel)]="level">
+          <select name="type" [(ngModel)]="type">
             <option value="STAFF">STAFF</option>
             <option value="ADMIN">ADMIN</option>
             <option value="MANAGER">MANAGER</option>
           </select>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" [disabled]="!username || !password || !hospcode || !prename || !fname || !lname || !position || !email || !level" (click)="save()">
+    <!-- <button type="button" class="btn btn-success" [disabled]="!username || !password || !hospcode || !prename || !fname || !lname || !position || !email || !type" (click)="save()"> -->
+    <button type="button" class="btn btn-success" [disabled]="!username  || !fname || !lname || !email || !telephone" (click)="save()">
       บันทึก
     </button>
     <button type="button" class="btn btn-danger" (click)="modal = false">

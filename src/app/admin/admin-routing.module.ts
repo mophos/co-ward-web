@@ -19,6 +19,7 @@ import { AdminGuard } from '../admin-guard.service';
 import { AuthRestock } from '../auth-restock.service';
 import { AuthMinmax } from '../auth-minmax.service';
 import { AuthUsermanage } from '../auth-usermanage.service';
+import { AuthPatientsmanage } from './auth-patientsmanage.service';
 import { AuthSuppliemanage } from '../auth-suppliemanage.service';
 import { AuthHospitalmanage } from '../auth-hospitalmanage.service';
 import { ManageHospitalComponent } from './manage-hospital/manage-hospital.component';
@@ -31,6 +32,7 @@ import { FulfillSurgicalMaskComponent } from './fulfill-surgical-mask/fulfill-su
 import { FulfillSurgicalMaskListComponent } from './fulfill-surgical-mask-list/fulfill-surgical-mask-list.component';
 import { ManageNodeSurgicalComponent } from './manage-node-surgical/manage-node-surgical.component'
 import { ExportComponent } from './export/export.component';
+import { ManagePatientsComponent } from './manage-patients/manage-patients.component';
 
 const routes: Routes = [
   {
@@ -66,6 +68,7 @@ const routes: Routes = [
           { path: 'sub', component: ManageMinMaxSubComponent }]
       },
       { path: 'manage-user', canActivate: [AuthUsermanage], component: ManageUserComponent },
+      { path: 'manage-patients', canActivate: [AuthPatientsmanage], component: ManagePatientsComponent },
       { path: 'manage-supplies', canActivate: [AuthSuppliemanage], component: ManageSuppliesComponent },
       { path: 'manage-hospital', canActivate: [AuthHospitalmanage], component: ManageHospitalComponent },
       { path: 'manage-drug', component: ManageDrugComponent },

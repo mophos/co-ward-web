@@ -1,0 +1,504 @@
+<div class="clr-row">
+  <div class="clr-col-1">
+    ค้นหา :
+  </div>
+  <!-- <div class="clr-col-3">
+    <input class="clr-input width-fit" name="queryPreson" [(ngModel)]="queryPerson" placeholder="cid, ชื่อ, นามสกุล" />
+  </div> -->
+  <div class="clr-col-3">
+    <input class="clr-input width-fit" name="queryHn" [(ngModel)]="queryHn" placeholder="HN" />
+  </div>
+  <div class="clr-col-3">
+    <input class="clr-input width-fit" name="queryHc" (keyup)="doEnter($event)" [(ngModel)]="queryHc"
+      placeholder="HOSPCODE" />
+  </div>
+  <div class="clr-col-2">
+    <button class="btn btn-sm btn-success" (click)="onSearch()" title="search">
+      <clr-icon shape="search"></clr-icon>
+    </button>
+  </div>
+</div>
+
+
+<div class="clr-row" *ngIf="patient">
+  <div class="clr-col-lg-12 clr-col-md-12 clr-col-12">
+    <div class="card" style="margin-top: 0 !important;" *ngFor='let p of patient'>
+      <!-- <div class="card-header" style="padding: 0 !important; margin: 0 !important;">
+       
+      </div> -->
+      <div class="card-block">
+        <div class="card-title" style="padding: 0 0 10px 0 !important; margin: 0 !important;">
+          <!-- <div class="clr-row" >
+            <div class="clr-col-2" *ngIf="!editCase"> -->
+          <button class="btn btn-sm btn-success" (click)="onEditInfo(p)" title="แก้ไขข้อมูลผู้ป่วย">
+            <clr-icon shape="search"></clr-icon> แก้ไขข้อมูลผู้ป่วย
+          </button>
+          <!-- </div>
+            <div class="clr-col-2" > -->
+          <button class="btn btn-sm btn-primary" (click)="onEditCase(p)" title="แก้ไขเคสผู้ป่วย">
+            <clr-icon shape="search"></clr-icon> แก้ไขเคสผู้ป่วย
+          </button>
+        </div>
+        <!-- </div>
+        </div> -->
+        <div class="card-text">
+          <div class="clr-row">
+            <div class="clr-col-lg-6 clr-col-md-6 clr-col-6">
+              <div class="clr-row">
+                <div class="clr-col-3">
+                  <label>ชื่อ: </label>
+                </div>
+                <div class="clr-col-9">
+                  <label>{{p.titleName}} {{p.first_name}} {{p.last_name}}</label>
+                </div>
+
+                <!-- <div class="clr-col-3">
+                  <label>first_name: </label>
+                </div>
+                <div class="clr-col-9">
+                  <label >{{p.first_name}}</label>
+                  <input  class="clr-input width-fit" [(ngModel)]="tmpPatient.first_name" name="first_name" />
+                </div>
+                <div class="clr-col-3">
+                  <label>last_name: </label>
+                </div>
+                <div class="clr-col-9">
+                  <label >{{p.last_name}}</label>
+                  <input  class="clr-input width-fit" [(ngModel)]="tmpPatient.last_name" name="last_name" />
+                </div> -->
+
+
+                <div class="clr-col-3">
+                  <label>address: </label>
+                </div>
+                <div class="clr-col-9">
+                  <label>{{p.room_no }} {{p.road }} {{p.village_name }} {{p.tambon_name }}
+                    {{p.ampur_name }} {{p.province_name }} {{p.zipcode }}</label>
+                </div>
+                <div class="clr-col-3">
+                  <label>telephone: </label>
+                </div>
+                <div class="clr-col-9">
+                  <label>{{p.telephone || '-' }}</label>
+                </div>
+                <div class="clr-col-3">
+                  <label>birth_date: </label>
+                </div>
+                <div class="clr-col-9">
+                  <label>{{p.birth_date | dateTh:'DD/MM/YYYY'}}</label>
+                  <!-- <input class="clr-input width-fit" [(ngModel)]="model" name="example" /> -->
+                </div>
+                <div class="clr-col-3">
+                  <label>passport: </label>
+                </div>
+                <div class="clr-col-9">
+                  <label>{{p.passport || '-'}}</label>
+                </div>
+
+                <!-- <div class="clr-col-3">
+                  <button class="btn btn-sm btn-primary" (click)="saveEditInfo()" title="บันทึกผู้ป่วย">
+                    <clr-icon shape="save"></clr-icon> บันทึกผู้ป่วย
+                  </button>
+                </div> -->
+              </div>
+            </div>
+            <div class="clr-col-lg-6 clr-col-md-6 clr-col-6">
+              <div class="clr-row">
+                <div class="clr-col-3">
+                  <label>CID: </label>
+                </div>
+                <div class="clr-col-9">
+                  <label>{{p.cid}}</label>
+                  <!-- <input class="clr-input width-fit" [(ngModel)]="tmpPatient.cid" name="cid" /> -->
+                </div>
+                <div class="clr-col-3">
+                  <label>hospname: </label>
+                </div>
+                <div class="clr-col-9">
+                  <label>{{p.hospname}}</label>
+                  <!-- <input class="clr-input width-fit" [(ngModel)]="model" name="example" /> -->
+                </div>
+                <div class="clr-col-3">
+                  <label>hospcode: </label>
+                </div>
+                <div class="clr-col-9">
+                  <label>{{p.hospcode}}</label>
+                  <!-- <input class="clr-input width-fit" [(ngModel)]="model" name="example" /> -->
+                </div>
+                <div class="clr-col-3">
+                  <label>HN: </label>
+                </div>
+                <div class="clr-col-9">
+                  <label>{{p.hn}}</label>
+                  <!-- <input  class="clr-input width-fit" [(ngModel)]="tmpPatient.hn" name="hn" /> -->
+                </div>
+                <!-- <div class="clr-col-3">
+                  <label>AN: </label>
+                </div>
+                <div class="clr-col-9">
+                  <label >{{p.an}}</label>
+                  <input  class="clr-input width-fit" [(ngModel)]="tmpPatient.an" name="an" />
+                </div>
+                <div class="clr-col-3">
+                  <label>status: </label>
+                </div>
+                <div class="clr-col-9">
+                  <label>{{p.status}}</label>
+                </div> -->
+
+                <!-- <div class="clr-col-3">
+                  <label>sat_id: </label>
+                </div>
+                <div class="clr-col-9">
+                  <label>{{p.sat_id || '-' }}</label>
+                </div> -->
+
+                <!-- <div class="clr-col-3">
+                  <label>date_admit: </label>
+                </div>
+                <div class="clr-col-9">
+                  <label>{{p.date_admit | dateTh:'DD/MM/YYYY'}}</label>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="card-footer">
+        <button class="btn btn-sm btn-link">Footer Action 1</button>
+        <button class="btn btn-sm btn-link">Footer Action 2</button>
+      </div> -->
+  </div>
+</div>
+
+
+<div class="card" style="margin-top: 0 !important;" *ngIf='historys'>
+  <div class="card-block">
+    <div class="card-text">
+      <div class="clr-row">
+        <div class="clr-col-6">ประวัติการรักษา</div>
+      </div>
+      <clr-datagrid>
+        <clr-dg-column>AN</clr-dg-column>
+        <clr-dg-column>วันที่ Admit</clr-dg-column>
+        <clr-dg-column>วันที่ตรวจพบ</clr-dg-column>
+        <clr-dg-column>สถานะแรกเข้า</clr-dg-column>
+        <clr-dg-column>สถานะล่าสุด</clr-dg-column>
+        <clr-dg-column>วันที่ D/C</clr-dg-column>
+        <clr-dg-column></clr-dg-column>
+        <clr-dg-row *ngFor="let l of historys;let idx=index;">
+          <clr-dg-cell>{{l.an}}</clr-dg-cell>
+          <clr-dg-cell>{{l.date_admit | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
+          <clr-dg-cell>{{l.confirm_date | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
+          <clr-dg-cell>{{l.case_status }}</clr-dg-cell>
+          <clr-dg-cell>{{l.status }}</clr-dg-cell>
+          <clr-dg-cell>{{l.date_discharge | dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
+          <clr-dg-cell>
+            <div class="btn-group">
+              <button type="button" class="btn btn-sm btn-primary" (click)="editHistory(l)" aria-label="settings">
+                <!-- <clr-icon shape="search"></clr-icon> -->
+                แก้ไข
+              </button>
+              <button type="button" class="btn btn-sm btn-info" (click)="getDetails(l)" aria-label="settings">
+                <clr-icon shape="search"></clr-icon>
+              </button>
+              <button type="button" class="btn btn-sm btn-danger" (click)="deletedHistory(l)" aria-label="settings">
+                <!-- <clr-icon shape="search"></clr-icon> -->
+                ลบ
+              </button>
+            </div>
+           
+          </clr-dg-cell>
+        </clr-dg-row>
+        <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
+      </clr-datagrid>
+    </div>
+  </div>
+</div>
+
+<clr-modal [(clrModalOpen)]="editHis" [style.height.px]="1000">
+  <h3 class="modal-title">แก้ไขประวัติผู้ป่วย</h3>
+  <div class="modal-body" style="padding-bottom: 1px; height: 300px; " *ngIf='editHis'>
+    <!-- height: 300px; -->
+    <div class="clr-row">
+      <div class="clr-col-3">
+        <label>AN: </label>
+      </div>
+      <div class="clr-col-9">
+        <input class="clr-input width-fit" [(ngModel)]="tmpHis.an" name="an" />
+      </div>
+      <div class="clr-col-3">
+        <label>สถานะแรกเข้า: </label>
+      </div>
+      <div class="clr-col-9">
+        <div class="clr-select-wrapper">
+          <select name="caseStatus" [(ngModel)]="tmpHis.case_status" class="clr-select" style="width: 100%;">
+            <option value="COVID">COVID</option>
+            <option value="IPPUI">IP PUI</option>
+            <option value="OBSERVE">OBSERVE</option>
+          </select>
+        </div>
+      </div>
+      <div class="clr-col-3">
+        <label>สถานะล่าสุด: </label>
+      </div>
+      <div class="clr-col-9">
+        <div class="clr-select-wrapper">
+          <select name="caseStatus" [(ngModel)]="tmpHis.status" class="clr-select" style="width: 100%;">
+            <option value="ADMIT">ADMIT</option>
+            <option value="DISCHARGE">DISCHARGE</option>
+            <option value="NEGATIVE">NEGATIVE</option>
+            <option value="REFER" disabled>REFER</option>
+            <option value="DEATH">DEATH</option>
+          </select>
+        </div>
+      </div>
+      <div class="clr-col-3">
+        <label>date_discharge: </label>
+      </div>
+      <div class="clr-col-9">
+        <div class="clr-row">
+          <div class="clr-col-6" *ngIf='tmpHis.status === "ADMIT"'>
+           -
+          </div>
+          <div class="clr-col-6" *ngIf='tmpHis.status !== "ADMIT"'>
+            <!-- {{tmpHis.date_discharge | dateTh:'DD/MM/YYYY'}} -->
+            <my-date-picker-th name="sDate" [options]="myDatePickerOptions" [(ngModel)]="tmpHis.disDate" required>
+            </my-date-picker-th>
+          </div>
+          <div class="clr-col-6" *ngIf='tmpHis.status !== "ADMIT"'>
+            <div class="clr-select-wrapper">
+              <select name="timeDH" [(ngModel)]="tmpHis.timeDischarge.h" class="clr-select" style="width: 100%;">
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+              </select>
+            </div>:
+            <div class="clr-select-wrapper">
+              <select name="timeDM" [(ngModel)]="tmpHis.timeDischarge.m" class="clr-select" style="width: 100%;">
+                <option value="00">00</option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19"> 19 </option>
+                <option value="20"> 20 </option>
+                <option value="21"> 21 </option>
+                <option value="22"> 22 </option>
+                <option value="23"> 23 </option>
+                <option value="24"> 24 </option>
+                <option value="25"> 25 </option>
+                <option value="26"> 26 </option>
+                <option value="27"> 27 </option>
+                <option value="28"> 28 </option>
+                <option value="29"> 29 </option>
+                <option value="30"> 30 </option>
+                <option value="31"> 31 </option>
+                <option value="32"> 32 </option>
+                <option value="33"> 33 </option>
+                <option value="34"> 34 </option>
+                <option value="35"> 35 </option>
+                <option value="36"> 36 </option>
+                <option value="37"> 37 </option>
+                <option value="38"> 38 </option>
+                <option value="39"> 39 </option>
+                <option value="40"> 40 </option>
+                <option value="41"> 41 </option>
+                <option value="42"> 42 </option>
+                <option value="43"> 43 </option>
+                <option value="44"> 44 </option>
+                <option value="45"> 45 </option>
+                <option value="46"> 46 </option>
+                <option value="47"> 47 </option>
+                <option value="48"> 48 </option>
+                <option value="49"> 49 </option>
+                <option value="50"> 50 </option>
+                <option value="51"> 51 </option>
+                <option value="52"> 52 </option>
+                <option value="53"> 53 </option>
+                <option value="54"> 54 </option>
+                <option value="55"> 55 </option>
+                <option value="56"> 56 </option>
+                <option value="57"> 57 </option>
+                <option value="58"> 58 </option>
+                <option value="59"> 59 </option>
+
+              </select>
+            </div>
+            น.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class=" modal-footer">
+    <button type="button" class="btn btn-success" (click)="saveEditHistory()">บันทึก</button>
+    <button type="button" class="btn btn-danger" (click)="closeEditHistory()">ยกเลิก</button>
+
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="editInfo" [style.height.px]="500">
+  <h3 class="modal-title">แก้ไขข้อมูลผู้ป่วย</h3>
+  <div class="modal-body" *ngIf='editInfo'>
+    <div class="clr-row">
+      <div class="clr-col-3">
+        <label>gender: </label>
+      </div>
+      <div class="clr-col-9">
+        <div class="clr-select-wrapper">
+          <select name="titleName" [(ngModel)]="tmpPatient.gender_id" class="clr-select" style="width: 100%;">
+            <option *ngFor="let t of genderList" [value]="t.id">{{t.name}} </option>
+          </select>
+        </div>
+      </div>
+      <div class="clr-col-3">
+        <label>title: </label>
+      </div>
+      <div class="clr-col-9">
+        <div class="clr-select-wrapper">
+          <select name="titleName" [(ngModel)]="tmpPatient.title_id" class="clr-select" style="width: 100%;">
+            <option *ngFor="let t of titleList" [value]="t.id">{{t.name}} </option>
+          </select>
+        </div>
+      </div>
+      <div class="clr-col-3">
+        <label>first_name: </label>
+      </div>
+
+      <div class="clr-col-9">
+        <input class="clr-input width-fit" [(ngModel)]="tmpPatient.first_name" name="first_name" />
+      </div>
+      <div class="clr-col-3">
+        <label>last_name: </label>
+      </div>
+      <div class="clr-col-9">
+        <input class="clr-input width-fit" [(ngModel)]="tmpPatient.last_name" name="last_name" />
+      </div>
+      <div class="clr-col-3">
+        <label>CID: </label>
+      </div>
+      <div class="clr-col-9">
+        <input class="clr-input width-fit" [(ngModel)]="tmpPatient.cid" name="cid" />
+      </div>
+      <div class="clr-col-3">
+        <label>HN: </label>
+      </div>
+      <div class="clr-col-9">
+        <input class="clr-input width-fit" [(ngModel)]="tmpPatient.hn" name="hn" />
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="saveEditInfo()">บันทึก</button>
+    <button type="button" class="btn btn-danger" (click)="closeEditInfo()">ยกเลิก</button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="modalDetails" [clrModalSize]="'xl'">
+  <!-- <h3 class="modal-title" *ngIf="modalDetails">Hn:{{hnEdit}} An: {{anEdit}}</h3> -->
+  <div class="modal-body">
+    <div class="clr-row">
+      <div class="clr-col-12">
+        <clr-datagrid>
+          <clr-dg-column>วันที่บันทึก</clr-dg-column>
+          <clr-dg-column>ความรุนแรง</clr-dg-column>
+          <clr-dg-column>เตียง</clr-dg-column>
+          <clr-dg-column>เครื่องช่วยหายใจ</clr-dg-column>
+          <clr-dg-column>สถานะ</clr-dg-column>
+          <clr-dg-column></clr-dg-column>
+          <clr-dg-row *ngFor="let l of details;let idx=index;">
+            <clr-dg-cell>{{l.entry_date | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
+            <clr-dg-cell>{{l.gcs_name}}</clr-dg-cell>
+            <clr-dg-cell>{{l.bed_name}}</clr-dg-cell>
+            <clr-dg-cell>{{l.medical_supplie_name || '-'}}</clr-dg-cell>
+            <clr-dg-cell>{{l.status}}</clr-dg-cell>
+            <clr-dg-cell> <div class="btn-group">
+              <button type="button" class="btn btn-sm btn-primary" (click)="editHistoryDetail(l)" aria-label="settings">
+                <!-- <clr-icon shape="search"></clr-icon> -->
+                แก้ไข
+              </button>
+              <button type="button" class="btn btn-sm btn-danger" (click)="deletedHistoryDetail(l)" aria-label="settings">
+                <!-- <clr-icon shape="search"></clr-icon> -->
+                ลบ
+              </button>
+            </div></clr-dg-cell>
+          </clr-dg-row>
+          <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
+        </clr-datagrid>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="editHisDetail" [style.height.px]="500">
+  <h3 class="modal-title">แก้ไข case มูลผู้ป่วย</h3>
+  <div class="modal-body" style="padding-bottom: 1px;">
+    <div class="clr-row" *ngIf="editHisDetail">
+      <!-- <div class="clr-col-3">
+        <label>AN: </label>
+      </div>
+      <div class="clr-col-9">
+        <input class="clr-input width-fit" [(ngModel)]="tmpHis.an" name="an" />
+      </div> -->
+      <div class="clr-col-3">
+        <label>สถานะ: </label>
+      </div>
+      <div class="clr-col-9">
+        <div class="clr-select-wrapper">
+          <select name="caseStatusDetail" [(ngModel)]="tmpHisDetail.status" class="clr-select" style="width: 100%;">
+            <option value="ADMIT">ADMIT</option>
+            <option value="DISCHARGE">DISCHARGE</option>
+            <option value="NEGATIVE">NEGATIVE</option>
+            <option value="REFER">REFER</option>
+            <option value="DEATH">DEATH</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="saveEditHistoryDetail()">บันทึก</button>
+    <button type="button" class="btn btn-danger" (click)="closeEditHistoryDetail()">ยกเลิก</button>
+
+  </div>
+</clr-modal>
+
+<app-loadding #modalLoading></app-loadding>

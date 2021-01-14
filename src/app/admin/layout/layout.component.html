@@ -71,17 +71,12 @@
                 routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 จัดการ Min-Max
-            </a>
-            <a *ngIf="userManageMenu" clrVerticalNavLink routerLink="/admin/manage-user" title="จัดการผู้ใช้งาน"
-                routerLinkActive="active">
-                <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
-                จัดการผู้ใช้งาน
-            </a>
-            <a *ngIf="hospitalManageMenu" clrVerticalNavLink routerLink="/admin/manage-hospital"
-                title="จัดการสถานบริการ" routerLinkActive="active">
-                <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
-                จัดการสถานบริการ
-            </a> -->
+            </a>-->
+            <!-- <a *ngIf="hospitalManageMenu" clrVerticalNavLink routerLink="/admin/manage-hospital"
+               title="จัดการสถานบริการ" routerLinkActive="active">
+               <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+               จัดการสถานบริการ
+           </a> -->
             <a *ngIf="systemManageMenu" clrVerticalNavLink routerLink="/admin/systems" title="จัดการระบบ"
                 routerLinkActive="active">
                 <clr-icon shape="cog" class="is-solid"></clr-icon>
@@ -97,6 +92,16 @@
                 ส่งออกข้อมูล
             </a>
 
+            <a *ngIf="patientManageMenu" clrVerticalNavLink routerLink="/admin/manage-patients" title="จัดการผู้ป่วย"
+                routerLinkActive="active">
+                <clr-icon shape="cog" class="is-solid"></clr-icon>
+                จัดการผู้ป่วย
+            </a>
+            <a *ngIf="userManageMenu" clrVerticalNavLink routerLink="/admin/manage-user" title="จัดการผู้ใช้งาน"
+                routerLinkActive="active">
+                <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+                จัดการผู้ใช้งาน
+            </a> 
             <!-- <a clrVerticalNavLink routerLink="/admin/manage-drug" title="จัดการยา" routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 จัดการยา

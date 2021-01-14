@@ -81,7 +81,6 @@ export class CovidCaseStatusComponent implements OnInit {
   dateCut: string;
   public jwtHelper = new JwtHelperService();
   hospitalType: any;
-  demo: string;
   constructor(
     private covidCaseService: CovidCaseService,
     private alertService: AlertService,
@@ -91,7 +90,6 @@ export class CovidCaseStatusComponent implements OnInit {
     const token = sessionStorage.getItem('token');
     const decodedToken = this.jwtHelper.decodeToken(token);
     this.hospitalType = decodedToken.hospitalType;
-    this.demo = sessionStorage.getItem('demo');
   }
 
   async ngOnInit() {
