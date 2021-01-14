@@ -49,6 +49,7 @@ export class LayoutComponent implements OnInit {
   message: any;
   topic: any;
   cioMenu = false;
+  isHospital = true;
   public jwtHelper = new JwtHelperService();
   constructor(
     private route: Router,
@@ -76,6 +77,7 @@ export class LayoutComponent implements OnInit {
     this.checkSuppliesMenu = findIndex(this.rights, { name: 'STAFF_CHECK_SUPPLIES' }) === -1 ? false : true;
     if (decoded.providerType === 'ZONE' || decoded.providerType === 'SSJ') {
       this.reportMenu = true;
+      this.isHospital = false;
     } else {
       this.reportMenu = false;
     }
