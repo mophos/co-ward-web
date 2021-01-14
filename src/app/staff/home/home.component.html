@@ -2,7 +2,7 @@
 
 <div class="clr-row">
   <div class="clr-col-lg-12 clr-col-md-12 clr-col-12">
-    <div class="card">
+    <div class="card" *ngIf="isHospital">
       <div class="card-block">
         <div class="card-text" style="text-align:center;">
           <div class="clr-row">
@@ -91,8 +91,8 @@
 
 
 
-        <h2 *ngIf="alertBed">โรงพยาบาลของคุณยังไม่ตั้งค่าเตียง!!!</h2>
-        <h3 *ngIf="alertBed" (click)="goToBed()"><a>ไปที่เมนูตั้งค่าเตียงทันที</a> <br></h3>
+        <h2 *ngIf="alertBed && isHospital">โรงพยาบาลของคุณยังไม่ตั้งค่าเตียง!!!</h2>
+        <h3 *ngIf="alertBed && isHospital" (click)="goToBed()"><a>ไปที่เมนูตั้งค่าเตียงทันที</a> <br></h3>
 
         <img src="https://sv1.picz.in.th/images/2021/01/12/lc8nLg.jpg" style="width:70%" alt="">
         <!-- <h4>ระบบมีการปรับปรุงเมนู "บันทึกผู้ป่วยใหม่" เพื่อรองรับสถานการณ์ COVID-19 ในระยะที่ 2 ดังนี้</h4>

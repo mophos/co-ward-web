@@ -86,11 +86,11 @@ const routes: Routes = [
       { path: 'covid-case-old', canActivate: [AuthCovidCaseService], component: CovidCaseOldComponent },
       { path: 'covid-case-update', canActivate: [AuthCovidCaseService], component: CovidCaseUpdateComponent },
       { path: 'covid-case-status', canActivate: [AuthCovidCaseStatusService], component: CovidCaseStatusComponent },
-      { path: 'covid-case-approved-drugs', canActivate: [AuthApprovedDrugsService], component: ApproveDrugsComponent },
+      // { path: 'covid-case-approved-drugs', canActivate: [AuthApprovedDrugsService], component: ApproveDrugsComponent },
       { path: 'covid-case-approved-supplies', canActivate: [AuthApprovedSuppliesService], component: CovidCaseApprovedComponent },
       { path: 'province-set-sup-user', canActivate: [AuthProvinceSetSupUserService], component: ManageProvinceSetSupUserComponent },
       // ----------------------------------------------------------------------------------------------------------
-      { path: 'covid-case-requisition', canActivate: [AuthCovidCaseRequisitionService], component: CovidCaseRequisitionComponent },
+      // { path: 'covid-case-requisition', canActivate: [AuthCovidCaseRequisitionService], component: CovidCaseRequisitionComponent },
       { path: 'stock-products', canActivate: [AuthStockProductsService], component: InventoryStatusComponent },
       { path: 'receive-products', canActivate: [AuthStockProductsService], component: ReceivesComponent },
       { path: 'surgical-sphp', canActivate: [AuthPayService], component: SurgicalMaskShphComponent },

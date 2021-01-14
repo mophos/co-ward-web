@@ -20,6 +20,8 @@ export class HomeComponent implements OnInit {
   BedsSum = [];
   medicalSuppliesSum = [];
   date: any;
+  public jwtHelper = new JwtHelperService();
+  isHospital = true;
   constructor(
     private alertService: AlertService,
     private basicService: BasicService,
@@ -27,6 +29,10 @@ export class HomeComponent implements OnInit {
     private bedService: BedService,
     private router: Router
   ) {
+    const decoded = this.jwtHelper.decodeToken(sessionStorage.getItem('token'));
+    if (decoded.providerType === 'ZONE' || decoded.providerType === 'SSJ') {
+      this.isHospital = false;
+    }
   }
 
   ngOnInit() {
@@ -45,7 +51,7 @@ export class HomeComponent implements OnInit {
     try {
       const rs: any = await this.basicService.getDate();
       if (rs.ok) {
-          this.date = rs.rows;
+        this.date = rs.rows;
       }
     } catch (error) {
       this.alertService.error(error);
