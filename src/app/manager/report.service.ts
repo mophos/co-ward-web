@@ -97,6 +97,16 @@ export class ReportService {
     return await this.http.get(url).toPromise();
   }
 
+  async dischargeDaily(date) {
+    const url = `${this.apiUrl}/v1/report/discharge-daily?date=${date}`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async dischargeDailyExport(date) {
+    const url = `${this.apiUrl}/v1/report/discharge-daily?date=${date}`;
+    return await this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+
   async homework() {
     const url = `${this.apiUrl}/v1/report/homework`;
     return await this.http.get(url).toPromise();
