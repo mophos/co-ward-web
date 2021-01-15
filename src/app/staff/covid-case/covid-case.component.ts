@@ -38,7 +38,7 @@ export class CovidCaseComponent implements OnInit {
   data: any = {};
   id: any;
   isLoadding = false;
-
+  query = '';
   @ViewChild('modalHPVC') modalHPVC: HpvcComponent;
   constructor(
     private covidCaseService: CovidCaseService,
@@ -61,7 +61,7 @@ export class CovidCaseComponent implements OnInit {
   async getList() {
     try {
       this.isLoadding = true;
-      const rs: any = await this.covidCaseService.getCovidCase();
+      const rs: any = await this.covidCaseService.getCovidCase(this.query);
       if (rs.ok) {
         this.list = rs.rows;
       } else {
@@ -173,8 +173,14 @@ export class CovidCaseComponent implements OnInit {
 
   onClickHPVC(e) {
     console.log(e);
-    
+
     this.personId = e.person_id;
     this.modalHPVC.openModal(e.person_id);
+  }
+
+  doEnter(e) {
+    if (e.keyCode === 13) {
+      this.getList();
+    }
   }
 }

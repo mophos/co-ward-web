@@ -17,20 +17,20 @@
       <tr>
         <th  class="right td-border" rowspan="2" style="position: sticky; top: 0; ">โรงพยาบาล</th>
         <th  class="right td-border" rowspan="2" style="position: sticky; top: 0; ">วันที่ตั้งค่าเครื่องช่วยหายใจล่าสุด</th>
-        <th  class="right td-border" colspan="3" style="position: sticky; top: 0; ">Invasive</th>
-        <th  class="right td-border" colspan="3" style="position: sticky; top: 0; ">Non Invasive</th>
-        <th  class="right td-border" colspan="3" style="position: sticky; top: 0; ">High Flow</th>
+        <th  class="right td-border"  style="position: sticky; top: 0; ">Invasive</th>
+        <th  class="right td-border"  style="position: sticky; top: 0; ">Non Invasive</th>
+        <th  class="right td-border"  style="position: sticky; top: 0; ">High Flow</th>
       </tr>
       <tr>
         <th  class="right td-border" style="position: sticky; top: 0; ">ทั้งหมดสำหรับcovid</th>
-        <th  class="right td-border" style="position: sticky; top: 0; ">ใช้ไป</th>
-        <th  class="right td-border" style="position: sticky; top: 0; ">คงเหลือ</th>
+        <!-- <th  class="right td-border" style="position: sticky; top: 0; ">ใช้ไป</th>
+        <th  class="right td-border" style="position: sticky; top: 0; ">คงเหลือ</th> -->
         <th  class="right td-border" style="position: sticky; top: 0; ">ทั้งหมดสำหรับcovid</th>
-        <th  class="right td-border" style="position: sticky; top: 0; ">ใช้ไป</th>
-        <th  class="right td-border" style="position: sticky; top: 0; ">คงเหลือ</th>
+        <!-- <th  class="right td-border" style="position: sticky; top: 0; ">ใช้ไป</th>
+        <th  class="right td-border" style="position: sticky; top: 0; ">คงเหลือ</th> -->
         <th  class="right td-border" style="position: sticky; top: 0; ">ทั้งหมดสำหรับcovid</th>
-        <th  class="right td-border" style="position: sticky; top: 0; ">ใช้ไป</th>
-        <th  class="right td-border" style="position: sticky; top: 0; ">คงเหลือ</th>
+        <!-- <th  class="right td-border" style="position: sticky; top: 0; ">ใช้ไป</th>
+        <th  class="right td-border" style="position: sticky; top: 0; ">คงเหลือ</th> -->
       </tr>
     </thead>
     <tbody>
@@ -38,14 +38,14 @@
         <td class="left td-border">{{h.hospname}}</td>
         <td class="left td-border">{{h.updated_entry | dateTh:'DD/MM/YYYY'}}</td>
         <td class="right td-border">{{h['invasive_covid_qty'] || 0}}</td>
-        <td class="right td-border">{{h['invasive_usage_qty'] || 0}}</td>
-        <td class="right td-border">{{h['invasive_covid_qty']-h['invasive_usage_qty'] || 0 }}</td>
+        <!-- <td class="right td-border">{{h['invasive_usage_qty'] || 0}}</td>
+        <td class="right td-border">{{h['invasive_covid_qty']-h['invasive_usage_qty'] || 0 }}</td> -->
         <td class="right td-border">{{h['non_invasive_covid_qty'] || 0}}</td>
-        <td class="right td-border">{{h['non_invasive_usage_qty'] || 0}}</td>
-        <td class="right td-border">{{h['non_invasive_covid_qty']-h['non_invasive_usage_qty']||0 }}</td>
+        <!-- <td class="right td-border">{{h['non_invasive_usage_qty'] || 0}}</td>
+        <td class="right td-border">{{h['non_invasive_covid_qty']-h['non_invasive_usage_qty']||0 }}</td> -->
         <td class="right td-border">{{h['high_flow_covid_qty'] || 0}}</td>
-        <td class="right td-border">{{h['high_flow_usage_qty'] || 0}}</td>
-        <td class="right td-border">{{h['high_flow_covid_qty']-h['high_flow_usage_qty']||0 }}</td>
+        <!-- <td class="right td-border">{{h['high_flow_usage_qty'] || 0}}</td>
+        <td class="right td-border">{{h['high_flow_covid_qty']-h['high_flow_usage_qty']||0 }}</td> -->
       </tr>
 
     </tbody>

@@ -8,8 +8,8 @@ export class CovidCaseService {
 
   constructor(private http: HttpClient, @Inject('API_URL') private apiUrl: string) { }
 
-  async getCovidCase() {
-    const url = `${this.apiUrl}/v1/staff/covid-case`;
+  async getCovidCase(query ='') {
+    const url = `${this.apiUrl}/v1/staff/covid-case?query=${query}`;
     return await this.http.get(url).toPromise();
   }
 

@@ -1,5 +1,5 @@
 <nav class="breadcrumb">
-  <span class="breadcrumb-item active">Case COVID</span>
+  <span class="breadcrumb-item active">ผู้ป่วยทั้งหมด</span>
 </nav>
 <div class="clr-row">
   <!-- <div class="clr-col-2">
@@ -28,7 +28,17 @@
     </button>
   </div> -->
 </div>
-
+<div class="clr-row">
+  <div class="clr-col-4">
+    <input class="clr-input width-fit" (keyup)="doEnter($event)" name="query" [(ngModel)]="query"
+      placeholder="Enter เพื่อค้นหา" />
+  </div>
+  <div class="clr-col-2">
+    <button class="btn btn-sm btn-primary">
+      <clr-icon shape="search" (click)="getList()"></clr-icon> ค้นหา
+    </button>
+  </div>
+</div>
 <div class="clr-row">
   <div class="clr-col-5">
     <clr-datagrid [clrDgLoading]="isLoadding" [style.height.px]="800">
