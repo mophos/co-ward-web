@@ -75,7 +75,7 @@
   <table class="table" *ngFor="let p of l.provinces">
     <thead>
       <tr>
-        <th colspan="16" style="text-align: left;">
+        <th colspan="19" style="text-align: left;">
           <h3>{{p.province_name}}</h3>
         </th>
       </tr>
@@ -87,8 +87,8 @@
         <th class="right">Cover All-2</th>
         <th class="right">N95</th>
         <th class="right">Shoe Cover</th>
-        <th class="right">Surgical hood</th>
-        <th class="right">Long glove</th>
+        <th class="right">Hood cover</th>
+        <th class="right">Nitrile Glove</th>
         <th class="right">Face shield</th>
         <th class="right">Surgical Mask</th>
         <th class="right">Powered air-purifying respirator</th>
@@ -96,6 +96,9 @@
         <th class="right">Alcohol 95%</th>
         <th class="right">Alcohol Gel</th>
         <th class="right">Disposable Glove (latex,nonsterile)</th>
+        <th class="right">Isolation gown</th>
+        <th class="right">Leg Cover</th>
+        <th class="right">Disposable cap</th>
       </tr>
     </thead>
     <tbody>
@@ -116,6 +119,9 @@
         <td class="right">{{h.alcohol_95_qty}}</td>
         <td class="right">{{h.alcohol_gel_qty}}</td>
         <td class="right">{{h.disposable_glove_qty}}</td>
+        <td class="right">{{h.isolation_gown_qty}}</td>
+        <td class="right">{{h.leg_cover_qty}}</td>
+        <td class="right">{{h.disposable_cap_qty}}</td>
       </tr>
       <!-- <tr>
         <td class="right" style="font-weight: bold;">รวม</td>
@@ -136,8 +142,8 @@
   <clr-dg-column>Cover All-1 (Industrial grade)</clr-dg-column>
   <clr-dg-column>Cover All-2 (Medical grade)</clr-dg-column>
   <clr-dg-column>Shoe Cover</clr-dg-column>
-  <clr-dg-column>Surgical hood</clr-dg-column>
-  <clr-dg-column>Long glove</clr-dg-column>
+  <clr-dg-column>Hood cover</clr-dg-column>
+  <clr-dg-column>Nitrile Glove</clr-dg-column>
   <clr-dg-column>Face shield</clr-dg-column>
 
   <clr-dg-row *ngFor="let l of list; let idx=index;">

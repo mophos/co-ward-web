@@ -103,7 +103,7 @@ export class ReportService {
   }
 
   async dischargeDailyExport(date) {
-    const url = `${this.apiUrl}/v1/report/discharge-daily?date=${date}`;
+    const url = `${this.apiUrl}/v1/report/discharge-daily/excel?date=${date}`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 
