@@ -146,4 +146,9 @@ export class ReportService {
     const url = `${this.apiUrl}/v1/report/summary-local-quarantine-province`;
     return await this.http.get(url).toPromise();
   }
+
+  async getLabPositive() {
+    const url = `${this.apiUrl}/v1/report/lab-positive`;
+    return await this.http.get(url).toPromise();
+  }
 }
