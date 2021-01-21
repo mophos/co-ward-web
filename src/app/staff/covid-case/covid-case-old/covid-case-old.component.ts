@@ -329,7 +329,7 @@ export class CovidCaseOldComponent implements OnInit {
 
   async onSelectCountry(e) {
     this.countryId = e.id;
-    if ( this.countryId === 20) {
+    if (this.countryId === 20) {
       this.setValue();
       this.setValueCurr();
     }
@@ -735,7 +735,7 @@ export class CovidCaseOldComponent implements OnInit {
             if (rs.case === 'NEW') {
               if (this.modalCIDType === 'CID') {
                 this.typeRegister = 'CID';
-                await this.infoCid(this.modalCIDCid);
+                await this.getInfo(this.modalCIDCid);
                 this.cid = this.modalCIDCid;
               } else if (this.modalCIDType === 'PASSPORT') {
                 this.typeRegister = 'PASSPORT';
@@ -772,10 +772,10 @@ export class CovidCaseOldComponent implements OnInit {
     this.modalCID = true;
   }
 
-  async infoCid(cid) {
+  async getInfo(key) {
     this.loading.show();
     try {
-      const rs: any = await this.covidCaseService.infoCid(cid);
+      const rs: any = await this.covidCaseService.infoCidByKey(key, this.peopleType);
       if (rs.ok) {
         this.data = rs.rows;
         await this.setData();
