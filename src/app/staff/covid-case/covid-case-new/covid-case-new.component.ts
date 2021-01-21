@@ -179,9 +179,10 @@ export class CovidCaseNewComponent implements OnInit {
     await this.getGCS();
     await this.getBeds();
     await this.getMedicalSupplies();
-
     if (this.peopleCaseType === 'THAI') {
-      this.infoCid(this.cid);
+      this.getInfo(this.cid, this.peopleCaseType);
+    } else if (this.peopleCaseType === 'FOREIGN') {
+      this.getInfo(this.passport, this.peopleCaseType);
     }
     // if (this.data.cid) {
     //   await this.setData();
@@ -871,7 +872,7 @@ export class CovidCaseNewComponent implements OnInit {
   //           if (rs.case === 'NEW') {
   //             if (this.modalCIDType === 'CID') {
   //               this.typeRegister = 'CID';
-  //               await this.infoCid(this.modalCIDCid);
+  //               await this.getInfo(this.modalCIDCid);
   //               this.cid = this.modalCIDCid;
   //             } else if (this.modalCIDType === 'PASSPORT') {
   //               this.typeRegister = 'PASSPORT';
@@ -908,10 +909,10 @@ export class CovidCaseNewComponent implements OnInit {
     this.modalCID = true;
   }
 
-  async infoCid(cid) {
+  async getInfo(key, type) {
     this.loading.show();
     try {
-      const rs: any = await this.covidCaseService.infoCid(cid);
+      const rs: any = await this.covidCaseService.infoCidByKey(key, type);
       console.log(rs);
 
       if (rs.ok) {

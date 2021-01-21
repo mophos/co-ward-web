@@ -60,6 +60,7 @@ export class CovidCaseStatusComponent implements OnInit {
   selected: any;
 
   modalDischarge = false;
+  modalDeath = false;
   modalDischargeType = 'HOME';
   s1 = [{ generic: 1, name: 'Hydroxychloroquine 200 mg.' }, { generic: 2, name: 'Chloroquine 250 mg.' }];
   s2 = [{ generic: 3, name: 'Darunavir 600mg+Ritonavir100 mg.' }, { generic: 4, name: 'Lopinavir 200 mg/Ritonavir 50 mg.' }];
@@ -175,7 +176,7 @@ export class CovidCaseStatusComponent implements OnInit {
     }
 
   }
-  
+
   async getBeds() {
     try {
       const rs: any = await this.basicAuthService.getBeds();
@@ -408,47 +409,51 @@ export class CovidCaseStatusComponent implements OnInit {
   }
 
   async save() {
-    const confirm = await this.alertService.confirm();
-    if (confirm) {
-      if (this.dateDischarge != null) {
-        try {
-          const obj: any = {};
-          let status = null;
-          if (this.modalDischargeType === 'HOME') {
-            status = 'DISCHARGE';
-          } else if (this.modalDischargeType === 'DEATH') {
-            status = 'DEATH';
-          } else if (this.modalDischargeType === 'REFER') {
-            status = 'REFER';
-            obj.hospitalId = this.hospitalId;
-            obj.reason = this.reason;
-          } else if (this.modalDischargeType === 'NEGATIVE') {
-            status = 'NEGATIVE';
-          }
-          obj.dateDischarge = this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day + ' ' + this.hour + ':' + this.minute + ':00';
-          obj.covidCaseId = this.selected.covid_case_id;
-          obj.status = status;
-
-          const rs: any = await this.covidCaseService.updateDischarge(obj, this.selected);
-          if (rs.ok) {
-            this.modalDischarge = false;
-            this.getList();
-            // this.getGCSSum();
-            // this.getBedSum();
-            // this.getMedicalSuppliesSum();
-            this.alertService.success();
-          } else {
-            console.log(rs.error);
-            this.alertService.serverError();
-          }
-        } catch (error) {
-          console.log(error);
-          this.alertService.serverError();
-        }
-      } else {
-        this.alertService.error('กรุณาระบุวันที่');
-      }
+    let textConfirm = 'คุณต้องการดำเนินการนี้ ใช่หรือไม่?';
+    if (this.modalDischargeType === 'DEATH') {
+      textConfirm = 'ผู้ป่วยเสียชีวิตจาก Covid ใช่หรือไม่ ถ้าไม่ใช่และผลเป็น Negative แล้วเสียชีวิตด้วยอาการอื่นให้กดยกเลิกและเลือกจำหน่าย "ตรวจไม่พบเชื้อ"';
     }
+    const confirm = await this.alertService.confirm(textConfirm);
+    // if (confirm) {
+    //   if (this.dateDischarge != null) {
+    //     try {
+    //       const obj: any = {};
+    //       let status = null;
+    //       if (this.modalDischargeType === 'HOME') {
+    //         status = 'DISCHARGE';
+    //       } else if (this.modalDischargeType === 'DEATH') {
+    //         status = 'DEATH';
+    //       } else if (this.modalDischargeType === 'REFER') {
+    //         status = 'REFER';
+    //         obj.hospitalId = this.hospitalId;
+    //         obj.reason = this.reason;
+    //       } else if (this.modalDischargeType === 'NEGATIVE') {
+    //         status = 'NEGATIVE';
+    //       }
+    //       obj.dateDischarge = this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day + ' ' + this.hour + ':' + this.minute + ':00';
+    //       obj.covidCaseId = this.selected.covid_case_id;
+    //       obj.status = status;
+
+    //       const rs: any = await this.covidCaseService.updateDischarge(obj, this.selected);
+    //       if (rs.ok) {
+    //         this.modalDischarge = false;
+    //         this.getList();
+    //         // this.getGCSSum();
+    //         // this.getBedSum();
+    //         // this.getMedicalSuppliesSum();
+    //         this.alertService.success();
+    //       } else {
+    //         console.log(rs.error);
+    //         this.alertService.serverError();
+    //       }
+    //     } catch (error) {
+    //       console.log(error);
+    //       this.alertService.serverError();
+    //     }
+    //   } else {
+    //     this.alertService.error('กรุณาระบุวันที่');
+    //   }
+    // }
   }
 
   uncheckRadio(listId, generic, type = '') {
