@@ -16,8 +16,10 @@ export class ReportDischargeDailyComponent implements OnInit {
     private service: ReportService,
     private alertService: AlertService
   ) { }
-  date: any;
+  dateDischarge: any;
+  dateEntry: any;
   list: any;
+  listEntry: any;
   @ViewChild('loading') loading: any;
   public jwtHelper = new JwtHelperService();
   myDatePickerOptions: IMyOptions = {
@@ -28,7 +30,14 @@ export class ReportDischargeDailyComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.date = {
+    this.dateDischarge = {
+      date: {
+        year: moment().get('year'),
+        month: moment().get('month') + 1,
+        day: moment().get('date')
+      }
+    };
+    this.dateEntry = {
       date: {
         year: moment().get('year'),
         month: moment().get('month') + 1,
@@ -38,17 +47,24 @@ export class ReportDischargeDailyComponent implements OnInit {
     this.getdischargeDaily();
   }
 
-  onChangeDate(e: any) {
+  onChangeDateDischarge(e: any) {
     if (e.formatted !== '') {
-      this.date = { date: e.date };
+      this.dateDischarge = { date: e.date };
       this.getdischargeDaily();
+    }
+  }
+
+  onChangeDateEntry(e: any) {
+    if (e.formatted !== '') {
+      this.dateEntry = { date: e.date };
+      this.getDischargeCaseEntryDate();
     }
   }
 
   async getdischargeDaily() {
     this.loading.show();
     try {
-      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
+      const date = this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day;
       const rs: any = await this.service.dischargeDaily(date);
       if (rs.ok) {
         this.list = rs.rows;
@@ -63,16 +79,51 @@ export class ReportDischargeDailyComponent implements OnInit {
     }
   }
 
+  async getDischargeCaseEntryDate() {
+    this.loading.show();
+    try {
+      const date = this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day;
+      const rs: any = await this.service.dischargeCaseEntryDate(date);
+      if (rs.ok) {
+        this.listEntry = rs.rows;
+        this.loading.hide();
+      } else {
+        this.loading.hide();
+        this.alertService.error();
+      }
+    } catch (error) {
+      this.loading.hide();
+      this.alertService.error(error);
+    }
+  }
+
   async doExportExcel() {
     this.loading.show();
     try {
-      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
+      const date = this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day;
       const rs: any = await this.service.dischargeDailyExport(date);
-      console.log(rs);
       if (!rs) {
         this.loading.hide();
       } else {
         this.downloadFile('รายงานผู้ป่วย DISCHARGE', 'xlsx', rs);
+        this.loading.hide();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.error();
+      this.loading.hide();
+    }
+  }
+
+  async doExportExcelEntryDate() {
+    this.loading.show();
+    try {
+      const date = this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day;
+      const rs: any = await this.service.dischargeCaseEntryDateExport(date);
+      if (!rs) {
+        this.loading.hide();
+      } else {
+        this.downloadFile('รายงานผู้ป่วย DISCHARGE ตามวันที่บันทึก', 'xlsx', rs);
         this.loading.hide();
       }
     } catch (error) {
