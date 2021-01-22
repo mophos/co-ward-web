@@ -82,7 +82,7 @@ export class ReportDischargeDailyComponent implements OnInit {
   async getDischargeCaseEntryDate() {
     this.loading.show();
     try {
-      const date = this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day;
+      const date = this.dateEntry.date.year + '-' + this.dateEntry.date.month + '-' + this.dateEntry.date.day;
       const rs: any = await this.service.dischargeCaseEntryDate(date);
       if (rs.ok) {
         this.listEntry = rs.rows;
@@ -118,7 +118,7 @@ export class ReportDischargeDailyComponent implements OnInit {
   async doExportExcelEntryDate() {
     this.loading.show();
     try {
-      const date = this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day;
+      const date = this.dateEntry.date.year + '-' + this.dateEntry.date.month + '-' + this.dateEntry.date.day;
       const rs: any = await this.service.dischargeCaseEntryDateExport(date);
       if (!rs) {
         this.loading.hide();
