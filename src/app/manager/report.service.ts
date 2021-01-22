@@ -107,6 +107,16 @@ export class ReportService {
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 
+  async dischargeCaseEntryDate(date) {
+    const url = `${this.apiUrl}/v1/report/discharge-entrydate?date=${date}`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async dischargeCaseEntryDateExport(date) {
+    const url = `${this.apiUrl}/v1/report/discharge-entrydate/excel?date=${date}`;
+    return await this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+
   async homework() {
     const url = `${this.apiUrl}/v1/report/homework`;
     return await this.http.get(url).toPromise();
@@ -144,6 +154,11 @@ export class ReportService {
 
   async summaryLocalQuarantineProvince() {
     const url = `${this.apiUrl}/v1/report/summary-local-quarantine-province`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async getLabPositive() {
+    const url = `${this.apiUrl}/v1/report/lab-positive`;
     return await this.http.get(url).toPromise();
   }
 }

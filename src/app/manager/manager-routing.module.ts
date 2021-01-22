@@ -1,3 +1,4 @@
+import { ReportLabPositiveComponent } from './report-lab-positive/report-lab-positive.component';
 
 import { ReportAdmitConfirmCaseComponent } from './report-admit-confirm-case/report-admit-confirm-case.component';
 import { ReportAdmitPuiCaseComponent } from './report-admit-pui-case/report-admit-pui-case.component';
@@ -109,7 +110,8 @@ const routes: Routes = [
       { path: 'report-admit-pui-case', component: ReportAdmitPuiCaseComponent },
       { path: 'report-records', component: ReportRecordsComponent },
       { path: 'report-local-quarantine', component: ReportLocalQuarantineComponent },
-      { path: 'report-discharge-daily', component: ReportDischargeDailyComponent }
+      { path: 'report-discharge-daily', component: ReportDischargeDailyComponent },
+      { path: 'report-lab-positive', component: ReportLabPositiveComponent }
     ]
   }
 ];

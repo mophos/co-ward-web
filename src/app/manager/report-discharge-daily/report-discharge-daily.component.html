@@ -5,59 +5,127 @@
 
 <br>
 
-<div class="clr-row">
-  <div class="clr-col-2">วันที่แสดงข้อมูล</div>
-  <div class="clr-col-2">
-    <my-date-picker-th name="date" [options]="myDatePickerOptions" (dateChanged)="onChangeDate($event)"
-      [(ngModel)]="date" required>
-    </my-date-picker-th>
-  </div>
-  <div class="clr-col-8">
-    <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
-      <clr-icon shape="download"></clr-icon>export excel
-    </button>
-  </div>
-</div>
-<div class="clr-row">
-  <div class="clr-col-12">
-    <span class="required">*</span> หมายเหตุ หากดูรายงานวันปัจจุบัน ข้อมูลอาจเปลี่ยนแปลง
-    เพราะรพ.สามารถแก้ไขข้อมูลได้ในวันปัจจุบัน
-  </div>
-</div>
+<clr-tabs>
+  <clr-tab>
+    <button clrTabLink>รายงานตามวันที่ Discharge</button>
+    <clr-tab-content *clrIfActive>
+      <br>
+      <div class="clr-row">
+        <div class="clr-col-2">วันที่แสดงข้อมูล</div>
+        <div class="clr-col-2">
+          <my-date-picker-th name="dateDischarge" [options]="myDatePickerOptions" (dateChanged)="onChangeDate($event)"
+            [(ngModel)]="dateDischarge" required>
+          </my-date-picker-th>
+        </div>
+        <div class="clr-col-8">
+          <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
+            <clr-icon shape="download"></clr-icon>export excel
+          </button>
+        </div>
+      </div>
+      <div class="clr-row">
+        <div class="clr-col-12">
+          <span class="required">*</span> หมายเหตุ หากดูรายงานวันปัจจุบัน ข้อมูลอาจเปลี่ยนแปลง
+          เพราะรพ.สามารถแก้ไขข้อมูลได้ในวันปัจจุบัน
+        </div>
+      </div>
 
-<clr-datagrid>
-  <clr-dg-column>เขต</clr-dg-column>
-  <clr-dg-column>DISCHARGE</clr-dg-column>
-  <clr-dg-column>NEGATIVE</clr-dg-column>
-  <clr-dg-column>REFER</clr-dg-column>
-  <clr-dg-column>DEATH</clr-dg-column>
-  <clr-dg-column>รวม</clr-dg-column>
-  <clr-dg-row *ngFor="let p of list">
-    <clr-dg-cell>{{p.zone_code}}</clr-dg-cell>
-    <clr-dg-cell>{{p.DISCHARGE}}</clr-dg-cell>
-    <clr-dg-cell>{{p.NEGATIVE}}</clr-dg-cell>
-    <clr-dg-cell>{{p.REFER}}</clr-dg-cell>
-    <clr-dg-cell>{{p.DEATH}}</clr-dg-cell>
-    <clr-dg-cell>{{p.DISCHARGE + p.NEGATIVE + p.REFER + p.DEATH}}</clr-dg-cell>
+      <clr-datagrid>
+        <clr-dg-column>เขต</clr-dg-column>
+        <clr-dg-column>DISCHARGE</clr-dg-column>
+        <clr-dg-column>NEGATIVE</clr-dg-column>
+        <clr-dg-column>REFER</clr-dg-column>
+        <clr-dg-column>DEATH</clr-dg-column>
+        <clr-dg-column>รวม</clr-dg-column>
+        <clr-dg-row *ngFor="let p of list">
+          <clr-dg-cell>{{p.zone_code}}</clr-dg-cell>
+          <clr-dg-cell>{{p.DISCHARGE}}</clr-dg-cell>
+          <clr-dg-cell>{{p.NEGATIVE}}</clr-dg-cell>
+          <clr-dg-cell>{{p.REFER}}</clr-dg-cell>
+          <clr-dg-cell>{{p.DEATH}}</clr-dg-cell>
+          <clr-dg-cell>{{p.DISCHARGE + p.NEGATIVE + p.REFER + p.DEATH}}</clr-dg-cell>
 
-    <clr-datagrid ngProjectAs="clr-dg-row-detail" *clrIfExpanded>
-      <clr-dg-column>จังหวัด</clr-dg-column>
-      <clr-dg-column>DISCHARGE</clr-dg-column>
-      <clr-dg-column>NEGATIVE</clr-dg-column>
-      <clr-dg-column>REFER</clr-dg-column>
-      <clr-dg-column>DEATH</clr-dg-column>
-      <clr-dg-column>รวม</clr-dg-column>
-      <clr-dg-row *ngFor="let h of p.value">
-        <clr-dg-cell>{{h.province_name}}</clr-dg-cell>
-        <clr-dg-cell>{{h.DISCHARGE}}</clr-dg-cell>
-        <clr-dg-cell>{{h.NEGATIVE}}</clr-dg-cell>
-        <clr-dg-cell>{{h.REFER}}</clr-dg-cell>
-        <clr-dg-cell>{{h.DEATH}}</clr-dg-cell>
-        <clr-dg-cell>{{h.DISCHARGE + h.NEGATIVE + h.REFER + h.DEATH}}</clr-dg-cell>
-      </clr-dg-row>
-    </clr-datagrid>
+          <clr-datagrid ngProjectAs="clr-dg-row-detail" *clrIfExpanded>
+            <clr-dg-column>จังหวัด</clr-dg-column>
+            <clr-dg-column>DISCHARGE</clr-dg-column>
+            <clr-dg-column>NEGATIVE</clr-dg-column>
+            <clr-dg-column>REFER</clr-dg-column>
+            <clr-dg-column>DEATH</clr-dg-column>
+            <clr-dg-column>รวม</clr-dg-column>
+            <clr-dg-row *ngFor="let h of p.value">
+              <clr-dg-cell>{{h.province_name}}</clr-dg-cell>
+              <clr-dg-cell>{{h.DISCHARGE}}</clr-dg-cell>
+              <clr-dg-cell>{{h.NEGATIVE}}</clr-dg-cell>
+              <clr-dg-cell>{{h.REFER}}</clr-dg-cell>
+              <clr-dg-cell>{{h.DEATH}}</clr-dg-cell>
+              <clr-dg-cell>{{h.DISCHARGE + h.NEGATIVE + h.REFER + h.DEATH}}</clr-dg-cell>
+            </clr-dg-row>
+          </clr-datagrid>
 
-  </clr-dg-row>
-</clr-datagrid>
+        </clr-dg-row>
+      </clr-datagrid>
+    </clr-tab-content>
+  </clr-tab>
+
+  <clr-tab>
+    <button (click)="getDischargeCaseEntryDate()" clrTabLink>รายงานตามวันที่บันทึก Discharge</button>
+    <clr-tab-content *clrIfActive>
+      <br>
+      <div class="clr-row">
+        <div class="clr-col-2">วันที่บันทึก Discharge</div>
+        <div class="clr-col-2">
+          <my-date-picker-th name="dateEntry" [options]="myDatePickerOptions" (dateChanged)="onChangeDateEntry($event)"
+            [(ngModel)]="dateEntry" required>
+          </my-date-picker-th>
+        </div>
+        <div class="clr-col-8">
+          <button class="btn btn-sm btn-primary" (click)="doExportExcelEntryDate()">
+            <clr-icon shape="download"></clr-icon>export excel
+          </button>
+        </div>
+      </div>
+      <div class="clr-row">
+        <div class="clr-col-12">
+          <span class="required">*</span> หมายเหตุ หากดูรายงานวันปัจจุบัน ข้อมูลอาจเปลี่ยนแปลง
+          เพราะรพ.สามารถแก้ไขข้อมูลได้ในวันปัจจุบัน
+        </div>
+      </div>
+      <clr-datagrid>
+        <clr-dg-column>เขต</clr-dg-column>
+        <clr-dg-column>DISCHARGE</clr-dg-column>
+        <clr-dg-column>NEGATIVE</clr-dg-column>
+        <clr-dg-column>REFER</clr-dg-column>
+        <clr-dg-column>DEATH</clr-dg-column>
+        <clr-dg-column>รวม</clr-dg-column>
+        <clr-dg-row *ngFor="let p of listEntry">
+          <clr-dg-cell>{{p.zone_code}}</clr-dg-cell>
+          <clr-dg-cell>{{p.DISCHARGE}}</clr-dg-cell>
+          <clr-dg-cell>{{p.NEGATIVE}}</clr-dg-cell>
+          <clr-dg-cell>{{p.REFER}}</clr-dg-cell>
+          <clr-dg-cell>{{p.DEATH}}</clr-dg-cell>
+          <clr-dg-cell>{{p.DISCHARGE + p.NEGATIVE + p.REFER + p.DEATH}}</clr-dg-cell>
+
+          <clr-datagrid ngProjectAs="clr-dg-row-detail" *clrIfExpanded>
+            <clr-dg-column>จังหวัด</clr-dg-column>
+            <clr-dg-column>DISCHARGE</clr-dg-column>
+            <clr-dg-column>NEGATIVE</clr-dg-column>
+            <clr-dg-column>REFER</clr-dg-column>
+            <clr-dg-column>DEATH</clr-dg-column>
+            <clr-dg-column>รวม</clr-dg-column>
+            <clr-dg-row *ngFor="let h of p.value">
+              <clr-dg-cell>{{h.province_name}}</clr-dg-cell>
+              <clr-dg-cell>{{h.DISCHARGE}}</clr-dg-cell>
+              <clr-dg-cell>{{h.NEGATIVE}}</clr-dg-cell>
+              <clr-dg-cell>{{h.REFER}}</clr-dg-cell>
+              <clr-dg-cell>{{h.DEATH}}</clr-dg-cell>
+              <clr-dg-cell>{{h.DISCHARGE + h.NEGATIVE + h.REFER + h.DEATH}}</clr-dg-cell>
+            </clr-dg-row>
+          </clr-datagrid>
+
+        </clr-dg-row>
+      </clr-datagrid>
+    </clr-tab-content>
+  </clr-tab>
+</clr-tabs>
 
 <app-loadding #loading></app-loadding>
