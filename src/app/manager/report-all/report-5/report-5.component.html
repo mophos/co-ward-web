@@ -73,12 +73,12 @@
         ข้อมูลล่าสุด: {{ h.updated_entry | dateTh:'DD/MM/YYYY hh:mm'}}
       </label>
     </td>
-    <td class="text-right  td-border">{{(h.aiir_qty || 0)+(h.modified_aiir_qty || 0)+(h.isolate_qty || 0)+(h.cohort_qty
-      || 0)| number:'1.0-0'}}</td>
+    <td class="text-right  td-border">
+      {{(h.aiir_covid_qty || 0)+(h.modified_aiir_covid_qty || 0)+(h.isolate_covid_qty || 0)+(h.cohort_covid_qty || 0)| number:'1.0-0'}}</td>
     <td class="text-right  td-border">{{(h.sum || 0)| number:'1.0-0'}}</td>
-    <td class="text-right  td-border">{{(h.aiir_spare_qty || 0)+(h.modified_aiir_spare_qty || 0)+(h.isolate_spare_qty ||
-      0)+(h.cohort_spare_qty || 0)| number:'1.0-0'}}</td>
-    <td class="text-right  td-border">{{((h.aiir_qty || 0)+(h.modified_aiir_qty || 0)+(h.isolate_qty || 0)+(h.cohort_qty
+    <td class="text-right  td-border">
+      {{(h.aiir_spare_qty || 0)+(h.modified_aiir_spare_qty || 0)+(h.isolate_spare_qty || 0)+(h.cohort_spare_qty || 0)| number:'1.0-0'}}</td>
+    <td class="text-right  td-border">{{((h.aiir_covid_qty || 0)+(h.modified_aiir_covid_qty || 0)+(h.isolate_covid_qty || 0)+(h.cohort_covid_qty
       ||
       0))-(h.sum)-((h.aiir_spare_qty || 0)+(h.modified_aiir_spare_qty || 0)+(h.isolate_spare_qty ||
       0)+(h.cohort_spare_qty ||
