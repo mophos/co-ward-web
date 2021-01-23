@@ -25,6 +25,7 @@ export class LayoutComponent implements OnInit {
   covidCaseStatusMenu: any;
   covidApproveDrugsMenu: any;
   covidApproveSuppliesMenu: any;
+  covidCaseOldMenu: any;
   // ---------------------------------
   covidCaseRequisitionMenu: any;
   covidProductStock: any;
@@ -62,6 +63,7 @@ export class LayoutComponent implements OnInit {
     this.topic = decoded.mqttTopic;
 
     this.covidCaseMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE' }) === -1 ? false : true;
+    this.covidCaseOldMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE_OLD' }) === -1 ? false : true;
     this.covidCaseStatusMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE_STATUS' }) === -1 ? false : true;
     this.covidApproveDrugsMenu = findIndex(this.rights, { name: 'STAFF_APPROVED_DRUGS' }) === -1 ? false : true;
     this.covidApproveSuppliesMenu = findIndex(this.rights, { name: 'STAFF_APPROVED_SUPPLIES' }) === -1 ? false : true;
@@ -96,7 +98,7 @@ export class LayoutComponent implements OnInit {
   }
 
 
-  async  ngOnInit() {
+  async ngOnInit() {
     await this.getSystems();
     // await this.initialSocket();
   }
