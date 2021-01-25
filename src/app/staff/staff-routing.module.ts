@@ -74,7 +74,7 @@ const routes: Routes = [
   {
     path: 'staff',
     component: LayoutComponent,
-    canActivate: [StaffGuard],
+    // canActivate: [StaffGuard],
     children: [
       { path: '', redirectTo: 'covid-case', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },

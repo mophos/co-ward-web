@@ -14,7 +14,12 @@ export class CovidCaseService {
   }
 
   async getListOldPatients(token = '') {
-    const url = `${this.apiUrl}/v1/staff/covid-case/list/old-patient?token=${token}`;
+    let url;
+    if (token) {
+      url = `${this.apiUrl}/v1/staff/covid-case/list/old-patient?token=${token}`;
+    } else {
+      url = `${this.apiUrl}/v1/staff/covid-case/list/old-patient`;
+    }
     return await this.http.get(url).toPromise();
   }
 
@@ -128,16 +133,32 @@ export class CovidCaseService {
   }
 
   async getBeds(token = '') {
-    const url = `${this.apiUrl}/v1/staff/covid-case/beds?token=${token}`;
+    let url;
+    if (token) {
+      url = `${this.apiUrl}/v1/staff/covid-case/beds?token=${token}`;
+    } else {
+      url = `${this.apiUrl}/v1/staff/covid-case/beds`;
+    }
     return await this.http.get(url).toPromise();
   }
 
   async getGCS(token = '') {
-    const url = `${this.apiUrl}/v1/staff/covid-case/gcs?token=${token}`;
+    let url;
+    if (token) {
+      url = `${this.apiUrl}/v1/staff/covid-case/gcs?token=${token}`;
+    } else {
+      url = `${this.apiUrl}/v1/staff/covid-case/gcs`;
+    }
     return await this.http.get(url).toPromise();
   }
   async getVentilators(token = '') {
-    const url = `${this.apiUrl}/v1/staff/covid-case/ventilators?token=${token}`;
+    let url;
+    if (token) {
+      url = `${this.apiUrl}/v1/staff/covid-case/ventilators?token=${token}`;
+    } else {
+
+      url = `${this.apiUrl}/v1/staff/covid-case/ventilators`;
+    }
     return await this.http.get(url).toPromise();
   }
   async getMedicalSupplies() {

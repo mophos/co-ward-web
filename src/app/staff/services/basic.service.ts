@@ -14,7 +14,12 @@ export class BasicService {
   }
 
   async getDate(token = '') {
-    const url = `${this.apiUrl}/date?token=${token}`;
+    let url;
+    if (token) {
+      url = `${this.apiUrl}/date?token=${token}`;
+    } else {
+      url = `${this.apiUrl}/date`;
+    }
     return await this.http.get(url).toPromise();
   }
 

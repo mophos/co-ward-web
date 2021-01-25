@@ -10,7 +10,12 @@ export class BedService {
     @Inject('API_URL') private apiUrl: string) { }
 
   async getBeds(token = '') {
-    const url = `${this.apiUrl}/v1/staff/bed?token=${token}`;
+    let url;
+    if (token) {
+      url = `${this.apiUrl}/v1/staff/bed?token=${token}`;
+    } else {
+      url = `${this.apiUrl}/v1/staff/bed`;
+    }
     return await this.http.get(url).toPromise();
   }
 
