@@ -56,11 +56,11 @@ export class LayoutComponent implements OnInit {
     private route: Router,
     private basicService: BasicService
   ) {
-    const decoded = this.jwtHelper.decodeToken(sessionStorage.getItem('token'));
-    this.fullname = decoded.fullname;
-    this.hospname = decoded.hospname;
-    this.rights = decoded.rights;
-    this.topic = decoded.mqttTopic;
+    // const decoded = this.jwtHelper.decodeToken(sessionStorage.getItem('token'));
+    // this.fullname = decoded.fullname;
+    // this.hospname = decoded.hospname;
+    // this.rights = decoded.rights;
+    // this.topic = decoded.mqttTopic;
 
     this.covidCaseMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE' }) === -1 ? false : true;
     this.covidCaseOldMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE_OLD' }) === -1 ? false : true;
@@ -77,18 +77,18 @@ export class LayoutComponent implements OnInit {
     this.trackingMenu = findIndex(this.rights, { name: 'STAFF_TRACKING' }) === -1 ? false : true;
     // ---------------------------------------------------------------------------------------------------
     this.checkSuppliesMenu = findIndex(this.rights, { name: 'STAFF_CHECK_SUPPLIES' }) === -1 ? false : true;
-    if (decoded.providerType === 'ZONE' || decoded.providerType === 'SSJ') {
-      this.reportMenu = true;
-      this.isHospital = false;
-    } else {
-      this.reportMenu = false;
-    }
+    // if (decoded.providerType === 'ZONE' || decoded.providerType === 'SSJ') {
+    //   this.reportMenu = true;
+    //   this.isHospital = false;
+    // } else {
+    //   this.reportMenu = false;
+    // }
 
-    if (decoded.providerType === 'ZONE') {
-      this.reportAll = true;
-    } else {
-      this.reportAll = false;
-    }
+    // if (decoded.providerType === 'ZONE') {
+    //   this.reportAll = true;
+    // } else {
+    //   this.reportAll = false;
+    // }
     // ---------------------------------------------------------------------------------------------------
     this.settingBasicMenu = findIndex(this.rights, { name: 'STAFF_SETTING_BASIC' }) === -1 ? false : true;
     this.settingBedsMenu = findIndex(this.rights, { name: 'STAFF_SETTING_BEDS' }) === -1 ? false : true;

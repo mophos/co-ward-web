@@ -31,13 +31,13 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    const decoded = this.jwtHelper.decodeToken(sessionStorage.getItem('token'));
-    if (decoded.providerType === 'ZONE' || decoded.providerType === 'SSJ') {
-      this.isHospital = false;
-    }
     const params = this.route.snapshot.params;
     this.token = params.token;
     console.log(this.token);
+    // const decoded = this.jwtHelper.decodeToken(sessionStorage.getItem('token'));
+    // if (decoded.providerType === 'ZONE' || decoded.providerType === 'SSJ') {
+    //   this.isHospital = false;
+    // }
 
   }
 
