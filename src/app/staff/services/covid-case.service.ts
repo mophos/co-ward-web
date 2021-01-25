@@ -13,7 +13,7 @@ export class CovidCaseService {
     return await this.http.get(url).toPromise();
   }
 
-  async getListOldPatients(token) {
+  async getListOldPatients(token = '') {
     const url = `${this.apiUrl}/v1/staff/covid-case/list/old-patient?token=${token}`;
     return await this.http.get(url).toPromise();
   }
@@ -127,16 +127,16 @@ export class CovidCaseService {
     return await this.http.get(url).toPromise();
   }
 
-  async getBeds(token) {
+  async getBeds(token = '') {
     const url = `${this.apiUrl}/v1/staff/covid-case/beds?token=${token}`;
     return await this.http.get(url).toPromise();
   }
 
-  async getGCS(token) {
+  async getGCS(token = '') {
     const url = `${this.apiUrl}/v1/staff/covid-case/gcs?token=${token}`;
     return await this.http.get(url).toPromise();
   }
-  async getVentilators(token) {
+  async getVentilators(token = '') {
     const url = `${this.apiUrl}/v1/staff/covid-case/ventilators?token=${token}`;
     return await this.http.get(url).toPromise();
   }
