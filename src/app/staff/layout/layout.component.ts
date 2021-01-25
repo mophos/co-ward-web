@@ -21,8 +21,8 @@ export class LayoutComponent implements OnInit {
   collapse = false;
   rights: any;
 
-  covidCaseMenu: any;
-  covidCaseStatusMenu: any;
+  covidCaseMenu: any = true;
+  covidCaseStatusMenu: any = true;
   covidApproveDrugsMenu: any;
   covidApproveSuppliesMenu: any;
   covidCaseOldMenu: any;
@@ -62,21 +62,21 @@ export class LayoutComponent implements OnInit {
     // this.rights = decoded.rights;
     // this.topic = decoded.mqttTopic;
 
-    this.covidCaseMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE' }) === -1 ? false : true;
-    this.covidCaseOldMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE_OLD' }) === -1 ? false : true;
-    this.covidCaseStatusMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE_STATUS' }) === -1 ? false : true;
-    this.covidApproveDrugsMenu = findIndex(this.rights, { name: 'STAFF_APPROVED_DRUGS' }) === -1 ? false : true;
-    this.covidApproveSuppliesMenu = findIndex(this.rights, { name: 'STAFF_APPROVED_SUPPLIES' }) === -1 ? false : true;
-    this.settingProvinceSubUserMenu = findIndex(this.rights, { name: 'STAFF_PROVINCE_SET_SUPER_USER' }) === -1 ? false : true;
-    this.cioMenu = findIndex(this.rights, { name: 'CIO_CHECK_PATIENT' }) === -1 ? false : true;
-    // ---------------------------------------------------------------------------------------------------
-    this.covidCaseRequisitionMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE_REQUISITION' }) === -1 ? false : true;
-    this.covidProductStock = findIndex(this.rights, { name: 'STAFF_STOCK_PRODUCTS' }) === -1 ? false : true;
-    this.surgicalSPHP = findIndex(this.rights, { name: 'STAFF_SURGICAL_SPHP' }) === -1 ? false : true;
-    this.stockSuppliesMenu = findIndex(this.rights, { name: 'STAFF_STOCK_SUPPLIES' }) === -1 ? false : true;
-    this.trackingMenu = findIndex(this.rights, { name: 'STAFF_TRACKING' }) === -1 ? false : true;
-    // ---------------------------------------------------------------------------------------------------
-    this.checkSuppliesMenu = findIndex(this.rights, { name: 'STAFF_CHECK_SUPPLIES' }) === -1 ? false : true;
+    // this.covidCaseMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE' }) === -1 ? false : true;
+    // this.covidCaseOldMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE_OLD' }) === -1 ? false : true;
+    // this.covidCaseStatusMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE_STATUS' }) === -1 ? false : true;
+    // this.covidApproveDrugsMenu = findIndex(this.rights, { name: 'STAFF_APPROVED_DRUGS' }) === -1 ? false : true;
+    // this.covidApproveSuppliesMenu = findIndex(this.rights, { name: 'STAFF_APPROVED_SUPPLIES' }) === -1 ? false : true;
+    // this.settingProvinceSubUserMenu = findIndex(this.rights, { name: 'STAFF_PROVINCE_SET_SUPER_USER' }) === -1 ? false : true;
+    // this.cioMenu = findIndex(this.rights, { name: 'CIO_CHECK_PATIENT' }) === -1 ? false : true;
+    // // ---------------------------------------------------------------------------------------------------
+    // this.covidCaseRequisitionMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE_REQUISITION' }) === -1 ? false : true;
+    // this.covidProductStock = findIndex(this.rights, { name: 'STAFF_STOCK_PRODUCTS' }) === -1 ? false : true;
+    // this.surgicalSPHP = findIndex(this.rights, { name: 'STAFF_SURGICAL_SPHP' }) === -1 ? false : true;
+    // this.stockSuppliesMenu = findIndex(this.rights, { name: 'STAFF_STOCK_SUPPLIES' }) === -1 ? false : true;
+    // this.trackingMenu = findIndex(this.rights, { name: 'STAFF_TRACKING' }) === -1 ? false : true;
+    // // ---------------------------------------------------------------------------------------------------
+    // this.checkSuppliesMenu = findIndex(this.rights, { name: 'STAFF_CHECK_SUPPLIES' }) === -1 ? false : true;
     // if (decoded.providerType === 'ZONE' || decoded.providerType === 'SSJ') {
     //   this.reportMenu = true;
     //   this.isHospital = false;
@@ -89,12 +89,12 @@ export class LayoutComponent implements OnInit {
     // } else {
     //   this.reportAll = false;
     // }
-    // ---------------------------------------------------------------------------------------------------
-    this.settingBasicMenu = findIndex(this.rights, { name: 'STAFF_SETTING_BASIC' }) === -1 ? false : true;
-    this.settingBedsMenu = findIndex(this.rights, { name: 'STAFF_SETTING_BEDS' }) === -1 ? false : true;
-    this.settingMedicalSuppliesMenu = findIndex(this.rights, { name: 'STAFF_SETTING_MEDICAL_SUPPLIE' }) === -1 ? false : true;
-    this.settingProfessionalMenu = findIndex(this.rights, { name: 'STAFF_SETTING_PROFESSIONAL' }) === -1 ? false : true;
-    this.settingUserMenu = findIndex(this.rights, { name: 'STAFF_SETTING_USERS' }) === -1 ? false : true;
+    // // ---------------------------------------------------------------------------------------------------
+    // this.settingBasicMenu = findIndex(this.rights, { name: 'STAFF_SETTING_BASIC' }) === -1 ? false : true;
+    // this.settingBedsMenu = findIndex(this.rights, { name: 'STAFF_SETTING_BEDS' }) === -1 ? false : true;
+    // this.settingMedicalSuppliesMenu = findIndex(this.rights, { name: 'STAFF_SETTING_MEDICAL_SUPPLIE' }) === -1 ? false : true;
+    // this.settingProfessionalMenu = findIndex(this.rights, { name: 'STAFF_SETTING_PROFESSIONAL' }) === -1 ? false : true;
+    // this.settingUserMenu = findIndex(this.rights, { name: 'STAFF_SETTING_USERS' }) === -1 ? false : true;
   }
 
 
