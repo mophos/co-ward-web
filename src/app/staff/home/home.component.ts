@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   BedsSum = [];
   medicalSuppliesSum = [];
   date: any;
+  token: any;
   public jwtHelper = new JwtHelperService();
   isHospital = true;
   constructor(
@@ -27,12 +28,17 @@ export class HomeComponent implements OnInit {
     private basicService: BasicService,
     private covidCaseService: CovidCaseService,
     private bedService: BedService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     const decoded = this.jwtHelper.decodeToken(sessionStorage.getItem('token'));
     if (decoded.providerType === 'ZONE' || decoded.providerType === 'SSJ') {
       this.isHospital = false;
     }
+    const params = this.route.snapshot.params;
+    this.token = params.token;
+    console.log(this.token);
+
   }
 
   ngOnInit() {
@@ -49,7 +55,7 @@ export class HomeComponent implements OnInit {
 
   async getDate() {
     try {
-      const rs: any = await this.basicService.getDate();
+      const rs: any = await this.basicService.getDate(this.token);
       if (rs.ok) {
         this.date = rs.rows;
       }
@@ -59,7 +65,7 @@ export class HomeComponent implements OnInit {
   }
   async getBed() {
     try {
-      const rs: any = await this.bedService.getBeds();
+      const rs: any = await this.bedService.getBeds(this.token);
       if (rs.ok) {
         if (!rs.rows.length) {
           this.alertBed = true;
@@ -72,7 +78,7 @@ export class HomeComponent implements OnInit {
 
   async getList() {
     try {
-      const rs: any = await this.covidCaseService.getListOldPatients();
+      const rs: any = await this.covidCaseService.getListOldPatients(this.token);
       if (rs.ok) {
         this.list = rs.rows;
       } else {
@@ -84,7 +90,7 @@ export class HomeComponent implements OnInit {
   }
   async getGCSSum() {
     try {
-      const rs: any = await this.covidCaseService.getGCS();
+      const rs: any = await this.covidCaseService.getGCS(this.token);
       if (rs.ok) {
         this.gcsSum = rs.rows;
       } else {
@@ -98,7 +104,7 @@ export class HomeComponent implements OnInit {
 
   async getBedSum() {
     try {
-      const rs: any = await this.covidCaseService.getBeds();
+      const rs: any = await this.covidCaseService.getBeds(this.token);
       if (rs.ok) {
         this.BedsSum = rs.rows;
       } else {
@@ -112,7 +118,7 @@ export class HomeComponent implements OnInit {
 
   async getMedicalSuppliesSum() {
     try {
-      const rs: any = await this.covidCaseService.getVentilators();
+      const rs: any = await this.covidCaseService.getVentilators(this.token);
       if (rs.ok) {
         this.medicalSuppliesSum = rs.rows;
       } else {

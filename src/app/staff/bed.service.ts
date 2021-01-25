@@ -9,8 +9,8 @@ export class BedService {
   constructor(private http: HttpClient,
     @Inject('API_URL') private apiUrl: string) { }
 
-  async getBeds() {
-    const url = `${this.apiUrl}/v1/staff/bed`;
+  async getBeds(token) {
+    const url = `${this.apiUrl}/v1/staff/bed?token=${token}`;
     return await this.http.get(url).toPromise();
   }
 

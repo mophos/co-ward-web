@@ -13,8 +13,8 @@ export class CovidCaseService {
     return await this.http.get(url).toPromise();
   }
 
-  async getListOldPatients() {
-    const url = `${this.apiUrl}/v1/staff/covid-case/list/old-patient`;
+  async getListOldPatients(token) {
+    const url = `${this.apiUrl}/v1/staff/covid-case/list/old-patient?token=${token}`;
     return await this.http.get(url).toPromise();
   }
 
@@ -127,17 +127,17 @@ export class CovidCaseService {
     return await this.http.get(url).toPromise();
   }
 
-  async getBeds() {
-    const url = `${this.apiUrl}/v1/staff/covid-case/beds`;
+  async getBeds(token) {
+    const url = `${this.apiUrl}/v1/staff/covid-case/beds?token=${token}`;
     return await this.http.get(url).toPromise();
   }
 
-  async getGCS() {
-    const url = `${this.apiUrl}/v1/staff/covid-case/gcs`;
+  async getGCS(token) {
+    const url = `${this.apiUrl}/v1/staff/covid-case/gcs?token=${token}`;
     return await this.http.get(url).toPromise();
   }
-  async getVentilators() {
-    const url = `${this.apiUrl}/v1/staff/covid-case/ventilators`;
+  async getVentilators(token) {
+    const url = `${this.apiUrl}/v1/staff/covid-case/ventilators?token=${token}`;
     return await this.http.get(url).toPromise();
   }
   async getMedicalSupplies() {

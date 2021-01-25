@@ -13,8 +13,8 @@ export class BasicService {
     return await this.http.get(url).toPromise();
   }
 
-  async getDate() {
-    const url = `${this.apiUrl}/date`;
+  async getDate(token) {
+    const url = `${this.apiUrl}/date?token=${token}`;
     return await this.http.get(url).toPromise();
   }
 
