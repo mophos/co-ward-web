@@ -49,4 +49,9 @@ export class PatientsService {
         return await this.http.delete(url).toPromise();
     }
 
+    async getPatientDischarge(hospitalId) {
+        const url = `${this.url}/v1/admin/patient-discharge?hospitalId=${hospitalId}`;
+        return await this.http.get(url).toPromise();
+    }
+
 }
