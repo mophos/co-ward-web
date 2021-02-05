@@ -40,6 +40,7 @@ import { ManageNodeSurgicalComponent } from './manage-node-surgical/manage-node-
 import { FulfillSuppliesNewComponent } from './fulfill-supplies/fulfill-supplies-new/fulfill-supplies-new.component';
 import { ExportComponent } from './export/export.component';
 import { ManagePatientsComponent } from './manage-patients/manage-patients.component';
+import { ManagePatientDischargeComponent } from './manage-patient-discharge/manage-patient-discharge.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { ManagePatientsComponent } from './manage-patients/manage-patients.compo
     ManageNodeSurgicalComponent,
     FulfillSuppliesNewComponent,
     ExportComponent,
-    ManagePatientsComponent
+    ManagePatientsComponent,
+    ManagePatientDischargeComponent
   ],
   imports: [
     HelpModule,

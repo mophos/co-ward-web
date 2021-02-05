@@ -30,9 +30,10 @@ import { ManageRestockCollectionComponent } from './manage-restock-collection/ma
 import { ManageMinMaxDrugsComponent } from './manage-min-max-drugs/manage-min-max-drugs.component';
 import { FulfillSurgicalMaskComponent } from './fulfill-surgical-mask/fulfill-surgical-mask.component';
 import { FulfillSurgicalMaskListComponent } from './fulfill-surgical-mask-list/fulfill-surgical-mask-list.component';
-import { ManageNodeSurgicalComponent } from './manage-node-surgical/manage-node-surgical.component'
+import { ManageNodeSurgicalComponent } from './manage-node-surgical/manage-node-surgical.component';
 import { ExportComponent } from './export/export.component';
 import { ManagePatientsComponent } from './manage-patients/manage-patients.component';
+import { ManagePatientDischargeComponent } from './manage-patient-discharge/manage-patient-discharge.component';
 
 const routes: Routes = [
   {
@@ -94,6 +95,7 @@ const routes: Routes = [
       { path: 'systems', component: ManageSystemsComponent },
       { path: 'manage-node-surgical', component: ManageNodeSurgicalComponent },
       { path: 'export', component: ExportComponent },
+      { path: 'manage-patient-discharge', component: ManagePatientDischargeComponent },
     ]
   }
 ];

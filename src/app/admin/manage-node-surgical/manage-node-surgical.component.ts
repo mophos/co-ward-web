@@ -9,14 +9,14 @@ import { NodeSurgicalService } from '../services/node-surgical.service';
 })
 export class ManageNodeSurgicalComponent implements OnInit {
 
-  list: any
-  listDetail: any
-  query: any
-  nodeId: any
-  hospId: any
-  hospname: any
-  hospcode: any
-  addHops: any
+  list: any;
+  listDetail: any;
+  query: any;
+  nodeId: any;
+  hospId: any;
+  hospname: any;
+  hospcode: any;
+  addHops: any;
   modal: any = false;
   loading: any = false;
 
@@ -32,7 +32,7 @@ export class ManageNodeSurgicalComponent implements OnInit {
   async getListNode() {
     try {
       this.loading = true;
-      let rs: any = await this.nodeSurgicalService.getList(this.query)
+      const rs: any = await this.nodeSurgicalService.getList(this.query);
       if (rs.ok) {
         this.list = rs.rows;
         this.loading = false;
@@ -56,10 +56,10 @@ export class ManageNodeSurgicalComponent implements OnInit {
     try {
       this.addHops = '';
       this.loading = true;
-      this.nodeId = l.id
-      this.hospcode = l.hospcode
-      this.hospname = l.hospname
-      let rs: any = await this.nodeSurgicalService.getListDetail(this.nodeId)
+      this.nodeId = l.id;
+      this.hospcode = l.hospcode;
+      this.hospname = l.hospname;
+      const rs: any = await this.nodeSurgicalService.getListDetail(this.nodeId);
       if (rs.ok) {
         this.listDetail = rs.rows;
         this.loading = false;
@@ -85,9 +85,9 @@ export class ManageNodeSurgicalComponent implements OnInit {
   async onClickAdd() {
     try {
       this.loading = true;
-      let rs: any = await this.nodeSurgicalService.saveDetail(this.addHops, this.nodeId)
+      const rs: any = await this.nodeSurgicalService.saveDetail(this.addHops, this.nodeId);
       if (rs.ok) {
-        let rs: any = await this.nodeSurgicalService.getListDetail(this.nodeId)
+        const rs: any = await this.nodeSurgicalService.getListDetail(this.nodeId);
         if (rs.ok) {
           this.addHops = '';
           this.listDetail = rs.rows;
