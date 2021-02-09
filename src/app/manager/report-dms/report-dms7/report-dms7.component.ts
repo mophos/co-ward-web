@@ -29,6 +29,10 @@ export class ReportDms7Component implements OnInit {
   hfCovid: any;
   hfAll: any;
 
+  paQty: any;
+  paCovid: any;
+  paAll: any;
+
   myDatePickerOptions: IMyOptions = {
     inline: false,
     dateFormat: 'dd mmm yyyy',
@@ -71,6 +75,10 @@ export class ReportDms7Component implements OnInit {
         this.hfCovid = sumBy(rs.rows, 'high_flow');
         this.hfQty = sumBy(rs.rows, 'high_flow_qty') - sumBy(rs.rows, 'high_flow');
         this.hfAll = sumBy(rs.rows, 'high_flow_qty');
+
+        this.paCovid = sumBy(rs.rows, 'papr');
+        this.paQty = sumBy(rs.rows, 'papr_qty') - sumBy(rs.rows, 'papr');
+        this.paAll = sumBy(rs.rows, 'papr_qty');
         this.loading.hide();
       } else {
         this.loading.hide();

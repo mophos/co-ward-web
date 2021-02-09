@@ -69,6 +69,7 @@ import { Report8Component } from '../manager/report-all/report-8/report-8.compon
 import { Report9Component } from '../manager/report-all/report-9/report-9.component';
 import { Report10Component } from '../manager/report-all/report-10/report-10.component';
 import { ReportMedicalSuppliesComponent } from './report-medical-supplies/report-medical-supplies.component';
+import { ReportAdmitPuiComponent } from './report-admit-pui/report-admit-pui.component';
 
 const routes: Routes = [
   {
@@ -120,8 +121,8 @@ const routes: Routes = [
       { path: 'report-supplies', component: ReportSuppliesComponent },
       { path: 'report-medical', component: ReportMedicalSuppliesComponent },
       { path: 'report-admit-confirm-case', component: ReportAdmitConfirmCaseComponent },
+      { path: 'report-admit-pui', component: ReportAdmitPuiComponent },
       { path: 'cio-check-patient', component: CioCheckPatientComponent },
-      
       // ----------------------------------------------------------------------------------------------------------
       {
         path: 'setting',

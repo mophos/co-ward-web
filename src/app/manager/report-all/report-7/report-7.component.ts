@@ -39,6 +39,10 @@ export class Report7Component implements OnInit {
   hfCovid: any;
   hfAll: any;
 
+  paQty: any;
+  paCovid: any;
+  paAll: any;
+
   tab: any = 1;
 
   myDatePickerOptions: IMyOptions = {
@@ -106,6 +110,10 @@ export class Report7Component implements OnInit {
         this.hfCovid = sumBy(rs.rows, 'high_flow');
         this.hfQty = sumBy(rs.rows, 'high_flow_qty') - sumBy(rs.rows, 'high_flow');
         this.hfAll = sumBy(rs.rows, 'high_flow_qty');
+
+        this.paCovid = sumBy(rs.rows, 'papr');
+        this.paQty = sumBy(rs.rows, 'papr_qty') - sumBy(rs.rows, 'papr');
+        this.paAll = sumBy(rs.rows, 'papr_qty');
         this.loading.hide();
       } else {
         this.loading.hide();
@@ -135,6 +143,10 @@ export class Report7Component implements OnInit {
         this.hfCovid = sumBy(rs.rows, 'high_flow');
         this.hfQty = sumBy(rs.rows, 'high_flow_qty') - sumBy(rs.rows, 'high_flow');
         this.hfAll = sumBy(rs.rows, 'high_flow_qty');
+
+        this.paCovid = sumBy(rs.rows, 'papr');
+        this.paQty = sumBy(rs.rows, 'papr_qty') - sumBy(rs.rows, 'papr');
+        this.paAll = sumBy(rs.rows, 'papr_qty');
         this.loading.hide();
       } else {
         this.loading.hide();
@@ -164,6 +176,10 @@ export class Report7Component implements OnInit {
         this.hfCovid = sumBy(rs.rows, 'high_flow');
         this.hfQty = sumBy(rs.rows, 'high_flow_qty') - sumBy(rs.rows, 'high_flow');
         this.hfAll = sumBy(rs.rows, 'high_flow_qty');
+
+        this.paCovid = sumBy(rs.rows, 'papr');
+        this.paQty = sumBy(rs.rows, 'papr_qty') - sumBy(rs.rows, 'papr');
+        this.paAll = sumBy(rs.rows, 'papr_qty');
         this.loading.hide();
       } else {
         this.loading.hide();
@@ -187,6 +203,10 @@ export class Report7Component implements OnInit {
     this.hfCovid = sumBy(rows, 'high_flow');
     this.hfQty = sumBy(rows, 'high_flow_qty') - sumBy(rows, 'high_flow');
     this.hfAll = sumBy(rows, 'high_flow_qty');
+
+    this.hfCovid = sumBy(rows, 'papr');
+    this.hfQty = sumBy(rows, 'papr_qty') - sumBy(rows, 'papr');
+    this.hfAll = sumBy(rows, 'papr_qty');
   }
 
   async onChangeTab(v) {

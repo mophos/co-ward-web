@@ -31,8 +31,7 @@
       <router-outlet></router-outlet>
     </div>
     <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
-      <a  clrVerticalNavLink routerLink="/staff/home" title="หน้าหลัก"
-        routerLinkActive="active">
+      <a clrVerticalNavLink routerLink="/staff/home" title="หน้าหลัก" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="home" class="is-solid"></clr-icon>
         หนัาหลัก
       </a>
@@ -132,6 +131,11 @@
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         รายงานผู้ป่วย Admit (Confirm)
       </a>
+      <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff/report-admit-pui" title="รายงานผู้ป่วย Admit PUI"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        รายงานผู้ป่วย Admit PUI
+      </a>
       <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff/report-patient-admit"
         title="รายงานการบันทึกผู้ป่วยใหม่ประจำวัน" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
@@ -152,7 +156,7 @@
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         รายงานเตียง
       </a>
-      
+
       <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff/report-medical" title="รายงานเตียง"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>

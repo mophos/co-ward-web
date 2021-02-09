@@ -70,8 +70,12 @@
           <th colspan="3" class="td-border">Invasive ventilator</th>
           <th colspan="3" class="td-border">Non-invasive ventilator (NIV)</th>
           <th colspan="3" class="td-border">High Flow</th>
+          <th colspan="3" class="td-border">PAPR</th>
         </tr>
         <tr>
+          <th class="td-border">ทั้งหมด</th>
+          <th class="td-border">เตรียมสำหรับผู้ป่วย Covid</th>
+          <th class="td-border">ใช้กับผู้ป่วย Covid</th>
           <th class="td-border">ทั้งหมด</th>
           <th class="td-border">เตรียมสำหรับผู้ป่วย Covid</th>
           <th class="td-border">ใช้กับผู้ป่วย Covid</th>
@@ -93,6 +97,9 @@
           <th class="td-border text-right">{{hfAll| number:'1.0-0'}}</th>
           <th class="td-border text-right">{{hfAll - hfCovid| number:'1.0-0'}}</th>
           <th class="td-border text-right">{{hfCovid| number:'1.0-0'}}</th>
+          <th class="td-border text-right">{{paAll| number:'1.0-0'}}</th>
+          <th class="td-border text-right">{{paAll - paCovid| number:'1.0-0'}}</th>
+          <th class="td-border text-right">{{paCovid| number:'1.0-0'}}</th>
         </tr>
         <tr *ngFor="let i of listSectorFilter;let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
           <td class="text-left td-border">{{i.zone_code}}
@@ -108,6 +115,9 @@
           <td class="td-border text-right">{{i.high_flow_qty || 0 | number:'1.0-0'}}</td>
           <td class="td-border text-right">{{(i.high_flow_qty || 0) - (i.high_flow || 0) | number:'1.0-0'}}</td>
           <td class="td-border text-right">{{i.high_flow || 0 | number:'1.0-0'}}</td>
+          <td class="td-border text-right">{{i.papr_qty || 0 | number:'1.0-0'}}</td>
+          <td class="td-border text-right">{{(i.papr_qty || 0) - (i.papr || 0) | number:'1.0-0'}}</td>
+          <td class="td-border text-right">{{i.papr || 0 | number:'1.0-0'}}</td>
         </tr>
         <tr>
           <th class="text-left td-border" รวม></th>
@@ -120,6 +130,9 @@
           <th class="td-border text-right">{{hfAll| number:'1.0-0'}}</th>
           <th class="td-border text-right">{{hfAll - hfCovid| number:'1.0-0'}}</th>
           <th class="td-border text-right">{{hfCovid| number:'1.0-0'}}</th>
+          <th class="td-border text-right">{{paAll| number:'1.0-0'}}</th>
+          <th class="td-border text-right">{{paAll - paCovid| number:'1.0-0'}}</th>
+          <th class="td-border text-right">{{paCovid| number:'1.0-0'}}</th>
         </tr>
       </table>
       <label>{{listSectorFilter.length | number:'1.0-0' }} รายการ</label>
@@ -231,9 +244,13 @@
           <th colspan="3" class="td-border">Invasive ventilator</th>
           <th colspan="3" class="td-border">Non-invasive ventilator (NIV)</th>
           <th colspan="3" class="td-border">High Flow</th>
+          <th colspan="3" class="td-border">PAPR</th>
           <th rowspan="2">หน่วยงาน</th>
         </tr>
         <tr>
+          <th class="td-border">ทั้งหมด</th>
+          <th class="td-border">เตรียมสำหรับผู้ป่วย Covid</th>
+          <th class="td-border">ใช้กับผู้ป่วย Covid</th>
           <th class="td-border">ทั้งหมด</th>
           <th class="td-border">เตรียมสำหรับผู้ป่วย Covid</th>
           <th class="td-border">ใช้กับผู้ป่วย Covid</th>
@@ -255,6 +272,9 @@
           <th class="td-border text-right">{{hfAll| number:'1.0-0'}}</th>
           <th class="td-border text-right">{{hfAll - hfCovid| number:'1.0-0'}}</th>
           <th class="td-border text-right">{{hfCovid| number:'1.0-0'}}</th>
+          <th class="td-border text-right">{{paAll| number:'1.0-0'}}</th>
+          <th class="td-border text-right">{{paAll - paCovid| number:'1.0-0'}}</th>
+          <th class="td-border text-right">{{paCovid| number:'1.0-0'}}</th>
           <th></th>
         </tr>
         <tr *ngFor="let i of listHospitalFilter;let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
@@ -275,6 +295,9 @@
           <td class="td-border text-right">{{i.high_flow_qty || 0 | number:'1.0-0'}}</td>
           <td class="td-border text-right">{{(i.high_flow_qty || 0) - (i.high_flow || 0) | number:'1.0-0'}}</td>
           <td class="td-border text-right">{{i.high_flow || 0 | number:'1.0-0'}}</td>
+          <td class="td-border text-right">{{i.papr_qty || 0 | number:'1.0-0'}}</td>
+          <td class="td-border text-right">{{(i.papr_qty || 0) - (i.papr || 0) | number:'1.0-0'}}</td>
+          <td class="td-border text-right">{{i.papr || 0 | number:'1.0-0'}}</td>
           <td>{{i.sub_ministry_name}}</td>
         </tr>
         <tr>
@@ -288,6 +311,9 @@
           <th class="td-border text-right">{{hfAll| number:'1.0-0'}}</th>
           <th class="td-border text-right">{{hfAll - hfCovid| number:'1.0-0'}}</th>
           <th class="td-border text-right">{{hfCovid| number:'1.0-0'}}</th>
+          <th class="td-border text-right">{{paAll| number:'1.0-0'}}</th>
+          <th class="td-border text-right">{{paAll - paCovid| number:'1.0-0'}}</th>
+          <th class="td-border text-right">{{paCovid| number:'1.0-0'}}</th>
           <th></th>
         </tr>
       </table>
