@@ -25,9 +25,13 @@
     <th colspan="2" class="td-border">Non-invasive ventilator (NIV)</th>
     <th colspan="2" class="td-border">Invasive ventilator</th>
     <th colspan="2" class="td-border">High Flow</th>
+    <th colspan="2" class="td-border">PAPR</th>
     <th rowspan="2">หน่วยงาน</th>
   </tr>
   <tr>
+    <th class="td-border">ใช้กับผู้ป่วย Covid</th>
+    <!-- <th class="td-border">ว่างพร้อมใช้งานทั้งโรงพยาบาล</th> -->
+    <th class="td-border">ทั้งหมด</th>
     <th class="td-border">ใช้กับผู้ป่วย Covid</th>
     <!-- <th class="td-border">ว่างพร้อมใช้งานทั้งโรงพยาบาล</th> -->
     <th class="td-border">ทั้งหมด</th>
@@ -49,6 +53,9 @@
     <th class="td-border">{{hfCovid}}</th>
     <!-- <th class="td-border">{{hfQty}}</th> -->
     <th class="td-border">{{hfAll}}</th>
+    <th class="td-border">{{paCovid}}</th>
+    <!-- <th class="td-border">{{paQty}}</th> -->
+    <th class="td-border">{{paAll}}</th>
     <th></th>
   </tr>
   <tr *ngFor="let i of list;let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}"> 
@@ -67,6 +74,9 @@
     <td class="td-border">{{i.high_flow}}</td>
     <!-- <td class="td-border">{{i.high_flow_qty-i.high_flow}}</td> -->
     <td class="td-border">{{i.high_flow_qty}}</td>
+    <td class="td-border">{{i.papr}}</td>
+    <!-- <td class="td-border">{{i.papr_qty-i.papr}}</td> -->
+    <td class="td-border">{{i.papr_qty}}</td>
     <td>{{i.sub_ministry_name}}</td>
   </tr>
   <tr>
@@ -80,6 +90,9 @@
     <th class="td-border">{{hfCovid}}</th>
     <!-- <th class="td-border">{{hfQty}}</th> -->
     <th class="td-border">{{hfAll}}</th>
+    <th class="td-border">{{paCovid}}</th>
+    <!-- <th class="td-border">{{paQty}}</th> -->
+    <th class="td-border">{{paAll}}</th>
     <th></th>
   </tr>
 </table>

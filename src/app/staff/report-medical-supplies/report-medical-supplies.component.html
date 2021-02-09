@@ -10,7 +10,7 @@
     *ngFor="let p of l.provinces">
     <thead>
       <tr>
-        <th colspan="18" style="text-align: left;">
+        <th colspan="21" style="text-align: left;">
           <h3>{{p.province_name}}</h3>
         </th>
       </tr>
@@ -20,8 +20,12 @@
         <th  class="right td-border" colspan="3" style="position: sticky; top: 0; ">Invasive</th>
         <th  class="right td-border" colspan="3" style="position: sticky; top: 0; ">Non Invasive</th>
         <th  class="right td-border" colspan="3" style="position: sticky; top: 0; ">High Flow</th>
+        <th  class="right td-border" colspan="3" style="position: sticky; top: 0; ">PAPR</th>
       </tr>
       <tr>
+        <th  class="right td-border" style="position: sticky; top: 0; ">ทั้งหมดสำหรับcovid</th>
+        <th  class="right td-border" style="position: sticky; top: 0; ">ใช้ไป</th>
+        <th  class="right td-border" style="position: sticky; top: 0; ">คงเหลือ</th>
         <th  class="right td-border" style="position: sticky; top: 0; ">ทั้งหมดสำหรับcovid</th>
         <th  class="right td-border" style="position: sticky; top: 0; ">ใช้ไป</th>
         <th  class="right td-border" style="position: sticky; top: 0; ">คงเหลือ</th>
@@ -46,6 +50,9 @@
         <td class="right td-border">{{h['high_flow_covid_qty'] || 0}}</td>
         <td class="right td-border">{{h['high_flow_usage_qty'] || 0}}</td>
         <td class="right td-border">{{h['high_flow_covid_qty']-h['high_flow_usage_qty']||0 }}</td>
+        <td class="right td-border">{{h['papr_covid_qty'] || 0}}</td>
+        <td class="right td-border">{{h['papr_usage_qty'] || 0}}</td>
+        <td class="right td-border">{{h['papr_covid_qty']-h['papr_usage_qty']||0 }}</td>
       </tr>
 
     </tbody>
