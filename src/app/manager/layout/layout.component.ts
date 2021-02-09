@@ -17,7 +17,7 @@ export class LayoutComponent implements OnInit {
   reportResource: any;
   reportPatient: any;
   reportBed: any;
-  reportLabPositive: any;
+  reportLabPositive: any = true;
   public jwtHelper = new JwtHelperService();
   constructor(
     private route: Router,
@@ -29,7 +29,7 @@ export class LayoutComponent implements OnInit {
     this.reportResource = findIndex(this.rights, { name: 'MANAGER_REPORT_RESOURCE' }) === -1 ? false : true;
     this.reportPatient = findIndex(this.rights, { name: 'MANAGER_REPORT_PATIENT' }) === -1 ? false : true;
     this.reportBed = findIndex(this.rights, { name: 'MANAGER_REPORT_BED' }) === -1 ? false : true;
-    this.reportLabPositive = findIndex(this.rights, { name: 'MANAGER_REPORT_LAB_POSITIVE' }) === -1 ? false : true;
+    // this.reportLabPositive = findIndex(this.rights, { name: 'MANAGER_REPORT_LAB_POSITIVE' }) === -1 ? false : true;
   }
 
   ngOnInit() {
