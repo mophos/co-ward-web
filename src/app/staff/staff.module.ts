@@ -71,6 +71,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { CovidCaseNewV2Component } from './covid-case/covid-case-new-v2/covid-case-new-v2.component';
 import { CioCheckPatientComponent } from './cio-check-patient/cio-check-patient.component';
 import { ReportMedicalSuppliesComponent } from './report-medical-supplies/report-medical-supplies.component';
+import { ReportAdmitPuiComponent } from './report-admit-pui/report-admit-pui.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -104,6 +105,7 @@ import { ReportMedicalSuppliesComponent } from './report-medical-supplies/report
     ReportBedComponent,
     ReportSuppliesComponent,
     ReportPatientAdmitComponent,
+    ReportAdmitPuiComponent,
     ReportAdmitConfirmCaseComponent,
     DashboardComponent,
     ReceivesComponent,
