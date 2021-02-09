@@ -16,12 +16,14 @@ export class ReportLabPositiveComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getList();
   }
+  
   async getList() {
     try {
       const rs: any = await this.reportService.getLabPositive();
       if (rs.ok) {
-          this.list = rs.rows;
+        this.list = rs.rows;
       } else {
         this.alertService.error(rs.error);
       }

@@ -1,18 +1,21 @@
 <div class="container">
-  <div class="clr-row">
-    <div class="clr-col-5 clr-offset-1">
+  <div class="clr-row" >
+    <div [ngClass]="{'clr-col-5 clr-offset-1': btn1==1,'display-none':btn1==2,'clr-col-4':btn1==3}">
       <button class="btn  btn-block" style="font-size: 1.5rem;height:3rem" [ngClass]="{'btn-success': province === 'IN','btn-outline-success':province != 'IN' }"
         (click)="province = 'IN'">ผู้ป่วยอยู่ในประเทศไทย</button>
     </div>
-    <div class="clr-col-5 ">
-      <button class="btn  btn-block" style="font-size: 1.5rem;height:3rem;" [ngClass]="{'btn-success': province === 'OUT','btn-outline-success':province != 'OUT' }"
-        (click)="province = 'OUT'">ผู้ป่วยกลับจากต่างประเทศ</button>
+    <div [ngClass]="{'clr-col-5': btn1==1,'display-none':btn1==2,'clr-col-4' : btn1==3}">
+      <button class="btn  btn-block" title="ผู้ป่วยกลับจากต่างประเทศ" style="font-size: 1.5rem;height:3rem;" [ngClass]="{'btn-success': province === 'OUT','btn-outline-success':province != 'OUT' }"
+        (click)="province = 'OUT'">ผู้ป่วยกลับจากตปท.</button>
     </div>
-
+    <div [ngClass]="{'clr-col-4 clr-offset-4': btn1==2,'display-none':btn1==1,'clr-col-4':btn1==3}">
+      <button class="btn btn-block" style="font-size: 1.5rem;height:3rem;" [ngClass]="{'btn-success': province === 'FACTORY','btn-outline-success':province != 'FACTORY' }"
+        (click)="province = 'FACTORY'">ผู้ป่วยในโรงงาน</button>
+    </div>
   </div>
   <br>
   <br>
-  <div class="clr-row" [ngClass]="{hidden: !province}">
+  <div class="clr-row" [ngClass]="{'display-none': province.length == 0 || province == 'FACTORY'}">
     <div class="clr-col-3 clr-offset-3">
       <button class="btn  btn-block" style="font-size: 1.5rem;height:3rem" [ngClass]="{'btn-success': peopleType === 'THAI','btn-outline-success':peopleType != 'THAI' }"
         (click)="changePeopleType('THAI')">คนไทย</button>
@@ -22,9 +25,19 @@
         (click)="changePeopleType('FOREIGN')">คนต่างชาติ</button>
     </div>
   </div>
+  <div class="clr-row" [ngClass]="{'display-none': province.length ==0 || province=='OUT' || province =='IN'}">
+    <div class="clr-col-3 clr-offset-3">
+      <button class="btn  btn-block" style="font-size: 1.5rem;height:3rem" [ngClass]="{'btn-success': peopleType === 'THAI','btn-outline-success':peopleType != 'THAI' }"
+        (click)="changePeopleType('THAI')">คนไทย</button>
+    </div>
+    <div class="clr-col-3 ">
+      <button class="btn  btn-block" style="font-size: 1.5rem;height:3rem;" [ngClass]="{'btn-success': peopleType === 'STATELESS','btn-outline-success':peopleType != 'STATELESS' }"
+        (click)="changePeopleType('STATELESS')">ต่างด้าว</button>
+    </div>
+  </div>
   <br>
   <br>
-  <div class="clr-row" [ngClass]="{hidden: !province || !peopleType}">
+  <div class="clr-row" [ngClass]="{hidden: !province || !peopleType,'display-none':province=='FACTORY'}">
     <div class="clr-col-4">
       <button class="btn btn-outline-primary btn-block" style="font-size: 1.5rem;height:3rem" [ngClass]="{'btn-primary': caseType === 'IPPUI','btn-outline-primary':caseType != 'IPPUI' }"
         (click)="caseType='IPPUI'">IP PUI <span class="p4">(ผู้ป่วย admit รอผลตรวจ)</span></button>
@@ -40,10 +53,8 @@
   </div>
   <br>
   <br>
-  <div class="clr-row" [ngClass]="{hidden: !province||!peopleType||!caseType}">
-
+  <div class="clr-row" [ngClass]="{hidden: !province||!peopleType||(!caseType && province!='FACTORY')}">
     <div class="clr-col-3 clr-offset-2" *ngIf="peopleType=='THAI'">
-
       <div class="clr-form-control">
         <label for="basic" class="clr-control-label">เลขที่บัตรประชาชน</label>
         <div class="clr-control-container">
@@ -69,6 +80,18 @@
             <input type="checkbox" [(ngModel)]="blankPassport" (click)="activeButton()" style="margin-right: 0.5rem;"> ไม่มีเลขที่หนังสือเดินทาง (ไม่แนะนำ)
           </div>
           <!-- <span *ngIf="passpostError" class="clr-subtext">เลขที่หนังสือเดินทางผิด</span> -->
+        </div>
+      </div>
+    </div>
+    <div class="clr-col-3 clr-offset-2" *ngIf="peopleType=='STATELESS'">
+      <div class="clr-form-control">
+        <label for="basic" class="clr-control-label">Sat Code</label>
+        <div class="clr-control-container">
+          <div class="clr-input-wrapper" style="max-height: 3rem !important;">
+            <input type="text" id="basic" class="clr-input" (keyup)="onKeyPassport($event)" style="height:3rem !important;font-size: 1.3rem;"
+              name="satcode" [(ngModel)]="satcode">
+          </div>
+
         </div>
       </div>
     </div>

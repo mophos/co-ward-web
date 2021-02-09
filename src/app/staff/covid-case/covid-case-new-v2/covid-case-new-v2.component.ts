@@ -15,11 +15,11 @@ export class CovidCaseNewV2Component implements OnInit {
   typeRegister: any = 'NEW';
   caseType: any;
 
-  province = null;
+  province = '';
   peopleType = null;
   cidError = true;
   blankPassport = false;
-
+  btn1: any;
   @ViewChild('loading') loading: any;
   constructor(
     private covidCaseService: CovidCaseService,
@@ -28,6 +28,7 @@ export class CovidCaseNewV2Component implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.btn1 = 3;
   }
 
   activeButton() {

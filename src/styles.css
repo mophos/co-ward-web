@@ -1,124 +1,128 @@
 /* You can add global styles to this file, and also import other style files */
 
 .width-fit {
-  width: 100%;
+    width: 100%;
 }
 
 .font-version {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 .breadcrumb {
-  padding: 0.5rem 0.5rem;
-  list-style: none;
-  background-color: #eceeef;
+    padding: 0.5rem 0.5rem;
+    list-style: none;
+    background-color: #eceeef;
 }
 
 .breadcrumb::after {
-  display: block;
-  content: "";
-  clear: both;
+    display: block;
+    content: "";
+    clear: both;
 }
 
 .breadcrumb-item {
-  float: left;
+    float: left;
 }
 
 .hidden {
-  visibility: hidden;
+    visibility: hidden;
 }
 
 .breadcrumb-item+.breadcrumb-item::before {
-  display: inline-block;
-  padding-right: 0.5rem;
-  padding-left: 0.5rem;
-  color: #636c72;
-  content: "/";
+    display: inline-block;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    color: #636c72;
+    content: "/";
 }
 
 .breadcrumb-item+.breadcrumb-item:hover::before {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .breadcrumb-item+.breadcrumb-item:hover::before {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .breadcrumb-item.active {
-  color: #636c72;
+    color: #636c72;
 }
 
 .isError {
-  background-color: #F8B7B6;
+    background-color: #F8B7B6;
 }
 
 .isSuccess {
-  background-color: #DFF0D0;
+    background-color: #DFF0D0;
 }
 
 .isWarning {
-  background-color: #FFFCE8;
+    background-color: #FFFCE8;
 }
 
 .isProblem {
-  background-color: #FFE5C9;
+    background-color: #FFE5C9;
 }
 
 .isPrimary {
-  background-color: #0079b8;
+    background-color: #0079b8;
 }
 
 .editLine {
-  border-bottom: 2px solid #E62700;
-  background-color: #FFF0EE;
+    border-bottom: 2px solid #E62700;
+    background-color: #FFF0EE;
 }
 
 .ta-item {
-  position: relative;
-  z-index: 20000;
-  display: block;
-  width: 20rem;
-  text-align: left;
-  padding: 5px;
-  border: 1px black solid !important;
+    position: relative;
+    z-index: 20000;
+    display: block;
+    width: 20rem;
+    text-align: left;
+    padding: 5px;
+    border: 1px black solid !important;
 }
 
 .text-register {
-  text-align: right;
+    text-align: right;
 }
 
 .pointer {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 599px) {
-  .text-register {
-    text-align: left;
-  }
+    .text-register {
+        text-align: left;
+    }
 }
 
 .clr-input-group {
-  width: 100% !important;
+    width: 100% !important;
 }
 
 .login-bg {
-  background-color: #25333D;
-  display: inline-block;
-  width: 100vw;
-  height: 100vh;
-  -webkit-background-size: cover;
-  background-size: cover;
+    background-color: #25333D;
+    display: inline-block;
+    width: 100vw;
+    height: 100vh;
+    -webkit-background-size: cover;
+    background-size: cover;
 }
 
 .td-border {
-  border-right: 1px solid #eee;
+    border-right: 1px solid #eee;
 }
 
 .sticky-row {
-  position: sticky;
-  position: -webkit-sticky;
-  left: 0;
-  top: 23px;
-  color: white;
-  z-index: 3;
+    position: sticky;
+    position: -webkit-sticky;
+    left: 0;
+    top: 23px;
+    color: white;
+    z-index: 3;
+}
+
+.display-none {
+    display: none
 }

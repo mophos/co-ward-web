@@ -1,3 +1,20 @@
-<p>
-  report-lab-positive works!
-</p>
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">รายงานผู้ป่วยค้าง Admit</span>
+</nav>
+
+<clr-datagrid [style.height.px]="800">
+
+  <clr-dg-column>#</clr-dg-column>
+  <clr-dg-column>cid</clr-dg-column>
+  <clr-dg-column>passport</clr-dg-column>
+  <clr-dg-column>sat code</clr-dg-column>
+  <clr-dg-column>ชื่อ นามสกุล</clr-dg-column>
+
+  <clr-dg-row *ngFor="let i of list;let idx = index">
+    <clr-dg-cell>{{idx+1}}</clr-dg-cell>
+    <clr-dg-cell>{{i.card_id}}</clr-dg-cell>
+    <clr-dg-cell>{{i.passport}}</clr-dg-cell>
+    <clr-dg-cell>{{i.sat_id}}</clr-dg-cell>
+    <clr-dg-cell>{{i.first_name}} {{i.last_name}}</clr-dg-cell>
+  </clr-dg-row>
+</clr-datagrid>

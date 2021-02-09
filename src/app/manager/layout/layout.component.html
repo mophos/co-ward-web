@@ -30,10 +30,10 @@
       <router-outlet></router-outlet>
     </div>
     <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
-      <a  *ngIf="reportLabPositive" clrVerticalNavLink routerLink="/manager/report-lab-positive"
-        title="รายงานไม่มีชื่อ" routerLinkActive="active">
+      <a *ngIf="reportLabPositive" clrVerticalNavLink routerLink="/manager/report-lab-positive" title="รายงานไม่มีชื่อ"
+        routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="folder-open" class="is-solid"></clr-icon>
-      รายงานไม่มีชื่อ
+        รายงานผู้ป่วยค้าง Admit
       </a>
       <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager/report-admit-confirm-case"
         title="รายงานผู้ป่วย ADMIT Confirm" routerLinkActive="active">
@@ -48,7 +48,7 @@
       <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager/report-discharge-daily"
         title="รายงานผู้ป่วย ADMIT PUI" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="folder-open" class="is-solid"></clr-icon>
-        รายงานผู้ป่วย DISCHARGE
+        รายงานผู้ป่วย DISCHARGE Confirm
       </a>
       <!-- <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager/report-review-homework"
         title="รายงานการลงทะเบียน" routerLinkActive="active">
@@ -263,11 +263,11 @@
             <clr-icon shape="folder-open" class="is-solid"></clr-icon>
             3. รายงานการแจ้งจำนวนผู้ป่วยเพื่อเบิกเวชภัณฑ์​สิ้นเปลืองประจำวัน
           </a>
-          <!-- <a *ngIf="reportBed" clrVerticalNavLink [routerLink]="['/manager/report/4']"
+          <a *ngIf="reportBed" clrVerticalNavLink [routerLink]="['/manager/report/4']"
             title="ยอดผู้ป่วยสะสมรวมที่รับไว้รักษาในโรงพยาบาล" routerLinkActive="active">
             <clr-icon shape="folder-open" class="is-solid"></clr-icon>
             4. ยอดผู้ป่วยสะสมรวมที่รับไว้รักษาในโรงพยาบาล
-          </a> -->
+          </a>
           <a *ngIf="reportBed" clrVerticalNavLink [routerLink]="['/manager/report/5']" title="รายงานการใช้เตียง"
             routerLinkActive="active">
             <clr-icon shape="folder-open" class="is-solid"></clr-icon>
