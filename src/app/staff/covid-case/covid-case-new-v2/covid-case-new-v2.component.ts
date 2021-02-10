@@ -28,7 +28,7 @@ export class CovidCaseNewV2Component implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.btn1 = 2;
+    this.btn1 = 1;
   }
 
   activeButton() {
