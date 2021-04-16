@@ -5,6 +5,8 @@ import { Component, OnInit } from '@angular/core';
 import * as mqttClient from '../../../vendor/mqtt.min.js';
 import { MqttClient } from 'mqtt';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { IMqttMessage, MqttService } from 'ngx-mqtt';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-manage-systems',
@@ -22,15 +24,19 @@ export class ManageSystemsComponent implements OnInit {
   constructor(
     private basicAuthService: BasicAuthService,
     private basicService: BasicService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private mqttService: MqttService
   ) {
     const decoded = this.jwtHelper.decodeToken(sessionStorage.getItem('token'));
     this.topic = decoded.mqttTopic;
   }
 
   ngOnInit() {
-    this.initialSocket();
     this.getSystems();
+  }
+
+  public publishMQTT(topic: string, message: string): void {
+    this.mqttService.unsafePublish(topic, message, { qos:  0 });
   }
 
   async getSystems() {
@@ -45,27 +51,6 @@ export class ManageSystemsComponent implements OnInit {
       this.alertService.error(error);
     }
   }
-  async initialSocket() {
-    // connect mqtt
-    await this.connectMqtt();
-    // await this.subscribeMqtt();
-    // await this.messageMqtt();
-  }
-
-  connectMqtt() {
-    try {
-      this.mqttClient = mqttClient.connect('ws://api-covid19.moph.go.th:8080', {
-        clienId: Math.floor(Math.random() * 10000),
-        username: 'mqtt',
-        password: '##Mqtt'
-      });
-      console.log('success');
-
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
 
 
   async closeSystems() {
@@ -84,11 +69,7 @@ export class ManageSystemsComponent implements OnInit {
   }
 
   closeSystemsMQTT() {
-    this.mqttClient.publish(`${this.topic}co-ward-close`, 'CLOSE', { qos: 0 }, (err) => {
-      if (err) {
-        console.log('publish Error!!');
-      }
-    });
+    this.publishMQTT(`${this.topic}co-ward-close`, 'CLOSE');
   }
 
   async openSystems() {
@@ -108,11 +89,7 @@ export class ManageSystemsComponent implements OnInit {
 
   openSystemsMQTT() {
     try {
-      this.mqttClient.publish(`${this.topic}co-ward-close`, 'OPEN', { qos: 0 }, (err) => {
-        if (err) {
-          console.log('publish Error!!');
-        }
-      });
+      this.publishMQTT(`${this.topic}co-ward-close`, 'OPEN');
 
     } catch (error) {
       console.log(error);
@@ -120,11 +97,7 @@ export class ManageSystemsComponent implements OnInit {
     }
   }
   alertMQTT(message) {
-    this.mqttClient.publish(`${this.topic}co-ward-alert`, message.toString(), (err) => {
-      if (err) {
-        console.log('publish Error!!');
-      }
-    });
+    this.publishMQTT(`${this.topic}co-ward-alert`, message.toString());
   }
   openBroadcast() {
     this.modalBroadcast = true;
@@ -133,11 +106,7 @@ export class ManageSystemsComponent implements OnInit {
   async onClickRefresh() {
     const confirm = await this.alertService.confirm();
     if (confirm) {
-      this.mqttClient.publish(`${this.topic}co-ward-restart`, 'RESTART', (err) => {
-        if (err) {
-          console.log('publish Error!!');
-        }
-      });
+      this.publishMQTT(`${this.topic}co-ward-restart`, 'RESTART');
     }
   }
 

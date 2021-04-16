@@ -1,18 +1,18 @@
 import { BasicService } from './../services/basic.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 import { findIndex } from 'lodash';
 
-import * as mqttClient from '../../../vendor/mqtt.min.js';
-import { MqttClient } from 'mqtt';
+import { IMqttMessage, MqttService } from 'ngx-mqtt';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css']
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent implements OnInit, OnDestroy {
 
   fullname: any;
   hospname: any;
@@ -44,7 +44,6 @@ export class LayoutComponent implements OnInit {
   // ---------------------------------
   reportMenu: any;
   reportAll: any;
-  mqttClient: MqttClient;
   modalClose = false;
   modalAlert = false;
   message: any;
@@ -52,9 +51,13 @@ export class LayoutComponent implements OnInit {
   cioMenu = false;
   isHospital = true;
   public jwtHelper = new JwtHelperService();
+  private subscription1: Subscription;
+  private subscription2: Subscription;
+  private subscription3: Subscription;
   constructor(
     private route: Router,
-    private basicService: BasicService
+    private basicService: BasicService,
+    private mqttService: MqttService
   ) {
     const decoded = this.jwtHelper.decodeToken(sessionStorage.getItem('token'));
     this.fullname = decoded.fullname;
@@ -95,6 +98,12 @@ export class LayoutComponent implements OnInit {
     this.settingMedicalSuppliesMenu = findIndex(this.rights, { name: 'STAFF_SETTING_MEDICAL_SUPPLIE' }) === -1 ? false : true;
     this.settingProfessionalMenu = findIndex(this.rights, { name: 'STAFF_SETTING_PROFESSIONAL' }) === -1 ? false : true;
     this.settingUserMenu = findIndex(this.rights, { name: 'STAFF_SETTING_USERS' }) === -1 ? false : true;
+    this.subscribeMqtt();
+  }
+  ngOnDestroy(): void {
+    this.subscription1.unsubscribe();
+    this.subscription2.unsubscribe();
+    this.subscription3.unsubscribe();
   }
 
 
@@ -117,83 +126,50 @@ export class LayoutComponent implements OnInit {
     }
   }
 
-  async initialSocket() {
-    // connect mqtt
-    await this.connectMqtt();
-    await this.subscribeMqtt();
-    await this.messageMqtt();
-  }
+  // async initialSocket() {
+  //   // connect mqtt
+  //   await this.connectMqtt();
+  //   await this.subscribeMqtt();
+  // }
 
   logout() {
     sessionStorage.removeItem('token');
     this.route.navigate(['/login']);
   }
 
-  connectMqtt() {
-    try {
-      // this.mqttClient = mqttClient.connect('mqtt://test.mosquitto.org', {
-      this.mqttClient = mqttClient.connect('ws://api-covid19.moph.go.th:8080', {
-        clienId: Math.floor(Math.random() * 10000),
-        username: 'q4u',
-        password: 'q4u'
-      });
-      console.log('connect');
 
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
-  checkMqtt() {
-    console.log('check');
-
-    this.mqttClient.on('connect', (error) => {
-      if (error) {
-        console.log('Subscribe Error!!');
-      } else {
-        console.log('Connect Mqtt success');
-      }
-    });
-  }
   subscribeMqtt() {
     const that = this;
-    this.mqttClient.on('connect', (error) => {
-      if (error) {
-        console.log('Subscribe Error!!');
-      } else {
-        console.log('Connect Mqtt success');
-
-      }
-      that.mqttClient.subscribe([`${this.topic}co-ward-close`, `${this.topic}co-ward-alert`, `${this.topic}co-ward-restart`], (err) => {
-        if (err) {
-          console.log('Subscribe Error!!');
-        } else {
-          console.log(`subscribe ${this.topic}`);
-
-        }
-      });
+    this.subscription1 = this.mqttService.observe(`${this.topic}co-ward-close`).subscribe((message: IMqttMessage) => {
+      this.messageMqtt(message.topic, message.payload.toString());
+    });
+    this.subscription2 = this.mqttService.observe(`${this.topic}co-ward-alert`).subscribe((message: IMqttMessage) => {
+      this.messageMqtt(message.topic, message.payload.toString());
+    });
+    this.subscription3 = this.mqttService.observe(`${this.topic}co-ward-restart`).subscribe((message: IMqttMessage) => {
+      this.messageMqtt(message.topic, message.payload.toString());
     });
   }
 
-  messageMqtt() {
-    this.mqttClient.on('message', (topic, payload) => {
-      console.log(topic, payload);
-      if (topic === `${this.topic}co-ward-close`) {
-        if (payload.toString() === 'CLOSE') {
-          this.modalClose = true;
-        } else if (payload.toString() === 'OPEN') {
-          this.modalClose = false;
-        }
-      } else if (topic === `${this.topic}co-ward-alert`) {
-        this.message = payload.toString();
-        this.modalAlert = true;
-      } else if (topic === `${this.topic}co-ward-restart`) {
-        if (payload.toString() === 'RESTART') {
-          console.log('asd');
 
-          window.location.reload();
-        }
+  messageMqtt(topic, payload) {
+    console.log(topic, payload);
+    if (topic === `${this.topic}co-ward-close`) {
+      if (payload.toString() === 'CLOSE') {
+        this.modalClose = true;
+      } else if (payload.toString() === 'OPEN') {
+        this.modalClose = false;
       }
-    });
+    } else if (topic === `${this.topic}co-ward-alert`) {
+      this.message = payload.toString();
+      this.modalAlert = true;
+    } else if (topic === `${this.topic}co-ward-restart`) {
+      if (payload.toString() === 'RESTART') {
+        console.log('asd');
+
+        window.location.reload();
+      }
+    }
   }
 }

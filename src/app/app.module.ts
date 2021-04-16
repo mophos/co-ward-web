@@ -24,7 +24,14 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
-
+import { MqttModule, IMqttServiceOptions } from 'ngx-mqtt';
+export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
+  hostname: 'api-covid19.moph.go.th',
+  port: 8080,
+  path: '/mqtt',
+  username: 'q4u',
+  password: 'q4u'
+};
 
 export function tokenGetter() {
   return sessionStorage.getItem('token');
@@ -53,6 +60,7 @@ export function tokenGetter() {
     HelpModule,
     NgSelectModule,
     NgxMaskModule.forRoot(),
+    MqttModule.forRoot(MQTT_SERVICE_OPTIONS)
   ],
   providers: [
     { provide: 'API_URL', useValue: environment.apiUrl },
