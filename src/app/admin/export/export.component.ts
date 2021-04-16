@@ -21,7 +21,7 @@ export class ExportComponent implements OnInit {
     showClearDateBtn: false
   };
 
-  @ViewChild('loading') loading: any;
+  @ViewChild('loading', { static: false }) loading: any;
 
   constructor(
     private alertService: AlertService,

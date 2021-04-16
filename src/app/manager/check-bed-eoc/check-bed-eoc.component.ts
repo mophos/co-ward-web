@@ -9,7 +9,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 export class CheckBedEocComponent implements OnInit {
 
   data: any = [];
-  @ViewChild('loadding') loadding: any;
+  @ViewChild('loadding', { static: false }) loadding: any;
   constructor(
     private apiService: ApiService,
     private alertService: AlertService

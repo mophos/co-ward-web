@@ -33,7 +33,7 @@ export class ReportDms4Component implements OnInit {
     editableDateField: false,
     showClearDateBtn: false
   };
-  @ViewChild('loading') loading: any;
+  @ViewChild('loading' ,{static: false}) loading: any;
   sector: any;
   public jwtHelper = new JwtHelperService();
 

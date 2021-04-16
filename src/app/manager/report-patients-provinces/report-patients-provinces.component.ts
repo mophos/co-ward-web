@@ -14,7 +14,7 @@ export class ReportPatientsProvincesComponent implements OnInit {
   startDate: any;
   endDate: any;
   list = [];
-  @ViewChild('loading') loading: any;
+  @ViewChild('loading' ,{static: false}) loading: any;
   myDatePickerOptions: IMyOptions = {
     inline: false,
     dateFormat: 'dd mmm yyyy',

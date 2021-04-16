@@ -28,7 +28,7 @@ export class ReportDms2Component implements OnInit {
     editableDateField: false,
     showClearDateBtn: false
   };
-  @ViewChild('loading') loading: any;
+  @ViewChild('loading' ,{static: false}) loading: any;
 
   public jwtHelper = new JwtHelperService();
   sector: any;

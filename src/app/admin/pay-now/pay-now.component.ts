@@ -27,8 +27,8 @@ export class PayNowComponent implements OnInit {
   modalExport = false;
   loading = false;
 
-  @ViewChild('loadding') loadding: any;
-  @ViewChild('hospital') hospitals: AutocompleteHospitalComponent;
+  @ViewChild('loadding', { static: false }) loadding: any;
+  @ViewChild('hospital', { static: false }) hospitals: AutocompleteHospitalComponent;
   constructor(
     private restockService: RestockService,
     private alertService: AlertService,

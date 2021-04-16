@@ -16,10 +16,10 @@ import { AutocompleteZipcodeComponent } from 'src/app/help/autocomplete-address/
   styles: []
 })
 export class ManageHospitalComponent implements OnInit {
-  @ViewChild('province') province: AutocompleteProvinceComponent;
-  @ViewChild('ampur') ampur: AutocompleteDistrictComponent;
-  @ViewChild('tambon') tambon: AutocompleteSubdistrictComponent;
-  @ViewChild('zipcode') zipc: AutocompleteZipcodeComponent;
+  @ViewChild('province', { static: false }) province: AutocompleteProvinceComponent;
+  @ViewChild('ampur', { static: false }) ampur: AutocompleteDistrictComponent;
+  @ViewChild('tambon', { static: false }) tambon: AutocompleteSubdistrictComponent;
+  @ViewChild('zipcode', { static: false }) zipc: AutocompleteZipcodeComponent;
 
   id: any;
 

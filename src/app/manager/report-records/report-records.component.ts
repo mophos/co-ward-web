@@ -18,7 +18,7 @@ export class ReportRecordsComponent implements OnInit {
   personTotal = 0;
   personTimeTotal = 0;
   personDeath = 0;
-  @ViewChild('loading') loading: any;
+  @ViewChild('loading' ,{static: false}) loading: any;
   constructor(
     private reportService: ReportService,
     private alertService: AlertService

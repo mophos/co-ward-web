@@ -61,12 +61,12 @@ export class CovidCaseEditComponent implements OnInit {
   errorTel = false;
   errorAdmit = false;
   errorGender = false;
-  @ViewChild('countries') countries: AutocompleteCountriesComponent;
-  @ViewChild('province') province: AutocompleteProvinceComponent;
-  @ViewChild('ampur') ampur: AutocompleteDistrictComponent;
-  @ViewChild('tambon') tambon: AutocompleteSubdistrictComponent;
-  @ViewChild('zipcode') zipc: AutocompleteZipcodeComponent;
-  @ViewChild('loading') loading: any;
+  @ViewChild('countries', { static: false }) countries: AutocompleteCountriesComponent;
+  @ViewChild('province', { static: false }) province: AutocompleteProvinceComponent;
+  @ViewChild('ampur', { static: false }) ampur: AutocompleteDistrictComponent;
+  @ViewChild('tambon', { static: false }) tambon: AutocompleteSubdistrictComponent;
+  @ViewChild('zipcode', { static: false }) zipc: AutocompleteZipcodeComponent;
+  @ViewChild('loading', { static: false }) loading: any;
   myDatePickerOptions: any = {
     inline: false,
     dateFormat: 'dd mmm yyyy',

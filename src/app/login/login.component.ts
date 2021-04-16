@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
   checkPasswordConfirm: any;
   demo = '';
   transactionID: any;
-  @ViewChild('loading') loading: any;
+  @ViewChild('loading', { static: false }) loading: any;
 
   public jwtHelper = new JwtHelperService();
   constructor(

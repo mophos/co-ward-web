@@ -9,7 +9,7 @@ import { ReportService } from '../report.service';
   styles: []
 })
 export class FulfillSuppliesComponent implements OnInit {
-  @ViewChild('modalLoading') public modalLoading;
+  @ViewChild('modalLoading' , {static: false}) public modalLoading;
 
   selected = [];
   selectedFulfills = [];

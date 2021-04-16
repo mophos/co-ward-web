@@ -10,7 +10,7 @@ import { PatientInfoService } from '../patient-info.service';
 export class PatientInfoComponent implements OnInit {
   list: any = [];
   query: any;
-  @ViewChild('modalLoading') loadding: any;
+  @ViewChild('modalLoading', {static: false}) loadding: any;
   constructor(
     private alertService: AlertService,
     private patientService: PatientInfoService

@@ -34,7 +34,7 @@ export class Report2Component implements OnInit {
     editableDateField: false,
     showClearDateBtn: false
   };
-  @ViewChild('loading') loading: any;
+  @ViewChild('loading', { static: false }) loading: any;
 
   public jwtHelper = new JwtHelperService();
   sector: any;
@@ -103,7 +103,7 @@ export class Report2Component implements OnInit {
 
   async onClickSearch() {
     console.log(this.list);
-    
+
     if (this.selectedZone === 'all' && this.selectedProvince === 'all') {
       this.listFilter = this.list;
       this.sCase = sumBy(this.listFilter, 'severe');

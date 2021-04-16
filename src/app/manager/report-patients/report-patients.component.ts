@@ -30,7 +30,7 @@ export class ReportPatientsComponent implements OnInit {
     showClearDateBtn: false
   };
   public jwtHelper = new JwtHelperService();
-  @ViewChild('loading') loading: any;
+  @ViewChild('loading' ,{static: false}) loading: any;
 
   constructor(
     private service: ReportService,

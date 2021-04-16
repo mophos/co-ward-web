@@ -31,7 +31,7 @@ export class ManageRestockEditComponent implements OnInit {
   modalExport = false;
   isSave = false;
 
-  @ViewChild('loadding') loadding: any;
+  @ViewChild('loadding', {static: false}) loadding: any;
   constructor(
     private router: Router,
     private route: ActivatedRoute,

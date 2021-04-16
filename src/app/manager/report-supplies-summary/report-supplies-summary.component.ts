@@ -10,7 +10,7 @@ import * as moment from 'moment';
   styles: []
 })
 export class ReportSuppliesSummaryComponent implements OnInit {
-  @ViewChild('loading') loading: any;
+  @ViewChild('loading' ,{static: false}) loading: any;
 
   detail: any;
   dateset: any;

@@ -136,17 +136,17 @@ export class CovidCaseOldComponent implements OnInit {
     '30', '31', '32', '33', '34', '35', '36', '37', '38', '39',
     '40', '41', '42', '43', '44', '45', '46', '47', '48', '49',
     '50', '51', '52', '53', '54', '55', '56', '57', '58', '59'];
-  @ViewChild('hospital') hospitals: AutocompleteHospitalComponent;
-  @ViewChild('countries') countries: AutocompleteCountriesComponent;
-  @ViewChild('province') province: AutocompleteProvinceComponent;
-  @ViewChild('ampur') ampur: AutocompleteDistrictComponent;
-  @ViewChild('tambon') tambon: AutocompleteSubdistrictComponent;
-  @ViewChild('zipcode') zipc: AutocompleteZipcodeComponent;
-  @ViewChild('provinceCurr') provinceCurr: AutocompleteProvinceComponent;
-  @ViewChild('ampurCurr') ampurCurr: AutocompleteDistrictComponent;
-  @ViewChild('tambonCurr') tambonCurr: AutocompleteSubdistrictComponent;
-  @ViewChild('zipcodeCurr') zipcCurr: AutocompleteZipcodeComponent;
-  @ViewChild('loading') loading: any;
+  @ViewChild('hospital', { static: false }) hospitals: AutocompleteHospitalComponent;
+  @ViewChild('countries', { static: false }) countries: AutocompleteCountriesComponent;
+  @ViewChild('province', { static: false }) province: AutocompleteProvinceComponent;
+  @ViewChild('ampur', { static: false }) ampur: AutocompleteDistrictComponent;
+  @ViewChild('tambon', { static: false }) tambon: AutocompleteSubdistrictComponent;
+  @ViewChild('zipcode', { static: false }) zipc: AutocompleteZipcodeComponent;
+  @ViewChild('provinceCurr', { static: false }) provinceCurr: AutocompleteProvinceComponent;
+  @ViewChild('ampurCurr', { static: false }) ampurCurr: AutocompleteDistrictComponent;
+  @ViewChild('tambonCurr', { static: false }) tambonCurr: AutocompleteSubdistrictComponent;
+  @ViewChild('zipcodeCurr', { static: false }) zipcCurr: AutocompleteZipcodeComponent;
+  @ViewChild('loading', { static: false }) loading: any;
 
   constructor(
     private route: ActivatedRoute,

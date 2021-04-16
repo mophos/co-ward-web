@@ -10,7 +10,7 @@ import { sumBy, orderBy } from 'lodash';
   styles: []
 })
 export class FulfillDrugsComponent implements OnInit {
-  @ViewChild('modalLoading') public modalLoading;
+  @ViewChild('modalLoading' , {static: false}) public modalLoading;
 
   nodes = [];
   generics = [];
@@ -32,7 +32,7 @@ export class FulfillDrugsComponent implements OnInit {
     type: 'zone_code',
     order: 'asc'
   };
-  @ViewChild('modalLoading') loadding: LoaddingComponent;
+  @ViewChild('modalLoading' , {static: false}) loadding: LoaddingComponent;
   constructor(
     private fulfillService: FulfillService,
     private alertService: AlertService,

@@ -57,7 +57,7 @@ export class RegisterComponent implements OnInit {
   transactionID: any;
   dateOtp: any = 0;
   otp = '';
-  @ViewChild('hospital') hosp: AutocompleteHospitalComponent;
+  @ViewChild('hospital', { static: false }) hosp: AutocompleteHospitalComponent;
   constructor(
     private alertService: AlertService,
     private registerService: RegisterService,

@@ -25,7 +25,7 @@ export class Report5Component implements OnInit {
   standbyQty: any;
   sector: any;
   date: any;
-  @ViewChild('loading') loading: any;
+  @ViewChild('loading' ,{static: false}) loading: any;
 
   constructor(
     private reportService: ReportAllService,

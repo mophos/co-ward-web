@@ -40,7 +40,7 @@ export class ReportAdmitPuiComponent implements OnInit {
   dataDate2: any;
   public jwtHelper = new JwtHelperService();
 
-  @ViewChild('loading') loading: any;
+  @ViewChild('loading' ,{static: false}) loading: any;
   constructor(
     private reportService: ReportService,
     private alertService: AlertService

@@ -37,11 +37,11 @@ export class ReportAdmitConfirmCaseComponent implements OnInit {
   d8 = 0;
   showPersons: any;
   rights: any;
-  dataDate1:any;
-  dataDate2:any;
+  dataDate1: any;
+  dataDate2: any;
   public jwtHelper = new JwtHelperService();
 
-  @ViewChild('loading') loading: any;
+  @ViewChild('loading', { static: false }) loading: any;
   constructor(
     private reportService: ReportService,
     private alertService: AlertService

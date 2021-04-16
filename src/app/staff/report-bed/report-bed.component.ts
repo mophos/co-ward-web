@@ -34,7 +34,7 @@ export class ReportBedComponent implements OnInit {
   host2: any;
   host3: any;
   sector: any;
-  @ViewChild('loading') loading: any;
+  @ViewChild('loading' ,{static: false}) loading: any;
 
   public jwtHelper = new JwtHelperService();
   myDatePickerOptions: IMyOptions = {
