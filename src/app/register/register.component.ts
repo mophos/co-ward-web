@@ -73,11 +73,11 @@ export class RegisterComponent implements OnInit {
     if (this.cid.length === 13) {
       try {
         this.checkCid = thaiIdCard.verify(this.cid);
-        const rs: any = await this.registerService.getCid(this.cid);
-        this.checkDupCid = rs.ok;
-        if (!this.checkDupCid) {
-          this.checkCid = null;
-        }
+        // const rs: any = await this.registerService.getCid(this.cid);
+        // this.checkDupCid = rs.ok;
+        // if (!this.checkDupCid) {
+        //   this.checkCid = null;
+        // }
       } catch (error) {
         console.log(error);
       }
