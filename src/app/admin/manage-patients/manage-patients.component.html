@@ -72,7 +72,7 @@
                   <label>address: </label>
                 </div>
                 <div class="clr-col-9">
-                  <label>{{p.room_no }} {{p.road }} {{p.village_name }} {{p.tambon_name }}
+                  <label>{{p.house_no }} {{p.road }} {{p.village_name }} {{p.room_no }} {{p.tambon_name }}
                     {{p.ampur_name }} {{p.province_name }} {{p.zipcode }}</label>
                 </div>
                 <div class="clr-col-3">
@@ -208,7 +208,7 @@
                 ลบ
               </button>
             </div>
-           
+
           </clr-dg-cell>
         </clr-dg-row>
         <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
@@ -260,7 +260,7 @@
       <div class="clr-col-9">
         <div class="clr-row">
           <div class="clr-col-6" *ngIf='tmpHis.status === "ADMIT"'>
-           -
+            -
           </div>
           <div class="clr-col-6" *ngIf='tmpHis.status !== "ADMIT"'>
             <!-- {{tmpHis.date_discharge | dateTh:'DD/MM/YYYY'}} -->
@@ -400,7 +400,6 @@
       <div class="clr-col-3">
         <label>first_name: </label>
       </div>
-
       <div class="clr-col-9">
         <input class="clr-input width-fit" [(ngModel)]="tmpPatient.first_name" name="first_name" />
       </div>
@@ -408,7 +407,13 @@
         <label>last_name: </label>
       </div>
       <div class="clr-col-9">
-        <input class="clr-input width-fit" [(ngModel)]="tmpPatient.last_name" name="last_name" />
+        <input class="clr-input width-fit" [(ngModel)]="tmpPatient.first_name" name="first_name" />
+      </div>
+      <div class="clr-col-3">
+        <label>telephone: </label>
+      </div>
+      <div class="clr-col-9">
+        <input class="clr-input width-fit" [(ngModel)]="tmpPatient.telephone" name="telephone" />
       </div>
       <div class="clr-col-3">
         <label>CID: </label>
@@ -422,11 +427,71 @@
       <div class="clr-col-9">
         <input class="clr-input width-fit" [(ngModel)]="tmpPatient.hn" name="hn" />
       </div>
+      <div class="clr-col-3">
+        <label>birth_date: </label>
+      </div>
+      <div class="clr-col-9">
+        <my-date-picker-th name="bDate" [options]="myDatePickerOptions" (dateChanged)="onChangebDateDischarge($event)"
+          [(ngModel)]="bDate" required>
+        </my-date-picker-th>
+      </div>
+      <div class="clr-col-3">
+        <label>house_no: </label>
+      </div>
+      <div class="clr-col-9">
+        <input class="clr-input width-fit" [(ngModel)]="tmpPatient.house_no" name="house_no" />
+      </div>
+      <div class="clr-col-3">
+        <label>room_no: </label>
+      </div>
+      <div class="clr-col-9">
+        <input class="clr-input width-fit" [(ngModel)]="tmpPatient.room_no" name="room_no" />
+      </div>
+      <div class="clr-col-3">
+        <label>road: </label>
+      </div>
+      <div class="clr-col-9">
+        <input class="clr-input width-fit" [(ngModel)]="tmpPatient.road" name="road" />
+      </div>
+      <div class="clr-col-3">
+        <label>village_name: </label>
+      </div>
+      <div class="clr-col-9">
+        <input class="clr-input width-fit" [(ngModel)]="tmpPatient.village_name" name="village_name" />
+      </div>
+      <div class="clr-col-3">
+        ตำบล
+      </div>
+      <div class="clr-col-9">
+        <app-autocomplete-subdistrict style="padding: 0px" #tambon (onselect)="onSelectTambon($event)">
+        </app-autocomplete-subdistrict>
+      </div>
+      <div class="clr-col-3">
+        อำเภอ
+      </div>
+      <div class="clr-col-9">
+        <app-autocomplete-district style="padding: 0px" #ampur (onselect)="onSelectAmpur($event)">
+        </app-autocomplete-district>
+      </div>
+      <div class="clr-col-3">
+        จังหวัด
+      </div>
+      <div class="clr-col-9">
+        <app-autocomplete-province style="padding: 0px" #province (onselect)="onSelectProvince($event)">
+        </app-autocomplete-province>
+      </div>
+      <div class="clr-col-3">
+        zipcode
+      </div>
+      <div class="clr-col-9">
+        <app-autocomplete-zipcode style="padding: 0px" #zipcode (onselect)="onSelectZipcode($event)">
+        </app-autocomplete-zipcode>
+      </div>
     </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="saveEditInfo()">บันทึก</button>
-    <button type="button" class="btn btn-danger" (click)="closeEditInfo()">ยกเลิก</button>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" (click)="saveEditInfo()">บันทึก</button>
+      <button type="button" class="btn btn-danger" (click)="closeEditInfo()">ยกเลิก</button>
+    </div>
   </div>
 </clr-modal>
 
@@ -448,16 +513,20 @@
             <clr-dg-cell>{{l.bed_name}}</clr-dg-cell>
             <clr-dg-cell>{{l.medical_supplie_name || '-'}}</clr-dg-cell>
             <clr-dg-cell>{{l.status}}</clr-dg-cell>
-            <clr-dg-cell> <div class="btn-group">
-              <button type="button" class="btn btn-sm btn-primary" (click)="editHistoryDetail(l)" aria-label="settings">
-                <!-- <clr-icon shape="search"></clr-icon> -->
-                แก้ไข
-              </button>
-              <button type="button" class="btn btn-sm btn-danger" (click)="deletedHistoryDetail(l)" aria-label="settings">
-                <!-- <clr-icon shape="search"></clr-icon> -->
-                ลบ
-              </button>
-            </div></clr-dg-cell>
+            <clr-dg-cell>
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-primary" (click)="editHistoryDetail(l)"
+                  aria-label="settings">
+                  <!-- <clr-icon shape="search"></clr-icon> -->
+                  แก้ไข
+                </button>
+                <button type="button" class="btn btn-sm btn-danger" (click)="deletedHistoryDetail(l)"
+                  aria-label="settings">
+                  <!-- <clr-icon shape="search"></clr-icon> -->
+                  ลบ
+                </button>
+              </div>
+            </clr-dg-cell>
           </clr-dg-row>
           <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
         </clr-datagrid>

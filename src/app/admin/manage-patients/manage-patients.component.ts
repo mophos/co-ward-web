@@ -5,6 +5,10 @@ import { UserService } from '../services/user.service';
 import { find, findIndex, cloneDeep } from 'lodash';
 import * as moment from 'moment';
 import { IMyOptions } from 'mydatepicker-th';
+import { AutocompleteProvinceComponent } from 'src/app/help/autocomplete-address/autocomplete-province/autocomplete-province.component';
+import { AutocompleteDistrictComponent } from 'src/app/help/autocomplete-address/autocomplete-district/autocomplete-district.component';
+import { AutocompleteSubdistrictComponent } from 'src/app/help/autocomplete-address/autocomplete-subdistrict/autocomplete-subdistrict.component';
+import { AutocompleteZipcodeComponent } from 'src/app/help/autocomplete-address/autocomplete-zipcode/autocomplete-zipcode.component';
 
 @Component({
   selector: 'app-manage-patients',
@@ -12,7 +16,12 @@ import { IMyOptions } from 'mydatepicker-th';
   styleUrls: ['./manage-patients.component.css']
 })
 export class ManagePatientsComponent implements OnInit {
+  @ViewChild('province', { static: true }) province: AutocompleteProvinceComponent;
+  @ViewChild('ampur', { static: true }) ampur: AutocompleteDistrictComponent;
+  @ViewChild('tambon', { static: true }) tambon: AutocompleteSubdistrictComponent;
+  @ViewChild('zipcode', { static: true }) zipc: AutocompleteZipcodeComponent;
   @ViewChild('modalLoading', { static: true }) public modalLoading;
+
   titleList: any;
   genderList: any;
   historys: any;
@@ -20,6 +29,7 @@ export class ManagePatientsComponent implements OnInit {
   tmpHis: any;
   editHisDetail: boolean;
   tmpHisDetail: any;
+  bDate: any;
 
   myDatePickerOptions: IMyOptions = {
     inline: false,
@@ -63,7 +73,6 @@ export class ManagePatientsComponent implements OnInit {
     this.details = null;
   }
   setTmpData(p) {
-
     this.tmpPatient = cloneDeep({
       person_id: p.person_id,
       patient_id: p.patient_id,
@@ -71,9 +80,30 @@ export class ManagePatientsComponent implements OnInit {
       title_id: p.title_id,
       first_name: p.first_name,
       last_name: p.last_name,
+      birth_date: p.birth_date,
       cid: p.cid,
-      hn: p.hn
+      hn: p.hn,
+      house_no: p.house_no,
+      room_no: p.room_no,
+      road: p.road,
+      village_name: p.village_name,
+      tambon_name: p.tambon_name,
+      tambon_code: p.tambon_code,
+      ampur_name: p.ampur_name,
+      ampur_code: p.ampur_code,
+      province_name: p.province_name,
+      province_code: p.province_code,
+      zipcode: p.zipcode,
+      telephone: p.telephone
     });
+
+    this.bDate = {
+      date: {
+        year: moment(p.birth_date).get('year'),
+        month: moment(p.birth_date).get('month') + 1,
+        day: moment(p.birth_date).get('date')
+      }
+    };
   }
 
   closeEditInfo() {
@@ -110,8 +140,21 @@ export class ManagePatientsComponent implements OnInit {
           this.patient[idx].title_id = this.tmpPatient.title_id;
           this.patient[idx].first_name = this.tmpPatient.first_name;
           this.patient[idx].last_name = this.tmpPatient.last_name;
+          this.patient[idx].birth_date = this.tmpPatient.birth_date;
           this.patient[idx].cid = this.tmpPatient.cid;
           this.patient[idx].hn = this.tmpPatient.hn;
+          this.patient[idx].house_no = this.tmpPatient.house_no;
+          this.patient[idx].room_no = this.tmpPatient.room_no;
+          this.patient[idx].village_name = this.tmpPatient.village_name;
+          this.patient[idx].tambon_code = this.tmpPatient.tambon_code;
+          this.patient[idx].tambon_name = this.tmpPatient.tambon_name;
+          this.patient[idx].ampur_code = this.tmpPatient.ampur_code;
+          this.patient[idx].ampur_name = this.tmpPatient.ampur_name;
+          this.patient[idx].province_code = this.tmpPatient.province_code;
+          this.patient[idx].province_name = this.tmpPatient.province_name;
+          this.patient[idx].zipcode = this.tmpPatient.zipcode;
+          this.patient[idx].road = this.tmpPatient.road;
+          this.patient[idx].telephone = this.tmpPatient.telephone;
         }
 
         this.alertService.success();
@@ -138,7 +181,6 @@ export class ManagePatientsComponent implements OnInit {
           }
           this.editInfo = false;
           this.editCase = false;
-          console.log(this.patient);
         } else {
           this.alertService.error('ไม่พบผู้ป่วย');
           this.patient = null;
@@ -199,10 +241,8 @@ export class ManagePatientsComponent implements OnInit {
     this.modalDetails = true;
     try {
       const rs: any = await this.patientsService.getCovidCaseDetails(l.covid_case_id);
-      console.log(rs);
       if (rs.ok) {
         this.details = rs.rows;
-        console.log(this.details);
       } else {
         this.alertService.error(rs.error);
       }
@@ -239,11 +279,10 @@ export class ManagePatientsComponent implements OnInit {
         this.modalLoading.show();
         if (this.tmpHis.status !== 'ADMIT') {
           this.tmpHis.date_discharge = this.tmpHis.disDate.date.year + '-' + this.tmpHis.disDate.date.month + '-' + this.tmpHis.disDate.date.day + ' ' + this.tmpHis.timeDischarge.h + ':' + this.tmpHis.timeDischarge.m + ':00';
-        } else  {
+        } else {
           this.tmpHis.date_discharge = null;
         }
         const rs: any = await this.patientsService.saveEditCovidCase(this.tmpHis);
-        console.log(rs);
         if (rs.ok) {
           const idx = findIndex(this.historys, (v: any) => {
             return v.covid_case_id === this.tmpHis.covid_case_id;
@@ -337,7 +376,6 @@ export class ManagePatientsComponent implements OnInit {
       if (confirm) {
         this.modalLoading.show();
         const rs: any = await this.patientsService.saveEditCovidCaseDtail(this.tmpHisDetail);
-        console.log(rs);
         if (rs.ok) {
           const idx = findIndex(this.details, (v: any) => {
             return v.id === this.tmpHisDetail.id;
@@ -367,6 +405,61 @@ export class ManagePatientsComponent implements OnInit {
     } catch (error) {
       this.alertService.error(error);
     }
+  }
+
+  onSelectProvince(e) {
+    this.tmpPatient.tambon_code = e.tambon_code;
+    this.tmpPatient.tambon_name = e.tambon_name;
+    this.tmpPatient.ampur_code = e.ampur_code;
+    this.tmpPatient.ampur_name = e.ampur_name;
+    this.tmpPatient.province_code = e.province_code;
+    this.tmpPatient.province_name = e.province_name;
+    this.tmpPatient.zipcode = e.zip_code;
+    this.setValue();
+  }
+
+  onSelectAmpur(e) {
+    this.tmpPatient.tambon_code = e.tambon_code;
+    this.tmpPatient.tambon_name = e.tambon_name;
+    this.tmpPatient.ampur_code = e.ampur_code;
+    this.tmpPatient.ampur_name = e.ampur_name;
+    this.tmpPatient.province_code = e.province_code;
+    this.tmpPatient.province_name = e.province_name;
+    this.tmpPatient.zipcode = e.zip_code;
+    this.setValue();
+  }
+
+  onSelectTambon(e) {
+    this.tmpPatient.tambon_code = e.tambon_code;
+    this.tmpPatient.tambon_name = e.tambon_name;
+    this.tmpPatient.ampur_code = e.ampur_code;
+    this.tmpPatient.ampur_name = e.ampur_name;
+    this.tmpPatient.province_code = e.province_code;
+    this.tmpPatient.province_name = e.province_name;
+    this.tmpPatient.zipcode = e.zip_code;
+    this.setValue();
+  }
+
+  onSelectZipcode(e) {
+    this.tmpPatient.tambon_code = e.tambon_code;
+    this.tmpPatient.tambon_name = e.tambon_name;
+    this.tmpPatient.ampur_code = e.ampur_code;
+    this.tmpPatient.ampur_name = e.ampur_name;
+    this.tmpPatient.province_code = e.province_code;
+    this.tmpPatient.province_name = e.province_name;
+    this.tmpPatient.zipcode = e.zip_code;
+    this.setValue();
+  }
+
+  setValue() {
+    this.province.setQuery(this.tmpPatient.province_name);
+    this.ampur.setQuery(this.tmpPatient.ampur_name);
+    this.tambon.setQuery(this.tmpPatient.tambon_name);
+    this.zipc.setQuery(this.tmpPatient.zipcode);
+  }
+
+  onChangebDateDischarge(e) {
+    this.tmpPatient.birth_date = e.date.year + '-' + e.date.month + '-' + e.date.day;
   }
 
 }
