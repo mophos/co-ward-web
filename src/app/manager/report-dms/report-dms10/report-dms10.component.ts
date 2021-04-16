@@ -31,7 +31,7 @@ export class ReportDms10Component implements OnInit {
   nurseQty2: any;
   nurseQty3: any;
   sector: any;
-  @ViewChild('loading') loading: any;
+  @ViewChild('loading' ,{ static: true }) loading: any;
 
   public jwtHelper = new JwtHelperService();
 

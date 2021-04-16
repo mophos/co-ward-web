@@ -22,6 +22,9 @@ import { HelpModule } from './help/help.module';
 import { RegisterDrugComponent } from './register-drug/register-drug.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
+
 
 export function tokenGetter() {
   return sessionStorage.getItem('token');
@@ -48,7 +51,8 @@ export function tokenGetter() {
     StaffModule,
     FormsModule,
     HelpModule,
-    NgSelectModule
+    NgSelectModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [
     { provide: 'API_URL', useValue: environment.apiUrl },

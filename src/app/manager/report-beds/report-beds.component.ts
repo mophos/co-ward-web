@@ -20,7 +20,7 @@ export class ReportBedsComponent implements OnInit {
     showClearDateBtn: false
   };
   dataDate: any;
-  @ViewChild('loading') loading: any;
+  @ViewChild('loading' ,{ static: true }) loading: any;
 
   public jwtHelper = new JwtHelperService();
 

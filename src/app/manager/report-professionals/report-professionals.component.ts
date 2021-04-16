@@ -11,7 +11,7 @@ export class ReportProfessionalsComponent implements OnInit {
   list: any;
   zone: any = '';
 
-  @ViewChild('loading') loading: any;
+  @ViewChild('loading' ,{ static: true }) loading: any;
 
   public jwtHelper = new JwtHelperService();
 

@@ -32,7 +32,7 @@ export class ReportDms6Component implements OnInit {
   host2: any;
   host3: any;
   sector: any;
-  @ViewChild('loading') loading: any;
+  @ViewChild('loading' ,{ static: true }) loading: any;
 
   public jwtHelper = new JwtHelperService();
   myDatePickerOptions: IMyOptions = {

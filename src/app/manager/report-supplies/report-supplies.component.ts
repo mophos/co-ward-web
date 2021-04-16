@@ -11,7 +11,7 @@ import * as moment from 'moment';
   styles: []
 })
 export class ReportSuppliesComponent implements OnInit {
-  @ViewChild('loading') loading: any;
+  @ViewChild('loading' ,{ static: true }) loading: any;
 
   list: any;
   detail: any;

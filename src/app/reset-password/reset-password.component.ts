@@ -45,7 +45,7 @@ export class ResetPasswordComponent implements OnInit {
   demo = '';
   redirect: any;
   transactionID: any;
-  @ViewChild('loading') loading: any;
+  @ViewChild('loading' ,{ static: true }) loading: any;
 
   public jwtHelper = new JwtHelperService();
   constructor(

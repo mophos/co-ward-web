@@ -18,10 +18,10 @@ export class AutocompleteAddressComponent implements OnInit {
   tambonId: any;
   tambonName: any;
   zipcode: any;
-  @ViewChild('province') province: AutocompleteProvinceComponent;
-  @ViewChild('ampur') ampur: AutocompleteDistrictComponent;
-  @ViewChild('tambon') tambon: AutocompleteSubdistrictComponent;
-  @ViewChild('zipcode') zipc: AutocompleteZipcodeComponent;
+  @ViewChild('province', { static: true }) province: AutocompleteProvinceComponent;
+  @ViewChild('ampur', { static: true }) ampur: AutocompleteDistrictComponent;
+  @ViewChild('tambon', { static: true }) tambon: AutocompleteSubdistrictComponent;
+  @ViewChild('zipcode', { static: true }) zipc: AutocompleteZipcodeComponent;
   constructor() { }
 
   ngOnInit() {

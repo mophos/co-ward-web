@@ -39,7 +39,7 @@ export class CovidCaseComponent implements OnInit {
   id: any;
   isLoadding = false;
   query = '';
-  @ViewChild('modalHPVC') modalHPVC: HpvcComponent;
+  @ViewChild('modalHPVC', { static: true }) modalHPVC: HpvcComponent;
   constructor(
     private covidCaseService: CovidCaseService,
     private alertService: AlertService,

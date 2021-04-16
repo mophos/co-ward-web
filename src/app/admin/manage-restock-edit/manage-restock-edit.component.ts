@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { AlertService } from '../../help/alert.service';
 import { MinMaxService } from '../services/min-max.service';
 import { RestockService } from '../services/restock.service';
-import * as XLSX from 'ts-xlsx';
-
+// import * as XLSX from 'ts-xlsx';
+import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-manage-restock-edit',
   templateUrl: './manage-restock-edit.component.html',
@@ -31,7 +31,7 @@ export class ManageRestockEditComponent implements OnInit {
   modalExport = false;
   isSave = false;
 
-  @ViewChild('loadding') loadding: any;
+  @ViewChild('loadding', { static: true }) loadding: any;
   constructor(
     private router: Router,
     private route: ActivatedRoute,

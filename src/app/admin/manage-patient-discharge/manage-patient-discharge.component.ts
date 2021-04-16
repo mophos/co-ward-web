@@ -10,7 +10,7 @@ import { AlertService } from '../../help/alert.service';
 })
 export class ManagePatientDischargeComponent implements OnInit {
 
-  @ViewChild('hospital') hosp: AutocompleteHospitalComponent;
+  @ViewChild('hospital', { static: true }) hosp: AutocompleteHospitalComponent;
   id: any;
   hospcode: any;
   list: any;

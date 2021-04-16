@@ -17,7 +17,7 @@ export class RequestProductNewComponent implements OnInit {
   requests = [];
   loading = false;
 
-  @ViewChild('loading') loadingPage: any;
+  @ViewChild('loading', { static: true }) loadingPage: any;
   constructor(
     private alertService: AlertService,
     private requestProductsService: RequestProductsService,

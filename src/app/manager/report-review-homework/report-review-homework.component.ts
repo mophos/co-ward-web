@@ -11,7 +11,7 @@ import { sumBy } from 'lodash';
 export class ReportReviewHomeworkComponent implements OnInit {
 
 
-  @ViewChild('loading') loading: any;
+  @ViewChild('loading' ,{ static: true }) loading: any;
   list = [];
   details = [];
   selectRegister = 'all';

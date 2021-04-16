@@ -41,7 +41,7 @@ export class RegisterDrugComponent implements OnInit {
 
   fileName: any;
   filesToUpload: File = null;
-  @ViewChild('hospital') hosp: AutocompleteHospitalComponent;
+  @ViewChild('hospital', { static: true }) hosp: AutocompleteHospitalComponent;
 
   constructor(
     private alertService: AlertService,

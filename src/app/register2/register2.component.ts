@@ -44,7 +44,7 @@ export class Register2Component implements OnInit {
   hospName: any = '';
   redirect: any;
   hospitalId: any;
-  @ViewChild('hospital') hosp: AutocompleteHospitalComponent;
+  @ViewChild('hospital', { static: true }) hosp: AutocompleteHospitalComponent;
   constructor(
     private alertService: AlertService,
     private registerService: Register2Service,

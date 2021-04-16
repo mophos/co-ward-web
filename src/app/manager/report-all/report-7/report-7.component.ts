@@ -52,7 +52,7 @@ export class Report7Component implements OnInit {
     showClearDateBtn: false
   };
 
-  @ViewChild('loading') loading: any;
+  @ViewChild('loading' ,{ static: true }) loading: any;
 
   public jwtHelper = new JwtHelperService();
   sector: any;

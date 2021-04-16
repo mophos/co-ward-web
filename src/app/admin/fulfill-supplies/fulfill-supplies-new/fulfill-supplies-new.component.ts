@@ -38,7 +38,7 @@ export class FulfillSuppliesNewComponent implements OnInit {
   g15Fill = 0;
   g16Fill = 0;
   g17Fill = 0;
-  @ViewChild('modalLoading') loading: any;
+  @ViewChild('modalLoading', { static: true }) loading: any;
   constructor(
     private fulfillService: FulfillService,
     private alertService: AlertService,

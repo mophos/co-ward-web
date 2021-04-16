@@ -18,6 +18,14 @@ export class RegisterService {
     return this.http.get(url).toPromise();
   }
 
+  async checkLaser(cid, firstName, lastName, birthDay, laser) {
+    const url = `${this.url}/smh/laser`;
+    return await this.http.post(url, {
+      cid, firstName, lastName, birthDay, laser
+    }).toPromise();
+  }
+
+
   uploadUserSupplie(files: File, cid) {
     return new Promise((resolve, reject) => {
       const formData: any = new FormData();

@@ -11,7 +11,7 @@ import { AlertService } from '../../../help/alert.service';
 })
 export class ReportReviewHomeworkDmsComponent implements OnInit {
 
-  @ViewChild('loading') loading: any;
+  @ViewChild('loading' ,{ static: true }) loading: any;
 
   sum1 = 0;
   sum2 = 0;

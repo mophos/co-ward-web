@@ -20,7 +20,7 @@ export class CovidCaseNewV2Component implements OnInit {
   cidError = true;
   blankPassport = false;
   btn1: any;
-  @ViewChild('loading') loading: any;
+  @ViewChild('loading' ,{ static: true }) loading: any;
   constructor(
     private covidCaseService: CovidCaseService,
     private alertService: AlertService,

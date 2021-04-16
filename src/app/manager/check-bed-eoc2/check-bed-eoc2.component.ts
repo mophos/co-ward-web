@@ -11,14 +11,14 @@ export class CheckBedEoc2Component implements OnInit {
 
   data: any = [];
   date: any;
-  @ViewChild('loadding') loadding: any;
+  @ViewChild('loadding', { static: true }) loadding: any;
   constructor(
     private apiService: ApiService,
     private alertService: AlertService
   ) { }
 
   ngOnInit() {
-    if(this.date){
+    if (this.date) {
       this.checkBed();
     }
   }

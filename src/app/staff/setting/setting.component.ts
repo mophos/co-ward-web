@@ -54,11 +54,11 @@ export class SettingComponent implements OnInit {
   lat: any;
   long: any;
 
-  @ViewChild('province') province: AutocompleteProvinceComponent;
-  @ViewChild('ampur') ampur: AutocompleteDistrictComponent;
-  @ViewChild('tambon') tambon: AutocompleteSubdistrictComponent;
-  @ViewChild('zipcode') zipc: AutocompleteZipcodeComponent;
-  @ViewChild('loading') loading: LoaddingComponent;
+  @ViewChild('province', { static: true }) province: AutocompleteProvinceComponent;
+  @ViewChild('ampur', { static: true }) ampur: AutocompleteDistrictComponent;
+  @ViewChild('tambon', { static: true }) tambon: AutocompleteSubdistrictComponent;
+  @ViewChild('zipcode', { static: true }) zipc: AutocompleteZipcodeComponent;
+  @ViewChild('loading', { static: true }) loading: LoaddingComponent;
 
   constructor(
     private settingService: SettingService,

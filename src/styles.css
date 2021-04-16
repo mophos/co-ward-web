@@ -108,6 +108,7 @@
     height: 100vh;
     -webkit-background-size: cover;
     background-size: cover;
+    overflow: scroll;
 }
 
 .td-border {
@@ -125,4 +126,13 @@
 
 .display-none {
     display: none
+}
+
+.disabled
+{
+  pointer-events: none;
+
+  /* for "disabled" effect */
+  opacity: 0.5;
+  background: #CCC;
 }

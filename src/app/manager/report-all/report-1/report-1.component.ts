@@ -29,7 +29,7 @@ export class Report1Component implements OnInit {
   sector: any;
   date: any;
   dateShow: any;
-  @ViewChild('loading') loading: any;
+  @ViewChild('loading', { static: true }) loading: any;
 
   constructor(
     private reportService: ReportAllService,
