@@ -12,7 +12,7 @@ import { TrackingDetailComponent } from '../tracking-detail/tracking-detail.comp
 export class TrackingComponent implements OnInit {
 
   list: any;
-  @ViewChild('modalsDetail', { static: false }) modalsDetail: TrackingDetailComponent;
+  @ViewChild('modalsDetail', { static: true }) modalsDetail: TrackingDetailComponent;
 
   constructor(
     private alertService: AlertService,

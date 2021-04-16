@@ -28,7 +28,7 @@ export class Report8Component implements OnInit {
     showClearDateBtn: false
   };
 
-  @ViewChild('loading' ,{static: false}) loading: any;
+  @ViewChild('loading' ,{ static: true }) loading: any;
 
   public jwtHelper = new JwtHelperService();
   sector: any;

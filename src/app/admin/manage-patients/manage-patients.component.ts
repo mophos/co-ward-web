@@ -12,7 +12,7 @@ import { IMyOptions } from 'mydatepicker-th';
   styleUrls: ['./manage-patients.component.css']
 })
 export class ManagePatientsComponent implements OnInit {
-  @ViewChild('modalLoading', {static: false}) public modalLoading;
+  @ViewChild('modalLoading', { static: true }) public modalLoading;
   titleList: any;
   genderList: any;
   historys: any;

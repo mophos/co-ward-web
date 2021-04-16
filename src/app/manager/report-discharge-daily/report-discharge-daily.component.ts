@@ -20,7 +20,7 @@ export class ReportDischargeDailyComponent implements OnInit {
   dateEntry: any;
   list: any;
   listEntry: any;
-  @ViewChild('loading' ,{static: false}) loading: any;
+  @ViewChild('loading' ,{ static: true }) loading: any;
   public jwtHelper = new JwtHelperService();
   myDatePickerOptions: IMyOptions = {
     inline: false,

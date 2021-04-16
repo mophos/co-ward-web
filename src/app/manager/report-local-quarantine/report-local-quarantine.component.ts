@@ -29,7 +29,7 @@ export class ReportLocalQuarantineComponent implements OnInit {
   sum6: any = 0;
   sum7: any = 0;
 
-  @ViewChild('modalLoading', {static: false}) loading: any;
+  @ViewChild('modalLoading', { static: true }) loading: any;
   constructor(
     private reportService: ReportService,
     private alertService: AlertService

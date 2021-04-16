@@ -19,7 +19,7 @@ export class CioCheckPatientComponent implements OnInit {
   data: any;
   status: any;
   date: any;
-  @ViewChild('loading' ,{static: false}) loading: any;
+  @ViewChild('loading' ,{ static: true }) loading: any;
   rights: any;
   public jwtHelper = new JwtHelperService();
   constructor(

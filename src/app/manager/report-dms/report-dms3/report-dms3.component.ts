@@ -11,7 +11,7 @@ import { sumBy, map } from 'lodash';
   styles: []
 })
 export class ReportDms3Component implements OnInit {
-  @ViewChild('loading', { static: false }) public loading;
+  @ViewChild('loading', { static: true }) public loading;
   list: any = [];
   date: any;
   arDates: any = [];

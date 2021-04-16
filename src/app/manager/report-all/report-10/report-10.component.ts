@@ -31,7 +31,7 @@ export class Report10Component implements OnInit {
   nurseQty2: any;
   nurseQty3: any;
   sector: any;
-  @ViewChild('loading', { static: false }) loading: any;
+  @ViewChild('loading', { static: true }) loading: any;
 
   public jwtHelper = new JwtHelperService();
 

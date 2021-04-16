@@ -31,7 +31,7 @@ export class SurgicalMaskShphComponent implements OnInit {
     height: '25px',
     width: '200px'
   };
-  @ViewChild('hospital', { static: false }) hospital: SelectedHospitalChildNodeComponent;
+  @ViewChild('hospital', { static: true }) hospital: SelectedHospitalChildNodeComponent;
   constructor(
     private payService: PayService,
     private alertService: AlertService,

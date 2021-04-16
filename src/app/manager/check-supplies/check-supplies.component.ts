@@ -10,7 +10,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 export class CheckSuppliesComponent implements OnInit {
 
   data: any = [];
-  @ViewChild('loadding', { static: false }) loadding: any;
+  @ViewChild('loadding', { static: true }) loadding: any;
   constructor(
     private apiService: ApiService,
     private alertService: AlertService

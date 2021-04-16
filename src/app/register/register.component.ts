@@ -9,7 +9,7 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styles: []
+  styleUrls: ['register.component.css']
 })
 export class RegisterComponent implements OnInit {
 
@@ -57,7 +57,11 @@ export class RegisterComponent implements OnInit {
   transactionID: any;
   dateOtp: any = 0;
   otp = '';
-  @ViewChild('hospital', { static: false }) hosp: AutocompleteHospitalComponent;
+  isBora = true;
+  errorBora: '';
+  birthDay: any;
+  laser: any;
+  @ViewChild('hospital', { static: true }) hosp: AutocompleteHospitalComponent;
   constructor(
     private alertService: AlertService,
     private registerService: RegisterService,
@@ -288,6 +292,21 @@ export class RegisterComponent implements OnInit {
     } catch (error) {
       this.isSave = false;
       console.log(error);
+    }
+  }
+
+  async onClickBORA() {
+    try {
+      const rs: any = await this.registerService.checkLaser(this.cid, this.firstName, this.lastName, this.birthDay, this.laser);
+      console.log(rs);
+      if (rs.isError) {
+        this.errorBora = rs.desc;
+      } else {
+        this.errorBora = ''
+        this.isBora = true;
+      }
+    } catch (error) {
+
     }
   }
 }

@@ -76,9 +76,9 @@ export class CovidCaseStatusComponent implements OnInit {
     height: '25px',
     width: '200px'
   };
-  @ViewChild('loading', { static: false }) loading: any;
+  @ViewChild('loading', { static: true }) loading: any;
 
-  @ViewChild('hospital', { static: false }) hosp: AutocompleteHospitalComponent;
+  @ViewChild('hospital', { static: true }) hosp: AutocompleteHospitalComponent;
   dateCut: string;
   public jwtHelper = new JwtHelperService();
   hospitalType: any;

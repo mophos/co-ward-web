@@ -45,7 +45,7 @@ export class Report6Component implements OnInit {
   host3: any;
 
   sector: any;
-  @ViewChild('loading' ,{static: false}) loading: any;
+  @ViewChild('loading' ,{ static: true }) loading: any;
 
   public jwtHelper = new JwtHelperService();
   myDatePickerOptions: IMyOptions = {

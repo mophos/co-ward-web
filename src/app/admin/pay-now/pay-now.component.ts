@@ -5,7 +5,8 @@ import { RestockService } from '../services/restock.service';
 import { Router } from '@angular/router';
 
 import { findIndex } from 'lodash';
-import * as XLSX from 'ts-xlsx';
+// import * as XLSX from 'ts-xlsx';
+import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-pay-now',
   templateUrl: './pay-now.component.html',
@@ -27,8 +28,8 @@ export class PayNowComponent implements OnInit {
   modalExport = false;
   loading = false;
 
-  @ViewChild('loadding', { static: false }) loadding: any;
-  @ViewChild('hospital', { static: false }) hospitals: AutocompleteHospitalComponent;
+  @ViewChild('loadding', { static: true }) loadding: any;
+  @ViewChild('hospital', { static: true }) hospitals: AutocompleteHospitalComponent;
   constructor(
     private restockService: RestockService,
     private alertService: AlertService,

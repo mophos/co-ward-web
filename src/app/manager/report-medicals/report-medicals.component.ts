@@ -19,7 +19,7 @@ export class ReportMedicalsComponent implements OnInit {
     editableDateField: false,
     showClearDateBtn: false
   };
-  @ViewChild('loading' ,{static: false}) loading: any;
+  @ViewChild('loading' ,{ static: true }) loading: any;
 
   public jwtHelper = new JwtHelperService();
 

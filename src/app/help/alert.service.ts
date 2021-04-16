@@ -1,7 +1,8 @@
 import { Injectable, HostListener } from '@angular/core';
 
-import { default as swal } from 'sweetalert2';
-
+// import { default as swal } from 'sweetalert2';
+// import Swal from 'sweetalert2';
+const Swal = require('sweetalert2')
 @Injectable()
 export class AlertService {
 
@@ -16,7 +17,7 @@ export class AlertService {
       type: 'error',
       confirmButtonText: 'ตกลง'
     };
-    swal.fire(option);
+    Swal.fire(option);
 
   }
 
@@ -29,7 +30,7 @@ export class AlertService {
       type: 'success',
       confirmButtonText: 'ตกลง'
     };
-    swal.fire(option);
+    Swal.fire(option);
 
   }
 
@@ -41,7 +42,7 @@ export class AlertService {
       type: 'error',
       confirmButtonText: 'ตกลง'
     };
-    swal.fire(option);
+    Swal.fire(option);
 
   }
 
@@ -57,7 +58,7 @@ export class AlertService {
       cancelButtonText: 'ยกเลิก'
     };
 
-    return swal.fire(option).then((result) => {
+    return Swal.fire(option).then((result) => {
       if (result.value) {
         return true;
       } else {
@@ -79,7 +80,7 @@ export class AlertService {
       cancelButtonText: 'ยกเลิก'
     };
 
-    return swal.fire(option).then((result) => {
+    return Swal.fire(option).then((result) => {
       if (result.value) {
         return true;
       } else {

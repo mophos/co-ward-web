@@ -11,7 +11,7 @@ import { sumBy, filter } from 'lodash';
   styles: []
 })
 export class Report3Component implements OnInit {
-  @ViewChild('loading', { static: false }) public loading;
+  @ViewChild('loading', { static: true }) public loading;
   zone: any = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13'];
   selectedZone: any = 'all';
   selectedProvince: any = 'all';

@@ -15,7 +15,7 @@ export class ReportPatientsComponent implements OnInit {
   query: any = '';
   date: any;
   public jwtHelper = new JwtHelperService();
-  @ViewChild('loading' ,{static: false}) loading: any;
+  @ViewChild('loading' ,{ static: true }) loading: any;
 
   myDatePickerOptions: IMyOptions = {
     inline: false,
