@@ -30,7 +30,8 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   port: 8080,
   path: '/mqtt',
   username: 'q4u',
-  password: 'q4u'
+  password: 'q4u',
+  protocol: 'ws'
 };
 
 export function tokenGetter() {
@@ -60,7 +61,7 @@ export function tokenGetter() {
     HelpModule,
     NgSelectModule,
     NgxMaskModule.forRoot(),
-    MqttModule.forRoot(MQTT_SERVICE_OPTIONS)
+    // MqttModule.forRoot(MQTT_SERVICE_OPTIONS)
   ],
   providers: [
     { provide: 'API_URL', useValue: environment.apiUrl },
