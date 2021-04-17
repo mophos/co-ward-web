@@ -56,6 +56,7 @@ export class RegisterComponent implements OnInit {
   refCode = false;
   transactionID: any;
   dateOtp: any = 0;
+  telOtp: any;
   otp = '';
   isBora = false;
   errorBora: '';
@@ -262,6 +263,7 @@ export class RegisterComponent implements OnInit {
       const date = (+moment().format('h') * 60) + +moment().format('m');
       if (this.dateOtp < date) {
         this.dateOtp = date + 5;
+        this.telOtp = this.phoneNumber;
         const rs: any = await this.registerService.requestOTP(this.phoneNumber);
         if (rs.ok) {
           this.transactionID = rs.transaction_id;
@@ -269,7 +271,18 @@ export class RegisterComponent implements OnInit {
           this.vendor = rs.vendor;
         }
       } else {
-        this.alertService.error('กรุณารอ 5 นาที');
+        if (this.telOtp !== this.phoneNumber) {
+          this.dateOtp = date + 5;
+          this.telOtp = this.phoneNumber;
+          const rs: any = await this.registerService.requestOTP(this.phoneNumber);
+          if (rs.ok) {
+            this.transactionID = rs.transaction_id;
+            this.refCode = rs.ref_code;
+            this.vendor = rs.vendor;
+          }
+        } else {
+          this.alertService.error('กรุณารอ 5 นาที');
+        }
       }
       this.isSave = false;
     } catch (error) {
