@@ -57,7 +57,7 @@ export class RegisterComponent implements OnInit {
   transactionID: any;
   dateOtp: any = 0;
   otp = '';
-  isBora = true;
+  isBora = false;
   errorBora: '';
   birthDay: any;
   laser: any;
