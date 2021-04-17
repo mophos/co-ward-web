@@ -140,16 +140,22 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
 
   subscribeMqtt() {
-    const that = this;
-    this.subscription1 = this.mqttService.observe(`${this.topic}co-ward-close`).subscribe((message: IMqttMessage) => {
-      this.messageMqtt(message.topic, message.payload.toString());
-    });
-    this.subscription2 = this.mqttService.observe(`${this.topic}co-ward-alert`).subscribe((message: IMqttMessage) => {
-      this.messageMqtt(message.topic, message.payload.toString());
-    });
-    this.subscription3 = this.mqttService.observe(`${this.topic}co-ward-restart`).subscribe((message: IMqttMessage) => {
-      this.messageMqtt(message.topic, message.payload.toString());
-    });
+    try {
+
+      const that = this;
+      this.subscription1 = this.mqttService.observe(`${this.topic}co-ward-close`).subscribe((message: IMqttMessage) => {
+        this.messageMqtt(message.topic, message.payload.toString());
+      });
+      this.subscription2 = this.mqttService.observe(`${this.topic}co-ward-alert`).subscribe((message: IMqttMessage) => {
+        this.messageMqtt(message.topic, message.payload.toString());
+      });
+      this.subscription3 = this.mqttService.observe(`${this.topic}co-ward-restart`).subscribe((message: IMqttMessage) => {
+        this.messageMqtt(message.topic, message.payload.toString());
+      });
+    } catch (error) {
+      console.log(error);
+
+    }
   }
 
 
