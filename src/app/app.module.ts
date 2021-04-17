@@ -61,7 +61,7 @@ export function tokenGetter() {
     HelpModule,
     NgSelectModule,
     NgxMaskModule.forRoot(),
-    // MqttModule.forRoot(MQTT_SERVICE_OPTIONS)
+    MqttModule.forRoot(MQTT_SERVICE_OPTIONS)
   ],
   providers: [
     { provide: 'API_URL', useValue: environment.apiUrl },
