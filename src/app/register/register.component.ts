@@ -152,7 +152,7 @@ export class RegisterComponent implements OnInit {
     const confirm = await this.alertService.confirm();
     if (confirm) {
       try {
-        if (this.onSelectHospcode === this.hospcodeConfirm && this.checkCid && this.position && this.title && this.firstName !== '' && this.lastName !== '' && this.username !== '' && this.checkPasswordConfirm && this.checkEmail && this.checkPhone && this.checkImage) {
+        if (this.onSelectHospcode === this.hospcodeConfirm && this.checkCid && this.position && this.title && this.firstName !== '' && this.lastName !== '' && this.username !== '' && this.checkPasswordConfirm && this.checkEmail && this.checkPhone) {
           const obj: any = {
             username: this.username,
             password: this.password,

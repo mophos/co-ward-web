@@ -117,7 +117,8 @@
             </div>
           </div>
           <div class="card-footer">
-            <button class="btn btn-sm btn-primary btn-block" *ngIf="!isBora" (click)="onClickBORA()">ตรวจสอบข้อมูล</button>
+            <button class="btn btn-sm btn-primary btn-block" *ngIf="!isBora"
+              (click)="onClickBORA()">ตรวจสอบข้อมูล</button>
             <!-- <span>{{errorBora}}</span> -->
             <!-- <button class="btn btn-sm btn-link">Footer Action 2</button> -->
           </div>
@@ -320,9 +321,8 @@
                 เบอร์มือถือ<span class="required">*</span> :
               </div>
               <div class="clr-col-md-8">
-                <input type="text" (keyup)="enterPhone()"  id="phoneNumber"
-                  mask="000-000-0000" matInput [showMaskTyped]="true" name="phoneNumber" class="clr-input clr-col-md-12"
-                  [(ngModel)]="phoneNumber">
+                <input type="text" (keyup)="enterPhone()" id="phoneNumber" mask="000-000-0000" matInput
+                  [showMaskTyped]="true" name="phoneNumber" class="clr-input clr-col-md-12" [(ngModel)]="phoneNumber">
               </div>
               <div class="clr-col-md-4">
               </div>
@@ -355,27 +355,27 @@
                 </div>
               </div>
             </div>
-                  <div class="clr-row" style="margin-top: 0.5rem;">
-        <div class="clr-col-md-4" style="text-align: right;">
-          ภาพหน้าบัตรประชาชน<span class="required">*</span> :
-        </div>
-        <div class="clr-col-md-8">
-          <label class="btn btn-sm btn-secondary" style="margin: 0px;" *ngIf="!(onSelectHospcode != hospcodeConfirm || !checkCid || !position || !title || firstName == '' || lastName == '' ||
+            <!-- <div class="clr-row" style="margin-top: 0.5rem;">
+              <div class="clr-col-md-4" style="text-align: right;">
+                ภาพหน้าบัตรประชาชน<span class="required">*</span> :
+              </div>
+              <div class="clr-col-md-8">
+                <label class="btn btn-sm btn-secondary" style="margin: 0px;" *ngIf="!(onSelectHospcode != hospcodeConfirm || !checkCid || !position || !title || firstName == '' || lastName == '' ||
           username == '' || !checkPasswordConfirm || !checkEmail || !checkPhone)">
-            <input type="file" #file accept="image/jpg,image/png,image/jpeg" style="display: none;"
-              (change)="fileChangeEvent($event)">
-            เลือกไฟล์...
-          </label>
-          <input type="text" style="width: 100%;" #file accept="image/*" class="form-control clr-input" id="fileName"
-            aria-describedby="fileName" name="fileName" [(ngModel)]="fileName"
-            placeholder="เลือกไฟล์ภาพที่ต้องการอัปโหลดไม่เกิน 5 MB ..." readonly>
-          <p>
-            <span class="spinner" *ngIf="isUploading">
-              Loading...
-            </span>
-          </p>
-        </div>
-      </div> 
+                  <input type="file" #file accept="image/jpg,image/png,image/jpeg" style="display: none;"
+                    (change)="fileChangeEvent($event)">
+                  เลือกไฟล์...
+                </label>
+                <input type="text" style="width: 100%;" #file accept="image/*" class="form-control clr-input"
+                  id="fileName" aria-describedby="fileName" name="fileName" [(ngModel)]="fileName"
+                  placeholder="เลือกไฟล์ภาพที่ต้องการอัปโหลดไม่เกิน 5 MB ..." readonly>
+                <p>
+                  <span class="spinner" *ngIf="isUploading">
+                    Loading...
+                  </span>
+                </p>
+              </div>
+            </div> -->
             <div class="clr-row" style="margin-top: 0.5rem;" *ngIf="isNodeDrugs || isNodeSupplies">
               <div class="clr-col-md-4" style="text-align: right;">
                 สิทธิ์การใช้งานการจ่ายของ<span class="required">*</span> :
@@ -395,16 +395,15 @@
             </div>
             <div class="clr-row">
               <div class="clr-col-md-12" style="text-align: right;">
-                <button class="btn btn-primary" (click)="onClickRequestOTP()"
-                  [disabled]="
-                (onSelectHospcode != hospcodeConfirm || !checkCid || !position || !title || firstName == '' || lastName == '' ||
-                username == '' || !checkPasswordConfirm || !checkEmail || !checkPhone || !checkImage || isVerify || isSave)  ">ขอ
+                <button class="btn btn-primary" (click)="onClickRequestOTP()" [disabled]="
+                ((onSelectHospcode != hospcodeConfirm || !checkCid || !position || !title || firstName == '' || lastName == '' ||
+                username == '' || !checkPasswordConfirm || !checkEmail || !checkPhone || isVerify ) && isSave)  ">ขอ
                   OTP</button>
 
                 <button class="btn btn-success" (click)="save()"
                   [disabled]="
                   onSelectHospcode != hospcodeConfirm || !checkCid || !position || !title || firstName == '' || lastName == '' ||
-                  username == '' || !checkPasswordConfirm || !checkEmail || !checkPhone || !checkImage || !isVerify || !checkDupCid || !checkUsername">บันทึก</button>
+                  username == '' || !checkPasswordConfirm || !checkEmail || !checkPhone || !isVerify || !checkDupCid || !checkUsername">บันทึก</button>
                 <button class="btn btn-danger-outline" (click)="cancel()">ยกเลิก</button>
               </div>
               <!-- </div> -->
