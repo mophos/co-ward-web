@@ -298,11 +298,11 @@ export class RegisterComponent implements OnInit {
   async onClickBORA() {
     try {
       const rs: any = await this.registerService.checkLaser(this.cid, this.firstName, this.lastName, this.birthDay, this.laser);
-      console.log(rs);
       if (rs.isError) {
-        this.errorBora = rs.desc;
+        // this.errorBora = rs.desc;
+        this.alertService.error(rs.desc);
       } else {
-        this.errorBora = ''
+        // this.errorBora = ''
         this.isBora = true;
       }
     } catch (error) {
