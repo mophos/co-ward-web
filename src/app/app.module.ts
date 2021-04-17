@@ -27,11 +27,11 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 import { MqttModule, IMqttServiceOptions } from 'ngx-mqtt';
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: 'api-covid19.moph.go.th',
-  port: 8080,
+  port: 8443,
   path: '/mqtt',
   username: 'q4u',
   password: 'q4u',
-  protocol: 'ws'
+  protocol: 'wss'
 };
 
 export function tokenGetter() {
