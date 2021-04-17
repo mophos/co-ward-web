@@ -1,3 +1,4 @@
+import { BasicAuthService } from './../../staff/services/basic-auth.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertService } from 'src/app/help/alert.service';
 import { PatientsService } from '../services/patients.service';
@@ -26,11 +27,13 @@ export class ManagePatientsComponent implements OnInit {
   genderList: any;
   historys: any;
   details: any;
-  tmpHis: any;
+  tmpHis: any = {};
   editHisDetail: boolean;
   tmpHisDetail: any;
   bDate: any;
-
+  gcsList = [];
+  bedList = [];
+  medicalSupplieList = [];
   myDatePickerOptions: IMyOptions = {
     inline: false,
     dateFormat: 'dd mmm yyyy',
@@ -42,11 +45,12 @@ export class ManagePatientsComponent implements OnInit {
     private patientsService: PatientsService,
     private userService: UserService,
     private alertService: AlertService,
+    private basicAuthService: BasicAuthService
 
   ) { }
   // queryPerson: string = 'kaka';
-  queryHc: string;
-  queryHn: string;
+  queryHc: string = '';
+  queryHn: string = '';
 
   patient: any;
   tmpPatient: any;
@@ -57,6 +61,9 @@ export class ManagePatientsComponent implements OnInit {
   async ngOnInit() {
     await this.getTitleName();
     await this.getGender();
+    await this.getGCS();
+    await this.getBeds();
+    await this.getMedicalSupplies();
     this.disDate = {
       date: {
         year: moment().get('year'),
@@ -64,6 +71,7 @@ export class ManagePatientsComponent implements OnInit {
         day: moment().get('date')
       }
     };
+    this.tmpHis.timeDischarge = { h: null, m: null };
   }
   onEditInfo(p: any) {
     this.editInfo = !this.editInfo;
@@ -238,7 +246,7 @@ export class ManagePatientsComponent implements OnInit {
   }
 
   async getDetails(l) {
-    this.modalDetails = true;
+    await this.editHistory(l);
     try {
       const rs: any = await this.patientsService.getCovidCaseDetails(l.covid_case_id);
       if (rs.ok) {
@@ -246,6 +254,7 @@ export class ManagePatientsComponent implements OnInit {
       } else {
         this.alertService.error(rs.error);
       }
+      this.modalDetails = true;
     } catch (error) {
       this.alertService.error(error);
     }
@@ -279,6 +288,7 @@ export class ManagePatientsComponent implements OnInit {
         this.modalLoading.show();
         if (this.tmpHis.status !== 'ADMIT') {
           this.tmpHis.date_discharge = this.tmpHis.disDate.date.year + '-' + this.tmpHis.disDate.date.month + '-' + this.tmpHis.disDate.date.day + ' ' + this.tmpHis.timeDischarge.h + ':' + this.tmpHis.timeDischarge.m + ':00';
+          this.tmpHis.confirm_date = this.tmpHis.confirmDate.date.year + '-' + this.tmpHis.confirmDate.date.month + '-' + this.tmpHis.confirmDate.date.day;
         } else {
           this.tmpHis.date_discharge = null;
         }
@@ -292,6 +302,7 @@ export class ManagePatientsComponent implements OnInit {
             this.historys[idx].date_discharge = this.tmpHis.date_discharge;
             this.historys[idx].case_status = this.tmpHis.case_status;
             this.historys[idx].status = this.tmpHis.status;
+            this.historys[idx].confirm_date = this.tmpHis.confirm_date;
           }
 
           this.alertService.success();
@@ -310,8 +321,9 @@ export class ManagePatientsComponent implements OnInit {
 
   async closeEditHistory() {
     try {
-      this.editHis = false;
       this.tmpHis = null;
+      this.editHis = false;
+      this.modalDetails = false;
     } catch (error) {
       this.alertService.error(error);
     }
@@ -322,17 +334,32 @@ export class ManagePatientsComponent implements OnInit {
       this.editHis = true;
       this.tmpHis = cloneDeep(l);
       if (l.status !== 'ADMIT') {
-        this.tmpHis.disDate = {
-          date: {
-            year: moment(this.tmpHis.date_discharge).get('year'),
-            month: moment(this.tmpHis.date_discharge).get('month') + 1,
-            day: moment(this.tmpHis.date_discharge).get('date')
-          }
-        };
-        this.tmpHis.timeDischarge = { h: moment(this.tmpHis.date_discharge).format('HH'), m: moment(this.tmpHis.date_discharge).format('mm') };
+        if (this.tmpHis.date_discharge) {
+          this.tmpHis.disDate = {
+            date: {
+              year: moment(this.tmpHis.date_discharge).get('year'),
+              month: moment(this.tmpHis.date_discharge).get('month') + 1,
+              day: moment(this.tmpHis.date_discharge).get('date')
+            }
+          };
+        }
+        if (this.tmpHis.confirm_date) {
+          this.tmpHis.confirmDate = {
+            date: {
+              year: moment(this.tmpHis.confirm_date).get('year'),
+              month: moment(this.tmpHis.confirm_date).get('month') + 1,
+              day: moment(this.tmpHis.confirm_date).get('date')
+            }
+          };
+        }
+        if (this.tmpHis.date_discharge) {
+          this.tmpHis.timeDischarge = { h: moment(this.tmpHis.date_discharge).format('HH'), m: moment(this.tmpHis.date_discharge).format('mm') };
+        } else {
+          this.tmpHis.timeDischarge = { h: null, m: null };
+        }
       } else {
-        this.tmpHis.disDate = this.disDate;
-        this.tmpHis.timeDischarge = { h: '13', m: '00' };
+        // this.tmpHis.disDate = this.disDate;
+        this.tmpHis.timeDischarge = { h: null, m: null };
       }
     } catch (error) {
       this.alertService.error(error);
@@ -382,6 +409,19 @@ export class ManagePatientsComponent implements OnInit {
           });
           if (idx > -1) {
             this.details[idx].status = this.tmpHisDetail.status;
+            this.details[idx].gcs_id = this.tmpHisDetail.gcs_id;
+            const gcsIdx = findIndex(this.gcsList, { id: +this.tmpHisDetail.gcs_id });
+            if (gcsIdx > -1) {
+              this.details[idx].gcs_name = this.gcsList[gcsIdx].name;
+            }
+            const bedIdx = findIndex(this.bedList, { id: +this.tmpHisDetail.bed_id });
+            if (bedIdx > -1) {
+              this.details[idx].bed_name = this.bedList[bedIdx].name;
+            }
+            const medicalIdx = findIndex(this.medicalSupplieList, { id: +this.tmpHisDetail.medical_supplie_id });
+            if (medicalIdx > -1) {
+              this.details[idx].medical_supplie_name = this.medicalSupplieList[medicalIdx].name;
+            }
           }
 
           this.alertService.success();
@@ -462,4 +502,53 @@ export class ManagePatientsComponent implements OnInit {
     this.tmpPatient.birth_date = e.date.year + '-' + e.date.month + '-' + e.date.day;
   }
 
+
+  async getGCS() {
+    try {
+      const rs: any = await this.basicAuthService.getGCS();
+      if (rs.ok) {
+        this.gcsList = rs.rows;
+      } else {
+        this.alertService.serverError();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.serverError();
+    }
+  }
+
+  async getBeds() {
+    try {
+      const rs: any = await this.basicAuthService.getBeds();
+      if (rs.ok) {
+        this.bedList = rs.rows;
+      } else {
+        this.alertService.serverError();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.serverError();
+    }
+  }
+
+  async getMedicalSupplies() {
+    try {
+      const rs: any = await this.basicAuthService.getMedicalSupplies();
+      if (rs.ok) {
+        this.medicalSupplieList = rs.rows;
+        this.medicalSupplieList.push({ id: null, name: 'ไม่ใช้งาน' });
+      } else {
+        this.alertService.serverError();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.serverError();
+    }
+  }
+
+  onSelectHosp(e) {
+    console.log(e);
+    this.queryHc = e.hospcode;
+
+  }
 }
