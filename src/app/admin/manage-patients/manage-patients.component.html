@@ -69,20 +69,20 @@
 
 
                 <div class="clr-col-3">
-                  <label>address: </label>
+                  <label>ที่อยู่: </label>
                 </div>
                 <div class="clr-col-9">
                   <label>{{p.house_no }} {{p.road }} {{p.village_name }} {{p.room_no }} {{p.tambon_name }}
                     {{p.ampur_name }} {{p.province_name }} {{p.zipcode }}</label>
                 </div>
                 <div class="clr-col-3">
-                  <label>telephone: </label>
+                  <label>เบอร์: </label>
                 </div>
                 <div class="clr-col-9">
                   <label>{{p.telephone || '-' }}</label>
                 </div>
                 <div class="clr-col-3">
-                  <label>birth_date: </label>
+                  <label>วันเกิด: </label>
                 </div>
                 <div class="clr-col-9">
                   <label>{{p.birth_date | dateTh:'DD/MM/YYYY'}}</label>
@@ -105,24 +105,24 @@
             <div class="clr-col-lg-6 clr-col-md-6 clr-col-6">
               <div class="clr-row">
                 <div class="clr-col-3">
-                  <label>CID: </label>
+                  <label>เลขบัตรประชาชน: </label>
                 </div>
                 <div class="clr-col-9">
                   <label>{{p.cid}}</label>
                   <!-- <input class="clr-input width-fit" [(ngModel)]="tmpPatient.cid" name="cid" /> -->
                 </div>
                 <div class="clr-col-3">
-                  <label>hospname: </label>
-                </div>
-                <div class="clr-col-9">
-                  <label>{{p.hospname}}</label>
-                  <!-- <input class="clr-input width-fit" [(ngModel)]="model" name="example" /> -->
-                </div>
-                <div class="clr-col-3">
-                  <label>hospcode: </label>
+                  <label>รหัสโรงพยาบาล: </label>
                 </div>
                 <div class="clr-col-9">
                   <label>{{p.hospcode}}</label>
+                  <!-- <input class="clr-input width-fit" [(ngModel)]="model" name="example" /> -->
+                </div>
+                <div class="clr-col-3">
+                  <label>ชื่อโรงพยาบาล: </label>
+                </div>
+                <div class="clr-col-9">
+                  <label>{{p.hospname}}</label>
                   <!-- <input class="clr-input width-fit" [(ngModel)]="model" name="example" /> -->
                 </div>
                 <div class="clr-col-3">
@@ -130,6 +130,13 @@
                 </div>
                 <div class="clr-col-9">
                   <label>{{p.hn}}</label>
+                  <!-- <input  class="clr-input width-fit" [(ngModel)]="tmpPatient.hn" name="hn" /> -->
+                </div>
+                <div class="clr-col-3">
+                  <label>เพศ: </label>
+                </div>
+                <div class="clr-col-9">
+                  <label>{{p.gender_name}}</label>
                   <!-- <input  class="clr-input width-fit" [(ngModel)]="tmpPatient.hn" name="hn" /> -->
                 </div>
                 <!-- <div class="clr-col-3">
@@ -378,33 +385,33 @@
   <div class="modal-body" *ngIf='editInfo'>
     <div class="clr-row">
       <div class="clr-col-3">
-        <label>gender: </label>
+        <label>เพศ: </label>
       </div>
       <div class="clr-col-9">
-        <div class="clr-select-wrapper">
+        <div class="clr-select-wrapper width-fit">
           <select name="titleName" [(ngModel)]="tmpPatient.gender_id" class="clr-select" style="width: 100%;">
             <option *ngFor="let t of genderList" [value]="t.id">{{t.name}} </option>
           </select>
         </div>
       </div>
       <div class="clr-col-3">
-        <label>title: </label>
+        <label>คำนำหน้า: </label>
       </div>
       <div class="clr-col-9">
         <div class="clr-select-wrapper">
-          <select name="titleName" [(ngModel)]="tmpPatient.title_id" class="clr-select" style="width: 100%;">
+          <select name="titleName" [(ngModel)]="tmpPatient.title_id" class="clr-select width-fit" style="width: 100%;">
             <option *ngFor="let t of titleList" [value]="t.id">{{t.name}} </option>
           </select>
         </div>
       </div>
       <div class="clr-col-3">
-        <label>first_name: </label>
+        <label>ชื่อ: </label>
       </div>
       <div class="clr-col-9">
         <input class="clr-input width-fit" [(ngModel)]="tmpPatient.first_name" name="first_name" />
       </div>
       <div class="clr-col-3">
-        <label>last_name: </label>
+        <label>นามสกุล: </label>
       </div>
       <div class="clr-col-9">
         <input class="clr-input width-fit" [(ngModel)]="tmpPatient.first_name" name="first_name" />
