@@ -292,9 +292,13 @@ export class ManagePatientsComponent implements OnInit {
         if (this.tmpHis.disDate) {
           this.tmpHis.date_discharge = this.tmpHis.disDate.date.year + '-' + this.tmpHis.disDate.date.month + '-' + this.tmpHis.disDate.date.day + ' ' + this.tmpHis.timeDischarge.h + ':' + this.tmpHis.timeDischarge.m + ':00';
         }
-
-        if (this.tmpHis.confirmDate) {
-          this.tmpHis.confirm_date = this.tmpHis.confirmDate.date.year + '-' + this.tmpHis.confirmDate.date.month + '-' + this.tmpHis.confirmDate.date.day;
+        
+        if (this.tmpHis.status !== 'IPPUT') {
+          if (this.tmpHis.confirmDate) {
+            this.tmpHis.confirm_date = this.tmpHis.confirmDate.date.year + '-' + this.tmpHis.confirmDate.date.month + '-' + this.tmpHis.confirmDate.date.day;
+          }
+        } else {
+          this.tmpHis.confirm_date = null;
         }
 
         // } else {
