@@ -286,14 +286,18 @@ export class ManagePatientsComponent implements OnInit {
       const confirm = await this.alertService.confirm('ต้องการแก้ไข case ผู้ป่วย ใช่หรือไม่');
       if (confirm) {
         this.modalLoading.show();
-        if (this.tmpHis.status !== 'ADMIT') {
+        // if (this.tmpHis.status !== 'ADMIT') {
+        if (this.tmpHis.disDate) {
           this.tmpHis.date_discharge = this.tmpHis.disDate.date.year + '-' + this.tmpHis.disDate.date.month + '-' + this.tmpHis.disDate.date.day + ' ' + this.tmpHis.timeDischarge.h + ':' + this.tmpHis.timeDischarge.m + ':00';
-          if (this.tmpHis.status !== 'IPPUI') {
-            this.tmpHis.confirm_date = this.tmpHis.confirmDate.date.year + '-' + this.tmpHis.confirmDate.date.month + '-' + this.tmpHis.confirmDate.date.day;
-          }
-        } else {
-          this.tmpHis.date_discharge = null;
         }
+
+        if (this.tmpHis.confirmDate) {
+          this.tmpHis.confirm_date = this.tmpHis.confirmDate.date.year + '-' + this.tmpHis.confirmDate.date.month + '-' + this.tmpHis.confirmDate.date.day;
+        }
+
+        // } else {
+        //   this.tmpHis.date_discharge = null;
+        // }
         const rs: any = await this.patientsService.saveEditCovidCase(this.tmpHis);
         if (rs.ok) {
           const idx = findIndex(this.historys, (v: any) => {
