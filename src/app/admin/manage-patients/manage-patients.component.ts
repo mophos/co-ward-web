@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertService } from 'src/app/help/alert.service';
 import { PatientsService } from '../services/patients.service';
 import { UserService } from '../services/user.service';
-import { find, findIndex, cloneDeep } from 'lodash';
+import { find, findIndex, cloneDeep, isEmpty } from 'lodash';
 import * as moment from 'moment';
 import { IMyOptions } from 'mydatepicker-th';
 import { AutocompleteProvinceComponent } from 'src/app/help/autocomplete-address/autocomplete-province/autocomplete-province.component';
@@ -49,8 +49,8 @@ export class ManagePatientsComponent implements OnInit {
 
   ) { }
   // queryPerson: string = 'kaka';
-  queryHc: string = '';
-  queryHn: string = '';
+  queryHc = '';
+  queryHn = '';
 
   patient: any;
   tmpPatient: any;
@@ -548,7 +548,11 @@ export class ManagePatientsComponent implements OnInit {
 
   onSelectHosp(e) {
     console.log(e);
-    this.queryHc = e.hospcode;
+    if (isEmpty(e)) {
+      this.queryHc = '';
+    } else {
+      this.queryHc = e.hospcode;
+    }
 
   }
 }

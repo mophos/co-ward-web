@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HospitalService } from '../services/hospital.service';
 import { AlertService } from '../../help/alert.service';
-import { findIndex } from 'lodash';
+import { findIndex, isEmpty } from 'lodash';
 import { ClrDatagridStateInterface } from '@clr/angular';
 
 import { AutocompleteProvinceComponent } from '../../help/autocomplete-address/autocomplete-province/autocomplete-province.component';
@@ -83,8 +83,11 @@ export class ManageHospitalComponent implements OnInit {
   }
 
   refresh(state: ClrDatagridStateInterface) {
-    this.limit = +state.page.size;
-    this.offset = +state.page.from;
+    console.log(state);
+    if (!isEmpty(state)) {
+      this.offset = +(state.page.current - 1) * +state.page.size;
+      this.limit = +state.page.size;
+    }
     this.getList();
   }
 
@@ -183,7 +186,7 @@ export class ManageHospitalComponent implements OnInit {
         tel: this.tel,
         telephone: this.telephone,
         telephone_manager: this.telephoneManager,
-        bed_spd: this.hospBed
+        // bed_spd: this.hospBed
       };
       let rs: any;
       if (this.isUpdate) {

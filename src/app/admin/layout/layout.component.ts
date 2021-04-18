@@ -18,7 +18,7 @@ export class LayoutComponent implements OnInit {
   minMaxMenu: any;
   userManageMenu: any;
   suppliesManageMenu: any;
-  hospitalManageMenu: any;
+  hospitalManageMenu: boolean;
   restockCollectionMenu: any;
   systemManageMenu: any;
 
@@ -34,7 +34,7 @@ export class LayoutComponent implements OnInit {
     this.hospname = decoded.hospname;
     // this.restockMenu = findIndex(this.rights, { name: 'ADMIN_RESTOCK' }) === -1 ? false : true;
     // this.minMaxMenu = findIndex(this.rights, { name: 'ADMIN_MIN_MAX' }) === -1 ? false : true;
-    // this.hospitalManageMenu = findIndex(this.rights, { name: 'ADMIN_MANAGE_HOSPITALS' }) === -1 ? false : true;
+    this.hospitalManageMenu = findIndex(this.rights, { name: 'ADMIN_MANAGE_HOSPITALS' }) === -1 ? false : true;
     // this.suppliesManageMenu = findIndex(this.rights, { name: 'ADMIN_MANAGE_SUPPLIES' }) === -1 ? false : true;
     this.restockCollectionMenu = findIndex(this.rights, { name: 'ADMIN_RESTOCK_COLLECTION' }) === -1 ? false : true;
     this.systemManageMenu = findIndex(this.rights, { name: 'ADMIN_MANAGE_SYSTEMS' }) === -1 ? false : true;

@@ -55,7 +55,7 @@
       <div class="clr-col-8">
         <div class="clr-error">
           <div class="clr-input-wrapper">
-            <input class="clr-error" type="text" name="hospCode" placeholder="รหัสโรงพยาบาล( 5 ตัวอักษร )" id="hospCode"
+            <input class="clr-error clr-input" type="text" name="hospCode" placeholder="รหัสโรงพยาบาล( 5 ตัวอักษร )" id="hospCode"
               [(ngModel)]="hospCode" style="width: 100%;">
           </div>
           <span class="clr-subtext" *ngIf="hospCode && hospCode.length != '5'">ต้อง 5 ตัวอักษร</span>
@@ -69,7 +69,7 @@
         ชื่อโรงพยาบาล<span class="required">*</span>
       </div>
       <div class="clr-col-8">
-        <input type="text" name="hospName" id="hospName" placeholder="ชื่อโรงพยาบาล" [(ngModel)]="hospName"
+        <input type="text" class="clr-input" name="hospName" id="hospName" placeholder="ชื่อโรงพยาบาล" [(ngModel)]="hospName"
           style="width: 100%;">
       </div>
     </div>
@@ -91,7 +91,7 @@
         โทร (1)<span class="required">*</span>
       </div>
       <div class="clr-col-8">
-        <input type="text" name="telephone" id="telephone" placeholder="เบอร์โทรศัพท์" [(ngModel)]="telephone"
+        <input type="text" class="clr-input" name="telephone" id="telephone" placeholder="เบอร์โทรศัพท์" [(ngModel)]="telephone"
           style="width: 100%;">
       </div>
     </div>
@@ -100,7 +100,7 @@
         โทร (2)
       </div>
       <div class="clr-col-8">
-        <input type="text" name="tel" id="tel" placeholder="เบอร์โทรศัพท์(เพิ่มเติม)" [(ngModel)]="tel"
+        <input type="text" class="clr-input" name="tel" id="tel" placeholder="เบอร์โทรศัพท์(เพิ่มเติม)" [(ngModel)]="tel"
           style="width: 100%;">
       </div>
     </div>
@@ -109,7 +109,7 @@
         โทร (ผู้อำนวยการ)
       </div>
       <div class="clr-col-8">
-        <input type="text" name="telephoneManager" id="telephoneManager" placeholder="เบอร์โทรศัพท์(ผู้อำนวยการ)"
+        <input type="text" class="clr-input" name="telephoneManager" id="telephoneManager" placeholder="เบอร์โทรศัพท์(ผู้อำนวยการ)"
           [(ngModel)]="telephoneManager" style="width: 100%;">
       </div>
     </div>
@@ -118,7 +118,7 @@
         ที่อยู่<span class="required">*</span>
       </div>
       <div class="clr-col-8">
-        <input type="text" name="address" id="address" placeholder="ที่อยู่" [(ngModel)]="address" style="width: 100%;">
+        <input type="text" class="clr-input" name="address" id="address" placeholder="ที่อยู่" [(ngModel)]="address" style="width: 100%;">
       </div>
     </div>
     <div class="clr-row">
@@ -157,15 +157,15 @@
         </app-autocomplete-zipcode>
       </div>
     </div>
-    <div class="clr-row">
+    <!-- <div class="clr-row">
       <div class="clr-col-4">
         จำนวนเตียง
       </div>
       <div class="clr-col-8">
-        <input type="text" name="hospBed" id="hospBed" placeholder="จำนวนเตียง" [(ngModel)]="hospBed"
+        <input type="text" class="clr-input" name="hospBed" id="hospBed" placeholder="จำนวนเตียง" [(ngModel)]="hospBed"
           style="width: 100%;">
       </div>
-    </div>
+    </div> -->
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-success"
