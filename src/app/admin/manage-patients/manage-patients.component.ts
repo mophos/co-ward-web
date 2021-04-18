@@ -88,7 +88,7 @@ export class ManagePatientsComponent implements OnInit {
       title_id: p.title_id,
       first_name: p.first_name,
       last_name: p.last_name,
-      birth_date: p.birth_date,
+      birth_date: moment(p.birth_date).format('YYYY-MM-DD'),
       cid: p.cid,
       hn: p.hn,
       house_no: p.house_no,
