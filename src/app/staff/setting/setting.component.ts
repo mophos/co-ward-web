@@ -54,10 +54,10 @@ export class SettingComponent implements OnInit {
   lat: any;
   long: any;
 
-  @ViewChild('province', { static: true }) province: AutocompleteProvinceComponent;
-  @ViewChild('ampur', { static: true }) ampur: AutocompleteDistrictComponent;
-  @ViewChild('tambon', { static: true }) tambon: AutocompleteSubdistrictComponent;
-  @ViewChild('zipcode', { static: true }) zipc: AutocompleteZipcodeComponent;
+  @ViewChild('province', { static: false }) province: AutocompleteProvinceComponent;
+  @ViewChild('ampur', { static: false }) ampur: AutocompleteDistrictComponent;
+  @ViewChild('tambon', { static: false }) tambon: AutocompleteSubdistrictComponent;
+  @ViewChild('zipcode', { static: false }) zipc: AutocompleteZipcodeComponent;
   @ViewChild('loading', { static: true }) loading: LoaddingComponent;
 
   constructor(

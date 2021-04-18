@@ -134,17 +134,17 @@ export class CovidCaseNewComponent implements OnInit {
   isKey = true;
   hide = true;
   modalConfirm = false;
-  @ViewChild('hospital', { static: true }) hospitals: AutocompleteHospitalComponent;
-  @ViewChild('icd', { static: true }) icd: AutocompleteIcd10Component;
-  @ViewChild('countries', { static: true }) countries: AutocompleteCountriesComponent;
-  @ViewChild('province', { static: true }) province: AutocompleteProvinceComponent;
-  @ViewChild('ampur', { static: true }) ampur: AutocompleteDistrictComponent;
-  @ViewChild('tambon', { static: true }) tambon: AutocompleteSubdistrictComponent;
-  @ViewChild('zipcode', { static: true }) zipc: AutocompleteZipcodeComponent;
-  @ViewChild('provinceCurr', { static: true }) provinceCurr: AutocompleteProvinceComponent;
-  @ViewChild('ampurCurr', { static: true }) ampurCurr: AutocompleteDistrictComponent;
-  @ViewChild('tambonCurr', { static: true }) tambonCurr: AutocompleteSubdistrictComponent;
-  @ViewChild('zipcodeCurr', { static: true }) zipcCurr: AutocompleteZipcodeComponent;
+  @ViewChild('hospital', { static: false }) hospitals: AutocompleteHospitalComponent;
+  @ViewChild('icd', { static: false }) icd: AutocompleteIcd10Component;
+  @ViewChild('countries', { static: false }) countries: AutocompleteCountriesComponent;
+  @ViewChild('province', { static: false }) province: AutocompleteProvinceComponent;
+  @ViewChild('ampur', { static: false }) ampur: AutocompleteDistrictComponent;
+  @ViewChild('tambon', { static: false }) tambon: AutocompleteSubdistrictComponent;
+  @ViewChild('zipcode', { static: false }) zipc: AutocompleteZipcodeComponent;
+  @ViewChild('provinceCurr', { static: false }) provinceCurr: AutocompleteProvinceComponent;
+  @ViewChild('ampurCurr', { static: false }) ampurCurr: AutocompleteDistrictComponent;
+  @ViewChild('tambonCurr', { static: false }) tambonCurr: AutocompleteSubdistrictComponent;
+  @ViewChild('zipcodeCurr', { static: false }) zipcCurr: AutocompleteZipcodeComponent;
   @ViewChild('loading', { static: true }) loading: any;
   icdName: any;
   icdCode: any = null;
@@ -257,13 +257,21 @@ export class CovidCaseNewComponent implements OnInit {
           this.ampurName = this.data.ampur_name;
           this.tambonName = this.data.tambon_name;
           this.provinceName = this.data.province_name;
-          this.ampurId = address.rows[0].ampur_code;
-          this.tambonId = address.rows[0].tambon_code;
-          this.provinceId = address.rows[0].province_code;
-          this.ampurCurr.setQuery(this.data.current_ampur_name || null);
-          this.tambonCurr.setQuery(this.data.current_tambon_name || null);
-          this.provinceCurr.setQuery(this.data.current_province_name || null);
-          this.zipcCurr.setQuery(this.data.current_zipcode || null);
+          if (address.ok && address.rows.length) {
+            this.ampurId = address.rows[0].ampur_code;
+            this.tambonId = address.rows[0].tambon_code;
+            this.provinceId = address.rows[0].province_code;
+            this.ampurCurr.setQuery(this.data.current_ampur_name || null);
+            this.tambonCurr.setQuery(this.data.current_tambon_name || null);
+            this.provinceCurr.setQuery(this.data.current_province_name || null);
+            this.zipcCurr.setQuery(this.data.current_zipcode || null);
+          } else {
+            this.ampurCurr.setQuery(null);
+            this.tambonCurr.setQuery(null);
+            this.provinceCurr.setQuery(null);
+            this.zipcCurr.setQuery(null);
+
+          }
         }
       }
     } catch (error) {
