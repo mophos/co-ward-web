@@ -287,6 +287,8 @@ export class ManagePatientsComponent implements OnInit {
       if (confirm) {
         this.modalLoading.show();
         // if (this.tmpHis.status !== 'ADMIT') {
+        console.log(this.tmpHis.disDate, this.tmpHis.confirmDate);
+
         if (this.tmpHis.disDate) {
           this.tmpHis.date_discharge = this.tmpHis.disDate.date.year + '-' + this.tmpHis.disDate.date.month + '-' + this.tmpHis.disDate.date.day + ' ' + this.tmpHis.timeDischarge.h + ':' + this.tmpHis.timeDischarge.m + ':00';
         }
