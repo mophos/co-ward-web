@@ -288,7 +288,9 @@ export class ManagePatientsComponent implements OnInit {
         this.modalLoading.show();
         if (this.tmpHis.status !== 'ADMIT') {
           this.tmpHis.date_discharge = this.tmpHis.disDate.date.year + '-' + this.tmpHis.disDate.date.month + '-' + this.tmpHis.disDate.date.day + ' ' + this.tmpHis.timeDischarge.h + ':' + this.tmpHis.timeDischarge.m + ':00';
-          this.tmpHis.confirm_date = this.tmpHis.confirmDate.date.year + '-' + this.tmpHis.confirmDate.date.month + '-' + this.tmpHis.confirmDate.date.day;
+          if (this.tmpHis.status !== 'IPPUI') {
+            this.tmpHis.confirm_date = this.tmpHis.confirmDate.date.year + '-' + this.tmpHis.confirmDate.date.month + '-' + this.tmpHis.confirmDate.date.day;
+          }
         } else {
           this.tmpHis.date_discharge = null;
         }
