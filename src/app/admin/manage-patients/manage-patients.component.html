@@ -16,7 +16,8 @@
     </app-autocomplete-hospital>
   </div>
   <div class="clr-col-2">
-    <button class="btn btn-sm btn-success" (click)="onSearch()" title="search" [disabled]="!queryHn.length || !queryHc.length">
+    <button class="btn btn-sm btn-success" (click)="onSearch()" title="search"
+      [disabled]="!queryHn.length || !queryHc.length">
       <clr-icon shape="search"></clr-icon>
     </button>
   </div>
@@ -537,6 +538,11 @@
               <clr-dg-cell>{{l.status}}</clr-dg-cell>
               <clr-dg-cell>
                 <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-success" (click)="editHistoryMed(l)"
+                    aria-label="settings">
+                    <!-- <clr-icon shape="search"></clr-icon> -->
+                    แก้ไขยา
+                  </button>
                   <button type="button" class="btn btn-sm btn-primary" (click)="editHistoryDetail(l)"
                     aria-label="settings">
                     <!-- <clr-icon shape="search"></clr-icon> -->
@@ -623,6 +629,28 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-success" (click)="saveEditHistoryDetail()">บันทึก</button>
     <button type="button" class="btn btn-danger" (click)="closeEditHistoryDetail()">ยกเลิก</button>
+
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="genericModal" [style.height.px]="500">
+  <h3 class="modal-title">แก้ไขยา</h3>
+  <div class="modal-body" style="padding-bottom: 1px;">
+    <clr-datagrid>
+      <clr-dg-column></clr-dg-column>
+      <clr-dg-column>ชื่อยา</clr-dg-column>
+      <clr-dg-row *ngFor="let l of genericsList;let idx=index;">
+        <clr-dg-cell>
+          <input type="checkbox" name="check" [(ngModel)]="genericsList[idx].check">
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.name}}</clr-dg-cell>
+      </clr-dg-row>
+      <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
+    </clr-datagrid>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="saveGeneric()">บันทึก</button>
+    <button type="button" class="btn btn-danger" (click)="closeGeneric()">ยกเลิก</button>
 
   </div>
 </clr-modal>

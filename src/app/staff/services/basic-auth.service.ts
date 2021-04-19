@@ -48,7 +48,19 @@ export class BasicAuthService {
     return await this.http.post(url, { message }).toPromise();
   }
 
+  async getGeneric(id) {
+    const url = `${this.apiUrl}/v1/basic-auth/generic/history?id=${id}`;
+    return await this.http.get(url).toPromise();
+  }
 
+  async getGenerics() {
+    const url = `${this.apiUrl}/v1/basic-auth/generics`;
+    return await this.http.get(url).toPromise();
+  }
 
+  async saveGeneric(data, id) {
+    const url = `${this.apiUrl}/v1/basic-auth/generic/history?id=${id}`;
+    return await this.http.post(url, { data }).toPromise();
+  }
 
 }

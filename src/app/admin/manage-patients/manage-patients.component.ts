@@ -30,9 +30,12 @@ export class ManagePatientsComponent implements OnInit {
   tmpHis: any = {};
   editHisDetail: boolean;
   tmpHisDetail: any;
+  covidCaseDetailId: any;
   bDate: any;
   gcsList = [];
   bedList = [];
+  genericList = [];
+  genericsList = [];
   medicalSupplieList = [];
   myDatePickerOptions: IMyOptions = {
     inline: false,
@@ -58,6 +61,7 @@ export class ManagePatientsComponent implements OnInit {
   editCase = false;
   editHis = false;
   modalDetails = false;
+  genericModal = false;
   async ngOnInit() {
     await this.getTitleName();
     await this.getGender();
@@ -322,7 +326,7 @@ export class ManagePatientsComponent implements OnInit {
         } else {
           this.alertService.error(rs.error);
         }
-      } else{
+      } else {
         this.modalDetails = false;
       }
     } catch (error) {
@@ -568,5 +572,56 @@ export class ManagePatientsComponent implements OnInit {
       this.queryHc = e.hospcode;
     }
 
+  }
+
+  async editHistoryMed(l) {
+    try {
+      this.covidCaseDetailId = l.id;
+      const rsg: any = await this.basicAuthService.getGenerics();
+      const rs: any = await this.basicAuthService.getGeneric(l.id);
+      if (rs.ok && rsg.ok) {
+        this.genericList = rs.rows;
+        this.genericsList = rsg.rows;
+
+        for (const v of this.genericList) {
+          const idx = findIndex(this.genericsList, { id: v.generic_id });
+          if (idx > -1) {
+            this.genericsList[idx].check = true;
+          } else {
+            this.genericsList[idx].check = false;
+          }
+        }
+        this.genericModal = true;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async saveGeneric() {
+    try {
+      const data: any = [];
+      for (const v of this.genericsList) {
+        if (v.check === true) {
+          data.push(v.id);
+        }
+      }
+      const rs: any = await this.basicAuthService.saveGeneric(data, this.covidCaseDetailId);
+      if (rs.ok) {
+        this.closeGeneric();
+        this.alertService.success();
+      } else {
+        this.alertService.error();
+      }
+    } catch (error) {
+      this.alertService.error(error);
+    }
+  }
+
+  async closeGeneric() {
+    this.covidCaseDetailId = null;
+    this.genericList = [];
+    this.genericsList = [];
+    this.genericModal = false;
   }
 }
