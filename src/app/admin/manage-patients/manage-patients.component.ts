@@ -299,6 +299,8 @@ export class ManagePatientsComponent implements OnInit {
         if (this.tmpHis.status !== 'IPPUT') {
           if (this.tmpHis.confirmDate) {
             this.tmpHis.confirm_date = this.tmpHis.confirmDate.date.year + '-' + this.tmpHis.confirmDate.date.month + '-' + this.tmpHis.confirmDate.date.day;
+          } else {
+            this.tmpHis.confirm_date = null;
           }
         } else {
           this.tmpHis.confirm_date = null;
@@ -325,16 +327,18 @@ export class ManagePatientsComponent implements OnInit {
         } else {
           this.alertService.error(rs.error);
         }
-      } else {
-        this.modalDetails = false;
       }
-    } catch (error) {
+      this.modalLoading.hide();
       this.modalDetails = false;
+      this.editHis = false;
+      this.tmpHis = null;
+    } catch (error) {
+      this.modalLoading.hide();
+      this.modalDetails = false;
+      this.editHis = false;
+      this.tmpHis = null;
       this.alertService.error(error);
     }
-    this.modalLoading.hide();
-    this.editHis = false;
-    this.tmpHis = null;
   }
 
   async closeEditHistory() {
@@ -369,6 +373,8 @@ export class ManagePatientsComponent implements OnInit {
               day: moment(this.tmpHis.confirm_date).get('date')
             }
           };
+        } else {
+          this.tmpHis.confirmDate = null;
         }
         if (this.tmpHis.date_discharge) {
           this.tmpHis.timeDischarge = { h: moment(this.tmpHis.date_discharge).format('HH'), m: moment(this.tmpHis.date_discharge).format('mm') };
