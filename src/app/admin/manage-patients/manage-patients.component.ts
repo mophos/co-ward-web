@@ -37,6 +37,7 @@ export class ManagePatientsComponent implements OnInit {
   genericList = [];
   genericsList = [];
   medicalSupplieList = [];
+  listMisDate = [];
   myDatePickerOptions: IMyOptions = {
     inline: false,
     dateFormat: 'dd mmm yyyy',
@@ -61,6 +62,7 @@ export class ManagePatientsComponent implements OnInit {
   editCase = false;
   editHis = false;
   modalDetails = false;
+  modalAddDate = false;
   genericModal = false;
   async ngOnInit() {
     await this.getTitleName();
@@ -254,6 +256,7 @@ export class ManagePatientsComponent implements OnInit {
       const rs: any = await this.patientsService.getCovidCaseDetails(l.covid_case_id);
       if (rs.ok) {
         this.details = rs.rows;
+        console.log(this.details);
       } else {
         this.alertService.error(rs.error);
       }
@@ -296,6 +299,10 @@ export class ManagePatientsComponent implements OnInit {
           this.tmpHis.date_discharge = this.tmpHis.disDate.date.year + '-' + this.tmpHis.disDate.date.month + '-' + this.tmpHis.disDate.date.day + ' ' + this.tmpHis.timeDischarge.h + ':' + this.tmpHis.timeDischarge.m + ':00';
         }
 
+        if (this.tmpHis.admitDate) {
+          this.tmpHis.date_admit = this.tmpHis.admitDate.date.year + '-' + this.tmpHis.admitDate.date.month + '-' + this.tmpHis.admitDate.date.day;
+        }
+
         if (this.tmpHis.status !== 'IPPUT') {
           if (this.tmpHis.confirmDate) {
             this.tmpHis.confirm_date = this.tmpHis.confirmDate.date.year + '-' + this.tmpHis.confirmDate.date.month + '-' + this.tmpHis.confirmDate.date.day;
@@ -322,6 +329,7 @@ export class ManagePatientsComponent implements OnInit {
             this.historys[idx].confirm_date = this.tmpHis.confirm_date;
           }
 
+          this.modalDetails = false;
           this.alertService.success();
           // this.details = rs.rows;
         } else {
@@ -355,6 +363,17 @@ export class ManagePatientsComponent implements OnInit {
     try {
       this.editHis = true;
       this.tmpHis = cloneDeep(l);
+      if (this.tmpHis.date_admit) {
+        this.tmpHis.admitDate = {
+          date: {
+            year: moment(this.tmpHis.date_admit).get('year'),
+            month: moment(this.tmpHis.date_admit).get('month') + 1,
+            day: moment(this.tmpHis.date_admit).get('date')
+          }
+        };
+        this.tmpHis.date_admit = this.tmpHis.admitDate.date.year + '-' + this.tmpHis.admitDate.date.month + '-' + this.tmpHis.admitDate.date.day;
+      }
+
       if (l.status !== 'ADMIT') {
         if (this.tmpHis.date_discharge) {
           this.tmpHis.disDate = {
@@ -376,6 +395,7 @@ export class ManagePatientsComponent implements OnInit {
         } else {
           this.tmpHis.confirmDate = null;
         }
+
         if (this.tmpHis.date_discharge) {
           this.tmpHis.timeDischarge = { h: moment(this.tmpHis.date_discharge).format('HH'), m: moment(this.tmpHis.date_discharge).format('mm') };
         } else {
@@ -634,5 +654,47 @@ export class ManagePatientsComponent implements OnInit {
     this.genericList = [];
     this.genericsList = [];
     this.genericModal = false;
+  }
+
+  async addMisDetail() {
+    this.listMisDate = [];
+    this.modalAddDate = true;
+    try {
+      if (this.tmpHis.status === 'ADMIT') {
+        let startDate = moment(this.tmpHis.date_admit);
+        let endDate = moment(this.details[this.details.length - 1].entry_date).add(1, 'days');
+        for (let date = moment(startDate); date.diff(endDate) < 0; date.add(1, 'days')) {
+          const ddate = moment(date).format('YYYY-MM-D');
+          const idx = findIndex(this.details, { s_entry_date: moment(date).format('YYYY-MM-D') });
+          if (idx === -1) {
+            const obj: any = {};
+            obj.bed_id = null;
+            obj.entry_date = ddate;
+            obj.gcs_id = null;
+            obj.medical_supplie_id = null;
+            obj.status = null;
+            this.listMisDate.push(obj);
+          }
+        }
+      } else if (this.tmpHis.status !== 'ADMIT') {
+        let startDate = moment(this.tmpHis.date_admit);
+        let endDate = moment(this.details[this.details.length - 1].entry_date).add(1, 'days');
+        for (let date = moment(startDate); date.diff(endDate) < 0; date.add(1, 'days')) {
+          const ddate = moment(date).format('YYYY-MM-D');
+          const idx = findIndex(this.details, { s_entry_date: moment(date).format('YYYY-MM-D') });
+          if (idx === -1) {
+            const obj: any = {};
+            obj.bed_id = null;
+            obj.entry_date = ddate;
+            obj.gcs_id = null;
+            obj.medical_supplie_id = null;
+            obj.status = null;
+            this.listMisDate.push(obj);
+          }
+        }
+      }
+    } catch (error) {
+
+    }
   }
 }
