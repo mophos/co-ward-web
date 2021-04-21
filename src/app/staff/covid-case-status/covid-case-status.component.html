@@ -3,7 +3,8 @@
 </nav>
 
 <h3 style="float: left;">วันที่ {{date | dateTh:'DD/MM/YYYY'}} </h3>
-<h5>&nbsp;สถานะจะต้องบันทึกทุกวัน ก่อนเวลา 23:00น. และหลัง 00:00น.เป็นต้นไปเท่านั้น  (เนื่องจาก 23:00-00:00น. เป็นช่วงประมวลผลข้อมูลอาจทำให้ข้อมูลผิดพลาด)</h5>
+<h5>&nbsp;สถานะจะต้องบันทึกทุกวัน ก่อนเวลา 23:00น. และหลัง 00:00น.เป็นต้นไปเท่านั้น (เนื่องจาก 23:00-00:00น.
+  เป็นช่วงประมวลผลข้อมูลอาจทำให้ข้อมูลผิดพลาด)</h5>
 
 <!-- <div class="clr-row">
   <div class="clr-col-5">
@@ -44,15 +45,16 @@
   <div class="card-body">
     <div class="clr-row" style="padding-top: 0.5rem; padding-bottom: -5rem; padding-left: 1rem;">
       <div class="clr-col-3">
-        <input class="clr-input width-fit" (keyup)="doEnter($event)" name="query" [(ngModel)]="query" placeholder="ระบุ HN,ชื่อ,นามสกุล เพื่อค้นหา" />
+        <input class="clr-input width-fit" (keyup)="doEnter($event)" name="query" [(ngModel)]="query"
+          placeholder="ระบุ HN,ชื่อ,นามสกุล เพื่อค้นหา" />
       </div>
       <div class="clr-col-2">
         <button class="btn btn-sm btn-primary" (click)="onClickSearch()">
           <clr-icon shape="search"></clr-icon>
         </button>
       </div>
-      <div class="clr-col-7" style="text-align: right;" >
-        <button class="btn btn-sm btn-success"  (click)="onClickSaveAll()">บันทึกทั้งหมด</button>
+      <div class="clr-col-7" style="text-align: right;">
+        <button class="btn btn-sm btn-success" (click)="onClickSaveAll()">บันทึกทั้งหมด</button>
       </div>
     </div>
     <table class="table">
@@ -76,7 +78,7 @@
               อัพเดทล่าสุด
             </div>
             <div>
-              <span >
+              <span>
                 : {{l.updated_entry | dateTh:'DD/MM/YYYY hh:mm'}}
               </span>
               <!-- <span *ngIf="!(l.updated_date)">
@@ -85,30 +87,34 @@
             </div>
           </td>
           <td class="left">
-            <div *ngFor="let i of gcs" >
-              <input [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)" 
-              *ngIf="!(l.old_gcs_id!=6 && i.id == 6) && !((l.old_gcs_id != 5 && l.old_gcs_id != 6 ) && i.id == 5) "
-              type="radio" name="gcs-{{l.covid_case_id}}" id="gcs-{{i.id}}-{{l.covid_case_id}}"
-                [(ngModel)]="l.gcs_id" [value]="i.id" (click)="checkGcs(i,l)">
-              <label *ngIf="!(l.old_gcs_id!=6 && i.id == 6) && !((l.old_gcs_id != 5 && l.old_gcs_id != 6 ) && i.id == 5)" [title]="i.name" class="pointer" for="gcs-{{i.id}}-{{l.covid_case_id}}">
+            <div *ngFor="let i of gcs">
+              <input [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)"
+                *ngIf="!(l.old_gcs_id!=6 && i.id == 6) && !((l.old_gcs_id != 5 && l.old_gcs_id != 6 ) && i.id == 5) "
+                type="radio" name="gcs-{{l.covid_case_id}}" id="gcs-{{i.id}}-{{l.covid_case_id}}" [(ngModel)]="l.gcs_id"
+                [value]="i.id" (click)="checkGcs(i,l)">
+              <label
+                *ngIf="!(l.old_gcs_id!=6 && i.id == 6) && !((l.old_gcs_id != 5 && l.old_gcs_id != 6 ) && i.id == 5)"
+                [title]="i.name" class="pointer" for="gcs-{{i.id}}-{{l.covid_case_id}}">
                 {{i.name}}
               </label>
             </div>
           </td>
           <td class="left">
             <div *ngFor="let i of beds">
-              <input *ngIf="!(l.bed_id!=6 && i.id == 6)" [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)" type="radio" name="bed-{{l.covid_case_id}}" id="bed-{{i.id}}-{{l.covid_case_id}}"
-                [(ngModel)]="l.bed_id" [value]="i.id" (click)="checkMedicalSupplies(i,l)">
-              <label *ngIf="!(l.bed_id!=6 && i.id == 6)" [title]="i.name" class="pointer" for="bed-{{i.id}}-{{l.covid_case_id}}">
+              <input *ngIf="!(l.bed_id!=6 && i.id == 6)" [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)"
+                type="radio" name="bed-{{l.covid_case_id}}" id="bed-{{i.id}}-{{l.covid_case_id}}" [(ngModel)]="l.bed_id"
+                [value]="i.id" (click)="checkMedicalSupplies(i,l)">
+              <label *ngIf="!(l.bed_id!=6 && i.id == 6)" [title]="i.name" class="pointer"
+                for="bed-{{i.id}}-{{l.covid_case_id}}">
                 {{i.name}}
               </label>
             </div>
           </td>
           <td class="left">
             <div *ngFor="let i of medicalSupplies">
-              <input [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)" type="radio" (click)='uncheckRadioMedicalSupplies(l.covid_case_id,i.id)'
-                name="medicalSupplie-id-{{l.covid_case_id}}" id="medicalSupplie-{{i.id}}-{{l.covid_case_id}}" [(ngModel)]="l.medical_supplie_id"
-                [value]="i.id">
+              <input [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)" type="radio"
+                (click)='uncheckRadioMedicalSupplies(l.covid_case_id,i.id)' name="medicalSupplie-id-{{l.covid_case_id}}"
+                id="medicalSupplie-{{i.id}}-{{l.covid_case_id}}" [(ngModel)]="l.medical_supplie_id" [value]="i.id">
               <label [title]="i.name" class="pointer" for="medicalSupplie-{{i.id}}-{{l.covid_case_id}}">
                 {{i.name}}
               </label>
@@ -117,36 +123,42 @@
           <td class="left">
             <div class="clr-control-inline">
               <div *ngFor="let i of s1" class="clr-col-6" style="padding: 0rem;">
-                <input [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)" (click)='uncheckRadio(l.covid_case_id,i.generic,"set1")'
-                  type="radio" name="s1-{{l.covid_case_id}}" id="s1-{{i.generic}}-{{l.covid_case_id}}" [value]="i.generic" [(ngModel)]="l.set1">
+                <input [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)"
+                  (click)='uncheckRadio(l.covid_case_id,i.generic,"set1")' type="radio" name="s1-{{l.covid_case_id}}"
+                  id="s1-{{i.generic}}-{{l.covid_case_id}}" [value]="i.generic" [(ngModel)]="l.set1">
                 <label [title]="i.name" class="pointer" for="s1-{{i.generic}}-{{l.covid_case_id}}"> {{i.name}}</label>
               </div>
             </div>
             <div class="clr-control-inline">
               <div *ngFor="let i of s2" class="clr-col-6" style="padding: 0rem;">
-                <input [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)" (click)='uncheckRadio(l.covid_case_id,i.generic,"set2")'
-                  type="radio" name="s2-{{l.covid_case_id}}" id="s2-{{i.generic}}-{{l.covid_case_id}}" [value]="i.generic" [(ngModel)]="l.set2">
+                <input [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)"
+                  (click)='uncheckRadio(l.covid_case_id,i.generic,"set2")' type="radio" name="s2-{{l.covid_case_id}}"
+                  id="s2-{{i.generic}}-{{l.covid_case_id}}" [value]="i.generic" [(ngModel)]="l.set2">
                 <label [title]="i.name" class="pointer" for="s2-{{i.generic}}-{{l.covid_case_id}}"> {{i.name}}</label>
               </div>
             </div>
             <div class="clr-control-inline">
               <div *ngFor="let i of s3" class="clr-col-6" style="padding: 0rem;">
-                <input [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)" (click)='uncheckRadio(l.covid_case_id,i.generic,"set3")'
-                  type="radio" name="s3-{{l.covid_case_id}}" id="s3-{{i.generic}}-{{l.covid_case_id}}" [value]="i.generic" [(ngModel)]="l.set3">
+                <input [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)"
+                  (click)='uncheckRadio(l.covid_case_id,i.generic,"set3")' type="radio" name="s3-{{l.covid_case_id}}"
+                  id="s3-{{i.generic}}-{{l.covid_case_id}}" [value]="i.generic" [(ngModel)]="l.set3">
                 <label [title]="i.name" class="pointer" for="s3-{{i.generic}}-{{l.covid_case_id}}"> {{i.name}}</label>
               </div>
             </div>
             <div class="clr-control-inline">
               <div *ngFor="let i of s4" class="clr-col-6" style="padding: 0rem;">
-                <input [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)" (click)='uncheckRadio(l.covid_case_id,i.generic,"set4")'
-                  type="radio" name="s4-{{l.covid_case_id}}" id="s4-{{i.generic}}-{{l.covid_case_id}}" [value]="i.generic" [(ngModel)]="l.set4">
-                <label [title]="i.name" class="pointer" for="s4-{{i.generic}}-{{l.covid_case_id}}"> <span [innerHTML]="i.name"></span></label>
+                <input [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)"
+                  (click)='uncheckRadio(l.covid_case_id,i.generic,"set4")' type="radio" name="s4-{{l.covid_case_id}}"
+                  id="s4-{{i.generic}}-{{l.covid_case_id}}" [value]="i.generic" [(ngModel)]="l.set4">
+                <label [title]="i.name" class="pointer" for="s4-{{i.generic}}-{{l.covid_case_id}}"> <span
+                    [innerHTML]="i.name"></span></label>
               </div>
             </div>
           </td>
           <td style="text-align: right;">
             <div *ngIf="l.entry_date | checkCutTime">
-              <button class="btn btn-sm btn-success" (click)="onClickSave(l.covid_case_id)" [disabled]="!(l.entry_date | checkCutTime)">บันทึก</button>
+              <button class="btn btn-sm btn-success" (click)="onClickSave(l.covid_case_id)"
+                [disabled]="!(l.entry_date | checkCutTime)">บันทึก</button>
             </div>
             <div *ngIf="!(l.entry_date | checkCutTime)">
               <button class="btn btn-sm " [ngClass]="{'btn-primary-outline': !l.is_edit, 'btn-primary': l.is_edit}"
@@ -171,19 +183,19 @@
     <clr-radio-container clrInline>
       <!-- <label>กรุณาเลือกประเภท</label> -->
       <clr-radio-wrapper *ngIf="selected.gcs_id != 5">
-        <input type="radio" clrRadio value="HOME"  name="modalDischargeType" [(ngModel)]="modalDischargeType" />
+        <input type="radio" clrRadio value="HOME" name="modalDischargeType" [(ngModel)]="modalDischargeType" />
         <label>รักษาหาย กลับบ้าน</label>
       </clr-radio-wrapper>
       <clr-radio-wrapper *ngIf="selected.gcs_id == 5">
-        <input type="radio" clrRadio value="NEGATIVE"  name="modalDischargeType" [(ngModel)]="modalDischargeType" />
+        <input type="radio" clrRadio value="NEGATIVE" name="modalDischargeType" [(ngModel)]="modalDischargeType" />
         <label>ตรวจไม่พบเชื้อ</label>
       </clr-radio-wrapper>
-      <clr-radio-wrapper  *ngIf="selected.gcs_id != 5">
+      <clr-radio-wrapper *ngIf="selected.gcs_id != 5">
         <input type="radio" clrRadio value="DEATH" name="modalDischargeType" [(ngModel)]="modalDischargeType" />
         <label>เสียชีวิต</label>
       </clr-radio-wrapper>
       <clr-radio-wrapper *ngIf="selected.gcs_id != 5">
-        <input type="radio" clrRadio value="REFER"  name="modalDischargeType" [(ngModel)]="modalDischargeType" />
+        <input type="radio" clrRadio value="REFER" name="modalDischargeType" [(ngModel)]="modalDischargeType" />
         <label>ส่งต่อรพ.</label>
       </clr-radio-wrapper>
     </clr-radio-container>
@@ -264,9 +276,10 @@
       <app-autocomplete-hospital style="padding: 0px; width: 100%;" #hospital (onchange)="onSelectHosp($event)"
         (onselect)="onSelectHosp($event)">
       </app-autocomplete-hospital>
-      <label for="basic" class="clr-control-label" style="padding-top: 1rem; padding-bottom: 0.2rem;">สาเหตุที่ส่งต่อ</label>
-      <input type="text" name="reason" style="padding: 0px; width: 100%;" [(ngModel)]="reason" class="clr-col-9 clr-input width-fit"
-        placeholder="สาเหตุที่ส่งต่อ">
+      <label for="basic" class="clr-control-label"
+        style="padding-top: 1rem; padding-bottom: 0.2rem;">สาเหตุที่ส่งต่อ</label>
+      <input type="text" name="reason" style="padding: 0px; width: 100%;" [(ngModel)]="reason"
+        class="clr-col-9 clr-input width-fit" placeholder="สาเหตุที่ส่งต่อ">
       <label for="basic" class="clr-control-label" style="padding-top: 1rem;">วันเวลา</label>
       <div class="clr-row" style="padding-bottom: 6rem;">
         <div class="clr-col-6">
@@ -289,13 +302,18 @@
         </div>
       </div>
     </div>
-    <span style="font-size: 2rem;" *ngIf="modalDischargeType == 'HOME'">รักษาหาย กลับบ้าน</span>
-    <span style="font-size: 2rem;" *ngIf="modalDischargeType == 'REFER'">ส่งต่อ</span>
-    <span style="font-size: 2rem;" *ngIf="modalDischargeType == 'NEGATIVE'">ตรวจไม่พบเชื้อ</span>
-    <span style="font-size: 2rem;" *ngIf="modalDischargeType == 'DEATH'">เสียชีวิต</span>
+    <div class="clr-row">
+      <div class="clr-col-12" style="text-align: center;">
+        <span style="font-size: 2rem;" *ngIf="modalDischargeType == 'HOME'">รักษาหาย กลับบ้าน</span>
+        <span style="font-size: 2rem;" *ngIf="modalDischargeType == 'REFER'">ส่งต่อ</span>
+        <span style="font-size: 2rem;" *ngIf="modalDischargeType == 'NEGATIVE'">ตรวจไม่พบเชื้อ</span>
+        <span style="font-size: 2rem;" *ngIf="modalDischargeType == 'DEATH'">เสียชีวิต</span>
+      </div>
+    </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success btn-block" (click)="save()" [disabled]="(!hospitalId && modalDischargeType=='REFER') || ((!hour || !minute )&& modalDischargeType!='REFER') ">บันทึก</button>
+    <button type="button" class="btn btn-success btn-block" (click)="save()"
+      [disabled]="(!hospitalId && modalDischargeType=='REFER') || ((!hour || !minute )&& modalDischargeType!='REFER') ">บันทึก</button>
   </div>
 </clr-modal>
 

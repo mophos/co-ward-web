@@ -522,10 +522,13 @@
             <div class="clr-col-3">
               <label>วันที่ตรวจพบ: </label>
             </div>
-            <div class="clr-col-9">
+            <div class="clr-col-8">
               <my-date-picker-th name="confirmDate" [options]="myDatePickerOptions" [(ngModel)]="tmpHis.confirmDate"
                 required>
               </my-date-picker-th>
+            </div>
+            <div class="clr-col-1">
+              <button class="btn btn-outline-danger" (click)="tmpHis.confirmDate = null">ลบ</button>
             </div>
             <div class="clr-col-12" style="text-align: right;">
               <button type="button" class="btn btn-success" (click)="saveEditHistory()">บันทึก</button>
