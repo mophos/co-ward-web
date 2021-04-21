@@ -454,14 +454,17 @@ export class ManagePatientsComponent implements OnInit {
           this.alertService.error(rs.error);
         }
       }
-      this.modalDetails = false;
+      // this.modalDetails = false;
+      this.modalLoading.hide();
+      this.editHisDetail = false;
+      this.tmpHisDetail = null;
     } catch (error) {
-      this.modalDetails = false;
+      this.modalLoading.hide();
+      this.editHisDetail = false;
+      this.tmpHisDetail = null;
+      // this.modalDetails = false;
       this.alertService.error(error);
     }
-    this.modalLoading.hide();
-    this.editHisDetail = false;
-    this.tmpHisDetail = null;
   }
 
   async closeEditHistoryDetail() {
