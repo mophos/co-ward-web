@@ -141,7 +141,6 @@ export class ManagePatientsComponent implements OnInit {
     const confirm = await this.alertService.confirm('ต้องการแก้ไขข้อมูลผู้ป่วย ใช่หรือไม่');
     if (confirm) {
       this.modalLoading.show();
-
       const rs: any = await this.patientsService.editInfo(this.tmpPatient);
       if (rs.ok) {
         const idx = findIndex(this.patient, (v: any) => {
@@ -330,6 +329,7 @@ export class ManagePatientsComponent implements OnInit {
         this.modalDetails = false;
       }
     } catch (error) {
+      this.modalDetails = false;
       this.alertService.error(error);
     }
     this.modalLoading.hide();
@@ -448,7 +448,9 @@ export class ManagePatientsComponent implements OnInit {
           this.alertService.error(rs.error);
         }
       }
+      this.modalDetails = false;
     } catch (error) {
+      this.modalDetails = false;
       this.alertService.error(error);
     }
     this.modalLoading.hide();
