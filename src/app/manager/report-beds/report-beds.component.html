@@ -64,7 +64,7 @@
     *ngFor="let p of l.provinces">
     <thead>
       <tr>
-        <th colspan="12" style="text-align: left;">
+        <th colspan="14" style="text-align: left;">
           <h4>{{p.province_name}}</h4>
         </th>
       </tr>
@@ -79,6 +79,8 @@
         <th class="right" style="position: sticky;top:0;">Isolate ใช้ไปแล้ว</th>
         <th class="right" style="position: sticky;top:0;">Cohort ทั้งหมด</th>
         <th class="right" style="position: sticky;top:0;">Cohort ใช้ไปแล้ว</th>
+        <th class="right" style="position: sticky;top:0;">Cohort ICU ทั้งหมด</th>
+        <th class="right" style="position: sticky;top:0;">Cohort ICU ใช้ไปแล้ว</th>
         <th class="right" style="position: sticky;top:0;">Hospitel ทั้งหมด</th>
         <th class="right" style="position: sticky;top:0;">Hospitel ใช้ไปแล้ว</th>
       </tr>
@@ -95,13 +97,15 @@
         <td class="right">{{h.isolate_usage_qty == null ? '-' : h.isolate_usage_qty}}</td>
         <td class="right">{{h.cohort_covid_qty == null ? '-' : h.cohort_covid_qty}}</td>
         <td class="right">{{h.cohort_usage_qty == null ? '-' : h.cohort_usage_qty}}</td>
+        <td class="right">{{h.cohort_icu_covid_qty == null ? '-' : h.cohort_icu_covid_qty}}</td>
+        <td class="right">{{h.cohort_icu_usage_qty == null ? '-' : h.cohort_icu_usage_qty}}</td>
         <td class="right">{{h.hospitel_covid_qty == null ? '-' : h.hospitel_covid_qty}}</td>
         <td class="right">{{h.hospitel_usage_qty == null ? '-' : h.hospitel_usage_qty}}</td>
       </tr>
     </tbody>
     <tfoot>
       <tr>
-        <td colspan="11" style="text-align:left">*เตียง = เตียงสำหรับผู้ป่วย covid</td>
+        <td colspan="14" style="text-align:left">*เตียง = เตียงสำหรับผู้ป่วย covid</td>
       </tr>
     </tfoot>
   </table>

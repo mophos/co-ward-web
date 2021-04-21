@@ -19,6 +19,7 @@ export class ReportDms1Component implements OnInit {
   qty3: any;
   qty4: any;
   qty5: any;
+  qty6: any;
   sector: any;
   date: any;
   dateShow: any;
@@ -57,6 +58,7 @@ export class ReportDms1Component implements OnInit {
         this.qty3 = sumBy(rs.rows, 'isolate_qty');
         this.qty4 = sumBy(rs.rows, 'cohort_qty');
         this.qty5 = sumBy(rs.rows, 'hospitel_qty');
+        this.qty6 = sumBy(rs.rows, 'cohort_icu_qty') || 0;
         this.list = rs.rows;
 
         this.loading.hide();

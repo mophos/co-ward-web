@@ -26,6 +26,7 @@ export class Report1Component implements OnInit {
   qty3: any;
   qty4: any;
   qty5: any;
+  qty6: any;
   sector: any;
   date: any;
   dateShow: any;
@@ -83,6 +84,7 @@ export class Report1Component implements OnInit {
         this.qty3 = sumBy(rs.rows, 'isolate_qty');
         this.qty4 = sumBy(rs.rows, 'cohort_qty');
         this.qty5 = sumBy(rs.rows, 'hospitel_qty');
+        this.qty6 = sumBy(rs.rows, 'cohort_icu_qty');
         this.list = rs.rows;
         this.listFilter = rs.rows;
 
@@ -107,6 +109,7 @@ export class Report1Component implements OnInit {
       this.qty3 = sumBy(this.listFilter, 'isolate_qty');
       this.qty4 = sumBy(this.listFilter, 'cohort_qty');
       this.qty5 = sumBy(this.listFilter, 'hospitel_qty');
+      this.qty6 = sumBy(this.listFilter, 'cohort_icu_qty');
     } else if (this.selectedZone !== 'all' && this.selectedProvince === 'all') {
       this.listFilter = filter(this.list, { zone_code: this.selectedZone });
       this.qtyHosp = sumBy(this.listFilter, 'hospital_qty');
@@ -116,6 +119,7 @@ export class Report1Component implements OnInit {
       this.qty3 = sumBy(this.listFilter, 'isolate_qty');
       this.qty4 = sumBy(this.listFilter, 'cohort_qty');
       this.qty5 = sumBy(this.listFilter, 'hospitel_qty');
+      this.qty6 = sumBy(this.listFilter, 'cohort_icu_qty');
     } else if (this.selectedZone !== 'all' && this.selectedProvince !== 'all') {
       this.listFilter = filter(this.list, { zone_code: this.selectedZone, province_code: this.selectedProvince });
       this.qtyHosp = sumBy(this.listFilter, 'hospital_qty');
@@ -125,6 +129,7 @@ export class Report1Component implements OnInit {
       this.qty3 = sumBy(this.listFilter, 'isolate_qty');
       this.qty4 = sumBy(this.listFilter, 'cohort_qty');
       this.qty5 = sumBy(this.listFilter, 'hospitel_qty');
+      this.qty6 = sumBy(this.listFilter, 'cohort_icu_qty');
     } else {
       this.listFilter = this.list;
       this.qtyHosp = sumBy(this.listFilter, 'hospital_qty');
@@ -134,6 +139,7 @@ export class Report1Component implements OnInit {
       this.qty3 = sumBy(this.listFilter, 'isolate_qty');
       this.qty4 = sumBy(this.listFilter, 'cohort_qty');
       this.qty5 = sumBy(this.listFilter, 'hospitel_qty');
+      this.qty6 = sumBy(this.listFilter, 'cohort_icu_qty');
     }
     console.log(this.selectedZone, this.selectedProvince);
   }
