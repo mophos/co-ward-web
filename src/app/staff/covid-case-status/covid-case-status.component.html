@@ -170,23 +170,21 @@
   <div class="modal-body">
     <clr-radio-container clrInline>
       <!-- <label>กรุณาเลือกประเภท</label> -->
-      <clr-radio-wrapper>
-        <input type="radio" clrRadio value="HOME" name="modalDischargeType" [(ngModel)]="modalDischargeType" />
+      <clr-radio-wrapper *ngIf="selected.gcs_id != 5">
+        <input type="radio" clrRadio value="HOME"  name="modalDischargeType" [(ngModel)]="modalDischargeType" />
         <label>รักษาหาย กลับบ้าน</label>
       </clr-radio-wrapper>
-      <clr-radio-wrapper>
-        <input type="radio" clrRadio value="NEGATIVE" name="modalDischargeType" [(ngModel)]="modalDischargeType" />
+      <clr-radio-wrapper *ngIf="selected.gcs_id == 5">
+        <input type="radio" clrRadio value="NEGATIVE"  name="modalDischargeType" [(ngModel)]="modalDischargeType" />
         <label>ตรวจไม่พบเชื้อ</label>
       </clr-radio-wrapper>
-      <clr-radio-wrapper>
+      <clr-radio-wrapper  *ngIf="selected.gcs_id != 5">
         <input type="radio" clrRadio value="DEATH" name="modalDischargeType" [(ngModel)]="modalDischargeType" />
         <label>เสียชีวิต</label>
       </clr-radio-wrapper>
-      <clr-radio-wrapper>
-        <input type="radio" clrRadio value="REFER" name="modalDischargeType" [(ngModel)]="modalDischargeType" />
+      <clr-radio-wrapper *ngIf="selected.gcs_id != 5">
+        <input type="radio" clrRadio value="REFER"  name="modalDischargeType" [(ngModel)]="modalDischargeType" />
         <label>ส่งต่อรพ.</label>
-      </clr-radio-wrapper>
-      <clr-radio-wrapper>
       </clr-radio-wrapper>
     </clr-radio-container>
 
@@ -270,7 +268,7 @@
       <input type="text" name="reason" style="padding: 0px; width: 100%;" [(ngModel)]="reason" class="clr-col-9 clr-input width-fit"
         placeholder="สาเหตุที่ส่งต่อ">
       <label for="basic" class="clr-control-label" style="padding-top: 1rem;">วันเวลา</label>
-      <div class="clr-row" style="padding-bottom: 10rem;">
+      <div class="clr-row" style="padding-bottom: 6rem;">
         <div class="clr-col-6">
           <my-date-picker-th name="dateDischarge" [options]="myDatePickerOptions" [(ngModel)]="dateDischarge" required>
           </my-date-picker-th>
@@ -291,6 +289,10 @@
         </div>
       </div>
     </div>
+    <span style="font-size: 2rem;" *ngIf="modalDischargeType == 'HOME'">รักษาหาย กลับบ้าน</span>
+    <span style="font-size: 2rem;" *ngIf="modalDischargeType == 'REFER'">ส่งต่อ</span>
+    <span style="font-size: 2rem;" *ngIf="modalDischargeType == 'NEGATIVE'">ตรวจไม่พบเชื้อ</span>
+    <span style="font-size: 2rem;" *ngIf="modalDischargeType == 'DEATH'">เสียชีวิต</span>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-success btn-block" (click)="save()" [disabled]="(!hospitalId && modalDischargeType=='REFER') || ((!hour || !minute )&& modalDischargeType!='REFER') ">บันทึก</button>

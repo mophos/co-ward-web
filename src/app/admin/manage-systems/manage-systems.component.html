@@ -3,8 +3,14 @@
 <br>
 <button class="btn btn-success btn-block" (click)="openSystems()">เปิดระบบ</button>
 <button class="btn btn-danger btn-block" (click)="closeSystems()">ปิดระบบ</button>
-<button class="btn btn-dark btn-block" (click)="openBroadcast()">Broadcase</button>
-<button class="btn btn-danger-outline btn-block" (click)="onClickRefresh()">Refresh</button>
+<div class="clr-row">
+  <div class="clr-col-6"><button class="btn btn-dark btn-block" (click)="openBroadcast('staff')">Broadcase</button></div>
+  <div class="clr-col-6"><button class="btn btn-dark btn-block" (click)="openBroadcast('manager')">Broadcase Report</button></div>
+  <div class="clr-col-6"><button class="btn btn-danger-outline btn-block" (click)="onClickRefresh('staff')">Refresh</button></div>
+  <div class="clr-col-6"><button class="btn btn-danger-outline btn-block" (click)="onClickRefresh('manager')">Refresh Report</button></div>
+</div>
+<!-- <button class="btn btn-dark btn-block" (click)="openBroadcast()">Broadcase</button>
+<button class="btn btn-danger-outline btn-block" (click)="onClickRefresh()">Refresh</button> -->
 
 
 

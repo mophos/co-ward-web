@@ -57,7 +57,7 @@ export class CovidCaseStatusComponent implements OnInit {
     '40', '41', '42', '43', '44', '45', '46', '47', '48', '49',
     '50', '51', '52', '53', '54', '55', '56', '57', '58', '59'];
 
-  selected: any;
+  selected: any = {};
 
   modalDischarge = false;
   modalDeath = false;
@@ -263,6 +263,11 @@ export class CovidCaseStatusComponent implements OnInit {
 
   onClickOpenModalDischarge(l) {
     this.selected = l;
+    if (l.gcs_id === 5) {
+      this.modalDischargeType = 'NEGATIVE';
+    } else {
+      this.modalDischargeType = 'HOME';
+    }
     this.modalDischarge = true;
   }
 

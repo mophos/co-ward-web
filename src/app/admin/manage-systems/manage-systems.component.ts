@@ -20,6 +20,7 @@ export class ManageSystemsComponent implements OnInit {
   modalBroadcast = false;
   message: any;
   topic: any;
+  type: any;
   public jwtHelper = new JwtHelperService();
   constructor(
     private basicAuthService: BasicAuthService,
@@ -36,7 +37,8 @@ export class ManageSystemsComponent implements OnInit {
   }
 
   public publishMQTT(topic: string, message: string): void {
-    this.mqttService.unsafePublish(topic, message, { qos:  0 });
+    console.log(topic, message);
+    this.mqttService.unsafePublish(topic, message, { qos: 0 });
   }
 
   async getSystems() {
@@ -97,16 +99,28 @@ export class ManageSystemsComponent implements OnInit {
     }
   }
   alertMQTT(message) {
-    this.publishMQTT(`${this.topic}co-ward-alert`, message.toString());
+    if (this.type === 'manager') {
+      this.publishMQTT(`${this.topic}manager-co-ward-alert`, message.toString());
+    } else {
+      this.publishMQTT(`${this.topic}co-ward-alert`, message.toString());
+    }
   }
-  openBroadcast() {
+
+  openBroadcast(type) {
+    this.type = type;
     this.modalBroadcast = true;
   }
 
-  async onClickRefresh() {
+  async onClickRefresh(type) {
     const confirm = await this.alertService.confirm();
     if (confirm) {
-      this.publishMQTT(`${this.topic}co-ward-restart`, 'RESTART');
+      console.log(type);
+
+      if (type === 'manager') {
+        this.publishMQTT(`${this.topic}manager-co-ward-restart`, 'RESTART');
+      } else {
+        this.publishMQTT(`${this.topic}co-ward-restart`, 'RESTART');
+      }
     }
   }
 
