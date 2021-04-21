@@ -398,6 +398,18 @@
               </div>
             </div>
             <div class="clr-col-3">
+              <label>วันที่ ADMIT: </label>
+            </div>
+            <div class="clr-col-9">
+              <div class="clr-row">
+                <div class="clr-col-6">
+                  <my-date-picker-th name="admitDate" [options]="myDatePickerOptions" [(ngModel)]="tmpHis.admitDate"
+                    required>
+                  </my-date-picker-th>
+                </div>
+              </div>
+            </div>
+            <div class="clr-col-3">
               <label>วันที่ D/C: </label>
             </div>
             <div class="clr-col-9">
@@ -520,8 +532,8 @@
               <button type="button" class="btn btn-danger" (click)="closeEditHistory()">ยกเลิก</button>
             </div>
           </div>
-          <button class="btn btn-sm btn-success">
-            <clr-icon shape="plus"></clr-icon> commingsoon
+          <button class="btn btn-sm btn-success" (click)="addMisDetail()">
+            <clr-icon shape="plus"></clr-icon> เพิ่มข้อมูลวันที่ขาด
           </button>
           <clr-datagrid>
             <clr-dg-column>วันที่บันทึก</clr-dg-column>
@@ -651,6 +663,65 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-success" (click)="saveGeneric()">บันทึก</button>
     <button type="button" class="btn btn-danger" (click)="closeGeneric()">ยกเลิก</button>
+
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="modalAddDate" [clrModalSize]="'xl'">
+  <h3 class="modal-title">เพิ่มข้อมูลวันที่ขาด</h3>
+  <div class="modal-body" style="padding-bottom: 1px;">
+    <clr-datagrid>
+      <clr-dg-column>วันที่บันทึก</clr-dg-column>
+      <clr-dg-column>ความรุนแรง</clr-dg-column>
+      <clr-dg-column>เตียง</clr-dg-column>
+      <clr-dg-column>เครื่องช่วยหายใจ</clr-dg-column>
+      <clr-dg-column>สถานะ</clr-dg-column>
+      <clr-dg-row *ngFor="let l of listMisDate;let idx=index;">
+        <clr-dg-cell>{{l.entry_date | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
+        <clr-dg-cell>
+          <label>ความรุนแรง: </label>
+          <div class="clr-select-wrapper width-fit">
+            <select name="caseDetailGcs" class="clr-select" style="width: 100%;" [(ngModel)]="listMisDate[idx].gcs_id">
+              <option *ngFor="let i of gcsList" [value]="i.id">{{i.name}}</option>
+            </select>
+          </div>
+        </clr-dg-cell>
+        <clr-dg-cell>
+          <label>เตียง: </label>
+          <div class="clr-select-wrapper width-fit">
+            <select class="clr-select" style="width: 100%;" [(ngModel)]="listMisDate[idx].bed_id">
+              <option *ngFor="let i of bedList" [value]="i.id">{{i.name}}</option>
+            </select>
+          </div>
+        </clr-dg-cell>
+        <clr-dg-cell>
+          <label>เครื่องช่วยหายใจ: </label>
+          <div class="clr-select-wrapper width-fit">
+            <select class="clr-select" style="width: 100%;" [(ngModel)]="listMisDate[idx].medical_supplie_id">
+              <option *ngFor="let i of medicalSupplieList" [value]="i.id">{{i.name}}</option>
+            </select>
+          </div>
+        </clr-dg-cell>
+        <clr-dg-cell>
+          <label>สถานะ: </label>
+          <div class="clr-select-wrapper width-fit">
+            <select name="caseStatusDetail" [(ngModel)]="listMisDate[idx].status" class="clr-select"
+              style="width: 100%;">
+              <option value="ADMIT">ADMIT</option>
+              <option value="DISCHARGE">DISCHARGE</option>
+              <option value="NEGATIVE">NEGATIVE</option>
+              <option value="REFER">REFER</option>
+              <option value="DEATH">DEATH</option>
+            </select>
+          </div>
+        </clr-dg-cell>
+      </clr-dg-row>
+      <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
+    </clr-datagrid>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="saveDate()">บันทึก</button>
+    <button type="button" class="btn btn-danger" (click)="closeDate()">ยกเลิก</button>
 
   </div>
 </clr-modal>
