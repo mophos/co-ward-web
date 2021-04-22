@@ -54,4 +54,8 @@ export class PatientsService {
         return await this.http.get(url).toPromise();
     }
 
+    async saveCovidCaseDetail(id, data) {
+        const url = `${this.url}/v1/admin/patient/covid-case-detail?caseId=${id}`;
+        return await this.http.post(url, { data }).toPromise();
+    }
 }
