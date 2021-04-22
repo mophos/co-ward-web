@@ -46,14 +46,15 @@
     <th rowspan="3" class="td-border">หน่วยงาน</th>
     <th rowspan="3" class="td-border">จำนวนโรงพยาบาล</th>
     <th rowspan="3" class="td-border">เตียงทั้งหมด</th>
-    <th colspan="5">ประเภทเตียง</th>
+    <th colspan="6">ประเภทเตียง</th>
   </tr>
 
   <tr>
     <th rowspan="2" class="td-border">(1) AIIR-ICU</th>
     <th colspan="2" class="td-border">Isolate Room</th>
     <th rowspan="2" class="td-border">(4) Cohort ward (bed)</th>
-    <th rowspan="2">(5) Hospitel (room)</th>
+    <th rowspan="2" class="td-border">(5) Hospitel (room)</th>
+    <th rowspan="2">(6) Cohort ICU (bed)</th>
   </tr>
 
   <tr>
@@ -64,34 +65,37 @@
   <tr>
     <th class="td-border" style="position: sticky; top: 0;">รวม</th>
     <th class="text-right td-border" style="position: sticky; top: 0;">{{qtyHosp | number:'1.0-0'}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty1+qty2+qty3+qty4+qty5| number:'1.0-0'}}</th>
+    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty1+qty2+qty3+qty4+qty5+qty6| number:'1.0-0'}}</th>
     <th class="text-right td-border" style="position: sticky; top: 0;">{{qty1| number:'1.0-0'}}</th>
     <th class="text-right td-border" style="position: sticky; top: 0;">{{qty2| number:'1.0-0'}}</th>
     <th class="text-right td-border" style="position: sticky; top: 0;">{{qty3| number:'1.0-0'}}</th>
     <th class="text-right td-border" style="position: sticky; top: 0;">{{qty4| number:'1.0-0'}}</th>
     <th class="text-right td-border" style="position: sticky; top: 0;">{{qty5| number:'1.0-0'}}</th>
+    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty6| number:'1.0-0'}}</th>
   </tr>
 
   <tr *ngFor="let h of listFilter; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
     <td class="left td-border">{{h.sub_ministry_name}}</td>
     <td class="text-right td-border">{{h.hospital_qty| number:'1.0-0'}}</td>
     <td class="text-right td-border">
-      {{h.aiir_qty+h.modified_aiir_qty+h.isolate_qty+h.cohort_qty+h.hospitel_qty| number:'1.0-0'}}</td>
+      {{h.aiir_qty+h.modified_aiir_qty+h.isolate_qty+h.cohort_qty+h.hospitel_qty+h.cohort_icu_qty| number:'1.0-0'}}</td>
     <td class="text-right td-border">{{h.aiir_qty| number:'1.0-0'}}</td>
     <td class="text-right td-border">{{h.modified_aiir_qty| number:'1.0-0'}}</td>
     <td class="text-right td-border">{{h.isolate_qty| number:'1.0-0'}}</td>
     <td class="text-right td-border">{{h.cohort_qty| number:'1.0-0'}}</td>
     <td class="text-right td-border">{{h.hospitel_qty| number:'1.0-0'}}</td>
+    <td class="text-right td-border">{{h.cohort_icu_qty| number:'1.0-0'}}</td>
   </tr>
   <tr>
     <th class=" td-border" style="position: sticky; top: 0;">รวม</th>
     <th class="text-right td-border" style="position: sticky; top: 0;">{{qtyHosp| number:'1.0-0'}}</th>
-    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty1+qty2+qty3+qty4+qty5| number:'1.0-0'}}</th>
+    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty1+qty2+qty3+qty4+qty5+qty6| number:'1.0-0'}}</th>
     <th class="text-right td-border" style="position: sticky; top: 0;">{{qty1| number:'1.0-0'}}</th>
     <th class="text-right td-border" style="position: sticky; top: 0;">{{qty2| number:'1.0-0'}}</th>
     <th class="text-right td-border" style="position: sticky; top: 0;">{{qty3| number:'1.0-0'}}</th>
     <th class="text-right td-border" style="position: sticky; top: 0;">{{qty4| number:'1.0-0'}}</th>
     <th class="text-right td-border" style="position: sticky; top: 0;">{{qty5| number:'1.0-0'}}</th>
+    <th class="text-right td-border" style="position: sticky; top: 0;">{{qty6| number:'1.0-0'}}</th>
   </tr>
 </table>
 <label>{{listFilter.length | number:'1.0-0' }} รายการ</label>

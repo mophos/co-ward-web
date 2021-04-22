@@ -43,9 +43,11 @@ export class Report6Component implements OnInit {
   host1: any;
   host2: any;
   host3: any;
-
+  cohortIcu1: any;
+  cohortIcu2: any;
+  cohortIcu3: any;
   sector: any;
-  @ViewChild('loading' ,{ static: true }) loading: any;
+  @ViewChild('loading', { static: true }) loading: any;
 
   public jwtHelper = new JwtHelperService();
   myDatePickerOptions: IMyOptions = {
@@ -113,6 +115,9 @@ export class Report6Component implements OnInit {
     this.host1 = sumBy(rows, 'hospitel_covid_qty');
     this.host2 = sumBy(rows, 'hospitel_usage_qty');
     this.host3 = sumBy(rows, 'hospitel_covid_qty') - sumBy(rows, 'hospitel_usage_qty');
+    this.cohortIcu1 = sumBy(rows, 'cohort_icu_covid_qty');
+    this.cohortIcu2 = sumBy(rows, 'cohort_icu_usage_qty');
+    this.cohortIcu3 = sumBy(rows, 'cohort_icu_covid_qty') - sumBy(rows, 'cohort_icu_usage_qty');
   }
 
   async onClickSearch() {
@@ -183,6 +188,9 @@ export class Report6Component implements OnInit {
         this.host1 = sumBy(rs.rows, 'hospitel_covid_qty');
         this.host2 = sumBy(rs.rows, 'hospitel_usage_qty');
         this.host3 = sumBy(rs.rows, 'hospitel_covid_qty') - sumBy(rs.rows, 'hospitel_usage_qty');
+        this.cohortIcu1 = sumBy(rs.rows, 'cohort_icu_covid_qty');
+        this.cohortIcu2 = sumBy(rs.rows, 'cohort_icu_usage_qty');
+        this.cohortIcu3 = sumBy(rs.rows, 'cohort_icu_covid_qty') - sumBy(rs.rows, 'cohort_icu_usage_qty');
 
         this.listHospital = rs.rows;
         this.listHospitalFilter = rs.rows;
@@ -218,6 +226,9 @@ export class Report6Component implements OnInit {
         this.host1 = sumBy(rs.rows, 'hospitel_covid_qty');
         this.host2 = sumBy(rs.rows, 'hospitel_usage_qty');
         this.host3 = sumBy(rs.rows, 'hospitel_covid_qty') - sumBy(rs.rows, 'hospitel_usage_qty');
+        this.cohortIcu1 = sumBy(rs.rows, 'cohort_icu_covid_qty');
+        this.cohortIcu2 = sumBy(rs.rows, 'cohort_icu_usage_qty');
+        this.cohortIcu3 = sumBy(rs.rows, 'cohort_icu_covid_qty') - sumBy(rs.rows, 'cohort_icu_usage_qty');
 
         this.listMinistry = rs.rows;
         this.listMinistryFilter = rs.rows;
@@ -253,6 +264,9 @@ export class Report6Component implements OnInit {
         this.host1 = sumBy(rs.rows, 'hospitel_covid_qty');
         this.host2 = sumBy(rs.rows, 'hospitel_usage_qty');
         this.host3 = sumBy(rs.rows, 'hospitel_covid_qty') - sumBy(rs.rows, 'hospitel_usage_qty');
+        this.cohortIcu1 = sumBy(rs.rows, 'cohort_icu_covid_qty');
+        this.cohortIcu2 = sumBy(rs.rows, 'cohort_icu_usage_qty');
+        this.cohortIcu3 = sumBy(rs.rows, 'cohort_icu_covid_qty') - sumBy(rs.rows, 'cohort_icu_usage_qty');
 
         this.listSector = rs.rows;
         this.listSectorFilter = rs.rows;
