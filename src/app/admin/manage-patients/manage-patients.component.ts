@@ -33,12 +33,12 @@ export class ManagePatientsComponent implements OnInit {
   covidCaseDetailId: any;
   covidCaseId: any;
   bDate: any;
-  gcsList = [];
-  bedList = [];
-  genericList = [];
-  genericsList = [];
-  medicalSupplieList = [];
-  listMisDate = [];
+  gcsList: any = [];
+  bedList: any = [];
+  genericList: any = [];
+  genericsList: any = [];
+  medicalSupplieList: any = [];
+  listMisDate: any = [];
   myDatePickerOptions: IMyOptions = {
     inline: false,
     dateFormat: 'dd mmm yyyy',

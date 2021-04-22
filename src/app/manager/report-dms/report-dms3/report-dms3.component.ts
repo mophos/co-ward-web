@@ -15,7 +15,7 @@ export class ReportDms3Component implements OnInit {
   list: any = [];
   date: any;
   arDates: any = [];
-  sum = {
+  sum: any = {
     ip_pui: '-',
     asymptomatic: '-',
     mild: '-',
