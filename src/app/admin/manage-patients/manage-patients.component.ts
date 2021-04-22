@@ -329,8 +329,6 @@ export class ManagePatientsComponent implements OnInit {
             this.historys[idx].status = this.tmpHis.status;
             this.historys[idx].confirm_date = this.tmpHis.confirm_date;
           }
-
-          this.modalDetails = false;
           this.alertService.success();
           // this.details = rs.rows;
         } else {
@@ -338,14 +336,14 @@ export class ManagePatientsComponent implements OnInit {
         }
       }
       this.modalLoading.hide();
-      this.modalDetails = false;
-      this.editHis = false;
-      this.tmpHis = null;
+      // this.modalDetails = false;
+      // this.editHis = false;
+      // this.tmpHis = null;
     } catch (error) {
       this.modalLoading.hide();
-      this.modalDetails = false;
-      this.editHis = false;
-      this.tmpHis = null;
+      // this.modalDetails = false;
+      // this.editHis = false;
+      // this.tmpHis = null;
       this.alertService.error(error);
     }
   }
