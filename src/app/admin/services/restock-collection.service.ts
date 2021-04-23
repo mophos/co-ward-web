@@ -9,7 +9,7 @@ export class RestockCollectionService {
   constructor(private http: HttpClient, @Inject('API_URL') private url: string) { }
 
   getRestockCollection(limit, offset) {
-    const url = `${this.url}/v2/admin/restock-collection?&limit=${limit}&offset=${offset}`;
+    const url = `${this.url}/v1/admin/restock-collection?&limit=${limit}&offset=${offset}`;
     return this.http.get(url).toPromise();
   }
 }

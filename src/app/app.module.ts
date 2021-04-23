@@ -27,7 +27,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 import { MqttModule, IMqttServiceOptions } from 'ngx-mqtt';
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: 'api-covid19.moph.go.th',
-  port: 8443,
+  port: 8080,
   path: '/mqtt',
   username: 'q4u',
   password: 'q4u',
