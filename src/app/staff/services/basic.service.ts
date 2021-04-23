@@ -9,7 +9,7 @@ export class BasicService {
   constructor(private http: HttpClient, @Inject('API_URL') private apiUrl: string) { }
 
   async getTitle() {
-    const url = `${this.apiUrl}/v1/basic/title`;
+    const url = `${this.apiUrl}/v2/basic/title`;
     return await this.http.get(url).toPromise();
   }
 
@@ -29,12 +29,12 @@ export class BasicService {
   }
 
   async getSystems() {
-    const url = `${this.apiUrl}/v1/basic/systems`;
+    const url = `${this.apiUrl}/v2/basic/systems`;
     return await this.http.get(url).toPromise();
   }
 
   async getAddCode(t, a, p, z) {
-    const url = `${this.apiUrl}/v1/basic/getAddCode?t=${t}&a=${a}&p=${p}&z=${z}`;
+    const url = `${this.apiUrl}/v2/basic/getAddCode?t=${t}&a=${a}&p=${p}&z=${z}`;
     return await this.http.get(url).toPromise();
   }
 

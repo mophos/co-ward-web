@@ -11,7 +11,7 @@ export class ExportService {
   ) { }
 
   async export(sDate, eDate) {
-    const url = `${this.apiUrl}/v1/admin/export/requisition?startDate=${sDate}&endDate=${eDate}`;
+    const url = `${this.apiUrl}/v2/admin/export/requisition?startDate=${sDate}&endDate=${eDate}`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 }

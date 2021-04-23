@@ -10,22 +10,22 @@ export class ApiService {
   constructor(private http: HttpClient, @Inject('API_URL') private url: string) { }
 
   checkBedEOC(date) {
-    const url = `${this.url}/v1/manager/eoc/beds?date=${date}`;
+    const url = `${this.url}/v2/manager/eoc/beds?date=${date}`;
     return this.http.get(url).toPromise();
   }
 
   checkBed() {
-    const url = `${this.url}/v1/manager/services/check-bed`;
+    const url = `${this.url}/v2/manager/services/check-bed`;
     return this.http.get(url).toPromise();
   }
 
   checkRemainHosp() {
-    const url = `${this.url}/v1/manager/services/remain/hosp/qty`;
+    const url = `${this.url}/v2/manager/services/remain/hosp/qty`;
     return this.http.get(url).toPromise();
   }
 
   checkSupplies() {
-    const url = `${this.url}/v1/manager/services/check-supplies`;
+    const url = `${this.url}/v2/manager/services/check-supplies`;
     return this.http.get(url).toPromise();
   }
 

@@ -12,32 +12,32 @@ export class SupplieService {
   ) { }
 
   async getSupplieHospital() {
-    const url = `${this.apiUrl}/v1/staff/supplies/total`;
+    const url = `${this.apiUrl}/v2/staff/supplies/total`;
     return await this.http.get(url).toPromise();
   }
 
   async getTotal() {
-    const url = `${this.apiUrl}/v1/staff/covid-case/gcs-bed`;
+    const url = `${this.apiUrl}/v2/staff/covid-case/gcs-bed`;
     return await this.http.get(url).toPromise();
   }
 
   async getSupplies() {
-    const url = `${this.apiUrl}/v1/staff/supplies/actived`;
+    const url = `${this.apiUrl}/v2/staff/supplies/actived`;
     return await this.http.get(url).toPromise();
   }
 
   async getSupplieStock() {
-    const url = `${this.apiUrl}/v1/staff/supplies`;
+    const url = `${this.apiUrl}/v2/staff/supplies`;
     return await this.http.get(url).toPromise();
   }
 
   async save(data) {
-    const url = `${this.apiUrl}/v1/staff/supplies`;
+    const url = `${this.apiUrl}/v2/staff/supplies`;
     return await this.http.post(url, { data }).toPromise();
   }
 
   async getSupplieDetails(id) {
-    const url = `${this.apiUrl}/v1/staff/supplies/details/${id}`;
+    const url = `${this.apiUrl}/v2/staff/supplies/details/${id}`;
     return await this.http.get(url).toPromise();
   }
 
