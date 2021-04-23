@@ -18,7 +18,7 @@ export class AutocompleteIcd10Component implements OnInit {
   constructor(
     @Inject('API_URL') private apiUrl: string,
     private alertService: AlertService) {
-    this.searchUrl = `${this.apiUrl}/v2/basic-auth/icd10/autocomplete`;
+    this.searchUrl = `${this.apiUrl}/v1/basic-auth/icd10/autocomplete`;
   }
 
   ngOnInit() {

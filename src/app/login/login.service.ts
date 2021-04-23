@@ -13,7 +13,7 @@ export class LoginService {
       username,
       password
     };
-    const url = `${this.url}/v2/login`;
+    const url = `${this.url}/v1/login`;
     return this.http.post(url, params).toPromise();
   }
 
@@ -28,29 +28,29 @@ export class LoginService {
   }
 
   getUsername(cid, phoneNumber) {
-    const url = `${this.url}/v2/login/get-username?cid=${cid}&phoneNumber=${phoneNumber}`;
+    const url = `${this.url}/v1/login/get-username?cid=${cid}&phoneNumber=${phoneNumber}`;
     return this.http.get(url).toPromise();
   }
 
   updatePassword(id, passwordNew) {
-    const url = `${this.url}/v2/login/update-password`;
+    const url = `${this.url}/v1/login/update-password`;
     return this.http.post(url, { id, passwordNew }).toPromise();
   }
 
   updatePassword2(id, cid, passwordNew) {
-    const url = `${this.url}/v2/login/update-password2`;
+    const url = `${this.url}/v1/login/update-password2`;
     return this.http.post(url, { id, cid, passwordNew }).toPromise();
   }
 
   requisOtp(tel) {
-    const url = `${this.url}/v2/login/requis-otp`;
+    const url = `${this.url}/v1/login/requis-otp`;
     return this.http.post(url, {
       tel
     }).toPromise();
   }
 
   verifyOtp(tel, transactionId, otp, vendor) {
-    const url = `${this.url}/v2/login/verify-otp`;
+    const url = `${this.url}/v1/login/verify-otp`;
     return this.http.post(url, {
       tel, transactionId, otp
     }).toPromise();

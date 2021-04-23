@@ -12,22 +12,22 @@ export class UserService {
   ) { }
 
   async getUser(query = '') {
-    const url = `${this.apiUrl}/v2/staff/users?query=${query}`;
+    const url = `${this.apiUrl}/v1/staff/users?query=${query}`;
     return await this.http.get(url).toPromise();
   }
 
   async removeUser(id) {
-    const url = `${this.apiUrl}/v2/staff/users/remove/${id}`;
+    const url = `${this.apiUrl}/v1/staff/users/remove/${id}`;
     return this.http.delete(url).toPromise();
   }
 
   async getUserRight(userId, groupName) {
-    const url = `${this.apiUrl}/v2/staff/users/get-user-right?userId=${userId}&groupName=${groupName}`;
+    const url = `${this.apiUrl}/v1/staff/users/get-user-right?userId=${userId}&groupName=${groupName}`;
     return await this.http.get(url).toPromise();
   }
 
   async updateUserRight(data: any, id: any) {
-    const url = `${this.apiUrl}/v2/staff/users/update-user-right/${id}`;
+    const url = `${this.apiUrl}/v1/staff/users/update-user-right/${id}`;
     return this.http.put(url, { data }).toPromise();
   }
 }
