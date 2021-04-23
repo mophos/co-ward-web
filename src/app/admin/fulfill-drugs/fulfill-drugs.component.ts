@@ -248,7 +248,7 @@ export class FulfillDrugsComponent implements OnInit {
 
       console.log(this.sortFulfill);
 
-      this.products = orderBy(this.products, [this.sortFulfill.type], [this.sortFulfill.order]);
+      this.products = orderBy(this.products, [this.sortFulfill.type, this.sortFulfill.order]);
       // this.getProducts();
       this.loadding.hide();
     } catch (error) {

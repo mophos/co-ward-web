@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertService } from 'src/app/help/alert.service';
 import { PatientsService } from '../services/patients.service';
 import { UserService } from '../services/user.service';
-import { find, findIndex, cloneDeep, isEmpty } from 'lodash';
+import { find, findIndex, cloneDeep, isEmpty, sortBy } from 'lodash';
 import * as moment from 'moment';
 import { IMyOptions } from 'mydatepicker-th';
 import { AutocompleteProvinceComponent } from 'src/app/help/autocomplete-address/autocomplete-province/autocomplete-province.component';
@@ -31,13 +31,14 @@ export class ManagePatientsComponent implements OnInit {
   editHisDetail: boolean;
   tmpHisDetail: any;
   covidCaseDetailId: any;
+  covidCaseId: any;
   bDate: any;
-  gcsList = [];
-  bedList = [];
-  genericList = [];
-  genericsList = [];
-  medicalSupplieList = [];
-  listMisDate = [];
+  gcsList: any = [];
+  bedList: any = [];
+  genericList: any = [];
+  genericsList: any = [];
+  medicalSupplieList: any = [];
+  listMisDate: any = [];
   myDatePickerOptions: IMyOptions = {
     inline: false,
     dateFormat: 'dd mmm yyyy',
@@ -359,6 +360,7 @@ export class ManagePatientsComponent implements OnInit {
 
   async editHistory(l) {
     try {
+      this.covidCaseId = l.covid_case_id;
       this.editHis = true;
       this.tmpHis = cloneDeep(l);
       if (this.tmpHis.date_admit) {
@@ -666,11 +668,11 @@ export class ManagePatientsComponent implements OnInit {
           const idx = findIndex(this.details, { s_entry_date: moment(date).format('YYYY-MM-D') });
           if (idx === -1) {
             const obj: any = {};
-            obj.bed_id = null;
+            obj.bed_id = 1;
             obj.entry_date = ddate;
-            obj.gcs_id = null;
-            obj.medical_supplie_id = null;
-            obj.status = null;
+            obj.gcs_id = 1;
+            obj.medical_supplie_id = 1;
+            obj.status = 'ADMIT';
             this.listMisDate.push(obj);
           }
         }
@@ -682,17 +684,53 @@ export class ManagePatientsComponent implements OnInit {
           const idx = findIndex(this.details, { s_entry_date: moment(date).format('YYYY-MM-D') });
           if (idx === -1) {
             const obj: any = {};
-            obj.bed_id = null;
+            obj.bed_id = 1;
             obj.entry_date = ddate;
-            obj.gcs_id = null;
-            obj.medical_supplie_id = null;
-            obj.status = null;
+            obj.gcs_id = 1;
+            obj.medical_supplie_id = 1;
+            obj.status = 'ADMIT';
             this.listMisDate.push(obj);
           }
         }
       }
     } catch (error) {
-
+      this.alertService.error(error);
     }
+  }
+
+  async saveDate() {
+    try {
+      const listDetail = cloneDeep(this.details);
+      for (const v of listDetail) {
+        delete v.bed_name;
+        delete v.gcs_name;
+        delete v.fname;
+        delete v.entry_date;
+        delete v.id;
+        delete v.lname;
+        delete v.medical_supplie_name;
+        v.entry_date = v.s_entry_date;
+        delete v.s_entry_date;
+      }
+      const list = this.listMisDate.concat(listDetail);
+
+      list.sort((a, b) => {
+        return moment(a.entry_date).diff(b.entry_date);
+      });
+
+      const rs: any = await this.patientsService.saveCovidCaseDetail(this.covidCaseId, list);
+      if (rs.ok) {
+        this.alertService.success();
+      } else {
+        this.alertService.error(rs.message);
+      }
+    } catch (error) {
+      this.alertService.error(error);
+    }
+  }
+
+  closeDate() {
+    this.listMisDate = [];
+    this.modalAddDate = false;
   }
 }
