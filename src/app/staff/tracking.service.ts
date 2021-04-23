@@ -12,12 +12,12 @@ export class TrackingService {
   ) { }
 
   async getPayList() {
-    const url = `${this.apiUrl}/v1/staff/pay`;
+    const url = `${this.apiUrl}/v2/staff/pay`;
     return await this.http.get(url).toPromise();
   }
 
   async getPayDetails(id, con_no) {
-    const url = `${this.apiUrl}/v1/staff/pay/${id}/${con_no}`;
+    const url = `${this.apiUrl}/v2/staff/pay/${id}/${con_no}`;
     return await this.http.get(url).toPromise();
   }
 

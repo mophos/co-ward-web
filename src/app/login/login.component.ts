@@ -177,8 +177,8 @@ export class LoginComponent implements OnInit {
   }
 
   async onClickRequestOTP() {
-    if (this.checkCid && this.checkPhone) {
-      try {
+    try {
+      if (this.checkCid && this.checkPhone) {
         this.isSave = true;
         const rs: any = await this.loginService.getUsername(this.cid, this.phoneNumber);
         if (rs.rows.length) {
@@ -190,13 +190,13 @@ export class LoginComponent implements OnInit {
         } else {
           this.alertService.error('ไม่พบเลขบัตรประชาชน หรือ เบอร์มือถือ ในระบบ');
         }
-        this.isSave = false;
-      } catch (error) {
-        this.isSave = false;
-        this.alertService.error();
+      } else {
+        this.alertService.error('กรุณากรอกข้อมูลให้ถูกต้อง');
       }
-    } else {
-      this.alertService.error('กรุณากรอกข้อมูลให้ถูกต้อง');
+      this.isSave = false;
+    } catch (error) {
+      this.isSave = false;
+      this.alertService.error();
     }
     console.log('onClickRequestOTP');
     // this.sendRequestOTP();
@@ -204,9 +204,9 @@ export class LoginComponent implements OnInit {
 
   async sendRequestOTP() {
     try {
+      this.isSave = true;
       if (this.phoneNumber) {
         const date = (+moment().format('h') * 60) + +moment().format('m');
-        this.isSave = true;
         if (this.dateOtp < date) {
           this.dateOtp = date + 5;
           const rs: any = await this.registerService.requestOTP(this.phoneNumber);

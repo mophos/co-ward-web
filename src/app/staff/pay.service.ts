@@ -17,22 +17,22 @@ export class PayService {
   }
 
   async getList() {
-    const url = `${this.apiUrl}/v1/staff/pay/surgical-mask`;
+    const url = `${this.apiUrl}/v2/staff/pay/surgical-mask`;
     return await this.http.get(url).toPromise();
   }
 
   async save(data) {
-    const url = `${this.apiUrl}/v1/staff/pay`;
+    const url = `${this.apiUrl}/v2/staff/pay`;
     return await this.http.post(url, { data }).toPromise();
   }
 
   async update(data, id) {
-    const url = `${this.apiUrl}/v1/staff/pay?id=${id}`;
+    const url = `${this.apiUrl}/v2/staff/pay?id=${id}`;
     return await this.http.put(url, { data }).toPromise();
   }
 
   remove(id: any) {
-    const url = `${this.apiUrl}/v1/staff/pay/${id}`;
+    const url = `${this.apiUrl}/v2/staff/pay/${id}`;
     return this.http.delete(url).toPromise();
   }
 }

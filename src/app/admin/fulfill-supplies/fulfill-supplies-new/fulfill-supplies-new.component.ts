@@ -107,7 +107,7 @@ export class FulfillSuppliesNewComponent implements OnInit {
       }
 
 
-      this.products = orderBy(this.products, [this.sortFulfill.type], [this.sortFulfill.order]);
+      this.products = orderBy(this.products, [this.sortFulfill.type, this.sortFulfill.order]);
       // this.getProducts();
     } catch (error) {
       this.alertService.error(error);

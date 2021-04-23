@@ -9,12 +9,12 @@ export class RegisterService {
   constructor(private http: HttpClient, @Inject('API_URL') private url: string) { }
 
   getTitle() {
-    const url = `${this.url}/v1/basic/title`;
+    const url = `${this.url}/v2/basic/title`;
     return this.http.get(url).toPromise();
   }
 
   getPosition() {
-    const url = `${this.url}/v1/basic/position`;
+    const url = `${this.url}/v2/basic/position`;
     return this.http.get(url).toPromise();
   }
 
@@ -46,44 +46,44 @@ export class RegisterService {
       };
 
       // const token = sessionStorage.getItem('token');
-      const url = `${this.url}/v1/register/upload-supplie`;
+      const url = `${this.url}/v2/register/upload-supplie`;
       xhr.open('POST', url, true);
       xhr.send(formData);
     });
   }
 
   register(data) {
-    const url = `${this.url}/v1/register`;
+    const url = `${this.url}/v2/register`;
     return this.http.post(url, { data }).toPromise();
   }
 
   getNodeDrugs(id) {
-    const url = `${this.url}/v1/register/get-node-drugs?id=${id}`;
+    const url = `${this.url}/v2/register/get-node-drugs?id=${id}`;
     return this.http.get(url).toPromise();
   }
 
   getNodeSupplies(id) {
-    const url = `${this.url}/v1/register/get-node-supplies?id=${id}`;
+    const url = `${this.url}/v2/register/get-node-supplies?id=${id}`;
     return this.http.get(url).toPromise();
   }
 
   getCid(cid) {
-    const url = `${this.url}/v1/register/get-cid?cid=${cid}`;
+    const url = `${this.url}/v2/register/get-cid?cid=${cid}`;
     return this.http.get(url).toPromise();
   }
 
   getUsername(username) {
-    const url = `${this.url}/v1/register/get-username?username=${username}`;
+    const url = `${this.url}/v2/register/get-username?username=${username}`;
     return this.http.get(url).toPromise();
   }
 
   requestOTP(tel) {
-    const url = `${this.url}/v1/register/req-otp`;
+    const url = `${this.url}/v2/register/req-otp`;
     return this.http.post(url, { tel }).toPromise();
   }
 
   verifyOTP(tel, otp, transactionId, vendor) {
-    const url = `${this.url}/v1/register/verify-otp`;
+    const url = `${this.url}/v2/register/verify-otp`;
     return this.http.post(url, { tel, otp, transactionId, vendor }).toPromise();
   }
 

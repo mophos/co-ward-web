@@ -16,7 +16,7 @@ export class AutocompleteCountriesComponent implements OnInit {
   constructor(
     @Inject('API_URL') private apiUrl: string,
     private alertService: AlertService) {
-    this.searchUrl = `${this.apiUrl}/v1/basic/countries/autocomplete/search`;
+    this.searchUrl = `${this.apiUrl}/v2/basic/countries/autocomplete/search`;
   }
 
   ngOnInit() {

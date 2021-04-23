@@ -15,8 +15,8 @@ export class SettingProfilesComponent implements OnInit {
   position: any;
   title: any;
 
-  positionList = [];
-  titleList = [];
+  positionList: any = [];
+  titleList: any = [];
 
   fname: any;
   lname: any;
