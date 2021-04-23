@@ -14,7 +14,22 @@ export class HospitalService {
   }
 
   getTypeList() {
-    const url = `${this.url}/v2/admin/hospital/types`;
+    const url = `${this.url}/v2/admin/hospital/type`;
+    return this.http.get(url).toPromise();
+  }
+
+  getMinistryTypeList() {
+    const url = `${this.url}/v2/admin/hospital/ministry-type`;
+    return this.http.get(url).toPromise();
+  }
+
+  getMinistryList() {
+    const url = `${this.url}/v2/admin/hospital/ministry`;
+    return this.http.get(url).toPromise();
+  }
+
+  getSubMinistryList() {
+    const url = `${this.url}/v2/admin/hospital/sub-ministry`;
     return this.http.get(url).toPromise();
   }
 
