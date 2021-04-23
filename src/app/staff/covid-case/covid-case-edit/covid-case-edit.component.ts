@@ -17,6 +17,7 @@ import * as moment from 'moment';
 export class CovidCaseEditComponent implements OnInit {
 
   data: any;
+  person: any;
   hn: any;
   personId: any;
   patientId: any;
@@ -82,6 +83,7 @@ export class CovidCaseEditComponent implements OnInit {
   ) {
     const params = this.route.snapshot.params;
     this.data = params.data ? JSON.parse(params.data) : null;
+    this.person = params.person ? JSON.parse(params.person) : false;
     this.covidCaseId = this.data.covid_case_id;
   }
 
@@ -92,7 +94,6 @@ export class CovidCaseEditComponent implements OnInit {
 
   async getInfo() {
     try {
-
       const rs: any = await this.covidCaseService.getCovidCaseInfo(this.data.covid_case_id);
       if (rs.ok) {
         this.hn = rs.rows.hn;
@@ -203,14 +204,19 @@ export class CovidCaseEditComponent implements OnInit {
           patientId: this.patientId
         };
 
-        if (this.confirmDate) {
-          obj.confirmDate = `${this.confirmDate.date.year}-${this.confirmDate.date.month}-${this.confirmDate.date.day}`;
-        }
-        if (this.birthDate) {
-          obj.birthDate = `${this.birthDate.date.year}-${this.birthDate.date.month}-${this.birthDate.date.day}`;
+        let rs: any;
+        if (this.person) {
+          rs = await this.covidCaseService.updateCasePerson(obj);
+        } else {
+          if (this.confirmDate) {
+            obj.confirmDate = `${this.confirmDate.date.year}-${this.confirmDate.date.month}-${this.confirmDate.date.day}`;
+          }
+          if (this.birthDate) {
+            obj.birthDate = `${this.birthDate.date.year}-${this.birthDate.date.month}-${this.birthDate.date.day}`;
+          }
+          rs = await this.covidCaseService.updateCase(this.covidCaseId, obj);
         }
 
-        const rs: any = await this.covidCaseService.updateCase(this.covidCaseId, obj);
         if (rs.ok) {
           this.isSave = false;
           this.router.navigate(['/staff/covid-case']);
