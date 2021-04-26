@@ -7,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportColabCheckComponent implements OnInit {
 
+  loadings = false;
   list = [];
+  limit = 100;
+  totalList = 0;
   constructor() { }
 
   ngOnInit() {
