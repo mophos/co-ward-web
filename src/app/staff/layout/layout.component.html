@@ -99,6 +99,11 @@
         <clr-icon clrVerticalNavIcon shape="users"></clr-icon>
         จ่าย Surgical Mask ให้รพสต.
       </a>
+      <a *ngIf="checkManageBedHosp" clrVerticalNavLink routerLink="/staff/bed-hosp-manage" title="จัดการเตียงให้โรงพยาบาล"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="users"></clr-icon>
+        จัดการเตียงให้โรงพยาบาล
+      </a> 
       <a *ngIf="stockSuppliesMenu" clrVerticalNavLink routerLink="/staff/supplies" title="บันทึกเวชภัณฑ์คงคลัง"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="cursor-hand-open"></clr-icon>
