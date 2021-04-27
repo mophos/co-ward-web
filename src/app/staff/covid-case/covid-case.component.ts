@@ -183,4 +183,12 @@ export class CovidCaseComponent implements OnInit {
       this.getList();
     }
   }
+
+  onEditPerson(l) {
+    try {
+      this.router.navigate(['/staff/covid-case-edit', { data: JSON.stringify(l), person: true }]);
+    } catch (error) {
+
+    }
+  }
 }

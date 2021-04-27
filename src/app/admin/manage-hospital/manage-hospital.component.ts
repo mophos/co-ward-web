@@ -31,6 +31,9 @@ export class ManageHospitalComponent implements OnInit {
   loading = false;
   modal = false;
   hospTypeId: any;
+  hospTypeCode: any;
+  ministryCode: any;
+  subMinistryCode: any;
   hospCode: any = '';
   hospName: any;
   address: any;
@@ -39,6 +42,9 @@ export class ManageHospitalComponent implements OnInit {
   telephoneManager: any;
   hospBed: any;
   listType: any;
+  listMinistryType: any;
+  listMinistry: any;
+  listSubMinistry: any;
 
   tambonId: any;
   tambonName: any;
@@ -47,21 +53,58 @@ export class ManageHospitalComponent implements OnInit {
   zipcode: any;
   isUpdate = false;
   tambonCode: any;
+  ampurCode: any;
+  provinceCode: any;
   constructor(
     private hospitalService: HospitalService,
     private alertService: AlertService,
   ) { }
   ngOnInit() {
     this.getTypeList();
+    this.getMinistryList();
+    this.getMinistryTypeList();
+    this.getSubMinistryList();
     this.getList();
   }
 
   async getTypeList() {
     this.loading = true;
-
     const rs: any = await this.hospitalService.getTypeList();
     if (rs.ok) {
       this.listType = rs.rows;
+    } else {
+      this.alertService.error(rs.error);
+    }
+    this.loading = false;
+  }
+
+  async getMinistryTypeList() {
+    this.loading = true;
+    const rs: any = await this.hospitalService.getMinistryTypeList();
+    if (rs.ok) {
+      this.listMinistryType = rs.rows;
+    } else {
+      this.alertService.error(rs.error);
+    }
+    this.loading = false;
+  }
+
+  async getMinistryList() {
+    this.loading = true;
+    const rs: any = await this.hospitalService.getMinistryList();
+    if (rs.ok) {
+      this.listMinistry = rs.rows;
+    } else {
+      this.alertService.error(rs.error);
+    }
+    this.loading = false;
+  }
+
+  async getSubMinistryList() {
+    this.loading = true;
+    const rs: any = await this.hospitalService.getSubMinistryList();
+    if (rs.ok) {
+      this.listSubMinistry = rs.rows;
     } else {
       this.alertService.error(rs.error);
     }
@@ -108,6 +151,9 @@ export class ManageHospitalComponent implements OnInit {
     this.tambonName = e.tambon_name;
     this.ampurName = e.ampur_name;
     this.provinceName = e.province_name;
+    this.tambonCode = e.tambon_code;
+    this.ampurCode = e.ampur_code;
+    this.provinceCode = e.province_code;
     this.zipcode = e.zip_code;
     this.setValue();
   }
@@ -117,6 +163,9 @@ export class ManageHospitalComponent implements OnInit {
     this.tambonName = e.tambon_name;
     this.ampurName = e.ampur_name;
     this.provinceName = e.province_name;
+    this.tambonCode = e.tambon_code;
+    this.ampurCode = e.ampur_code;
+    this.provinceCode = e.province_code;
     this.zipcode = e.zip_code;
     this.setValue();
   }
@@ -126,6 +175,9 @@ export class ManageHospitalComponent implements OnInit {
     this.tambonName = e.tambon_name;
     this.ampurName = e.ampur_name;
     this.provinceName = e.province_name;
+    this.tambonCode = e.tambon_code;
+    this.ampurCode = e.ampur_code;
+    this.provinceCode = e.province_code;
     this.zipcode = e.zip_code;
     this.setValue();
   }
@@ -135,6 +187,9 @@ export class ManageHospitalComponent implements OnInit {
     this.tambonName = e.tambon_name;
     this.ampurName = e.ampur_name;
     this.provinceName = e.province_name;
+    this.tambonCode = e.tambon_code;
+    this.ampurCode = e.ampur_code;
+    this.provinceCode = e.province_code;
     this.zipcode = e.zip_code;
     this.setValue();
   }
@@ -173,21 +228,27 @@ export class ManageHospitalComponent implements OnInit {
 
   async save() {
     try {
+      const idx = findIndex(this.listType, { id: +this.hospTypeId });
       const data = {
         hosptype_id: this.hospTypeId,
-        tambon_code: this.tambonCode,
-        tambon_name: this.tambonName,
-        ampur_name: this.ampurName,
+        hosptype_code: this.listType[idx].code,
+        tambon_code: this.tambonCode || null,
+        ministry_code: this.ministryCode || null,
+        sub_ministry_code: this.subMinistryCode || null,
+        ampur_code: this.ampurCode || null,
+        province_code: this.provinceCode,
+        tambon_name: this.tambonName || null,
+        ampur_name: this.ampurName || null,
         province_name: this.provinceName,
-        zipcode: this.zipcode,
+        zipcode: this.zipcode || null,
         hospcode: this.hospCode,
         hospname: this.hospName,
-        address: this.address,
-        tel: this.tel,
-        telephone: this.telephone,
-        telephone_manager: this.telephoneManager,
-        // bed_spd: this.hospBed
+        address: this.address || null,
+        tel: this.tel || null,
+        telephone: this.telephone || null,
+        telephone_manager: this.telephoneManager || null
       };
+
       let rs: any;
       if (this.isUpdate) {
         rs = await this.hospitalService.update(data, this.id);
@@ -214,7 +275,12 @@ export class ManageHospitalComponent implements OnInit {
     this.isUpdate = true;
     this.id = l.id;
     this.hospTypeId = l.hosptype_id;
+    this.hospTypeCode = l.hosptype_code;
+    this.ministryCode = l.ministry_code;
+    this.subMinistryCode = l.sub_ministry_code;
     this.tambonCode = l.tambon_code;
+    this.ampurCode = l.ampur_code;
+    this.provinceCode = l.province_code;
     this.tambonName = l.tambon_name;
     this.ampurName = l.ampur_name;
     this.provinceName = l.province_name;

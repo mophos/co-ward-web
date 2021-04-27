@@ -25,9 +25,9 @@
     <!-- <clr-dg-cell>{{l.hospTypeName}}</clr-dg-cell> -->
     <clr-dg-cell style="text-align: center;">
       <div class="btn-group">
-        <!-- <button class="btn btn-sm btn-success" (click)="onClickEdit(l)" title="แก้ไข">
+        <button class="btn btn-sm btn-success" (click)="onClickEdit(l)" title="แก้ไข">
           <clr-icon shape="note"></clr-icon>
-        </button> -->
+        </button>
         <button class="btn btn-sm btn-danger" (click)="onClickRemove(l)" title="ลบ">
           <clr-icon shape="trash"></clr-icon>
         </button>
@@ -55,8 +55,8 @@
       <div class="clr-col-8">
         <div class="clr-error">
           <div class="clr-input-wrapper">
-            <input class="clr-error clr-input" type="text" name="hospCode" placeholder="รหัสโรงพยาบาล( 5 ตัวอักษร )" id="hospCode"
-              [(ngModel)]="hospCode" style="width: 100%;">
+            <input class="clr-error clr-input" type="text" name="hospCode" placeholder="รหัสโรงพยาบาล( 5 ตัวอักษร )"
+              id="hospCode" [(ngModel)]="hospCode" style="width: 100%;">
           </div>
           <span class="clr-subtext" *ngIf="hospCode && hospCode.length != '5'">ต้อง 5 ตัวอักษร</span>
         </div>
@@ -69,18 +69,17 @@
         ชื่อโรงพยาบาล<span class="required">*</span>
       </div>
       <div class="clr-col-8">
-        <input type="text" class="clr-input" name="hospName" id="hospName" placeholder="ชื่อโรงพยาบาล" [(ngModel)]="hospName"
-          style="width: 100%;">
+        <input type="text" class="clr-input" name="hospName" id="hospName" placeholder="ชื่อโรงพยาบาล"
+          [(ngModel)]="hospName" style="width: 100%;">
       </div>
     </div>
     <div class="clr-row">
       <div class="clr-col-4">
-        สังกัด<span class="required">*</span>
+        ประเภทสถานบริการ<span class="required">*</span>
       </div>
       <div class="clr-col-8">
         <div class="clr-select-wrapper" style="width: 100%;">
           <select name="hospType" [(ngModel)]="hospTypeId" class="clr-select" style="width: 100%;">
-            <option [value]="null">ไม่ระบุสังกัด</option>
             <option *ngFor="let l of listType" [value]="l.id">{{l.name}}</option>
           </select>
         </div>
@@ -88,11 +87,35 @@
     </div>
     <div class="clr-row">
       <div class="clr-col-4">
-        โทร (1)<span class="required">*</span>
+        สังกัด
       </div>
       <div class="clr-col-8">
-        <input type="text" class="clr-input" name="telephone" id="telephone" placeholder="เบอร์โทรศัพท์" [(ngModel)]="telephone"
-          style="width: 100%;">
+        <div class="clr-select-wrapper" style="width: 100%;">
+          <select name="ministry" [(ngModel)]="ministryCode" class="clr-select" style="width: 100%;">
+            <option *ngFor="let l of listMinistry" [value]="l.id">{{l.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="clr-row">
+      <div class="clr-col-4">
+        กรม
+      </div>
+      <div class="clr-col-8">
+        <div class="clr-select-wrapper" style="width: 100%;">
+          <select name="subMinistry" [(ngModel)]="subMinistryCode" class="clr-select" style="width: 100%;">
+            <option *ngFor="let l of listSubMinistry" [value]="l.id">{{l.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="clr-row">
+      <div class="clr-col-4">
+        โทร (1)
+      </div>
+      <div class="clr-col-8">
+        <input type="text" class="clr-input" name="telephone" id="telephone" placeholder="เบอร์โทรศัพท์"
+          [(ngModel)]="telephone" style="width: 100%;">
       </div>
     </div>
     <div class="clr-row">
@@ -100,8 +123,8 @@
         โทร (2)
       </div>
       <div class="clr-col-8">
-        <input type="text" class="clr-input" name="tel" id="tel" placeholder="เบอร์โทรศัพท์(เพิ่มเติม)" [(ngModel)]="tel"
-          style="width: 100%;">
+        <input type="text" class="clr-input" name="tel" id="tel" placeholder="เบอร์โทรศัพท์(เพิ่มเติม)"
+          [(ngModel)]="tel" style="width: 100%;">
       </div>
     </div>
     <div class="clr-row">
@@ -109,21 +132,22 @@
         โทร (ผู้อำนวยการ)
       </div>
       <div class="clr-col-8">
-        <input type="text" class="clr-input" name="telephoneManager" id="telephoneManager" placeholder="เบอร์โทรศัพท์(ผู้อำนวยการ)"
-          [(ngModel)]="telephoneManager" style="width: 100%;">
+        <input type="text" class="clr-input" name="telephoneManager" id="telephoneManager"
+          placeholder="เบอร์โทรศัพท์(ผู้อำนวยการ)" [(ngModel)]="telephoneManager" style="width: 100%;">
       </div>
     </div>
     <div class="clr-row">
       <div class="clr-col-4">
-        ที่อยู่<span class="required">*</span>
+        ที่อยู่
       </div>
       <div class="clr-col-8">
-        <input type="text" class="clr-input" name="address" id="address" placeholder="ที่อยู่" [(ngModel)]="address" style="width: 100%;">
+        <input type="text" class="clr-input" name="address" id="address" placeholder="ที่อยู่" [(ngModel)]="address"
+          style="width: 100%;">
       </div>
     </div>
     <div class="clr-row">
       <div class="clr-col-4">
-        ตำบล<span class="required">*</span>
+        ตำบล
       </div>
       <div class="clr-col-8">
         <app-autocomplete-subdistrict style="padding: 0px" #tambon (onselect)="onSelectTambon($event)">
@@ -132,7 +156,7 @@
     </div>
     <div class="clr-row">
       <div class="clr-col-4">
-        อำเภอ<span class="required">*</span>
+        อำเภอ
       </div>
       <div class="clr-col-8">
         <app-autocomplete-district style="padding: 0px" #ampur (onselect)="onSelectAmpur($event)">
@@ -150,7 +174,7 @@
     </div>
     <div class="clr-row">
       <div class="clr-col-4">
-        รหัสไปรษณีย์<span class="required">*</span>
+        รหัสไปรษณีย์
       </div>
       <div class="clr-col-8">
         <app-autocomplete-zipcode style="padding: 0px" #zipcode (onselect)="onSelectZipcode($event)">
@@ -169,7 +193,7 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-success"
-      [disabled]="!tambonName || !ampurName || !provinceName || !zipcode || hospCode.length != 5 || !hospName || !address || !telephone"
+      [disabled]="hospCode.length != 5 || !hospName || !hospTypeId || !provinceName"
       (click)="save()">
       บันทึก
     </button>

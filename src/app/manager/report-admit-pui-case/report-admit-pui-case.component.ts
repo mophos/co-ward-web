@@ -1,9 +1,10 @@
 import { AlertService } from '../../help/alert.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportService } from '../report.service';
-import { sumBy } from 'lodash';
+import { sumBy, isEmpty } from 'lodash';
 import { findIndex } from 'lodash';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ClrDatagridStateInterface } from '@clr/angular';
 
 @Component({
   selector: 'app-report-admit-pui-case',
@@ -39,6 +40,10 @@ export class ReportAdmitPuiCaseComponent implements OnInit {
   rights: any;
   dataDate1: any;
   dataDate2: any;
+  loadings = false;
+  limit = 100;
+  offset = 0;
+  totalList = 0;
   public jwtHelper = new JwtHelperService();
 
   @ViewChild('loading', { static: true }) loading: any;
@@ -52,8 +57,19 @@ export class ReportAdmitPuiCaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getList();
+    // this.getList();
     this.getSummary();
+  }
+
+  async refresh(state: ClrDatagridStateInterface) {
+    if (!isEmpty(state)) {
+      this.loadings = true;
+      this.limit = +state.page.size;
+      this.offset = (state.page.current - 1) * this.limit;
+      await this.getList();
+      this.loadings = false;
+    }
+    // const state.page.from, state.page.size
   }
 
   async getList() {
@@ -61,6 +77,7 @@ export class ReportAdmitPuiCaseComponent implements OnInit {
       this.loading.show();
       const rs: any = await this.reportService.admitPuiCase();
       if (rs.ok) {
+        this.totalList = rs.total;
         this.list = rs.rows;
         this.dataDate2 = rs.rows[0].timestamp;
       } else {
@@ -105,6 +122,46 @@ export class ReportAdmitPuiCaseComponent implements OnInit {
       }
     } catch (error) {
       this.alertService.error(error);
+    }
+  }
+
+
+  async onClickExport() {
+    this.loading.show();
+    try {
+      // this.dateShow = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
+      const rs: any = await this.reportService.admintPuiCaseExport();
+      if (!rs) {
+        this.loading.hide();
+      } else {
+        this.downloadFile('รายงานผู้ป่วย ADMIT Confirm', 'xlsx', rs);
+        // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
+        this.loading.hide();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.error();
+      this.loading.hide();
+    }
+  }
+
+  downloadFile(name, type, data: any) {
+    try {
+      const url = window.URL.createObjectURL(new Blob([data]));
+      console.log(url);
+      const fileName = `${name}.${type}`;
+      // Debe haber una manera mejor de hacer esto...
+      const a = document.createElement('a');
+      document.body.appendChild(a);
+      a.setAttribute('style', 'display: none');
+      a.href = url;
+      a.download = fileName;
+      a.click();
+      window.URL.revokeObjectURL(url);
+      a.remove(); // remove the element
+    } catch (error) {
+      console.log(error);
+      this.alertService.error();
     }
   }
 }
