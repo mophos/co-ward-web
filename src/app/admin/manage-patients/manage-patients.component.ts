@@ -111,8 +111,6 @@ export class ManagePatientsComponent implements OnInit {
       zipcode: p.zipcode,
       telephone: p.telephone
     });
-    console.log('test');
-    
     this.bDate = {
       date: {
         year: moment(p.birth_date).get('year'),
