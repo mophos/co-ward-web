@@ -75,7 +75,7 @@
 <clr-modal [(clrModalOpen)]="modal" [clrModalSize]="'xl'" [style.height.px]="500">
   <h3 class="modal-title">{{detail.hospname}}</h3>
   <div class="modal-body">
-    <clr-datagrid [clrDgLoading]="isLoading">
+    <clr-datagrid >
       <clr-dg-column>ประเภทเตียง</clr-dg-column>
       <clr-dg-column>จำนวนเตียงทั้งหมดของโรงพยาบาล</clr-dg-column>
       <clr-dg-column>สำหรับผู้ป่วย Covid</clr-dg-column>
