@@ -1,0 +1,118 @@
+<nav class="breadcrumb">
+  <!-- <a class="breadcrumb-item" href="javascript://" routerLink="/staff/requisition-supplies">การใช้เวชภัณฑ์</a> -->
+  <span class="breadcrumb-item active">จัดการเตียงให้โรงพยาบาล</span>
+</nav>
+<clr-datagrid [clrDgLoading]="loading" [style.height.%]="65">
+  <clr-dg-column>hospname</clr-dg-column>
+  <clr-dg-column>entry_date</clr-dg-column>
+  <clr-dg-column>aiir_qty</clr-dg-column>
+  <clr-dg-column>aiir_covid</clr-dg-column>
+  <clr-dg-column>aiir_spare_qty</clr-dg-column>
+  <clr-dg-column>cohort_qty</clr-dg-column>
+  <clr-dg-column>cohort_covid_qty</clr-dg-column>
+  <clr-dg-column>cohort_spare_qty</clr-dg-column>
+  <clr-dg-column>cohort_icu_qty</clr-dg-column>
+  <clr-dg-column>cohort_icu_covid_qty</clr-dg-column>
+  <clr-dg-column>cohort_icu_spare_qty</clr-dg-column>
+  <clr-dg-column>hospitel_qty</clr-dg-column>
+  <clr-dg-column>hospitel_covid_qty</clr-dg-column>
+  <clr-dg-column>hospitel_spare_qty</clr-dg-column>
+  <clr-dg-column>isolate_qty</clr-dg-column>
+  <clr-dg-column>isolate_covid_qty</clr-dg-column>
+  <clr-dg-column>isolate_spare_qty</clr-dg-column>
+  <clr-dg-column>modified_aiir_qty</clr-dg-column>
+  <clr-dg-column>modified_aiir_covid_qty</clr-dg-column>
+  <clr-dg-column>modified_aiir_spare_qty</clr-dg-column>
+  <clr-dg-row *ngFor="let l of list; let idx=index;" (click)="editBed(l);  ">
+    <!-- [ngClass]="{ 'isSuccess'.id == listId }" -->
+    <!--  -->
+    <clr-dg-cell>{{l.hospname }}</clr-dg-cell>
+    <clr-dg-cell>{{l.entry_date | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
+    <clr-dg-cell>{{l.aiir_qty }}</clr-dg-cell>
+    <clr-dg-cell>{{l.aiir_covid_qty }}</clr-dg-cell>
+    <clr-dg-cell>{{l.aiir_spare_qty }}</clr-dg-cell>
+    <clr-dg-cell>{{l.cohort_qty }}</clr-dg-cell>
+    <clr-dg-cell>{{l.cohort_covid_qty }}</clr-dg-cell>
+    <clr-dg-cell>{{l.cohort_spare_qty }}</clr-dg-cell>
+    <clr-dg-cell>{{l.cohort_icu_qty }}</clr-dg-cell>
+    <clr-dg-cell>{{l.cohort_icu_covid_qty }}</clr-dg-cell>
+    <clr-dg-cell>{{l.cohort_icu_spare_qty }}</clr-dg-cell>
+    <clr-dg-cell>{{l.hospitel_qty }}</clr-dg-cell>
+    <clr-dg-cell>{{l.hospitel_covid_qty }}</clr-dg-cell>
+    <clr-dg-cell>{{l.hospitel_spare_qty }}</clr-dg-cell>
+    <clr-dg-cell>{{l.isolate_qty }}</clr-dg-cell>
+    <clr-dg-cell>{{l.isolate_covid_qty }}</clr-dg-cell>
+    <clr-dg-cell>{{l.isolate_spare_qty }}</clr-dg-cell>
+    <clr-dg-cell>{{l.modified_aiir_qty }}</clr-dg-cell>
+    <clr-dg-cell>{{l.modified_aiir_covid_qty }}</clr-dg-cell>
+    <clr-dg-cell>{{l.modified_aiir_spare_qty }}</clr-dg-cell>
+  </clr-dg-row>
+
+</clr-datagrid>
+<clr-datagrid [clrDgLoading]="loading" [style.height.%]="30">
+  <clr-dg-column>hospname</clr-dg-column>
+  <clr-dg-column>entry_date</clr-dg-column>
+  <clr-dg-column>hospitel_qty</clr-dg-column>
+  <clr-dg-column>hospitel_covid_qty</clr-dg-column>
+  <clr-dg-column>hospitel_spare_qty</clr-dg-column>
+  <clr-dg-column>cohort_qty</clr-dg-column>
+  <clr-dg-column>cohort_covid_qty</clr-dg-column>
+  <clr-dg-column>cohort_spare_qty</clr-dg-column>
+  <clr-dg-row *ngFor="let l of listHospitel; let idx=index;" (click)="editBed(l);  ">
+    <!-- [ngClass]="{ 'isSuccess'.id == listId }" -->
+    <!--  -->
+    <clr-dg-cell>{{l.hospname }}</clr-dg-cell>
+    <clr-dg-cell>{{l.entry_date | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
+    <clr-dg-cell>{{l.hospitel_qty }}</clr-dg-cell>
+    <clr-dg-cell>{{l.hospitel_covid_qty }}</clr-dg-cell>
+    <clr-dg-cell>{{l.hospitel_spare_qty }}</clr-dg-cell>
+    <clr-dg-cell>{{l.cohort_qty }}</clr-dg-cell>
+    <clr-dg-cell>{{l.cohort_covid_qty }}</clr-dg-cell>
+    <clr-dg-cell>{{l.cohort_spare_qty }}</clr-dg-cell>
+  </clr-dg-row>
+
+</clr-datagrid>
+<clr-modal [(clrModalOpen)]="modal" [clrModalSize]="'xl'" [style.height.px]="500">
+  <h3 class="modal-title">{{detail.hospname}}</h3>
+  <div class="modal-body">
+    <clr-datagrid [clrDgLoading]="isLoading">
+      <clr-dg-column>ประเภทเตียง</clr-dg-column>
+      <clr-dg-column>จำนวนเตียงทั้งหมดของโรงพยาบาล</clr-dg-column>
+      <clr-dg-column>สำหรับผู้ป่วย Covid</clr-dg-column>
+      <clr-dg-column>สำรองเตียงรอรับย้าย</clr-dg-column>
+      <clr-dg-column>ใช้ไปแล้ว</clr-dg-column>
+
+      <clr-dg-row *clrDgItems="let l of listBed; let idx=index;">
+        <clr-dg-cell>{{l.name}}</clr-dg-cell>
+        <clr-dg-cell>
+          <input class="clr-input width-fit" style="text-align: right;" type="text" appNumberOnly name="{{l.qty}}"
+            [(ngModel)]="l.qty">
+        </clr-dg-cell>
+        <clr-dg-cell>
+          <input class="clr-input width-fit" style="text-align: right;" type="text" appNumberOnly name="{{l.covid_qty}}"
+            [(ngModel)]="l.covid_qty">
+        </clr-dg-cell>
+        <clr-dg-cell>
+          <input class="clr-input width-fit" style="text-align: right;" type="text" appNumberOnly name="{{l.spare_qty}}"
+            [(ngModel)]="l.spare_qty">
+        </clr-dg-cell>
+        <clr-dg-cell>
+          <label for="" style="float: right;">{{l.use_covid_qty}}</label>
+          <!-- <input class="clr-input width-fit" style="text-align: right;" type="text" appNumberOnly name="{{l.covid_qty}}" -->
+          <!-- [(ngModel)]="l.covid_qty" [disabled]="true"> -->
+        </clr-dg-cell>
+      </clr-dg-row>
+      <clr-dg-footer>
+        <clr-dg-pagination #pagination>
+          <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
+          {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} จาก {{pagination.totalItems}} รายการ
+        </clr-dg-pagination>
+      </clr-dg-footer>
+    </clr-datagrid>
+    <br>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-success btn-block" (click)="onClickSave()" [disabled]="isSave">บันทึก</button>
+  </div>
+</clr-modal>
+<!-- <app-loadding #loading></app-loadding> -->
