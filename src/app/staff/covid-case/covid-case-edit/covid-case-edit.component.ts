@@ -298,7 +298,7 @@ export class CovidCaseEditComponent implements OnInit {
     this.tambonName = e.tambon_name;
     this.ampurId = e.ampur_code;
     this.ampurName = e.ampur_name;
-    this.provinceId = e.province_id;
+    this.provinceId = e.province_code;
     this.provinceName = e.province_name;
     this.zipcode = e.zip_code;
     this.setValue();
@@ -309,7 +309,7 @@ export class CovidCaseEditComponent implements OnInit {
     this.tambonName = e.tambon_name;
     this.ampurId = e.ampur_code;
     this.ampurName = e.ampur_name;
-    this.provinceId = e.province_id;
+    this.provinceId = e.province_code;
     this.provinceName = e.province_name;
     this.zipcode = e.zip_code;
     this.setValue();
@@ -320,7 +320,7 @@ export class CovidCaseEditComponent implements OnInit {
     this.tambonName = e.tambon_name;
     this.ampurId = e.ampur_code;
     this.ampurName = e.ampur_name;
-    this.provinceId = e.province_id;
+    this.provinceId = e.province_code;
     this.provinceName = e.province_name;
     this.zipcode = e.zip_code;
     this.setValue();
@@ -331,7 +331,7 @@ export class CovidCaseEditComponent implements OnInit {
     this.tambonName = e.tambon_name;
     this.ampurId = e.ampur_code;
     this.ampurName = e.ampur_name;
-    this.provinceId = e.province_id;
+    this.provinceId = e.province_code;
     this.provinceName = e.province_name;
     this.zipcode = e.zip_code;
     this.setValue();
