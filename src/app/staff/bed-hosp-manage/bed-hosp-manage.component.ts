@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from 'src/app/help/alert.service';
 import { BedService } from '../bed.service';
-import { groupBy, find } from 'lodash';
+import { findIndex, find } from 'lodash';
 @Component({
   selector: 'app-bed-hosp-manage',
   templateUrl: './bed-hosp-manage.component.html',
@@ -54,11 +54,27 @@ export class BedHospManageComponent implements OnInit {
     try {
       const rs: any = await this.bedService.getHospBed();
       if (rs.ok) {
-        const tmp = groupBy(rs.rows.bed, 'hospital_type');
+        this.list = rs.rows.bed;
         this.listUsage = rs.rows.sum;
-        this.list = tmp.HOSPITAL;
-        this.listHospitel = tmp.HOSPITEL;
-        console.log(tmp);
+        for (const item of this.listUsage) {
+          const idx = findIndex(this.list, { id: item.hospital_id });
+          if (idx > -1) {
+            if (item.bed_id === 1) {
+              this.list[idx].aiir_usage_qty = item.usage_qty;
+            } else if (item.bed_id === 2) {
+              this.list[idx].modified_aiir_usage_qty = item.usage_qty;
+            } else if (item.bed_id === 3) {
+              this.list[idx].isolate_usage_qty = item.usage_qty;
+            } else if (item.bed_id === 4) {
+              this.list[idx].cohort_usage_qty = item.usage_qty;
+            } else if (item.bed_id === 7) {
+              this.list[idx].hospitel_usage_qty = item.usage_qty;
+            }
+          }
+        }
+
+        // this.list = tmp.HOSPITAL;
+        // this.listHospitel = tmp.HOSPITEL;
 
         // if (this.listId > 0) {
         //   this.getListDetail(this.listId);
