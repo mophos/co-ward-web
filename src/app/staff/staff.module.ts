@@ -73,6 +73,7 @@ import { CioCheckPatientComponent } from './cio-check-patient/cio-check-patient.
 import { ReportMedicalSuppliesComponent } from './report-medical-supplies/report-medical-supplies.component';
 import { ReportAdmitPuiComponent } from './report-admit-pui/report-admit-pui.component';
 import { BedHospManageComponent } from './bed-hosp-manage/bed-hosp-manage.component';
+import { ReportDcComponent } from './report-dc/report-dc.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -116,7 +117,8 @@ import { BedHospManageComponent } from './bed-hosp-manage/bed-hosp-manage.compon
     CovidCaseNewV2Component,
     CioCheckPatientComponent,
     ReportMedicalSuppliesComponent,
-    BedHospManageComponent
+    BedHospManageComponent,
+    ReportDcComponent
   ],
   imports: [
     HelpModule,

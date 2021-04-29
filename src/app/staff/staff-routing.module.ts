@@ -72,6 +72,7 @@ import { ReportMedicalSuppliesComponent } from './report-medical-supplies/report
 import { ReportAdmitPuiComponent } from './report-admit-pui/report-admit-pui.component';
 import { BedHospManageComponent } from './bed-hosp-manage/bed-hosp-manage.component';
 import { AuthManageBedHospService } from '../auth-staff/auth-manage-bed-hosp.service';
+import { ReportDcComponent } from './report-dc/report-dc.component';
 
 const routes: Routes = [
   {
@@ -126,6 +127,7 @@ const routes: Routes = [
       { path: 'report-admit-confirm-case', component: ReportAdmitConfirmCaseComponent },
       { path: 'report-admit-pui', component: ReportAdmitPuiComponent },
       { path: 'cio-check-patient', component: CioCheckPatientComponent },
+      { path: 'report-dc', component: ReportDcComponent },
       // ----------------------------------------------------------------------------------------------------------
       {
         path: 'setting',

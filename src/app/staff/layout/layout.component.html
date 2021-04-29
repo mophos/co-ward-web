@@ -145,6 +145,11 @@
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         รายงานการบันทึกผู้ป่วยใหม่ประจำวัน
       </a>
+      <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff/report-dc" title="รายงานผู้ป่วย Discharge"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        รายงานผู้ป่วย Discharge
+      </a>
       <!-- <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff/report-patient" title="รายงานผู้ป่วย Admit"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
