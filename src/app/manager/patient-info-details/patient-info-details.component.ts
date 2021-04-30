@@ -34,6 +34,8 @@ export class PatientInfoDetailsComponent implements OnInit {
       if (rs.ok) {
         // this.loadding.hide();
         this.list = rs.rows;
+        console.log(this.list);
+        
         // this.query = null;
       } else {
         // this.loadding.hide();

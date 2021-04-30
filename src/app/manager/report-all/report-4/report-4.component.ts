@@ -117,7 +117,7 @@ export class Report4Component implements OnInit {
   async onClickExport() {
     this.loading.show();
     try {
-      const rs: any = await this.reportService.getReport4Excel(moment(this.date).format('YYYY-MM-DD'), this.sector);
+      const rs: any = await this.reportService.getReport4Excel(moment(this.date, 'DD/MM/YYYY').format('YYYY-MM-DD'), this.sector);
       if (!rs) {
         this.loading.hide();
       } else {

@@ -60,6 +60,10 @@ export class ManageHospitalComponent implements OnInit {
     private alertService: AlertService,
   ) { }
   ngOnInit() {
+    this.getTypeList();
+    this.getMinistryList();
+    this.getMinistryTypeList();
+    this.getSubMinistryList();
     this.getList();
   }
 
@@ -138,10 +142,6 @@ export class ManageHospitalComponent implements OnInit {
   }
 
   async onClickAdd() {
-    this.getTypeList();
-    this.getMinistryList();
-    this.getMinistryTypeList();
-    this.getSubMinistryList();
     this.modal = true;
     this.clearForm();
   }
@@ -232,21 +232,21 @@ export class ManageHospitalComponent implements OnInit {
       const data = {
         hosptype_id: this.hospTypeId,
         hosptype_code: this.listType[idx].code,
-        tambon_code: this.tambonCode,
-        ministry_code: this.ministryCode,
-        sub_ministry_code: this.subMinistryCode,
-        ampur_code: this.ampurCode,
+        tambon_code: this.tambonCode || null,
+        ministry_code: this.ministryCode || null,
+        sub_ministry_code: this.subMinistryCode || null,
+        ampur_code: this.ampurCode || null,
         province_code: this.provinceCode,
-        tambon_name: this.tambonName,
-        ampur_name: this.ampurName,
+        tambon_name: this.tambonName || null,
+        ampur_name: this.ampurName || null,
         province_name: this.provinceName,
-        zipcode: this.zipcode,
+        zipcode: this.zipcode || null,
         hospcode: this.hospCode,
         hospname: this.hospName,
-        address: this.address,
-        tel: this.tel,
-        telephone: this.telephone,
-        telephone_manager: this.telephoneManager
+        address: this.address || null,
+        tel: this.tel || null,
+        telephone: this.telephone || null,
+        telephone_manager: this.telephoneManager || null
       };
 
       let rs: any;
@@ -276,6 +276,8 @@ export class ManageHospitalComponent implements OnInit {
     this.id = l.id;
     this.hospTypeId = l.hosptype_id;
     this.hospTypeCode = l.hosptype_code;
+    this.ministryCode = l.ministry_code;
+    this.subMinistryCode = l.sub_ministry_code;
     this.tambonCode = l.tambon_code;
     this.ampurCode = l.ampur_code;
     this.provinceCode = l.province_code;
