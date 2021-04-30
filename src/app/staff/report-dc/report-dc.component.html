@@ -1,0 +1,125 @@
+<nav class="breadcrumb">
+    <span class="breadcrumb-item active">ผู้ป่วยทั้งหมด</span>
+</nav>
+<div class="clr-row">
+    <div class="clr-col-4">
+      <input class="clr-input width-fit" (keyup)="doEnter($event)" name="query" [(ngModel)]="query"
+        placeholder="Enter เพื่อค้นหา" />
+    </div>
+    <div class="clr-col-2">
+      <button class="btn btn-sm btn-primary" (click)="getList()">
+        <clr-icon shape="search" ></clr-icon> ค้นหา
+      </button>
+    </div>
+  </div>
+  <div class="clr-row">
+    <div class="clr-col-12">
+      <clr-datagrid [clrDgLoading]="isLoadding" [style.height.px]="800">
+        <clr-dg-column>จังหวัด</clr-dg-column>
+        <clr-dg-column>โรงพยาบาล</clr-dg-column>
+        <clr-dg-column>HN</clr-dg-column>
+        <clr-dg-column *ngIf="showPersons">ชื่อ-นามสกุล</clr-dg-column>
+        <clr-dg-column>วันที่ Admit</clr-dg-column>
+        <clr-dg-column>สถานะ</clr-dg-column>
+        <clr-dg-column  class="text-center">วันที่ d/c</clr-dg-column>
+        <!-- <clr-dg-column></clr-dg-column> -->
+  
+        <clr-dg-row *clrDgItems="let l of list;let idx=index;" [clrDgItem]="l" >
+          <!-- <clr-dg-action-overflow>
+            <button class="action-item" (click)="onClickOpenModalDateConfirm(l)"
+              *ngIf="!l.confirm_date">บันทึกวันที่ตรวจพบ</button>
+            <button class="action-item" (click)="onEditPerson(l)">แก้ไขข้อมูลส่วนตัว</button>
+            <button class="action-item" (click)="onEdit(l)">แก้ไข</button>
+            <button class="action-item" (click)="onDelete(l)">ลบ</button>
+          </clr-dg-action-overflow> -->
+          <clr-dg-cell>{{l.province_name}}</clr-dg-cell>
+          <clr-dg-cell>{{l.hospname}}</clr-dg-cell>
+          <clr-dg-cell>{{l.hn}}</clr-dg-cell>
+          <clr-dg-cell *ngIf="showPersons">{{l.title_name}}{{l.first_name}} {{l.last_name}}</clr-dg-cell>
+          <clr-dg-cell>{{l.date_admit | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
+          <clr-dg-cell>{{l.status }}</clr-dg-cell>
+          <clr-dg-cell class="text-center">{{l.date_discharge | dateTh:'DD/MM/YYYY' }}</clr-dg-cell>
+          <!-- <clr-dg-cell >
+            <button class="btn btn-sm btn-success" style="margin:0" (click)="onClickEdit(l)">
+              <clr-icon shape="search"></clr-icon> 
+            </button>
+          </clr-dg-cell> -->
+        </clr-dg-row>
+  
+        <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
+        <clr-dg-footer>
+          <clr-dg-pagination #pagination [clrDgPageSize]="50">
+            <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
+            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+            of {{pagination.totalItems}} รายการ
+          </clr-dg-pagination>
+        </clr-dg-footer>
+      </clr-datagrid>
+  
+    </div>
+    <!-- <div class="clr-col-7">
+      <div class="card">
+        <div class="card-header">
+          <div class="clr-row">
+            <div class="clr-col-3">
+              HN: {{data.hn || '-'}}
+            </div>
+            <div class="clr-col-6">
+              ชื่อ: {{data.title_name || ''}}{{data.first_name || ''}} {{data.last_name || ''}}
+              [{{data.gender_id == 1 ? 'ชาย' : data.gender_id == 2 ? 'หญิง' : '-'|| '-'}}]
+            </div>
+            <div class="clr-col-3" style="text-align: right;">
+              สถานะ: {{data.status|| '-'}}
+            </div>
+          </div>
+        </div>
+        <div class="card-block">
+          <div class="card-text">
+            <div class="clr-row">
+              <div class="clr-col-4">
+                CID/PASSPORT: {{data.cid ? data.cid : data.passport || '-'}}
+              </div>
+              <div class="clr-col-4">
+                วันเดือนปีเกิด: {{data.birth_date| dateTh:'DD/MM/YYYY' }}
+              </div>
+              <div class="clr-col-4">
+                เบอร์โทรศัพท์: {{data.telephone || '-' }}
+              </div>
+            </div>
+            <br>
+            
+            <div class="clr-row">
+              <div class="clr-col-6">ประวัติการรักษา</div>
+              <div class="clr-col-6" style="text-align: right;">
+                <button class="btn btn-danger btn-sm" (click)="onClickHPVC(data)" *ngIf="data.covid_case_id">บันทึกแพ้ยา</button>
+              </div>
+            </div>
+            <clr-datagrid [clrDgLoading]="isLoadding">
+              <clr-dg-column>AN</clr-dg-column>
+              <clr-dg-column>วันที่ Admit</clr-dg-column>
+              <clr-dg-column>วันที่ตรวจพบ</clr-dg-column>
+              <clr-dg-column>โรงพยาบาล</clr-dg-column>
+              <clr-dg-column>สถานะ</clr-dg-column>
+              <clr-dg-column>วันที่ D/C</clr-dg-column>
+              <clr-dg-column></clr-dg-column>
+              <clr-dg-row *ngFor="let l of historys;let idx=index;">
+                <clr-dg-cell>{{l.an}}</clr-dg-cell>
+                <clr-dg-cell>{{l.date_admit | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
+                <clr-dg-cell>{{l.confirm_date | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
+                <clr-dg-cell>{{l.hospname }}</clr-dg-cell>
+                <clr-dg-cell>{{l.status }}</clr-dg-cell>
+                <clr-dg-cell>{{l.date_discharge | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
+                <clr-dg-cell>
+                  <button type="button" class="btn btn-icon btn-primary" (click)="getDetails(l)" aria-label="settings">
+                    <clr-icon shape="search"></clr-icon>
+                  </button>
+                </clr-dg-cell>
+              </clr-dg-row>
+              <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
+            </clr-datagrid>
+  
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>

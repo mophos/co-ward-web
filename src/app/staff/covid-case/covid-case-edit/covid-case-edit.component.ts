@@ -203,16 +203,15 @@ export class CovidCaseEditComponent implements OnInit {
           personId: this.personId,
           patientId: this.patientId
         };
-
         let rs: any;
         if (this.person) {
+          if (this.birthDate) {
+            obj.birthDate = `${this.birthDate.date.year}-${this.birthDate.date.month}-${this.birthDate.date.day}`;
+          }
           rs = await this.covidCaseService.updateCasePerson(obj);
         } else {
           if (this.confirmDate) {
             obj.confirmDate = `${this.confirmDate.date.year}-${this.confirmDate.date.month}-${this.confirmDate.date.day}`;
-          }
-          if (this.birthDate) {
-            obj.birthDate = `${this.birthDate.date.year}-${this.birthDate.date.month}-${this.birthDate.date.day}`;
           }
           rs = await this.covidCaseService.updateCase(this.covidCaseId, obj);
         }
@@ -299,7 +298,7 @@ export class CovidCaseEditComponent implements OnInit {
     this.tambonName = e.tambon_name;
     this.ampurId = e.ampur_code;
     this.ampurName = e.ampur_name;
-    this.provinceId = e.province_id;
+    this.provinceId = e.province_code;
     this.provinceName = e.province_name;
     this.zipcode = e.zip_code;
     this.setValue();
@@ -310,7 +309,7 @@ export class CovidCaseEditComponent implements OnInit {
     this.tambonName = e.tambon_name;
     this.ampurId = e.ampur_code;
     this.ampurName = e.ampur_name;
-    this.provinceId = e.province_id;
+    this.provinceId = e.province_code;
     this.provinceName = e.province_name;
     this.zipcode = e.zip_code;
     this.setValue();
@@ -321,7 +320,7 @@ export class CovidCaseEditComponent implements OnInit {
     this.tambonName = e.tambon_name;
     this.ampurId = e.ampur_code;
     this.ampurName = e.ampur_name;
-    this.provinceId = e.province_id;
+    this.provinceId = e.province_code;
     this.provinceName = e.province_name;
     this.zipcode = e.zip_code;
     this.setValue();
@@ -332,7 +331,7 @@ export class CovidCaseEditComponent implements OnInit {
     this.tambonName = e.tambon_name;
     this.ampurId = e.ampur_code;
     this.ampurName = e.ampur_name;
-    this.provinceId = e.province_id;
+    this.provinceId = e.province_code;
     this.provinceName = e.province_name;
     this.zipcode = e.zip_code;
     this.setValue();
@@ -343,5 +342,9 @@ export class CovidCaseEditComponent implements OnInit {
     this.ampur.setQuery(this.ampurName);
     this.tambon.setQuery(this.tambonName);
     this.zipc.setQuery(this.zipcode);
+  }
+
+  onChangebDateDischarge(e) {
+    this.birthDate = e;
   }
 }

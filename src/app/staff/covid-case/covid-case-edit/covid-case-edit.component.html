@@ -139,7 +139,7 @@
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
                     <!-- <input type="date" name="admitDate" [(ngModel)]="admitDate" class="clr-input  width-fit"> -->
-                    <my-date-picker-th name="birthDate" [options]="myDatePickerOptions" [(ngModel)]="birthDate"
+                    <my-date-picker-th name="birthDate" [options]="myDatePickerOptions" (dateChanged)="onChangebDateDischarge($event)" [(ngModel)]="birthDate"
                       required>
                     </my-date-picker-th>
                     <!-- <clr-icon class="clr-validate-icon" shape="exclamation-circle" *ngIf="!reason.length">  </clr-icon>-->

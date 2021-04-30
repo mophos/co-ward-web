@@ -70,6 +70,9 @@ import { Report9Component } from '../manager/report-all/report-9/report-9.compon
 import { Report10Component } from '../manager/report-all/report-10/report-10.component';
 import { ReportMedicalSuppliesComponent } from './report-medical-supplies/report-medical-supplies.component';
 import { ReportAdmitPuiComponent } from './report-admit-pui/report-admit-pui.component';
+import { BedHospManageComponent } from './bed-hosp-manage/bed-hosp-manage.component';
+import { AuthManageBedHospService } from '../auth-staff/auth-manage-bed-hosp.service';
+import { ReportDcComponent } from './report-dc/report-dc.component';
 
 const routes: Routes = [
   {
@@ -96,6 +99,7 @@ const routes: Routes = [
       { path: 'receive-products', canActivate: [AuthStockProductsService], component: ReceivesComponent },
       { path: 'surgical-sphp', canActivate: [AuthPayService], component: SurgicalMaskShphComponent },
       { path: 'supplies', canActivate: [AuthStockSuppliesService], component: SuppliesComponent },
+      { path: 'bed-hosp-manage', canActivate: [AuthManageBedHospService], component: BedHospManageComponent },
       // { path: 'request-products',  component: RequestProductsComponent },
       {
         path: 'request-products',
@@ -123,6 +127,7 @@ const routes: Routes = [
       { path: 'report-admit-confirm-case', component: ReportAdmitConfirmCaseComponent },
       { path: 'report-admit-pui', component: ReportAdmitPuiComponent },
       { path: 'cio-check-patient', component: CioCheckPatientComponent },
+      { path: 'report-dc', component: ReportDcComponent },
       // ----------------------------------------------------------------------------------------------------------
       {
         path: 'setting',
