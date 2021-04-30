@@ -26,6 +26,7 @@ export class ReportAdmitPuiCaseComponent implements OnInit {
   isolate = 0;
   cohort = 0;
   hospitel = 0;
+  cohortIcu = 0;
   invasive = 0;
   noninvasive = 0;
   highFlow = 0;
@@ -106,6 +107,7 @@ export class ReportAdmitPuiCaseComponent implements OnInit {
         this.isolate = sumBy(rs.rows, 'isolate');
         this.cohort = sumBy(rs.rows, 'cohort');
         this.hospitel = sumBy(rs.rows, 'hospitel');
+        this.cohortIcu = sumBy(rs.rows, 'cohort_icu');
         this.invasive = sumBy(rs.rows, 'invasive');
         this.noninvasive = sumBy(rs.rows, 'noninvasive');
         this.highFlow = sumBy(rs.rows, 'high_flow');
@@ -134,7 +136,7 @@ export class ReportAdmitPuiCaseComponent implements OnInit {
       if (!rs) {
         this.loading.hide();
       } else {
-        this.downloadFile('รายงานผู้ป่วย ADMIT Confirm', 'xlsx', rs);
+        this.downloadFile('รายงานผู้ป่วย ADMIT PUI', 'xlsx', rs);
         // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
         this.loading.hide();
       }

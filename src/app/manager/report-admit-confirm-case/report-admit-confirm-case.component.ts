@@ -27,6 +27,7 @@ export class ReportAdmitConfirmCaseComponent implements OnInit {
   isolate = 0;
   cohort = 0;
   hospitel = 0;
+  cohortIcu = 0;
   invasive = 0;
   noninvasive = 0;
   highFlow = 0;
@@ -123,6 +124,7 @@ export class ReportAdmitConfirmCaseComponent implements OnInit {
         this.modifiedAiir = sumBy(rs.rows, 'modified_aiir');
         this.isolate = sumBy(rs.rows, 'isolate');
         this.cohort = sumBy(rs.rows, 'cohort');
+        this.cohortIcu = sumBy(rs.rows, 'cohort_icu');
         this.hospitel = sumBy(rs.rows, 'hospitel');
         this.invasive = sumBy(rs.rows, 'invasive');
         this.noninvasive = sumBy(rs.rows, 'noninvasive');
