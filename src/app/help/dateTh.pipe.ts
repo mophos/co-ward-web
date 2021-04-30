@@ -8,7 +8,6 @@ export class DateThPipe implements PipeTransform {
   transform(value: any, args?: any): any {
     // DD-MM-YYYY
     // DD/MM/YYYY
-    // DD/MM/YY
     // D MM YYYY
     // D MMM YYYY
     // D MMMM YYYY
@@ -21,8 +20,6 @@ export class DateThPipe implements PipeTransform {
           date = moment(value).format('DD-MM-') + (moment(value).get('year') + 543);
         } else if (args === 'DD/MM/YYYY') {
           date = moment(value).format('DD/MM/') + (moment(value).get('year') + 543);
-        } else if (args === 'DD/MM/YY') {
-          date = moment(value).format('DD/MM/') + (moment(value).get('year') + 543).toString().substr(2, 2);
         } else if (args === 'DD/MM/YYYY hh:mm') {
           date = moment(value).format('DD/MM/') + (moment(value).get('year') + 543) + ' ' + moment(value).format('HH:mm') + ' น.';
         } else if (args === 'D MM YYYY') {

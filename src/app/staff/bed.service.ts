@@ -53,14 +53,4 @@ export class BedService {
     const url = `${this.apiUrl}/v1/staff/balance/${id}`;
     return await this.http.put(url, { data }).toPromise();
   }
-
-  async getHospBed() {
-    const url = `${this.apiUrl}/v1/staff/bed/hosp-bed`;
-    return await this.http.get(url).toPromise();
-  }
-
-  async saveBeds(data, hospitalId) {
-    const url = `${this.apiUrl}/v1/staff/bed/bed-save`;
-    return await this.http.post(url, { data, hospitalId }).toPromise();
-  }
 }

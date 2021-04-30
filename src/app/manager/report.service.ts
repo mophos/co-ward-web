@@ -77,13 +77,8 @@ export class ReportService {
     return await this.http.get(url).toPromise();
   }
 
-  async admitConfirmCase(limit = 100, offset = 0) {
-    const url = `${this.apiUrl}/v1/report/admit-confirm-case?limit=${limit}&offset=${offset}`;
-    return await this.http.get(url).toPromise();
-  }
-
-  async admitConfirmCaseTotal() {
-    const url = `${this.apiUrl}/v1/report/admit-confirm-case/total`;
+  async admitConfirmCase() {
+    const url = `${this.apiUrl}/v1/report/admit-confirm-case`;
     return await this.http.get(url).toPromise();
   }
 
@@ -165,16 +160,5 @@ export class ReportService {
   async getLabPositive() {
     const url = `${this.apiUrl}/v1/report/lab-positive`;
     return await this.http.get(url).toPromise();
-  }
-
-
-  async admintConfirmCaseExport() {
-    const url = `${this.apiUrl}/v1/report/admit-confirm-case/export`;
-    return await this.http.get(url, { responseType: 'blob' }).toPromise();
-  }
-
-  async admintPuiCaseExport() {
-    const url = `${this.apiUrl}/v1/report/admit-pui-case/export`;
-    return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 }

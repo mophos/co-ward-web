@@ -25,9 +25,9 @@
     <!-- <clr-dg-cell>{{l.hospTypeName}}</clr-dg-cell> -->
     <clr-dg-cell style="text-align: center;">
       <div class="btn-group">
-        <button class="btn btn-sm btn-success" (click)="onClickEdit(l)" title="แก้ไข">
+        <!-- <button class="btn btn-sm btn-success" (click)="onClickEdit(l)" title="แก้ไข">
           <clr-icon shape="note"></clr-icon>
-        </button>
+        </button> -->
         <button class="btn btn-sm btn-danger" (click)="onClickRemove(l)" title="ลบ">
           <clr-icon shape="trash"></clr-icon>
         </button>
@@ -87,7 +87,7 @@
     </div>
     <div class="clr-row">
       <div class="clr-col-4">
-        สังกัด
+        สังกัด<span class="required">*</span>
       </div>
       <div class="clr-col-8">
         <div class="clr-select-wrapper" style="width: 100%;">
@@ -99,7 +99,7 @@
     </div>
     <div class="clr-row">
       <div class="clr-col-4">
-        กรม
+        กรม<span class="required">*</span>
       </div>
       <div class="clr-col-8">
         <div class="clr-select-wrapper" style="width: 100%;">
@@ -111,7 +111,7 @@
     </div>
     <div class="clr-row">
       <div class="clr-col-4">
-        โทร (1)
+        โทร (1)<span class="required">*</span>
       </div>
       <div class="clr-col-8">
         <input type="text" class="clr-input" name="telephone" id="telephone" placeholder="เบอร์โทรศัพท์"
@@ -138,7 +138,7 @@
     </div>
     <div class="clr-row">
       <div class="clr-col-4">
-        ที่อยู่
+        ที่อยู่<span class="required">*</span>
       </div>
       <div class="clr-col-8">
         <input type="text" class="clr-input" name="address" id="address" placeholder="ที่อยู่" [(ngModel)]="address"
@@ -147,7 +147,7 @@
     </div>
     <div class="clr-row">
       <div class="clr-col-4">
-        ตำบล
+        ตำบล<span class="required">*</span>
       </div>
       <div class="clr-col-8">
         <app-autocomplete-subdistrict style="padding: 0px" #tambon (onselect)="onSelectTambon($event)">
@@ -156,7 +156,7 @@
     </div>
     <div class="clr-row">
       <div class="clr-col-4">
-        อำเภอ
+        อำเภอ<span class="required">*</span>
       </div>
       <div class="clr-col-8">
         <app-autocomplete-district style="padding: 0px" #ampur (onselect)="onSelectAmpur($event)">
@@ -174,7 +174,7 @@
     </div>
     <div class="clr-row">
       <div class="clr-col-4">
-        รหัสไปรษณีย์
+        รหัสไปรษณีย์<span class="required">*</span>
       </div>
       <div class="clr-col-8">
         <app-autocomplete-zipcode style="padding: 0px" #zipcode (onselect)="onSelectZipcode($event)">
@@ -193,7 +193,7 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-success"
-      [disabled]="hospCode.length != 5 || !hospName || !hospTypeId || !provinceName"
+      [disabled]="!tambonName || !ampurName || !provinceName || !zipcode || hospCode.length != 5 || !hospName || !address || !telephone"
       (click)="save()">
       บันทึก
     </button>

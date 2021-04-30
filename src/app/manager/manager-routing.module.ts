@@ -1,4 +1,3 @@
-import { ReportColabCheckComponent } from './report-colab-check/report-colab-check.component';
 import { ReportLabPositiveComponent } from './report-lab-positive/report-lab-positive.component';
 
 import { ReportAdmitConfirmCaseComponent } from './report-admit-confirm-case/report-admit-confirm-case.component';
@@ -112,8 +111,7 @@ const routes: Routes = [
       { path: 'report-records', component: ReportRecordsComponent },
       { path: 'report-local-quarantine', component: ReportLocalQuarantineComponent },
       { path: 'report-discharge-daily', component: ReportDischargeDailyComponent },
-      { path: 'report-lab-positive', component: ReportLabPositiveComponent },
-      { path: 'report-lab-positive-colab', component: ReportColabCheckComponent }
+      { path: 'report-lab-positive', component: ReportLabPositiveComponent }
     ]
   }
 ];

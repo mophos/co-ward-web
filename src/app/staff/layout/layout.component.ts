@@ -54,7 +54,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
   private subscription1: Subscription;
   private subscription2: Subscription;
   private subscription3: Subscription;
-  checkManageBedHosp: boolean;
   constructor(
     private route: Router,
     private basicService: BasicService,
@@ -81,7 +80,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.trackingMenu = findIndex(this.rights, { name: 'STAFF_TRACKING' }) === -1 ? false : true;
     // ---------------------------------------------------------------------------------------------------
     this.checkSuppliesMenu = findIndex(this.rights, { name: 'STAFF_CHECK_SUPPLIES' }) === -1 ? false : true;
-    this.checkManageBedHosp = findIndex(this.rights, { name: 'STAFF_MANAGE_BED_HOSPITAL' }) === -1 ? false : true;
     if (decoded.providerType === 'ZONE' || decoded.providerType === 'SSJ') {
       this.reportMenu = true;
       this.isHospital = false;

@@ -145,7 +145,7 @@
             </div>
             <div class="clr-col-3 clr-form">
               <div class="clr-form-control" style="margin-top: 0;">
-                <label for="example" class="clr-control-label">วันเกิด<span class="required">*</span></label>
+                <label for="example" class="clr-control-label">วันเกิด</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
                     <my-date-picker-th name="birthDate" [options]="myDatePickerOptions" [(ngModel)]="birthDate"
@@ -705,7 +705,7 @@
 <div class="clr-row" [ngClass]="{hidden: !isKey}">
   <div class="clr-col-12">
     <div class="card" style="margin-top: 0;">
-      <button class="btn btn-success btn-block" (click)="onClickSave()" title="บันทึก" [disabled]="!peopleType || !admitDate || isSave || !hn || !an || !fname || !lname ||!titleId ||!genderId ||!birthDate">
+      <button class="btn btn-success btn-block" (click)="onClickSave()" title="บันทึก" [disabled]="!peopleType || !admitDate || isSave || !hn || !an || !fname || !lname ||!titleId ||!genderId ">
         <clr-icon shape="floppy"></clr-icon> บันทึก
       </button>
     </div>

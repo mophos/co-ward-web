@@ -53,7 +53,6 @@ import { PatientInfoDetailsComponent } from './patient-info-details/patient-info
 import { ReportAdmitPuiCaseComponent } from './report-admit-pui-case/report-admit-pui-case.component';
 import { ReportDischargeDailyComponent } from './report-discharge-daily/report-discharge-daily.component';
 import { ReportLabPositiveComponent } from './report-lab-positive/report-lab-positive.component';
-import { ReportColabCheckComponent } from './report-colab-check/report-colab-check.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -100,8 +99,7 @@ import { ReportColabCheckComponent } from './report-colab-check/report-colab-che
     ReportLocalQuarantineComponent,
     PatientInfoDetailsComponent,
     ReportDischargeDailyComponent,
-    ReportLabPositiveComponent,
-    ReportColabCheckComponent
+    ReportLabPositiveComponent
   ],
   imports: [
     CommonModule,
