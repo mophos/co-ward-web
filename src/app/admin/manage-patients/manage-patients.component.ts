@@ -660,9 +660,9 @@ export class ManagePatientsComponent implements OnInit {
     this.modalAddDate = true;
     try {
       if (this.tmpHis.status === 'ADMIT') {
-        let startDate = moment(this.tmpHis.date_admit);
-        let endDate = moment(this.details[this.details.length - 1].entry_date).add(1, 'days');
-        for (let date = moment(startDate); date.diff(endDate) < 0; date.add(1, 'days')) {
+        const startDate = moment(this.tmpHis.date_admit);
+        const endDate = moment(this.details[this.details.length - 1].entry_date).add(1, 'days');
+        for (const date = moment(startDate); date.diff(endDate) < 0; date.add(1, 'days')) {
           const ddate = moment(date).format('YYYY-MM-D');
           const idx = findIndex(this.details, { s_entry_date: moment(date).format('YYYY-MM-D') });
           if (idx === -1) {
@@ -676,9 +676,9 @@ export class ManagePatientsComponent implements OnInit {
           }
         }
       } else if (this.tmpHis.status !== 'ADMIT') {
-        let startDate = moment(this.tmpHis.date_admit);
-        let endDate = moment(this.details[this.details.length - 1].entry_date).add(1, 'days');
-        for (let date = moment(startDate); date.diff(endDate) < 0; date.add(1, 'days')) {
+        const startDate = moment(this.tmpHis.date_admit);
+        const endDate = moment(this.details[this.details.length - 1].date_discharge).add(1, 'days');
+        for (const date = moment(startDate); date.diff(endDate) < 0; date.add(1, 'days')) {
           const ddate = moment(date).format('YYYY-MM-D');
           const idx = findIndex(this.details, { s_entry_date: moment(date).format('YYYY-MM-D') });
           if (idx === -1) {
