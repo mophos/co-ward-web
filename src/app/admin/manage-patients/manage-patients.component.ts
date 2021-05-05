@@ -708,6 +708,7 @@ export class ManagePatientsComponent implements OnInit {
         delete v.id;
         delete v.lname;
         delete v.medical_supplie_name;
+        delete v.date_discharge;
         v.entry_date = v.s_entry_date;
         delete v.s_entry_date;
       }
