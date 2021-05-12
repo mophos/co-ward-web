@@ -32,7 +32,7 @@
             <button class="action-item" (click)="onEdit(l)">แก้ไข</button>
             <button class="action-item" (click)="onDelete(l)">ลบ</button>
           </clr-dg-action-overflow> -->
-          <clr-dg-cell>{{l.province_name}}</clr-dg-cell>
+          <clr-dg-cell>{{l.hosp_province}}</clr-dg-cell>
           <clr-dg-cell>{{l.hospname}}</clr-dg-cell>
           <clr-dg-cell>{{l.hn}}</clr-dg-cell>
           <clr-dg-cell *ngIf="showPersons">{{l.title_name}}{{l.first_name}} {{l.last_name}}</clr-dg-cell>
