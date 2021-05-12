@@ -53,6 +53,17 @@
               <th class="right td-border" >คงเหลือ</th>
             </tr>
           </table></th>
+          <th colspan="3" class="right td-border" style="position: sticky; top: 0; padding: 0;">
+            <table>
+              <tr>
+                <th colspan="3" class="right td-border" >Cohort ICU</th>
+              </tr>
+              <tr>
+                <th class="right td-border" >ทั้งหมด</th>
+                <th class="right td-border" >ใช้ไปแล้ว</th>
+                <th class="right td-border" >คงเหลือ</th>
+              </tr>
+            </table></th>
         <th colspan="3" class="right td-border" style="position: sticky; top: 0; padding: 0;">
           <table>
             <tr>
@@ -83,13 +94,16 @@
       <td class="right td-border">{{l.cohort_covid_qty || 0}}</td>
       <td class="right td-border">{{l.cohort_usage_qty ||0 }}</td>
       <td class="right td-border">{{l.cohort_covid_qty - l.cohort_usage_qty || 0}}</td>
+      <td class="right td-border">{{l.cohort_icu_covid_qty || 0}}</td>
+      <td class="right td-border">{{l.cohort_icu_usage_qty ||0 }}</td>
+      <td class="right td-border">{{l.cohort_icu_covid_qty - l.cohort_icu_usage_qty || 0}}</td>
       <td class="right td-border">{{l.hospitel_covid_qty || 0}}</td>
       <td class="right td-border">{{l.hospitel_usage_qty ||0 }}</td>
       <td class="right">{{l.hospitel_covid_qty - l.hospitel_usage_qty || 0}}</td>
     </tr>
     <tfoot>
       <tr>
-        <td colspan="18" style="text-align:left">*เตียง = เตียงสำหรับผู้ป่วย covid</td>
+        <td colspan="20" style="text-align:left">*เตียง = เตียงสำหรับผู้ป่วย covid</td>
       </tr>
     </tfoot>
   </table>

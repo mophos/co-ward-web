@@ -88,12 +88,16 @@ export class ReportService {
     const url = `${this.apiUrl}/v1/report/medical-supplies`;
     return await this.http.get(url).toPromise();
   }
-  
+
   async getCovidCaseDc(query = '') {
     const url = `${this.apiUrl}/v1/staff/report/discharge-case?query=${query}`;
     return await this.http.get(url).toPromise();
   }
 
-  
+  async getCovidCaseDcExcel() {
+    const url = `${this.apiUrl}/v1/staff/report/discharge-case/excel`;
+    return await this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+
 
 }
