@@ -18,23 +18,8 @@ export class ReportBedComponent implements OnInit {
   list: any;
   zone: any = '';
   date: any;
-  aiir1: any;
-  aiir2: any;
-  aiir3: any;
-  modi1: any;
-  modi2: any;
-  modi3: any;
-  iso1: any;
-  iso2: any;
-  iso3: any;
-  coh1: any;
-  coh2: any;
-  coh3: any;
-  host1: any;
-  host2: any;
-  host3: any;
   sector: any;
-  @ViewChild('loading' ,{ static: true }) loading: any;
+  @ViewChild('loading', { static: true }) loading: any;
 
   public jwtHelper = new JwtHelperService();
   myDatePickerOptions: IMyOptions = {
@@ -78,6 +63,9 @@ export class ReportBedComponent implements OnInit {
             a.sum_modified_aiir_covid_qty = sumBy(a.hospitals, 'modified_aiir_covid_qty');
             a.sum_modified_aiir_usage_qty = sumBy(a.hospitals, 'modified_aiir_usage_qty');
             a.sum_modified_aiir_inven_qty = sumBy(a.hospitals, 'modified_aiir_covid_qty') - sumBy(a.hospitals, 'modified_aiir_usage_qty');
+            a.sum_cohort_icu_covid_qty = sumBy(a.hospitals, 'cohort_icu_covid_qty');
+            a.sum_cohort_icu_usage_qty = sumBy(a.hospitals, 'cohort_icu_usage_qty');
+            a.sum_cohort_icu_inven_qty = sumBy(a.hospitals, 'cohort_icu_covid_qty') - sumBy(a.hospitals, 'cohort_icu_usage_qty');
             a.sum_isolate_covid_qty = sumBy(a.hospitals, 'isolate_covid_qty');
             a.sum_isolate_usage_qty = sumBy(a.hospitals, 'isolate_usage_qty');
             a.sum_isolate_inven_qty = sumBy(a.hospitals, 'isolate_covid_qty') - sumBy(a.hospitals, 'isolate_usage_qty');

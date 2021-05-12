@@ -1,31 +1,36 @@
 <nav class="breadcrumb">
-    <span class="breadcrumb-item active">ผู้ป่วยทั้งหมด</span>
+  <span class="breadcrumb-item active">ผู้ป่วยทั้งหมด</span>
 </nav>
 <div class="clr-row">
-    <div class="clr-col-4">
-      <input class="clr-input width-fit" (keyup)="doEnter($event)" name="query" [(ngModel)]="query"
-        placeholder="Enter เพื่อค้นหา" />
-    </div>
-    <div class="clr-col-2">
-      <button class="btn btn-sm btn-primary" (click)="getList()">
-        <clr-icon shape="search" ></clr-icon> ค้นหา
-      </button>
-    </div>
+  <div class="clr-col-4">
+    <input class="clr-input width-fit" (keyup)="doEnter($event)" name="query" [(ngModel)]="query"
+      placeholder="Enter เพื่อค้นหา" />
   </div>
-  <div class="clr-row">
-    <div class="clr-col-12">
-      <clr-datagrid [clrDgLoading]="isLoadding" [style.height.px]="800">
-        <clr-dg-column>จังหวัด</clr-dg-column>
-        <clr-dg-column>โรงพยาบาล</clr-dg-column>
-        <clr-dg-column>HN</clr-dg-column>
-        <clr-dg-column *ngIf="showPersons">ชื่อ-นามสกุล</clr-dg-column>
-        <clr-dg-column>วันที่ Admit</clr-dg-column>
-        <clr-dg-column>สถานะ</clr-dg-column>
-        <clr-dg-column  class="text-center">วันที่ d/c</clr-dg-column>
-        <!-- <clr-dg-column></clr-dg-column> -->
-  
-        <clr-dg-row *clrDgItems="let l of list;let idx=index;" [clrDgItem]="l" >
-          <!-- <clr-dg-action-overflow>
+  <div class="clr-col-2">
+    <button class="btn btn-sm btn-primary" (click)="getList()">
+      <clr-icon shape="search"></clr-icon> ค้นหา
+    </button>
+  </div>
+  <div class="clr-col-6">
+    <button class="btn btn-sm btn-primary" style="text-align: right;" (click)="doExportExcel()">
+      <clr-icon shape="download"></clr-icon>export excel
+    </button>
+  </div>
+</div>
+<div class="clr-row">
+  <div class="clr-col-12">
+    <clr-datagrid [clrDgLoading]="isLoadding" [style.height.px]="800">
+      <clr-dg-column>จังหวัด</clr-dg-column>
+      <clr-dg-column>โรงพยาบาล</clr-dg-column>
+      <clr-dg-column>HN</clr-dg-column>
+      <clr-dg-column *ngIf="showPersons">ชื่อ-นามสกุล</clr-dg-column>
+      <clr-dg-column [clrDgField]="'date_admit'">วันที่ Admit</clr-dg-column>
+      <clr-dg-column>สถานะ</clr-dg-column>
+      <clr-dg-column [clrDgField]="'date_discharge'" class="text-center">วันที่ d/c</clr-dg-column>
+      <!-- <clr-dg-column></clr-dg-column> -->
+
+      <clr-dg-row *clrDgItems="let l of list;let idx=index;" [clrDgItem]="l">
+        <!-- <clr-dg-action-overflow>
             <button class="action-item" (click)="onClickOpenModalDateConfirm(l)"
               *ngIf="!l.confirm_date">บันทึกวันที่ตรวจพบ</button>
             <button class="action-item" (click)="onEditPerson(l)">แก้ไขข้อมูลส่วนตัว</button>
@@ -39,25 +44,25 @@
           <clr-dg-cell>{{l.date_admit | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
           <clr-dg-cell>{{l.status }}</clr-dg-cell>
           <clr-dg-cell class="text-center">{{l.date_discharge | dateTh:'DD/MM/YYYY' }}</clr-dg-cell>
-          <!-- <clr-dg-cell >
+        <!-- <clr-dg-cell >
             <button class="btn btn-sm btn-success" style="margin:0" (click)="onClickEdit(l)">
               <clr-icon shape="search"></clr-icon> 
             </button>
           </clr-dg-cell> -->
-        </clr-dg-row>
-  
-        <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
-        <clr-dg-footer>
-          <clr-dg-pagination #pagination [clrDgPageSize]="50">
-            <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
-            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
-            of {{pagination.totalItems}} รายการ
-          </clr-dg-pagination>
-        </clr-dg-footer>
-      </clr-datagrid>
-  
-    </div>
-    <!-- <div class="clr-col-7">
+      </clr-dg-row>
+
+      <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
+      <clr-dg-footer>
+        <clr-dg-pagination #pagination [clrDgPageSize]="50">
+          <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
+          {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+          of {{pagination.totalItems}} รายการ
+        </clr-dg-pagination>
+      </clr-dg-footer>
+    </clr-datagrid>
+
+  </div>
+  <!-- <div class="clr-col-7">
       <div class="card">
         <div class="card-header">
           <div class="clr-row">
@@ -122,4 +127,6 @@
         </div>
       </div>
     </div> -->
-  </div>
+</div>
+
+<app-loadding #loading></app-loadding>
