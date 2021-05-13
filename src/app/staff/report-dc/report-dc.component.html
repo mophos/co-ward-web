@@ -37,13 +37,13 @@
             <button class="action-item" (click)="onEdit(l)">แก้ไข</button>
             <button class="action-item" (click)="onDelete(l)">ลบ</button>
           </clr-dg-action-overflow> -->
-        <clr-dg-cell>{{l.province_name}}</clr-dg-cell>
-        <clr-dg-cell>{{l.hospname}}</clr-dg-cell>
-        <clr-dg-cell>{{l.hn}}</clr-dg-cell>
-        <clr-dg-cell *ngIf="showPersons">{{l.title_name}}{{l.first_name}} {{l.last_name}}</clr-dg-cell>
-        <clr-dg-cell>{{l.date_admit | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
-        <clr-dg-cell>{{l.status }}</clr-dg-cell>
-        <clr-dg-cell class="text-center">{{l.date_discharge | dateTh:'DD/MM/YYYY' }}</clr-dg-cell>
+          <clr-dg-cell>{{l.hosp_province}}</clr-dg-cell>
+          <clr-dg-cell>{{l.hospname}}</clr-dg-cell>
+          <clr-dg-cell>{{l.hn}}</clr-dg-cell>
+          <clr-dg-cell *ngIf="showPersons">{{l.title_name}}{{l.first_name}} {{l.last_name}}</clr-dg-cell>
+          <clr-dg-cell>{{l.date_admit | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
+          <clr-dg-cell>{{l.status }}</clr-dg-cell>
+          <clr-dg-cell class="text-center">{{l.date_discharge | dateTh:'DD/MM/YYYY' }}</clr-dg-cell>
         <!-- <clr-dg-cell >
             <button class="btn btn-sm btn-success" style="margin:0" (click)="onClickEdit(l)">
               <clr-icon shape="search"></clr-icon> 
