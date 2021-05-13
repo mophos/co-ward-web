@@ -114,6 +114,24 @@ export class ReportDischargeDailyComponent implements OnInit {
       this.loading.hide();
     }
   }
+  
+  async doExportExcelDms() {
+    this.loading.show();
+    try {
+      const date = this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day;
+      const rs: any = await this.service.dischargeDailyExportDms(date);
+      if (!rs) {
+        this.loading.hide();
+      } else {
+        this.downloadFile('รายงานผู้ป่วย DISCHARGE', 'xlsx', rs);
+        this.loading.hide();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.error();
+      this.loading.hide();
+    }
+  }
 
   async doExportExcelEntryDate() {
     this.loading.show();

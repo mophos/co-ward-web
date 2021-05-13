@@ -112,6 +112,11 @@ export class ReportService {
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 
+  async dischargeDailyExportDms(date) {
+    const url = `${this.apiUrl}/v1/report/discharge-daily/excel/dms?date=${date}`;
+    return await this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+
   async dischargeCaseEntryDate(date) {
     const url = `${this.apiUrl}/v1/report/discharge-entrydate?date=${date}`;
     return await this.http.get(url).toPromise();
@@ -173,8 +178,18 @@ export class ReportService {
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 
+  async admintConfirmCaseExportDms() {
+    const url = `${this.apiUrl}/v1/report/admit-confirm-case/export/dms`;
+    return await this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+
   async admintPuiCaseExport() {
     const url = `${this.apiUrl}/v1/report/admit-pui-case/export`;
+    return await this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+
+  async admintPuiCaseExportDms() {
+    const url = `${this.apiUrl}/v1/report/admit-pui-case/export/dms`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 }
