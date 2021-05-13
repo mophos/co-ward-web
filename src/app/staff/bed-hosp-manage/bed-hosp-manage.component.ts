@@ -68,6 +68,8 @@ export class BedHospManageComponent implements OnInit {
             } else if (item.bed_id === 4) {
               this.list[idx].cohort_usage_qty = item.usage_qty;
             } else if (item.bed_id === 7) {
+              this.list[idx].cohort_icu_usage_qty = item.usage_qty;
+            } else if (item.bed_id === 5) {
               this.list[idx].hospitel_usage_qty = item.usage_qty;
             }
           }
