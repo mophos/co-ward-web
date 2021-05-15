@@ -164,6 +164,25 @@ export class ReportAdmitConfirmCaseComponent implements OnInit {
     }
   }
 
+  async onClickExportDms() {
+    this.loading.show();
+    try {
+      // this.dateShow = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
+      const rs: any = await this.reportService.admintConfirmCaseExportDms();
+      if (!rs) {
+        this.loading.hide();
+      } else {
+        this.downloadFile('รายงานผู้ป่วย ADMIT Confirm (DMS)', 'xlsx', rs);
+        // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
+        this.loading.hide();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.error();
+      this.loading.hide();
+    }
+  }
+
   downloadFile(name, type, data: any) {
     try {
       const url = window.URL.createObjectURL(new Blob([data]));

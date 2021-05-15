@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportService } from '../report.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import * as moment from 'moment';
-import { sumBy } from 'lodash';
+import { sumBy, filter } from 'lodash';
 import { IMyOptions } from 'mydatepicker-th';
 import { AlertService } from 'src/app/help/alert.service';
 
@@ -55,6 +55,8 @@ export class ReportBedComponent implements OnInit {
       const rs: any = await this.reportService.getBed(date);
       if (rs.ok) {
         this.list = rs.rows;
+        console.log(this.list);
+
         for (const i of this.list) {
           for (const a of i.provinces) {
             a.sum_aiir_covid_qty = sumBy(a.hospitals, 'aiir_covid_qty');

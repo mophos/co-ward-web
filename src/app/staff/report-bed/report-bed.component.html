@@ -26,7 +26,7 @@
     *ngFor="let p of l.provinces">
     <thead>
       <tr>
-        <th colspan="18" style="text-align: left;">
+        <th colspan="21" style="text-align: left;">
           <h3>{{p.province_name}}</h3>
         </th>
       </tr>
@@ -90,9 +90,9 @@
         <td class="right td-border">{{h['modified_aiir_covid_qty'] || 0}}</td>
         <td class="right td-border">{{h['modified_aiir_usage_qty']||0 }}</td>
         <td class="right td-border">{{h['modified_aiir_covid_qty'] - h['modified_aiir_usage_qty'] || 0}}</td>
-        <td class="right td-border">{{h['cohort_icu_covid_qty:'] || 0}}</td>
-        <td class="right td-border">{{h['cohort_icu_usage_qty:']||0 }}</td>
-        <td class="right td-border">{{h['cohort_icu_covid_qty'] - h['cohort_icu_usage_qty:'] || 0}}</td>
+        <td class="right td-border">{{h['cohort_icu_covid_qty'] || 0}}</td>
+        <td class="right td-border">{{h['cohort_icu_usage_qty']||0 }}</td>
+        <td class="right td-border">{{h['cohort_icu_covid_qty'] - h['cohort_icu_usage_qty'] || 0}}</td>
         <td class="right td-border">{{h['isolate_covid_qty'] || 0}}</td>
         <td class="right td-border">{{h['isolate_usage_qty']||0 }}</td>
         <td class="right td-border">{{h['isolate_covid_qty'] - h['isolate_usage_qty'] || 0}}</td>
