@@ -170,7 +170,7 @@ export class CovidCaseNewComponent implements OnInit {
   }
 
   async ngOnInit() {
-    // this.loading.show();
+    this.loading.show();
 
     if (this.provinceType === 'IN') {
       this.hide = false;
@@ -180,9 +180,9 @@ export class CovidCaseNewComponent implements OnInit {
     await this.getBeds();
     await this.getMedicalSupplies();
     if (this.peopleCaseType === 'THAI') {
-      this.getInfo(this.cid, this.peopleCaseType);
+      await this.getInfo(this.cid, this.peopleCaseType);
     } else if (this.peopleCaseType === 'FOREIGN') {
-      this.getInfo(this.passport, this.peopleCaseType);
+      await this.getInfo(this.passport, this.peopleCaseType);
     }
     // if (this.data.cid) {
     //   await this.setData();
