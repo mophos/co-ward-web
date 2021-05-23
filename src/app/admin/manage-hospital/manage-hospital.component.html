@@ -92,7 +92,7 @@
       <div class="clr-col-8">
         <div class="clr-select-wrapper" style="width: 100%;">
           <select name="ministry" [(ngModel)]="ministryCode" class="clr-select" style="width: 100%;">
-            <option *ngFor="let l of listMinistry" [value]="l.id">{{l.name}}</option>
+            <option *ngFor="let l of listMinistry" [value]="l.code">{{l.name}}</option>
           </select>
         </div>
       </div>
@@ -104,7 +104,7 @@
       <div class="clr-col-8">
         <div class="clr-select-wrapper" style="width: 100%;">
           <select name="subMinistry" [(ngModel)]="subMinistryCode" class="clr-select" style="width: 100%;">
-            <option *ngFor="let l of listSubMinistry" [value]="l.id">{{l.name}}</option>
+            <option *ngFor="let l of listSubMinistry" [value]="l.code">{{l.name}}</option>
           </select>
         </div>
       </div>
