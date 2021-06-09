@@ -28,6 +28,11 @@ export class BasicAuthService {
     return await this.http.get(url).toPromise();
   }
 
+  async getCountry() {
+    const url = `${this.apiUrl}/v1/basic-auth/country`;
+    return await this.http.get(url).toPromise();
+  }
+
   async getGenericSet(type) {
     const url = `${this.apiUrl}/v1/basic-auth/generic-set?type=${type}`;
     return await this.http.get(url).toPromise();

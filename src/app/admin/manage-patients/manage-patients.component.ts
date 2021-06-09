@@ -38,6 +38,7 @@ export class ManagePatientsComponent implements OnInit {
   genericList: any = [];
   genericsList: any = [];
   medicalSupplieList: any = [];
+  listCountry: any = [];
   listMisDate: any = [];
   myDatePickerOptions: IMyOptions = {
     inline: false,
@@ -71,6 +72,7 @@ export class ManagePatientsComponent implements OnInit {
     await this.getGCS();
     await this.getBeds();
     await this.getMedicalSupplies();
+    await this.getCountry();
     this.disDate = {
       date: {
         year: moment().get('year'),
@@ -88,6 +90,8 @@ export class ManagePatientsComponent implements OnInit {
     this.details = null;
   }
   setTmpData(p) {
+    console.log(p);
+
     this.tmpPatient = cloneDeep({
       person_id: p.person_id,
       patient_id: p.patient_id,
@@ -109,7 +113,8 @@ export class ManagePatientsComponent implements OnInit {
       province_name: p.province_name,
       province_code: p.province_code,
       zipcode: p.zipcode,
-      telephone: p.telephone
+      telephone: p.telephone,
+      country_code: p.country_code
     });
     this.bDate = {
       date: {
@@ -168,6 +173,7 @@ export class ManagePatientsComponent implements OnInit {
           this.patient[idx].zipcode = this.tmpPatient.zipcode;
           this.patient[idx].road = this.tmpPatient.road;
           this.patient[idx].telephone = this.tmpPatient.telephone;
+          this.patient[idx].country_code = this.tmpPatient.country_code;
         }
 
         this.alertService.success();
@@ -585,6 +591,20 @@ export class ManagePatientsComponent implements OnInit {
       if (rs.ok) {
         this.medicalSupplieList = rs.rows;
         this.medicalSupplieList.push({ id: null, name: 'ไม่ใช้งาน' });
+      } else {
+        this.alertService.serverError();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.serverError();
+    }
+  }
+
+  async getCountry() {
+    try {
+      const rs: any = await this.basicAuthService.getCountry();
+      if (rs.ok) {
+        this.listCountry = rs.rows;
       } else {
         this.alertService.serverError();
       }
