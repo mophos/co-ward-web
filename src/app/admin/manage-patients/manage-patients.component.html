@@ -278,6 +278,14 @@
         <input class="clr-input width-fit" [(ngModel)]="tmpPatient.cid" name="cid" />
       </div>
       <div class="clr-col-3">
+        <label>ประเทศ: </label>
+      </div>
+      <div class="clr-col-9">
+        <select name="countryCode" [(ngModel)]="tmpPatient.country_code" class="clr-select" style="width: 100%;">
+          <option *ngFor="let l of listCountry" [value]="l.id">{{l.name}}</option>
+        </select>
+      </div>
+      <div class="clr-col-3">
         <label>HN: </label>
       </div>
       <div class="clr-col-9">
@@ -392,7 +400,7 @@
                   <option value="ADMIT">ADMIT</option>
                   <option value="DISCHARGE">DISCHARGE</option>
                   <option value="NEGATIVE">NEGATIVE</option>
-                  <option value="REFER" >REFER</option>
+                  <option value="REFER">REFER</option>
                   <option value="DEATH">DEATH</option>
                 </select>
               </div>
