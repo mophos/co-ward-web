@@ -32,6 +32,7 @@ import { FulfillDrugsComponent } from './fulfill-drugs/fulfill-drugs.component';
 import { ManageMinMaxDrugsComponent } from './manage-min-max-drugs/manage-min-max-drugs.component';
 import { ManageSystemsComponent } from './manage-systems/manage-systems.component';
 import { MyDatePickerTHModule } from 'mydatepicker-th';
+import { MyDatePickerModule } from '@tanjaae/mydatepicker';
 import { FulfillSurgicalMaskComponent } from './fulfill-surgical-mask/fulfill-surgical-mask.component';
 import { FulfillSurgicalMaskListComponent } from './fulfill-surgical-mask-list/fulfill-surgical-mask-list.component';
 import { FulfillSuppliesComponent } from './fulfill-supplies/fulfill-supplies.component';
@@ -80,7 +81,8 @@ import { ManagePatientDischargeComponent } from './manage-patient-discharge/mana
     ClarityModule,
     BrowserAnimationsModule,
     FormsModule,
-    MyDatePickerTHModule
+    MyDatePickerTHModule,
+    MyDatePickerModule
   ],
   providers: [
     AuthRestock,

@@ -1,24 +1,86 @@
-<app-autocomplete-hospital style="padding: 0px" #hospital (onchange)="onSelectHosp($event)"
-  (onselect)="onSelectHosp($event)">
-</app-autocomplete-hospital>
+<div class="clr-row">
+  <div class="clr-col-4">
+    <app-autocomplete-hospital style="padding: 0px" #hospital (onchange)="onSelectHosp($event)"
+      (onselect)="onSelectHosp($event)">
+    </app-autocomplete-hospital>
+  </div>
+  <div class="clr-col-2">
+    <my-date-picker-th name="date" [options]="myDatePickerOptions" [(ngModel)]="startDate" required>
+    </my-date-picker-th>
+  </div>
+  <div class="clr-col-2">
+    <my-date-picker-th name="date" [options]="myDatePickerOptions" [(ngModel)]="endDate" required>
+    </my-date-picker-th>
+  </div>
+  <div class="clr-col-1">
+    <button class="btn btn-primary" (click)="getListPatient()">ค้นหา</button>
+  </div>
+  <div class="clr-col-3" style="text-align: right;">
+    <button class="btn btn-success" [disabled]="!selected.length" (click)="openModal()">D/C</button>
+  </div>
+</div>
 
-<clr-datagrid [clrDgLoading]="!loading" [style.height.px]="800">
-  <clr-dg-column>รหัสสถานบริการ</clr-dg-column>
-  <clr-dg-column>ชื่อสถานบริการ</clr-dg-column>
 
-  <clr-dg-row *ngFor="let l of list;">
+<clr-datagrid [clrDgLoading]="loadings" [(clrDgSelected)]="selected" [clrDgRowSelection]="true">
+  <clr-dg-column></clr-dg-column>
+  <clr-dg-column [clrDgField]="'hn'">HN</clr-dg-column>
+  <clr-dg-column [clrDgField]="'an'"> AN</clr-dg-column>
+  <clr-dg-column [clrDgField]="'first_name'">ชื่อ</clr-dg-column>
+  <clr-dg-column [clrDgField]="'last_name'">นามสกุล</clr-dg-column>
+  <clr-dg-column >วันที่ Admit</clr-dg-column>
+  <clr-dg-column [clrDgField]="'days'"></clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let l of list" [clrDgItem]="l">
+    <clr-dg-cell>{{l.id}}</clr-dg-cell>
+    <clr-dg-cell>{{l.hn}}</clr-dg-cell>
+    <clr-dg-cell>{{l.an}}</clr-dg-cell>
     <clr-dg-cell>{{l.first_name}}</clr-dg-cell>
     <clr-dg-cell>{{l.last_name}}</clr-dg-cell>
+    <clr-dg-cell>{{l.date_admit | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
+    <clr-dg-cell>{{l.days}}</clr-dg-cell>
   </clr-dg-row>
   <clr-dg-footer>
-    <clr-dg-pagination #pagination>
+    <!-- <clr-dg-pagination #pagination>
       <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
       {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} จาก {{pagination.totalItems}} รายการ
-    </clr-dg-pagination>
+    </clr-dg-pagination> -->
   </clr-dg-footer>
 </clr-datagrid>
 
+<clr-modal [(clrModalOpen)]="modal" >
+  <!-- <h3 class="modal-title">I have a nice title</h3> -->
+  <div class="modal-body" style="height:300px">
+    <div class="clr-row">
+      <div class="clr-col-12">วันที่ D/C</div>
+      <div class="clr-col-12">
+        <my-date-picker name="date" [options]="myDatePickerOptions" [(ngModel)]="dateDC" required>
+        </my-date-picker>
+      </div>
+      <div class="clr-col-12">
+
+        <!-- <div class="clr-select-wrapper width-fit"> -->
+        <select name="hour" class="clr-select width-fit" [(ngModel)]="hour" name="hour" style="width: 30%;">
+          <option *ngFor="let i of hours" [value]="i">
+            <span *ngIf="i < 10">0</span>{{ i }}
+          </option>
+        </select>
+        <!-- </div> -->
+        <span style="padding-right: 1em;padding-left: 1em;"> : </span>
+        <select name="minute" class="clr-select width-fit" [(ngModel)]="minute" name="minute" style="width: 30%;">
+          <option *ngFor="let i of minutes" [value]="i">
+            <span *ngIf="i < 10">0</span>{{ i }}
+          </option>
+        </select>
+        <span style="padding-left: 1em;"> น. </span>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="modal = false">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="onClickSave()" [disabled]="!dateDC || !hour || !minute">Ok</button>
+  </div>
+</clr-modal>
 
 
 
-<app-loadding #loading></app-loadding>
+<!-- <app-loadding #loading></app-loadding> -->

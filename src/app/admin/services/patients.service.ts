@@ -49,9 +49,17 @@ export class PatientsService {
         return await this.http.delete(url).toPromise();
     }
 
-    async getPatientDischarge(hospitalId) {
-        const url = `${this.url}/v1/admin/patient-discharge?hospitalId=${hospitalId}`;
+    async getPatientDischarge(hospitalId, startDate = '', endDate = '') {
+        const url = `${this.url}/v1/admin/patient-discharge?hospitalId=${hospitalId}&startDate=${startDate}&endDate=${endDate}`;
         return await this.http.get(url).toPromise();
+    }
+
+    async adminSaveDC(data, dateDC) {
+        const url = `${this.url}/v1/admin/patient-discharge`;
+        return await this.http.post(url, {
+            data,
+            dateDC
+        }).toPromise();
     }
 
     async saveCovidCaseDetail(id, data) {
