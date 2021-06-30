@@ -1,3 +1,4 @@
+import { ReportBed2Component } from './report-bed2/report-bed2.component';
 import { ReportColabCheckComponent } from './report-colab-check/report-colab-check.component';
 import { ReportLabPositiveComponent } from './report-lab-positive/report-lab-positive.component';
 
@@ -113,7 +114,8 @@ const routes: Routes = [
       { path: 'report-local-quarantine', component: ReportLocalQuarantineComponent },
       { path: 'report-discharge-daily', component: ReportDischargeDailyComponent },
       { path: 'report-lab-positive', component: ReportLabPositiveComponent },
-      { path: 'report-lab-positive-colab', component: ReportColabCheckComponent }
+      { path: 'report-lab-positive-colab', component: ReportColabCheckComponent },
+      { path: 'report-bed-zone', component: ReportBed2Component }
     ]
   }
 ];

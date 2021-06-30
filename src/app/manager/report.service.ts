@@ -192,4 +192,12 @@ export class ReportService {
     const url = `${this.apiUrl}/v1/report/admit-pui-case/export/dms`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
+  async reportBedZone() {
+    const url = `${this.apiUrl}/v1/report/bed-zone`;
+    return await this.http.get(url).toPromise();
+  }
+  async reportBedProvince() {
+    const url = `${this.apiUrl}/v1/report/bed-province`;
+    return await this.http.get(url).toPromise();
+  }
 }
