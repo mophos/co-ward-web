@@ -8,6 +8,7 @@ import { findIndex } from 'lodash';
 import * as moment from 'moment';
 import { AutocompleteHospitalComponent } from '../../help/autocomplete-hospital/autocomplete-hospital.component';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ReportService } from '../report.service';
 @Component({
   selector: 'app-covid-case-status',
   templateUrl: './covid-case-status.component.html',
@@ -82,11 +83,14 @@ export class CovidCaseStatusComponent implements OnInit {
   dateCut: string;
   public jwtHelper = new JwtHelperService();
   hospitalType: any;
+  time: string;
   constructor(
     private covidCaseService: CovidCaseService,
     private alertService: AlertService,
     private basicService: BasicService,
-    private basicAuthService: BasicAuthService
+    private basicAuthService: BasicAuthService,
+    private service: ReportService,
+
   ) {
     const token = sessionStorage.getItem('token');
     const decodedToken = this.jwtHelper.decodeToken(token);
@@ -139,6 +143,7 @@ export class CovidCaseStatusComponent implements OnInit {
     try {
       const rs: any = await this.basicService.getDate();
       if (rs.ok) {
+        this.time = moment(rs.rows).format('HH:mm:ss');
         this.date = moment(rs.rows).format('YYYY-MM-DD');
       } else {
         this.alertService.error(rs.error);
@@ -548,4 +553,42 @@ export class CovidCaseStatusComponent implements OnInit {
     }
     this.loading.hide();
   }
+
+  async doExportExcel() {
+    this.loading.show();
+    try {
+      const rs: any = await this.service.getPatientCaseAdminExcel();
+      if (!rs) {
+        this.loading.hide();
+      } else {
+        this.downloadFile('สถานะผู้ป่วยรายวัน ' + moment(this.date).format('DDMMYYYY') + this.time, 'xlsx', rs);
+        this.loading.hide();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.error();
+      this.loading.hide();
+    }
+  }
+
+  downloadFile(name, type, data: any) {
+    try {
+      const url = window.URL.createObjectURL(new Blob([data]));
+      console.log(url);
+      const fileName = `${name}.${type}`;
+      // Debe haber una manera mejor de hacer esto...
+      const a = document.createElement('a');
+      document.body.appendChild(a);
+      a.setAttribute('style', 'display: none');
+      a.href = url;
+      a.download = fileName;
+      a.click();
+      window.URL.revokeObjectURL(url);
+      a.remove(); // remove the element
+    } catch (error) {
+      console.log(error);
+      this.alertService.error();
+    }
+  }
+
 }

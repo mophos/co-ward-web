@@ -1,11 +1,20 @@
 <nav class="breadcrumb">
   <span class="breadcrumb-item active">สถานะ Case COVID</span>
 </nav>
-
-<h3 style="float: left;">วันที่ {{date | dateTh:'DD/MM/YYYY'}} </h3>
-<h5>&nbsp;สถานะจะต้องบันทึกทุกวัน ก่อนเวลา 23:00น. และหลัง 00:00น.เป็นต้นไปเท่านั้น (เนื่องจาก 23:00-00:00น.
-  เป็นช่วงประมวลผลข้อมูลอาจทำให้ข้อมูลผิดพลาด)</h5>
-
+<div class="clr-row">
+  <div class="clr-col-10">
+    <h3 style="float: left;">วันที่ {{date | dateTh:'DD/MM/YYYY'}} </h3>
+    <h5>&nbsp;สถานะจะต้องบันทึกทุกวัน ก่อนเวลา 23:00น. และหลัง 00:00น.เป็นต้นไปเท่านั้น (เนื่องจาก 23:00-00:00น.
+      เป็นช่วงประมวลผลข้อมูลอาจทำให้ข้อมูลผิดพลาด)</h5>
+  </div>
+  <div class="clr-col-2">
+    <div style='margin-top: 24px;'>
+      <button class="btn btn-sm btn-primary" style="text-align: right;margin: 0;" (click)="doExportExcel()">
+        <clr-icon shape="download"></clr-icon> export excel
+      </button>
+    </div>
+  </div>
+</div>
 <!-- <div class="clr-row">
   <div class="clr-col-5">
     <table class="table">

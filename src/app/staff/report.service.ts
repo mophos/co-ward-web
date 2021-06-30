@@ -103,6 +103,10 @@ export class ReportService {
     const url = `${this.apiUrl}/v1/staff/report/discharge-case/excel`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
+  async getPatientCaseAdminExcel() {
+    const url = `${this.apiUrl}/v1/staff/report/present-case-status/excel`;
+    return await this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
 
 
 }
