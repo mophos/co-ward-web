@@ -1,0 +1,891 @@
+<h3>
+    จำนวนเตียง เขียว เหลือง แดง วันที่ {{list[0].timestamp | dateTh:'D MMMM YYYY'}}
+</h3>
+<table class="table">
+    <tr>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">เขต</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Modified AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Cohort ICU</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Isolate</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Cohort</td>
+        <td colspan="3" style="border:1px solid;background-color: #D9DEBB;">Hospitel</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมทั้งหมด</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">ใช้ไปแล้ว</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมคงเหลือ</td>
+    </tr>
+    <tr>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">คงเหลือ</td>
+    </tr>
+    <tr *ngFor="let i of list">
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.zone_code}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty-i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty-i.modified_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty-i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty-i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty-i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty-i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_usage_qty+i.modified_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{(i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty)-(i.aiir_usage_qty+i.modified_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty)| number:'1.0-0'}}</td>
+    </tr>
+</table>
+
+<br>
+<br>
+<h3>
+  เขต 1
+</h3>
+<table class="table">
+    <tr>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">จังหวัด</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Modified AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Cohort ICU</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Isolate</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Cohort</td>
+        <td colspan="3" style="border:1px solid;background-color: #D9DEBB;">Hospitel</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมทั้งหมด</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">ใช้ไปแล้ว</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมคงเหลือ</td>
+    </tr>
+    <tr>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">คงเหลือ</td>
+    </tr>
+    <tr *ngFor="let i of z1">
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.province_name}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty-i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty-i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty-i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty-i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty-i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty-i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{(i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty)-(i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty)| number:'1.0-0'}}</td>
+    </tr>
+</table>
+<br>
+<br>
+<h3>
+  เขต 2
+</h3>
+<table class="table">
+    <tr>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">จังหวัด</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Modified AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Cohort ICU</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Isolate</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Cohort</td>
+        <td colspan="3" style="border:1px solid;background-color: #D9DEBB;">Hospitel</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมทั้งหมด</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">ใช้ไปแล้ว</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมคงเหลือ</td>
+    </tr>
+    <tr>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">คงเหลือ</td>
+    </tr>
+    <tr *ngFor="let i of z2">
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.province_name}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty-i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty-i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty-i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty-i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty-i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty-i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{(i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty)-(i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty)| number:'1.0-0'}}</td>
+    </tr>
+</table>
+<br>
+<br>
+<h3>
+  เขต 3
+</h3>
+<table class="table">
+    <tr>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">จังหวัด</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Modified AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Cohort ICU</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Isolate</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Cohort</td>
+        <td colspan="3" style="border:1px solid;background-color: #D9DEBB;">Hospitel</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมทั้งหมด</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">ใช้ไปแล้ว</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมคงเหลือ</td>
+    </tr>
+    <tr>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">คงเหลือ</td>
+    </tr>
+    <tr *ngFor="let i of z3">
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.province_name}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty-i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty-i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty-i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty-i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty-i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty-i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{(i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty)-(i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty)| number:'1.0-0'}}</td>
+    </tr>
+</table>
+
+<br>
+<br>
+<h3>
+  เขต 4
+</h3>
+<table class="table">
+    <tr>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">จังหวัด</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Modified AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Cohort ICU</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Isolate</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Cohort</td>
+        <td colspan="3" style="border:1px solid;background-color: #D9DEBB;">Hospitel</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมทั้งหมด</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">ใช้ไปแล้ว</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมคงเหลือ</td>
+    </tr>
+    <tr>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">คงเหลือ</td>
+    </tr>
+    <tr *ngFor="let i of z4">
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.province_name}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty-i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty-i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty-i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty-i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty-i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty-i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{(i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty)-(i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty)| number:'1.0-0'}}</td>
+    </tr>
+</table>
+<br>
+<br>
+<h3>
+  เขต 5
+</h3>
+<table class="table">
+    <tr>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">จังหวัด</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Modified AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Cohort ICU</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Isolate</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Cohort</td>
+        <td colspan="3" style="border:1px solid;background-color: #D9DEBB;">Hospitel</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมทั้งหมด</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">ใช้ไปแล้ว</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมคงเหลือ</td>
+    </tr>
+    <tr>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">คงเหลือ</td>
+    </tr>
+    <tr *ngFor="let i of z5">
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.province_name}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty-i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty-i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty-i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty-i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty-i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty-i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{(i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty)-(i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty)| number:'1.0-0'}}</td>
+    </tr>
+</table>
+
+<br>
+<br>
+<h3>
+  เขต 6
+</h3>
+<table class="table">
+    <tr>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">จังหวัด</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Modified AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Cohort ICU</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Isolate</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Cohort</td>
+        <td colspan="3" style="border:1px solid;background-color: #D9DEBB;">Hospitel</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมทั้งหมด</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">ใช้ไปแล้ว</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมคงเหลือ</td>
+    </tr>
+    <tr>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">คงเหลือ</td>
+    </tr>
+    <tr *ngFor="let i of z6">
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.province_name}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty-i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty-i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty-i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty-i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty-i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty-i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{(i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty)-(i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty)| number:'1.0-0'}}</td>
+    </tr>
+</table>
+
+
+<br>
+<br>
+<h3>
+  เขต 7
+</h3>
+<table class="table">
+    <tr>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">จังหวัด</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Modified AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Cohort ICU</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Isolate</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Cohort</td>
+        <td colspan="3" style="border:1px solid;background-color: #D9DEBB;">Hospitel</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมทั้งหมด</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">ใช้ไปแล้ว</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมคงเหลือ</td>
+    </tr>
+    <tr>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">คงเหลือ</td>
+    </tr>
+    <tr *ngFor="let i of z7">
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.province_name}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty-i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty-i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty-i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty-i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty-i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty-i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{(i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty)-(i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty)| number:'1.0-0'}}</td>
+    </tr>
+</table>
+
+<br>
+<br>
+<h3>
+  เขต 8
+</h3>
+<table class="table">
+    <tr>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">จังหวัด</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Modified AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Cohort ICU</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Isolate</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Cohort</td>
+        <td colspan="3" style="border:1px solid;background-color: #D9DEBB;">Hospitel</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมทั้งหมด</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">ใช้ไปแล้ว</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมคงเหลือ</td>
+    </tr>
+    <tr>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">คงเหลือ</td>
+    </tr>
+    <tr *ngFor="let i of z8">
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.province_name}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty-i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty-i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty-i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty-i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty-i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty-i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{(i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty)-(i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty)| number:'1.0-0'}}</td>
+    </tr>
+</table>
+
+<br>
+<br>
+<h3>
+  เขต 9
+</h3>
+<table class="table">
+    <tr>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">จังหวัด</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Modified AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Cohort ICU</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Isolate</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Cohort</td>
+        <td colspan="3" style="border:1px solid;background-color: #D9DEBB;">Hospitel</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมทั้งหมด</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">ใช้ไปแล้ว</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมคงเหลือ</td>
+    </tr>
+    <tr>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">คงเหลือ</td>
+    </tr>
+    <tr *ngFor="let i of z9">
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.province_name}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty-i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty-i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty-i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty-i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty-i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty-i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{(i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty)-(i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty)| number:'1.0-0'}}</td>
+    </tr>
+</table>
+
+<br>
+<br>
+<h3>
+  เขต 10
+</h3>
+<table class="table">
+    <tr>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">จังหวัด</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Modified AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Cohort ICU</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Isolate</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Cohort</td>
+        <td colspan="3" style="border:1px solid;background-color: #D9DEBB;">Hospitel</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมทั้งหมด</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">ใช้ไปแล้ว</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมคงเหลือ</td>
+    </tr>
+    <tr>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">คงเหลือ</td>
+    </tr>
+    <tr *ngFor="let i of z10">
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.province_name}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty-i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty-i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty-i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty-i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty-i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty-i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{(i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty)-(i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty)| number:'1.0-0'}}</td>
+    </tr>
+</table>
+
+<br>
+<br>
+<h3>
+  เขต 11
+</h3>
+<table class="table">
+    <tr>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">จังหวัด</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Modified AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Cohort ICU</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Isolate</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Cohort</td>
+        <td colspan="3" style="border:1px solid;background-color: #D9DEBB;">Hospitel</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมทั้งหมด</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">ใช้ไปแล้ว</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมคงเหลือ</td>
+    </tr>
+    <tr>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">คงเหลือ</td>
+    </tr>
+    <tr *ngFor="let i of z11">
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.province_name}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty-i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty-i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty-i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty-i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty-i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty-i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{(i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty)-(i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty)| number:'1.0-0'}}</td>
+    </tr>
+</table>
+
+<br>
+<br>
+<h3>
+  เขต 12
+</h3>
+<table class="table">
+    <tr>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">จังหวัด</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Modified AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Cohort ICU</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Isolate</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Cohort</td>
+        <td colspan="3" style="border:1px solid;background-color: #D9DEBB;">Hospitel</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมทั้งหมด</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">ใช้ไปแล้ว</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมคงเหลือ</td>
+    </tr>
+    <tr>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">คงเหลือ</td>
+    </tr>
+    <tr *ngFor="let i of z12">
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.province_name}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty-i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty-i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty-i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty-i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty-i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty-i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{(i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty)-(i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty)| number:'1.0-0'}}</td>
+    </tr>
+</table>
+
+<br>
+<br>
+<h3>
+  เขต 13
+</h3>
+<table class="table">
+    <tr>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">จังหวัด</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Modified AIIR</td>
+        <td colspan="3" style="border:1px solid;background-color: #FAAE9F;">Cohort ICU</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Isolate</td>
+        <td colspan="3" style="border:1px solid;background-color: #F9EEB6;">Cohort</td>
+        <td colspan="3" style="border:1px solid;background-color: #D9DEBB;">Hospitel</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมทั้งหมด</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">ใช้ไปแล้ว</td>
+        <td rowspan="2" style="border:1px solid;vertical-align: middle;background-color: #E1EBF8;">รวมคงเหลือ</td>
+    </tr>
+    <tr>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #FAAE9F;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #F9EEB6;">คงเหลือ</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ทั้งหมด</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">ใช้ไปแล้ว</td>
+        <td style="padding:.2rem .5rem;border:1px solid;background-color: #D9DEBB;">คงเหลือ</td>
+    </tr>
+    <tr *ngFor="let i of z13">
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.province_name}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.aiir_covid_qty-i.aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.modified_aiir_covid_qty-i.modified_aiir_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #FAAE9F;">{{i.cohort_icu_covid_qty-i.cohort_icu_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.isolate_covid_qty-i.isolate_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #F9EEB6;">{{i.cohort_covid_qty-i.cohort_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #D9DEBB;">{{i.hospitel_covid_qty-i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty| number:'1.0-0'}}</td>
+        <td style="padding:.2rem .5rem;border:1px solid black;background-color: #E1EBF8;">{{(i.aiir_covid_qty+i.modified_aiir_covid_qty+i.cohort_icu_covid_qty+i.isolate_covid_qty+i.cohort_covid_qty+i.hospitel_covid_qty)-(i.aiir_usage_qty+i.modified_aiir_usage_qty+i.cohort_icu_usage_qty+i.isolate_usage_qty+i.cohort_usage_qty+i.hospitel_usage_qty)| number:'1.0-0'}}</td>
+    </tr>
+</table>
