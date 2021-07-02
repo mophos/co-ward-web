@@ -573,7 +573,7 @@ export class ManagePatientsComponent implements OnInit {
 
   async getBeds() {
     try {
-      const rs: any = await this.basicAuthService.getBeds();
+      const rs: any = await this.basicAuthService.getBedAdmin();
       if (rs.ok) {
         this.bedList = rs.rows;
       } else {

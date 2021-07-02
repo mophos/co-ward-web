@@ -6,6 +6,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import thaiIdCard from 'thai-id-card';
 import { IMyOptions } from 'mydatepicker-th';
 import * as moment from 'moment';
+import { ReportService } from '../report.service';
 @Component({
   selector: 'app-covid-case',
   templateUrl: './covid-case.component.html',
@@ -40,10 +41,13 @@ export class CovidCaseComponent implements OnInit {
   isLoadding = false;
   query = '';
   @ViewChild('modalHPVC', { static: true }) modalHPVC: HpvcComponent;
+  @ViewChild('loading', { static: true }) loading: any;
   constructor(
     private covidCaseService: CovidCaseService,
     private alertService: AlertService,
-    private router: Router
+    private router: Router,
+    private service: ReportService,
+
   ) { }
 
   ngOnInit() {
@@ -191,4 +195,41 @@ export class CovidCaseComponent implements OnInit {
 
     }
   }
+  async doExportExcel() {
+    this.loading.show();
+    try {
+      const rs: any = await this.service.getAllCaseExcel();
+      if (!rs) {
+        this.loading.hide();
+      } else {
+        this.downloadFile('ผู้ป่วยทั้งหมด', 'xlsx', rs);
+        this.loading.hide();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.error();
+      this.loading.hide();
+    }
+  }
+
+  downloadFile(name, type, data: any) {
+    try {
+      const url = window.URL.createObjectURL(new Blob([data]));
+      console.log(url);
+      const fileName = `${name}.${type}`;
+      // Debe haber una manera mejor de hacer esto...
+      const a = document.createElement('a');
+      document.body.appendChild(a);
+      a.setAttribute('style', 'display: none');
+      a.href = url;
+      a.download = fileName;
+      a.click();
+      window.URL.revokeObjectURL(url);
+      a.remove(); // remove the element
+    } catch (error) {
+      console.log(error);
+      this.alertService.error();
+    }
+  }
+
 }
