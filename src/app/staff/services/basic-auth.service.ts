@@ -14,6 +14,10 @@ export class BasicAuthService {
   }
 
   async getBeds() {
+    const url = `${this.apiUrl}/v1/basic-auth/beds`;
+    return await this.http.get(url).toPromise();
+  }
+  async getBedAdmin() {
     const url = `${this.apiUrl}/v1/basic-auth/beds-admin`;
     return await this.http.get(url).toPromise();
   }
