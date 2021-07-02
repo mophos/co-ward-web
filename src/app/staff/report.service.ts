@@ -107,6 +107,10 @@ export class ReportService {
     const url = `${this.apiUrl}/v1/staff/report/present-case-status/excel`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
+  async getAllCaseExcel() {
+    const url = `${this.apiUrl}/v1/staff/report/all-case-hosp/excel`;
+    return await this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
 
 
 }

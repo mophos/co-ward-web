@@ -38,6 +38,11 @@
       <clr-icon shape="search" (click)="getList()"></clr-icon> ค้นหา
     </button>
   </div>
+  <div class="clr-offset-4 clr-col-2" style="text-align: right;">
+    <button class="btn btn-sm btn-primary" style="text-align: right;" (click)="doExportExcel()">
+      <clr-icon shape="download"></clr-icon> export excel
+    </button>
+  </div>
 </div>
 <div class="clr-row">
   <div class="clr-col-5">
@@ -46,7 +51,7 @@
       <clr-dg-column>ชื่อ-นามสกุล</clr-dg-column>
       <clr-dg-column>วันที่ Admit</clr-dg-column>
       <clr-dg-column>สถานะ</clr-dg-column>
-      <clr-dg-column  class="text-center">วันที่ d/c</clr-dg-column>
+      <clr-dg-column class="text-center">วันที่ d/c</clr-dg-column>
       <!-- <clr-dg-column></clr-dg-column> -->
 
       <clr-dg-row *clrDgItems="let l of list;let idx=index;" [clrDgItem]="l" (click)="getData(l)">
@@ -110,11 +115,12 @@
             </div>
           </div>
           <br>
-          
+
           <div class="clr-row">
             <div class="clr-col-6">ประวัติการรักษา</div>
             <div class="clr-col-6" style="text-align: right;">
-              <button class="btn btn-danger btn-sm" (click)="onClickHPVC(data)" *ngIf="data.covid_case_id">บันทึกแพ้ยา</button>
+              <button class="btn btn-danger btn-sm" (click)="onClickHPVC(data)"
+                *ngIf="data.covid_case_id">บันทึกแพ้ยา</button>
             </div>
           </div>
           <clr-datagrid [clrDgLoading]="isLoadding">
@@ -199,4 +205,5 @@
   </div>
 </clr-modal>
 
-<app-hpvc #modalHPVC ></app-hpvc>
+<app-hpvc #modalHPVC></app-hpvc>
+<app-loadding #loading></app-loadding>
