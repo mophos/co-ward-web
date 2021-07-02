@@ -70,6 +70,8 @@ export class ManageHospitalComponent implements OnInit {
   async getTypeList() {
     this.loading = true;
     const rs: any = await this.hospitalService.getTypeList();
+    console.log(rs);
+
     if (rs.ok) {
       this.listType = rs.rows;
     } else {
@@ -231,6 +233,7 @@ export class ManageHospitalComponent implements OnInit {
       const idx = findIndex(this.listType, { id: +this.hospTypeId });
       const data = {
         hosptype_id: this.hospTypeId,
+        hospital_type: this.hospTypeId === 19 ? 'HOSPITEL' : 'HOSPITAL',
         hosptype_code: this.listType[idx].code,
         tambon_code: this.tambonCode || null,
         ministry_code: this.ministryCode || null,
