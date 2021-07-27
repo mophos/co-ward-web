@@ -26,7 +26,7 @@
     *ngFor="let p of l.provinces">
     <thead>
       <tr>
-        <th colspan="21" style="text-align: left;">
+        <th colspan="27" style="text-align: left;">
           <h3>{{p.province_name}}</h3>
         </th>
       </tr>
@@ -39,9 +39,17 @@
         <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Isolate</th>
         <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Cohort</th>
         <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Hospitel</th>
+        <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Home Isolation</th>
+        <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Community Isolation</th>
         <th rowspan="3" class="right" style="position: sticky; top: 0;">สังกัด</th>
       </tr>
       <tr>
+        <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+        <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+        <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
         <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
         <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
         <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
@@ -102,6 +110,12 @@
         <td class="right td-border">{{h['hospitel_covid_qty'] || 0}}</td>
         <td class="right td-border">{{h['hospitel_usage_qty']||0 }}</td>
         <td class="right">{{h['hospitel_covid_qty'] - h['hospitel_usage_qty'] || 0}}</td>
+        <td class="right td-border">{{h['home_isolation_covid_qty'] || 0}}</td>
+        <td class="right td-border">{{h['home_isolation_usage_qty']||0 }}</td>
+        <td class="right">{{h['home_isolation_covid_qty'] - h['home_isolation_usage_qty'] || 0}}</td>
+        <td class="right td-border">{{h['community_isolation_covid_qty'] || 0}}</td>
+        <td class="right td-border">{{h['community_isolation_usage_qty']||0 }}</td>
+        <td class="right">{{h['community_isolation_covid_qty'] - h['community_isolation_usage_qty'] || 0}}</td>
         <td class="left td-border">{{h.sub_ministry_name}}</td>
       </tr>
 
@@ -126,6 +140,12 @@
         <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_hospitel_covid_qty}}</th>
         <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_hospitel_usage_qty}}</th>
         <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_hospitel_inven_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_home_isolation_covid_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_home_isolation_usage_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_home_isolation_inven_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_community_isolation_covid_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_community_isolation_usage_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_community_isolation_inven_qty}}</th>
         <th class=" td-border" style="position: sticky; top: 0;"></th>
       </tr>
     </tbody>

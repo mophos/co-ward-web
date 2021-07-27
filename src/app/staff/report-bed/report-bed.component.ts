@@ -77,6 +77,12 @@ export class ReportBedComponent implements OnInit {
             a.sum_hospitel_covid_qty = sumBy(a.hospitals, 'hospitel_covid_qty');
             a.sum_hospitel_usage_qty = sumBy(a.hospitals, 'hospitel_usage_qty');
             a.sum_hospitel_inven_qty = sumBy(a.hospitals, 'hospitel_covid_qty') - sumBy(a.hospitals, 'hospitel_usage_qty');
+            a.sum_home_isolation_covid_qty = sumBy(a.hospitals, 'home_isolation_covid_qty');
+            a.sum_home_isolation_usage_qty = sumBy(a.hospitals, 'home_isolation_usage_qty');
+            a.sum_home_isolation_inven_qty = sumBy(a.hospitals, 'home_isolation_covid_qty') - sumBy(a.hospitals, 'home_isolation_usage_qty');
+            a.sum_community_isolation_covid_qty = sumBy(a.hospitals, 'community_isolation_covid_qty');
+            a.sum_community_isolation_usage_qty = sumBy(a.hospitals, 'community_isolation_usage_qty');
+            a.sum_community_isolation_inven_qty = sumBy(a.hospitals, 'community_isolation_covid_qty') - sumBy(a.hospitals, 'community_isolation_usage_qty');
           }
         }
         this.loading.hide();
