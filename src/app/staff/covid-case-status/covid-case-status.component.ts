@@ -103,10 +103,10 @@ export class CovidCaseStatusComponent implements OnInit {
   async ngOnInit() {
     await this.getDate();
     await this.getDateCut();
-    await this.getList();
     await this.getGCS();
     await this.getBeds();
     await this.getMedicalSupplies();
+    await this.getList();
     // await this.getGCSSum();
     // await this.getBedSum();
     // await this.getMedicalSuppliesSum();
