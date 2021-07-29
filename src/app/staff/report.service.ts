@@ -26,6 +26,11 @@ export class ReportService {
     return await this.http.get(url).toPromise();
   }
 
+  async admitPuiCaseExport() {
+    const url = `${this.apiUrl}/v1/staff/report/admit-pui-case/export`;
+    return await this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+
   async getAdmitPatients(date, query) {
     const url = `${this.apiUrl}/v1/report/get-gcs-admit?date=${date}&query=${query}`;
     return await this.http.get(url).toPromise();
