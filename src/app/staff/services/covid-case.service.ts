@@ -23,8 +23,8 @@ export class CovidCaseService {
     return await this.http.get(url).toPromise();
   }
 
-  async getCovidCasePresent(query) {
-    const url = `${this.apiUrl}/v1/staff/covid-case/present?query=${query}`;
+  async getCovidCasePresent(query, gcsSearchId, bedSearchId) {
+    const url = `${this.apiUrl}/v1/staff/covid-case/present?query=${query}&gcsSearchId=${gcsSearchId}&bedSearchId=${bedSearchId}`;
     return await this.http.get(url).toPromise();
   }
 
@@ -170,8 +170,8 @@ export class CovidCaseService {
     return await this.http.get(url).toPromise();
   }
 
-  async updateAllCase() {
-    const url = `${this.apiUrl}/v1/staff/covid-case/update/all-case`;
+  async updateAllCase( gcsSearchId, bedSearchId) {
+    const url = `${this.apiUrl}/v1/staff/covid-case/update/all-case?gcsSearchId=${gcsSearchId}&bedSearchId=${bedSearchId}`;
     return await this.http.get(url).toPromise();
   }
 }

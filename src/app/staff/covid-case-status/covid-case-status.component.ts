@@ -84,6 +84,9 @@ export class CovidCaseStatusComponent implements OnInit {
   public jwtHelper = new JwtHelperService();
   hospitalType: any;
   time: string;
+  bedSearchId: any = null;
+  gcsSearchId: any = null;
+
   constructor(
     private covidCaseService: CovidCaseService,
     private alertService: AlertService,
@@ -123,7 +126,7 @@ export class CovidCaseStatusComponent implements OnInit {
   async getList() {
     try {
       this.loading.show();
-      const rs: any = await this.covidCaseService.getCovidCasePresent(this.query);
+      const rs: any = await this.covidCaseService.getCovidCasePresent(this.query, this.gcsSearchId, this.bedSearchId);
       if (rs.ok) {
         for (const i of rs.rows) {
           i.old_gcs_id = i.gcs_id;
@@ -539,7 +542,7 @@ export class CovidCaseStatusComponent implements OnInit {
     const confirm = await this.alertService.confirm('ระบบจะทำการบันทึกอาการคนไข้ทั้งหมด ที่ยังไม่ได้บันทึกอาการ โดยตั้งเป็นอาการเดิมทั้งหมด');
     if (confirm) {
       this.loading.show();
-      const rs: any = await this.covidCaseService.updateAllCase();
+      const rs: any = await this.covidCaseService.updateAllCase(this.gcsSearchId, this.bedSearchId);
       if (rs.ok) {
         console.log(rs.rows);
         this.getList();

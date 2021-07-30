@@ -57,12 +57,31 @@
         <input class="clr-input width-fit" (keyup)="doEnter($event)" name="query" [(ngModel)]="query"
           placeholder="ระบุ HN,ชื่อ,นามสกุล เพื่อค้นหา" />
       </div>
-      <div class="clr-col-2">
+     
+      <div class="clr-col-2" style="text-align: right;">
+        ความรุนแรง
+        <div class="clr-select-wrapper" style="width: 60%;">
+          <select name="gcsSearc" [(ngModel)]="gcsSearchId" class="clr-select" style="width: 100%;">
+            <option value="null">ทั้งหมด</option>
+            <option *ngFor="let l of gcs" [value]="l.id">{{l.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="clr-col-2" style="text-align: left;">
+        เตียง
+        <div class="clr-select-wrapper" style="width: 80%;">
+          <select name="bedSearc" [(ngModel)]="bedSearchId" class="clr-select" style="width: 100%;">
+            <option value="null">ทั้งหมด</option>
+            <option *ngFor="let l of beds" [value]="l.id">{{l.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="clr-col-1">
         <button class="btn btn-sm btn-primary" (click)="onClickSearch()">
           <clr-icon shape="search"></clr-icon>
         </button>
       </div>
-      <div class="clr-col-7" style="text-align: right;">
+      <div class="clr-col-4" style="text-align: right;">
         <button class="btn btn-sm btn-success" (click)="onClickSaveAll()">บันทึกทั้งหมด</button>
       </div>
     </div>
