@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getDate();
-    this.getList();
+    // this.getList();
     this.getBed();
     this.getGCSSum();
     this.getBedSum();
