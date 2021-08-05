@@ -1,112 +1,148 @@
 <nav class="breadcrumb">
-  <!-- <a class="breadcrumb-item" href="javascript://" routerLink="/staff/requisition-supplies">การใช้เวชภัณฑ์</a> -->
-  <span class="breadcrumb-item active">จัดการเตียงให้โรงพยาบาล</span>
+    <!-- <a class="breadcrumb-item" href="javascript://" routerLink="/staff/requisition-supplies">การใช้เวชภัณฑ์</a> -->
+    <span class="breadcrumb-item active">จัดการเตียงให้โรงพยาบาล</span>
 </nav>
 <div [style.height.%]="65">
-  <table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
+    <table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
 
-    <thead>
-      <tr>
-        <th  class="right td-border" style="position: sticky; top: 0; ">โรงพยาบาล</th>
-        <th  class="right td-border" style="position: sticky; top: 0; ">วันที่ตั้งค่าเตียงล่าสุด</th>
-        <th colspan="3" style="position: sticky; top: 0; padding: 0;">
-          <table>
+        <thead>
             <tr>
-              <th colspan="3" class="right td-border" >AIIR</th>
+                <th class="right td-border" style="position: sticky; top: 0; ">โรงพยาบาล</th>
+                <th class="right td-border" style="position: sticky; top: 0; ">วันที่ตั้งค่าเตียงล่าสุด</th>
+                <th colspan="3" style="position: sticky; top: 0; padding: 0;">
+                    <table>
+                        <tr>
+                            <th colspan="3" class="right td-border">AIIR</th>
+                        </tr>
+                        <tr>
+                            <th class="right td-border">ทั้งหมด</th>
+                            <th class="right td-border">ใช้ไปแล้ว</th>
+                            <th class="right td-border">คงเหลือ</th>
+                        </tr>
+                    </table>
+                </th>
+                <th colspan="3" style="position: sticky; top: 0; padding: 0;">
+                    <table>
+                        <tr>
+                            <th colspan="3" class="right td-border">Modified AIIR</th>
+                        </tr>
+                        <tr>
+                            <th class="right td-border">ทั้งหมด</th>
+                            <th class="right td-border">ใช้ไปแล้ว</th>
+                            <th class="right td-border">คงเหลือ</th>
+                        </tr>
+                    </table>
+                </th>
+                <th colspan="3" class="right td-border" style="position: sticky; top: 0; padding: 0;">
+                    <table>
+                        <tr>
+                            <th colspan="3" class="right td-border">Isolate</th>
+                        </tr>
+                        <tr>
+                            <th class="right td-border">ทั้งหมด</th>
+                            <th class="right td-border">ใช้ไปแล้ว</th>
+                            <th class="right td-border">คงเหลือ</th>
+                        </tr>
+                    </table>
+                </th>
+                <th colspan="3" class="right td-border" style="position: sticky; top: 0; padding: 0;">
+                    <table>
+                        <tr>
+                            <th colspan="3" class="right td-border">Cohort</th>
+                        </tr>
+                        <tr>
+                            <th class="right td-border">ทั้งหมด</th>
+                            <th class="right td-border">ใช้ไปแล้ว</th>
+                            <th class="right td-border">คงเหลือ</th>
+                        </tr>
+                    </table>
+                </th>
+                <th colspan="3" class="right td-border" style="position: sticky; top: 0; padding: 0;">
+                    <table>
+                        <tr>
+                            <th colspan="3" class="right td-border">Cohort ICU</th>
+                        </tr>
+                        <tr>
+                            <th class="right td-border">ทั้งหมด</th>
+                            <th class="right td-border">ใช้ไปแล้ว</th>
+                            <th class="right td-border">คงเหลือ</th>
+                        </tr>
+                    </table>
+                </th>
+                <th colspan="3" class="right td-border" style="position: sticky; top: 0; padding: 0;">
+                    <table>
+                        <tr>
+                            <th colspan="3" class="right td-border">Hospitel</th>
+                        </tr>
+                        <tr>
+                            <th class="right td-border">ทั้งหมด</th>
+                            <th class="right td-border">ใช้ไปแล้ว</th>
+                            <th class="right td-border">คงเหลือ</th>
+                        </tr>
+                    </table>
+                </th>
+                <th colspan="3" class="right td-border" style="position: sticky; top: 0; padding: 0;">
+                    <table>
+                        <tr>
+                            <th colspan="3" class="right td-border">Home Isolation</th>
+                        </tr>
+                        <tr>
+                            <th class="right td-border">ทั้งหมด</th>
+                            <th class="right td-border">ใช้ไปแล้ว</th>
+                            <th class="right td-border">คงเหลือ</th>
+                        </tr>
+                    </table>
+                </th>
+                <th colspan="3" class="right td-border" style="position: sticky; top: 0; padding: 0;">
+                    <table>
+                        <tr>
+                            <th colspan="3" class="right td-border">Community Isolation</th>
+                        </tr>
+                        <tr>
+                            <th class="right td-border">ทั้งหมด</th>
+                            <th class="right td-border">ใช้ไปแล้ว</th>
+                            <th class="right td-border">คงเหลือ</th>
+                        </tr>
+                    </table>
+                </th>
+
             </tr>
+
+        </thead>
+        <tr *ngFor="let l of list; let idx=index;" class="pointer" [ngClass]="{isWarning: idx % 2 === 0}" (click)="editBed(l);">
+            <td class="left td-border">{{l.hospname}}</td>
+            <td class="left td-border">{{l.entry_date | dateTh:'DD/MM/YYYY'}}</td>
+            <td class="right td-border">{{l.aiir_covid_qty || 0}}</td>
+            <td class="right td-border">{{l.aiir_usage_qty || 0 }}</td>
+            <td class="right td-border">{{l.aiir_covid_qty - l.aiir_usage_qty || 0}}</td>
+            <td class="right td-border">{{l.modified_aiir_covid_qty || 0}}</td>
+            <td class="right td-border">{{l.modified_aiir_usage_qty ||0 }}</td>
+            <td class="right td-border">{{l.modified_aiir_covid_qty - l.modified_aiir_usage_qty || 0}}</td>
+            <td class="right td-border">{{l.isolate_covid_qty || 0}}</td>
+            <td class="right td-border">{{l.isolate_usage_qty ||0 }}</td>
+            <td class="right td-border">{{l.isolate_covid_qty - l.isolate_usage_qty || 0}}</td>
+            <td class="right td-border">{{l.cohort_covid_qty || 0}}</td>
+            <td class="right td-border">{{l.cohort_usage_qty ||0 }}</td>
+            <td class="right td-border">{{l.cohort_covid_qty - l.cohort_usage_qty || 0}}</td>
+            <td class="right td-border">{{l.cohort_icu_covid_qty || 0}}</td>
+            <td class="right td-border">{{l.cohort_icu_usage_qty ||0 }}</td>
+            <td class="right td-border">{{l.cohort_icu_covid_qty - l.cohort_icu_usage_qty || 0}}</td>
+            <td class="right td-border">{{l.hospitel_covid_qty || 0}}</td>
+            <td class="right td-border">{{l.hospitel_usage_qty ||0 }}</td>
+            <td class="right td-border">{{l.hospitel_covid_qty - l.hospitel_usage_qty || 0}}</td>
+            <td class="right td-border">{{l.home_isolation_covid_qty || 0}}</td>
+            <td class="right td-border">{{l.home_isolation_usage_qty ||0 }}</td>
+            <td class="right td-border">{{l.home_isolation_covid_qty - l.home_isolation_usage_qty || 0}}</td>
+            <td class="right td-border">{{l.community_isolation_covid_qty || 0}}</td>
+            <td class="right td-border">{{l.community_isolation_usage_qty ||0 }}</td>
+            <td class="right">{{l.community_isolation_covid_qty - l.community_isolation_usage_qty || 0}}</td>
+        </tr>
+        <tfoot>
             <tr>
-              <th class="right td-border" >ทั้งหมด</th>
-              <th class="right td-border" >ใช้ไปแล้ว</th>
-              <th class="right td-border" >คงเหลือ</th>
+                <td colspan="20" style="text-align:left">*เตียง = เตียงสำหรับผู้ป่วย covid</td>
             </tr>
-          </table></th>
-        <th colspan="3" style="position: sticky; top: 0; padding: 0;">
-          <table>
-            <tr>
-              <th colspan="3" class="right td-border" >Modified AIIR</th>
-            </tr>
-            <tr>
-              <th class="right td-border" >ทั้งหมด</th>
-              <th class="right td-border" >ใช้ไปแล้ว</th>
-              <th class="right td-border" >คงเหลือ</th>
-            </tr>
-          </table></th>
-        <th colspan="3" class="right td-border" style="position: sticky; top: 0; padding: 0;">
-          <table>
-            <tr>
-              <th colspan="3" class="right td-border" >Isolate</th>
-            </tr>
-            <tr>
-              <th class="right td-border" >ทั้งหมด</th>
-              <th class="right td-border" >ใช้ไปแล้ว</th>
-              <th class="right td-border" >คงเหลือ</th>
-            </tr>
-          </table></th>
-        <th colspan="3" class="right td-border" style="position: sticky; top: 0; padding: 0;">
-          <table>
-            <tr>
-              <th colspan="3" class="right td-border" >Cohort</th>
-            </tr>
-            <tr>
-              <th class="right td-border" >ทั้งหมด</th>
-              <th class="right td-border" >ใช้ไปแล้ว</th>
-              <th class="right td-border" >คงเหลือ</th>
-            </tr>
-          </table></th>
-          <th colspan="3" class="right td-border" style="position: sticky; top: 0; padding: 0;">
-            <table>
-              <tr>
-                <th colspan="3" class="right td-border" >Cohort ICU</th>
-              </tr>
-              <tr>
-                <th class="right td-border" >ทั้งหมด</th>
-                <th class="right td-border" >ใช้ไปแล้ว</th>
-                <th class="right td-border" >คงเหลือ</th>
-              </tr>
-            </table></th>
-        <th colspan="3" class="right td-border" style="position: sticky; top: 0; padding: 0;">
-          <table>
-            <tr>
-              <th colspan="3" class="right td-border" >Hospitel</th>
-            </tr>
-            <tr>
-              <th class="right td-border" >ทั้งหมด</th>
-              <th class="right td-border" >ใช้ไปแล้ว</th>
-              <th class="right td-border" >คงเหลือ</th>
-            </tr>
-          </table></th>
-          
-      </tr>
-      
-    </thead>
-    <tr *ngFor="let l of list; let idx=index;" class="pointer" [ngClass]="{isWarning: idx % 2 === 0}" (click)="editBed(l);">
-      <td class="left td-border">{{l.hospname}}</td>
-      <td class="left td-border">{{l.entry_date | dateTh:'DD/MM/YYYY'}}</td>
-      <td class="right td-border">{{l.aiir_covid_qty || 0}}</td>
-      <td class="right td-border">{{l.aiir_usage_qty || 0 }}</td>
-      <td class="right td-border">{{l.aiir_covid_qty - l.aiir_usage_qty || 0}}</td>
-      <td class="right td-border">{{l.modified_aiir_covid_qty || 0}}</td>
-      <td class="right td-border">{{l.modified_aiir_usage_qty ||0 }}</td>
-      <td class="right td-border">{{l.modified_aiir_covid_qty - l.modified_aiir_usage_qty || 0}}</td>
-      <td class="right td-border">{{l.isolate_covid_qty || 0}}</td>
-      <td class="right td-border">{{l.isolate_usage_qty ||0 }}</td>
-      <td class="right td-border">{{l.isolate_covid_qty - l.isolate_usage_qty || 0}}</td>
-      <td class="right td-border">{{l.cohort_covid_qty || 0}}</td>
-      <td class="right td-border">{{l.cohort_usage_qty ||0 }}</td>
-      <td class="right td-border">{{l.cohort_covid_qty - l.cohort_usage_qty || 0}}</td>
-      <td class="right td-border">{{l.cohort_icu_covid_qty || 0}}</td>
-      <td class="right td-border">{{l.cohort_icu_usage_qty ||0 }}</td>
-      <td class="right td-border">{{l.cohort_icu_covid_qty - l.cohort_icu_usage_qty || 0}}</td>
-      <td class="right td-border">{{l.hospitel_covid_qty || 0}}</td>
-      <td class="right td-border">{{l.hospitel_usage_qty ||0 }}</td>
-      <td class="right">{{l.hospitel_covid_qty - l.hospitel_usage_qty || 0}}</td>
-    </tr>
-    <tfoot>
-      <tr>
-        <td colspan="20" style="text-align:left">*เตียง = เตียงสำหรับผู้ป่วย covid</td>
-      </tr>
-    </tfoot>
-  </table>
+        </tfoot>
+    </table>
 </div>
 
 
@@ -181,46 +217,43 @@
 
 </clr-datagrid> -->
 <clr-modal [(clrModalOpen)]="modal" [clrModalSize]="'xl'" [style.height.px]="500">
-  <h3 class="modal-title">{{detail.hospname}}</h3>
-  <div class="modal-body">
-    <clr-datagrid>
-      <clr-dg-column>ประเภทเตียง</clr-dg-column>
-      <clr-dg-column>จำนวนเตียงทั้งหมดของโรงพยาบาล</clr-dg-column>
-      <clr-dg-column>สำหรับผู้ป่วย Covid</clr-dg-column>
-      <clr-dg-column>สำรองเตียงรอรับย้าย</clr-dg-column>
-      <clr-dg-column>ใช้ไปแล้ว</clr-dg-column>
+    <h3 class="modal-title">{{detail.hospname}}</h3>
+    <div class="modal-body">
+        <clr-datagrid>
+            <clr-dg-column>ประเภทเตียง</clr-dg-column>
+            <clr-dg-column>จำนวนเตียงทั้งหมดของโรงพยาบาล</clr-dg-column>
+            <clr-dg-column>สำหรับผู้ป่วย Covid</clr-dg-column>
+            <clr-dg-column>สำรองเตียงรอรับย้าย</clr-dg-column>
+            <clr-dg-column>ใช้ไปแล้ว</clr-dg-column>
 
-      <clr-dg-row *clrDgItems="let l of listBed; let idx=index;">
-        <clr-dg-cell>{{l.name}}</clr-dg-cell>
-        <clr-dg-cell>
-          <input class="clr-input width-fit" style="text-align: right;" type="text" appNumberOnly name="{{l.qty}}"
-            [(ngModel)]="l.qty">
-        </clr-dg-cell>
-        <clr-dg-cell>
-          <input class="clr-input width-fit" style="text-align: right;" type="text" appNumberOnly name="{{l.covid_qty}}"
-            [(ngModel)]="l.covid_qty">
-        </clr-dg-cell>
-        <clr-dg-cell>
-          <input class="clr-input width-fit" style="text-align: right;" type="text" appNumberOnly name="{{l.spare_qty}}"
-            [(ngModel)]="l.spare_qty">
-        </clr-dg-cell>
-        <clr-dg-cell>
-          <label for="" style="float: right;">{{l.use_covid_qty}}</label>
-          <!-- <input class="clr-input width-fit" style="text-align: right;" type="text" appNumberOnly name="{{l.covid_qty}}" -->
-          <!-- [(ngModel)]="l.covid_qty" [disabled]="true"> -->
-        </clr-dg-cell>
-      </clr-dg-row>
-      <clr-dg-footer>
-        <clr-dg-pagination #pagination>
-          <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
-          {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} จาก {{pagination.totalItems}} รายการ
-        </clr-dg-pagination>
-      </clr-dg-footer>
-    </clr-datagrid>
-    <br>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-success btn-block" (click)="onClickSave()" [disabled]="isSave">บันทึก</button>
-  </div>
+            <clr-dg-row *clrDgItems="let l of listBed; let idx=index;">
+                <clr-dg-cell>{{l.name}}</clr-dg-cell>
+                <clr-dg-cell>
+                    <input class="clr-input width-fit" style="text-align: right;" type="text" appNumberOnly name="{{l.qty}}" [(ngModel)]="l.qty">
+                </clr-dg-cell>
+                <clr-dg-cell>
+                    <input class="clr-input width-fit" style="text-align: right;" type="text" appNumberOnly name="{{l.covid_qty}}" [(ngModel)]="l.covid_qty">
+                </clr-dg-cell>
+                <clr-dg-cell>
+                    <input class="clr-input width-fit" style="text-align: right;" type="text" appNumberOnly name="{{l.spare_qty}}" [(ngModel)]="l.spare_qty">
+                </clr-dg-cell>
+                <clr-dg-cell>
+                    <label for="" style="float: right;">{{l.use_covid_qty}}</label>
+                    <!-- <input class="clr-input width-fit" style="text-align: right;" type="text" appNumberOnly name="{{l.covid_qty}}" -->
+                    <!-- [(ngModel)]="l.covid_qty" [disabled]="true"> -->
+                </clr-dg-cell>
+            </clr-dg-row>
+            <clr-dg-footer>
+                <clr-dg-pagination #pagination>
+                    <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
+                    {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} จาก {{pagination.totalItems}} รายการ
+                </clr-dg-pagination>
+            </clr-dg-footer>
+        </clr-datagrid>
+        <br>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success btn-block" (click)="onClickSave()" [disabled]="isSave">บันทึก</button>
+    </div>
 </clr-modal>
 <!-- <app-loadding #loading></app-loadding> -->
