@@ -48,6 +48,8 @@ export class ReportBedsComponent implements OnInit {
       const rs: any = await this.service.getBeds(this.zone, date);
       if (rs.ok) {
         this.list = rs.rows;
+        console.log(this.list);
+        
         this.dataDate = rs.rows[0].timestamp;
         this.loading.hide();
       } else {
