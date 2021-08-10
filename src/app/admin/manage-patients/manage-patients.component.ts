@@ -101,6 +101,7 @@ export class ManagePatientsComponent implements OnInit {
       last_name: p.last_name,
       birth_date: moment(p.birth_date).format('YYYY-MM-DD'),
       cid: p.cid,
+      passport: p.passport,
       hn: p.hn,
       house_no: p.house_no,
       room_no: p.room_no,
@@ -160,6 +161,7 @@ export class ManagePatientsComponent implements OnInit {
           this.patient[idx].last_name = this.tmpPatient.last_name;
           this.patient[idx].birth_date = this.tmpPatient.birth_date;
           this.patient[idx].cid = this.tmpPatient.cid;
+          this.patient[idx].passport = this.tmpPatient.passport;
           this.patient[idx].hn = this.tmpPatient.hn;
           this.patient[idx].house_no = this.tmpPatient.house_no;
           this.patient[idx].room_no = this.tmpPatient.room_no;
