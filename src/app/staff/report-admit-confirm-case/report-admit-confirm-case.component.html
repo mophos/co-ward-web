@@ -94,7 +94,16 @@
 </div>
 <br>
 <div style="overflow-y:auto;height:700px">
-  ข้อมูล ณ​ {{dataDate2 | dateTh:'DD/MM/YYYY hh:mm'}}
+  <div class="clr-row">
+    <div class="clr-col-6">
+      ข้อมูล ณ​ {{dataDate2 | dateTh:'DD/MM/YYYY hh:mm'}}
+    </div>
+    <div class="clr-col-6" style="text-align: right;">
+      <button class="btn btn-sm btn-success" (click)="doExportExcel2()">
+        Export
+      </button>
+    </div>
+  </div>
   <table class="table table-compact" style="position: relative; border-collapse: collapse;">
     <thead>
       <tr>

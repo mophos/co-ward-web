@@ -151,4 +151,23 @@ export class ReportAdmitConfirmCaseComponent implements OnInit {
       this.alertService.error();
     }
   }
+
+  async doExportExcel2() {
+    this.loading.show();
+    try {
+      const rs: any = await this.reportService.admitConfirmCaseSummaryExcel2();
+      console.log(rs);
+      if (!rs) {
+        this.loading.hide();
+      } else {
+        this.downloadFile('report-admit-confirm-case-all', 'xlsx', rs);
+        // this.downloadFile('รายงานการจ่ายยา(แยกตามสถานที่จ่าย)', 'xlsx', url);
+        this.loading.hide();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.error();
+      this.loading.hide();
+    }
+  }
 }

@@ -90,6 +90,11 @@ export class ReportService {
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 
+  async admitConfirmCaseSummaryExcel2() {
+    const url = `${this.apiUrl}/v1/report/admit-confirm-case/excel`;
+    return await this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+
   async exportCheckAdmitConfirmCase() {
     const url = `${this.apiUrl}/v1/report/check-admit-confirm-case/export`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
