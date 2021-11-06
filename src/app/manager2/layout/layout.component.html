@@ -11,6 +11,8 @@
       </a>
     </div>
     <div class="header-nav">
+      <a href="javascript://" class="active nav-link nav-text" [routerLink]="['/manager']" routerLinkActive="router-link-active" >Report Old</a>
+      <a href="javascript://" class="nav-link nav-text" [routerLink]="['/manager2']" routerLinkActive="router-link-active" >Report New</a>
     </div>
     <div class="header-actions">
       <clr-dropdown>
@@ -116,143 +118,7 @@
         <clr-icon shape="user" class="is-solid"></clr-icon>
         ค้นหาผู้ป่วย
       </a>
-      <clr-vertical-nav-group routerLinkActive="active">
-        <a clrVerticalNavLink href="javascript://">
-          <clr-icon shape="folder" class="is-solid" clrVerticalNavIcon></clr-icon>
-          รายงาน DMS (ภาครัฐ)
-        </a>
-        <clr-vertical-nav-group-children *clrIfExpanded="true">
-          <!-- <a *ngIf="reportBed" clrVerticalNavLink
-            [routerLink]="['/manager/report-review-homework-goverment',{sector:'GOVERNMENT'}]"
-            title="รายงานเตียงตามสังกัดหน่วยงาน" routerLinkActive="active">
-            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
-            รายงานการลงทะเบียน
-          </a> -->
-          <a *ngIf="reportBed" clrVerticalNavLink
-            [routerLink]="['/manager/report-dms1-goverment',{sector:'GOVERNMENT'}]" title="รายงานเตียงตามสังกัดหน่วยงาน"
-            routerLinkActive="active">
-            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
-            1. รายงานเตียงตามสังกัดหน่วยงาน
-          </a>
-          <a *ngIf="reportBed" clrVerticalNavLink
-            [routerLink]="['/manager/report-dms2-goverment',{sector:'GOVERNMENT'}]"
-            title="ประเภทความรุนแรงของผู้ป่วยที่ยังรักษาตัวอยู่" routerLinkActive="active">
-            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
-            2. ประเภทความรุนแรงของผู้ป่วยที่ยังรักษาตัวอยู่
-          </a>
-          <a *ngIf="reportBed" clrVerticalNavLink
-            [routerLink]="['/manager/report-dms3-goverment',{sector:'GOVERNMENT'}]"
-            title="รายงานประเภทความรุนแรงย้อนหลัง" routerLinkActive="active">
-            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
-            3. รายงานประเภทความรุนแรงย้อนหลัง
-          </a>
-          <a *ngIf="reportBed" clrVerticalNavLink
-            [routerLink]="['/manager/report-dms4-goverment',{sector:'GOVERNMENT'}]"
-            title="ยอดผู้ป่วยสะสมรวมที่รับไว้รักษาในโรงพยาบาล" routerLinkActive="active">
-            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
-            4. ยอดผู้ป่วยสะสมรวมที่รับไว้รักษาในโรงพยาบาล
-          </a>
-          <!-- <a *ngIf="reportBed" clrVerticalNavLink [routerLink]="['/manager/report-dms5-goverment',{sector:'GOVERNMENT'}]"
-            title="รายงานการใช้เตียง" routerLinkActive="active">
-            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
-            5. รายงานการใช้เตียง
-          </a> -->
-          <a *ngIf="reportBed" clrVerticalNavLink
-            [routerLink]="['/manager/report-dms6-goverment',{sector:'GOVERNMENT'}]" title="รายงานเตียงว่างแยกประเภท"
-            routerLinkActive="active">
-            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
-            6. รายงานเตียงว่างแยกประเภท
-          </a>
-          <a *ngIf="reportBed" clrVerticalNavLink
-            [routerLink]="['/manager/report-dms7-goverment',{sector:'GOVERNMENT'}]"
-            title="รายงานจำนวนประเภทเครื่องช่วยหายใจ" routerLinkActive="active">
-            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
-            7. รายงานจำนวนประเภทเครื่องช่วยหายใจ
-          </a>
-          <a *ngIf="reportBed" clrVerticalNavLink
-            [routerLink]="['/manager/report-dms8-goverment',{sector:'GOVERNMENT'}]" title="รายงานเวชภัณฑ์สิ้นเปลือง"
-            routerLinkActive="active">
-            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
-            8. รายงานเวชภัณฑ์สิ้นเปลือง
-          </a>
-          <a *ngIf="reportBed" clrVerticalNavLink
-            [routerLink]="['/manager/report-dms9-goverment',{sector:'GOVERNMENT'}]" title="รายงานจำนวนบุคลากร (แพทย์)"
-            routerLinkActive="active">
-            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
-            9. รายงานจำนวนบุคลากร (แพทย์)
-          </a>
-          <a *ngIf="reportBed" clrVerticalNavLink
-            [routerLink]="['/manager/report-dms10-goverment',{sector:'GOVERNMENT'}]"
-            title="รายงานจำนวนบุคลากร (พยาบาล) นับจำนวนทั้งหมดไม่นับเป็นเวร" routerLinkActive="active">
-            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
-            10. รายงานจำนวนบุคลากร (พยาบาล) นับจำนวนทั้งหมดไม่นับเป็นเวร
-          </a>
-        </clr-vertical-nav-group-children>
-      </clr-vertical-nav-group>
-      <clr-vertical-nav-group routerLinkActive="active">
-        <a clrVerticalNavLink href="javascript://">
-          <clr-icon shape="folder" class="is-solid" clrVerticalNavIcon></clr-icon>
-          รายงาน DMS (เอกชน)
-        </a>
-        <clr-vertical-nav-group-children *clrIfExpanded="true">
-          <!-- <a *ngIf="reportBed" clrVerticalNavLink
-            [routerLink]="['/manager/report-review-homework-private',{sector:'PRIVATE'}]"
-            title="รายงานเตียงตามสังกัดหน่วยงาน" routerLinkActive="active">
-            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
-            รายงานการลงทะเบียน
-          </a> -->
-          <a *ngIf="reportBed" clrVerticalNavLink [routerLink]="['/manager/report-dms1-private',{sector:'PRIVATE'}]"
-            title="รายงานเตียงตามสังกัดหน่วยงาน" routerLinkActive="active">
-            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
-            1. รายงานเตียงตามสังกัดหน่วยงาน
-          </a>
-          <a *ngIf="reportBed" clrVerticalNavLink [routerLink]="['/manager/report-dms2-private',{sector:'PRIVATE'}]"
-            title="ประเภทความรุนแรงของผู้ป่วยที่ยังรักษาตัวอยู่" routerLinkActive="active">
-            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
-            2. ประเภทความรุนแรงของผู้ป่วยที่ยังรักษาตัวอยู่
-          </a>
-          <a *ngIf="reportBed" clrVerticalNavLink [routerLink]="['/manager/report-dms3-private',{sector:'PRIVATE'}]"
-            title="รายงานประเภทความรุนแรงย้อนหลัง" routerLinkActive="active">
-            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
-            3. รายงานประเภทความรุนแรงย้อนหลัง
-          </a>
-          <a *ngIf="reportBed" clrVerticalNavLink [routerLink]="['/manager/report-dms4-private',{sector:'PRIVATE'}]"
-            title="ยอดผู้ป่วยสะสมรวมที่รับไว้รักษาในโรงพยาบาล" routerLinkActive="active">
-            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
-            4. ยอดผู้ป่วยสะสมรวมที่รับไว้รักษาในโรงพยาบาล
-          </a>
-          <!-- <a *ngIf="reportBed" clrVerticalNavLink [routerLink]="['/manager/report-dms5-private',{sector:'PRIVATE'}]"
-            title="รายงานการใช้เตียง" routerLinkActive="active">
-            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
-            5. รายงานการใช้เตียง
-          </a> -->
-          <a *ngIf="reportBed" clrVerticalNavLink [routerLink]="['/manager/report-dms6-private',{sector:'PRIVATE'}]"
-            title="รายงานเตียงว่างแยกประเภท" routerLinkActive="active">
-            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
-            6. รายงานเตียงว่างแยกประเภท
-          </a>
-          <a *ngIf="reportBed" clrVerticalNavLink [routerLink]="['/manager/report-dms7-private',{sector:'PRIVATE'}]"
-            title="รายงานจำนวนประเภทเครื่องช่วยหายใจ" routerLinkActive="active">
-            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
-            7. รายงานจำนวนประเภทเครื่องช่วยหายใจ
-          </a>
-          <a *ngIf="reportBed" clrVerticalNavLink [routerLink]="['/manager/report-dms8-private',{sector:'PRIVATE'}]"
-            title="รายงานเวชภัณฑ์สิ้นเปลือง" routerLinkActive="active">
-            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
-            8. รายงานเวชภัณฑ์สิ้นเปลือง
-          </a>
-          <a *ngIf="reportBed" clrVerticalNavLink [routerLink]="['/manager/report-dms9-private',{sector:'PRIVATE'}]"
-            title="รายงานจำนวนบุคลากร (แพทย์)" routerLinkActive="active">
-            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
-            9. รายงานจำนวนบุคลากร (แพทย์)
-          </a>
-          <a *ngIf="reportBed" clrVerticalNavLink [routerLink]="['/manager/report-dms10-private',{sector:'PRIVATE'}]"
-            title="รายงานจำนวนบุคลากร (พยาบาล) นับจำนวนทั้งหมดไม่นับเป็นเวร" routerLinkActive="active">
-            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
-            10. รายงานจำนวนบุคลากร (พยาบาล) นับจำนวนทั้งหมดไม่นับเป็นเวร
-          </a>
-        </clr-vertical-nav-group-children>
-      </clr-vertical-nav-group>
+     
       <clr-vertical-nav-group routerLinkActive="active">
         <a clrVerticalNavLink href="javascript://">
           <clr-icon shape="folder" class="is-solid" clrVerticalNavIcon></clr-icon>

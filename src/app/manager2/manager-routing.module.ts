@@ -48,7 +48,7 @@ import { ReportLocalQuarantineComponent } from './report-local-quarantine/report
 
 const routes: Routes = [
   {
-    path: 'manager',
+    path: 'manager2',
     component: LayoutComponent,
     canActivate: [ManagerGuard],
     children: [
