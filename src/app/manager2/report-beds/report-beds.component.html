@@ -1,0 +1,122 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">รายงานจำนวนเตียงผู้ป่วย</span>
+</nav>
+<div class="clr-row" style="padding-bottom: 0rem;">
+  <div class="clr-col-12">
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('')">
+      ทั้งหมด
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('01')">
+      เขต 1
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('02')">
+      เขต 2
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('03')">
+      เขต 3
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('04')">
+      เขต 4
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('05')">
+      เขต 5
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('06')">
+      เขต 6
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('07')">
+      เขต 7
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('08')">
+      เขต 8
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('09')">
+      เขต 9
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('10')">
+      เขต 10
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('11')">
+      เขต 11
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('12')">
+      เขต 12
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('13')">
+      เขต 13
+    </button>
+  </div>
+</div>
+
+<br>
+<div class="clr-row">
+  <div class="clr-col-3">
+    <button class="btn btn-sm btn-success" (click)="export()">
+      Export
+    </button>
+    ข้อมูล ณ​ {{dataDate | dateTh:'DD/MM/YYYY hh:mm'}}
+  </div>
+</div>
+
+<div *ngFor="let l of list">
+  <h3> {{l.provinces == 1 ? '' : 'เขต '+l.zone_code}}</h3>
+  <table class="table table-compact" style="position: relative; border-collapse: collapse;"
+    *ngFor="let p of l.provinces">
+    <thead>
+      <tr>
+        <th colspan="18" style="text-align: left;">
+          <h4>{{p.province_name}}</h4>
+        </th>
+      </tr>
+      <tr>
+        <th class="right" style="position: sticky;top:0;">โรงพยาบาล</th>
+        <th class="right" style="position: sticky;top:0;">ระดับขีดความสามารถ</th>
+        <th class="right" style="position: sticky;top:0;">AIIR ทั้งหมด</th>
+        <th class="right" style="position: sticky;top:0;">AIIR ใช้ไปแล้ว</th>
+        <th class="right" style="position: sticky;top:0;">Modified AIIR ทั้งหมด</th>
+        <th class="right" style="position: sticky;top:0;">Modified AIIR ใช้ไปแล้ว</th>
+        <th class="right" style="position: sticky;top:0;">Isolate ทั้งหมด</th>
+        <th class="right" style="position: sticky;top:0;">Isolate ใช้ไปแล้ว</th>
+        <th class="right" style="position: sticky;top:0;">Cohort ทั้งหมด</th>
+        <th class="right" style="position: sticky;top:0;">Cohort ใช้ไปแล้ว</th>
+        <th class="right" style="position: sticky;top:0;">Cohort ICU ทั้งหมด</th>
+        <th class="right" style="position: sticky;top:0;">Cohort ICU ใช้ไปแล้ว</th>
+        <th class="right" style="position: sticky;top:0;">Hospitel ทั้งหมด</th>
+        <th class="right" style="position: sticky;top:0;">Hospitel ใช้ไปแล้ว</th>
+        <th class="right" style="position: sticky;top:0;">Home Isolation ทั้งหมด</th>
+        <th class="right" style="position: sticky;top:0;">Home Isolation ใช้ไปแล้ว</th>
+        <th class="right" style="position: sticky;top:0;">Community Isolation ทั้งหมด</th>
+        <th class="right" style="position: sticky;top:0;">Community Isolation ใช้ไปแล้ว</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let h of p.hospitals">
+        <td class="left">{{h.hospname}}</td>
+        <td class="right">{{h.level}}</td>
+        <td class="right">{{h.aiir_covid_qty == null ? '-' : h.aiir_covid_qty}}</td>
+        <td class="right">{{h.aiir_usage_qty == null ? '-' : h.aiir_usage_qty}}</td>
+        <td class="right">{{h.modified_aiir_covid_qty == null ? '-' : h.modified_aiir_covid_qty}}</td>
+        <td class="right">{{h.modified_aiir_usage_qty == null ? '-' : h.modified_aiir_usage_qty}}</td>
+        <td class="right">{{h.isolate_covid_qty == null ? '-' : h.isolate_covid_qty}}</td>
+        <td class="right">{{h.isolate_usage_qty == null ? '-' : h.isolate_usage_qty}}</td>
+        <td class="right">{{h.cohort_covid_qty == null ? '-' : h.cohort_covid_qty}}</td>
+        <td class="right">{{h.cohort_usage_qty == null ? '-' : h.cohort_usage_qty}}</td>
+        <td class="right">{{h.cohort_icu_covid_qty == null ? '-' : h.cohort_icu_covid_qty}}</td>
+        <td class="right">{{h.cohort_icu_usage_qty == null ? '-' : h.cohort_icu_usage_qty}}</td>
+        <td class="right">{{h.hospitel_covid_qty == null ? '-' : h.hospitel_covid_qty}}</td>
+        <td class="right">{{h.hospitel_usage_qty == null ? '-' : h.hospitel_usage_qty}}</td>
+        <td class="right">{{h.home_isolation_covid_qty == null ? '-' : h.home_isolation_covid_qty}}</td>
+        <td class="right">{{h.home_isolation_usage_qty == null ? '-' : h.home_isolation_usage_qty}}</td>
+        <td class="right">{{h.community_isolation_covid_qty == null ? '-' : h.community_isolation_covid_qty}}</td>
+        <td class="right">{{h.community_isolation_usage_qty == null ? '-' : h.community_isolation_usage_qty}}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="14" style="text-align:left">*เตียง = เตียงสำหรับผู้ป่วย covid</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<app-loadding #loading></app-loadding>

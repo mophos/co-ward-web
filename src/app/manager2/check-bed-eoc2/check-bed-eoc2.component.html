@@ -1,0 +1,49 @@
+<br>
+<input type="date" name="date" [(ngModel)]="date" (change)="onChangeDate()">
+<clr-datagrid>
+  <clr-dg-column>เขตสุขภาพ</clr-dg-column>
+
+  <clr-dg-row *ngFor="let b of data">
+    <clr-dg-cell>{{b.zone_code}}</clr-dg-cell>
+    <clr-datagrid ngProjectAs="clr-dg-row-detail" *clrIfExpanded>
+      <clr-dg-column>จังหวัด</clr-dg-column>
+      <clr-dg-row *ngFor="let p of b.provinces">
+        <clr-dg-cell>{{p.province_name}}</clr-dg-cell>
+       
+        <clr-datagrid ngProjectAs="clr-dg-row-detail" *clrIfExpanded>
+          <clr-dg-column>โรงพยาบาล</clr-dg-column>
+          <clr-dg-column>AIIR(ทั้งหมด/ใช้)</clr-dg-column>
+          <clr-dg-column>Modified AIIR(ทั้งหมด/ใช้)</clr-dg-column>
+          <clr-dg-column>Isolation(ทั้งหมด/ใช้)</clr-dg-column>
+          <clr-dg-column>Cohort Ward(ทั้งหมด/ใช้)</clr-dg-column>
+          <clr-dg-column>วันที่อัพเดตล่าสุด</clr-dg-column>
+          <clr-dg-row *ngFor="let h of p.hospitals">
+            <clr-dg-cell>{{h.hospname}}</clr-dg-cell>
+            <clr-dg-cell>{{h.eoc_AIIR}}{{+h.eoc_AIIR >= 0 ? '/':'' }}{{h.eoc_AIIRUsed}}</clr-dg-cell>
+            <clr-dg-cell>{{h.eoc_ModifiedAIIR}}{{+h.eoc_ModifiedAIIR >= 0? '/':'' }}{{h.eoc_ModifiedAIIRUsed}}</clr-dg-cell>
+            <clr-dg-cell>{{h.eoc_IsolationRoom}}{{+h.eoc_IsolationRoom >= 0? '/':'' }}{{h.eoc_IsolationRoomUsed}}</clr-dg-cell>
+            <clr-dg-cell>{{h.eoc_cohortWard}}{{+h.eoc_cohortWard >= 0? '/':'' }}{{h.eoc_cohortWardUsed}}</clr-dg-cell>
+            <clr-dg-cell>{{h.last_update | dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
+             <!-- <clr-datagrid ngProjectAs="clr-dg-row-detail" *clrIfExpanded>
+              <clr-dg-column>aiir</clr-dg-column>
+              <clr-dg-column>จังหวัด</clr-dg-column>
+              <clr-dg-column>จังหวัด</clr-dg-column>
+              <clr-dg-column>จังหวัด</clr-dg-column>
+              <clr-dg-column>จังหวัด</clr-dg-column>
+              <clr-dg-row *ngFor="let p of p.hospitals">
+                <clr-dg-cell>{{h.hospname}}</clr-dg-cell>
+              </clr-dg-row>
+            </clr-datagrid>  -->
+          </clr-dg-row>
+          <!-- <clr-dg-footer>{{users.length}} users</clr-dg-footer> -->
+        </clr-datagrid>
+      </clr-dg-row>
+      <!-- <clr-dg-footer>{{users.length}} users</clr-dg-footer> -->
+    </clr-datagrid>
+  </clr-dg-row>
+
+  <!-- <clr-dg-footer>{{users.length}} users</clr-dg-footer> -->
+</clr-datagrid>
+
+
+<app-loadding #loadding></app-loadding>

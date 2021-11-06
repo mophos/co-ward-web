@@ -1,0 +1,36 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">ค้นหาผู้ป่วย</span>
+</nav>
+<br>
+<div class="clr-row">
+  <div class="clr-col-1">
+    ค้นหา :
+  </div>
+  <div class="clr-col-5">
+    <input class="clr-input width-fit" (keyup)="doEnter($event)" name="query" [(ngModel)]="query" placeholder="โปรดระบุเลขประจำตัวประชาชน,ชื่อ,นามสกุล,Sat Code" />
+  </div>
+</div>
+
+<button style="float: right;" class="btn btn-sm btn-primary" (click)="clear()">
+  <clr-icon shape="repeat"></clr-icon>
+  ล้าง
+</button>
+<h4>รายชื่อผู้ป่วย</h4>
+<clr-datagrid>
+  <clr-dg-column>Sat Code</clr-dg-column>
+  <clr-dg-column>ชื่อ-นามสกุล</clr-dg-column>
+  <clr-dg-column>เบอร์โทร</clr-dg-column>
+  <clr-dg-column>ที่อยู่ตามบัตรประชาชน/พาสปอร์ต</clr-dg-column>
+
+  <clr-dg-row *ngFor="let l of list">
+    <app-patient-info-details *clrIfExpanded [cid]="l.cid" ngProjectAs="clr-dg-row-detail" ></app-patient-info-details>
+    <clr-dg-cell>{{l.sat_id}}</clr-dg-cell>
+    <clr-dg-cell>{{l.tname}}{{l.fname}} {{l.lname}}</clr-dg-cell>
+    <clr-dg-cell>{{l.tel}}</clr-dg-cell>
+    <clr-dg-cell>{{l.village}} {{l.village_no}} {{l.house_no}} {{l.road}} {{l.tambon_name}} {{l.ampur_name}} {{l.province_name}}</clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-footer>{{list.length | number:'1.0-0' }} รายการ</clr-dg-footer>
+</clr-datagrid>
+
+<app-loadding #modalLoading></app-loadding>

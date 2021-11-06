@@ -1,0 +1,56 @@
+<nav class="breadcrumb">
+  <!-- <a class="breadcrumb-item" href="javascript://" routerLink="/admin/manage-min-max">รายการสังกัด</a> -->
+  <span class="breadcrumb-item active">รายงานเวชภัณฑ์คงเหลือเขตสุขภาพ</span>
+</nav>
+
+<table class="table table-compact">
+  <thead>
+    <tr>
+      <th colspan="17">{{dateShow | dateTh:'DD/MM/YYYY'}}</th>
+    </tr>
+    <tr>
+      <!-- <th rowspan="2">รายการ</th> -->
+      <th style="text-align: right;">เขตสุขภาพ</th>
+      <th style="text-align: right;">surgical gown</th>
+      <th style="text-align: right;">cover all1</th>
+      <th style="text-align: right;">cover all2</th>
+      <th style="text-align: right;">n95</th>
+      <th style="text-align: right;">shoe cover</th>
+      <th style="text-align: right;">Hood cover</th>
+      <th style="text-align: right;">Nitrile Glove</th>
+      <th style="text-align: right;">face shield</th>
+      <th style="text-align: right;">surgical mask</th>
+      <th style="text-align: right;">alcohol 70%</th>
+      <th style="text-align: right;">alcohol 95%</th>
+      <th style="text-align: right;">alcohol gel</th>
+      <th style="text-align: right;">disposable glove (latex,nonsterile)</th>
+      <th style="text-align: right;">Isolation gown</th>
+      <th style="text-align: right;">Leg Cover</th>
+      <th style="text-align: right;">Disposable cap</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let l of total;">
+      <td class="left">{{l.zone_code}}</td>
+      <td style="text-align: right;">{{l.surgical_gown_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.cover_all1_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.cover_all2_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.n95_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.shoe_cover_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.surgical_hood_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.long_glove_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.face_shield_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.surgical_mask_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.alcohol_70_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.alcohol_95_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.alcohol_gel_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.disposable_glove_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.isolation_gown_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.leg_cover_qty | number:'1.0-0'}}</td>
+      <td style="text-align: right;">{{l.disposable_cap_qty | number:'1.0-0'}}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<app-loadding #loading></app-loadding>

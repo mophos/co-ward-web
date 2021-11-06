@@ -1,0 +1,45 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">รายงานยอดผู้ป่วยรายจังหวัด</span>
+</nav>
+<br>
+<div class="clr-row">
+  <div class="clr-col-3">
+    <!-- รายงานจำนวนเตียงผู้ป่วย ณ วันที่ {{date | dateTh:'D MMM YYYY'}} -->
+    <my-date-picker-th name="startDate" (dateChanged)="onChangeStartDate($event)" [options]="myDatePickerOptions"
+      [(ngModel)]="startDate" required>
+    </my-date-picker-th>
+  </div>
+  <div class="clr-col-3">
+    <my-date-picker-th name="endDate" (dateChanged)="onChangeEndDate($event)" [options]="myDatePickerOptions"
+      [(ngModel)]="endDate" required>
+    </my-date-picker-th>
+  </div>
+  <div class="clr-col-1">
+    
+  </div>
+  <!-- <div class="clr-col-7" style="text-align: right;">
+    <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
+      <clr-icon shape="download"></clr-icon>export excel
+    </button>
+
+  </div> -->
+</div>
+
+<table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
+  <tr>
+    <th class="right td-border" style="position: sticky; top: 0; ">เขต</th>
+    <th class="right td-border" style="position: sticky; top: 0; ">จังหวัด</th>
+    <th class="right td-border" style="position: sticky; top: 0; ">ผลรวมของ Confirm Case</th>
+    <th class="right td-border" style="position: sticky; top: 0; " *ngFor="let d of date">{{d |dateTh:'DD/MM/YYYY'}}
+    </th>
+  </tr>
+
+  <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+    <td class="left td-border">{{h.zone_code}}</td>
+    <td class="left td-border">{{h.province_code }}:{{h.province_name}}</td>
+    <td class="right td-border">{{h.sum || 0}}</td>
+    <td class="right td-border" *ngFor="let d of date">{{h[d] || 0}}</td>
+  </tr>
+</table>
+
+<app-loadding #loading></app-loadding>

@@ -1,0 +1,88 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">รายงานจำนวนการเบิกยา</span>
+</nav>
+<div class="clr-row" style="padding-bottom: 0rem;">
+  <div class="clr-col-12">
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('')">
+      ทั้งหมด
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('01')">
+      เขต 1
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('02')">
+      เขต 2
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('03')">
+      เขต 3
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('04')">
+      เขต 4
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('05')">
+      เขต 5
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('06')">
+      เขต 6
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('07')">
+      เขต 7
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('08')">
+      เขต 8
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('09')">
+      เขต 9
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('10')">
+      เขต 10
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('11')">
+      เขต 11
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('12')">
+      เขต 12
+    </button>
+    <button class="btn btn-sm btn-primary btn-outline" (click)="click('13')">
+      เขต 13
+    </button>
+  </div>
+</div>
+<h4>รายงานจำนวนการเบิกยา ตั้งแต่วันที่ 20 เมษายน 2563 ถึง ปัจจุบัน</h4>
+
+<div *ngFor="let l of list">
+  <h3> {{l.provinces == 1 ? '' : 'เขต '+l.zone_code}}</h3>
+  <table class="table table-compact" style="position: relative; border-collapse: collapse;"
+    *ngFor="let p of l.provinces">
+    <thead>
+      <tr>
+        <th colspan="11" style="text-align: left;">
+          <h4>{{p.province_name}}</h4>
+        </th>
+      </tr>
+      <tr>
+        <th class="right" style="position: sticky; top: 0;">โรงพยาบาล</th>
+        <th class="right" style="position: sticky; top: 0;">Hydroxychloroquine 200 mg.</th>
+        <th class="right" style="position: sticky; top: 0;">Chloroquine 250 mg.</th>
+        <th class="right" style="position: sticky; top: 0;">Darunavir 600 mg.</th>
+        <th class="right" style="position: sticky; top: 0;">Lopinavir 200 mg./Ritonavir 50 mg.</th>
+        <th class="right" style="position: sticky; top: 0;">Ritonavir 100 mg.</th>
+        <th class="right" style="position: sticky; top: 0;">Azithromycin 250 mg.</th>
+        <th class="right" style="position: sticky; top: 0;">Favipiravir</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let h of p.hospitals">
+        <td class="left">{{h.hospname}}</td>
+        <td class="right">{{h['hydroxychloroquine'] }}</td>
+        <td class="right">{{h['chloroquine'] }}</td>
+        <td class="right">{{h['darunavir'] }}</td>
+        <td class="right">{{h['lopinavir_ritonavir'] }}</td>
+        <td class="right">{{h['ritonavir'] }}</td>
+        <td class="right">{{h['azithromycin'] }}</td>
+        <td class="right">{{h['favipiravir'] }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-loadding #loading></app-loadding>
