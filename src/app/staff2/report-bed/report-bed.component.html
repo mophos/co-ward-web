@@ -1,0 +1,159 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">รายงานเตียง</span>
+</nav>
+<br>
+<div class="clr-row">
+  <div class="clr-col-4">
+    <!-- <my-date-picker-th name="date" [options]="myDatePickerOptions" [(ngModel)]="date" required>
+    </my-date-picker-th> -->
+  </div>
+  <div class="clr-col-1">
+    <!-- <button class="btn btn-sm btn-primary" (click)="doEnter()">
+      <clr-icon shape="search"></clr-icon>
+    </button> -->
+  </div>
+  <div class="clr-col-7" style="text-align: right;">
+    <button class="btn btn-sm btn-success" (click)="doExportExcel()">
+      Export
+    </button>
+  </div>
+</div>
+
+<div *ngFor="let l of list">
+  <h4> {{l.provinces == 1 ? '' : 'เขต '+l.zone_code}}</h4>
+  <!-- <table class="table"> -->
+  <table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;"
+    *ngFor="let p of l.provinces">
+    <thead>
+      <tr>
+        <th colspan="27" style="text-align: left;">
+          <h3>{{p.province_name}}</h3>
+        </th>
+      </tr>
+      <tr>
+        <th rowspan="2" class="right td-border" style="position: sticky; top: 0; ">โรงพยาบาล</th>
+        <th rowspan="2" class="right td-border" style="position: sticky; top: 0; ">วันที่ตั้งค่าเตียงล่าสุด</th>
+        <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">AIIR</th>
+        <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Modified AIIR</th>
+        <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Cohort ICU</th>
+        <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Isolate</th>
+        <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Cohort</th>
+        <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Hospitel</th>
+        <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Home Isolation</th>
+        <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Community Isolation</th>
+        <th rowspan="3" class="right" style="position: sticky; top: 0;">สังกัด</th>
+      </tr>
+      <tr>
+        <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+        <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+        <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+        <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+        <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+        <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+        <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+        <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+        <th class="right" style="position: sticky; top: 0;">คงเหลือ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- <tr *ngFor="let h of p.hospitals">
+        <th class="right td-border" style="position: sticky; top: 0;">รวม</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{aiir1}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{aiir2}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{aiir3 || 0}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{modi1}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{modi2}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{modi3 || 0}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{iso1}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{iso2}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{iso3 || 0}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{coh1}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{coh2}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{coh3 || 0}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{host1}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{host2}}</th>
+        <th class="right" style="position: sticky; top: 0;">{{host3 || 0}}</th>
+      </tr> -->
+      <tr *ngFor="let h of p.hospitals; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+        <td class="left td-border">{{h.hospname}}</td>
+        <td class="left td-border">{{h.updated_entry | dateTh:'DD/MM/YYYY'}}</td>
+        <td class="right td-border">{{h['aiir_covid_qty'] || 0}}</td>
+        <td class="right td-border">{{h['aiir_usage_qty'] || 0 }}</td>
+        <td class="right td-border">{{h['aiir_covid_qty'] - h['aiir_usage_qty'] || 0}}</td>
+        <td class="right td-border">{{h['modified_aiir_covid_qty'] || 0}}</td>
+        <td class="right td-border">{{h['modified_aiir_usage_qty']||0 }}</td>
+        <td class="right td-border">{{h['modified_aiir_covid_qty'] - h['modified_aiir_usage_qty'] || 0}}</td>
+        <td class="right td-border">{{h['cohort_icu_covid_qty'] || 0}}</td>
+        <td class="right td-border">{{h['cohort_icu_usage_qty']||0 }}</td>
+        <td class="right td-border">{{h['cohort_icu_covid_qty'] - h['cohort_icu_usage_qty'] || 0}}</td>
+        <td class="right td-border">{{h['isolate_covid_qty'] || 0}}</td>
+        <td class="right td-border">{{h['isolate_usage_qty']||0 }}</td>
+        <td class="right td-border">{{h['isolate_covid_qty'] - h['isolate_usage_qty'] || 0}}</td>
+        <td class="right td-border">{{h['cohort_covid_qty'] || 0}}</td>
+        <td class="right td-border">{{h['cohort_usage_qty']||0 }}</td>
+        <td class="right td-border">{{h['cohort_covid_qty'] - h['cohort_usage_qty'] || 0}}</td>
+        <td class="right td-border">{{h['hospitel_covid_qty'] || 0}}</td>
+        <td class="right td-border">{{h['hospitel_usage_qty']||0 }}</td>
+        <td class="right">{{h['hospitel_covid_qty'] - h['hospitel_usage_qty'] || 0}}</td>
+        <td class="right td-border">{{h['home_isolation_covid_qty'] || 0}}</td>
+        <td class="right td-border">{{h['home_isolation_usage_qty']||0 }}</td>
+        <td class="right">{{h['home_isolation_covid_qty'] - h['home_isolation_usage_qty'] || 0}}</td>
+        <td class="right td-border">{{h['community_isolation_covid_qty'] || 0}}</td>
+        <td class="right td-border">{{h['community_isolation_usage_qty']||0 }}</td>
+        <td class="right">{{h['community_isolation_covid_qty'] - h['community_isolation_usage_qty'] || 0}}</td>
+        <td class="left td-border">{{h.sub_ministry_name}}</td>
+      </tr>
+
+      <tr>
+        <th class=" td-border" style="position: sticky; top: 0;">รวม</th>
+        <th class=" td-border" style="position: sticky; top: 0;"></th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_aiir_covid_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_aiir_usage_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_aiir_inven_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_modified_aiir_covid_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_modified_aiir_usage_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_modified_aiir_inven_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_cohort_icu_covid_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_cohort_icu_usage_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_cohort_icu_inven_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_isolate_covid_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_isolate_usage_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_isolate_inven_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_cohort_covid_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_cohort_usage_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_cohort_inven_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_hospitel_covid_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_hospitel_usage_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_hospitel_inven_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_home_isolation_covid_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_home_isolation_usage_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_home_isolation_inven_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_community_isolation_covid_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_community_isolation_usage_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_community_isolation_inven_qty}}</th>
+        <th class=" td-border" style="position: sticky; top: 0;"></th>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="18" style="text-align:left">*เตียง = เตียงสำหรับผู้ป่วย covid</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+<app-loadding #loading></app-loadding>

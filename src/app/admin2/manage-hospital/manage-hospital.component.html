@@ -1,0 +1,230 @@
+<div class="clr-row">
+  <div class="clr-col-4">
+    <button class="btn btn-sm btn-success" (click)="onClickAdd()">
+      <clr-icon shape="plus"></clr-icon> เพิ่มรายการ
+    </button>
+  </div>
+  <div class="clr-col-1">
+    ค้นหา :
+  </div>
+  <div class="clr-col-3">
+    <input class="clr-input width-fit" (keyup)="doEnter($event)" name="query" [(ngModel)]="query"
+      placeholder="Enter เพื่อค้นหา" />
+  </div>
+</div>
+
+<clr-datagrid (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading" [style.height.px]="800">
+  <clr-dg-column>รหัสสถานบริการ</clr-dg-column>
+  <clr-dg-column>ชื่อสถานบริการ</clr-dg-column>
+  <!-- <clr-dg-column>สังกัด</clr-dg-column> -->
+  <clr-dg-column></clr-dg-column>
+
+  <clr-dg-row *ngFor="let l of list;">
+    <clr-dg-cell>{{l.hospcode}}</clr-dg-cell>
+    <clr-dg-cell>{{l.hospname}}</clr-dg-cell>
+    <!-- <clr-dg-cell>{{l.hospTypeName}}</clr-dg-cell> -->
+    <clr-dg-cell style="text-align: center;">
+      <div class="btn-group">
+        <button class="btn btn-sm btn-success" (click)="onClickEdit(l)" title="แก้ไข">
+          <clr-icon shape="note"></clr-icon>
+        </button>
+        <button class="btn btn-sm btn-danger" (click)="onClickRemove(l)" title="ลบ">
+          <clr-icon shape="trash"></clr-icon>
+        </button>
+      </div>
+    </clr-dg-cell>
+  </clr-dg-row>
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgTotalItems]="total" [clrDgPageSize]="limit">
+      <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
+      {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} จาก {{pagination.totalItems}} รายการ
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>
+
+<clr-modal [clrModalSize]="'md'" [(clrModalOpen)]="modal" [clrModalClosable]="false">
+  <h3 *ngIf="!isUpdate" class="modal-title">เพิ่ม สถานบริการ</h3>
+  <h3 *ngIf="isUpdate" class="modal-title">แก้ไข สถานบริการ</h3>
+  <div class="modal-body">
+
+    <!-- <div class="clr-row">
+      <div class="clr-col-4">
+        รหัสโรงพยาบาล<span class="required">*</span>
+      </div>
+      <div class="clr-col-8">
+        <div class="clr-error">
+          <div class="clr-input-wrapper">
+            <input class="clr-error clr-input" type="text" name="hospCode" placeholder="รหัสโรงพยาบาล( 5 ตัวอักษร )"
+              id="hospCode" [(ngModel)]="hospCode" style="width: 100%;">
+          </div>
+          <span class="clr-subtext" *ngIf="hospCode && hospCode.length != '5'">ต้อง 5 ตัวอักษร</span>
+        </div>
+      </div>
+    </div> -->
+    <div class="clr-row">
+      <div class="clr-col-4">
+        ชื่อโรงพยาบาล<span class="required">*</span>
+      </div>
+      <div class="clr-col-8">
+        <input type="text" class="clr-input" name="hospName" id="hospName" placeholder="ชื่อโรงพยาบาล"
+          [(ngModel)]="hospName" style="width: 100%;">
+      </div>
+    </div>
+    <div class="clr-row">
+      <div class="clr-col-4">
+        ประเภทสถานบริการ<span class="required">*</span>
+      </div>
+      <div class="clr-col-8">
+        <div class="clr-select-wrapper" style="width: 100%;">
+          <select name="hospType" [(ngModel)]="hospTypeId" class="clr-select" style="width: 100%;">
+            <option *ngFor="let l of listType" [value]="l.id">{{l.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="clr-row">
+      <div class="clr-col-4">
+        โรงพยาบาลแม่ข่าย<span class="required">*</span>
+      </div>
+      <div class="clr-col-8">
+        <div class="clr-select-wrapper" style="width: 100%;">
+          <select name="hospType" [(ngModel)]="hospTypeId" class="clr-select" style="width: 100%;">
+            <option *ngFor="let node of listNode" [value]="l.id">
+              {{ l.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="clr-row">
+      <div class="clr-col-4">
+        สังกัด
+      </div>
+      <div class="clr-col-8">
+        <div class="clr-select-wrapper" style="width: 100%;">
+          <select name="ministry" [(ngModel)]="ministryCode" class="clr-select" style="width: 100%;">
+            <option *ngFor="let l of listMinistry" [value]="l.code">{{l.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="clr-row">
+      <div class="clr-col-4">
+        กรม
+      </div>
+      <div class="clr-col-8">
+        <div class="clr-select-wrapper" style="width: 100%;">
+          <select name="subMinistry" [(ngModel)]="subMinistryCode" class="clr-select" style="width: 100%;">
+            <option *ngFor="let l of listSubMinistry" [value]="l.code">{{l.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="clr-row">
+      <div class="clr-col-4">
+        โทร (1)
+      </div>
+      <div class="clr-col-8">
+        <input type="text" class="clr-input" name="telephone" id="telephone" placeholder="เบอร์โทรศัพท์"
+          [(ngModel)]="telephone" style="width: 100%;">
+      </div>
+    </div>
+    <div class="clr-row">
+      <div class="clr-col-4">
+        โทร (2)
+      </div>
+      <div class="clr-col-8">
+        <input type="text" class="clr-input" name="tel" id="tel" placeholder="เบอร์โทรศัพท์(เพิ่มเติม)"
+          [(ngModel)]="tel" style="width: 100%;">
+      </div>
+    </div>
+    <div class="clr-row">
+      <div class="clr-col-4">
+        โทร (ผู้อำนวยการ)
+      </div>
+      <div class="clr-col-8">
+        <input type="text" class="clr-input" name="telephoneManager" id="telephoneManager"
+          placeholder="เบอร์โทรศัพท์(ผู้อำนวยการ)" [(ngModel)]="telephoneManager" style="width: 100%;">
+      </div>
+    </div>
+    <div class="clr-row">
+      <div class="clr-col-4">
+        ที่อยู่
+      </div>
+      <div class="clr-col-8">
+        <input type="text" class="clr-input" name="address" id="address" placeholder="ที่อยู่" [(ngModel)]="address"
+          style="width: 100%;">
+      </div>
+    </div>
+    <div class="clr-row">
+      <div class="clr-col-4">
+        ตำบล
+      </div>
+      <div class="clr-col-8">
+        <app-autocomplete-subdistrict style="padding: 0px" #tambon (onselect)="onSelectTambon($event)">
+        </app-autocomplete-subdistrict>
+      </div>
+    </div>
+    <div class="clr-row">
+      <div class="clr-col-4">
+        อำเภอ
+      </div>
+      <div class="clr-col-8">
+        <app-autocomplete-district style="padding: 0px" #ampur (onselect)="onSelectAmpur($event)">
+        </app-autocomplete-district>
+      </div>
+    </div>
+    <div class="clr-row">
+      <div class="clr-col-4">
+        จังหวัด<span class="required">*</span>
+      </div>
+      <div class="clr-col-8">
+        <app-autocomplete-province style="padding: 0px" #province (onselect)="onSelectProvince($event)">
+        </app-autocomplete-province>
+      </div>
+    </div>
+    <div class="clr-row">
+      <div class="clr-col-4">
+        รหัสไปรษณีย์
+      </div>
+      <div class="clr-col-8">
+        <app-autocomplete-zipcode style="padding: 0px" #zipcode (onselect)="onSelectZipcode($event)">
+        </app-autocomplete-zipcode>
+      </div>
+    </div>
+    <div class="clr-row">
+      <div class="clr-col-4">
+        ชื่อผู้ประสานงาน
+      </div>
+      <div class="clr-col-8">
+        <input
+          type="text"
+          class="clr-input"
+          name="coordinatorName"
+          id="coordinatorName"
+          placeholder="ชื่อผู้ประสานงาน"
+          [(ngModel)]="coordinatorName"
+          style="width: 100%;">
+      </div>
+    </div>
+    <!-- <div class="clr-row">
+      <div class="clr-col-4">
+        จำนวนเตียง
+      </div>
+      <div class="clr-col-8">
+        <input type="text" class="clr-input" name="hospBed" id="hospBed" placeholder="จำนวนเตียง" [(ngModel)]="hospBed"
+          style="width: 100%;">
+      </div>
+    </div> -->
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success"
+      [disabled]="hospCode.length != 5 || !hospName || !hospTypeId || !provinceName"
+      (click)="save()">
+      บันทึก
+    </button>
+    <button type="button" class="btn btn-danger" (click)="onClose()">
+      ปิด
+    </button>
+  </div>
+</clr-modal>

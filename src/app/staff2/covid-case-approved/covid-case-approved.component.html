@@ -1,0 +1,96 @@
+<nav class="breadcrumb">
+  <!-- <a class="breadcrumb-item" href="javascript://" routerLink="/staff/requisition-supplies">การใช้เวชภัณฑ์</a> -->
+  <span class="breadcrumb-item active">จ่ายเวชภัณฑ์ให้รพ.ลูกข่าย</span>
+</nav>
+<div class="clr-row">
+  <div class="clr-col-3">
+    <div style="padding-top: 0.2rem;">
+      <h4>เลือกสถานบริการ</h4>
+    </div>
+  </div>
+  <div class="clr-col-3">
+    <div style="padding-top: 0.2rem;">
+      <h4>รายการใบเบิก</h4>
+    </div>
+  </div>
+  <div class="clr-col-3">
+    <div style="padding-top: 0.2rem;">
+      <h4>{{reqCode}}</h4>
+    </div>
+  </div>
+  <div class="clr-col-3">
+    <button class="btn btn-lg btn-success" (click)="checkApproved()" style="float: right;" [disabled]="!selected.length">จ่ายของ</button>
+  </div>
+</div>
+<div class="clr-row">
+  <div class="clr-col-3">
+    <clr-datagrid [clrDgLoading]="isLoading" style="height: 20rem;">
+      <clr-dg-column>โรงพยาบาลลูกข่าย</clr-dg-column>
+      <clr-dg-row *ngFor="let l of list; let idx=index;" (click)="onClickRow(l)" [ngClass]="{ 'isSuccess': l.hospital_id_client == hospIdClient }">
+        <clr-dg-cell>{{l.hospname}}</clr-dg-cell>
+      </clr-dg-row>
+    </clr-datagrid>
+  </div>
+  <div class="clr-col-3">
+    <clr-datagrid [clrDgLoading]="isLoading" [(clrDgSelected)]="selected" (clrDgSelectedChange)="onClickRowDetail($event)"
+      style="height: 20rem;">
+      <clr-dg-column [clrDgField]="'code'">เลขที่ใบเบิก</clr-dg-column>
+      <clr-dg-column [clrDgField]="'create_date'">วันที่เบิก</clr-dg-column>
+
+      <clr-dg-row *clrDgItems="let l of details; let idx=index;" (click)="onClickDetail(l)" [clrDgItem]="l">
+        <clr-dg-cell>{{l.code}}</clr-dg-cell>
+        <clr-dg-cell>{{l.create_date | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
+      </clr-dg-row>
+    </clr-datagrid>
+  </div>
+  <div class="clr-col-3">
+    <clr-datagrid [clrDgLoading]="isLoading" style="height: 20rem;">
+      <clr-dg-column>รายการ</clr-dg-column>
+      <clr-dg-column></clr-dg-column>
+
+      <clr-dg-row *ngFor="let l of drugs; let idx=index;">
+        <clr-dg-cell>{{l.name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.qty}} {{l.unit_name}}</clr-dg-cell>
+      </clr-dg-row>
+    </clr-datagrid>
+  </div>
+  <div class="clr-col-3">
+    <clr-datagrid [clrDgLoading]="isLoading" style="height: 20rem;">
+      <clr-dg-column>รายการ</clr-dg-column>
+      <clr-dg-column>จำนวนเบิกรวม</clr-dg-column>
+      <clr-dg-column>Stock คงเหลือ</clr-dg-column>
+
+      <clr-dg-row *ngFor="let l of drugStock; let idx=index;" [ngClass]="{ 'isError': l.requisition_qty > stock_qty }">
+        <clr-dg-cell>{{l.name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.requisition_qty}} {{l.unit_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.stock_qty}} {{l.unit_name}}</clr-dg-cell>
+      </clr-dg-row>
+    </clr-datagrid>
+  </div>
+</div>
+
+<clr-modal [(clrModalOpen)]="modal" [clrModalClosable]="false">
+  <h3 class="modal-title">กรุณาตรวจสอบรายการให้ถูกต้อง</h3>
+  <div class="modal-body">
+    <label for="">รายการเบิกของ{{hospName}}</label>
+    <clr-datagrid [clrDgLoading]="isLoading" style="height: 20rem;">
+      <clr-dg-column>รายการ</clr-dg-column>
+      <clr-dg-column>จำนวนเบิกรวม</clr-dg-column>
+      <clr-dg-column>คงเหลือ</clr-dg-column>
+
+      <clr-dg-row *ngFor="let l of drugStock; let idx=index;" [ngClass]="{ 'isError': l.requisition_qty > stock_qty }">
+        <clr-dg-cell>{{l.name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.requisition_qty}} {{l.unit_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.stock_qty}} {{l.unit_name}}</clr-dg-cell>
+      </clr-dg-row>
+    </clr-datagrid>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="approved()" [disabled]="isSave">
+      บันทึก
+    </button>
+    <button type="button" class="btn btn-danger" (click)="modal = false">
+      ปิด
+    </button>
+  </div>
+</clr-modal>

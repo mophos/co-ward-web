@@ -1,0 +1,205 @@
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="javascript://" routerLink="/admin/fulfill-supplies">รายการเติมเวชภัณฑ์</a>
+  <span>เติมเวชภัณฑ์</span>
+</nav>
+<div [ngClass]="{hidden: isModal}">
+  <!-- <table class="table" style="width:100%">
+    <tr>
+      <td>N95 <br>0 ชิ้น</td>
+      <td>COVER ALL <br>0 ชิ้น</td>
+      <td>Surgical gown<br>0 ชิ้น</td>
+    </tr>
+  </table> -->
+<table class="table">
+  <tr>
+    <td>{{g9Fill}}</td>
+    <td>{{g10Fill}}</td>
+    <td>{{g11Fill}}</td>
+    <td>{{g12Fill}}</td>
+    <td>{{g13Fill}}</td>
+    <td>{{g14Fill}}</td>
+    <td>{{g15Fill}}</td>
+    <td>{{g16Fill}}</td>
+    <td>{{g17Fill}}</td>
+  </tr>
+</table>
+  <div style="overflow-x: scroll;width: 100%;">
+   
+    <table class="table table-compact" style="width:max-content;max-width: max-content;border-collapse: collapse;">
+      <thead>
+        <tr>
+          <th class="td-border" rowspan="2" (click)="sort('zone_code')"><span class="pointer"> เขต<clr-icon
+                shape="sort-by"></clr-icon></span></th>
+          <th class="td-border" rowspan="2" (click)="sort('hospital_name')"><span class="pointer"> โรงพยาบาล
+              <clr-icon shape="sort-by"></clr-icon></span></th>
+          <th class="td-border" *ngIf="g9" colspan="3">surgical gown</th>
+          <th class="td-border" *ngIf="g10" colspan="3">cover all 1</th>
+          <th class="td-border" *ngIf="g11" colspan="3">cover all 2</th>
+          <th class="td-border" *ngIf="g12" colspan="3">n95</th>
+          <th class="td-border" *ngIf="g13" colspan="3">shoe cover</th>
+          <th class="td-border" *ngIf="g14" colspan="3">Hood cover</th>
+          <th class="td-border" *ngIf="g15" colspan="3">Nitrile Glove</th>
+          <th class="td-border" *ngIf="g16" colspan="3">face shield</th>
+          <th class="td-border" *ngIf="g17" colspan="3">surgical mask</th>
+        </tr>
+        <tr>
+          <th class="td-border" *ngIf="g9">ยอดเบิก</th>
+          <th class="td-border" *ngIf="g9">คงเหลือ</th>
+          <th class="td-border" *ngIf="g9" (click)="sort('surgical_gown_recomment_qty')"><span class="pointer">
+              เติมเวชภัณฑ์<clr-icon shape="sort-by"></clr-icon></span></th>
+          <th class="td-border" *ngIf="g10">ยอดเบิก</th>
+          <th class="td-border" *ngIf="g10">คงเหลือ</th>
+          <th class="td-border" *ngIf="g10" (click)="sort('cover_all1_recomment_qty')"><span class="pointer">
+              เติมเวชภัณฑ์<clr-icon shape="sort-by"></clr-icon></span></th>
+          <th class="td-border" *ngIf="g11">ยอดเบิก</th>
+          <th class="td-border" *ngIf="g11">คงเหลือ</th>
+          <th class="td-border" *ngIf="g11" (click)="sort('cover_all2_recomment_qty')"><span class="pointer">
+              เติมเวชภัณฑ์<clr-icon shape="sort-by"></clr-icon></span></th>
+          <th class="td-border" *ngIf="g12">ยอดเบิก</th>
+          <th class="td-border" *ngIf="g12">คงเหลือ</th>
+          <th class="td-border" *ngIf="g12" (click)="sort('n95_recomment_qty')"><span class="pointer"> เติมเวชภัณฑ์
+              <clr-icon shape="sort-by"></clr-icon></span></th>
+          <th class="td-border" *ngIf="g13">ยอดเบิก</th>
+          <th class="td-border" *ngIf="g13">คงเหลือ</th>
+          <th class="td-border" *ngIf="g13" (click)="sort('shoe_cover_recomment_qty')"><span class="pointer">
+              เติมเวชภัณฑ์<clr-icon shape="sort-by"></clr-icon></span></th>
+          <th class="td-border" *ngIf="g14">ยอดเบิก</th>
+          <th class="td-border" *ngIf="g14">คงเหลือ</th>
+          <th class="td-border" *ngIf="g14" (click)="sort('surgical_hood_recomment_qty')"><span class="pointer">
+              เติมเวชภัณฑ์<clr-icon shape="sort-by"></clr-icon></span></th>
+          <th class="td-border" *ngIf="g15">ยอดเบิก</th>
+          <th class="td-border" *ngIf="g15">คงเหลือ</th>
+          <th class="td-border" *ngIf="g15" (click)="sort('long_glove_recomment_qty')"><span class="pointer">
+              เติมเวชภัณฑ์<clr-icon shape="sort-by"></clr-icon></span></th>
+          <th class="td-border" *ngIf="g16">ยอดเบิก</th>
+          <th class="td-border" *ngIf="g16">คงเหลือ</th>
+          <th class="td-border" *ngIf="g16" (click)="sort('face_shield_recomment_qty')"><span class="pointer">
+              เติมเวชภัณฑ์<clr-icon shape="sort-by"></clr-icon></span></th>
+          <th class="td-border" *ngIf="g17">ยอดเบิก</th>
+          <th class="td-border" *ngIf="g17">คงเหลือ</th>
+          <th class="td-border" *ngIf="g17" (click)="sort('surgical_mask_recomment_qty')"><span class="pointer">
+              เติมเวชภัณฑ์<clr-icon shape="sort-by"></clr-icon></span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let i of products">
+          <td class="td-border">{{i.zone_code}}</td>
+          <td class="td-border text-left">{{i.hospital_name}}</td>
+
+          <td *ngIf="g9" class="td-border text-left isWarning">
+            {{i.surgical_gown_req_qty || 0}}</td>
+          <td *ngIf="g9" class="td-border text-left isWarning">
+            {{i.surgical_gown_qty ||0}}(+{{i.surgical_gown_reserve_qty ||0}})</td>
+          <td *ngIf="g9" class="td-border text-left isWarning">
+            <input type="number" (keyup)="sumProduct()" class="clr-input" appNumberOnly style="width: 50px;"
+              [value]="i.surgical_gown_recomment_qty" [(ngModel)]="i.surgical_gown_recomment_qty"></td>
+
+          <td *ngIf="g10" class="td-border text-left" >
+            {{i.cover_all1_req_qty || 0}}</td>
+          <td *ngIf="g10" class="td-border text-left" >
+            {{i.cover_all1_qty ||0}}(+{{i.cover_all1_reserve_qty ||0}})</td>
+          <td *ngIf="g10" class="td-border text-left" >
+            <input type="number" (keyup)="sumProduct()" class="clr-input" appNumberOnly style="width: 50px;"
+              [value]="i.cover_all1_recomment_qty" [(ngModel)]="i.cover_all1_recomment_qty"></td>
+
+          <td *ngIf="g11" class="td-border text-left"
+            [ngClass]="{isError: i.cover_all2_qty < i.cover_all2_min_qty,isWarning: i.cover_all2_qty >= i.cover_all2_min_qty}">
+            {{i.cover_all2_req_qty || 0}}</td>
+          <td *ngIf="g11" class="td-border text-left"
+            [ngClass]="{isError: i.cover_all2_qty < i.cover_all2_min_qty,isWarning: i.cover_all2_qty >= i.cover_all2_min_qty}">
+            {{i.cover_all2_qty ||0}}(+{{i.cover_all2_reserve_qty ||0}})</td>
+          <td *ngIf="g11" class="td-border text-left"
+            [ngClass]="{isError: i.cover_all2_qty < i.cover_all2_min_qty,isWarning: i.cover_all2_qty >= i.cover_all2_min_qty}">
+            <input type="number" (keyup)="sumProduct()" class="clr-input" appNumberOnly style="width: 50px;"
+              [value]="i.cover_all2_recomment_qty" [(ngModel)]="i.cover_all2_recomment_qty"></td>
+
+          <td *ngIf="g12" class="td-border text-left" [ngClass]="{isError: i.n95_qty < i.n95_min_qty}">
+            {{i.n95_req_qty || 0}}</td>
+          <td *ngIf="g12" class="td-border text-left" [ngClass]="{isError: i.n95_qty < i.n95_min_qty}">
+            {{i.n95_qty ||0}}(+{{i.n95_reserve_qty ||0}})</td>
+          <td *ngIf="g12" class="td-border text-left" [ngClass]="{isError: i.n95_qty < i.n95_min_qty}"><input
+              type="number" (keyup)="sumProduct()" class="clr-input" appNumberOnly style="width: 50px;"
+              [value]="i.n95_recomment_qty" [(ngModel)]="i.n95_recomment_qty"></td>
+
+          <td *ngIf="g13" class="td-border text-left"
+            [ngClass]="{isError: i.shoe_cover_qty < i.shoe_cover_min_qty,isWarning: i.shoe_cover_qty >= i.shoe_cover_min_qty}">
+            {{i.shoe_cover_req_qty || 0}}</td>
+          <td *ngIf="g13" class="td-border text-left"
+            [ngClass]="{isError: i.shoe_cover_qty < i.shoe_cover_min_qty,isWarning: i.shoe_cover_qty >= i.shoe_cover_min_qty}">
+            {{i.shoe_cover_qty ||0}}(+{{i.shoe_cover_reserve_qty ||0}})</td>
+          <td *ngIf="g13" class="td-border text-left"
+            [ngClass]="{isError: i.shoe_cover_qty < i.shoe_cover_min_qty,isWarning: i.shoe_cover_qty >= i.shoe_cover_min_qty}">
+            <input type="number" (keyup)="sumProduct()" class="clr-input" appNumberOnly style="width: 50px;"
+              [value]="i.shoe_cover_recomment_qty" [(ngModel)]="i.shoe_cover_recomment_qty"></td>
+
+          <td *ngIf="g14" class="td-border text-left"
+            [ngClass]="{isError: i.surgical_hood_qty < i.surgical_hood_min_qty}">
+            {{i.surgical_hood_req_qty || 0}}</td>
+          <td *ngIf="g14" class="td-border text-left"
+            [ngClass]="{isError: i.surgical_hood_qty < i.surgical_hood_min_qty}">
+            {{i.surgical_hood_qty ||0}}(+{{i.surgical_hood_reserve_qty ||0}})</td>
+          <td *ngIf="g14" class="td-border text-left"
+            [ngClass]="{isError: i.surgical_hood_qty < i.surgical_hood_min_qty}">
+            <input type="number" (keyup)="sumProduct()" class="clr-input" appNumberOnly style="width: 50px;"
+              [value]="i.surgical_hood_recomment_qty" [(ngModel)]="i.surgical_hood_recomment_qty"></td>
+
+          <td *ngIf="g15" class="td-border text-left"
+            [ngClass]="{isError: i.long_glove_qty < i.long_glove_min_qty,isWarning: i.long_glove_qty >= i.long_glove_min_qty}">
+            {{i.long_glove_req_qty || 0}}</td>
+          <td *ngIf="g15" class="td-border text-left"
+            [ngClass]="{isError: i.long_glove_qty < i.long_glove_min_qty,isWarning: i.long_glove_qty >= i.long_glove_min_qty}">
+            {{i.long_glove_qty ||0}}(+{{i.long_glove_reserve_qty ||0}})</td>
+          <td *ngIf="g15" class="td-border text-left"
+            [ngClass]="{isError: i.long_glove_qty < i.long_glove_min_qty,isWarning: i.long_glove_qty >= i.long_glove_min_qty}">
+            <input type="number" (keyup)="sumProduct()" class="clr-input" appNumberOnly style="width: 50px;"
+              [value]="i.long_glove_recomment_qty" [(ngModel)]="i.long_glove_recomment_qty"></td>
+
+          <td *ngIf="g16" class="td-border text-left" [ngClass]="{isError: i.face_shield_qty < i.face_shield_min_qty}">
+            {{i.face_shield_req_qty || 0}}</td>
+          <td *ngIf="g16" class="td-border text-left" [ngClass]="{isError: i.face_shield_qty < i.face_shield_min_qty}">
+            {{i.face_shield_qty ||0}}(+{{i.face_shield_reserve_qty ||0}})</td>
+          <td *ngIf="g16" class="td-border text-left" [ngClass]="{isError: i.face_shield_qty < i.face_shield_min_qty}">
+            <input type="number" (keyup)="sumProduct()" class="clr-input" appNumberOnly style="width: 50px;"
+              [value]="i.face_shield_recomment_qty" [(ngModel)]="i.face_shield_recomment_qty"></td>
+
+          <td *ngIf="g17" class="td-border text-left"
+            [ngClass]="{isError: i.surgical_mask_qty < i.surgical_mask_min_qty,isWarning: i.surgical_mask_qty >= i.surgical_mask_min_qty}">
+            {{i.surgical_mask_req_qty || 0}}</td>
+          <td *ngIf="g17" class="td-border text-left"
+            [ngClass]="{isError: i.surgical_mask_qty < i.surgical_mask_min_qty,isWarning: i.surgical_mask_qty >= i.surgical_mask_min_qty}">
+            {{i.surgical_mask_qty ||0}}(+{{i.surgical_mask_reserve_qty ||0}})</td>
+          <td *ngIf="g17" class="td-border text-left"
+            [ngClass]="{isError: i.surgical_mask_qty < i.surgical_mask_min_qty,isWarning: i.surgical_mask_qty >= i.surgical_mask_min_qty}">
+            <input type="number" (keyup)="sumProduct()" class="clr-input" appNumberOnly style="width: 50px;"
+              [value]="i.surgical_mask_recomment_qty" [(ngModel)]="i.surgical_mask_recomment_qty"></td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-success btn-sm btn-block" (click)="onClickFulFill()">บันทึก</button>
+  </div>
+</div>
+
+
+<clr-modal [(clrModalOpen)]="isModal">
+  <h3 class="modal-title">เลือกรายการที่ต้องการเติม</h3>
+  <div class="modal-body">
+
+    <input type="checkbox" name="gAll" [(ngModel)]="gAll" (click)="onClickAll()">ทั้งหมด<br>
+    <input type="checkbox" name="g9" [(ngModel)]="g9">surgical gown<br>
+    <input type="checkbox" name="g10" [(ngModel)]="g10">cover all 1<br>
+    <input type="checkbox" name="g11" [(ngModel)]="g11">cover all 2<br>
+    <input type="checkbox" name="g12" [(ngModel)]="g12">n95<br>
+    <input type="checkbox" name="g13" [(ngModel)]="g13">shoe cover<br>
+    <input type="checkbox" name="g14" [(ngModel)]="g14">Hood cover<br>
+    <input type="checkbox" name="g15" [(ngModel)]="g15">Nitrile Glove<br>
+    <input type="checkbox" name="g16" [(ngModel)]="g16">face shield<br>
+    <input type="checkbox" name="g17" [(ngModel)]="g17">surgical mask
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="onClickSelect()">Ok</button>
+    <button type="button" class="btn btn-danger" [routerLink]="['/admin/fulfill-supplies']">Cancel</button>
+  </div>
+</clr-modal>
+
+<app-loadding #modalLoading></app-loadding>

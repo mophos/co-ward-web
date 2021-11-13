@@ -1,0 +1,120 @@
+<button class="btn btn-primary" (click)="onClickExport()">Export</button>
+
+<table class="table table-compact" style="position: relative; border-collapse: collapse;">
+  <thead>
+    <tr>
+      <th class="text-left td-border" style="position: sticky; top: 0;"></th>
+      <th class="text-left td-border" style="position: sticky; top: 0;">ไม่ได้บันทึกมา</th>
+      <th class="text-left td-border" style="position: sticky; top: 0;">จังหวัด</th>
+      <th class="text-left td-border" style="position: sticky; top: 0;">โรงพยาบาล</th>
+      <th class="text-left td-border" style="position: sticky; top: 0;">HN/AN</th>
+      <th *ngIf='showPersons' class="text-left td-border" style="position: sticky; top: 0;">CID</th>
+      <th *ngIf='showPersons' class="text-left td-border" style="position: sticky; top: 0;">ชื่อ</th>
+      <th *ngIf='showPersons' class="text-left td-border" style="position: sticky; top: 0;">นามสกุล</th>
+      <th *ngIf='showPersons' class="text-left td-border" style="position: sticky; top: 0;">SAT ID</th>
+      <th class="text-left td-border" style="position: sticky; top: 0;">วันที่ ADMIT</th>
+      <th class="text-left td-border" style="position: sticky; top: 0;">ความรุนแรง</th>
+      <th class="text-left td-border" style="position: sticky; top: 0;">เตียง</th>
+      <th class="text-left td-border" style="position: sticky; top: 0;">เครื่องช่วยหายใจ</th>
+      <th class="text-left td-border" style="position: sticky; top: 0;">วันที่บันทึกล่าสุด</th>
+      <!-- <th class="text-left td-border" style="position: sticky; top: 0;">Hydroxychloroquine 200 mg.</th>
+      <th class="text-left td-border" style="position: sticky; top: 0;">Chloroquine 250 mg.</th>
+      <th class="text-left td-border" style="position: sticky; top: 0;">Darunavir 600 mg.</th>
+      <th class="text-left td-border" style="position: sticky; top: 0;">Lopinavir 200 mg./Ritonavir 50 mg.</th>
+      <th class="text-left td-border" style="position: sticky; top: 0;">Ritonavir 100 mg.</th>
+      <th class="text-left td-border" style="position: sticky; top: 0;">Azithromycin 250 mg.</th>
+      <th class="text-left td-border" style="position: sticky; top: 0;">Favipiravi</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let l of list; let idx=index;" [ngClass]="{'isSuccess': l.cio_status === 'CORRECT' && l.cio_date === date,'isError':l.cio_status === 'WRONG' && l.cio_date === date,'isPrimary':l.cio_status === 'NOTUPDATE' && l.cio_date === date}">
+      <td>
+        <div class="btn-group">
+          <button class="btn btn-sm btn-success btn-icon" title="ข้อมูลถูกต้อง" (click)="onClickCheck(l,'CORRECT')"
+            [disabled]="l.cio_date === date">
+            <clr-icon shape="check"></clr-icon>
+          </button>
+          <button class="btn btn-sm btn-danger btn-icon" title="ข้อมูลไม่ถูกต้อง" (click)="onClickCheck(l,'WRONG')"
+            [disabled]="l.cio_date === date">
+            <clr-icon shape="times"></clr-icon>
+          </button>
+          <button class="btn btn-sm btn-primary btn-icon" title="ไม่อัพเดตข้อมูล" (click)="onClickCheck(l,'NOTUPDATE')"
+            [disabled]="l.cio_date === date">
+            <clr-icon shape="minus"></clr-icon>
+          </button>
+        </div>
+      </td>
+      <td class="text-right td-border"> {{l.days}} วัน</td>
+      <td class="text-left td-border">{{l.province_name}}</td>
+      <td class="text-left td-border">{{l.hospname}}</td>
+      <td class="text-left td-border"> {{l.hn}}<br>{{l.an}}</td>
+      <td *ngIf='showPersons' class="text-left td-border"> {{l.cid}}</td>
+      <td *ngIf='showPersons' class="text-left td-border"> {{l.first_name}}</td>
+      <td *ngIf='showPersons' class="text-left td-border"> {{l.last_name}}</td>
+      <td *ngIf='showPersons' class="text-left td-border"> {{l.sat_id}}</td>
+      <td class="text-left td-border"> {{l.date_admit | dateTh:'DD/MM/YYYY'}}</td>
+      <td class="text-left td-border"> {{l.gcs_name}}</td>
+      <td class="text-left td-border"> {{l.bed_name}}</td>
+      <td class="text-left td-border"> {{l.medical_supplies_name}}</td>
+      <td class="text-left"> {{l.updated_entry_last| dateTh:'DD/MM/YYYY'}}</td>
+      <!-- <td class="text-center td-border">
+        <clr-icon shape="times" class="is-error" *ngIf='!l.d1 || l.d1 == 0'></clr-icon>
+        <clr-icon shape="check" class="is-success" *ngIf='l.d1 > 0'></clr-icon>
+      </td>
+      <td class="text-center td-border">
+        <clr-icon shape="times" class="is-error" *ngIf='!l.d2 || l.d2 == 0'></clr-icon>
+        <clr-icon shape="check" class="is-success" *ngIf='l.d2 > 0'></clr-icon>
+      </td>
+      <td class="text-center td-border">
+        <clr-icon shape="times" class="is-error" *ngIf='!l.d3 || l.d3 == 0'></clr-icon>
+        <clr-icon shape="check" class="is-success" *ngIf='l.d3 > 0'></clr-icon>
+      </td>
+      <td class="text-center td-border">
+        <clr-icon shape="times" class="is-error" *ngIf='!l.d4 || l.d4 == 0'></clr-icon>
+        <clr-icon shape="check" class="is-success" *ngIf='l.d4 > 0'></clr-icon>
+      </td>
+      <td class="text-center td-border">
+        <clr-icon shape="times" class="is-error" *ngIf='!l.d5 || l.d5 == 0'></clr-icon>
+        <clr-icon shape="check" class="is-success" *ngIf='l.d5 > 0'></clr-icon>
+      </td>
+      <td class="text-center td-border">
+        <clr-icon shape="times" class="is-error" *ngIf='!l.d7 || l.d7 == 0'></clr-icon>
+        <clr-icon shape="check" class="is-success" *ngIf='l.d7 > 0'></clr-icon>
+      </td>
+      <td class="text-center td-border">
+        <clr-icon shape="times" class="is-error" *ngIf='!l.d8 || l.d8 == 0'></clr-icon>
+        <clr-icon shape="check" class="is-success" *ngIf='l.d8 > 0'></clr-icon>
+      </td> -->
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="17" class="text-left">{{list.length | number:'1.0-0' }} รายการ</td>
+    </tr>
+  </tfoot>
+</table>
+
+<button class="btn btn-sm btn-success btn-icon" title="ข้อมูลถูกต้อง">
+  <clr-icon shape="check"></clr-icon>
+</button>= ข้อมูลถูกต้อง
+<button class="btn btn-sm btn-danger btn-icon" title="ข้อมูลไม่ถูกต้อง">
+  <clr-icon shape="times"></clr-icon>
+</button>= ข้อมูลไม่ถูกต้อง
+<button class="btn btn-sm btn-primary btn-icon" title="ไม่อัพเดตข้อมูล">
+  <clr-icon shape="minus"></clr-icon>
+</button>= ไม่อัพเดตข้อมูล
+
+
+<app-loadding #loading></app-loadding>
+
+
+<clr-modal [(clrModalOpen)]="modalRemark" [style.height.px]="500">
+  <h3 class="modal-title">หมายเหตุข้อมูลที่ไม่ถูก</h3>
+  <div class="modal-body">
+    <textarea name="remark" [(ngModel)]="remark" id="" cols="30" rows="10"></textarea>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="onSaveRemark()" [disabled]="!remark.length">ตกลง</button>
+    <button type="button" class="btn btn-danger" (click)="modalRemark = false">ยกเลิก</button>
+  </div>
+</clr-modal>

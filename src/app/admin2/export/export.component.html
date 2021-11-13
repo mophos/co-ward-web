@@ -1,0 +1,41 @@
+<nav class="breadcrumb">
+  <span>ส่งออกข้อมูล</span>
+</nav>
+
+<clr-datagrid [style.height.px]="800">
+  <clr-dg-column>รายการ</clr-dg-column>
+  <clr-dg-column></clr-dg-column>
+
+  <clr-dg-row>
+    <clr-dg-cell>ส่งออกรายงานเวชภัณฑ์ที่เบิก</clr-dg-cell>
+    <clr-dg-cell>
+      <button type="button" class="btn btn-success btn-sm" (click)="modalExport()">
+        <clr-icon shape="export"></clr-icon> ส่งออก
+      </button>
+    </clr-dg-cell>
+  </clr-dg-row>
+</clr-datagrid>
+
+<clr-modal [(clrModalOpen)]="modal" [style.height.px]="500">
+  <h3 class="modal-title">เลือกวันที่</h3>
+  <div class="modal-body">
+    <div class="clr-row">
+      <div class="clr-col-6">
+        <label for="">วันที่เริ่มต้น</label>
+        <my-date-picker-th name="sDate" [options]="myDatePickerOptions" [(ngModel)]="sDate" required>
+        </my-date-picker-th>
+      </div>
+      <div class="clr-col-6">
+        <label for="">วันที่สิ้นสุด</label>
+        <my-date-picker-th name="eDate" [options]="myDatePickerOptions" [(ngModel)]="eDate" required>
+        </my-date-picker-th>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="export()">ตกลง</button>
+    <button type="button" class="btn btn-danger" (click)="modal = false">ยกเลิก</button>
+  </div>
+</clr-modal>
+
+<app-loadding #loading></app-loadding>

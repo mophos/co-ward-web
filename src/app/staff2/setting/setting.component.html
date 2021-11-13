@@ -1,0 +1,166 @@
+<div class="clr-row">
+  <div class="clr-col-12">
+    <div class="card">
+      <div class="card-head">
+        <h3 style="padding-left: 1rem;">ข้อมูลโรงพยาบาล</h3>
+      </div>
+      <div class="card-body">
+        <div style="padding: 1rem;">
+          <div class="clr-row">
+            <div class="clr-col-2">
+              รหัสโรงพยาบาล<span class="required">*</span>
+            </div>
+            <div class="clr-col-4">
+              <input class="clr-input" type="text" name="" id="" [disabled]="true" value="{{hospCode}}" style="width: 100%;">
+            </div>
+          </div>
+          <div class="clr-row">
+            <div class="clr-col-2">
+              ชื่อโรงพยาบาล<span class="required">*</span>
+            </div>
+            <div class="clr-col-4">
+              <input class="clr-input" type="text" name="" id="" [disabled]="true" value="{{hospName}}" style="width: 100%;">
+            </div>
+          </div>
+          <div class="clr-row">
+            <div class="clr-col-2">
+              โทร (1)<span class="required">*</span>
+            </div>
+            <div class="clr-col-4">
+              <input class="clr-input" type="text" name="" id="" [(ngModel)]="tel" style="width: 100%;">
+            </div>
+          </div>
+          <div class="clr-row">
+            <div class="clr-col-2">
+              โทร (2)
+            </div>
+            <div class="clr-col-4">
+              <input class="clr-input" type="text" name="" id="" [(ngModel)]="telephone" style="width: 100%;">
+            </div>
+          </div>
+          <div class="clr-row">
+            <div class="clr-col-2">
+              ที่อยู่<span class="required">*</span>
+            </div>
+            <div class="clr-col-4">
+              <input class="clr-input" type="text" name="" id="" [(ngModel)]="address" style="width: 100%;">
+            </div>
+          </div>
+          <div class="clr-row">
+            <div class="clr-col-2">
+              ตำบล<span class="required">*</span>
+            </div>
+            <div class="clr-col-4">
+              <app-autocomplete-subdistrict style="padding: 0px" #tambon (onselect)="onSelectTambon($event)">
+              </app-autocomplete-subdistrict>
+            </div>
+          </div>
+          <div class="clr-row">
+            <div class="clr-col-2">
+              อำเภอ<span class="required">*</span>
+            </div>
+            <div class="clr-col-4">
+              <app-autocomplete-district style="padding: 0px" #ampur (onselect)="onSelectAmpur($event)">
+              </app-autocomplete-district>
+            </div>
+          </div>
+          <div class="clr-row">
+            <div class="clr-col-2">
+              จังหวัด<span class="required">*</span>
+            </div>
+            <div class="clr-col-4">
+              <app-autocomplete-province style="padding: 0px" #province (onselect)="onSelectProvince($event)">
+              </app-autocomplete-province>
+            </div>
+          </div>
+          <div class="clr-row">
+            <div class="clr-col-2">
+              รหัสไปรษณีย์<span class="required">*</span>
+            </div>
+            <div class="clr-col-4">
+              <app-autocomplete-zipcode style="padding: 0px" #zipcode (onselect)="onSelectZipcode($event)">
+              </app-autocomplete-zipcode>
+            </div>
+          </div>
+          <div class="clr-row">
+            <div class="clr-col-2">
+              ละติจูด
+            </div>
+            <div class="clr-col-4">
+              <input class="clr-input" type="text" name="" id="" [(ngModel)]="lat" style="width: 100%;">
+            </div>
+          </div>
+          <div class="clr-row">
+            <div class="clr-col-2">
+              ลองติจูด
+            </div>
+            <div class="clr-col-4">
+              <input class="clr-input" type="text" name="" id="" [(ngModel)]="long" style="width: 100%;">
+            </div>
+          </div>
+
+          <br>
+          <div class="clr-row">
+            <div class="clr-col-12" style="font-weight: bold;">ข้อมูลผู้รับของ</div>
+            <div class="clr-col-2">
+              ชื่อผู้รับของ<span class="required">*</span>
+            </div>
+            <div class="clr-col-4">
+              <input class="clr-input" type="text" name="" id="" [(ngModel)]="contactName" style="width: 100%;">
+            </div>
+          </div>
+          <div class="clr-row">
+            <div class="clr-col-2">
+              เบอร์ผู้รับของ<span class="required">*</span>
+            </div>
+            <div class="clr-col-4">
+              <input class="clr-input" type="text" name="" id="" [(ngModel)]="contactTel" style="width: 100%;">
+            </div>
+          </div>
+
+
+
+
+
+          <br>
+          <div class="clr-row">
+            <div class="clr-col-12"  style="font-weight: bold;">ข้อมูลผู้อำนวยการ</div>
+            <div class="clr-col-2">
+              ชื่อผู้อำนวยการ
+            </div>
+            <div class="clr-col-4">
+              <input class="clr-input" type="text" name="" id="" [(ngModel)]="nameManager" style="width: 100%;" placeholder="ชื่อผู้อำนวยการ">
+            </div>
+          </div>
+          <div class="clr-row">
+            <div class="clr-col-2">
+              เบอร์โทรศัพท์ 
+            </div>
+            <div class="clr-col-4">
+              <input class="clr-input" type="text" name="" id="" [(ngModel)]="telephoneManager" style="width: 100%;" placeholder="เบอร์โทรศัพท์">
+            </div>
+          </div>
+          <div class="clr-row">
+            <div class="clr-col-2">
+              อีเมล
+            </div>
+            <div class="clr-col-4">
+              <input class="clr-input" type="text" name="" id="" [(ngModel)]="emailManager" style="width: 100%;" placeholder="อีเมล">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="clr-row">
+  <div class="clr-col-12">
+    <button type="button" class="btn btn-success" (click)="save()">
+      บันทึก
+    </button>
+  </div>
+</div>
+
+<app-loadding #loading></app-loadding>

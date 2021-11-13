@@ -1,0 +1,42 @@
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="javascript://" routerLink="/staff/inventory-status">รายการจ่ายจากส่วนกลาง</a>
+</nav>
+
+<clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
+  <clr-dg-column>#</clr-dg-column>
+  <clr-dg-column>วันที่อนุมัติ</clr-dg-column>
+  <clr-dg-column>เลขที่ใบ</clr-dg-column>
+  <clr-dg-column></clr-dg-column>
+
+  <clr-dg-row *ngFor="let l of listFulFill; let idx=index;" [ngClass]="{ 'isSuccess': l.is_received == 'Y' }">
+    <clr-dg-cell>{{idx+1}}</clr-dg-cell>
+    <clr-dg-cell>{{l.approved_date | dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
+    <clr-dg-cell>{{l.code}}</clr-dg-cell>
+    <clr-dg-cell>
+      <button class="btn btn-sm btn-icon btn-success" style="margin: 0;" *ngIf="l.is_received == 'N'"
+        (click)="receive(l)">
+        <clr-icon shape="download"></clr-icon>
+        รับเข้าคลัง
+      </button>
+    </clr-dg-cell>
+    <clr-datagrid ngProjectAs="clr-dg-row-detail" *clrIfExpanded>
+      <clr-dg-column>ชื่อ</clr-dg-column>
+      <clr-dg-column>จำนวน</clr-dg-column>
+      <clr-dg-column>หน่วย</clr-dg-column>
+
+      <clr-dg-row *ngFor="let i of l.details;">
+        <clr-dg-cell>{{i.generic_name}}</clr-dg-cell>
+        <clr-dg-cell>{{i.qty}}</clr-dg-cell>
+        <clr-dg-cell>{{i.unit_name}}</clr-dg-cell>
+      </clr-dg-row>
+      <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
+    </clr-datagrid>
+  </clr-dg-row>
+  <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
+  <!-- <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgTotalItems]="totalApproved" [clrDgPageSize]="limit">
+      <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
+      {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} จาก {{pagination.totalItems}} รายการ
+    </clr-dg-pagination>
+  </clr-dg-footer> -->
+</clr-datagrid>

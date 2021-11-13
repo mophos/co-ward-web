@@ -4,7 +4,7 @@ import { HelpModule } from 'src/app/help/help.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ManagerRoutingModule } from './manager-routing.module';
+import { Manager2RoutingModule } from './manager2-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -55,6 +55,8 @@ import { ReportDischargeDailyComponent } from './report-discharge-daily/report-d
 import { ReportLabPositiveComponent } from './report-lab-positive/report-lab-positive.component';
 import { ReportColabCheckComponent } from './report-colab-check/report-colab-check.component';
 import { ReportBed2Component } from './report-bed2/report-bed2.component';
+import { ReportRetrospectiveComponent } from './report-retrospective/report-retrospective.component';
+import { DashboardNationalComponent } from './dashboard-national/dashboard-national.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -103,11 +105,14 @@ import { ReportBed2Component } from './report-bed2/report-bed2.component';
     ReportDischargeDailyComponent,
     ReportLabPositiveComponent,
     ReportColabCheckComponent,
-    ReportBed2Component
+    ReportBed2Component,
+    /////// new ////////
+    ReportRetrospectiveComponent,
+    DashboardNationalComponent
   ],
   imports: [
     CommonModule,
-    ManagerRoutingModule,
+    Manager2RoutingModule,
     BrowserModule,
     ClarityModule,
     BrowserAnimationsModule,
@@ -119,4 +124,4 @@ import { ReportBed2Component } from './report-bed2/report-bed2.component';
     PatientInfoDetailsComponent
   ]
 })
-export class ManagerModule { }
+export class Manager2Module { }

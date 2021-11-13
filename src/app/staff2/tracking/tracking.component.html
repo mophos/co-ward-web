@@ -1,0 +1,30 @@
+<clr-datagrid>
+  <clr-dg-column>ลำดับ</clr-dg-column>
+  <clr-dg-column>วันที่</clr-dg-column>
+  <clr-dg-column>tracking</clr-dg-column>
+  <clr-dg-column>สถานะ</clr-dg-column>
+  <clr-dg-column></clr-dg-column>
+
+  <clr-dg-row *ngFor="let l of list;let idx=index;">
+    <clr-dg-cell>{{idx+1}}</clr-dg-cell>
+    <clr-dg-cell>{{l.created_at |  dateTh:'DD/MM/YYYY hh:mm'}}</clr-dg-cell>
+    <clr-dg-cell>
+      <a [href]="l.tracking">{{l.tracking}}</a>
+      </clr-dg-cell>
+    <clr-dg-cell>{{l.status_name_th || 'รอยืนยัน'}}</clr-dg-cell>
+    <clr-dg-cell>
+      <button class="btn btn-sm btn-primary" (click)="onOpenDetails(l)"><clr-icon shape="search"></clr-icon> รายละเอียด</button>
+    </clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="50">
+      <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
+      {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+      of {{pagination.totalItems}} รายการ
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>
+
+<app-tracking-detail #modalsDetail></app-tracking-detail>

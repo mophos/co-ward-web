@@ -200,4 +200,11 @@ export class ReportService {
     const url = `${this.apiUrl}/v1/report/bed-province`;
     return await this.http.get(url).toPromise();
   }
+
+  //////////////// new ////////////////////////
+
+  async  reportRetrospective () {
+    const url = 'https://618f591050e24d0017ce16b5.mockapi.io/user'
+    return await this.http.get(url).toPromise()
+  }
 }

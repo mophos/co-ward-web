@@ -1,0 +1,107 @@
+<nav class="breadcrumb">
+  <!-- <a class="breadcrumb-item" href="javascript://" routerLink="/admin/requisition-min-max">ตั้งค่า MIN-MAX</a> -->
+  <span>แก้ไขข้อมูลผู้ป่วยเก่า</span>
+</nav>
+
+<clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
+  <clr-dg-column>HN</clr-dg-column>
+  <clr-dg-column>AN</clr-dg-column>
+  <clr-dg-column>ชื่อ-นามสกุล</clr-dg-column>
+  <clr-dg-column>วันที่ Admit</clr-dg-column>
+  <clr-dg-column>วันที่ Discharge</clr-dg-column>
+  <clr-dg-column></clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let l of list">
+    <clr-dg-cell>{{l.hn}}</clr-dg-cell>
+    <clr-dg-cell>{{l.an}}</clr-dg-cell>
+    <clr-dg-cell>{{l.first_name}} {{l.last_name}}</clr-dg-cell>
+    <clr-dg-cell>{{l.date_admit | dateTh:'D MMM YYYY'}}</clr-dg-cell>
+    <clr-dg-cell>{{l.date_discharge | dateTh:'D MMM YYYY'}}</clr-dg-cell>
+    <clr-dg-cell>
+      <button class="btn btn-sm btn-success" (click)="onClickEdit(l)" title="แก้ไข">
+        <clr-icon shape="note"></clr-icon>
+      </button>
+    </clr-dg-cell>
+  </clr-dg-row>
+  <!-- <clr-dg-footer>
+      <clr-dg-pagination #pagination [clrDgTotalItems]="total" [clrDgPageSize]="limit">
+        <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} จาก {{pagination.totalItems}} รายการ
+      </clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+
+<clr-modal [(clrModalOpen)]="modal" [clrModalClosable]="false" [clrModalSize]="'xl'">
+  <!-- <h3 class="modal-title"></h3> -->
+  <div class="modal-body">
+    <table class="table">
+      <tr>
+        <th class="left">วันที่</th>
+        <th class="left">ความรุนแรง</th>
+        <th class="left">เตียง</th>
+        <th class="left">เครื่องช่วยหายใจ</th>
+      </tr>
+      <tr *ngFor="let l of data;let idx=index;" [ngClass]="{isWarning: idx%2==0}">
+        <td class="left">
+          <label style="font-weight: bold;">
+            {{l.date | dateTh:'DD-MM-YYYY' }}
+          </label>
+        </td>
+        <td class="left">
+          <div *ngFor="let i of gcs">
+            <input type="radio" *ngIf="(l.gcs_id != 5 && l.gcs_id !=6) && i.id ==5 " name="gcs-{{l.id}}" id="gcs-{{i.id}}-{{l.id}}" (click)="checkGcs(i,l)" [(ngModel)]="l.gcs_id"
+              [value]="i.id">
+            <label [title]="i.name" class="pointer" for="gcs-{{i.id}}-{{l.id}}">
+              {{i.name}}
+            </label>
+          </div>
+        </td>
+        <td class="left">
+          <div *ngFor="let i of beds">
+            <input type="radio" name="bed-{{l.id}}" id="bed-{{i.id}}-{{l.id}}" [(ngModel)]="l.bed_id" [value]="i.id">
+            <label [title]="i.name" class="pointer" for="bed-{{i.id}}-{{l.id}}">
+              {{i.name}}
+            </label>
+          </div>
+        </td>
+        <td class="left">
+          <div *ngFor="let i of medicalSupplies">
+            <input type="radio" (click)='uncheckRadioMedicalSupplies(l.id,i.id)' (click)="checkMedicalSupplies(i,l)"
+              name="medicalSupplie-id-{{l.id}}" id="medicalSupplie-{{i.id}}-{{l.id}}" [(ngModel)]="l.medical_supplie_id"
+              [value]="i.id">
+            <label [title]="i.name" class="pointer" for="medicalSupplie-{{i.id}}-{{l.id}}">
+              {{i.name}}
+            </label>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="save()" [disabled]="isSave">
+      บันทึก
+    </button>
+    <button type="button" class="btn btn-danger" (click)="modal = false">
+      ปิด
+    </button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="modalDate" [clrModalClosable]="false" [clrModalSize]="'md'" style="height: 400px;">
+  <!-- <h3 class="modal-title"></h3> -->
+  <div class="modal-body">
+    วันที่ Admit : <my-date-picker-th name="dateAdmit" [options]="myDatePickerOptions" [(ngModel)]="dateAdmit" required>
+    </my-date-picker-th>
+    วันที่ Discharge : <my-date-picker-th name="dateDischarge" [options]="myDatePickerOptions" [(ngModel)]="dateDischarge"
+      required>
+    </my-date-picker-th>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="saveDates()" [disabled]="isSave">
+      บันทึก
+    </button>
+    <button type="button" class="btn btn-danger" (click)="modalDate = false">
+      ปิด
+    </button>
+  </div>
+</clr-modal>
