@@ -74,6 +74,8 @@ import { ReportMedicalSuppliesComponent } from './report-medical-supplies/report
 import { ReportAdmitPuiComponent } from './report-admit-pui/report-admit-pui.component';
 import { BedHospManageComponent } from './bed-hosp-manage/bed-hosp-manage.component';
 import { ReportDcComponent } from './report-dc/report-dc.component';
+import { ResultLabComponent } from './result-lab/result-lab.component';
+import { ResultVaccineComponent } from './result-vaccine/result-vaccine.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -118,7 +120,9 @@ import { ReportDcComponent } from './report-dc/report-dc.component';
     CioCheckPatientComponent,
     ReportMedicalSuppliesComponent,
     BedHospManageComponent,
-    ReportDcComponent
+    ReportDcComponent,
+    ResultLabComponent,
+    ResultVaccineComponent
   ],
   imports: [
     HelpModule,

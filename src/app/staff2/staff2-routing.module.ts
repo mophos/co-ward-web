@@ -73,6 +73,8 @@ import { ReportAdmitPuiComponent } from './report-admit-pui/report-admit-pui.com
 import { BedHospManageComponent } from './bed-hosp-manage/bed-hosp-manage.component';
 import { AuthManageBedHospService } from '../auth-staff/auth-manage-bed-hosp.service';
 import { ReportDcComponent } from './report-dc/report-dc.component';
+import { ResultLabComponent } from './result-lab/result-lab.component';
+import { ResultVaccineComponent } from './result-vaccine/result-vaccine.component';
 
 const routes: Routes = [
   {
@@ -149,6 +151,10 @@ const routes: Routes = [
       { path: 'report/8', component: Report8Component },
       { path: 'report/9', component: Report9Component },
       { path: 'report/10', component: Report10Component },
+
+      //////////// new ////////////////
+      { path: 'result-lab', component: ResultLabComponent },
+      { path: 'result-vaccine', component: ResultVaccineComponent },
     ]
   }
 ];

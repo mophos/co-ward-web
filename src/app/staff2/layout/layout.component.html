@@ -61,6 +61,17 @@
         <clr-icon clrVerticalNavIcon shape="wand"></clr-icon>
         สถานะผู้ป่วยรายวัน
       </a>
+      <a clrVerticalNavLink routerLink="/staff2/result-lab" title="ผลการตรวจ lab"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="volume"></clr-icon>
+        ผลการตรวจ lab (new)
+      </a>
+      <a clrVerticalNavLink routerLink="/staff2/result-vaccine" title="การฉีดวัคซีน"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="color-picker"></clr-icon>
+        การฉีดวัคซีน (new)
+      </a>
+      
       <a *ngIf="covidApproveDrugsMenu" clrVerticalNavLink routerLink="/staff/covid-case-approved-drugs" title="จ่ายยา"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
