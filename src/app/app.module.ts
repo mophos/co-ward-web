@@ -36,6 +36,7 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   password: 'q4u',
   protocol: 'wss'
 };
+import { HighchartsChartModule } from 'highcharts-angular';
 
 export function tokenGetter() {
   return sessionStorage.getItem('token');
@@ -67,7 +68,8 @@ export function tokenGetter() {
     HelpModule,
     NgSelectModule,
     NgxMaskModule.forRoot(),
-    MqttModule.forRoot(MQTT_SERVICE_OPTIONS)
+    MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
+    HighchartsChartModule
   ],
   providers: [
     { provide: 'API_URL', useValue: environment.apiUrl },

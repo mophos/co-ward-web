@@ -75,6 +75,9 @@ import { AuthManageBedHospService } from '../auth-staff/auth-manage-bed-hosp.ser
 import { ReportDcComponent } from './report-dc/report-dc.component';
 import { ResultLabComponent } from './result-lab/result-lab.component';
 import { ResultVaccineComponent } from './result-vaccine/result-vaccine.component';
+import { BedEachTypeChartComponent } from './bed-each-type-chart/bed-each-type-chart.component';
+import { CovidEachCaseChartComponent } from './covid-each-case-chart/covid-each-case-chart.component';
+import { CovidEachStatusChartComponent } from './covid-each-status-chart/covid-each-status-chart.component';
 
 const routes: Routes = [
   {
@@ -155,6 +158,9 @@ const routes: Routes = [
       //////////// new ////////////////
       { path: 'result-lab', component: ResultLabComponent },
       { path: 'result-vaccine', component: ResultVaccineComponent },
+      { path: 'bed-each-type-chart', component: BedEachTypeChartComponent },
+      { path: 'covid-each-case-chart', component: CovidEachCaseChartComponent },
+      { path: 'covid-each-status-chart', component: CovidEachStatusChartComponent }
     ]
   }
 ];

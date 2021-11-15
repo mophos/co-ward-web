@@ -79,6 +79,10 @@ import { ResultVaccineComponent } from './result-vaccine/result-vaccine.componen
 import { TimePipe } from './pipes/time.pipe';
 import { DatePipe } from './pipes/date.pipe';
 import { DateTimePipe } from './pipes/date-time.pipe';
+import { BedEachTypeChartComponent } from './bed-each-type-chart/bed-each-type-chart.component';
+import { CovidEachCaseChartComponent } from './covid-each-case-chart/covid-each-case-chart.component';
+import { CovidEachStatusChartComponent } from './covid-each-status-chart/covid-each-status-chart.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -128,7 +132,10 @@ import { DateTimePipe } from './pipes/date-time.pipe';
     ResultVaccineComponent,
     TimePipe,
     DatePipe,
-    DateTimePipe
+    DateTimePipe,
+    BedEachTypeChartComponent,
+    CovidEachCaseChartComponent,
+    CovidEachStatusChartComponent
   ],
   imports: [
     HelpModule,
@@ -139,7 +146,8 @@ import { DateTimePipe } from './pipes/date-time.pipe';
     BrowserAnimationsModule,
     FormsModule,
     MyDatePickerTHModule,
-    NgSelectModule
+    NgSelectModule,
+    HighchartsChartModule
   ],
   exports: [
     TrackingDetailComponent
