@@ -76,6 +76,9 @@ import { BedHospManageComponent } from './bed-hosp-manage/bed-hosp-manage.compon
 import { ReportDcComponent } from './report-dc/report-dc.component';
 import { ResultLabComponent } from './result-lab/result-lab.component';
 import { ResultVaccineComponent } from './result-vaccine/result-vaccine.component';
+import { TimePipe } from './pipes/time.pipe';
+import { DatePipe } from './pipes/date.pipe';
+import { DateTimePipe } from './pipes/date-time.pipe';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -122,7 +125,10 @@ import { ResultVaccineComponent } from './result-vaccine/result-vaccine.componen
     BedHospManageComponent,
     ReportDcComponent,
     ResultLabComponent,
-    ResultVaccineComponent
+    ResultVaccineComponent,
+    TimePipe,
+    DatePipe,
+    DateTimePipe
   ],
   imports: [
     HelpModule,
