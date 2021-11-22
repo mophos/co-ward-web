@@ -45,7 +45,6 @@ import { Report10Component } from './report-all/report-10/report-10.component';
 import { ReportReviewHomeworkAllComponent } from './report-all/report-review-homework-all/report-review-homework-all.component';
 import { ReportRecordsComponent } from './report-records/report-records.component';
 import { ReportLocalQuarantineComponent } from './report-local-quarantine/report-local-quarantine.component';
-import { ReportRetrospectiveComponent } from './report-retrospective/report-retrospective.component';
 import { DashboardNationalComponent } from './dashboard-national/dashboard-national.component';
 
 const routes: Routes = [
@@ -120,7 +119,6 @@ const routes: Routes = [
       { path: 'report-bed-zone', component: ReportBed2Component },
       
       ///////// new ////////////
-      { path: 'report-retrospective', component: ReportRetrospectiveComponent },
       { path: 'dashboard-national', component: DashboardNationalComponent }
     ]
   }

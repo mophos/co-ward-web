@@ -55,8 +55,8 @@ import { ReportDischargeDailyComponent } from './report-discharge-daily/report-d
 import { ReportLabPositiveComponent } from './report-lab-positive/report-lab-positive.component';
 import { ReportColabCheckComponent } from './report-colab-check/report-colab-check.component';
 import { ReportBed2Component } from './report-bed2/report-bed2.component';
-import { ReportRetrospectiveComponent } from './report-retrospective/report-retrospective.component';
 import { DashboardNationalComponent } from './dashboard-national/dashboard-national.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -107,7 +107,6 @@ import { DashboardNationalComponent } from './dashboard-national/dashboard-natio
     ReportColabCheckComponent,
     ReportBed2Component,
     /////// new ////////
-    ReportRetrospectiveComponent,
     DashboardNationalComponent
   ],
   imports: [
@@ -118,7 +117,8 @@ import { DashboardNationalComponent } from './dashboard-national/dashboard-natio
     BrowserAnimationsModule,
     FormsModule,
     HelpModule,
-    MyDatePickerTHModule
+    MyDatePickerTHModule,
+    HighchartsChartModule
   ],
   exports: [
     PatientInfoDetailsComponent

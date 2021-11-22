@@ -10,14 +10,24 @@
     <button clrTabLink>รายงานตามวันที่ Discharge</button>
     <clr-tab-content *clrIfActive>
       <br>
-      <div class="clr-row">
-        <div class="clr-col-2">วันที่แสดงข้อมูล</div>
-        <div class="clr-col-2">
+      <div
+        style="margin-bottom: 8px;"
+        class="clr-row">
+        <div class="clr-col-3">
+          <label> วันที่เริ่ม </label>
           <my-date-picker-th name="dateDischarge" [options]="myDatePickerOptions" (dateChanged)="onChangeDateDischarge($event)"
             [(ngModel)]="dateDischarge" required>
           </my-date-picker-th>
         </div>
-        <div class="clr-col-8">
+        <div class="clr-col-3">
+          <label> วันที่สิ้นสุด </label>
+          <my-date-picker-th name="dateDischarge" [options]="myDatePickerOptions" (dateChanged)="onChangeDateDischarge($event)"
+            [(ngModel)]="dateDischarge" required>
+          </my-date-picker-th>
+        </div>
+        <div
+          style="padding-top: 24px;"
+          class="clr-col-6">
           <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
             <clr-icon shape="download"></clr-icon>export excel
           </button>
@@ -26,7 +36,9 @@
           </button>
         </div>
       </div>
-      <div class="clr-row">
+      <div
+        style="margin-bottom: 12px;"  
+        class="clr-row">
         <div class="clr-col-12">
           <span class="required">*</span> หมายเหตุ หากดูรายงานวันปัจจุบัน ข้อมูลอาจเปลี่ยนแปลง
           เพราะรพ.สามารถแก้ไขข้อมูลได้ในวันปัจจุบัน
