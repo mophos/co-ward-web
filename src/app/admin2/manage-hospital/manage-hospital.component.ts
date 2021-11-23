@@ -57,8 +57,29 @@ export class ManageHospitalComponent implements OnInit {
   tambonCode: any;
   ampurCode: any;
   provinceCode: any;
-
+  
+  // new 
+  hospType: any
+  hosTypeEnum = [
+    {
+      name: 'โรงพยาบาล',
+      value: 'HOSPITAL'
+    },
+    {
+      name: 'โรงพยาบาลสนาม',
+      value: 'FIELD'
+    },
+    {
+      name: 'Hospitel',
+      value: 'HOSPITEL'
+    },
+    {
+      name: 'Community Isolation',
+      value: 'CI'
+    }
+  ]
   coordinatorName: any
+
   constructor(
     private hospitalService: HospitalService,
     private nodeSurgicalService:NodeSurgicalService,
@@ -77,8 +98,6 @@ export class ManageHospitalComponent implements OnInit {
   async getTypeList() {
     this.loading = true;
     const rs: any = await this.hospitalService.getTypeList();
-    console.log(rs);
-
     if (rs.ok) {
       this.listType = rs.rows;
     } else {
