@@ -1,0 +1,64 @@
+<nav class="breadcrumb">
+    <span class="breadcrumb-item active">
+        รายงานผู้ป่วยรายเขต
+    </span>
+</nav>
+
+<table style="border-collapse: collapse;" class="table table-compact">
+    <thead>
+        <th class="td-border"> เขตสุขภาพ </th>
+        <th class="td-border"> ผู้ป่วยทั้งหมด </th>
+        <th class="td-border"> Servere </th>
+        <th class="td-border"> Invasive Ventilator </th>
+        <th class="td-border"> Non-Invasive Ventilator  </th>
+        <th class="td-border"> High flow </th>
+        <th class="td-border"> Moderate </th>
+        <th class="td-border"> Mild </th>
+        <th class="td-border"> Asymptomatic </th>
+        <th class="td-border"> Dead </th>
+        <th> PUI </th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of [].constructor(13); let i = index">
+            <td class="td-border"> รวมเขต {{ i + 1 }} </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td>  </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td class="td-border"> รวมทุกเขต </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td>  </td>
+        </tr>
+        <tr>
+            <td class="td-border"> ทั่วประเทศ </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td>  </td>
+        </tr>
+    </tfoot>
+</table>

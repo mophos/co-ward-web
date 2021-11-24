@@ -29,7 +29,25 @@
 
 <!-- การใช้งานเตียงแต่ละประเภท -->
 <div *ngIf="tabs === 0">
-  <h3> การใช้งานเตียงแต่ละประเภท </h3>
+  <div
+    style="display: flex; margin-bottom: 8px;">
+    <h3 style="margin-right: 24px;">
+      การใช้งานเตียงแต่ละประเภท
+    </h3>
+    <div style="width: 200px; margin-right: 16px;">
+      <label> วันที่เริ่ม </label>
+      <my-date-picker-th name="dateDischarge" [options]="myDatePickerOptions" (dateChanged)="onChangeDateDischarge($event)"
+        [(ngModel)]="dateDischarge"
+        required>
+      </my-date-picker-th>
+    </div>
+    <div style="width: 200px;">
+      <label> วันที่สิ้นสุด </label>
+      <my-date-picker-th name="dateDischarge" [options]="myDatePickerOptions" (dateChanged)="onChangeDateDischarge($event)"
+        [(ngModel)]="dateDischarge" required>
+      </my-date-picker-th>
+    </div>
+  </div>
   <div style="display: flex;">
     <div 
       style="margin-right: 24px"

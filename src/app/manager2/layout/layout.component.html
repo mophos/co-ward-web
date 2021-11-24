@@ -178,6 +178,65 @@
         </clr-vertical-nav-group-children>
       </clr-vertical-nav-group>
 
+      <clr-vertical-nav-group routerLinkActive="active">
+        <a clrVerticalNavLink href="javascript://">
+          <clr-icon shape="folder" class="is-solid" clrVerticalNavIcon></clr-icon>
+          รายงานรวม (new)
+        </a>
+        <clr-vertical-nav-group-children *clrIfExpanded="true">
+          <a clrVerticalNavLink [routerLink]="['/manager2/report-patients-district']"
+            title="รายงานผู้ป่วยรายเขต" routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            1. รายงานผู้ป่วยรายเขต
+          </a>
+          <a clrVerticalNavLink [routerLink]="['/manager2/report-beds-district']"
+            title="รายงานเตียงรายเขต" routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            2. รายงานเตียงรายเขต
+          </a>
+          <a clrVerticalNavLink [routerLink]="['/manager2/report-beds-province']"
+            title="รายงานเตียงรายจังหวัด" routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            3. รายงานเตียงรายจังหวัด
+          </a>
+          <a clrVerticalNavLink [routerLink]="['/manager2/report-beds-hospital']"
+            title="รายงานเตียงรายสถานพยาบาล" routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            4. รายงานเตียงรายสถานพยาบาล
+          </a>
+          <a clrVerticalNavLink [routerLink]="['/manager2/report-patients-status']"
+            title="รายงานผู้ป่วยตามสถานะ" routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            5. รายงานผู้ป่วยตามสถานะ
+          </a>
+          <a clrVerticalNavLink [routerLink]="['/manager2/report-patients-severity-illness']"
+            title="รายงานผู้ป่วยตามอาการ" routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            6. รายงานผู้ป่วยตามอาการ
+          </a>
+          <a clrVerticalNavLink [routerLink]="['/manager2/report-patients-ett-dead']"
+            title="รายงานผู้ป่วย ETT-DEAD" routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            7. รายงานผู้ป่วย ETT - DEAD
+          </a>
+          <a clrVerticalNavLink [routerLink]="['/manager2/report-patients-sum-daily']"
+            title="รายงานผู้ป่วย ETT-DEAD" routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            8. รายงานผู้ป่วย สะสม + วันนี้
+          </a>
+          <a clrVerticalNavLink [routerLink]="['/manager2/report-patients-admit']"
+            title="รายงานผู้ป่วย Admit" routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            9. รายงานผู้ป่วย Admit
+          </a>
+          <a clrVerticalNavLink [routerLink]="['/manager2/report-patients-discharge']"
+            title="รายงานผู้ป่วย Discharge" routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            10. รายงานผู้ป่วย Discharge
+          </a>
+        </clr-vertical-nav-group-children>
+      </clr-vertical-nav-group>
+
       <a clrVerticalNavLink routerLink="/manager2/dashboard-national"
         title="รายงานเวชภัณฑ์คงคลังเขตสุขภาพ" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="file" class="is-solid"></clr-icon>

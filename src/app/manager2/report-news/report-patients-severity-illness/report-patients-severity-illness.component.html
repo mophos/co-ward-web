@@ -1,0 +1,86 @@
+<nav
+    style="margin-bottom: 16px;"
+    class="breadcrumb">
+    <span class="breadcrumb-item active">
+        รายงานผู้ป่วยตามอาการ
+    </span>
+</nav>
+
+<div style="display: flex;">
+    <div style="width: 200px; margin-right: 16px;">
+        <label> วันที่เริ่ม </label>
+        <my-date-picker-th name="dateDischarge" [options]="myDatePickerOptions" (dateChanged)="onChangeDateDischarge($event)"
+            [(ngModel)]="dateDischarge"
+            required>
+        </my-date-picker-th>
+    </div>
+    <div style="width: 200px; margin-right: 16px;">
+        <label> วันที่สิ้นสุด </label>
+        <my-date-picker-th name="dateDischarge" [options]="myDatePickerOptions" (dateChanged)="onChangeDateDischarge($event)"
+            [(ngModel)]="dateDischarge" required>
+        </my-date-picker-th>
+    </div>
+    <div style="width: 200px; margin-right: 16px;">
+        <div> เขตสุขภาพ </div>
+        <div class="clr-select-wrapper" style="width: 100%;">
+            <select name="district" class="clr-select" style="width: 100%;">
+                <option value="all">เลือกเขต</option>
+                <option *ngFor="let item of [].constructor(13); let i = index" [value]="i">
+                    เขต {{ i + 1 }}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div style="width: 200px; margin-right: 16px;">
+        <div> จังหวัด </div>
+        <div class="clr-select-wrapper" style="width: 100%;">
+            <select
+                [(ngModel)]="province"
+                name="district"
+                class="clr-select"
+                style="width: 100%;"
+                (click)="setSelectMultiProvince()"
+                readonly="true">
+                <option style="display: none;" value=""> เลือกจังหวัด </option>
+            </select>
+            <div
+                *ngIf="isSelectProvince"
+                class="report-patients-severity-illness__select-menu">
+                <clr-checkbox-wrapper *ngFor="let item of [].constructor(77);">
+                    <input type="checkbox" clrCheckbox value="option1" />
+                    <label>Option 1</label>
+                </clr-checkbox-wrapper>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table style="border-collapse: collapse;" class="table table-compact">
+    <thead>
+        <tr>
+            <th class="td-border"> วันที่ </th>
+            <th class="td-border"> Servere Case </th>
+            <th class="td-border"> Moderate Case </th>
+            <th class="td-border"> Mild Case </th>
+            <th> Asymptomatic </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of [].constructor(10); let i = index">
+            <td class="td-border"> 24/11/2564 </td>
+            <td class="td-border"> 18451 </td>
+            <td class="td-border"> 821 </td>
+            <td class="td-border"> 1266 </td>
+            <td> 656 </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td class="td-border"> รวม </td>
+            <td class="td-border"> 29312 </td>
+            <td class="td-border"> 12312 </td>
+            <td class="td-border"> 123123 </td>
+            <td> 3211 </td>
+        </tr>
+    </tfoot>
+</table>

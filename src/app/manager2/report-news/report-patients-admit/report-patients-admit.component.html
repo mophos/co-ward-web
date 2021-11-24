@@ -1,0 +1,76 @@
+<nav
+    style="margin-bottom: 16px;"
+    class="breadcrumb">
+    <span class="breadcrumb-item active">
+        รายงานผู้ป่วย Admit
+    </span>
+</nav>
+
+<div style="display: flex;">
+    <label style="padding-top: 4px; margin-right: 16px;"> วันที่แสดงข้อมูล </label>
+    <div style="width: 200px; margin-right: 16px;">
+        <my-date-picker-th name="dateDischarge" [options]="myDatePickerOptions" (dateChanged)="onChangeDateDischarge($event)"
+            [(ngModel)]="dateDischarge"
+            required>
+        </my-date-picker-th>
+    </div>
+</div>
+
+<div style="overflow-x: auto;">
+    <table style="border-collapse: collapse;" class="table table-compact">
+        <thead>
+            <tr>
+                <th class="td-border"> เขต </th>
+                <th class="td-border"> จังหวัด </th>
+                <th class="td-border"> โรงพยาบาล </th>
+                <th class="td-border"> HN </th>
+                <th class="td-border"> AN </th>
+                <th class="td-border"> CID </th>
+                <th class="td-border"> ชื่อ </th>
+                <th class="td-border"> นามสกุล </th>
+                <th class="td-border"> เพศ </th>
+                <th class="td-border"> อายุ </th>
+                <th class="td-border"> วันที่ Admit </th>
+                <th class="td-border"> วันที่บันทึก </th>
+                <th class="td-border"> ความรุนแรง </th>
+                <th class="td-border"> เตียง </th>
+                <th class="td-border"> เครื่องช่วยหายใจ </th>
+                <th class="td-border"> วันที่ update อาการล่าสุด </th>
+                <th class="td-border"> ไม่ได้บันทึกมา </th>
+                <th class="td-border"> Darunavir 600 mg. </th>
+                <th class="td-border"> Lopinavir 200 mg. / Ritonavir 50 mg. </th>
+                <th class="td-border"> Ritonavir 100 mg. </th>
+                <th class="td-border"> Azithromycin 250 mg. </th>
+                <th class="td-border"> Favipiravi </th>
+                <th> หน่วยงาน </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of [].constructor(10); let i = index">
+                <td class="td-border">  </td>
+                <td class="td-border">  <td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td>  </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

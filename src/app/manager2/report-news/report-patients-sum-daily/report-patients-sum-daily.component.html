@@ -1,0 +1,117 @@
+<nav
+    style="margin-bottom: 16px;"
+    class="breadcrumb">
+    <span class="breadcrumb-item active">
+        รายงานผู้ป่วย สะสม + วันนี้
+    </span>
+</nav>
+
+<div style="display: flex;">
+    <div style="width: 200px; margin-right: 16px;">
+        <label> วันที่เริ่ม </label>
+        <my-date-picker-th name="dateDischarge" [options]="myDatePickerOptions" (dateChanged)="onChangeDateDischarge($event)"
+            [(ngModel)]="dateDischarge"
+            required>
+        </my-date-picker-th>
+    </div>
+    <div style="width: 200px; margin-right: 16px;">
+        <label> วันที่สิ้นสุด </label>
+        <my-date-picker-th name="dateDischarge" [options]="myDatePickerOptions" (dateChanged)="onChangeDateDischarge($event)"
+            [(ngModel)]="dateDischarge" required>
+        </my-date-picker-th>
+    </div>
+    <div style="width: 200px; margin-right: 16px;">
+        <div> เขตสุขภาพ </div>
+        <div class="clr-select-wrapper" style="width: 100%;">
+            <select name="district" class="clr-select" style="width: 100%;">
+                <option value="all">เลือกเขต</option>
+                <option *ngFor="let item of [].constructor(13); let i = index" [value]="i">
+                    เขต {{ i + 1 }}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div style="width: 200px; margin-right: 16px;">
+        <div> จังหวัด </div>
+        <div class="clr-select-wrapper" style="width: 100%;">
+            <select
+                [(ngModel)]="province"
+                name="district"
+                class="clr-select"
+                style="width: 100%;"
+                (click)="setSelectMultiProvince()"
+                readonly="true">
+                <option style="display: none;" value=""> เลือกจังหวัด </option>
+            </select>
+            <div
+                *ngIf="isSelectProvince"
+                class="report-patients-sum-daily__select-menu">
+                <clr-checkbox-wrapper *ngFor="let item of [].constructor(77);">
+                    <input type="checkbox" clrCheckbox value="option1" />
+                    <label>Option 1</label>
+                </clr-checkbox-wrapper>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="overflow-x: auto;">
+    <table style="border-collapse: collapse;" class="table table-compact">
+        <thead>
+            <tr>
+                <th rowspan="2" class="td-border"> เขตสุขภาพ </th>
+                <th rowspan="2" class="td-border"> จังหวัด </th>
+                <th rowspan="2" class="td-border"> รหัสโรงพยาบาล </th>
+                <th rowspan="2" class="td-border"> โรงพยาบาล </th>
+                <th rowspan="2" class="td-border"> หน่วยงาน </th>
+                <th colspan="4" class="td-border"> Positive ยอดสะสม </th>
+                <th colspan="4" class="td-border"> PUI ยอดสะสม </th>
+                <th colspan="4" class="td-border"> Positive วันนี้ </th>
+                <th colspan="4"> PUI วันนี้ </th>
+            </tr>
+            <tr>
+                <th class="td-border"> Admit </th>
+                <th class="td-border"> Discharge รวมสะสม </th>
+                <th class="td-border"> Discharge ส่ง Hospital </th>
+                <th class="td-border"> Discharge ตายสะสม </th>
+                <th class="td-border"> Admit </th>
+                <th class="td-border"> Discharge รวมสะสม </th>
+                <th class="td-border"> Discharge ส่ง Hospital </th>
+                <th class="td-border"> Discharge ตายสะสม </th>
+                <th class="td-border"> Admit </th>
+                <th class="td-border"> Discharge รวมสะสม </th>
+                <th class="td-border"> Discharge ส่ง Hospital </th>
+                <th class="td-border"> Discharge ตายสะสม </th>
+                <th class="td-border"> Admit </th>
+                <th class="td-border"> Discharge รวมสะสม </th>
+                <th class="td-border"> Discharge ส่ง Hospital </th>
+                <th> Discharge ตายสะสม </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of [].constructor(5); let i = index">
+                <td class="td-border"></td>
+                <td class="td-border"></td>
+                <td class="td-border"></td>
+                <td class="td-border"></td>
+                <td class="td-border"></td>
+                <td class="td-border"></td>
+                <td class="td-border"></td>
+                <td class="td-border"></td>
+                <td class="td-border"></td>
+                <td class="td-border"></td>
+                <td class="td-border"></td>
+                <td class="td-border"></td>
+                <td class="td-border"></td>
+                <td class="td-border"></td>
+                <td class="td-border"></td>
+                <td class="td-border"></td>
+                <td class="td-border"></td>
+                <td class="td-border"></td>
+                <td class="td-border"></td>
+                <td class="td-border"></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
