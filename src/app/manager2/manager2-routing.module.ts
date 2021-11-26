@@ -46,16 +46,16 @@ import { ReportReviewHomeworkAllComponent } from './report-all/report-review-hom
 import { ReportRecordsComponent } from './report-records/report-records.component';
 import { ReportLocalQuarantineComponent } from './report-local-quarantine/report-local-quarantine.component';
 import { DashboardNationalComponent } from './dashboard-national/dashboard-national.component';
-import { ReportPatientsDistrictComponent } from './report-news/report-patients-district/report-patients-district.component';
-import { ReportBedsDistrictComponent } from './report-news/report-beds-district/report-beds-district.component';
 import { ReportBedsProvinceComponent } from './report-news/report-beds-province/report-beds-province.component';
 import { ReportBedsHospitalComponent } from './report-news/report-beds-hospital/report-beds-hospital.component';
-import { ReportPatientsStatusComponent } from './report-news/report-patients-status/report-patients-status.component';
-import { ReportPatientsSeverityIllnessComponent } from './report-news/report-patients-severity-illness/report-patients-severity-illness.component';
-import { ReportPatientsEttDeadComponent } from './report-news/report-patients-ett-dead/report-patients-ett-dead.component';
 import { ReportPatientsSumDailyComponent } from './report-news/report-patients-sum-daily/report-patients-sum-daily.component';
 import { ReportPatientsAdmitComponent } from './report-news/report-patients-admit/report-patients-admit.component';
 import { ReportPatientsDischargeComponent } from './report-news/report-patients-discharge/report-patients-discharge.component';
+import { ReportPatientsZoneComponent } from './report-news/report-patients-zone/report-patients-zone.component';
+import { ReportPatientsProvinceComponent } from './report-news/report-patients-province/report-patients-province.component';
+import { ReportBedsZoneComponent } from './report-news/report-beds-zone/report-beds-zone.component';
+import { ReportPatientsHospitalComponent } from './report-news/report-patients-hospital/report-patients-hospital.component';
+import { ReportRespiratorComponent } from './report-news/report-respirator/report-respirator.component';
 
 const routes: Routes = [
   {
@@ -129,16 +129,16 @@ const routes: Routes = [
       { path: 'report-bed-zone', component: ReportBed2Component },
       
       ///////// new ////////////
-      { path: 'report-patients-district', component: ReportPatientsDistrictComponent },
-      { path: 'report-beds-district', component: ReportBedsDistrictComponent },
+      { path: 'report-patients-zone', component: ReportPatientsZoneComponent },
+      { path: 'report-patients-province', component: ReportPatientsProvinceComponent },
+      { path: 'report-beds-zone', component: ReportBedsZoneComponent },
       { path: 'report-beds-province', component: ReportBedsProvinceComponent },
+      { path: 'report-patients-hospital', component: ReportPatientsHospitalComponent },
       { path: 'report-beds-hospital', component: ReportBedsHospitalComponent },
-      { path: 'report-patients-status', component: ReportPatientsStatusComponent },
-      { path: 'report-patients-severity-illness', component: ReportPatientsSeverityIllnessComponent },
-      { path: 'report-patients-ett-dead', component: ReportPatientsEttDeadComponent },
-      { path: 'report-patients-sum-daily', component: ReportPatientsSumDailyComponent },
       { path: 'report-patients-admit', component: ReportPatientsAdmitComponent },
       { path: 'report-patients-discharge', component: ReportPatientsDischargeComponent },
+      { path: 'report-patients-sum-daily', component: ReportPatientsSumDailyComponent },
+      { path: 'report-respirator', component: ReportRespiratorComponent },
       { path: 'dashboard-national', component: DashboardNationalComponent }
     ]
   }

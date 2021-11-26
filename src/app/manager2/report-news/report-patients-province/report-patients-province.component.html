@@ -1,0 +1,81 @@
+<nav class="breadcrumb">
+    <span class="breadcrumb-item active">
+        รายงานผู้ป่วยรายจังหวัด
+    </span>
+</nav>
+
+<table style="border-collapse: collapse;" class="table table-compact">
+    <thead>
+        <tr>
+            <th class="td-border"> เขตสุขภาพ </th>
+            <th class="td-border"> จังหวัด </th>
+            <th class="td-border"> ผู้ป่วยทั้งหมด </th>
+            <th class="td-border"> Servere </th>
+            <th class="td-border"> Invasive Ventilator </th>
+            <th class="td-border"> Non-Invasive Ventilator  </th>
+            <th class="td-border"> High flow </th>
+            <th class="td-border"> Moderate </th>
+            <th class="td-border"> Mild </th>
+            <th class="td-border"> Asymptomatic </th>
+            <th class="td-border"> Dead </th>
+            <th> PUI </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of [].constructor(10); let i = index">
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th>  </th>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="2" class="td-border"> กรุงเทพมหานคร </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th>  </th>
+        </tr>
+        <tr>
+            <th colspan="2" class="td-border"> รวม 12 เขต </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th>  </th>
+        </tr>
+        <tr>
+            <th colspan="2" class="td-border"> ทั่วประเทศ </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th class="td-border">  </th>
+            <th>  </th>
+        </tr>
+    </tfoot>
+</table>

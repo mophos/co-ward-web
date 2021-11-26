@@ -1,0 +1,48 @@
+<nav class="breadcrumb">
+    <span class="breadcrumb-item active">
+        รายงานการใช้เครื่องช่วยหายใจ
+    </span>
+</nav>
+
+<table style="border-collapse: collapse;" class="table table-compact">
+    <thead>
+        <tr>
+            <th rowspan="2" class="td-border"> เขตสุขภาพ </th>
+            <th rowspan="2" class="td-border"> จังหวัด </th>
+            <th rowspan="2" class="td-border"> รหัสโรงพยาบาล </th>
+            <th rowspan="2" class="td-border"> โรงพยาบาล </th>
+            <th colspan="2" class="td-border"> Non Invasive </th>
+            <th colspan="2" class="td-border"> Invasive Ventilator </th>
+            <th colspan="2" class="td-border"> High Flow </th>
+            <th colspan="2" class="td-border"> PAPR </th>
+            <th rowspan="2"> หน่วยงาน </th>
+        </tr>
+        <tr>
+            <th class="td-border"> ใช้กับผู้ป่วย </th>
+            <th class="td-border"> ทั้งหมด </th>
+            <th class="td-border"> ใช้กับผู้ป่วย </th>
+            <th class="td-border"> ทั้งหมด </th>
+            <th class="td-border"> ใช้กับผู้ป่วย </th>
+            <th class="td-border"> ทั้งหมด </th>
+            <th class="td-border"> ใช้กับผู้ป่วย </th>
+            <th class="td-border"> ทั้งหมด </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of [].constructor(10); let i = index">
+            <td class="td-border"></td>
+            <td class="td-border"></td>
+            <td class="td-border"></td>
+            <td class="td-border"></td>
+            <td class="td-border"></td>
+            <td class="td-border"></td>
+            <td class="td-border"></td>
+            <td class="td-border"></td>
+            <td class="td-border"></td>
+            <td class="td-border"></td>
+            <td class="td-border"></td>
+            <td class="td-border"></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>

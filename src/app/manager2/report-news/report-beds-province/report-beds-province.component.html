@@ -44,47 +44,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of [].constructor(6); let i = index">
-                <td class="td-border" >
-                    <div *ngIf="i < 5">
-                        1
-                    </div>
-                    <div *ngIf="i === 5">
-                        รวมเขต {{ 1 }}
-                    </div>
-                </td>
-                <td class="td-border"> province </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-            </tr>
-
-            <tr *ngFor="let item of [].constructor(6); let i = index">
-                <td class="td-border" >
-                    <div *ngIf="i < 5">
-                        1
-                    </div>
-                    <div *ngIf="i === 5">
-                        รวมเขต {{ 1 }}
-                    </div>
-                </td>
+                <td class="td-border"> {{ 1 }} </td>
                 <td class="td-border"> province </td>
                 <td class="td-border"> 0 </td>
                 <td class="td-border"> 0 </td>
@@ -111,7 +71,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <td class="td-border"> กรุงเทพมหานคร </td>
+                <td colspan="2" class="td-border"> กรุงเทพมหานคร </td>
                 <td class="td-border"> 0 </td>
                 <td class="td-border"> 0 </td>
                 <td class="td-border"> 0 </td>
@@ -132,10 +92,10 @@
                 <td class="td-border"> 0 </td>
                 <td class="td-border"> 0 </td>
                 <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
+                <td> 0 </td>
             </tr>
             <tr>
-                <td class="td-border"> รวมเขต 12 </td>
+                <td colspan="2" class="td-border"> รวม 12 เขต </td>
                 <td class="td-border"> 0 </td>
                 <td class="td-border"> 0 </td>
                 <td class="td-border"> 0 </td>
@@ -156,10 +116,10 @@
                 <td class="td-border"> 0 </td>
                 <td class="td-border"> 0 </td>
                 <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
+                <td> 0 </td>
             </tr>
             <tr>
-                <td class="td-border"> ทั่วประเทศ </td>
+                <td colspan="2" class="td-border"> ทั่วประเทศ </td>
                 <td class="td-border"> 0 </td>
                 <td class="td-border"> 0 </td>
                 <td class="td-border"> 0 </td>
@@ -180,7 +140,7 @@
                 <td class="td-border"> 0 </td>
                 <td class="td-border"> 0 </td>
                 <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
+                <td> 0 </td>
             </tr>
         </tfoot>
     </table>

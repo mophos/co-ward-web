@@ -57,16 +57,16 @@ import { ReportColabCheckComponent } from './report-colab-check/report-colab-che
 import { ReportBed2Component } from './report-bed2/report-bed2.component';
 import { DashboardNationalComponent } from './dashboard-national/dashboard-national.component';
 import { HighchartsChartModule } from 'highcharts-angular';
-import { ReportPatientsDistrictComponent } from './report-news/report-patients-district/report-patients-district.component';
-import { ReportBedsDistrictComponent } from './report-news/report-beds-district/report-beds-district.component';
 import { ReportBedsProvinceComponent } from './report-news/report-beds-province/report-beds-province.component';
 import { ReportBedsHospitalComponent } from './report-news/report-beds-hospital/report-beds-hospital.component';
-import { ReportPatientsStatusComponent } from './report-news/report-patients-status/report-patients-status.component';
-import { ReportPatientsSeverityIllnessComponent } from './report-news/report-patients-severity-illness/report-patients-severity-illness.component';
-import { ReportPatientsEttDeadComponent } from './report-news/report-patients-ett-dead/report-patients-ett-dead.component';
 import { ReportPatientsSumDailyComponent } from './report-news/report-patients-sum-daily/report-patients-sum-daily.component';
 import { ReportPatientsAdmitComponent } from './report-news/report-patients-admit/report-patients-admit.component';
 import { ReportPatientsDischargeComponent } from './report-news/report-patients-discharge/report-patients-discharge.component';
+import { ReportPatientsZoneComponent } from './report-news/report-patients-zone/report-patients-zone.component';
+import { ReportPatientsProvinceComponent } from './report-news/report-patients-province/report-patients-province.component';
+import { ReportBedsZoneComponent } from './report-news/report-beds-zone/report-beds-zone.component';
+import { ReportPatientsHospitalComponent } from './report-news/report-patients-hospital/report-patients-hospital.component';
+import { ReportRespiratorComponent } from './report-news/report-respirator/report-respirator.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -118,16 +118,21 @@ import { ReportPatientsDischargeComponent } from './report-news/report-patients-
     ReportBed2Component,
     /////// new ////////
     DashboardNationalComponent,
-    ReportPatientsDistrictComponent,
-    ReportBedsDistrictComponent,
     ReportBedsProvinceComponent,
     ReportBedsHospitalComponent,
-    ReportPatientsStatusComponent,
-    ReportPatientsSeverityIllnessComponent,
-    ReportPatientsEttDeadComponent,
     ReportPatientsSumDailyComponent,
     ReportPatientsAdmitComponent,
     ReportPatientsDischargeComponent,
+    
+    ReportPatientsZoneComponent,
+    
+    ReportPatientsProvinceComponent,
+    
+    ReportBedsZoneComponent,
+    
+    ReportPatientsHospitalComponent,
+    
+    ReportRespiratorComponent,
   ],
   imports: [
     CommonModule,
