@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BedsProvinceService } from '../../serveices-new-report/beds-province.service'
 
 @Component({
   selector: 'app-report-beds-province',
@@ -7,9 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportBedsProvinceComponent implements OnInit {
 
-  constructor() { }
+  items:any = []
+
+  constructor(
+    private bedsProvinceService: BedsProvinceService
+  ) { }
 
   ngOnInit() {
+    this.loadData()
+  }
+
+  async loadData () {
+    try {
+      const res:any = await this.bedsProvinceService.getBedProvince()
+      if (res.ok) {
+        this.items = res.rows
+        console.log(res.rows)
+      }
+    } catch (error) {
+      console.error(error)
+    }
   }
 
 }

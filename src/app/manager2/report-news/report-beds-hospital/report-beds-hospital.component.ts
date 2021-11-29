@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BedsHospitalService } from '../../serveices-new-report/beds-hospital.service'
 
 @Component({
   selector: 'app-report-beds-hospital',
@@ -7,9 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportBedsHospitalComponent implements OnInit {
 
-  constructor() { }
+  items:any = []
+
+  constructor(
+    private bedsHospitalService: BedsHospitalService
+  ) { }
 
   ngOnInit() {
+    this.loadData()
+  }
+
+  async loadData () {
+    try {
+      const res:any = await this.bedsHospitalService.getBedHospital()
+      if (res.ok) {
+        this.items = res.rows
+        console.log('beds hospital ', res.rows)
+      }
+    } catch (error) {
+      console.error(error)
+    }
   }
 
 }

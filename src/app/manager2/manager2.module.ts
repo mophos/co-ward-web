@@ -123,15 +123,15 @@ import { ReportRespiratorComponent } from './report-news/report-respirator/repor
     ReportPatientsSumDailyComponent,
     ReportPatientsAdmitComponent,
     ReportPatientsDischargeComponent,
-    
+
     ReportPatientsZoneComponent,
-    
+
     ReportPatientsProvinceComponent,
-    
+
     ReportBedsZoneComponent,
-    
+
     ReportPatientsHospitalComponent,
-    
+
     ReportRespiratorComponent,
   ],
   imports: [

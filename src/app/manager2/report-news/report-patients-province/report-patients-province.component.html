@@ -1,8 +1,22 @@
-<nav class="breadcrumb">
+<nav
+    style="margin-bottom: 16px;"
+    class="breadcrumb">
     <span class="breadcrumb-item active">
         รายงานผู้ป่วยรายจังหวัด
     </span>
 </nav>
+
+<div style="display: flex;">
+    <label style="padding-top: 4px; margin-right: 16px;"> วันที่แสดงข้อมูล </label>
+    <div style="width: 200px; margin-right: 16px;">
+        <my-date-picker-th
+            [(ngModel)]="date"
+            [options]="myDatePickerOptions"
+            name="datePatientsZone"
+            (dateChanged)="selectDate($event)">
+        </my-date-picker-th>
+    </div>
+</div>
 
 <table style="border-collapse: collapse;" class="table table-compact">
     <thead>
@@ -22,9 +36,9 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let item of [].constructor(10); let i = index">
-            <th class="td-border">  </th>
-            <th class="td-border">  </th>
+        <tr *ngFor="let item of items; let i = index">
+            <th class="td-border"> {{ item.zone_code }} </th>
+            <th class="td-border"> {{ item.province_name }} </th>
             <th class="td-border">  </th>
             <th class="td-border">  </th>
             <th class="td-border">  </th>

@@ -1,8 +1,22 @@
-<nav class="breadcrumb">
+<nav
+    style="margin-bottom: 16px;"
+    class="breadcrumb">
     <span class="breadcrumb-item active">
         รายงานผู้ป่วยรายเขต
     </span>
 </nav>
+
+<div style="display: flex;">
+    <label style="padding-top: 4px; margin-right: 16px;"> วันที่แสดงข้อมูล </label>
+    <div style="width: 200px; margin-right: 16px;">
+        <my-date-picker-th
+            [(ngModel)]="date"
+            [options]="myDatePickerOptions"
+            name="datePatientsZone"
+            (dateChanged)="selectDate($event)">
+        </my-date-picker-th>
+    </div>
+</div>
 
 <table style="border-collapse: collapse;" class="table table-compact">
     <thead>
@@ -19,8 +33,8 @@
         <th> PUI </th>
     </thead>
     <tbody>
-        <tr *ngFor="let item of [].constructor(13); let i = index">
-            <td class="td-border"> รวมเขต {{ i + 1 }} </td>
+        <tr *ngFor="let item of items; let i = index">
+            <td class="td-border"> {{ item.zone_code }} </td>
             <td class="td-border">  </td>
             <td class="td-border">  </td>
             <td class="td-border">  </td>
@@ -33,7 +47,7 @@
             <td>  </td>
         </tr>
     </tbody>
-    <tfoot>
+    <tfoot *ngIf="items.length">
         <tr>
             <td class="td-border"> รวมทุกเขต </td>
             <td class="td-border">  </td>
@@ -62,3 +76,9 @@
         </tr>
     </tfoot>
 </table>
+
+<div
+    *ngIf="!items.length"
+    style="display: flex; justify-content: center; padding: 24px;">
+    ไม่พบข้อมูล
+</div>

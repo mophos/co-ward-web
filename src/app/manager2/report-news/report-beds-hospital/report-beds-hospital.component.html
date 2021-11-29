@@ -51,11 +51,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of [].constructor(10); let i = index">
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
+            <tr *ngFor="let item of items; let i = index">
+                <td class="td-border"> {{ item.zone_code }} </td>
+                <td class="td-border"> {{ item.province_name }} </td>
+                <td class="td-border"> {{ item.hospcode }} </td>
+                <td class="td-border"> {{ item.hospname }} </td>
                 <td class="td-border">  </td>
                 <td class="td-border">  </td>
                 <td class="td-border">  </td>

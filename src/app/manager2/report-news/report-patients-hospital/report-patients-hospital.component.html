@@ -1,46 +1,66 @@
-<nav class="breadcrumb">
+<nav
+    style="margin-bottom: 16px;"
+    class="breadcrumb">
     <span class="breadcrumb-item active">
         รายงานผู้ป่วยรายสถานพยาบาล
     </span>
 </nav>
 
-<table style="border-collapse: collapse;" class="table table-compact">
-    <thead>
-        <th class="td-border"> เขตสุขภาพ </th>
-        <th class="td-border"> จังหวัด </th>
-        <th class="td-border"> รหัสสถานพยาบาล </th>
-        <th class="td-border"> โรงพยาบาล </th>
-        <th class="td-border"> ระดับขีดความสามารถ </th>
-        <th class="td-border"> ผู้ป่วยทั้งหมด </th>
-        <th class="td-border"> Servere </th>
-        <th class="td-border"> Invasive Ventilator </th>
-        <th class="td-border"> Non-Invasive Ventilator  </th>
-        <th class="td-border"> High flow </th>
-        <th class="td-border"> Moderate </th>
-        <th class="td-border"> Mild </th>
-        <th class="td-border"> Asymptomatic </th>
-        <th class="td-border"> Dead </th>
-        <th class="td-border"> PUI </th>
-        <th> หน่วยรายงาน </th>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of [].constructor(13); let i = index">
-            <td class="td-border"> 1 </td>
-            <td class="td-border">  </td>
-            <td class="td-border">  </td>
-            <td class="td-border">  </td>
-            <td class="td-border">  </td>
-            <td class="td-border">  </td>
-            <td class="td-border">  </td>
-            <td class="td-border">  </td>
-            <td class="td-border">  </td>
-            <td class="td-border">  </td>
-            <td class="td-border">  </td>
-            <td class="td-border">  </td>
-            <td class="td-border">  </td>
-            <td class="td-border">  </td>
-            <td class="td-border">  </td>
-            <td>  </td>
-        </tr>
-    </tbody>
-</table>
+<div style="display: flex;">
+    <label style="padding-top: 4px; margin-right: 16px;"> วันที่แสดงข้อมูล </label>
+    <div style="width: 200px; margin-right: 16px;">
+        <my-date-picker-th
+            [(ngModel)]="date"
+            [options]="myDatePickerOptions"
+            name="datePatientsZone"
+            (dateChanged)="selectDate($event)">
+        </my-date-picker-th>
+    </div>
+</div>
+
+<div style="overflow-x: auto;">
+    <table style="border-collapse: collapse;" class="table table-compact">
+        <thead>
+            <th class="td-border"> เขตสุขภาพ </th>
+            <th class="td-border"> จังหวัด </th>
+            <th class="td-border"> รหัสสถานพยาบาล </th>
+            <th class="td-border"> โรงพยาบาล </th>
+            <th class="td-border"> ระดับขีดความสามารถ </th>
+            <th class="td-border"> ผู้ป่วยทั้งหมด </th>
+            <th class="td-border"> Servere </th>
+            <th class="td-border"> Invasive Ventilator </th>
+            <th class="td-border"> Non-Invasive Ventilator  </th>
+            <th class="td-border"> High flow </th>
+            <th class="td-border"> Moderate </th>
+            <th class="td-border"> Mild </th>
+            <th class="td-border"> Asymptomatic </th>
+            <th class="td-border"> Dead </th>
+            <th class="td-border"> PUI </th>
+            <th> หน่วยรายงาน </th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of items; let i = index">
+                <td class="td-border"> {{ item.zone_code }} </td>
+                <td class="td-border"> {{ item.province_name }} </td>
+                <td class="td-border"> {{ item.hospcode }} </td>
+                <td class="td-border"> {{ item.hospname }} </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td>  </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div style="display: flex; justify-content: center; padding: 24px;">
+    ไม่พบข้อมูล
+</div>

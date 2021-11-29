@@ -9,9 +9,11 @@
 <div style="display: flex;">
     <label style="padding-top: 4px; margin-right: 16px;"> วันที่แสดงข้อมูล </label>
     <div style="width: 200px; margin-right: 16px;">
-        <my-date-picker-th name="dateDischarge" [options]="myDatePickerOptions" (dateChanged)="onChangeDateDischarge($event)"
-            [(ngModel)]="dateDischarge"
-            required>
+        <my-date-picker-th
+            [(ngModel)]="date"
+            [options]="myDatePickerOptions"
+            name="dateAdmit"
+            (dateChanged)="selectDate($event)">
         </my-date-picker-th>
     </div>
 </div>
@@ -46,8 +48,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of [].constructor(10); let i = index">
-                <td class="td-border">  </td>
+            <tr *ngFor="let item of items; let i = index">
+                <td class="td-border"> {{ item.zone_code }} </td>
                 <td class="td-border">  <td>
                 <td class="td-border">  </td>
                 <td class="td-border">  </td>
@@ -72,4 +74,10 @@
             </tr>
         </tbody>
     </table>
+</div>
+
+<div
+    *ngIf="!items.length"
+    style="display: flex; justify-content: center; padding: 24px;">
+    ไม่พบข้อมูล
 </div>

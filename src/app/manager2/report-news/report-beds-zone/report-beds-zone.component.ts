@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BedsZoneService } from '../../serveices-new-report/beds-zone.service';
 
 @Component({
   selector: 'app-report-beds-zone',
@@ -7,9 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportBedsZoneComponent implements OnInit {
 
-  constructor() { }
+  items:any = []
+
+  constructor(
+    private bedsZoneService: BedsZoneService,
+  ) { }
 
   ngOnInit() {
+    this.loadData()
+  }
+
+  async loadData () {
+    const res:any = await this.bedsZoneService.getBedZone()
+    try {
+      if (res.ok) {
+        this.items = res.rows
+        console.log(res.rows)
+      }
+    } catch (error) {
+      console.error(error)
+    }
   }
 
 }
