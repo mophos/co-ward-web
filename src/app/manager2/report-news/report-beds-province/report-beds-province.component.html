@@ -1,8 +1,17 @@
-<nav class="breadcrumb">
+<nav
+    style="margin-bottom: 16px;"
+    class="breadcrumb">
     <span class="breadcrumb-item active">
         รายงานเตียงรายจังหวัด
     </span>
 </nav>
+
+<div style="display: flex; justify-content: space-between;">
+    <div></div>
+    <button class="btn btn-sm btn-primary" (click)="exportExcel()">
+        <clr-icon shape="download"></clr-icon>export excel
+    </button>
+</div>
 
 <div style="overflow: auto;">
     <table style="border-collapse: collapse;" class="table table-compact">
@@ -157,3 +166,5 @@
     style="display: flex; justify-content: center; padding: 24px;">
     ไม่พบข้อมูล
 </div>
+
+<app-loadding #loading></app-loadding>
