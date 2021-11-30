@@ -13,4 +13,9 @@ export class BedsHospitalService {
     return this.http.get(url).toPromise();
   }
 
+  exportExcelBedHospital () {
+    const url = `${this.url}/v1/new-manager/export/bed-report-by-hospital`;
+    return this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+
 }
