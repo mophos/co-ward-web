@@ -13,4 +13,9 @@ export class PatientsAdmitService {
     return this.http.get(url).toPromise();
   }
 
+  exportExcelPatientAdmit (params) {
+    const url = `${this.url}/v1/new-manager/export/patient-admit?date=${params.date}`;
+    return this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+
 }
