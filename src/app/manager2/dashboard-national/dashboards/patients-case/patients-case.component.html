@@ -1,0 +1,104 @@
+<div
+  style="display: flex; margin-bottom: 8px;">
+  <h3 style="margin-right: 24px;">
+    ผู้ป่วยแต่ละอาการ
+  </h3>
+  <div style="width: 200px; margin-right: 16px;">
+    <label> วันที่เริ่ม </label>
+    <my-date-picker-th
+        [(ngModel)]="startDate"
+        [options]="myDatePickerOptions"
+        name="startDatePatientsVase"
+        (dateChanged)="selectStartDate($event)">
+    </my-date-picker-th>
+  </div>
+  <div style="width: 200px; margin-right: 16px;">
+    <label> วันที่สิ้นสุด </label>
+    <my-date-picker-th
+        [(ngModel)]="endDate"
+        [options]="myDatePickerOptions"
+        name="endDatePatientsVase"
+        (dateChanged)="selectEndDate($event)">
+    </my-date-picker-th>
+  </div>
+</div>
+<div style="display: flex;">
+  <div
+    style="margin-right: 24px"
+    class="card patients-case__card">
+    <div class="card-block">
+        <div  class="card-title">
+          Severe Case
+        </div>
+        <div
+          style="text-align: center;"
+          class="card-text">
+          12312
+        </div>
+    </div>
+  </div>
+  <div
+    style="margin-right: 24px"
+    class="card patients-case__card">
+    <div class="card-block">
+        <div class="card-title">
+          Moderate Case
+        </div>
+        <div
+          style="text-align: center;"
+          class="card-text">
+          123123
+        </div>
+    </div>
+  </div>
+  <div
+    style="margin-right: 24px"
+    class="card patients-case__card">
+    <div class="card-block">
+        <div class="card-title">
+          Mild Case
+        </div>
+        <div
+          style="text-align: center;"
+          class="card-text">
+          123123
+        </div>
+    </div>
+  </div>
+  <div
+    style="margin-right: 24px"
+    class="card patients-case__card">
+    <div class="card-block">
+        <div class="card-title">
+          Asymptomatic
+        </div>
+        <div
+          style="text-align: center;"
+          class="card-text">
+          123123123
+        </div>
+    </div>
+  </div>
+  <div class="card patients-case__card">
+    <div class="card-block">
+        <div class="card-title">
+          PUI
+        </div>
+        <div
+          style="text-align: center;"
+          class="card-text">
+          123123123
+        </div>
+    </div>
+  </div>
+</div>
+<div
+  style="width: 636px;"
+  class="card">
+  <div class="card-block">
+    <highcharts-chart
+        [Highcharts] = "highcharts"
+        [options] = "lineChartOptions">
+    </highcharts-chart>
+  </div>
+</div>

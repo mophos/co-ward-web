@@ -67,6 +67,9 @@ import { ReportPatientsProvinceComponent } from './report-news/report-patients-p
 import { ReportBedsZoneComponent } from './report-news/report-beds-zone/report-beds-zone.component';
 import { ReportPatientsHospitalComponent } from './report-news/report-patients-hospital/report-patients-hospital.component';
 import { ReportRespiratorComponent } from './report-news/report-respirator/report-respirator.component';
+import { BedsTypeComponent } from './dashboard-national/dashboards/beds-type/beds-type.component';
+import { PatientsCaseComponent } from './dashboard-national/dashboards/patients-case/patients-case.component';
+import { PatientsStatusComponent } from './dashboard-national/dashboards/patients-status/patients-status.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -133,6 +136,12 @@ import { ReportRespiratorComponent } from './report-news/report-respirator/repor
     ReportPatientsHospitalComponent,
 
     ReportRespiratorComponent,
+
+    BedsTypeComponent,
+
+    PatientsCaseComponent,
+
+    PatientsStatusComponent,
   ],
   imports: [
     CommonModule,

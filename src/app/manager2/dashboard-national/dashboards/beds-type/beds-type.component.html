@@ -1,0 +1,102 @@
+<div
+    style="display: flex; margin-bottom: 8px;">
+    <h3 style="margin-right: 24px;">
+      การใช้งานเตียงแต่ละประเภท
+    </h3>
+    <div style="width: 200px; margin-right: 16px;">
+      <label> วันที่เริ่ม </label>
+      <my-date-picker-th
+          [(ngModel)]="startDate"
+          [options]="myDatePickerOptions"
+          name="startDateBedsType"
+          (dateChanged)="selectStartDate($event)">
+      </my-date-picker-th>
+    </div>
+    <div style="width: 200px; margin-right: 16px;">
+      <label> วันที่สิ้นสุด </label>
+      <my-date-picker-th
+          [(ngModel)]="endDate"
+          [options]="myDatePickerOptions"
+          name="endDateBedsType"
+          (dateChanged)="selectEndDate($event)">
+      </my-date-picker-th>
+    </div>
+  </div>
+  <div style="display: flex;">
+    <div
+      style="margin-right: 24px"
+      class="card beds-type__card">
+      <div class="card-block">
+          <div  class="card-title">
+            เตียงทั้งหมด
+          </div>
+          <div
+            style="text-align: center;"
+            class="card-text">
+            {{ report.total }}
+          </div>
+      </div>
+    </div>
+    <div
+      style="margin-right: 24px"
+      class="card beds-type__card">
+      <div class="card-block">
+          <div class="card-title">
+            ครอบครองเตียงทั้งหมด
+          </div>
+          <div
+            style="text-align: center;"
+            class="card-text">
+            {{ report.usageTotal }}
+          </div>
+      </div>
+    </div>
+    <div
+      style="margin-right: 24px"
+      class="card beds-type__card">
+      <div class="card-block">
+          <div class="card-title">
+            เตียงว่าง
+          </div>
+          <div
+            style="text-align: center;"
+            class="card-text">
+            {{ report.empty }}
+          </div>
+      </div>
+    </div>
+    <div class="card beds-type__card">
+      <div class="card-block">
+          <div class="card-title">
+            อัตราครองเตียง
+          </div>
+          <div
+            style="text-align: center;"
+            class="card-text">
+            {{ report.usageTotalPercentage }}
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    style="width: 636px;"
+    class="card">
+    <div class="card-block">
+      <highcharts-chart
+          [Highcharts] = "highcharts"
+          [options] = "pieChartOptions">
+      </highcharts-chart>
+    </div>
+  </div>
+
+  <div
+    style="width: 636px;"
+    class="card">
+    <div class="card-block">
+      <highcharts-chart
+          [Highcharts] = "highcharts"
+          [options] = "stackChartOptions">
+      </highcharts-chart>
+    </div>
+  </div>

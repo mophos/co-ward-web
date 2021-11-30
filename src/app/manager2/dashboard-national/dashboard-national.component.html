@@ -8,19 +8,19 @@
 
 <div class="dashboard-national__menus">
   <button
-    style="margin-right: 24px;"  
+    style="margin-right: 24px;"
     class="btn btn-primary btn-sm"
     (click)="setTabs(0)">
     การใช้งานเตียงแต่ละประเภท
   </button>
   <button
-    style="margin-right: 24px;"  
+    style="margin-right: 24px;"
     class="btn btn-primary btn-sm"
     (click)="setTabs(1)">
     ผู้ป่วยแต่ละอาการ
   </button>
   <button
-    style="margin-right: 24px;"  
+    style="margin-right: 24px;"
     class="btn btn-primary btn-sm"
     (click)="setTabs(2)">
     ผู้ป่วยแต่ละสถานะ
@@ -29,281 +29,15 @@
 
 <!-- การใช้งานเตียงแต่ละประเภท -->
 <div *ngIf="tabs === 0">
-  <div
-    style="display: flex; margin-bottom: 8px;">
-    <h3 style="margin-right: 24px;">
-      การใช้งานเตียงแต่ละประเภท
-    </h3>
-    <div style="width: 200px; margin-right: 16px;">
-      <label> วันที่เริ่ม </label>
-      <my-date-picker-th name="dateDischarge" [options]="myDatePickerOptions" (dateChanged)="onChangeDateDischarge($event)"
-        [(ngModel)]="dateDischarge"
-        required>
-      </my-date-picker-th>
-    </div>
-    <div style="width: 200px;">
-      <label> วันที่สิ้นสุด </label>
-      <my-date-picker-th name="dateDischarge" [options]="myDatePickerOptions" (dateChanged)="onChangeDateDischarge($event)"
-        [(ngModel)]="dateDischarge" required>
-      </my-date-picker-th>
-    </div>
-  </div>
-  <div style="display: flex;">
-    <div 
-      style="margin-right: 24px"
-      class="card dashboard-national__bed-card">
-      <div class="card-block">
-          <div  class="card-title">
-            เตียงทั้งหมด
-          </div>
-          <div 
-            style="text-align: center;"
-            class="card-text">
-            {{ bed.total }}
-          </div>
-      </div>
-    </div>
-    <div
-      style="margin-right: 24px"  
-      class="card dashboard-national__bed-card">
-      <div class="card-block">
-          <div class="card-title">
-            ครอบครองเตียงทั้งหมด
-          </div>
-          <div
-            style="text-align: center;"
-            class="card-text">
-            {{ bed.usageTotal }}
-          </div>
-      </div>
-    </div>
-    <div
-      style="margin-right: 24px"
-      class="card dashboard-national__bed-card">
-      <div class="card-block">
-          <div class="card-title">
-            เตียงว่าง
-          </div>
-          <div 
-            style="text-align: center;"
-            class="card-text">
-            {{ bed.empty }}
-          </div>
-      </div>
-    </div>
-    <div class="card dashboard-national__bed-card">
-      <div class="card-block">
-          <div class="card-title">
-            อัตราครองเตียง
-          </div>
-          <div 
-            style="text-align: center;"
-            class="card-text">
-            {{ bed.usageTotalPercentage }}
-          </div>
-      </div>
-    </div>
-  </div>
-
-  <div
-    style="width: 636px;"
-    class="card">
-    <div class="card-block">
-      <highcharts-chart
-          [Highcharts] = "highcharts" 
-          [options] = "pieChartOptions">
-      </highcharts-chart>
-    </div>
-  </div>
-
-  <div
-    style="width: 636px;"
-    class="card">
-    <div class="card-block">
-      <highcharts-chart
-          [Highcharts] = "highcharts" 
-          [options] = "stackChartOptions">
-      </highcharts-chart>
-    </div>
-  </div>
+  <app-beds-type></app-beds-type>
 </div>
 
 <!-- ผู้ป่วยแต่ละอาการ -->
 <div *ngIf="tabs === 1">
-  <div
-    style="display: flex; margin-bottom: 8px;">
-    <h3 style="margin-right: 24px;">
-      ผู้ป่วยแต่ละอาการ
-    </h3>
-    <div style="width: 200px; margin-right: 16px;">
-      <label> วันที่เริ่ม </label>
-      <my-date-picker-th name="dateDischarge" [options]="myDatePickerOptions" (dateChanged)="onChangeDateDischarge($event)"
-        [(ngModel)]="dateDischarge"
-        required>
-      </my-date-picker-th>
-    </div>
-    <div style="width: 200px;">
-      <label> วันที่สิ้นสุด </label>
-      <my-date-picker-th name="dateDischarge" [options]="myDatePickerOptions" (dateChanged)="onChangeDateDischarge($event)"
-        [(ngModel)]="dateDischarge" required>
-      </my-date-picker-th>
-    </div>
-  </div>
-  <div style="display: flex;">
-    <div 
-      style="margin-right: 24px"
-      class="card dashboard-national__bed-card">
-      <div class="card-block">
-          <div  class="card-title">
-            Servere Case
-          </div>
-          <div 
-            style="text-align: center;"
-            class="card-text">
-            12312
-          </div>
-      </div>
-    </div>
-    <div
-      style="margin-right: 24px"  
-      class="card dashboard-national__bed-card">
-      <div class="card-block">
-          <div class="card-title">
-            Moderate Case
-          </div>
-          <div
-            style="text-align: center;"
-            class="card-text">
-            123123
-          </div>
-      </div>
-    </div>
-    <div
-      style="margin-right: 24px"
-      class="card dashboard-national__bed-card">
-      <div class="card-block">
-          <div class="card-title">
-            Mild Case
-          </div>
-          <div 
-            style="text-align: center;"
-            class="card-text">
-            123123
-          </div>
-      </div>
-    </div>
-    <div
-      style="margin-right: 24px"
-      class="card dashboard-national__bed-card">
-      <div class="card-block">
-          <div class="card-title">
-            Asymptomatic
-          </div>
-          <div 
-            style="text-align: center;"
-            class="card-text">
-            123123123
-          </div>
-      </div>
-    </div>
-    <div class="card dashboard-national__bed-card">
-      <div class="card-block">
-          <div class="card-title">
-            PUI
-          </div>
-          <div 
-            style="text-align: center;"
-            class="card-text">
-            123123123
-          </div>
-      </div>
-    </div>
-  </div>
-  <div
-    style="width: 636px;"
-    class="card">
-    <div class="card-block">
-      <highcharts-chart
-          [Highcharts] = "highcharts" 
-          [options] = "lineChartOptions">
-      </highcharts-chart>
-    </div>
-  </div>
+  <app-patients-case></app-patients-case>
 </div>
 
 <!-- ผู้ป่วยแต่ละสถานะ -->
 <div *ngIf="tabs === 2">
-  <div
-    style="display: flex; margin-bottom: 8px;">
-    <h3 style="margin-right: 24px;">
-      ผู้ป่วยแต่ละสถานะ
-    </h3>
-    <div style="width: 200px; margin-right: 16px;">
-      <label> วันที่เริ่ม </label>
-      <my-date-picker-th name="dateDischarge" [options]="myDatePickerOptions" (dateChanged)="onChangeDateDischarge($event)"
-        [(ngModel)]="dateDischarge"
-        required>
-      </my-date-picker-th>
-    </div>
-    <div style="width: 200px;">
-      <label> วันที่สิ้นสุด </label>
-      <my-date-picker-th name="dateDischarge" [options]="myDatePickerOptions" (dateChanged)="onChangeDateDischarge($event)"
-        [(ngModel)]="dateDischarge" required>
-      </my-date-picker-th>
-    </div>
-  </div>
-  <div style="display: flex;">
-    <div 
-      style="margin-right: 24px"
-      class="card dashboard-national__bed-card">
-      <div class="card-block">
-          <div  class="card-title">
-            Admit
-          </div>
-          <div 
-            style="text-align: center;"
-            class="card-text">
-            12312
-          </div>
-      </div>
-    </div>
-    <div
-      style="margin-right: 24px"  
-      class="card dashboard-national__bed-card">
-      <div class="card-block">
-          <div class="card-title">
-            Discharge
-          </div>
-          <div
-            style="text-align: center;"
-            class="card-text">
-            12312
-          </div>
-      </div>
-    </div>
-    <div
-      style="margin-right: 24px"
-      class="card dashboard-national__bed-card">
-      <div class="card-block">
-          <div class="card-title">
-            Dead
-          </div>
-          <div 
-            style="text-align: center;"
-            class="card-text">
-            1231
-          </div>
-      </div>
-    </div>
-  </div>
-  <div
-    style="width: 636px;"
-    class="card">
-    <div class="card-block">
-      <highcharts-chart
-          [Highcharts] = "highcharts" 
-          [options] = "lineChartOptions">
-      </highcharts-chart>
-    </div>
-  </div>
+  <app-patients-status></app-patients-status>
 </div>
