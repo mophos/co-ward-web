@@ -13,4 +13,9 @@ export class BedsZoneService {
     return this.http.get(url).toPromise();
   }
 
+  exportExcelBedZone () {
+    const url = `${this.url}/v1/new-manager/export/bed-report-by-zone`;
+    return this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+
 }
