@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyOptions } from '@tanjaae/mydatepicker';
 import { PatientsSumDailyService } from '../../serveices-new-report/patients-sum-daily.service'
 import provinceJson from '../../../../assets/provinces.json'
@@ -32,6 +32,7 @@ export class ReportPatientsSumDailyComponent implements OnInit {
     editableDateField: false,
     showClearDateBtn: false
   }
+  @ViewChild('loading', { static: true }) loading: any;
 
   constructor(
     private patientsSumDailyService: PatientsSumDailyService
@@ -74,6 +75,39 @@ export class ReportPatientsSumDailyComponent implements OnInit {
       }
     } catch (error) {
       console.error(error)
+    }
+  }
+
+  downloadFile (name, type, data: any) {
+    try {
+      const url = window.URL.createObjectURL(new Blob([data]))
+      const fileName = `${name}.${type}`
+      const a = document.createElement('a')
+      document.body.appendChild(a)
+      a.setAttribute('style', 'display: none')
+      a.href = url
+      a.download = fileName
+      a.click()
+      window.URL.revokeObjectURL(url)
+      a.remove()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async exportExcel() {
+    try {
+      this.loading.show()
+      const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
+      const res:any = await this.patientsSumDailyService.exportExcelPatientSumDaily({ date })
+      if (res) {
+        this.downloadFile('รายงานผู้ป่วย สะสม + วันนี้', 'xlsx', res)
+        this.loading.hide()
+      }
+
+    } catch (error) {
+      console.log(error)
+      this.loading.hide()
     }
   }
 
