@@ -51,7 +51,7 @@
             <th> 0 </th>
         </tr>
     </tbody>
-    <tfoot *ngIf="!items.length">
+    <tfoot *ngIf="items.length">
         <tr>
             <th colspan="2" class="td-border"> กรุงเทพมหานคร </th>
             <th class="td-border"> 0 </th>
@@ -93,3 +93,15 @@
         </tr>
     </tfoot>
 </table>
+
+<div
+    *ngIf="isLoading && !items.length"
+    style="display: flex; justify-content: center; padding: 24px;">
+    กำลังโหลดข้อมูล ...
+</div>
+
+<div
+    *ngIf="!isLoading && !items.length"
+    style="display: flex; justify-content: center; padding: 24px;">
+    ไม่พบข้อมูล
+</div>

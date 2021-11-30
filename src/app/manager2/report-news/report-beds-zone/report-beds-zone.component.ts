@@ -8,6 +8,8 @@ import { BedsZoneService } from '../../serveices-new-report/beds-zone.service';
 })
 export class ReportBedsZoneComponent implements OnInit {
 
+  isLoading = false
+
   items:any = []
 
   constructor(
@@ -19,11 +21,13 @@ export class ReportBedsZoneComponent implements OnInit {
   }
 
   async loadData () {
-    const res:any = await this.bedsZoneService.getBedZone()
     try {
+      this.isLoading = true
+      const res:any = await this.bedsZoneService.getBedZone()
       if (res.ok) {
         this.items = res.rows
         console.log(res.rows)
+        this.isLoading = false
       }
     } catch (error) {
       console.error(error)

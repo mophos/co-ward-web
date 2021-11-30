@@ -67,7 +67,7 @@
                 <td class="td-border"> {{ item.community_isolation_covid_qty - item.community_isolation_usage_qty }} </td>
             </tr>
         </tbody>
-        <tfoot>
+        <tfoot *ngIf="items.length">
             <tr>
                 <td class="td-border"> กรุงเทพมหานคร </td>
                 <td class="td-border"> 0 </td>
@@ -142,4 +142,16 @@
             </tr>
         </tfoot>
     </table>
+</div>
+
+<div
+    *ngIf="isLoading && !items.length"
+    style="display: flex; justify-content: center; padding: 24px;">
+    กำลังโหลดข้อมูล ...
+</div>
+
+<div
+    *ngIf="!isLoading && !items.length"
+    style="display: flex; justify-content: center; padding: 24px;">
+    ไม่พบข้อมูล
 </div>

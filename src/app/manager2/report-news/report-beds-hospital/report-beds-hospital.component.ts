@@ -8,6 +8,8 @@ import { BedsHospitalService } from '../../serveices-new-report/beds-hospital.se
 })
 export class ReportBedsHospitalComponent implements OnInit {
 
+  isLoading = false
+
   items:any = []
 
   constructor(
@@ -20,10 +22,12 @@ export class ReportBedsHospitalComponent implements OnInit {
 
   async loadData () {
     try {
+      this.isLoading = true
       const res:any = await this.bedsHospitalService.getBedHospital()
       if (res.ok) {
         this.items = res.rows
         console.log('beds hospital ', res.rows)
+        this.isLoading = false
       }
     } catch (error) {
       console.error(error)

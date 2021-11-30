@@ -11,6 +11,8 @@ import moment from 'moment';
 })
 export class ReportPatientsSumDailyComponent implements OnInit {
 
+  isLoading = false
+
   items:any = []
   zone = []
   provinceGroup = []
@@ -63,10 +65,12 @@ export class ReportPatientsSumDailyComponent implements OnInit {
 
   async loadData () {
     try {
+      this.isLoading = true
       const res:any = await this.patientsSumDailyService.getPatientSumDaily()
       if (res.ok) {
         this.items = res.rows
         console.log('paitent sum daily ', res.rows)
+        this.isLoading = false
       }
     } catch (error) {
       console.error(error)

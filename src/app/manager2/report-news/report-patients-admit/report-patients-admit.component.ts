@@ -10,6 +10,8 @@ import moment from 'moment';
 })
 export class ReportPatientsAdmitComponent implements OnInit {
 
+  isLoading = false
+
   items:any = []
   date:any = {
     date: {
@@ -42,11 +44,13 @@ export class ReportPatientsAdmitComponent implements OnInit {
 
   async loadData () {
     try {
+      this.isLoading = true
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
       const res:any = await this.patientsAdmitService.getPatientAdmit({ date })
       if (res.ok) {
         this.items = res.rows
         console.log(res.rows)
+        this.isLoading = false
       }
     } catch (error) {
       console.error(error)
