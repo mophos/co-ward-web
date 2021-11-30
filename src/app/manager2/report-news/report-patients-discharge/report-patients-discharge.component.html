@@ -6,16 +6,21 @@
     </span>
 </nav>
 
-<div style="display: flex;">
-    <label style="padding-top: 4px; margin-right: 16px;"> วันที่แสดงข้อมูล </label>
-    <div style="width: 200px; margin-right: 16px;">
-        <my-date-picker-th
-            [(ngModel)]="date"
-            [options]="myDatePickerOptions"
-            name="dateDischarge"
-            (dateChanged)="selectDate($event)">
-        </my-date-picker-th>
+<div style="display: flex; justify-content: space-between;">
+    <div style="display: flex;">
+        <label style="padding-top: 4px; margin-right: 16px;"> วันที่แสดงข้อมูล </label>
+        <div style="width: 200px; margin-right: 16px;">
+            <my-date-picker-th
+                [(ngModel)]="date"
+                [options]="myDatePickerOptions"
+                name="dateDischarge"
+                (dateChanged)="selectDate($event)">
+            </my-date-picker-th>
+        </div>
     </div>
+    <button class="btn btn-sm btn-primary" (click)="exportExcel()">
+        <clr-icon shape="download"></clr-icon>export excel
+    </button>
 </div>
 
 <div style="overflow-x: auto;">
@@ -75,3 +80,5 @@
     style="display: flex; justify-content: center; padding: 24px;">
     ไม่พบข้อมูล
 </div>
+
+<app-loadding #loading></app-loadding>
