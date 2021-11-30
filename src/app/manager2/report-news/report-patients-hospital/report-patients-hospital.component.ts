@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyOptions } from 'mydatepicker-th';
 import { PatientsHospitalService } from '../../serveices-new-report/patients-hospital.service'
 import moment from 'moment';
@@ -26,6 +26,7 @@ export class ReportPatientsHospitalComponent implements OnInit {
     editableDateField: false,
     showClearDateBtn: false
   }
+  @ViewChild('loading', { static: true }) loading: any;
 
   constructor(
     private patientsHospitalService: PatientsHospitalService
@@ -54,6 +55,39 @@ export class ReportPatientsHospitalComponent implements OnInit {
       }
     } catch (error) {
       console.error(error)
+    }
+  }
+
+  downloadFile (name, type, data: any) {
+    try {
+      const url = window.URL.createObjectURL(new Blob([data]))
+      const fileName = `${name}.${type}`
+      const a = document.createElement('a')
+      document.body.appendChild(a)
+      a.setAttribute('style', 'display: none')
+      a.href = url
+      a.download = fileName
+      a.click()
+      window.URL.revokeObjectURL(url)
+      a.remove()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async exportExcel() {
+    try {
+      this.loading.show()
+      const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
+      const res:any = await this.patientsHospitalService.exportExcelPatientHospital({ date })
+      if (res) {
+        this.downloadFile('รายงานผู้ป่วยรายสถานพยาบาล', 'xlsx', res)
+        this.loading.hide()
+      }
+
+    } catch (error) {
+      console.log(error)
+      this.loading.hide()
     }
   }
 

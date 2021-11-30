@@ -13,4 +13,9 @@ export class PatientsHospitalService {
     return this.http.get(url).toPromise();
   }
 
+  exportExcelPatientHospital (params) {
+    const url = `${this.url}/v1/new-manager/export/patient-report-by-hospital?date=${params.date}`;
+    return this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+
 }
