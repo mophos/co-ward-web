@@ -69,7 +69,7 @@ export class ReportPatientsZoneComponent implements OnInit {
       a.download = fileName
       a.click()
       window.URL.revokeObjectURL(url)
-      a.remove() // remove the element
+      a.remove()
     } catch (error) {
       console.log(error)
     }
