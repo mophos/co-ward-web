@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyOptions } from '@tanjaae/mydatepicker';
 import { PatientsZoneService } from '../../serveices-new-report/patients-zone.service';
 import moment from 'moment';
@@ -26,6 +26,7 @@ export class ReportPatientsZoneComponent implements OnInit {
     editableDateField: false,
     showClearDateBtn: false
   }
+  @ViewChild('loading', { static: true }) loading: any;
 
   constructor(
     private patientsZoneService: PatientsZoneService,
@@ -54,6 +55,39 @@ export class ReportPatientsZoneComponent implements OnInit {
       }
     } catch (error) {
       console.error(error)
+    }
+  }
+
+  downloadFile (name, type, data: any) {
+    try {
+      const url = window.URL.createObjectURL(new Blob([data]))
+      const fileName = `${name}.${type}`
+      const a = document.createElement('a')
+      document.body.appendChild(a)
+      a.setAttribute('style', 'display: none')
+      a.href = url
+      a.download = fileName
+      a.click()
+      window.URL.revokeObjectURL(url)
+      a.remove() // remove the element
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async exportExcel() {
+    try {
+      this.loading.show()
+      const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
+      const res:any = await this.patientsZoneService.exportExcelPatientZone({ date })
+      if (res) {
+        this.downloadFile('รายงานผู้ป่วยรายเขต', 'xlsx', res)
+        this.loading.hide()
+      }
+
+    } catch (error) {
+      console.log(error)
+      this.loading.hide()
     }
   }
 

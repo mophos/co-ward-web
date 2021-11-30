@@ -14,7 +14,7 @@ export class ReportAllService {
   }
 
   async getReport1Excel(date, sector) {
-    const url = `${this.apiUrl}/v1/manager/report-all/report1/excel?date=${date}`;
+    const url = `${this.apiUrl}/v1/new-manager/report-all/report1/excel?date=${date}`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
   async getReport2(date, sector) {
