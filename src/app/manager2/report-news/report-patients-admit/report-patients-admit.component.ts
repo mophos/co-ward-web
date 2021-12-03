@@ -33,7 +33,7 @@ export class ReportPatientsAdmitComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadData()
+    // this.loadData()
   }
 
   selectDate (value) {
