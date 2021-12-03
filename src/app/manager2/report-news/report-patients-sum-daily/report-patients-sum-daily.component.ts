@@ -14,7 +14,7 @@ export class ReportPatientsSumDailyComponent implements OnInit {
   isLoading = false
 
   items:any = []
-  zone = []
+  zone = ''
   provinceGroup = []
   displayProvince = ''
   provinces = provinceJson.data
@@ -42,26 +42,11 @@ export class ReportPatientsSumDailyComponent implements OnInit {
     // this.loadData()
   }
 
-  selectZone () {
-    // TODO : GET DATA AGAIN
-    // this.loadData()
-  }
-
-  selectProvince (value) {
-    const index = this.provinceGroup.findIndex(item => item === value)
-    if (index > -1) {
-      this.provinceGroup.splice(index, 1)
-    } else {
-      this.provinceGroup.push(value)
+  selectDate (value) {
+    this.date = {
+      date: value.date
     }
-  }
-
-  setSelectMultiProvince () {
-    this.isSelectProvince = !this.isSelectProvince
-  }
-
-  checkProvince (province) {
-    return this.provinceGroup.some(item => item === province)
+    // this.loadData()
   }
 
   async loadData () {

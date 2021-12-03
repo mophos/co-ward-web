@@ -7,10 +7,38 @@
 </nav>
 
 <div style="display: flex; justify-content: space-between;">
-    <div></div>
-    <button class="btn btn-sm btn-primary" (click)="exportExcel()">
-        <clr-icon shape="download"></clr-icon>export excel
-    </button>
+    <div style="display: flex;">
+        <div style="width: 200px; margin-right: 24px;">
+            <label> วันที่แสดงข้อมูล </label>
+            <my-date-picker-th
+                [(ngModel)]="date"
+                [options]="myDatePickerOptions"
+                name="dateBedsProvince"
+                (dateChanged)="selectDate($event)">
+            </my-date-picker-th>
+        </div>
+        <div style="width: 200px;">
+            <label> เขตสุขภาพ </label>
+            <div class="clr-select-wrapper" style="width: 100%;">
+                <select
+                    [(ngModel)]="zone"
+                    name="zoneBedsProvince"
+                    style="width: 100%;"
+                    class="clr-select"
+                    (change)="selectZone()">
+                    <option value="">เลือกเขต</option>
+                    <option *ngFor="let item of [].constructor(13); let i = index" [value]="i + 1">
+                        เขต {{ i + 1 }}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div style="padding-top: 16px;">
+        <button class="btn btn-sm btn-primary" (click)="exportExcel()">
+            <clr-icon shape="download"></clr-icon>export excel
+        </button>
+    </div>
 </div>
 
 <div style="overflow: auto;">
@@ -52,33 +80,61 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of items; let i = index">
-                <td class="td-border"> {{ item.zone_code }} </td>
-                <td class="td-border"> {{ item.province_name }} </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-            </tr>
+            <ng-container *ngFor="let count of items; let i = index">
+                <ng-container *ngFor="let item of items[i]; let j = index">
+                    <tr *ngIf="item.zone_code !== '13'">
+                        <td class="td-border"> {{ item.zone_code }} </td>
+                        <td class="td-border"> {{ item.province_name }} </td>
+                        <td class="td-border"> 0 </td>
+                        <td class="td-border"> 0 </td>
+                        <td class="td-border"> 0 </td>
+                        <td class="td-border"> 0 </td>
+                        <td class="td-border"> 0 </td>
+                        <td class="td-border"> 0 </td>
+                        <td class="td-border"> 0 </td>
+                        <td class="td-border"> 0 </td>
+                        <td class="td-border"> 0 </td>
+                        <td class="td-border"> 0 </td>
+                        <td class="td-border"> 0 </td>
+                        <td class="td-border"> 0 </td>
+                        <td class="td-border"> 0 </td>
+                        <td class="td-border"> 0 </td>
+                        <td class="td-border"> 0 </td>
+                        <td class="td-border"> 0 </td>
+                        <td class="td-border"> 0 </td>
+                        <td class="td-border"> 0 </td>
+                        <td class="td-border"> 0 </td>
+                        <td class="td-border"> 0 </td>
+                        <td class="td-border"> 0 </td>
+                    </tr>
+                </ng-container>
+                <tr *ngIf="items.length && items[i][0].zone_code !== '13'">
+                    <td colspan="2" class="td-border"> รวมเขต {{ items[i][0].zone_code }} </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                </tr>
+            </ng-container>
         </tbody>
-        <tfoot *ngIf="items.length">
+        <tfoot *ngIf="items[12].length">
             <tr>
                 <td colspan="2" class="td-border"> กรุงเทพมหานคร </td>
                 <td class="td-border"> 0 </td>
@@ -156,13 +212,13 @@
 </div>
 
 <div
-    *ngIf="isLoading && !items.length"
+    *ngIf="isLoading && !items[12].length"
     style="display: flex; justify-content: center; padding: 24px;">
     กำลังโหลดข้อมูล ...
 </div>
 
 <div
-    *ngIf="!isLoading && !items.length"
+    *ngIf="!isLoading && !items[12].length"
     style="display: flex; justify-content: center; padding: 24px;">
     ไม่พบข้อมูล
 </div>

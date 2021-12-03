@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { IMyOptions } from 'mydatepicker-th';
 import { RespiratorService } from '../../serveices-new-report/respirator.service'
+import moment from 'moment';
 
 @Component({
   selector: 'app-report-respirator',
@@ -10,6 +12,20 @@ export class ReportRespiratorComponent implements OnInit {
 
   isLoading = false
 
+  myDatePickerOptions: IMyOptions = {
+    inline: false,
+    dateFormat: 'dd-mm-yyyy',
+    editableDateField: false,
+    showClearDateBtn: false
+  }
+  date:any = {
+    date: {
+      year: moment().year(),
+      month: moment().month() + 1,
+      day: moment().date()
+    }
+  }
+
   items:any = []
   @ViewChild('loading', { static: true }) loading: any;
 
@@ -18,6 +34,13 @@ export class ReportRespiratorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // this.loadData()
+  }
+
+  selectDate (value) {
+    this.date = {
+      date: value.date
+    }
     // this.loadData()
   }
 

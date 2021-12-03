@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { IMyOptions } from 'mydatepicker-th';
 import { BedsHospitalService } from '../../serveices-new-report/beds-hospital.service'
+import provinceJson from '../../../../assets/provinces.json'
+import moment from 'moment';
 
 @Component({
   selector: 'app-report-beds-hospital',
@@ -10,7 +13,26 @@ export class ReportBedsHospitalComponent implements OnInit {
 
   isLoading = false
 
+  myDatePickerOptions: IMyOptions = {
+    inline: false,
+    dateFormat: 'dd-mm-yyyy',
+    editableDateField: false,
+    showClearDateBtn: false
+  }
+  date:any = {
+    date: {
+      year: moment().year(),
+      month: moment().month() + 1,
+      day: moment().date()
+    }
+  }
+
   items:any = []
+  zone = ''
+  provinceGroup = []
+  displayProvince = ''
+  provinces = provinceJson.data
+  isSelectProvince = false
   @ViewChild('loading', { static: true }) loading: any;
 
   constructor(
@@ -19,6 +41,34 @@ export class ReportBedsHospitalComponent implements OnInit {
 
   ngOnInit() {
     this.loadData()
+  }
+
+  selectDate (value) {
+    this.date = {
+      date: value.date
+    }
+    // this.loadDate()
+  }
+
+  selectZone () {
+    // this.loadData()
+  }
+
+  selectProvince (value) {
+    const index = this.provinceGroup.findIndex(item => item === value)
+    if (index > -1) {
+      this.provinceGroup.splice(index, 1)
+    } else {
+      this.provinceGroup.push(value)
+    }
+  }
+
+  setSelectMultiProvince () {
+    this.isSelectProvince = !this.isSelectProvince
+  }
+
+  checkProvince (province) {
+    return this.provinceGroup.some(item => item === province)
   }
 
   async loadData () {

@@ -7,7 +7,17 @@
 </nav>
 
 <div style="display: flex; justify-content: space-between;">
-    <div></div>
+    <div style="display: flex;">
+        <label style="padding-top: 4px; margin-right: 16px;"> วันที่แสดงข้อมูล </label>
+        <div style="width: 200px; margin-right: 16px;">
+            <my-date-picker-th
+                [(ngModel)]="date"
+                [options]="myDatePickerOptions"
+                name="dateBedsZone"
+                (dateChanged)="selectDate($event)">
+            </my-date-picker-th>
+        </div>
+    </div>
     <button class="btn btn-sm btn-primary" (click)="exportExcel()">
         <clr-icon shape="download"></clr-icon>export excel
     </button>
@@ -51,30 +61,32 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of items; let i = index">
-                <td class="td-border"> รวมเขต {{ item.zone_code }} </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> {{ item.home_isolation_covid_qty }} </td>
-                <td class="td-border"> {{ item.home_isolation_usage_qty }} </td>
-                <td class="td-border"> {{ item.home_isolation_covid_qty - item.home_isolation_usage_qty }} </td>
-                <td class="td-border"> {{ item.community_isolation_covid_qty }} </td>
-                <td class="td-border"> {{ item.community_isolation_usage_qty }} </td>
-                <td class="td-border"> {{ item.community_isolation_covid_qty - item.community_isolation_usage_qty }} </td>
-            </tr>
+            <ng-container *ngFor="let item of items; let i = index">
+                <tr *ngIf="item.zone_code !== '13'">
+                    <td class="td-border"> รวมเขต {{ item.zone_code }} </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> {{ item.home_isolation_covid_qty }} </td>
+                    <td class="td-border"> {{ item.home_isolation_usage_qty }} </td>
+                    <td class="td-border"> {{ item.home_isolation_covid_qty - item.home_isolation_usage_qty }} </td>
+                    <td class="td-border"> {{ item.community_isolation_covid_qty }} </td>
+                    <td class="td-border"> {{ item.community_isolation_usage_qty }} </td>
+                    <td class="td-border"> {{ item.community_isolation_covid_qty - item.community_isolation_usage_qty }} </td>
+                </tr>
+            </ng-container>
         </tbody>
         <tfoot *ngIf="items.length">
             <tr>

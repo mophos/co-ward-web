@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { IMyOptions } from 'mydatepicker-th';
 import { BedsZoneService } from '../../serveices-new-report/beds-zone.service';
+import moment from 'moment';
 
 @Component({
   selector: 'app-report-beds-zone',
@@ -10,6 +12,20 @@ export class ReportBedsZoneComponent implements OnInit {
 
   isLoading = false
 
+  myDatePickerOptions: IMyOptions = {
+    inline: false,
+    dateFormat: 'dd-mm-yyyy',
+    editableDateField: false,
+    showClearDateBtn: false
+  }
+  date:any = {
+    date: {
+      year: moment().year(),
+      month: moment().month() + 1,
+      day: moment().date()
+    }
+  }
+
   items:any = []
   @ViewChild('loading', { static: true }) loading: any;
 
@@ -19,6 +35,13 @@ export class ReportBedsZoneComponent implements OnInit {
 
   ngOnInit() {
     this.loadData()
+  }
+
+  selectDate (value) {
+    this.date = {
+      date: value.date
+    }
+    // this.loadData()
   }
 
   async loadData () {

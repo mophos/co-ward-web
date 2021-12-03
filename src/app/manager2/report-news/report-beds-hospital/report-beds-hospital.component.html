@@ -7,10 +7,75 @@
 </nav>
 
 <div style="display: flex; justify-content: space-between;">
-    <div></div>
-    <button class="btn btn-sm btn-primary" (click)="exportExcel()">
-        <clr-icon shape="download"></clr-icon>export excel
-    </button>
+    <div style="display: flex;">
+        <div style="width: 200px; margin-right: 24px;">
+            <label> วันที่แสดงข้อมูล </label>
+            <my-date-picker-th
+                [(ngModel)]="date"
+                [options]="myDatePickerOptions"
+                name="dateBedsHospital"
+                (dateChanged)="selectDate($event)">
+            </my-date-picker-th>
+        </div>
+        <div style="width: 200px; margin-right: 24px;">
+            <label> เขตสุขภาพ </label>
+            <div class="clr-select-wrapper" style="width: 100%;">
+                <select
+                    [(ngModel)]="zone"
+                    name="zoneBedsHospital"
+                    style="width: 100%;"
+                    class="clr-select"
+                    (change)="selectZone()">
+                    <option value="">เลือกเขต</option>
+                    <option *ngFor="let item of [].constructor(13); let i = index" [value]="i + 1">
+                        เขต {{ i + 1 }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div style="width: 200px;">
+            <label> จังหวัด </label>
+            <div class="clr-select-wrapper" style="width: 100%;">
+                <select
+                    [(ngModel)]="displayProvince"
+                    name="provinceBedsHospital"
+                    style="width: 100%;"
+                    class="clr-select"
+                    readonly="true"
+                    (click)="setSelectMultiProvince()">
+                    <option style="display: none;" value=""> เลือกจังหวัด </option>
+                    <option
+                        [selected]="provinceGroup.length"
+                        style="display: none;">
+                        <div *ngIf="provinceGroup.length === 1">
+                            {{ provinceGroup[0] }}
+                        </div>
+                        <div *ngIf="provinceGroup.length > 1">
+                            {{ provinceGroup[0] + ' + ' + '( ' + ( provinceGroup.length - 1 ) + ' )' }}
+                        </div>
+                    </option>
+                </select>
+                <div
+                    *ngIf="isSelectProvince"
+                    class="patients-beds-hospital__select-menu">
+                    <clr-checkbox-wrapper *ngFor="let province of provinces; let i = index">
+                        <input
+                            [value]="province"
+                            [checked]="checkProvince(province)"
+                            type="checkbox"
+                            clrCheckbox
+                            (change)="selectProvince($event.target.value)" />
+                        <label> {{ province }} </label>
+                    </clr-checkbox-wrapper>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding-top: 16px;">
+        <button class="btn btn-sm btn-primary" (click)="exportExcel()">
+            <clr-icon shape="download"></clr-icon>export excel
+        </button>
+    </div>
 </div>
 
 <div style="overflow: auto;">

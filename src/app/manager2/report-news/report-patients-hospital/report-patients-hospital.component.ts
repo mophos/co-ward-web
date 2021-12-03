@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyOptions } from 'mydatepicker-th';
 import { PatientsHospitalService } from '../../serveices-new-report/patients-hospital.service'
+import provinceJson from '../../../../assets/provinces.json'
 import moment from 'moment';
 
 @Component({
@@ -26,6 +27,11 @@ export class ReportPatientsHospitalComponent implements OnInit {
     editableDateField: false,
     showClearDateBtn: false
   }
+  zone = ''
+  provinceGroup = []
+  displayProvince = ''
+  provinces = provinceJson.data
+  isSelectProvince = false
   @ViewChild('loading', { static: true }) loading: any;
 
   constructor(
@@ -41,6 +47,27 @@ export class ReportPatientsHospitalComponent implements OnInit {
       date: value.date
     }
     this.loadData()
+  }
+
+  selectZone () {
+    // this.loadData()
+  }
+
+  selectProvince (value) {
+    const index = this.provinceGroup.findIndex(item => item === value)
+    if (index > -1) {
+      this.provinceGroup.splice(index, 1)
+    } else {
+      this.provinceGroup.push(value)
+    }
+  }
+
+  setSelectMultiProvince () {
+    this.isSelectProvince = !this.isSelectProvince
+  }
+
+  checkProvince (province) {
+    return this.provinceGroup.some(item => item === province)
   }
 
   async loadData () {

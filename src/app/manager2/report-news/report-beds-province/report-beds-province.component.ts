@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { IMyOptions } from 'mydatepicker-th';
 import { BedsProvinceService } from '../../serveices-new-report/beds-province.service'
+import moment from 'moment';
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 @Component({
   selector: 'app-report-beds-province',
@@ -9,8 +12,25 @@ import { BedsProvinceService } from '../../serveices-new-report/beds-province.se
 export class ReportBedsProvinceComponent implements OnInit {
 
   isLoading = true
-
-  items:any = []
+  zone = ''
+  items = [
+    [], [], [], [], [],
+    [], [], [], [], [],
+    [], [], []
+  ]
+  myDatePickerOptions: IMyOptions = {
+    inline: false,
+    dateFormat: 'dd-mm-yyyy',
+    editableDateField: false,
+    showClearDateBtn: false
+  }
+  date:any = {
+    date: {
+      year: moment().year(),
+      month: moment().month() + 1,
+      day: moment().date()
+    }
+  }
   @ViewChild('loading', { static: true }) loading: any;
 
   constructor(
@@ -21,17 +41,57 @@ export class ReportBedsProvinceComponent implements OnInit {
     this.loadData()
   }
 
+  selectZone () {
+    // this.loadData()
+  }
+
+  selectDate (value) {
+    this.date = {
+      date: value.date
+    }
+    // this.loadData()
+  }
+
   async loadData () {
     try {
       this.isLoading = true
       const res:any = await this.bedsProvinceService.getBedProvince()
       if (res.ok) {
-        this.items = res.rows
+        res.rows.forEach(item => {
+          if (item.zone_code === '01') {
+            this.items[0].push(item)
+          } else if (item.zone_code === '02') {
+            this.items[1].push(item)
+          } else if (item.zone_code === '03') {
+            this.items[2].push(item)
+          } else if (item.zone_code === '04') {
+            this.items[3].push(item)
+          } else if (item.zone_code === '05') {
+            this.items[4].push(item)
+          } else if (item.zone_code === '06') {
+            this.items[5].push(item)
+          } else if (item.zone_code === '07') {
+            this.items[6].push(item)
+          } else if (item.zone_code === '08') {
+            this.items[7].push(item)
+          } else if (item.zone_code === '09') {
+            this.items[8].push(item)
+          } else if (item.zone_code === '10') {
+            this.items[9].push(item)
+          } else if (item.zone_code === '11') {
+            this.items[10].push(item)
+          } else if (item.zone_code === '12') {
+            this.items[11].push(item)
+          } else {
+            this.items[12].push(item)
+          }
+        })
         console.log(res.rows)
         this.isLoading = false
       }
     } catch (error) {
       console.error(error)
+      this.isLoading = false
     }
   }
 

@@ -11,8 +11,12 @@ import moment from 'moment';
 export class ReportPatientsProvinceComponent implements OnInit {
 
   isLoading = false
-
-  items:any = []
+  zone = ''
+  items = [
+    [], [], [], [], [],
+    [], [], [], [], [],
+    [], [], []
+  ]
   date:any = {
     date: {
       year: moment().year(),
@@ -36,6 +40,10 @@ export class ReportPatientsProvinceComponent implements OnInit {
     this.loadData()
   }
 
+  selectZone () {
+    // this.loadData()
+  }
+
   selectDate (value) {
     this.date = {
       date: value.date
@@ -49,12 +57,42 @@ export class ReportPatientsProvinceComponent implements OnInit {
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
       const res:any = await this.patientsProvinceService.getPatientProvince({ date })
       if (res.ok) {
-        this.items = res.rows
-        console.log(res.rows)
+
+        res.rows.forEach(item => {
+          if (item.zone_code === '01') {
+            this.items[0].push(item)
+          } else if (item.zone_code === '02') {
+            this.items[1].push(item)
+          } else if (item.zone_code === '03') {
+            this.items[2].push(item)
+          } else if (item.zone_code === '04') {
+            this.items[3].push(item)
+          } else if (item.zone_code === '05') {
+            this.items[4].push(item)
+          } else if (item.zone_code === '06') {
+            this.items[5].push(item)
+          } else if (item.zone_code === '07') {
+            this.items[6].push(item)
+          } else if (item.zone_code === '08') {
+            this.items[7].push(item)
+          } else if (item.zone_code === '09') {
+            this.items[8].push(item)
+          } else if (item.zone_code === '10') {
+            this.items[9].push(item)
+          } else if (item.zone_code === '11') {
+            this.items[10].push(item)
+          } else if (item.zone_code === '12') {
+            this.items[11].push(item)
+          } else {
+            this.items[12].push(item)
+          }
+        })
+        console.log(this.items)
         this.isLoading = false
       }
     } catch (error) {
       console.error(error)
+      this.isLoading = false
     }
   }
 
