@@ -1,0 +1,26 @@
+<nav
+  style="margin-bottom: 16px;"
+  class="breadcrumb">
+  <span class="breadcrumb-item active"> เชื่อมต่อข้อมูล HIS </span>
+</nav>
+
+<input type="file" (change)="onChange($event)">
+
+<button class="btn" (click)="importCsv()">
+  import
+</button>
+
+{{ items }}
+
+<table style="border-collapse: collapse;" class="table table-compact">
+  <thead>
+    <tr>
+      <!-- <th class="td-border"> เขตสุขภาพ </th> -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items; let i = index">
+      <td> {{ item.name }} </td>
+    </tr>
+  </tbody>
+</table>

@@ -74,6 +74,9 @@ import { ReportMedicalSuppliesComponent } from './report-medical-supplies/report
 import { ReportAdmitPuiComponent } from './report-admit-pui/report-admit-pui.component';
 import { BedHospManageComponent } from './bed-hosp-manage/bed-hosp-manage.component';
 import { ReportDcComponent } from './report-dc/report-dc.component';
+
+// new
+
 import { ResultLabComponent } from './result-lab/result-lab.component';
 import { ResultVaccineComponent } from './result-vaccine/result-vaccine.component';
 import { TimePipe } from './pipes/time.pipe';
@@ -83,6 +86,10 @@ import { BedEachTypeChartComponent } from './bed-each-type-chart/bed-each-type-c
 import { CovidEachCaseChartComponent } from './covid-each-case-chart/covid-each-case-chart.component';
 import { CovidEachStatusChartComponent } from './covid-each-status-chart/covid-each-status-chart.component';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { ConnectHisComponent } from './connect-his/connect-his.component';
+import { ReportPatientsAdmitConfirmComponent } from './new-reports/report-patients-admit-confirm/report-patients-admit-confirm.component';
+import { ReportPatientsAdmitPuiComponent } from './new-reports/report-patients-admit-pui/report-patients-admit-pui.component';
+import { ReportBed2Component } from './new-reports/report-bed2/report-bed2.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -135,7 +142,11 @@ import { HighchartsChartModule } from 'highcharts-angular';
     DateTimePipe,
     BedEachTypeChartComponent,
     CovidEachCaseChartComponent,
-    CovidEachStatusChartComponent
+    CovidEachStatusChartComponent,
+    ConnectHisComponent,
+    ReportPatientsAdmitConfirmComponent,
+    ReportPatientsAdmitPuiComponent,
+    ReportBed2Component
   ],
   imports: [
     HelpModule,
@@ -147,6 +158,8 @@ import { HighchartsChartModule } from 'highcharts-angular';
     FormsModule,
     MyDatePickerTHModule,
     NgSelectModule,
+
+    // new
     HighchartsChartModule
   ],
   exports: [

@@ -78,6 +78,10 @@ import { ResultVaccineComponent } from './result-vaccine/result-vaccine.componen
 import { BedEachTypeChartComponent } from './bed-each-type-chart/bed-each-type-chart.component';
 import { CovidEachCaseChartComponent } from './covid-each-case-chart/covid-each-case-chart.component';
 import { CovidEachStatusChartComponent } from './covid-each-status-chart/covid-each-status-chart.component';
+import { ConnectHisComponent } from './connect-his/connect-his.component';
+import { ReportPatientsAdmitConfirmComponent } from './new-reports/report-patients-admit-confirm/report-patients-admit-confirm.component';
+import { ReportPatientsAdmitPuiComponent } from './new-reports/report-patients-admit-pui/report-patients-admit-pui.component';
+import { ReportBed2Component } from './new-reports/report-bed2/report-bed2.component';
 
 const routes: Routes = [
   {
@@ -156,11 +160,16 @@ const routes: Routes = [
       { path: 'report/10', component: Report10Component },
 
       //////////// new ////////////////
-      { path: 'result-lab', component: ResultLabComponent },
-      { path: 'result-vaccine', component: ResultVaccineComponent },
-      { path: 'bed-each-type-chart', component: BedEachTypeChartComponent },
-      { path: 'covid-each-case-chart', component: CovidEachCaseChartComponent },
-      { path: 'covid-each-status-chart', component: CovidEachStatusChartComponent }
+
+      // { path: 'result-lab', component: ResultLabComponent },
+      // { path: 'result-vaccine', component: ResultVaccineComponent },
+      // { path: 'bed-each-type-chart', component: BedEachTypeChartComponent },
+      // { path: 'covid-each-case-chart', component: CovidEachCaseChartComponent },
+      // { path: 'covid-each-status-chart', component: CovidEachStatusChartComponent }
+      { path: 'connect-his', component: ConnectHisComponent },
+      { path: 'report-patients-admit-confirm', component: ReportPatientsAdmitConfirmComponent },
+      { path: 'report-patients-admit-pui', component: ReportPatientsAdmitPuiComponent },
+      { path: 'report-bed2', component: ReportBed2Component }
     ]
   }
 ];
