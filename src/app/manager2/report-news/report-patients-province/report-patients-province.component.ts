@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyOptions } from '@tanjaae/mydatepicker'
-import { PatientsProvinceService } from '../../serveices-new-report/patients-province.service'
+import { PatientsProvinceService } from '../../services-new-report/patients-province.service'
+import { CalculateService } from '../../services-new-report/calculate.service';
 import moment from 'moment';
 
 @Component({
@@ -33,21 +34,32 @@ export class ReportPatientsProvinceComponent implements OnInit {
   @ViewChild('loading', { static: true }) loading: any;
 
   constructor(
-    private patientsProvinceService: PatientsProvinceService
+    private patientsProvinceService: PatientsProvinceService,
+    private cal: CalculateService
   ) { }
 
   ngOnInit() {
     this.loadData()
   }
 
+  clearData () {
+    this.items = [
+      [], [], [], [], [],
+      [], [], [], [], [],
+      [], [], []
+    ]
+  }
+
   selectZone () {
-    // this.loadData()
+    this.clearData()
+    this.loadData()
   }
 
   selectDate (value) {
     this.date = {
       date: value.date
     }
+    this.clearData()
     this.loadData()
   }
 

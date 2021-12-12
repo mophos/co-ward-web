@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyOptions } from 'mydatepicker-th';
-import { BedsHospitalService } from '../../serveices-new-report/beds-hospital.service'
+import { BedsHospitalService } from '../../services-new-report/beds-hospital.service'
 import provinceJson from '../../../../assets/provinces.json'
 import moment from 'moment';
 
@@ -47,7 +47,8 @@ export class ReportBedsHospitalComponent implements OnInit {
     this.date = {
       date: value.date
     }
-    // this.loadDate()
+    this.items = []
+    this.loadData()
   }
 
   selectZone () {
@@ -61,6 +62,8 @@ export class ReportBedsHospitalComponent implements OnInit {
     } else {
       this.provinceGroup.push(value)
     }
+    this.items = []
+    this.loadData()
   }
 
   setSelectMultiProvince () {

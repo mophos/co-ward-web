@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyOptions } from '@tanjaae/mydatepicker';
-import { PatientsSumDailyService } from '../../serveices-new-report/patients-sum-daily.service'
+import { PatientsSumDailyService } from '../../services-new-report/patients-sum-daily.service'
 import provinceJson from '../../../../assets/provinces.json'
 import moment from 'moment';
 

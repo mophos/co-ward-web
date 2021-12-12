@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyOptions } from '@tanjaae/mydatepicker';
-import { PatientsDischargeService } from '../../serveices-new-report/patients-discharge.service'
+import { PatientsDischargeService } from '../../services-new-report/patients-discharge.service'
 import moment  from 'moment';
 
 @Component({
@@ -40,6 +40,7 @@ export class ReportPatientsDischargeComponent implements OnInit {
     this.date = {
       date: value.date
     }
+    this.items = []
     this.loadData()
   }
 

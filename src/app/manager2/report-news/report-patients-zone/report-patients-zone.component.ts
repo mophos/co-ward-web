@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyOptions } from '@tanjaae/mydatepicker';
-import { PatientsZoneService } from '../../serveices-new-report/patients-zone.service';
+import { PatientsZoneService } from '../../services-new-report/patients-zone.service';
+import { CalculateService } from '../../services-new-report/calculate.service';
 import moment from 'moment';
 
 @Component({
@@ -30,6 +31,7 @@ export class ReportPatientsZoneComponent implements OnInit {
 
   constructor(
     private patientsZoneService: PatientsZoneService,
+    private cal: CalculateService
   ) { }
 
   ngOnInit() {
@@ -40,6 +42,7 @@ export class ReportPatientsZoneComponent implements OnInit {
     this.date = {
       date: value.date
     }
+    this.items = []
     this.loadData()
   }
 

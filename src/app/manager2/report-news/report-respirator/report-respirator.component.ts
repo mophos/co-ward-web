@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyOptions } from 'mydatepicker-th';
-import { RespiratorService } from '../../serveices-new-report/respirator.service'
+import { RespiratorService } from '../../services-new-report/respirator.service'
 import moment from 'moment';
 
 @Component({

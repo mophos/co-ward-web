@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyOptions } from '@tanjaae/mydatepicker';
-import { PatientsAdmitService } from '../../serveices-new-report/patients-admit.service';
+import { PatientsAdmitService } from '../../services-new-report/patients-admit.service';
 import moment from 'moment';
 
 @Component({
@@ -33,7 +33,7 @@ export class ReportPatientsAdmitComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.loadData()
+    this.loadData()
   }
 
   selectDate (value) {

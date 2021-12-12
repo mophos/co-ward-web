@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyOptions } from 'mydatepicker-th';
-import { BedsZoneService } from '../../serveices-new-report/beds-zone.service';
+import { BedsZoneService } from '../../services-new-report/beds-zone.service';
+import { CalculateService } from '../../services-new-report/calculate.service';
 import moment from 'moment';
+import { sumBy } from 'lodash';
 
 @Component({
   selector: 'app-report-beds-zone',
@@ -31,6 +33,7 @@ export class ReportBedsZoneComponent implements OnInit {
 
   constructor(
     private bedsZoneService: BedsZoneService,
+    private cal: CalculateService
   ) { }
 
   ngOnInit() {
@@ -41,13 +44,23 @@ export class ReportBedsZoneComponent implements OnInit {
     this.date = {
       date: value.date
     }
-    // this.loadData()
+    this.items = []
+    this.loadData()
+  }
+
+  sum12Zone (value) {
+    return sumBy(this.items, value) - this.items[12][value]
+  }
+
+  sumAllZone (value) {
+    return sumBy(this.items, value)
   }
 
   async loadData () {
     try {
       this.isLoading = true
-      const res:any = await this.bedsZoneService.getBedZone()
+      const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
+      const res:any = await this.bedsZoneService.getBedZone({ date })
       if (res.ok) {
         this.items = res.rows
         console.log(res.rows)
@@ -78,8 +91,8 @@ export class ReportBedsZoneComponent implements OnInit {
   async exportExcel() {
     try {
       this.loading.show()
-      // const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.bedsZoneService.exportExcelBedZone()
+      const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
+      const res:any = await this.bedsZoneService.exportExcelBedZone({ date })
       if (res) {
         this.downloadFile('รายงานเตียงรายเขต', 'xlsx', res)
         this.loading.hide()

@@ -15,6 +15,7 @@ import { AutocompleteCountriesComponent } from 'src/app/help/autocomplete-countr
 import * as moment from 'moment';
 import thaiIdCard from 'thai-id-card';
 import { AutocompleteIcd10Component } from 'src/app/help/autocomplete-icd10/autocomplete-icd10.component';
+import { NewAlertService } from 'src/app/help/new-alert.service';
 @Component({
   selector: 'app-covid-case-new',
   templateUrl: './covid-case-new.component.html',
@@ -154,7 +155,8 @@ export class CovidCaseNewComponent implements OnInit {
     private basicService: BasicService,
     private basicAuthService: BasicAuthService,
     private covidCaseService: CovidCaseService,
-    private router: Router
+    private router: Router,
+    private newAlertService: NewAlertService
   ) {
     const params = this.route.snapshot.params;
     this.isRefer = params.isRefer;
@@ -588,7 +590,7 @@ export class CovidCaseNewComponent implements OnInit {
                 this.isKey = false;
                 this.isSave = false;
                 this.alertService.success();
-                this.router.navigate(['/staff/covid-case-new-v2']);
+                this.router.navigate(['/staff2/covid-case-new-v2']);
               } else if (rs.code === 3301) {
                 console.log('3301');
                 this.dataOld = rs.rows;
@@ -625,6 +627,12 @@ export class CovidCaseNewComponent implements OnInit {
         } catch (error) {
           this.isSave = false;
           this.alertService.error(error);
+
+          // if (error.) {
+          //   this.newAlertService.warningBedType('มีการใช้งานเตียงเกินปริมาณที่กำหนด', 'ไปยังหน้าตั้งค่าเตียง ?')
+          // } else if (error.) {
+          //   this.newAlertService.warningBedType('มีเตียงที่ยังไม่ได้ถูกตั้งค่า', 'ไปยังหน้าตั้งค่าเตียง ?')
+          // }
         }
       }
     } else {
@@ -983,6 +991,7 @@ export class CovidCaseNewComponent implements OnInit {
         }
       }
     }
+    console.log(this.admitDetail)
   }
 
   uncheckRadioMedicalSupplies(listId, ms) {

@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyOptions } from 'mydatepicker-th';
-import { BedsProvinceService } from '../../serveices-new-report/beds-province.service'
+import { BedsProvinceService } from '../../services-new-report/beds-province.service'
+import { CalculateService } from '../../services-new-report/calculate.service';
 import moment from 'moment';
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 @Component({
   selector: 'app-report-beds-province',
@@ -34,11 +34,20 @@ export class ReportBedsProvinceComponent implements OnInit {
   @ViewChild('loading', { static: true }) loading: any;
 
   constructor(
-    private bedsProvinceService: BedsProvinceService
+    private bedsProvinceService: BedsProvinceService,
+    private cal: CalculateService
   ) { }
 
   ngOnInit() {
     this.loadData()
+  }
+
+  clearData () {
+    this.items = [
+      [], [], [], [], [],
+      [], [], [], [], [],
+      [], [], []
+    ]
   }
 
   selectZone () {
@@ -49,13 +58,15 @@ export class ReportBedsProvinceComponent implements OnInit {
     this.date = {
       date: value.date
     }
-    // this.loadData()
+    this.clearData()
+    this.loadData()
   }
 
   async loadData () {
     try {
       this.isLoading = true
-      const res:any = await this.bedsProvinceService.getBedProvince()
+      const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
+      const res:any = await this.bedsProvinceService.getBedProvince({ date })
       if (res.ok) {
         res.rows.forEach(item => {
           if (item.zone_code === '01') {
@@ -86,7 +97,7 @@ export class ReportBedsProvinceComponent implements OnInit {
             this.items[12].push(item)
           }
         })
-        console.log(res.rows)
+        console.log(this.items)
         this.isLoading = false
       }
     } catch (error) {
@@ -115,8 +126,8 @@ export class ReportBedsProvinceComponent implements OnInit {
   async exportExcel() {
     try {
       this.loading.show()
-      // const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.bedsProvinceService.exportExcelBedProvince()
+      const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
+      const res:any = await this.bedsProvinceService.exportExcelBedProvince({ date })
       if (res) {
         this.downloadFile('รายงานเตียงรายจังหวัด', 'xlsx', res)
         this.loading.hide()

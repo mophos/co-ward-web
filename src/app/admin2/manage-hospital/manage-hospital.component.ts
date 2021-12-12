@@ -35,7 +35,7 @@ export class ManageHospitalComponent implements OnInit {
   hospTypeCode: any;
   ministryCode: any;
   subMinistryCode: any;
-  hospCode: any = '';
+  // hospCode: any = '';
   hospName: any;
   address: any;
   tel: any;
@@ -47,7 +47,6 @@ export class ManageHospitalComponent implements OnInit {
   listMinistry: any;
   listSubMinistry: any;
   listNode:any
-
   tambonId: any;
   tambonName: any;
   ampurName: any;
@@ -57,9 +56,9 @@ export class ManageHospitalComponent implements OnInit {
   tambonCode: any;
   ampurCode: any;
   provinceCode: any;
-  
-  // new 
-  hospType: any
+
+  // new
+  hospType = ''
   hosTypeEnum = [
     {
       name: 'โรงพยาบาล',
@@ -78,7 +77,8 @@ export class ManageHospitalComponent implements OnInit {
       value: 'CI'
     }
   ]
-  coordinatorName: any
+  coordinatorName = ''
+  listNodeId = ''
 
   constructor(
     private hospitalService: HospitalService,
@@ -91,7 +91,6 @@ export class ManageHospitalComponent implements OnInit {
     this.getMinistryTypeList();
     this.getSubMinistryList();
     this.getList();
-    this.getListNode();
     this.getListNode()
   }
 
@@ -242,7 +241,7 @@ export class ManageHospitalComponent implements OnInit {
     this.ampurName = null;
     this.provinceName = null;
     this.zipcode = null;
-    this.hospCode = '';
+    // this.hospCode = '';
     this.hospName = null;
     this.address = null;
     this.tel = null;
@@ -259,7 +258,7 @@ export class ManageHospitalComponent implements OnInit {
       const idx = findIndex(this.listType, { id: +this.hospTypeId });
       const data = {
         hosptype_id: this.hospTypeId,
-        hospital_type: +this.hospTypeId === 19 ? 'HOSPITEL' : 'HOSPITAL',
+        // hospital_type: this.hospTypeId === 19 ? 'HOSPITEL' : 'HOSPITAL',
         hosptype_code: this.listType[idx].code,
         tambon_code: this.tambonCode || null,
         ministry_code: this.ministryCode || null,
@@ -270,12 +269,17 @@ export class ManageHospitalComponent implements OnInit {
         ampur_name: this.ampurName || null,
         province_name: this.provinceName,
         zipcode: this.zipcode || null,
-        hospcode: this.hospCode,
+        // hospcode: this.hospCode,
         hospname: this.hospName,
         address: this.address || null,
         tel: this.tel || null,
         telephone: this.telephone || null,
-        telephone_manager: this.telephoneManager || null
+        telephone_manager: this.telephoneManager || null,
+        // new
+        hospital_type: this.hospType || null,
+        head_hospcode: this.listNodeId || null,
+        contact_name: this.coordinatorName || null
+
       };
 
       let rs: any;
@@ -314,7 +318,7 @@ export class ManageHospitalComponent implements OnInit {
     this.ampurName = l.ampur_name;
     this.provinceName = l.province_name;
     this.zipcode = l.zipcode;
-    this.hospCode = l.hospcode;
+    // this.hospCode = l.hospcode;
     this.hospName = l.hospname;
     this.address = l.address;
     this.tel = l.tel;

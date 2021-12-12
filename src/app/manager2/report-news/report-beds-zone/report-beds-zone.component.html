@@ -61,15 +61,18 @@
             </tr>
         </thead>
         <tbody>
-            <ng-container *ngFor="let item of items; let i = index">
-                <tr *ngIf="item.zone_code !== '13'">
-                    <td class="td-border"> รวมเขต {{ item.zone_code }} </td>
+            <ng-container >
+                <tr *ngFor="let item of items; let i = index">
+                    <td class="td-border">
+                        <div *ngIf="item.zone_code !== '13'"> รวมเขต {{ item.zone_code }} </div>
+                        <div *ngIf="item.zone_code === '13'"> กรุงเทพมหานคร </div>
+                    </td>
                     <td class="td-border"> 0 </td>
                     <td class="td-border"> 0 </td>
                     <td class="td-border"> 0 </td>
-                    <td class="td-border"> 0 </td>
-                    <td class="td-border"> 0 </td>
-                    <td class="td-border"> 0 </td>
+                    <td class="td-border"> {{ item.high_flow_covid_qty }} </td>
+                    <td class="td-border"> {{ item.high_flow_usage_qty }} </td>
+                    <td class="td-border"> {{ item.high_flow_covid_qty - item.high_flow_usage_qty }} </td>
                     <td class="td-border"> 0 </td>
                     <td class="td-border"> 0 </td>
                     <td class="td-border"> 0 </td>
@@ -84,40 +87,19 @@
                     <td class="td-border"> {{ item.home_isolation_covid_qty - item.home_isolation_usage_qty }} </td>
                     <td class="td-border"> {{ item.community_isolation_covid_qty }} </td>
                     <td class="td-border"> {{ item.community_isolation_usage_qty }} </td>
-                    <td class="td-border"> {{ item.community_isolation_covid_qty - item.community_isolation_usage_qty }} </td>
+                    <td> {{ item.community_isolation_covid_qty - item.community_isolation_usage_qty }} </td>
                 </tr>
             </ng-container>
         </tbody>
         <tfoot *ngIf="items.length">
             <tr>
-                <td class="td-border"> กรุงเทพมหานคร </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-            </tr>
-            <tr>
                 <td class="td-border"> รวม 12 เขต </td>
                 <td class="td-border"> 0 </td>
                 <td class="td-border"> 0 </td>
                 <td class="td-border"> 0 </td>
+                <td class="td-border"> {{ cal.sum12Zone(items, 'high_flow_covid_qty') }} </td>
+                <td class="td-border"> {{ cal.sum12Zone(items, 'high_flow_usage_qty') }} </td>
+                <td class="td-border"> {{ cal.sum12Zone(items, 'high_flow_covid_qty') - cal.sum12Zone(items, 'high_flow_usage_qty') }} </td>
                 <td class="td-border"> 0 </td>
                 <td class="td-border"> 0 </td>
                 <td class="td-border"> 0 </td>
@@ -127,21 +109,21 @@
                 <td class="td-border"> 0 </td>
                 <td class="td-border"> 0 </td>
                 <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
+                <td class="td-border"> {{ cal.sum12Zone(items, 'home_isolation_covid_qty') }} </td>
+                <td class="td-border"> {{ cal.sum12Zone(items, 'home_isolation_usage_qty') }} </td>
+                <td class="td-border"> {{ cal.sum12Zone(items, 'home_isolation_covid_qty') - cal.sum12Zone(items, 'home_isolation_usage_qty') }} </td>
+                <td class="td-border"> {{ cal.sum12Zone(items, 'community_isolation_covid_qty') }} </td>
+                <td class="td-border"> {{ cal.sum12Zone(items, 'community_isolation_usage_qty') }} </td>
+                <td> {{ cal.sum12Zone(items, 'community_isolation_covid_qty') - cal.sum12Zone(items, 'community_isolation_usage_qty') }} </td>
             </tr>
             <tr>
                 <td class="td-border"> ทั่วประเทศ </td>
                 <td class="td-border"> 0 </td>
                 <td class="td-border"> 0 </td>
                 <td class="td-border"> 0 </td>
+                <td class="td-border"> {{ cal.sumAllZone(items, 'high_flow_covid_qty') }} </td>
+                <td class="td-border"> {{ cal.sumAllZone(items, 'high_flow_usage_qty') }} </td>
+                <td class="td-border"> {{ cal.sumAllZone(items, 'high_flow_covid_qty') - cal.sumAllZone(items, 'high_flow_usage_qty') }} </td>
                 <td class="td-border"> 0 </td>
                 <td class="td-border"> 0 </td>
                 <td class="td-border"> 0 </td>
@@ -151,15 +133,12 @@
                 <td class="td-border"> 0 </td>
                 <td class="td-border"> 0 </td>
                 <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
+                <td class="td-border"> {{ cal.sumAllZone(items, 'home_isolation_covid_qty') }} </td>
+                <td class="td-border"> {{ cal.sumAllZone(items, 'home_isolation_usage_qty') }} </td>
+                <td class="td-border"> {{ cal.sumAllZone(items, 'home_isolation_covid_qty') - cal.sumAllZone(items, 'home_isolation_usage_qty') }} </td>
+                <td class="td-border"> {{ cal.sumAllZone(items, 'community_isolation_covid_qty') }} </td>
+                <td class="td-border"> {{ cal.sumAllZone(items, 'community_isolation_usage_qty') }} </td>
+                <td> {{ cal.sumAllZone(items, 'community_isolation_covid_qty') - cal.sumAllZone(items, 'community_isolation_usage_qty') }} </td>
             </tr>
         </tfoot>
     </table>

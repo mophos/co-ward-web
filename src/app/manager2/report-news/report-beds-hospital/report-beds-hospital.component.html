@@ -130,29 +130,33 @@
                 <td class="td-border"> {{ item.province_name }} </td>
                 <td class="td-border"> {{ item.hospcode }} </td>
                 <td class="td-border"> {{ item.hospname }} </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td> 0 </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border"> {{ item.home_isolation_covid_qty }} </td>
+                <td class="td-border"> {{ item.home_isolation_usage_qty }} </td>
+                <td class="td-border"> {{ item.home_isolation_covid_qty - item.home_isolation_usage_qty }} </td>
+                <td class="td-border"> {{ item.community_isolation_covid_qty }} </td>
+                <td class="td-border"> {{ item.community_isolation_usage_qty }} </td>
+                <td class="td-border"> {{ item.community_isolation_covid_qty - item.community_isolation_usage_qty }} </td>
+                <td>
+                    <div style="width: 200px;">
+                        {{ item.sub_ministry_name }}
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>

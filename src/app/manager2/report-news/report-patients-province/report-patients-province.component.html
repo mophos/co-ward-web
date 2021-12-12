@@ -64,72 +64,72 @@
                 <tr *ngIf="item.zone_code !== '13'">
                     <td class="td-border"> {{ item.zone_code }} </td>
                     <td class="td-border"> {{ item.province_name }} </td>
-                    <td class="td-border"> 0 </td>
-                    <td class="td-border"> 0 </td>
-                    <td class="td-border"> 0 </td>
-                    <td class="td-border"> 0 </td>
-                    <td class="td-border"> 0 </td>
-                    <td class="td-border"> 0 </td>
-                    <td class="td-border"> 0 </td>
-                    <td class="td-border"> 0 </td>
-                    <td class="td-border"> 0 </td>
-                    <td> 0 </td>
+                    <td class="td-border">  </td>
+                    <td class="td-border"> {{ item.severe }} </td>
+                    <td class="td-border">  </td>
+                    <td class="td-border">  </td>
+                    <td class="td-border">  </td>
+                    <td class="td-border"> {{ item.moderater }} </td>
+                    <td class="td-border"> {{ item.mild }} </td>
+                    <td class="td-border"> {{ item.asymtomatic }} </td>
+                    <td class="td-border">  </td>
+                    <td>  </td>
                 </tr>
             </ng-container>
             <tr *ngIf="items[i].length && items[i][0].zone_code !== '13'">
                 <td colspan="2" class="td-border"> รวมเขต {{ items[i][0].zone_code }} </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td class="td-border"> 0 </td>
-                <td> 0 </td>
+                <td class="td-border">  </td>
+                <td class="td-border"> {{ cal.sumZone(items[i], 'severe') }} </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border">  </td>
+                <td class="td-border"> {{ cal.sumZone(items[i], 'moderater') }} </td>
+                <td class="td-border"> {{ cal.sumZone(items[i], 'mild') }} </td>
+                <td class="td-border"> {{ cal.sumZone(items[i], 'asymtomatic') }} </td>
+                <td class="td-border">  </td>
+                <td>  </td>
             </tr>
         </ng-container>
     </tbody>
     <tfoot *ngIf="items[12].length">
         <tr>
             <td colspan="2" class="td-border"> กรุงเทพมหานคร </td>
-            <td class="td-border"> 0 </td>
-            <td class="td-border"> 0 </td>
-            <td class="td-border"> 0 </td>
-            <td class="td-border"> 0 </td>
-            <td class="td-border"> 0 </td>
-            <td class="td-border"> 0 </td>
-            <td class="td-border"> 0 </td>
-            <td class="td-border"> 0 </td>
-            <td class="td-border"> 0 </td>
-            <td> 0 </td>
+            <td class="td-border">  </td>
+            <td class="td-border"> {{ items[12][0].severe }} </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border"> {{ items[12][0].moderater }} </td>
+            <td class="td-border"> {{ items[12][0].mild }} </td>
+            <td class="td-border"> {{ items[12][0].asymtomatic }} </td>
+            <td class="td-border">  </td>
+            <td>  </td>
         </tr>
         <tr>
             <td colspan="2" class="td-border"> รวม 12 เขต </td>
-            <td class="td-border"> 0 </td>
-            <td class="td-border"> 0 </td>
-            <td class="td-border"> 0 </td>
-            <td class="td-border"> 0 </td>
-            <td class="td-border"> 0 </td>
-            <td class="td-border"> 0 </td>
-            <td class="td-border"> 0 </td>
-            <td class="td-border"> 0 </td>
-            <td class="td-border"> 0 </td>
-            <td> 0 </td>
+            <td class="td-border">  </td>
+            <td class="td-border"> {{ cal.sum12ZoneByProvince(items, 'severe') }} </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border"> {{ cal.sum12ZoneByProvince(items, 'moderater') }} </td>
+            <td class="td-border"> {{ cal.sum12ZoneByProvince(items, 'mild') }} </td>
+            <td class="td-border"> {{ cal.sum12ZoneByProvince(items, 'asymtomatic') }} </td>
+            <td class="td-border">  </td>
+            <td>  </td>
         </tr>
         <tr>
             <td colspan="2" class="td-border"> ทั่วประเทศ </td>
-            <td class="td-border"> 0 </td>
-            <td class="td-border"> 0 </td>
-            <td class="td-border"> 0 </td>
-            <td class="td-border"> 0 </td>
-            <td class="td-border"> 0 </td>
-            <td class="td-border"> 0 </td>
-            <td class="td-border"> 0 </td>
-            <td class="td-border"> 0 </td>
-            <td class="td-border"> 0 </td>
-            <td> 0 </td>
+            <td class="td-border">  </td>
+            <td class="td-border"> {{ cal.sumAllZoneByProvince(items, 'severe') }} </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border">  </td>
+            <td class="td-border"> {{ cal.sumAllZoneByProvince(items, 'moderater') }} </td>
+            <td class="td-border"> {{ cal.sumAllZoneByProvince(items, 'mild') }} </td>
+            <td class="td-border"> {{ cal.sumAllZoneByProvince(items, 'asymtomatic') }} </td>
+            <td class="td-border">  </td>
+            <td>  </td>
         </tr>
     </tfoot>
 </table>
