@@ -28,6 +28,46 @@
         <thead>
             <tr>
                 <th class="td-border"> เขต </th>
+                <th class="td-border"> Discharge </th>
+                <th class="td-border"> Negative </th>
+                <th class="td-border"> Refer </th>
+                <th class="td-border"> Death </th>
+                <th> รวม </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let summary of summaries; let i = index">
+                <td class="td-border">
+                    <div *ngIf="summary.zone_code !== '13'"> {{ summary.zone_code }} </div>
+                    <div *ngIf="summary.zone_code === '13'"> กรุงเทพมหานคร </div>
+                </td>
+                <td class="td-border"> {{ cal.checkValue(summary.DISCHARGE) }} </td>
+                <td class="td-border"> {{ cal.checkValue(summary.NEGATIVE) }} </td>
+                <td class="td-border"> {{ cal.checkValue(summary.REFER) }} </td>
+                <td class="td-border"> {{ cal.checkValue(summary.DEATH) }} </td>
+                <td> {{ cal.sumField(summary) }} </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div
+    *ngIf="isLoading && !summaries.length"
+    style="display: flex; justify-content: center; padding: 24px;">
+    กำลังโหลดข้อมูล ...
+</div>
+
+<div
+    *ngIf="!isLoading && !summaries.length"
+    style="display: flex; justify-content: center; padding: 24px;">
+    ไม่พบข้อมูล
+</div>
+
+<div style="overflow-x: auto; margin-top: 24px;">
+    <table style="border-collapse: collapse;" class="table table-compact">
+        <thead>
+            <tr>
+                <th class="td-border"> เขต </th>
                 <th class="td-border"> จังหวัด </th>
                 <th class="td-border"> รหัสโรงพยาบาล </th>
                 <th class="td-border"> โรงพยาบาล </th>
@@ -49,21 +89,30 @@
         <tbody>
             <tr *ngFor="let item of items; let i = index">
                 <td class="td-border"> {{ item.zone_code }} </td>
-                <td class="td-border">  <td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td>  </td>
+                <td class="td-border"> {{ item.province_name || '-' }} </td>
+                <td class="td-border"> {{ item.hospcode }} </td>
+                <td class="td-border"> {{ item.hospname }} </td>
+                <td class="td-border"> {{ item.hn || '-' }} </td>
+                <td class="td-border"> {{ item.an || '-' }} </td>
+                <td class="td-border"> {{ item.cid || '-' }} </td>
+                <td class="td-border"> {{ item.first_name }} </td>
+                <td class="td-border"> {{ item.last_name }} </td>
+                <td class="td-border"> {{ item.gender }} </td>
+                <td class="td-border"> {{ getAge(item.birth_date) }} </td>
+                <td class="td-border"> {{ item.status }} </td>
+                <td class="td-border">
+                    <div style="width: 100px;">
+                        {{ formatDate(item.date_admit) }}
+                    </div>
+                </td>
+                <td class="td-border">
+                    <div style="width: 100px;">
+                        {{ formatDate(item.date_discharge) }}
+                    </div>
+                </td>
+                <td class="td-border"> {{ item.refer_hospcode || '-' }} </td>
+                <td class="td-border"> {{ item.refer_hospname || '-' }} </td>
+                <td> {{ item.sub_ministry_name || '-' }} </td>
             </tr>
         </tbody>
     </table>

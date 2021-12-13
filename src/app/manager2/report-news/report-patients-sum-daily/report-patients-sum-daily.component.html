@@ -13,7 +13,8 @@
             <my-date-picker-th
                 [(ngModel)]="date"
                 [options]="myDatePickerOptions"
-                name="dateSumDaily">
+                name="dateSumDaily"
+                (dateChanged)="selectDate($event)">
             </my-date-picker-th>
         </div>
     </div>
@@ -57,28 +58,31 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of items; let i = index">
-                <td class="td-border"></td>
-                <td class="td-border"></td>
-                <td class="td-border"></td>
-                <td class="td-border"></td>
-                <td class="td-border"></td>
-                <td class="td-border"></td>
-                <td class="td-border"></td>
-                <td class="td-border"></td>
-                <td class="td-border"></td>
-                <td class="td-border"></td>
-                <td class="td-border"></td>
-                <td class="td-border"></td>
-                <td class="td-border"></td>
-                <td class="td-border"></td>
-                <td class="td-border"></td>
-                <td class="td-border"></td>
-                <td class="td-border"></td>
-                <td class="td-border"></td>
-                <td class="td-border"></td>
-                <td class="td-border"></td>
-                <td class="td-border"></td>
-                <td></td>
+                <td class="td-border"> {{ item.zone_code }} </td>
+                <td class="td-border"> {{ item.province_name }} </td>
+                <td class="td-border"> {{ item.hospcode }} </td>
+                <td class="td-border"> {{ item.hospname }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.admit) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.discharge) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.discharge_hospitel) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.discharge_death) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.pui_admit) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.pui_discharge) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.pui_discharge_hospitel) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.pui_discharge_death) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.today_admit) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.today_discharge) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.today_discharge_hospitel) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.today_discharge_death) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.today_pui_admit) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.today_pui_discharge) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.today_pui_discharge_hospitel) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.today_pui_discharge_death) }} </td>
+                <td>
+                    <div style="width: 200px;">
+                        {{ item.sub_ministry_name }}
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>

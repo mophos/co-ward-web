@@ -9,7 +9,12 @@ export class PatientsAdmitService {
   constructor(private http: HttpClient, @Inject('API_URL') private url: string) { }
 
   getPatientAdmit (params) {
-    const url = `${this.url}/v1/new-report/admit-case-by-date?start=${params.date}&end=${params.date}`;
+    const url = `${this.url}/v1/new-report/admit-case?date=${params.date}`;
+    return this.http.get(url).toPromise();
+  }
+
+  getPatientAdmitSummary (params) {
+    const url = `${this.url}/v1/new-report/admit-case-summary?start=${params.date}&end=${params.date}`;
     return this.http.get(url).toPromise();
   }
 

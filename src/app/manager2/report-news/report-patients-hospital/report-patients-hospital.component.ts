@@ -15,11 +15,18 @@ export class ReportPatientsHospitalComponent implements OnInit {
   isLoading = false
 
   items:any = []
+  // date:any = {
+  //   date: {
+  //     year: moment().year(),
+  //     month: moment().month() + 1,
+  //     day: moment().date()
+  //   }
+  // }
   date:any = {
     date: {
-      year: moment().year(),
-      month: moment().month() + 1,
-      day: moment().date()
+      year: 2020,
+      month: 4,
+      day: 27
     }
   }
   myDatePickerOptions: IMyOptions = {

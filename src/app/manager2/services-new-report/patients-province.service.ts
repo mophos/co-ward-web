@@ -9,7 +9,8 @@ export class PatientsProvinceService {
   constructor(private http: HttpClient, @Inject('API_URL') private url: string) { }
 
   getPatientProvince (params) {
-    const url = `${this.url}/v1/new-manager/report-all/patient-report-by-province?date=${params.date}`;
+    const zonesQuery = params.zone ? `zones[]=${params.zone}` : ''
+    const url = `${this.url}/v1/new-manager/report-all/patient-report-by-province?date=${params.date}&${zonesQuery}`;
     return this.http.get(url).toPromise();
   }
 

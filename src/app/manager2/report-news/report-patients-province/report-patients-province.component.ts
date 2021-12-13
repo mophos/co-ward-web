@@ -13,16 +13,38 @@ export class ReportPatientsProvinceComponent implements OnInit {
 
   isLoading = false
   zone = ''
+  zones = [
+    { name: 'เขต 01', value: '01' },
+    { name: 'เขต 02', value: '02' },
+    { name: 'เขต 03', value: '03' },
+    { name: 'เขต 04', value: '04' },
+    { name: 'เขต 05', value: '05' },
+    { name: 'เขต 06', value: '06' },
+    { name: 'เขต 07', value: '07' },
+    { name: 'เขต 08', value: '08' },
+    { name: 'เขต 09', value: '09' },
+    { name: 'เขต 10', value: '10' },
+    { name: 'เขต 11', value: '11' },
+    { name: 'เขต 12', value: '12' },
+    { name: 'เขต 13', value: '13' }
+  ]
   items = [
     [], [], [], [], [],
     [], [], [], [], [],
     [], [], []
   ]
+  // date:any = {
+  //   date: {
+  //     year: moment().year(),
+  //     month: moment().month() + 1,
+  //     day: moment().date()
+  //   }
+  // }
   date:any = {
     date: {
-      year: moment().year(),
-      month: moment().month() + 1,
-      day: moment().date()
+      year: 2020,
+      month: 4,
+      day: 27
     }
   }
   myDatePickerOptions: IMyOptions = {
@@ -40,6 +62,16 @@ export class ReportPatientsProvinceComponent implements OnInit {
 
   ngOnInit() {
     this.loadData()
+  }
+
+  checkExist () {
+    let check = false
+    this.items.forEach((item) => {
+      if (item.length) {
+        check = true
+      }
+    })
+    return check
   }
 
   clearData () {
@@ -67,7 +99,10 @@ export class ReportPatientsProvinceComponent implements OnInit {
     try {
       this.isLoading = true
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.patientsProvinceService.getPatientProvince({ date })
+      const res:any = await this.patientsProvinceService.getPatientProvince({
+        date,
+        zone: this.zone
+      })
       if (res.ok) {
 
         res.rows.forEach(item => {

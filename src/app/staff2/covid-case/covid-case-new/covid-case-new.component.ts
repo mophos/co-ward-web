@@ -191,6 +191,7 @@ export class CovidCaseNewComponent implements OnInit {
     // }
     this.loading.hide();
     // this.modalCID = true;
+    this.newAlertService.warningBedType('มีการใช้งานเตียงเกินปริมาณที่กำหนด', 'ไปยังหน้าตั้งค่าเตียง ?')
   }
 
   onSelectIcdCode(e) {

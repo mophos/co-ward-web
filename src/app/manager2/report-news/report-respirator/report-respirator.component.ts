@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyOptions } from 'mydatepicker-th';
 import { RespiratorService } from '../../services-new-report/respirator.service'
+import { CalculateService } from '../../services-new-report/calculate.service';
 import moment from 'moment';
 
 @Component({
@@ -30,24 +31,27 @@ export class ReportRespiratorComponent implements OnInit {
   @ViewChild('loading', { static: true }) loading: any;
 
   constructor(
-    private respiratorService: RespiratorService
+    private respiratorService: RespiratorService,
+    private cal: CalculateService
   ) { }
 
   ngOnInit() {
-    // this.loadData()
+    this.loadData()
   }
 
   selectDate (value) {
     this.date = {
       date: value.date
     }
-    // this.loadData()
+    this.items = []
+    this.loadData()
   }
 
   async loadData () {
     try {
       this.isLoading = true
-      const res:any = await this.respiratorService.getRespirator()
+      const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
+      const res:any = await this.respiratorService.getRespirator({ date })
       if (res.ok) {
         this.items = res.rows
         console.log('respirator ', res.rows)

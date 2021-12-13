@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyOptions } from '@tanjaae/mydatepicker';
 import { PatientsSumDailyService } from '../../services-new-report/patients-sum-daily.service'
+import { CalculateService } from '../../services-new-report/calculate.service';
 import provinceJson from '../../../../assets/provinces.json'
 import moment from 'moment';
 
@@ -35,24 +36,27 @@ export class ReportPatientsSumDailyComponent implements OnInit {
   @ViewChild('loading', { static: true }) loading: any;
 
   constructor(
-    private patientsSumDailyService: PatientsSumDailyService
+    private patientsSumDailyService: PatientsSumDailyService,
+    private cal: CalculateService
   ) { }
 
   ngOnInit() {
-    // this.loadData()
+    this.loadData()
   }
 
   selectDate (value) {
     this.date = {
       date: value.date
     }
-    // this.loadData()
+    this.items = []
+    this.loadData()
   }
 
   async loadData () {
     try {
       this.isLoading = true
-      const res:any = await this.patientsSumDailyService.getPatientSumDaily()
+      const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
+      const res:any = await this.patientsSumDailyService.getPatientSumDaily({ date })
       if (res.ok) {
         this.items = res.rows
         console.log('paitent sum daily ', res.rows)

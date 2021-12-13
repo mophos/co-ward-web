@@ -105,16 +105,16 @@
                 <td class="td-border"> {{ item.hospcode }} </td>
                 <td class="td-border"> {{ item.hospname }} </td>
                 <td class="td-border">  </td>
-                <td class="td-border"> {{ item.severe }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.total) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.severe) }} </td>
                 <td class="td-border">  </td>
                 <td class="td-border">  </td>
                 <td class="td-border">  </td>
-                <td class="td-border"> {{ item.moderate }} </td>
-                <td class="td-border"> {{ item.mild }} </td>
-                <td class="td-border"> {{ item.asymptomatic }} </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
+                <td class="td-border"> {{ cal.checkValue(item.moderate) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.mild) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.asymptomatic) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.death) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.pui) }} </td>
                 <td>
                     <div style="width: 200px">
                         {{ item.sub_ministry_name }}

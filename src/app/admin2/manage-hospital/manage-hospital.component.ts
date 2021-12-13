@@ -9,6 +9,7 @@ import { AutocompleteProvinceComponent } from '../../help/autocomplete-address/a
 import { AutocompleteDistrictComponent } from '../../help/autocomplete-address/autocomplete-district/autocomplete-district.component';
 import { AutocompleteSubdistrictComponent } from '../../help/autocomplete-address/autocomplete-subdistrict/autocomplete-subdistrict.component';
 import { AutocompleteZipcodeComponent } from 'src/app/help/autocomplete-address/autocomplete-zipcode/autocomplete-zipcode.component';
+import { AutocompleteHospitalComponent } from 'src/app/help/autocomplete-hospital/autocomplete-hospital.component';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class ManageHospitalComponent implements OnInit {
   @ViewChild('ampur', { static: false }) ampur: AutocompleteDistrictComponent;
   @ViewChild('tambon', { static: false }) tambon: AutocompleteSubdistrictComponent;
   @ViewChild('zipcode', { static: false }) zipc: AutocompleteZipcodeComponent;
+  @ViewChild('hospital', { static: false }) hospital: AutocompleteHospitalComponent;
 
   id: any;
 
@@ -35,7 +37,7 @@ export class ManageHospitalComponent implements OnInit {
   hospTypeCode: any;
   ministryCode: any;
   subMinistryCode: any;
-  // hospCode: any = '';
+  hospCode: any = '';
   hospName: any;
   address: any;
   tel: any;
@@ -77,8 +79,9 @@ export class ManageHospitalComponent implements OnInit {
       value: 'CI'
     }
   ]
-  coordinatorName = ''
-  listNodeId = ''
+  contact_name = ''
+  headHospcode = ''
+  headHospname = ''
 
   constructor(
     private hospitalService: HospitalService,
@@ -92,6 +95,11 @@ export class ManageHospitalComponent implements OnInit {
     this.getSubMinistryList();
     this.getList();
     this.getListNode()
+  }
+
+  onSelectHosp (value) {
+    this.headHospcode = value.hospcode
+    this.headHospname = value.hospname
   }
 
   async getTypeList() {
@@ -226,6 +234,7 @@ export class ManageHospitalComponent implements OnInit {
     this.ampur.setQuery(this.ampurName);
     this.tambon.setQuery(this.tambonName);
     this.zipc.setQuery(this.zipcode);
+    this.hospital.setQuery(this.headHospname);
   }
 
   onClose() {
@@ -241,7 +250,7 @@ export class ManageHospitalComponent implements OnInit {
     this.ampurName = null;
     this.provinceName = null;
     this.zipcode = null;
-    // this.hospCode = '';
+    this.hospCode = '';
     this.hospName = null;
     this.address = null;
     this.tel = null;
@@ -269,7 +278,7 @@ export class ManageHospitalComponent implements OnInit {
         ampur_name: this.ampurName || null,
         province_name: this.provinceName,
         zipcode: this.zipcode || null,
-        // hospcode: this.hospCode,
+        hospcode: this.hospCode,
         hospname: this.hospName,
         address: this.address || null,
         tel: this.tel || null,
@@ -277,9 +286,8 @@ export class ManageHospitalComponent implements OnInit {
         telephone_manager: this.telephoneManager || null,
         // new
         hospital_type: this.hospType || null,
-        head_hospcode: this.listNodeId || null,
-        contact_name: this.coordinatorName || null
-
+        head_hospcode: this.headHospcode || null,
+        contact_name: this.contact_name || null
       };
 
       let rs: any;
@@ -297,6 +305,7 @@ export class ManageHospitalComponent implements OnInit {
       } else {
         this.alertService.error(rs.error);
       }
+
     } catch (error) {
       this.alertService.error();
       this.modal = false;
@@ -318,13 +327,19 @@ export class ManageHospitalComponent implements OnInit {
     this.ampurName = l.ampur_name;
     this.provinceName = l.province_name;
     this.zipcode = l.zipcode;
-    // this.hospCode = l.hospcode;
+    this.hospCode = l.hospcode;
     this.hospName = l.hospname;
     this.address = l.address;
     this.tel = l.tel;
     this.telephone = l.telephone;
     this.telephoneManager = l.telephone_manager;
     this.hospBed = l.bed_spd;
+
+    //new
+    this.hospType = l.hospital_type
+    this.contact_name = l.contact_name
+    this.headHospcode = l.head_hospcode
+    this.headHospname = l.head_hospname
 
     this.setValue();
   }

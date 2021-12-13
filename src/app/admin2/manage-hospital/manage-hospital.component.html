@@ -47,7 +47,9 @@
   <h3 *ngIf="isUpdate" class="modal-title">แก้ไข สถานบริการ</h3>
   <div class="modal-body">
 
-    <!-- <div class="clr-row">
+    <div
+      *ngIf="hospType === 'HOSPITAL'"
+      class="clr-row">
       <div class="clr-col-4">
         รหัสโรงพยาบาล<span class="required">*</span>
       </div>
@@ -55,12 +57,12 @@
         <div class="clr-error">
           <div class="clr-input-wrapper">
             <input class="clr-error clr-input" type="text" name="hospCode" placeholder="รหัสโรงพยาบาล( 5 ตัวอักษร )"
-              id="hospCode" [(ngModel)]="hospCode" style="width: 100%;">
+              id="hospCode" [(ngModel)]="hospCode" style="width: 100%;" maxlength="5">
           </div>
           <span class="clr-subtext" *ngIf="hospCode && hospCode.length != '5'">ต้อง 5 ตัวอักษร</span>
         </div>
       </div>
-    </div> -->
+    </div>
     <div class="clr-row">
       <div class="clr-col-4">
         ชื่อโรงพยาบาล<span class="required">*</span>
@@ -101,13 +103,12 @@
         โรงพยาบาลแม่ข่าย<span class="required">*</span>
       </div>
       <div class="clr-col-8">
-        <div class="clr-select-wrapper" style="width: 100%;">
-          <select name="hospType" [(ngModel)]="listNodeId" class="clr-select" style="width: 100%;">
-            <option *ngFor="let node of listNode" [value]="l.id">
-              {{ l.name }}
-            </option>
-          </select>
-        </div>
+        <app-autocomplete-hospital
+          style="padding: 0px;"
+          #hospital
+          (onchange)="onSelectHosp($event)"
+          (onselect)="onSelectHosp($event)">
+        </app-autocomplete-hospital>
       </div>
     </div>
     <div class="clr-row">
@@ -214,10 +215,10 @@
         <input
           type="text"
           class="clr-input"
-          name="coordinatorName"
-          id="coordinatorName"
+          name="contact_name"
+          id="contact_name"
           placeholder="ชื่อผู้ประสานงาน"
-          [(ngModel)]="coordinatorName"
+          [(ngModel)]="contact_name"
           style="width: 100%;">
       </div>
     </div>
@@ -232,8 +233,8 @@
     </div> -->
   </div>
   <div class="modal-footer">
+    <!-- [disabled]="hospCode.length != 5 || !hospName || !hospTypeId || !provinceName" -->
     <button type="button" class="btn btn-success"
-      [disabled]="hospCode.length != 5 || !hospName || !hospTypeId || !provinceName"
       (click)="save()">
       บันทึก
     </button>

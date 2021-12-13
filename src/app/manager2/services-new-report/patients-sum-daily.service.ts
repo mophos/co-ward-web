@@ -8,8 +8,8 @@ export class PatientsSumDailyService {
 
   constructor(private http: HttpClient, @Inject('API_URL') private url: string) { }
 
-  getPatientSumDaily () {
-    const url = `${this.url}/`;
+  getPatientSumDaily (params) {
+    const url = `${this.url}/v1/new-manager/report-all/patients-report?date=${params.date}`;
     return this.http.get(url).toPromise();
   }
 
