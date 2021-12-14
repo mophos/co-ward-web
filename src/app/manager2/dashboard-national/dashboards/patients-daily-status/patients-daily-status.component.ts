@@ -5,11 +5,11 @@ import moment from 'moment';
 import provinceJson from '../../../../../assets/provinces.json'
 
 @Component({
-  selector: 'app-patients-case',
-  templateUrl: './patients-case.component.html',
-  styleUrls: ['./patients-case.component.css']
+  selector: 'app-patients-daily-status',
+  templateUrl: './patients-daily-status.component.html',
+  styleUrls: ['./patients-daily-status.component.css']
 })
-export class PatientsCaseComponent implements OnInit {
+export class PatientsDailyStatusComponent implements OnInit {
 
   myDatePickerOptions: IMyOptions = {
     inline: false,
@@ -65,7 +65,7 @@ export class PatientsCaseComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.setLineChartPatientEachIllness()
+    this.setLineChartPatientEachStatus()
   }
 
   selectStartDate (value) {
@@ -119,7 +119,7 @@ export class PatientsCaseComponent implements OnInit {
     // TODO : GET DATA
   }
 
-  setLineChartPatientEachIllness () {
+  setLineChartPatientEachStatus () {
     this.lineChartOptions = {
       title: {
           text: ''
@@ -149,18 +149,13 @@ export class PatientsCaseComponent implements OnInit {
           align: 'right',
           verticalAlign: 'top'
       },
+      colors: ['#0880FF', '#FF0000'],
       series: [{
-          name: 'Severe Case',
+          name: 'ETT',
           data: [151, 223, 64, 77, 89, 123, 33]
       }, {
-          name: 'Moderate Case',
-          data: [22, 333, 87, 101, 321, 32, 11]
-      }, {
-          name: 'Mild Case',
+          name: 'Dead',
           data: [92, 932, 334, 29, 34, 30, 75]
-      }, {
-          name: 'Asymotimatic',
-          data: [45, 212, 829, 111, 20, 40, 99]
       }]
     }
   }

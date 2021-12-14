@@ -1,10 +1,10 @@
-.beds-type__card {
+.patients-daily-status__card {
   width: 220px;
   border-radius: 14px;
   box-shadow: none;
 }
 
-.beds-type__select-menu {
+.patients-daily-status__select-menu {
   position: absolute;
   width: 100%;
   height: 130px;
@@ -15,19 +15,4 @@
   box-shadow: 0 5px 5px -3px rgb(0 0 0 / 20%), 0 8px 10px 1px rgb(0 0 0 / 14%), 0 3px 14px 2px rgb(0 0 0 / 12%);
   border-radius: 4px;
   z-index: 10;
-}
-
-.beds-type__chart-column {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: black;
-  font-weight: 700;
-}
-
-.beds-type__chart-title-circle {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  margin-right: 8px;
 }

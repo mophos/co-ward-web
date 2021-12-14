@@ -1,102 +1,260 @@
+<div style="margin-bottom: 24px;">
+  <h3> การใช้งานเตียงแต่ละประเภท </h3>
+</div>
+
+<div style="display: flex; margin-bottom: 8px;">
+  <div style="width: 160px; margin-right: 16px;">
+    <label> วันที่เริ่ม </label>
+    <my-date-picker-th
+        [(ngModel)]="startDate"
+        [options]="myDatePickerOptions"
+        name="startDateBedsType"
+        (dateChanged)="selectStartDate($event)">
+    </my-date-picker-th>
+  </div>
+  <div style="width: 160px; margin-right: 16px;">
+    <label> วันที่สิ้นสุด </label>
+    <my-date-picker-th
+        [(ngModel)]="endDate"
+        [options]="myDatePickerOptions"
+        name="endDateBedsType"
+        (dateChanged)="selectEndDate($event)">
+    </my-date-picker-th>
+  </div>
+
+  <div style="width: 160px; margin-right: 16px;">
+      <label> หน่วยงาน </label>
+      <div class="clr-select-wrapper" style="width: 100%;">
+          <select
+              [(ngModel)]="ministryCode"
+              name="ministryBedsType"
+              style="width: 100%;"
+              class="clr-select"
+              (change)="selectMinistry()">
+              <option value=""> เลือกหน่วยงาน </option>
+              <option *ngFor="let ministry of listMinistry; let i = index" [value]="ministry.code">
+                  {{ ministry.name }}
+              </option>
+          </select>
+      </div>
+  </div>
+
+  <div style="width: 160px; margin-right: 16px;">
+      <label> เขตสุขภาพ </label>
+      <div class="clr-select-wrapper" style="width: 100%;">
+          <select
+              [(ngModel)]="zone"
+              name="zoneBedsTypeDashboard"
+              style="width: 100%;"
+              class="clr-select"
+              (change)="selectZone()">
+              <option value="">เลือกเขต</option>
+              <option *ngFor="let zone of zones; let i = index" [value]="zone.value">
+                  {{ zone.name }}
+              </option>
+          </select>
+      </div>
+  </div>
+  <div style="width: 160px; margin-right: 16px;">
+      <label> จังหวัด </label>
+      <div class="clr-select-wrapper" style="width: 100%;">
+          <select
+              [(ngModel)]="displayProvince"
+              name="provinceBedsTypeDashboard"
+              style="width: 100%;"
+              class="clr-select"
+              readonly="true"
+              (click)="setSelectMultiProvince()">
+              <option style="display: none;" value=""> เลือกจังหวัด </option>
+              <option
+                  [selected]="provinceGroup.length"
+                  style="display: none;">
+                  <div *ngIf="provinceGroup.length === 1">
+                      {{ provinceGroup[0] }}
+                  </div>
+                  <div *ngIf="provinceGroup.length > 1">
+                      {{ provinceGroup[0] + ' + ' + ( provinceGroup.length - 1 ) }}
+                  </div>
+              </option>
+          </select>
+          <div
+              *ngIf="isSelectProvince"
+              class="beds-type__select-menu">
+              <clr-checkbox-wrapper *ngFor="let province of provinces; let i = index">
+                  <input
+                      [value]="province"
+                      [checked]="checkProvince(province)"
+                      type="checkbox"
+                      clrCheckbox
+                      (change)="selectProvince($event.target.value)" />
+                  <label> {{ province }} </label>
+              </clr-checkbox-wrapper>
+          </div>
+      </div>
+  </div>
+  <div style="width: 160px;">
+    <label> ประเภทเตียง </label>
+    <div class="clr-select-wrapper" style="width: 100%;">
+        <select
+            [(ngModel)]="ministryCode"
+            name="bedTypeBedsType"
+            style="width: 100%;"
+            class="clr-select"
+            (change)="selectBedType()">
+            <option value=""> เลือกประเภทเตียง </option>
+            <option *ngFor="let bedType of bedTypes; let i = index" [value]="bedType.id">
+                {{ bedType.name }}
+            </option>
+        </select>
+    </div>
+  </div>
+</div>
+
+<div style="display: flex;">
+  <div
+    style="margin-right: 24px"
+    class="card beds-type__card">
+    <div class="card-block">
+        <div  class="card-title">
+          เตียงทั้งหมด
+        </div>
+        <div
+          style="text-align: center;"
+          class="card-text">
+          {{ report.total }}
+        </div>
+    </div>
+  </div>
+  <div
+    style="margin-right: 24px"
+    class="card beds-type__card">
+    <div class="card-block">
+        <div class="card-title">
+          ครอบครองเตียงทั้งหมด
+        </div>
+        <div
+          style="text-align: center;"
+          class="card-text">
+          {{ report.usageTotal }}
+        </div>
+    </div>
+  </div>
+  <div
+    style="margin-right: 24px"
+    class="card beds-type__card">
+    <div class="card-block">
+        <div class="card-title">
+          เตียงว่าง
+        </div>
+        <div
+          style="text-align: center;"
+          class="card-text">
+          {{ report.empty }}
+        </div>
+    </div>
+  </div>
+  <div class="card beds-type__card">
+    <div class="card-block">
+        <div class="card-title">
+          อัตราครองเตียง
+        </div>
+        <div
+          style="text-align: center;"
+          class="card-text">
+          {{ report.usageTotalPercentage }}
+        </div>
+    </div>
+  </div>
+</div>
+
 <div
-    style="display: flex; margin-bottom: 8px;">
-    <h3 style="margin-right: 24px;">
-      การใช้งานเตียงแต่ละประเภท
-    </h3>
-    <div style="width: 200px; margin-right: 16px;">
-      <label> วันที่เริ่ม </label>
-      <my-date-picker-th
-          [(ngModel)]="startDate"
-          [options]="myDatePickerOptions"
-          name="startDateBedsType"
-          (dateChanged)="selectStartDate($event)">
-      </my-date-picker-th>
-    </div>
-    <div style="width: 200px; margin-right: 16px;">
-      <label> วันที่สิ้นสุด </label>
-      <my-date-picker-th
-          [(ngModel)]="endDate"
-          [options]="myDatePickerOptions"
-          name="endDateBedsType"
-          (dateChanged)="selectEndDate($event)">
-      </my-date-picker-th>
-    </div>
+  style="width: 636px;"
+  class="card">
+  <div class="card-block">
+    <highcharts-chart
+        [Highcharts] = "highcharts"
+        [options] = "pieChartOptions">
+    </highcharts-chart>
   </div>
-  <div style="display: flex;">
-    <div
-      style="margin-right: 24px"
-      class="card beds-type__card">
-      <div class="card-block">
-          <div  class="card-title">
-            เตียงทั้งหมด
-          </div>
-          <div
-            style="text-align: center;"
-            class="card-text">
-            {{ report.total }}
-          </div>
-      </div>
-    </div>
-    <div
-      style="margin-right: 24px"
-      class="card beds-type__card">
-      <div class="card-block">
-          <div class="card-title">
-            ครอบครองเตียงทั้งหมด
-          </div>
-          <div
-            style="text-align: center;"
-            class="card-text">
-            {{ report.usageTotal }}
-          </div>
-      </div>
-    </div>
-    <div
-      style="margin-right: 24px"
-      class="card beds-type__card">
-      <div class="card-block">
-          <div class="card-title">
-            เตียงว่าง
-          </div>
-          <div
-            style="text-align: center;"
-            class="card-text">
-            {{ report.empty }}
-          </div>
-      </div>
-    </div>
-    <div class="card beds-type__card">
-      <div class="card-block">
-          <div class="card-title">
-            อัตราครองเตียง
-          </div>
-          <div
-            style="text-align: center;"
-            class="card-text">
-            {{ report.usageTotalPercentage }}
-          </div>
-      </div>
-    </div>
-  </div>
+</div>
 
+<div
+  style="width: 636px; height: 400px;"
+  class="card">
   <div
-    style="width: 636px;"
-    class="card">
-    <div class="card-block">
-      <highcharts-chart
-          [Highcharts] = "highcharts"
-          [options] = "pieChartOptions">
-      </highcharts-chart>
+    style="padding-top: 24px;"
+    class="card-block">
+    <!-- <highcharts-chart
+        [Highcharts] = "highcharts"
+        [options] = "stackChartOptions">
+    </highcharts-chart> -->
+    <div style="display: flex; justify-content: space-around; border-bottom: 1px solid black;">
+      <div style="width: 60px; height: 300px;">
+        <div
+          style="width: 100%; height: 55%; background-color: #BFBFBF;"
+          class="beds-type__chart-column">
+          90
+        </div>
+        <div
+          style="width: 100%; height: 45%; background-color: #FF0000;"
+          class="beds-type__chart-column">
+          75
+        </div>
+      </div>
+      <div style="width: 60px; height: 300px;">
+        <div
+          style="width: 100%; height: 40%; background-color: #BFBFBF;"
+          class="beds-type__chart-column">
+          66
+        </div>
+        <div
+          style="width: 100%; height: 60%; background-color: #EC7D31;"
+          class="beds-type__chart-column">
+          85
+        </div>
+      </div>
+      <div style="width: 60px; height: 300px;">
+        <div
+          style="width: 100%; height: 40%; background-color: #BFBFBF;"
+          class="beds-type__chart-column">
+          79
+        </div>
+        <div
+          style="width: 100%; height: 60%; background-color: #FFFF8F;"
+          class="beds-type__chart-column">
+          107
+        </div>
+      </div>
+      <div style="width: 60px; height: 300px;">
+        <div
+          style="width: 100%; height: 40%; background-color: #BFBFBF;"
+          class="beds-type__chart-column">
+          319
+        </div>
+        <div
+          style="width: 100%; height: 60%; background-color: #70AC47;"
+          class="beds-type__chart-column">
+          427
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: center; margin-top: 24px;">
+      <div style="display: flex; align-items: center; margin-right: 24px;">
+        <div style="background-color: #FF0000;" class="beds-type__chart-title-circle"></div>
+        <div style="font-weight: 700;"> ระดับ 3 </div>
+      </div>
+      <div style="display: flex; align-items: center; margin-right: 24px;">
+        <div style="background-color: #EC7D31;" class="beds-type__chart-title-circle"></div>
+        <div style="font-weight: 700;"> ระดับ 2.2 </div>
+      </div>
+      <div style="display: flex; align-items: center; margin-right: 24px;">
+        <div style="background-color: #FFFF8F;" class="beds-type__chart-title-circle"></div>
+        <div style="font-weight: 700;"> ระดับ 2.1 </div>
+      </div>
+      <div style="display: flex; align-items: center;">
+        <div style="background-color: #70AC47;" class="beds-type__chart-title-circle"></div>
+        <div style="font-weight: 700;"> ระดับ 1 </div>
+      </div>
     </div>
   </div>
-
-  <div
-    style="width: 636px;"
-    class="card">
-    <div class="card-block">
-      <highcharts-chart
-          [Highcharts] = "highcharts"
-          [options] = "stackChartOptions">
-      </highcharts-chart>
-    </div>
-  </div>
+</div>

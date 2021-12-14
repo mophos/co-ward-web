@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { IMyOptions } from 'mydatepicker-th';
+import provinceJson from '../../../../../assets/provinces.json'
 import * as Highcharts from 'highcharts';
 import moment from 'moment';
+import { HospitalService } from '../../../hospital.service';
 
 @Component({
   selector: 'app-beds-type',
@@ -17,6 +19,31 @@ export class BedsTypeComponent implements OnInit {
     showClearDateBtn: false
   }
 
+  items:any = []
+  zone = ''
+  zones = [
+    { name: 'เขต 01', value: '01' },
+    { name: 'เขต 02', value: '02' },
+    { name: 'เขต 03', value: '03' },
+    { name: 'เขต 04', value: '04' },
+    { name: 'เขต 05', value: '05' },
+    { name: 'เขต 06', value: '06' },
+    { name: 'เขต 07', value: '07' },
+    { name: 'เขต 08', value: '08' },
+    { name: 'เขต 09', value: '09' },
+    { name: 'เขต 10', value: '10' },
+    { name: 'เขต 11', value: '11' },
+    { name: 'เขต 12', value: '12' },
+    { name: 'เขต 13', value: '13' }
+  ]
+  provinceGroup = []
+  displayProvince = ''
+  provinces = provinceJson.data
+  isSelectProvince = false
+  ministryCode = ''
+  listMinistry:any = []
+  listSubMinistry: any = []
+
   startDate:any = {
     date: {
       year: moment().year(),
@@ -24,6 +51,7 @@ export class BedsTypeComponent implements OnInit {
       day: moment().date()
     }
   }
+
   endDate:any = {
     date: {
       year: moment().year(),
@@ -71,9 +99,14 @@ export class BedsTypeComponent implements OnInit {
     ]
   }
 
-  constructor() { }
+  constructor(
+    private hospitalService: HospitalService
+  ) { }
 
   ngOnInit() {
+    // this.getMinistryList()
+    // this.getSubMinistryList()
+    this.loadData()
     this.setPieChartBed()
     this.setStackChartBed()
   }
@@ -92,6 +125,63 @@ export class BedsTypeComponent implements OnInit {
     }
     // TODO : RE GET DATA
     // this.loadData()
+  }
+
+  selectMinistry () {
+    // TODO : CHANGE MINISTRY AND GET DATA
+  }
+
+  selectZone () {
+    // TODO : CHANGE ZONE AND GET DATA
+  }
+
+  selectBedType () {
+    // TODO : CHANGE BED TYPE AND GET DATA
+  }
+
+  selectProvince (value) {
+    const index = this.provinceGroup.findIndex(item => item === value)
+    if (index > -1) {
+      this.provinceGroup.splice(index, 1)
+    } else {
+      this.provinceGroup.push(value)
+    }
+    this.items = []
+    this.loadData()
+  }
+
+  setSelectMultiProvince () {
+    this.isSelectProvince = !this.isSelectProvince
+  }
+
+  checkProvince (province) {
+    return this.provinceGroup.some(item => item === province)
+  }
+
+  loadData () {
+    // TODO : GET DATA
+  }
+
+  async getMinistryList() {
+    try {
+      const rs: any = await this.hospitalService.getMinistryList();
+      if (rs.ok) {
+        this.listMinistry = rs.rows;
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async getSubMinistryList() {
+    try {
+      const rs: any = await this.hospitalService.getSubMinistryList();
+      if (rs.ok) {
+        this.listSubMinistry = rs.rows;
+      }
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   setPieChartBed () {

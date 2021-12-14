@@ -1,5 +1,5 @@
 <div style="margin-bottom: 24px;">
-  <h3> ผู้ป่วยแต่ละอาการ </h3>
+  <h3> ผู้ป่วยแต่ละสถานะ (วันนี้) </h3>
 </div>
 
 <div style="display: flex; margin-bottom: 8px;">
@@ -8,7 +8,7 @@
     <my-date-picker-th
         [(ngModel)]="startDate"
         [options]="myDatePickerOptions"
-        name="startDatePatientsCase"
+        name="startDatePatientsDailyStatus"
         (dateChanged)="selectStartDate($event)">
     </my-date-picker-th>
   </div>
@@ -17,7 +17,7 @@
     <my-date-picker-th
         [(ngModel)]="endDate"
         [options]="myDatePickerOptions"
-        name="endDatePatientsCase"
+        name="endDatePatientsDailyStatus"
         (dateChanged)="selectEndDate($event)">
     </my-date-picker-th>
   </div>
@@ -27,7 +27,7 @@
       <div class="clr-select-wrapper" style="width: 100%;">
           <select
               [(ngModel)]="ministryCode"
-              name="ministryPatientsCase"
+              name="ministryPatientsDailyStatus"
               style="width: 100%;"
               class="clr-select"
               (change)="selectMinistry()">
@@ -44,7 +44,7 @@
       <div class="clr-select-wrapper" style="width: 100%;">
           <select
               [(ngModel)]="zone"
-              name="zonePatientsCaseDashboard"
+              name="zonePatientsDailyStatusDashboard"
               style="width: 100%;"
               class="clr-select"
               (change)="selectZone()">
@@ -60,7 +60,7 @@
       <div class="clr-select-wrapper" style="width: 100%;">
           <select
               [(ngModel)]="displayProvince"
-              name="provincePatientsCaseDashboard"
+              name="provincePatientsDailyStatusDashboard"
               style="width: 100%;"
               class="clr-select"
               readonly="true"
@@ -79,7 +79,7 @@
           </select>
           <div
               *ngIf="isSelectProvince"
-              class="patients-case__select-menu">
+              class="patients-daily-status__select-menu">
               <clr-checkbox-wrapper *ngFor="let province of provinces; let i = index">
                   <input
                       [value]="province"
@@ -97,7 +97,7 @@
     <div class="clr-select-wrapper" style="width: 100%;">
         <select
             [(ngModel)]="ministryCode"
-            name="bedTypePatientsCase"
+            name="bedTypePatientsDailyStatus"
             style="width: 100%;"
             class="clr-select"
             (change)="selectBedType()">
@@ -113,10 +113,10 @@
 <div style="display: flex;">
   <div
     style="margin-right: 24px"
-    class="card patients-case__card">
+    class="card patients-daily-status__card">
     <div class="card-block">
         <div  class="card-title">
-          Severe Case
+          ผู้ป่วยรักษาอยู่
         </div>
         <div
           style="text-align: center;"
@@ -127,43 +127,29 @@
   </div>
   <div
     style="margin-right: 24px"
-    class="card patients-case__card">
+    class="card patients-daily-status__card">
     <div class="card-block">
         <div class="card-title">
-          Moderate Case
+          อาการรุนแรง
         </div>
         <div
           style="text-align: center;"
           class="card-text">
-          123123
+          12312
         </div>
     </div>
   </div>
   <div
     style="margin-right: 24px"
-    class="card patients-case__card">
+    class="card patients-daily-status__card">
     <div class="card-block">
         <div class="card-title">
-          Mild Case
+          ใส่เครื่องช่วยหายใจ
         </div>
         <div
           style="text-align: center;"
           class="card-text">
-          123123
-        </div>
-    </div>
-  </div>
-  <div
-    style="margin-right: 24px"
-    class="card patients-case__card">
-    <div class="card-block">
-        <div class="card-title">
-          Asymptomatic
-        </div>
-        <div
-          style="text-align: center;"
-          class="card-text">
-          123123123
+          1231
         </div>
     </div>
   </div>
