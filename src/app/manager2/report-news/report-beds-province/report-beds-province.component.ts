@@ -13,6 +13,21 @@ export class ReportBedsProvinceComponent implements OnInit {
 
   isLoading = true
   zone = ''
+  zones = [
+    { name: 'เขต 01', value: '01' },
+    { name: 'เขต 02', value: '02' },
+    { name: 'เขต 03', value: '03' },
+    { name: 'เขต 04', value: '04' },
+    { name: 'เขต 05', value: '05' },
+    { name: 'เขต 06', value: '06' },
+    { name: 'เขต 07', value: '07' },
+    { name: 'เขต 08', value: '08' },
+    { name: 'เขต 09', value: '09' },
+    { name: 'เขต 10', value: '10' },
+    { name: 'เขต 11', value: '11' },
+    { name: 'เขต 12', value: '12' },
+    { name: 'เขต 13', value: '13' }
+  ]
   items = [
     [], [], [], [], [],
     [], [], [], [], [],
@@ -49,6 +64,16 @@ export class ReportBedsProvinceComponent implements OnInit {
     this.loadData()
   }
 
+  checkExist () {
+    let check = false
+    this.items.forEach((item) => {
+      if (item.length) {
+        check = true
+      }
+    })
+    return check
+  }
+
   clearData () {
     this.items = [
       [], [], [], [], [],
@@ -58,7 +83,8 @@ export class ReportBedsProvinceComponent implements OnInit {
   }
 
   selectZone () {
-    // this.loadData()
+    this.clearData()
+    this.loadData()
   }
 
   selectDate (value) {
@@ -73,9 +99,55 @@ export class ReportBedsProvinceComponent implements OnInit {
     try {
       this.isLoading = true
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.bedsProvinceService.getBedProvince({ date })
+      const res:any = await this.bedsProvinceService.getBedProvince({
+        date,
+        zone: this.zone
+      })
       if (res.ok) {
-        res.rows.forEach(item => {
+        const items = []
+
+        res.rows.forEach((row, i) => {
+          row.forEach((x, j) => {
+            if (!items.some(item => item.province_code === x.province_code)) {
+              items.push({
+                zone_code: x.zone_code,
+                province_code: x.province_code,
+                province_name: x.province_name,
+              })
+            }
+
+            const index = items.findIndex(item => item.province_code === x.province_code)
+            if (index > -1) {
+              if (x.bed_name === 'ระดับ3 ใส่ท่อและเครื่องช่วยหายใจ') {
+                items[index].level3_total = x.total
+                items[index].level3_used = x.used
+              } else if (x.bed_name === 'ระดับ 2.2 Oxygen high flow') {
+                items[index].level2_2_total = x.total
+                items[index].level2_2_used = x.used
+              } else if (x.bed_name === 'ระดับ 2.2 Oxygen high flow') {
+                items[index].level2_2_total = x.total
+                items[index].level2_2_used = x.used
+              } else if (x.bed_name === 'ระดับ 2.1 Oxygen high low') {
+                items[index].level2_1_total = x.total
+                items[index].level2_1_used = x.used
+              } else if (x.bed_name === 'ระดับ 1 ไม่ใช่ Oxygen') {
+                items[index].level1_total = x.total
+                items[index].level1_used = x.used
+              } else if (x.bed_name === 'ระดับ 0 Home Isolation (stepdown)') {
+                items[index].level0_total = x.total
+                items[index].level0_used = x.used
+              } else if (x.bed_name === 'Home Isolation') {
+                items[index].home_isolation_total = x.total
+                items[index].home_isolation_used = x.used
+              } else if (x.bed_name === 'Community Isolation') {
+                items[index].community_isolation_total = x.total
+                items[index].community_isolation_used = x.used
+              }
+            }
+          })
+        })
+
+        items.forEach(item => {
           if (item.zone_code === '01') {
             this.items[0].push(item)
           } else if (item.zone_code === '02') {
@@ -104,7 +176,8 @@ export class ReportBedsProvinceComponent implements OnInit {
             this.items[12].push(item)
           }
         })
-        console.log(this.items)
+
+        console.log('items ', this.items)
         this.isLoading = false
       }
     } catch (error) {
@@ -134,7 +207,10 @@ export class ReportBedsProvinceComponent implements OnInit {
     try {
       this.loading.show()
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.bedsProvinceService.exportExcelBedProvince({ date })
+      const res:any = await this.bedsProvinceService.exportExcelBedProvince({
+        date,
+        zone: this.zone
+      })
       if (res) {
         this.downloadFile('รายงานเตียงรายจังหวัด', 'xlsx', res)
         this.loading.hide()

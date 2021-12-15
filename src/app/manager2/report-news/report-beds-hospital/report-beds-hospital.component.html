@@ -27,8 +27,8 @@
                     class="clr-select"
                     (change)="selectZone()">
                     <option value="">เลือกเขต</option>
-                    <option *ngFor="let item of [].constructor(13); let i = index" [value]="i + 1">
-                        เขต {{ i + 1 }}
+                    <option *ngFor="let zone of zones; let i = index" [value]="zone.value">
+                        {{ zone.name }}
                     </option>
                 </select>
             </div>
@@ -37,7 +37,6 @@
             <label> จังหวัด </label>
             <div class="clr-select-wrapper" style="width: 100%;">
                 <select
-                    [(ngModel)]="displayProvince"
                     name="provinceBedsHospital"
                     style="width: 100%;"
                     class="clr-select"
@@ -48,10 +47,10 @@
                         [selected]="provinceGroup.length"
                         style="display: none;">
                         <div *ngIf="provinceGroup.length === 1">
-                            {{ provinceGroup[0] }}
+                            {{ provinceGroup[0].name }}
                         </div>
                         <div *ngIf="provinceGroup.length > 1">
-                            {{ provinceGroup[0] + ' + ' + '( ' + ( provinceGroup.length - 1 ) + ' )' }}
+                            {{ provinceGroup[0].name + ' + ' + '( ' + ( provinceGroup.length - 1 ) + ' )' }}
                         </div>
                     </option>
                 </select>
@@ -60,12 +59,12 @@
                     class="beds-hospital__select-menu">
                     <clr-checkbox-wrapper *ngFor="let province of provinces; let i = index">
                         <input
-                            [value]="province"
+                            [value]="province.code"
                             [checked]="checkProvince(province)"
                             type="checkbox"
                             clrCheckbox
-                            (change)="selectProvince($event.target.value)" />
-                        <label> {{ province }} </label>
+                            (change)="selectProvince(province)" />
+                        <label> {{ province.name }} </label>
                     </clr-checkbox-wrapper>
                 </div>
             </div>
@@ -130,31 +129,31 @@
                 <td class="td-border"> {{ item.province_name }} </td>
                 <td class="td-border"> {{ item.hospcode }} </td>
                 <td class="td-border"> {{ item.hospname }} </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border"> {{ item.home_isolation_covid_qty }} </td>
-                <td class="td-border"> {{ item.home_isolation_usage_qty }} </td>
-                <td class="td-border"> {{ item.home_isolation_covid_qty - item.home_isolation_usage_qty }} </td>
-                <td class="td-border"> {{ item.community_isolation_covid_qty }} </td>
-                <td class="td-border"> {{ item.community_isolation_usage_qty }} </td>
-                <td class="td-border"> {{ item.community_isolation_covid_qty - item.community_isolation_usage_qty }} </td>
+                <td class="td-border"> {{ item.level || '-' }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.level3_total) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.level3_used) }} </td>
+                <td class="td-border"> {{ cal.getRemaining(item.level3_total, item.level3_used) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.level2_2_total) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.level2_2_used) }} </td>
+                <td class="td-border"> {{ cal.getRemaining(item.level2_2_total, item.level2_2_used) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.level2_1_total) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.level2_1_used) }} </td>
+                <td class="td-border"> {{ cal.getRemaining(item.level2_1_total, item.level2_1_used) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.level1_total) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.level1_used) }} </td>
+                <td class="td-border"> {{ cal.getRemaining(item.level1_total, item.level1_used) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.level0_total) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.level0_used) }} </td>
+                <td class="td-border"> {{ cal.getRemaining(item.level0_total, item.level0_used) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.home_isolation_total) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.home_isolation_used) }} </td>
+                <td class="td-border"> {{ cal.getRemaining(item.home_isolation_total, item.home_isolation_used) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.community_isolation_total) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.community_isolation_used) }} </td>
+                <td class="td-border"> {{ cal.getRemaining(item.community_isolation_total, item.community_isolation_used) }} </td>
                 <td>
                     <div style="width: 200px;">
-                        {{ item.sub_ministry_name }}
+                        {{ item.sub_ministry_name || '-' }}
                     </div>
                 </td>
             </tr>

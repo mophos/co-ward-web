@@ -36,9 +36,23 @@ export class ReportPatientsHospitalComponent implements OnInit {
     showClearDateBtn: false
   }
   zone = ''
+  zones = [
+    { name: 'เขต 01', value: '01' },
+    { name: 'เขต 02', value: '02' },
+    { name: 'เขต 03', value: '03' },
+    { name: 'เขต 04', value: '04' },
+    { name: 'เขต 05', value: '05' },
+    { name: 'เขต 06', value: '06' },
+    { name: 'เขต 07', value: '07' },
+    { name: 'เขต 08', value: '08' },
+    { name: 'เขต 09', value: '09' },
+    { name: 'เขต 10', value: '10' },
+    { name: 'เขต 11', value: '11' },
+    { name: 'เขต 12', value: '12' },
+    { name: 'เขต 13', value: '13' }
+  ]
   provinceGroup = []
-  displayProvince = ''
-  provinces = provinceJson.data
+  provinces:any = []
   isSelectProvince = false
   @ViewChild('loading', { static: true }) loading: any;
 
@@ -60,11 +74,13 @@ export class ReportPatientsHospitalComponent implements OnInit {
   }
 
   selectZone () {
-    // this.loadData()
+    this.items = []
+    this.loadData()
+    this.isSelectProvince = false
   }
 
   selectProvince (value) {
-    const index = this.provinceGroup.findIndex(item => item === value)
+    const index = this.provinceGroup.findIndex(item => item.code === value.code)
     if (index > -1) {
       this.provinceGroup.splice(index, 1)
     } else {
@@ -79,18 +95,33 @@ export class ReportPatientsHospitalComponent implements OnInit {
   }
 
   checkProvince (province) {
-    return this.provinceGroup.some(item => item === province)
+    return this.provinceGroup.some(item => item.name === province.name)
   }
 
   async loadData () {
     try {
       this.isLoading = true
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.patientsHospitalService.getPatientHospital({ date })
+      const res:any = await this.patientsHospitalService.getPatientHospital({
+        date,
+        zone: this.zone,
+        province: this.provinceGroup
+      })
       if (res.ok) {
         this.items = res.rows
         console.log('patient hospital ', res.rows)
         this.isLoading = false
+
+        const provinces = []
+        res.rows.forEach(item => {
+          if (!provinces.some(x => x.code === item.province_code)) {
+            provinces.push({
+              code: item.province_code,
+              name: item.province_name
+            })
+          }
+        })
+        this.provinces = provinces
       }
     } catch (error) {
       console.error(error)

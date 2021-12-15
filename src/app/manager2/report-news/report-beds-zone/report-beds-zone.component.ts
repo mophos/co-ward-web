@@ -3,7 +3,6 @@ import { IMyOptions } from 'mydatepicker-th';
 import { BedsZoneService } from '../../services-new-report/beds-zone.service';
 import { CalculateService } from '../../services-new-report/calculate.service';
 import moment from 'moment';
-import { sumBy } from 'lodash';
 
 @Component({
   selector: 'app-report-beds-zone',
@@ -55,22 +54,55 @@ export class ReportBedsZoneComponent implements OnInit {
     this.loadData()
   }
 
-  sum12Zone (value) {
-    return sumBy(this.items, value) - this.items[12][value]
-  }
-
-  sumAllZone (value) {
-    return sumBy(this.items, value)
-  }
-
   async loadData () {
     try {
       this.isLoading = true
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
       const res:any = await this.bedsZoneService.getBedZone({ date })
       if (res.ok) {
-        this.items = res.rows
-        console.log(res.rows)
+        const items = []
+
+        res.rows.forEach((row, i) => {
+          row.forEach((x, j) => {
+            if (!items.some(item => item.zone_code === x.zone_code)) {
+              items.push({
+                zone_code: x.zone_code
+              })
+            }
+
+            const index = items.findIndex(item => item.zone_code === x.zone_code)
+            if (index > -1) {
+              if (x.bed_name === 'ระดับ3 ใส่ท่อและเครื่องช่วยหายใจ') {
+                items[index].level3_total = x.total
+                items[index].level3_used = x.used
+              } else if (x.bed_name === 'ระดับ 2.2 Oxygen high flow') {
+                items[index].level2_2_total = x.total
+                items[index].level2_2_used = x.used
+              } else if (x.bed_name === 'ระดับ 2.2 Oxygen high flow') {
+                items[index].level2_2_total = x.total
+                items[index].level2_2_used = x.used
+              } else if (x.bed_name === 'ระดับ 2.1 Oxygen high low') {
+                items[index].level2_1_total = x.total
+                items[index].level2_1_used = x.used
+              } else if (x.bed_name === 'ระดับ 1 ไม่ใช่ Oxygen') {
+                items[index].level1_total = x.total
+                items[index].level1_used = x.used
+              } else if (x.bed_name === 'ระดับ 0 Home Isolation (stepdown)') {
+                items[index].level0_total = x.total
+                items[index].level0_used = x.used
+              } else if (x.bed_name === 'Home Isolation') {
+                items[index].home_isolation_total = x.total
+                items[index].home_isolation_used = x.used
+              } else if (x.bed_name === 'Community Isolation') {
+                items[index].community_isolation_total = x.total
+                items[index].community_isolation_used = x.used
+              }
+            }
+          })
+        })
+
+        this.items = items
+        console.log('beds zone ', this.items)
         this.isLoading = false
       }
     } catch (error) {

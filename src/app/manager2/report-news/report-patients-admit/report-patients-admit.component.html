@@ -114,7 +114,7 @@
                         {{ formatDate(item.update_date) }}
                     </div>
                 </td>
-                <td class="td-border">  </td>
+                <td class="td-border"> {{ item.notUpdated || '-' }} </td>
                 <td class="td-border"> {{ item['Darunavir 600 mg.'] || '-' }} </td>
                 <td class="td-border"> {{ item['Lopinavir 200 mg. / Ritonavir 50 mg.'] || '-' }} </td>
                 <td class="td-border"> {{ item['Ritonavir 100 mg.'] || '-' }} </td>

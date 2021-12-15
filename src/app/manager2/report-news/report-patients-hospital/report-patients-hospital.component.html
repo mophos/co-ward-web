@@ -27,8 +27,8 @@
                     class="clr-select"
                     (change)="selectZone()">
                     <option value="">เลือกเขต</option>
-                    <option *ngFor="let item of [].constructor(13); let i = index" [value]="i + 1">
-                        เขต {{ i + 1 }}
+                    <option *ngFor="let zone of zones; let i = index" [value]="zone.value">
+                        {{ zone.name }}
                     </option>
                 </select>
             </div>
@@ -37,7 +37,6 @@
             <label> จังหวัด </label>
             <div class="clr-select-wrapper" style="width: 100%;">
                 <select
-                    [(ngModel)]="displayProvince"
                     name="provincePatientsHospital"
                     style="width: 100%;"
                     class="clr-select"
@@ -48,10 +47,10 @@
                         [selected]="provinceGroup.length"
                         style="display: none;">
                         <div *ngIf="provinceGroup.length === 1">
-                            {{ provinceGroup[0] }}
+                            {{ provinceGroup[0].name }}
                         </div>
                         <div *ngIf="provinceGroup.length > 1">
-                            {{ provinceGroup[0] + ' + ' + '( ' + ( provinceGroup.length - 1 ) + ' )' }}
+                            {{ provinceGroup[0].name + ' + ' + '( ' + ( provinceGroup.length - 1 ) + ' )' }}
                         </div>
                     </option>
                 </select>
@@ -60,12 +59,12 @@
                     class="patients-hospital__select-menu">
                     <clr-checkbox-wrapper *ngFor="let province of provinces; let i = index">
                         <input
-                            [value]="province"
+                            [value]="province.code"
                             [checked]="checkProvince(province)"
                             type="checkbox"
                             clrCheckbox
-                            (change)="selectProvince($event.target.value)" />
-                        <label> {{ province }} </label>
+                            (change)="selectProvince(province)" />
+                        <label> {{ province.name }} </label>
                     </clr-checkbox-wrapper>
                 </div>
             </div>
@@ -104,12 +103,12 @@
                 <td class="td-border"> {{ item.province_name }} </td>
                 <td class="td-border"> {{ item.hospcode }} </td>
                 <td class="td-border"> {{ item.hospname }} </td>
-                <td class="td-border">  </td>
+                <td class="td-border"> {{ cal.checkValue(item.level) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.total) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.severe) }} </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
-                <td class="td-border">  </td>
+                <td class="td-border"> {{ cal.checkValue(item.invasive) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.non_invasive) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.high_flow) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.moderate) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.mild) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.asymptomatic) }} </td>

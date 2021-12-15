@@ -105,7 +105,7 @@
             <td class="td-border"> {{ cal.checkValue(items[12][0].death) }} </td>
             <td> {{ cal.checkValue(items[12][0].pui) }} </td>
         </tr>
-        <tr *ngIf="items.length < 12">
+        <tr *ngIf="items.length > 12">
             <td colspan="2" class="td-border"> รวม 12 เขต </td>
             <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'total')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'severe')) }} </td>
