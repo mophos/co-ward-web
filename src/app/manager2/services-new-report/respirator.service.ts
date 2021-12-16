@@ -13,8 +13,8 @@ export class RespiratorService {
     return this.http.get(url).toPromise();
   }
 
-  exportExcelRespirator () {
-    const url = `${this.url}/v1/new-manager/export/respirator `;
+  exportExcelRespirator (params) {
+    const url = `${this.url}/v1/new-manager/export/medicals-supplies-report-by-hospital?date=${params.date}`;
     return this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 

@@ -64,16 +64,6 @@ export class ReportPatientsProvinceComponent implements OnInit {
     this.loadData()
   }
 
-  checkExist () {
-    let check = false
-    this.items.forEach((item) => {
-      if (item.length) {
-        check = true
-      }
-    })
-    return check
-  }
-
   clearData () {
     this.items = [
       [], [], [], [], [],
@@ -164,7 +154,10 @@ export class ReportPatientsProvinceComponent implements OnInit {
     try {
       this.loading.show()
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.patientsProvinceService.exportExcelPatientProvince({ date })
+      const res:any = await this.patientsProvinceService.exportExcelPatientProvince({
+        date,
+        zone: this.zone
+      })
       if (res) {
         this.downloadFile('รายงานผู้ป่วยรายจังหวัด', 'xlsx', res)
         this.loading.hide()

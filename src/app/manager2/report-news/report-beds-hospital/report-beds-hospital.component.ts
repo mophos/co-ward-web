@@ -197,8 +197,12 @@ export class ReportBedsHospitalComponent implements OnInit {
   async exportExcel() {
     try {
       this.loading.show()
-      // const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.bedsHospitalService.exportExcelBedHospital()
+      const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
+      const res:any = await this.bedsHospitalService.exportExcelBedHospital({
+        date,
+        zone: this.zone,
+        province: this.provinceGroup
+      })
       if (res) {
         this.downloadFile('รายงานเตียงรายสถานพยาบาล', 'xlsx', res)
         this.loading.hide()

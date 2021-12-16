@@ -19,11 +19,18 @@ export class ReportRespiratorComponent implements OnInit {
     editableDateField: false,
     showClearDateBtn: false
   }
+  // date:any = {
+  //   date: {
+  //     year: moment().year(),
+  //     month: moment().month() + 1,
+  //     day: moment().date()
+  //   }
+  // }
   date:any = {
     date: {
-      year: moment().year(),
-      month: moment().month() + 1,
-      day: moment().date()
+      year: 2020,
+      month: 5,
+      day: 27
     }
   }
 
@@ -82,8 +89,8 @@ export class ReportRespiratorComponent implements OnInit {
   async exportExcel() {
     try {
       this.loading.show()
-      // const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.respiratorService.exportExcelRespirator()
+      const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
+      const res:any = await this.respiratorService.exportExcelRespirator({ date })
       if (res) {
         this.downloadFile('รายงานการใช้เครื่องช่วยหายใจ', 'xlsx', res)
         this.loading.hide()

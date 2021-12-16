@@ -91,7 +91,7 @@
             </tr>
         </ng-container>
     </tbody>
-    <tfoot *ngIf="checkExist()">
+    <tfoot *ngIf="cal.checkExistingZone(items)">
         <tr *ngIf="items[12].length">
             <td colspan="2" class="td-border"> กรุงเทพมหานคร </td>
             <td class="td-border"> {{ cal.checkValue(items[12][0].total) }} </td>
@@ -105,7 +105,7 @@
             <td class="td-border"> {{ cal.checkValue(items[12][0].death) }} </td>
             <td> {{ cal.checkValue(items[12][0].pui) }} </td>
         </tr>
-        <tr *ngIf="items.length > 12">
+        <tr *ngIf="cal.countExistingZone(items) >= 12">
             <td colspan="2" class="td-border"> รวม 12 เขต </td>
             <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'total')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'severe')) }} </td>
@@ -118,7 +118,7 @@
             <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'death')) }} </td>
             <td> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'pui')) }} </td>
         </tr>
-        <tr>
+        <tr *ngIf="cal.countExistingZone(items) > 12">
             <td colspan="2" class="td-border"> ทั่วประเทศ </td>
             <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'total')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'severe')) }} </td>
@@ -135,13 +135,13 @@
 </table>
 
 <div
-    *ngIf="isLoading && !checkExist()"
+    *ngIf="isLoading && !cal.checkExistingZone(items)"
     style="display: flex; justify-content: center; padding: 24px;">
     กำลังโหลดข้อมูล ...
 </div>
 
 <div
-    *ngIf="!isLoading && !checkExist()"
+    *ngIf="!isLoading && !cal.checkExistingZone(items)"
     style="display: flex; justify-content: center; padding: 24px;">
     ไม่พบข้อมูล
 </div>

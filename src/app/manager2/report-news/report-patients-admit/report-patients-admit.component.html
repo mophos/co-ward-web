@@ -18,7 +18,7 @@
             </my-date-picker-th>
         </div>
     </div>
-    <button class="btn btn-sm btn-primary" (click)="exportExcel()">
+    <button class="btn btn-sm btn-primary" (click)="exportExcelSumData()">
         <clr-icon shape="download"></clr-icon>export excel
     </button>
 </div>
@@ -28,7 +28,7 @@
         <thead>
             <tr>
                 <th class="td-border"> เขต </th>
-                <th class="td-border"> Admit </th>
+                <th> Admit </th>
             </tr>
         </thead>
         <tbody>
@@ -55,7 +55,13 @@
     ไม่พบข้อมูล
 </div>
 
-<div style="overflow-x: auto; margin-top: 24px;">
+<div style="display: flex; justify-content: flex-end; margin-top: 24px;">
+    <button class="btn btn-sm btn-primary" (click)="exportExcelList()">
+        <clr-icon shape="download"></clr-icon>export excel
+    </button>
+</div>
+
+<div style="overflow-x: auto;">
     <table style="border-collapse: collapse;" class="table table-compact">
         <thead>
             <tr>
@@ -115,11 +121,26 @@
                     </div>
                 </td>
                 <td class="td-border"> {{ item.notUpdated || '-' }} </td>
-                <td class="td-border"> {{ item['Darunavir 600 mg.'] || '-' }} </td>
-                <td class="td-border"> {{ item['Lopinavir 200 mg. / Ritonavir 50 mg.'] || '-' }} </td>
-                <td class="td-border"> {{ item['Ritonavir 100 mg.'] || '-' }} </td>
-                <td class="td-border"> {{ item['Azithromycin 250 mg.'] || '-' }} </td>
-                <td class="td-border"> {{ item['Favipiravi'] || '-' }} </td>
+                <td class="td-border">
+                    <clr-icon *ngIf="item['Darunavir 600 mg.']" shape="check" class="is-success"></clr-icon>
+                    <clr-icon *ngIf="!item['Darunavir 600 mg.']" shape="times" class="is-error"></clr-icon>
+                </td>
+                <td class="td-border">
+                    <clr-icon *ngIf="item['Lopinavir 200 mg. / Ritonavir 50 mg.']" shape="check" class="is-success"></clr-icon>
+                    <clr-icon *ngIf="!item['Lopinavir 200 mg. / Ritonavir 50 mg.']" shape="times" class="is-error"></clr-icon>
+                </td>
+                <td class="td-border">
+                    <clr-icon *ngIf="item['Ritonavir 100 mg.']" shape="check" class="is-success"></clr-icon>
+                    <clr-icon *ngIf="!item['Ritonavir 100 mg.']" shape="times" class="is-error"></clr-icon>
+                </td>
+                <td class="td-border">
+                    <clr-icon *ngIf="item['Azithromycin 250 mg.']" shape="check" class="is-success"></clr-icon>
+                    <clr-icon *ngIf="!item['Azithromycin 250 mg.']" shape="times" class="is-error"></clr-icon>
+                </td>
+                <td class="td-border">
+                    <clr-icon *ngIf="item['Favipiravi']" shape="check" class="is-success"></clr-icon>
+                    <clr-icon *ngIf="!item['Favipiravi']" shape="times" class="is-error"></clr-icon>
+                </td>
                 <td> {{ item.sub_ministry_name || '-' }} </td>
             </tr>
         </tbody>

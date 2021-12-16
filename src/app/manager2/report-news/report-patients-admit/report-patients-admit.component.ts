@@ -113,13 +113,29 @@ export class ReportPatientsAdmitComponent implements OnInit {
     }
   }
 
-  async exportExcel() {
+  async exportExcelSumData() {
+    try {
+      this.loading.show()
+      const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
+      const res:any = await this.patientsAdmitService.exportExcelPatientAdmitSummary({ date })
+      if (res) {
+        this.downloadFile('รายงานผู้ป่วย Admit(สะสม)', 'xlsx', res)
+        this.loading.hide()
+      }
+
+    } catch (error) {
+      console.log(error)
+      this.loading.hide()
+    }
+  }
+
+  async exportExcelList() {
     try {
       this.loading.show()
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
       const res:any = await this.patientsAdmitService.exportExcelPatientAdmit({ date })
       if (res) {
-        this.downloadFile('รายงานผู้ป่วย Admit', 'xlsx', res)
+        this.downloadFile('รายงานผู้ป่วย Admit(ทั้งหมด)', 'xlsx', res)
         this.loading.hide()
       }
 

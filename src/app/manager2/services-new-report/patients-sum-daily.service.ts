@@ -14,7 +14,7 @@ export class PatientsSumDailyService {
   }
 
   exportExcelPatientSumDaily (params) {
-    const url = `${this.url}/v1/new-manager/export/patient-sum-daily?date=${params.date}`;
+    const url = `${this.url}/v1/new-manager/export/patients-report?date=${params.date}`;
     return this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 

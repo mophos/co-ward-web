@@ -19,7 +19,12 @@ export class PatientsAdmitService {
   }
 
   exportExcelPatientAdmit (params) {
-    const url = `${this.url}/v1/new-manager/export/patient-admit?date=${params.date}`;
+    const url = `${this.url}/v1/new-manager/export/admit-case?date=${params.date}`;
+    return this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+
+  exportExcelPatientAdmitSummary (params) {
+    const url = `${this.url}/v1/new-manager/export/admit-case-summary?start=${params.date}&end=${params.date}`;
     return this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 

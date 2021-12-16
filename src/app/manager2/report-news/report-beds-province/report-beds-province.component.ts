@@ -64,16 +64,6 @@ export class ReportBedsProvinceComponent implements OnInit {
     this.loadData()
   }
 
-  checkExist () {
-    let check = false
-    this.items.forEach((item) => {
-      if (item.length) {
-        check = true
-      }
-    })
-    return check
-  }
-
   clearData () {
     this.items = [
       [], [], [], [], [],

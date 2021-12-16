@@ -15,7 +15,8 @@ export class BedsProvinceService {
   }
 
   exportExcelBedProvince (params) {
-    const url = `${this.url}/v1/new-manager/export/bed-report-by-province?date=${params.date}`;
+    const zonesQuery = params.zone ? `&zones[]=${params.zone}` : ''
+    const url = `${this.url}/v1/new-manager/export/bed-report-by-province?date=${params.date}${zonesQuery}`;
     return this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 

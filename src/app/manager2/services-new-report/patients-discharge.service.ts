@@ -19,7 +19,12 @@ export class PatientsDischargeService {
   }
 
   exportExcelPatientDischarge (params) {
-    const url = `${this.url}/v1/new-manager/export/patient-discharge?date=${params.date}`;
+    const url = `${this.url}/v1/new-manager/export/discharge-case?date=${params.date}`;
+    return this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+
+  exportExcelPatientDischargeSummary (params) {
+    const url = `${this.url}/v1/new-manager/export/discharge-case-summary?start=${params.date}&end=${params.date}`;
     return this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 

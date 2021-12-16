@@ -114,13 +114,29 @@ export class ReportPatientsDischargeComponent implements OnInit {
     }
   }
 
-  async exportExcel() {
+  async exportExcelSumData() {
+    try {
+      this.loading.show()
+      const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
+      const res:any = await this.patientsDischargeService.exportExcelPatientDischargeSummary({ date })
+      if (res) {
+        this.downloadFile('รายงานผู้ป่วย Discharge(สะสม)', 'xlsx', res)
+        this.loading.hide()
+      }
+
+    } catch (error) {
+      console.log(error)
+      this.loading.hide()
+    }
+  }
+
+  async exportExcelList() {
     try {
       this.loading.show()
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
       const res:any = await this.patientsDischargeService.exportExcelPatientDischarge({ date })
       if (res) {
-        this.downloadFile('รายงานผู้ป่วย Discharge', 'xlsx', res)
+        this.downloadFile('รายงานผู้ป่วย Discharge(ทั้งหมด)', 'xlsx', res)
         this.loading.hide()
       }
 

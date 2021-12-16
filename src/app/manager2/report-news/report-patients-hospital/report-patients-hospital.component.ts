@@ -149,7 +149,11 @@ export class ReportPatientsHospitalComponent implements OnInit {
     try {
       this.loading.show()
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.patientsHospitalService.exportExcelPatientHospital({ date })
+      const res:any = await this.patientsHospitalService.exportExcelPatientHospital({
+        date,
+        zone: this.zone,
+        province: this.provinceGroup
+      })
       if (res) {
         this.downloadFile('รายงานผู้ป่วยรายสถานพยาบาล', 'xlsx', res)
         this.loading.hide()

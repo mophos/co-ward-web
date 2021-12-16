@@ -8,6 +8,26 @@ export class CalculateService {
 
   constructor() { }
 
+  checkExistingZone (items) {
+    let check = false
+    items.forEach((item) => {
+      if (item.length) {
+        check = true
+      }
+    })
+    return check
+  }
+
+  countExistingZone (items) {
+    let count = 0
+    items.forEach((item) => {
+      if (item.length) {
+        count++
+      }
+    })
+    return count
+  }
+
   checkValue (value) {
     if (value !== undefined && (value !== null && !isNaN(value))) {
       return value
@@ -20,44 +40,6 @@ export class CalculateService {
       return '-'
     }
     return (num1 || 0) - (num2 || 0)
-  }
-
-  getSpecificBed (items, bed, key) {
-    const data = items.find(item => item.bed_name === bed)
-    if (data) {
-      return data[key]
-    }
-    return undefined
-  }
-
-  sumSpecificBed12Zone (items, bed, key) {
-    let sum = 0
-    let dataZone13 = 0
-    const zone13 = items[12].find(item => item.bed_name === bed)
-    if (zone13) {
-      dataZone13 = zone13[key]
-    }
-
-    items.forEach(item => {
-      item.forEach(x => {
-        if (x.bed_name === bed) {
-          sum += x[key] || 0
-        }
-      })
-    })
-    return sum - dataZone13
-  }
-
-  sumSpecificBedAllZone (items, value, key) {
-    let sum = 0
-    items.forEach(item => {
-      item.forEach(x => {
-        if (x.bed_name === value) {
-          sum += x[key] || 0
-        }
-      })
-    })
-    return sum
   }
 
   sumField (value) {

@@ -26,7 +26,7 @@
                     style="width: 100%;"
                     class="clr-select"
                     (change)="selectZone()">
-                    <option value="">เลือกเขต</option>
+                    <option value=""> ทุกเขต </option>
                     <option *ngFor="let zone of zones; let i = index" [value]="zone.value">
                         {{ zone.name }}
                     </option>
@@ -42,7 +42,7 @@
                     class="clr-select"
                     readonly="true"
                     (click)="setSelectMultiProvince()">
-                    <option style="display: none;" value=""> เลือกจังหวัด </option>
+                    <option style="display: none;" value=""> ทุกจังหวัด </option>
                     <option
                         [selected]="provinceGroup.length"
                         style="display: none;">

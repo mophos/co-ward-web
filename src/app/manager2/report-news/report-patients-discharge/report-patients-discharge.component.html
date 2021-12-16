@@ -18,7 +18,7 @@
             </my-date-picker-th>
         </div>
     </div>
-    <button class="btn btn-sm btn-primary" (click)="exportExcel()">
+    <button class="btn btn-sm btn-primary" (click)="exportExcelSumData()">
         <clr-icon shape="download"></clr-icon>export excel
     </button>
 </div>
@@ -63,7 +63,13 @@
     ไม่พบข้อมูล
 </div>
 
-<div style="overflow-x: auto; margin-top: 24px;">
+<div style="display: flex; justify-content: flex-end; margin-top: 24px;">
+    <button class="btn btn-sm btn-primary" (click)="exportExcelList()">
+        <clr-icon shape="download"></clr-icon>export excel
+    </button>
+</div>
+
+<div style="overflow-x: auto;">
     <table style="border-collapse: collapse;" class="table table-compact">
         <thead>
             <tr>

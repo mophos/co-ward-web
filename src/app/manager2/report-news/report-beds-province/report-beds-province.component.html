@@ -26,7 +26,7 @@
                     style="width: 100%;"
                     class="clr-select"
                     (change)="selectZone()">
-                    <option value="">เลือกเขต</option>
+                    <option value=""> ทุกเขต </option>
                     <option *ngFor="let zone of zones; let i = index" [value]="zone.value">
                         {{ zone.name }}
                     </option>
@@ -134,7 +134,7 @@
                 </tr>
             </ng-container>
         </tbody>
-        <tfoot *ngIf="checkExist()">
+        <tfoot *ngIf="cal.checkExistingZone(items)">
             <tr  *ngIf="items[12].length">
                 <td colspan="2" class="td-border"> กรุงเทพมหานคร </td>
                 <td class="td-border"> {{ cal.checkValue(items[12][0].level3_total) }} </td>
@@ -159,7 +159,7 @@
                 <td class="td-border"> {{ cal.checkValue(items[12][0].community_isolation_used) }} </td>
                 <td> {{ cal.getRemaining(items[12][0].community_isolation_total, items[12][0].community_isolation_used) }} </td>
             </tr>
-            <tr *ngIf="items.length > 12">
+            <tr *ngIf="cal.countExistingZone(items) >= 12">
                 <td colspan="2" class="td-border"> รวม 12 เขต </td>
                 <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'level3_total')) }} </td>
                 <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'level3_used')) }} </td>
@@ -183,7 +183,7 @@
                 <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'community_isolation_used')) }} </td>
                 <td> {{ cal.getRemaining(cal.sum12ZoneByProvince(items, 'community_isolation_total') - cal.sum12ZoneByProvince(items, 'community_isolation_used')) }} </td>
             </tr>
-            <tr>
+            <tr *ngIf="cal.countExistingZone(items) > 12">
                 <td colspan="2" class="td-border"> ทั่วประเทศ </td>
                 <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'level3_total')) }} </td>
                 <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'level3_used')) }} </td>
@@ -212,13 +212,13 @@
 </div>
 
 <div
-    *ngIf="isLoading && !checkExist()"
+    *ngIf="isLoading && !cal.checkExistingZone(items)"
     style="display: flex; justify-content: center; padding: 24px;">
     กำลังโหลดข้อมูล ...
 </div>
 
 <div
-    *ngIf="!isLoading && !checkExist()"
+    *ngIf="!isLoading && !cal.checkExistingZone(items)"
     style="display: flex; justify-content: center; padding: 24px;">
     ไม่พบข้อมูล
 </div>
