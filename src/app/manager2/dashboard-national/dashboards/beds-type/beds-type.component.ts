@@ -3,7 +3,7 @@ import { IMyOptions } from 'mydatepicker-th';
 import provinceJson from '../../../../../assets/provinces.json'
 import * as Highcharts from 'highcharts';
 import moment from 'moment';
-import { HospitalService } from '../../../hospital.service';
+import { BedsTypeService } from 'src/app/manager2/services-new-dashboard/beds-type.service';
 
 @Component({
   selector: 'app-beds-type',
@@ -19,7 +19,9 @@ export class BedsTypeComponent implements OnInit {
     showClearDateBtn: false
   }
 
-  items:any = []
+  items:any = {
+    results: []
+  }
   zone = ''
   zones = [
     { name: 'เขต 01', value: '01' },
@@ -44,71 +46,62 @@ export class BedsTypeComponent implements OnInit {
   listMinistry:any = []
   listSubMinistry: any = []
 
+  // startDate:any = {
+  //   date: {
+  //     year: moment().year(),
+  //     month: moment().month() + 1,
+  //     day: moment().date()
+  //   }
+  // }
   startDate:any = {
     date: {
-      year: moment().year(),
-      month: moment().month() + 1,
-      day: moment().date()
+      year: 2021,
+      month: 11,
+      day: 1
     }
   }
-
+  // endDate:any = {
+  //   date: {
+  //     year: moment().year(),
+  //     month: moment().month() + 1,
+  //     day: moment().date()
+  //   }
+  // }
   endDate:any = {
     date: {
-      year: moment().year(),
-      month: moment().month() + 1,
-      day: moment().date()
+      year: 2021,
+      month: 12,
+      day: 31
     }
   }
 
-  highcharts = Highcharts;
+  highcharts = null
 
   pieChartOptions = {}
   stackChartOptions = {}
 
-  report:any = {
-    total: 39552,
-    usageTotal: 15982,
-    empty: 23570,
-    usageTotalPercentage: 40.4,
-    data: [
-      {
-        title: 'ระดับ 3',
-        usage: 75,
-        empty: 90
-      },
-      {
-        title: 'ระดับ 2.2',
-        usage: 85,
-        empty: 66
-      },
-      {
-        title: 'ระดับ 2.1',
-        usage: 107,
-        empty: 79
-      },
-      {
-        title: 'ระดับ 1',
-        usage: 427,
-        empty: 319
-      },
-      {
-        title: 'ระดับ 0',
-        usage: 1306,
-        empty: 836
-      }
-    ]
-  }
-
   constructor(
-    private hospitalService: HospitalService
+    private bedsTypeService: BedsTypeService
   ) { }
 
   ngOnInit() {
     // this.getMinistryList()
     // this.getSubMinistryList()
     this.loadData()
-    this.setPieChartBed()
-    this.setStackChartBed()
+    // this.setPieChartBed()
+    // this.setStackChartBed()
+  }
+
+  formatPercent (total, value) {
+    const result = (value * 100) / total
+    return result || 0
+  }
+
+  formatNumber (value = 0) {
+    return value.toLocaleString(undefined, {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    })
   }
 
   selectStartDate (value) {
@@ -158,26 +151,18 @@ export class BedsTypeComponent implements OnInit {
     return this.provinceGroup.some(item => item === province)
   }
 
-  loadData () {
-    // TODO : GET DATA
-  }
-
-  async getMinistryList() {
+  async loadData () {
     try {
-      const rs: any = await this.hospitalService.getMinistryList();
-      if (rs.ok) {
-        this.listMinistry = rs.rows;
-      }
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  async getSubMinistryList() {
-    try {
-      const rs: any = await this.hospitalService.getSubMinistryList();
-      if (rs.ok) {
-        this.listSubMinistry = rs.rows;
+      const startDate = `${this.startDate.date.year}-${this.startDate.date.month}-${this.startDate.date.day}`
+      const endDate = `${this.endDate.date.year}-${this.endDate.date.month}-${this.endDate.date.day}`
+      const res:any = await this.bedsTypeService.getBedType({
+        startDate,
+        endDate
+      })
+      if (res.ok) {
+        this.items = res.rows
+        this.setPieChartBed()
+        console.log('bed type ', res.rows)
       }
     } catch (error) {
       console.error(error)
@@ -185,6 +170,9 @@ export class BedsTypeComponent implements OnInit {
   }
 
   setPieChartBed () {
+    const total = 100 - this.formatPercent(this.items.total_covid_qty, this.items.total_used_qty)
+    const used = this.formatPercent(this.items.total_covid_qty, this.items.total_used_qty)
+
     this.pieChartOptions = {
       chart: {
           plotBackgroundColor: null,
@@ -195,9 +183,6 @@ export class BedsTypeComponent implements OnInit {
       title: {
           text: ''
       },
-      // tooltip: {
-      //     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-      // },
       accessibility: {
           point: {
               valueSuffix: '%'
@@ -220,75 +205,22 @@ export class BedsTypeComponent implements OnInit {
           data: [
             {
               name: 'เตียงว่าง',
-              y: 59.6
+              y: total
             },
             {
-              name: 'เตียงที่ถูกใช้งาน',
-              y: 40.4
+              name: 'ครองเตียง',
+              y: used
             }
           ]
         }
       ]
     }
+
+    this.highcharts = Highcharts;
   }
 
   setStackChartBed () {
-    const labels = []
-    const emptys = []
-    const usages = []
 
-    this.report.data.forEach(item => {
-      labels.push(item.title)
-    })
-
-    this.report.data.forEach(item => {
-      emptys.push(item.empty)
-    })
-
-    this.report.data.forEach(item => {
-      usages.push(item.usage)
-    })
-
-    this.stackChartOptions = {
-      chart: {
-          type: 'column'
-      },
-      title: {
-          text: ''
-      },
-      xAxis: {
-        categories: labels
-      },
-      yAxis: {
-          allowDecimals: false,
-          min: 0,
-          title: {
-              text: 'จำนวนเตียง'
-          }
-      },
-      tooltip: {
-          formatter: function () {
-              return '<b>' + this.x + '</b><br/>' +
-                  this.series.name + ': ' + this.y + ' เตียง'
-          }
-      },
-      plotOptions: {
-          column: {
-              stacking: 'normal'
-          }
-      },
-      colors: ['#E4E4E4', '#50B432'],
-      series: [
-        {
-          name: 'เตียงว่าง',
-          data: emptys,
-        },
-        {
-          name: 'เตียงถูกใช้งาน',
-          data: usages,
-        }
-      ]
-    }
   }
 
 }

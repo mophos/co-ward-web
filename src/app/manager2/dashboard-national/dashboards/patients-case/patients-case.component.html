@@ -121,7 +121,7 @@
         <div
           style="text-align: center;"
           class="card-text">
-          12312
+          {{ formatNumber(items.severe_total) }}
         </div>
     </div>
   </div>
@@ -135,7 +135,7 @@
         <div
           style="text-align: center;"
           class="card-text">
-          123123
+          {{ formatNumber(items.moderate_total) }}
         </div>
     </div>
   </div>
@@ -149,7 +149,7 @@
         <div
           style="text-align: center;"
           class="card-text">
-          123123
+          {{ formatNumber(items.mild_total) }}
         </div>
     </div>
   </div>
@@ -163,7 +163,7 @@
         <div
           style="text-align: center;"
           class="card-text">
-          123123123
+          {{ formatNumber(items.asymptomatic_total) }}
         </div>
     </div>
   </div>
@@ -173,6 +173,7 @@
   class="card">
   <div class="card-block">
     <highcharts-chart
+        *ngIf="highcharts"
         [Highcharts] = "highcharts"
         [options] = "lineChartOptions">
     </highcharts-chart>

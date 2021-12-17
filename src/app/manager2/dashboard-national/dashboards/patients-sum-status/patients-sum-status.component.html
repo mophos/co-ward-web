@@ -121,7 +121,7 @@
         <div
           style="text-align: center;"
           class="card-text">
-          12312
+          {{ formatNumber(items.admit_total) }}
         </div>
     </div>
   </div>
@@ -135,7 +135,7 @@
         <div
           style="text-align: center;"
           class="card-text">
-          12312
+          {{ formatNumber(items.discharge_total) }}
         </div>
     </div>
   </div>
@@ -149,7 +149,7 @@
         <div
           style="text-align: center;"
           class="card-text">
-          1231
+          {{ formatNumber(items.death_total) }}
         </div>
     </div>
   </div>
@@ -159,6 +159,7 @@
   class="card">
   <div class="card-block">
     <highcharts-chart
+        *ngIf="highcharts"
         [Highcharts] = "highcharts"
         [options] = "lineChartOptions">
     </highcharts-chart>

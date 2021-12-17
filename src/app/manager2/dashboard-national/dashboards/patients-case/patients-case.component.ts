@@ -3,6 +3,7 @@ import { IMyOptions } from 'mydatepicker-th';
 import * as Highcharts from 'highcharts';
 import moment from 'moment';
 import provinceJson from '../../../../../assets/provinces.json'
+import { PatientsCaseService } from 'src/app/manager2/services-new-dashboard/patients-case.service';
 
 @Component({
   selector: 'app-patients-case',
@@ -43,29 +44,52 @@ export class PatientsCaseComponent implements OnInit {
   listMinistry:any = []
   listSubMinistry: any = []
 
+  // startDate:any = {
+  //   date: {
+  //     year: moment().year(),
+  //     month: moment().month() + 1,
+  //     day: moment().date()
+  //   }
+  // }
   startDate:any = {
     date: {
-      year: moment().year(),
-      month: moment().month() + 1,
-      day: moment().date()
+      year: 2020,
+      month: 4,
+      day: 27
     }
   }
+  // endDate:any = {
+  //   date: {
+  //     year: moment().year(),
+  //     month: moment().month() + 1,
+  //     day: moment().date()
+  //   }
+  // }
   endDate:any = {
     date: {
-      year: moment().year(),
-      month: moment().month() + 1,
-      day: moment().date()
+      year: 2020,
+      month: 4,
+      day: 30
     }
   }
 
-  highcharts = Highcharts;
+  highcharts = null;
 
   lineChartOptions = {}
 
-  constructor() { }
+  constructor(
+    private patientsCaseService: PatientsCaseService
+  ) { }
 
   ngOnInit() {
-    this.setLineChartPatientEachIllness()
+    this.loadData()
+  }
+
+  formatNumber (value = 0) {
+    return value.toLocaleString(undefined, {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    })
   }
 
   selectStartDate (value) {
@@ -115,11 +139,75 @@ export class PatientsCaseComponent implements OnInit {
     return this.provinceGroup.some(item => item === province)
   }
 
-  loadData () {
-    // TODO : GET DATA
+  async loadData () {
+    try {
+      const startDate = `${this.startDate.date.year}-${this.startDate.date.month}-${this.startDate.date.day}`
+      const endDate = `${this.endDate.date.year}-${this.endDate.date.month}-${this.endDate.date.day}`
+      const res:any = await this.patientsCaseService.getPatientsCase({
+        startDate,
+        endDate
+      })
+      if (res.ok) {
+        this.items = res.rows
+        this.setLineChartPatientEachCase()
+      }
+    } catch (error) {
+      console.error(error)
+    }
   }
 
-  setLineChartPatientEachIllness () {
+  setLineChartPatientEachCase () {
+    const startDate = moment(`${this.startDate.date.year}-${this.startDate.date.month}-${this.startDate.date.day}`, 'YYYY-MM-DD')
+    const endDate = moment(`${this.endDate.date.year}-${this.endDate.date.month}-${this.endDate.date.day}`, 'YYYY-MM-DD')
+    const diff = endDate.diff(startDate, 'days')
+    const categories = []
+    const severe = []
+    const moderate = []
+    const mild = []
+    const asymptomatic = []
+
+    for (let i = 0; i <= diff; i++) {
+      categories.push(moment(startDate).format('DD-MM-YYYY'))
+      startDate.add(1, 'days');
+    }
+
+    console.log('categories ', categories)
+
+    categories.forEach((categorie, i) => {
+      if (this.items.severe && this.items.severe.length) {
+        const data = this.items.severe.find(item => moment(item.date_admit).format('DD-MM-YYYY') === categorie)
+        if (data) {
+          severe.push(data.amount)
+        } else {
+          severe.push(0)
+        }
+      }
+      if (this.items.moderate && this.items.moderate.length) {
+        const data = this.items.moderate.find(item => moment(item.date_admit).format('DD-MM-YYYY') === categorie)
+        if (data) {
+          moderate.push(data.amount)
+        } else {
+          moderate.push(0)
+        }
+      }
+      if (this.items.mild && this.items.mild.length) {
+        const data = this.items.mild.find(item => moment(item.date_admit).format('DD-MM-YYYY') === categorie)
+        if (data) {
+          mild.push(data.amount)
+        } else {
+          mild.push(0)
+        }
+      }
+      if (this.items.asymptomatic && this.items.asymptomatic.length) {
+        const data = this.items.asymptomatic.find(item => moment(item.date_admit).format('DD-MM-YYYY') === categorie)
+        if (data) {
+          asymptomatic.push(data.amount)
+        } else {
+          asymptomatic.push(0)
+        }
+      }
+    })
+
     this.lineChartOptions = {
       title: {
           text: ''
@@ -133,16 +221,7 @@ export class PatientsCaseComponent implements OnInit {
           }
       },
       xAxis: {
-        categories: [
-          '15/11/2021',
-          '16/11/2021',
-          '17/11/2021',
-          '18/11/2021',
-          '19/11/2021',
-          '20/11/2021',
-          '21/11/2021',
-          '22/11/2021'
-        ]
+        categories: categories
       },
       legend: {
           layout: 'vertical',
@@ -151,18 +230,19 @@ export class PatientsCaseComponent implements OnInit {
       },
       series: [{
           name: 'Severe Case',
-          data: [151, 223, 64, 77, 89, 123, 33]
+          data: severe
       }, {
           name: 'Moderate Case',
-          data: [22, 333, 87, 101, 321, 32, 11]
+          data: moderate
       }, {
           name: 'Mild Case',
-          data: [92, 932, 334, 29, 34, 30, 75]
+          data: mild
       }, {
           name: 'Asymotimatic',
-          data: [45, 212, 829, 111, 20, 40, 99]
+          data: asymptomatic
       }]
     }
-  }
 
+    this.highcharts = Highcharts
+  }
 }

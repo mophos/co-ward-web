@@ -121,7 +121,7 @@
         <div
           style="text-align: center;"
           class="card-text">
-          {{ report.total }}
+          {{ formatNumber(items.total_covid_qty) }}
         </div>
     </div>
   </div>
@@ -135,7 +135,7 @@
         <div
           style="text-align: center;"
           class="card-text">
-          {{ report.usageTotal }}
+          {{ formatNumber(items.total_used_qty) }}
         </div>
     </div>
   </div>
@@ -149,7 +149,7 @@
         <div
           style="text-align: center;"
           class="card-text">
-          {{ report.empty }}
+          {{ formatNumber(items.total_covid_qty - items.total_used_qty) }}
         </div>
     </div>
   </div>
@@ -161,7 +161,7 @@
         <div
           style="text-align: center;"
           class="card-text">
-          {{ report.usageTotalPercentage }}
+          {{ formatPercent(items.total_covid_qty, items.total_used_qty).toFixed(2) }} %
         </div>
     </div>
   </div>
@@ -172,6 +172,7 @@
   class="card">
   <div class="card-block">
     <highcharts-chart
+        *ngIf="highcharts"
         [Highcharts] = "highcharts"
         [options] = "pieChartOptions">
     </highcharts-chart>
@@ -184,57 +185,63 @@
   <div
     style="padding-top: 24px;"
     class="card-block">
-    <!-- <highcharts-chart
-        [Highcharts] = "highcharts"
-        [options] = "stackChartOptions">
-    </highcharts-chart> -->
-    <div style="display: flex; justify-content: space-around; border-bottom: 1px solid black;">
+    <div
+      *ngIf="items.results.length"
+      style="display: flex; justify-content: space-around; border-bottom: 1px solid black;">
       <div style="width: 60px; height: 300px;">
         <div
+          [style.height]="(100 - formatPercent(items.results[3].covid_qty, items.results[3].used_qty)).toFixed(2) + '%'"
           style="width: 100%; height: 55%; background-color: #BFBFBF;"
           class="beds-type__chart-column">
-          90
+          {{ (items.results[3].covid_qty - items.results[3].used_qty) || '' }}
         </div>
         <div
+        [style.height]="formatPercent(items.results[3].covid_qty, items.results[3].used_qty).toFixed(2) + '%'"
           style="width: 100%; height: 45%; background-color: #FF0000;"
           class="beds-type__chart-column">
-          75
+          {{ items.results[3].used_qty || '' }}
         </div>
       </div>
       <div style="width: 60px; height: 300px;">
         <div
-          style="width: 100%; height: 40%; background-color: #BFBFBF;"
+          [style.height]="(100 - formatPercent(items.results[2].covid_qty, items.results[2].used_qty)).toFixed(2) + '%'"
+          style="width: 100%; background-color: #BFBFBF;"
           class="beds-type__chart-column">
-          66
+          {{ (items.results[2].covid_qty - items.results[2].used_qty) || '' }}
         </div>
         <div
-          style="width: 100%; height: 60%; background-color: #EC7D31;"
+          [style.height]="formatPercent(items.results[2].covid_qty, items.results[2].used_qty).toFixed(2) + '%'"
+          style="width: 100%; height: 0%; background-color: #EC7D31;"
           class="beds-type__chart-column">
-          85
-        </div>
-      </div>
-      <div style="width: 60px; height: 300px;">
-        <div
-          style="width: 100%; height: 40%; background-color: #BFBFBF;"
-          class="beds-type__chart-column">
-          79
-        </div>
-        <div
-          style="width: 100%; height: 60%; background-color: #FFFF8F;"
-          class="beds-type__chart-column">
-          107
+          {{ items.results[2].used_qty || '' }}
         </div>
       </div>
       <div style="width: 60px; height: 300px;">
         <div
-          style="width: 100%; height: 40%; background-color: #BFBFBF;"
+          [style.height]="(100 - formatPercent(items.results[1].covid_qty, items.results[1].used_qty)).toFixed(2) + '%'"
+          style="width: 100%; background-color: #BFBFBF;"
           class="beds-type__chart-column">
-          319
+          {{ (items.results[1].covid_qty - items.results[1].used_qty) || '' }}
         </div>
         <div
-          style="width: 100%; height: 60%; background-color: #70AC47;"
+          [style.height]="formatPercent(items.results[1].covid_qty, items.results[1].used_qty).toFixed(2) + '%'"
+          style="width: 100%; background-color: #FFFF8F;"
           class="beds-type__chart-column">
-          427
+          {{ items.results[1].used_qty || '' }}
+        </div>
+      </div>
+      <div style="width: 60px; height: 300px;">
+        <div
+          [style.height]="(100 - formatPercent(items.results[0].covid_qty, items.results[0].used_qty)).toFixed(2) + '%'"
+          style="width: 100%; background-color: #BFBFBF;"
+          class="beds-type__chart-column">
+          {{ (items.results[0].covid_qty - items.results[0].used_qty) || '' }}
+        </div>
+        <div
+          [style.height]="formatPercent(items.results[0].covid_qty, items.results[0].used_qty).toFixed(2) + '%'"
+          style="width: 100%; background-color: #70AC47;"
+          class="beds-type__chart-column">
+          {{ items.results[0].used_qty || '' }}
         </div>
       </div>
     </div>

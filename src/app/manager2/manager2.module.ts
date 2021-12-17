@@ -70,7 +70,7 @@ import { ReportRespiratorComponent } from './report-news/report-respirator/repor
 import { BedsTypeComponent } from './dashboard-national/dashboards/beds-type/beds-type.component';
 import { PatientsCaseComponent } from './dashboard-national/dashboards/patients-case/patients-case.component';
 import { PatientsSumStatusComponent } from './dashboard-national/dashboards/patients-sum-status/patients-sum-status.component';
-import { PatientsDailyStatusComponent } from './dashboard-national/dashboards/patients-daily-status/patients-daily-status.component';
+import { PatientsStatusPart2Component } from './dashboard-national/dashboards/patients-status-part2/patients-status-part2.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -144,7 +144,7 @@ import { PatientsDailyStatusComponent } from './dashboard-national/dashboards/pa
 
     PatientsSumStatusComponent,
 
-    PatientsDailyStatusComponent,
+    PatientsStatusPart2Component,
   ],
   imports: [
     CommonModule,

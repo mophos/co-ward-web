@@ -1,5 +1,5 @@
 <div style="margin-bottom: 24px;">
-  <h3> ผู้ป่วยแต่ละสถานะ (วันนี้) </h3>
+  <h3> ผู้ป่วยแต่ละสถานะ (ส่วนที่ 2) </h3>
 </div>
 
 <div style="display: flex; margin-bottom: 8px;">
@@ -8,7 +8,7 @@
     <my-date-picker-th
         [(ngModel)]="startDate"
         [options]="myDatePickerOptions"
-        name="startDatePatientsDailyStatus"
+        name="startDatePatientsStatusPart2"
         (dateChanged)="selectStartDate($event)">
     </my-date-picker-th>
   </div>
@@ -17,7 +17,7 @@
     <my-date-picker-th
         [(ngModel)]="endDate"
         [options]="myDatePickerOptions"
-        name="endDatePatientsDailyStatus"
+        name="endDatePatientsStatusPart2"
         (dateChanged)="selectEndDate($event)">
     </my-date-picker-th>
   </div>
@@ -27,7 +27,7 @@
       <div class="clr-select-wrapper" style="width: 100%;">
           <select
               [(ngModel)]="ministryCode"
-              name="ministryPatientsDailyStatus"
+              name="ministryPatientsStatusPart2"
               style="width: 100%;"
               class="clr-select"
               (change)="selectMinistry()">
@@ -44,7 +44,7 @@
       <div class="clr-select-wrapper" style="width: 100%;">
           <select
               [(ngModel)]="zone"
-              name="zonePatientsDailyStatusDashboard"
+              name="zonePatientsStatusPart2Dashboard"
               style="width: 100%;"
               class="clr-select"
               (change)="selectZone()">
@@ -60,7 +60,7 @@
       <div class="clr-select-wrapper" style="width: 100%;">
           <select
               [(ngModel)]="displayProvince"
-              name="provincePatientsDailyStatusDashboard"
+              name="provincePatientsStatusPart2Dashboard"
               style="width: 100%;"
               class="clr-select"
               readonly="true"
@@ -79,7 +79,7 @@
           </select>
           <div
               *ngIf="isSelectProvince"
-              class="patients-daily-status__select-menu">
+              class="patients-status-part2">
               <clr-checkbox-wrapper *ngFor="let province of provinces; let i = index">
                   <input
                       [value]="province"
@@ -113,7 +113,7 @@
 <div style="display: flex;">
   <div
     style="margin-right: 24px"
-    class="card patients-daily-status__card">
+    class="card patients-status-part2__card">
     <div class="card-block">
         <div  class="card-title">
           ผู้ป่วยรักษาอยู่
@@ -121,13 +121,13 @@
         <div
           style="text-align: center;"
           class="card-text">
-          12312
+          {{ formatNumber(chart.patients_total) }}
         </div>
     </div>
   </div>
   <div
     style="margin-right: 24px"
-    class="card patients-daily-status__card">
+    class="card patients-status-part2__card">
     <div class="card-block">
         <div class="card-title">
           อาการรุนแรง
@@ -135,13 +135,13 @@
         <div
           style="text-align: center;"
           class="card-text">
-          12312
+          {{ formatNumber(chart.severeCases_total) }}
         </div>
     </div>
   </div>
   <div
     style="margin-right: 24px"
-    class="card patients-daily-status__card">
+    class="card patients-status-part2__card">
     <div class="card-block">
         <div class="card-title">
           ใส่เครื่องช่วยหายใจ
@@ -149,7 +149,7 @@
         <div
           style="text-align: center;"
           class="card-text">
-          1231
+          {{ formatNumber(chart.invasionVentilatorCases_total) }}
         </div>
     </div>
   </div>
@@ -159,6 +159,7 @@
   class="card">
   <div class="card-block">
     <highcharts-chart
+        *ngIf="highcharts"
         [Highcharts] = "highcharts"
         [options] = "lineChartOptions">
     </highcharts-chart>

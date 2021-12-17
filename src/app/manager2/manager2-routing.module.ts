@@ -56,6 +56,10 @@ import { ReportPatientsProvinceComponent } from './report-news/report-patients-p
 import { ReportBedsZoneComponent } from './report-news/report-beds-zone/report-beds-zone.component';
 import { ReportPatientsHospitalComponent } from './report-news/report-patients-hospital/report-patients-hospital.component';
 import { ReportRespiratorComponent } from './report-news/report-respirator/report-respirator.component';
+import { BedsTypeComponent } from './dashboard-national/dashboards/beds-type/beds-type.component';
+import { PatientsCaseComponent } from './dashboard-national/dashboards/patients-case/patients-case.component';
+import { PatientsSumStatusComponent } from './dashboard-national/dashboards/patients-sum-status/patients-sum-status.component';
+import { PatientsStatusPart2Component } from './dashboard-national/dashboards/patients-status-part2/patients-status-part2.component';
 
 const routes: Routes = [
   {
@@ -127,7 +131,7 @@ const routes: Routes = [
       { path: 'report-lab-positive', component: ReportLabPositiveComponent },
       { path: 'report-lab-positive-colab', component: ReportColabCheckComponent },
       { path: 'report-bed-zone', component: ReportBed2Component },
-      
+
       ///////// new ////////////
       { path: 'report-patients-zone', component: ReportPatientsZoneComponent },
       { path: 'report-patients-province', component: ReportPatientsProvinceComponent },
@@ -139,7 +143,16 @@ const routes: Routes = [
       { path: 'report-patients-discharge', component: ReportPatientsDischargeComponent },
       { path: 'report-patients-sum-daily', component: ReportPatientsSumDailyComponent },
       { path: 'report-respirator', component: ReportRespiratorComponent },
-      { path: 'dashboard-national', component: DashboardNationalComponent }
+      {
+        path: 'dashboard-national',
+        component: DashboardNationalComponent,
+        children: [
+          { path: 'beds-type', component: BedsTypeComponent },
+          { path: 'patients-case', component: PatientsCaseComponent },
+          { path: 'patients-sum-status', component: PatientsSumStatusComponent },
+          { path: 'patients-status-part2', component: PatientsStatusPart2Component }
+        ]
+      }
     ]
   }
 ];

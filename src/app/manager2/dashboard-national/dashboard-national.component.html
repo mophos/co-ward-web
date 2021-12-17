@@ -10,44 +10,43 @@
   <button
     style="margin-right: 24px;"
     class="btn btn-primary btn-sm"
-    (click)="setTabs(0)">
+    routerLink="beds-type">
     การใช้งานเตียงแต่ละประเภท
   </button>
   <button
     style="margin-right: 24px;"
     class="btn btn-primary btn-sm"
-    (click)="setTabs(1)">
+    routerLink="patients-case">
     ผู้ป่วยแต่ละอาการ
   </button>
   <button
     style="margin-right: 24px;"
     class="btn btn-primary btn-sm"
-    (click)="setTabs(2)">
-    ผู้ป่วยแต่ละสถานะ (สะสม)
+    routerLink="patients-sum-status">
+    ผู้ป่วยแต่ละสถานะ (ส่วนที่ 1)
   </button>
   <button
     class="btn btn-primary btn-sm"
-    (click)="setTabs(3)">
-    ผู้ป่วยแต่ละสถานะ (วันนี้)
+    routerLink="patients-status-part2">
+    ผู้ป่วยแต่ละสถานะ (ส่วนที่ 2)
   </button>
 </div>
 
-<!-- การใช้งานเตียงแต่ละประเภท -->
-<div *ngIf="tabs === 0">
+<router-outlet></router-outlet>
+
+<!-- <div *ngIf="tabs === 0">
   <app-beds-type></app-beds-type>
 </div>
 
-<!-- ผู้ป่วยแต่ละอาการ -->
 <div *ngIf="tabs === 1">
   <app-patients-case></app-patients-case>
 </div>
 
-<!-- ผู้ป่วยแต่ละสถานะ (สะสม) -->
 <div *ngIf="tabs === 2">
   <app-patients-sum-status></app-patients-sum-status>
 </div>
 
-<!-- ผู้ป่วยแต่ละสถานะ (วันนี้) -->
+
 <div *ngIf="tabs === 3">
   <app-patients-daily-status></app-patients-daily-status>
-</div>
+</div> -->

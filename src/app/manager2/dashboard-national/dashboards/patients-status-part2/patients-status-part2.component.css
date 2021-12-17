@@ -1,10 +1,10 @@
-.patients-daily-status__card {
+.patients-status-part2__card {
   width: 220px;
   border-radius: 14px;
   box-shadow: none;
 }
 
-.patients-daily-status__select-menu {
+.patients-status-part2__select-menu {
   position: absolute;
   width: 100%;
   height: 130px;

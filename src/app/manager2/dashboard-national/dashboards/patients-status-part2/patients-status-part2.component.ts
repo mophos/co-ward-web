@@ -6,11 +6,11 @@ import provinceJson from '../../../../../assets/provinces.json'
 import { PatientsStatusService } from 'src/app/manager2/services-new-dashboard/patients-status.service';
 
 @Component({
-  selector: 'app-patients-sum-status',
-  templateUrl: './patients-sum-status.component.html',
-  styleUrls: ['./patients-sum-status.component.css']
+  selector: 'app-patients-status-part2',
+  templateUrl: './patients-status-part2.component.html',
+  styleUrls: ['./patients-status-part2.component.css']
 })
-export class PatientsSumStatusComponent implements OnInit {
+export class PatientsStatusPart2Component implements OnInit {
 
   myDatePickerOptions: IMyOptions = {
     inline: false,
@@ -19,6 +19,7 @@ export class PatientsSumStatusComponent implements OnInit {
     showClearDateBtn: false
   }
 
+  chart:any = {}
   items:any = []
   zone = ''
   zones = [
@@ -55,7 +56,7 @@ export class PatientsSumStatusComponent implements OnInit {
     date: {
       year: 2020,
       month: 4,
-      day: 30
+      day: 10
     }
   }
   // endDate:any = {
@@ -68,7 +69,7 @@ export class PatientsSumStatusComponent implements OnInit {
   endDate:any = {
     date: {
       year: 2020,
-      month: 5,
+      month: 4,
       day: 30
     }
   }
@@ -82,8 +83,8 @@ export class PatientsSumStatusComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadData()
-    // this.setLineChartPatientEachStatus()
+    this.loadDataTotal()
+    this.loadDataChart()
   }
 
   formatNumber (value = 0) {
@@ -129,7 +130,7 @@ export class PatientsSumStatusComponent implements OnInit {
       this.provinceGroup.push(value)
     }
     this.items = []
-    this.loadData()
+    // this.loadData()
   }
 
   setSelectMultiProvince () {
@@ -140,18 +141,33 @@ export class PatientsSumStatusComponent implements OnInit {
     return this.provinceGroup.some(item => item === province)
   }
 
-  async loadData () {
+  async loadDataTotal () {
     try {
       const startDate = `${this.startDate.date.year}-${this.startDate.date.month}-${this.startDate.date.day}`
       const endDate = `${this.endDate.date.year}-${this.endDate.date.month}-${this.endDate.date.day}`
-      const res:any = await this.patientsStatusService.getPatientsStatus({
+      const res:any = await this.patientsStatusService.getPatientsStatusCategory({
+        startDate,
+        endDate
+      })
+      if (res.ok) {
+        this.chart = res.rows
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async loadDataChart () {
+    try {
+      const startDate = `${this.startDate.date.year}-${this.startDate.date.month}-${this.startDate.date.day}`
+      const endDate = `${this.endDate.date.year}-${this.endDate.date.month}-${this.endDate.date.day}`
+      const res:any = await this.patientsStatusService.getPatientsStatusEttDead({
         startDate,
         endDate
       })
       if (res.ok) {
         this.items = res.rows
         this.setLineChartPatientEachStatus()
-        console.log('patients sum ', res)
       }
     } catch (error) {
       console.error(error)
@@ -163,11 +179,10 @@ export class PatientsSumStatusComponent implements OnInit {
     const endDate = moment(`${this.endDate.date.year}-${this.endDate.date.month}-${this.endDate.date.day}`, 'YYYY-MM-DD')
     const diff = endDate.diff(startDate, 'days')
     const categories = []
-    const admit = []
-    const discharge = []
+    const ett = []
     const death = []
 
-    for (let i = 0; i < diff; i++) {
+    for (let i = 0; i <= diff; i++) {
       categories.push(moment(startDate).format('DD-MM-YYYY'))
       startDate.add(1, 'days');
     }
@@ -175,28 +190,20 @@ export class PatientsSumStatusComponent implements OnInit {
     console.log('categories ', categories)
 
     categories.forEach((categorie, i) => {
-      if (this.items.admit && this.items.admit.length) {
-        const data = this.items.admit.find(item => moment(item.date_admit).format('DD-MM-YYYY') === categorie)
-        if (data) {
-          admit.push(data.amount)
-        } else {
-          admit.push(0)
-        }
-      }
-      if (this.items.discharge && this.items.discharge.length) {
-        const data = this.items.discharge.find(item => moment(item.date_admit).format('DD-MM-YYYY') === categorie)
-        if (data) {
-          discharge.push(data.amount)
-        } else {
-          discharge.push(0)
-        }
-      }
-      if (this.items.death && this.items.death.length) {
-        const data = this.items.death.find(item => moment(item.date_admit).format('DD-MM-YYYY') === categorie)
+      if (this.items.deathCases && this.items.deathCases.length) {
+        const data = this.items.deathCases.find(item => moment(item.date_admit).format('DD-MM-YYYY') === categorie)
         if (data) {
           death.push(data.amount)
         } else {
           death.push(0)
+        }
+      }
+      if (this.items.invasionVentilatorCases && this.items.invasionVentilatorCases.length) {
+        const data = this.items.invasionVentilatorCases.find(item => moment(item.date_admit).format('DD-MM-YYYY') === categorie)
+        if (data) {
+          ett.push(data.amount)
+        } else {
+          ett.push(0)
         }
       }
     })
@@ -214,27 +221,23 @@ export class PatientsSumStatusComponent implements OnInit {
           }
       },
       xAxis: {
-        categories
+        categories: categories
       },
       legend: {
           layout: 'vertical',
           align: 'right',
           verticalAlign: 'top'
       },
-      colors: ['#0880FF', '#06F647', '#FF0000'],
+      colors: ['#0880FF', '#FF0000'],
       series: [{
-          name: 'Admit',
-          data: admit
+          name: 'ETT',
+          data: ett
       }, {
-          name: 'Discharge',
-          data: discharge
-      }, {
-          name: 'Death',
+          name: 'Dead',
           data: death
       }]
     }
 
     this.highcharts = Highcharts
   }
-
 }
