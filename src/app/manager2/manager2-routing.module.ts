@@ -58,8 +58,8 @@ import { ReportPatientsHospitalComponent } from './report-news/report-patients-h
 import { ReportRespiratorComponent } from './report-news/report-respirator/report-respirator.component';
 import { BedsTypeComponent } from './dashboard-national/dashboards/beds-type/beds-type.component';
 import { PatientsCaseComponent } from './dashboard-national/dashboards/patients-case/patients-case.component';
-import { PatientsSumStatusComponent } from './dashboard-national/dashboards/patients-sum-status/patients-sum-status.component';
 import { PatientsStatusPart2Component } from './dashboard-national/dashboards/patients-status-part2/patients-status-part2.component';
+import { PatientsStatusPart1Component } from './dashboard-national/dashboards/patients-status-part1/patients-status-part1.component';
 
 const routes: Routes = [
   {
@@ -149,7 +149,7 @@ const routes: Routes = [
         children: [
           { path: 'beds-type', component: BedsTypeComponent },
           { path: 'patients-case', component: PatientsCaseComponent },
-          { path: 'patients-sum-status', component: PatientsSumStatusComponent },
+          { path: 'patients-status-part1', component: PatientsStatusPart1Component },
           { path: 'patients-status-part2', component: PatientsStatusPart2Component }
         ]
       }

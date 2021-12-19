@@ -1,8 +1,5 @@
-<div style="margin-bottom: 24px;">
-  <h3> ผู้ป่วยแต่ละสถานะ (ส่วนที่ 2) </h3>
-</div>
-
-<div style="display: flex; margin-bottom: 8px;">
+<div style="display: flex; margin-bottom: 24px;">
+  <h3 style="margin-right: 24px;"> ผู้ป่วยแต่ละสถานะ (ส่วนที่ 2) </h3>
   <div style="width: 160px; margin-right: 16px;">
     <label> วันที่เริ่ม </label>
     <my-date-picker-th
@@ -21,19 +18,41 @@
         (dateChanged)="selectEndDate($event)">
     </my-date-picker-th>
   </div>
+</div>
 
+<div style="display: flex; margin-bottom: 8px;">
   <div style="width: 160px; margin-right: 16px;">
       <label> หน่วยงาน </label>
       <div class="clr-select-wrapper" style="width: 100%;">
           <select
-              [(ngModel)]="ministryCode"
-              name="ministryPatientsStatusPart2"
+              [(ngModel)]="sector"
+              name="sectorPatientsStatusPart2"
               style="width: 100%;"
               class="clr-select"
-              (change)="selectMinistry()">
-              <option value=""> เลือกหน่วยงาน </option>
-              <option *ngFor="let ministry of listMinistry; let i = index" [value]="ministry.code">
-                  {{ ministry.name }}
+              (change)="selectSector()">
+              <option value=""> ทุกหน่วยงาน </option>
+              <option value="GOVERNMENT">
+                ภาครัฐ
+              </option>
+              <option value="PRIVATE">
+                เอกชน
+              </option>
+          </select>
+      </div>
+  </div>
+
+  <div style="width: 160px; margin-right: 16px;">
+      <label> หน่วยงานย่อย </label>
+      <div class="clr-select-wrapper" style="width: 100%;">
+          <select
+              [(ngModel)]="subMinistryCode"
+              name="subMinistryPatientsStatusPart2"
+              style="width: 100%;"
+              class="clr-select"
+              (change)="selectSubMinistry()">
+              <option value=""> ทุกหน่วยงานย่อย </option>
+              <option *ngFor="let subMinistry of listSubMinistry; let i = index" [value]="subMinistry.code">
+                  {{ subMinistry.name }}
               </option>
           </select>
       </div>
@@ -44,11 +63,11 @@
       <div class="clr-select-wrapper" style="width: 100%;">
           <select
               [(ngModel)]="zone"
-              name="zonePatientsStatusPart2Dashboard"
+              name="zonePatientsStatusPart2"
               style="width: 100%;"
               class="clr-select"
               (change)="selectZone()">
-              <option value="">เลือกเขต</option>
+              <option value=""> ทุกเขตสุขภาพ </option>
               <option *ngFor="let zone of zones; let i = index" [value]="zone.value">
                   {{ zone.name }}
               </option>
@@ -60,48 +79,47 @@
       <div class="clr-select-wrapper" style="width: 100%;">
           <select
               [(ngModel)]="displayProvince"
-              name="provincePatientsStatusPart2Dashboard"
+              name="provincePatientsStatusPart2"
               style="width: 100%;"
               class="clr-select"
               readonly="true"
               (click)="setSelectMultiProvince()">
-              <option style="display: none;" value=""> เลือกจังหวัด </option>
+              <option style="display: none;" value=""> ทุกจังหวัด </option>
               <option
-                  [selected]="provinceGroup.length"
+                  [selected]="selectedProvince.length"
                   style="display: none;">
-                  <div *ngIf="provinceGroup.length === 1">
-                      {{ provinceGroup[0] }}
+                  <div *ngIf="selectedProvince.length === 1">
+                      {{ selectedProvince[0].name_th }}
                   </div>
-                  <div *ngIf="provinceGroup.length > 1">
-                      {{ provinceGroup[0] + ' + ' + ( provinceGroup.length - 1 ) }}
+                  <div *ngIf="selectedProvince.length > 1">
+                      {{ selectedProvince[0].name_th + ' + ' + ( selectedProvince.length - 1 ) }}
                   </div>
               </option>
           </select>
           <div
               *ngIf="isSelectProvince"
-              class="patients-status-part2">
+              class="patients-status-part2__select-menu">
               <clr-checkbox-wrapper *ngFor="let province of provinces; let i = index">
                   <input
-                      [value]="province"
                       [checked]="checkProvince(province)"
                       type="checkbox"
                       clrCheckbox
-                      (change)="selectProvince($event.target.value)" />
-                  <label> {{ province }} </label>
+                      (change)="selectProvince(province)" />
+                  <label> {{ province.name_th }} </label>
               </clr-checkbox-wrapper>
           </div>
       </div>
   </div>
-  <div style="width: 160px;">
+  <div style="min-width: 160px; max-width: 200px;">
     <label> ประเภทเตียง </label>
     <div class="clr-select-wrapper" style="width: 100%;">
         <select
-            [(ngModel)]="ministryCode"
+            [(ngModel)]="bedTypeId"
             name="bedTypePatientsDailyStatus"
             style="width: 100%;"
             class="clr-select"
             (change)="selectBedType()">
-            <option value=""> เลือกประเภทเตียง </option>
+            <option value=""> ทุกประเภทเตียง </option>
             <option *ngFor="let bedType of bedTypes; let i = index" [value]="bedType.id">
                 {{ bedType.name }}
             </option>

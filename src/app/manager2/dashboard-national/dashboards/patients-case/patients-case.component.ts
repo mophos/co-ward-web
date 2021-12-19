@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { IMyOptions } from 'mydatepicker-th';
 import * as Highcharts from 'highcharts';
 import moment from 'moment';
-import provinceJson from '../../../../../assets/provinces.json'
 import { PatientsCaseService } from 'src/app/manager2/services-new-dashboard/patients-case.service';
+import { FilterService } from 'src/app/manager2/services-new-dashboard/filter.service';
 
 @Component({
   selector: 'app-patients-case',
@@ -36,13 +36,30 @@ export class PatientsCaseComponent implements OnInit {
     { name: 'เขต 12', value: '12' },
     { name: 'เขต 13', value: '13' }
   ]
-  provinceGroup = []
+  selectedProvince = []
   displayProvince = ''
-  provinces = provinceJson.data
+  provinces = []
   isSelectProvince = false
-  ministryCode = ''
-  listMinistry:any = []
+  sector = ''
+  subMinistryCode = ''
+  bedTypeId = ''
+  // listMinistry:any = []
   listSubMinistry: any = []
+  bedTypes:any = [
+    { id: 1, name: 'AIIR' },
+    { id: 2, name: 'Modified AIIR' },
+    { id: 3, name: 'Isolate' },
+    { id: 4, name: 'Cohort' },
+    { id: 5, name: 'Hospitel' },
+    { id: 7, name: 'Cohort ICU' },
+    { id: 8, name: 'Home Isolation' },
+    { id: 9, name: 'Community Isolation' },
+    { id: 10, name: 'ระดับ 0 Home Isolation (stepdown)' },
+    { id: 11, name: 'ระดับ 1 ไม่ใช้ Oxygen' },
+    { id: 12, name: 'ระดับ 2.1 Oxygen low flow' },
+    { id: 13, name: 'ระดับ 2.2 Oxygen high flow' },
+    { id: 14, name: 'ระดับ 3 ใส่ท่อและเครื่องช่วยหายใจ' },
+  ]
 
   // startDate:any = {
   //   date: {
@@ -78,11 +95,48 @@ export class PatientsCaseComponent implements OnInit {
   lineChartOptions = {}
 
   constructor(
-    private patientsCaseService: PatientsCaseService
+    private patientsCaseService: PatientsCaseService,
+    private filterService: FilterService
   ) { }
 
   ngOnInit() {
     this.loadData()
+    this.getProvince()
+    // this.getMinistry()
+    this.getSubMinistry()
+  }
+
+  // async getMinistry () {
+  //   try {
+  //     const res:any = await this.filter.getMinistryList()
+  //     if (res.ok) {
+  //       this.listMinistry = res.rows
+  //     }
+  //   } catch (error) {
+  //     console.error(error)
+  //   }
+  // }
+
+  async getSubMinistry () {
+    try {
+      const res:any = await this.filterService.getSubMinistryList()
+      if (res.ok) {
+        this.listSubMinistry = res.rows
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async getProvince () {
+    try {
+      const res:any = await this.filterService.getProvince()
+      if (res.ok) {
+        this.provinces = res.rows
+      }
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   formatNumber (value = 0) {
@@ -96,36 +150,44 @@ export class PatientsCaseComponent implements OnInit {
     this.startDate = {
       date: value.date
     }
-    // TODO : RE GET DATA
-    // this.loadData()
+    this.items = []
+    this.loadData()
   }
 
   selectEndDate (value) {
     this.endDate = {
       date: value.date
     }
-    // TODO : RE GET DATA
-    // this.loadData()
+    this.items = []
+    this.loadData()
   }
 
-  selectMinistry () {
-    // TODO : CHANGE MINISTRY AND GET DATA
+  selectSector () {
+    this.items = []
+    this.loadData()
+  }
+
+  selectSubMinistry () {
+    this.items = []
+    this.loadData()
   }
 
   selectZone () {
-    // TODO : CHANGE ZONE AND GET DATA
+    this.items = []
+    this.loadData()
   }
 
   selectBedType () {
-    // TODO : CHANGE BED TYPE AND GET DATA
+    this.items = []
+    this.loadData()
   }
 
   selectProvince (value) {
-    const index = this.provinceGroup.findIndex(item => item === value)
+    const index = this.selectedProvince.findIndex(item => item.code === value.code)
     if (index > -1) {
-      this.provinceGroup.splice(index, 1)
+      this.selectedProvince.splice(index, 1)
     } else {
-      this.provinceGroup.push(value)
+      this.selectedProvince.push(value)
     }
     this.items = []
     this.loadData()
@@ -136,7 +198,7 @@ export class PatientsCaseComponent implements OnInit {
   }
 
   checkProvince (province) {
-    return this.provinceGroup.some(item => item === province)
+    return this.selectedProvince.some(item => item.code === province.code)
   }
 
   async loadData () {
@@ -145,7 +207,12 @@ export class PatientsCaseComponent implements OnInit {
       const endDate = `${this.endDate.date.year}-${this.endDate.date.month}-${this.endDate.date.day}`
       const res:any = await this.patientsCaseService.getPatientsCase({
         startDate,
-        endDate
+        endDate,
+        zone: this.zone,
+        province: this.selectedProvince,
+        sector: this.sector,
+        subMinistry: this.subMinistryCode,
+        bedType: this.bedTypeId
       })
       if (res.ok) {
         this.items = res.rows

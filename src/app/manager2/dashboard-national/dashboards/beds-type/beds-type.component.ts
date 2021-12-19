@@ -4,6 +4,7 @@ import provinceJson from '../../../../../assets/provinces.json'
 import * as Highcharts from 'highcharts';
 import moment from 'moment';
 import { BedsTypeService } from 'src/app/manager2/services-new-dashboard/beds-type.service';
+import { FilterService } from 'src/app/manager2/services-new-dashboard/filter.service';
 
 @Component({
   selector: 'app-beds-type',
@@ -38,13 +39,21 @@ export class BedsTypeComponent implements OnInit {
     { name: 'เขต 12', value: '12' },
     { name: 'เขต 13', value: '13' }
   ]
-  provinceGroup = []
+  selectedProvince = []
   displayProvince = ''
-  provinces = provinceJson.data
+  provinces = []
   isSelectProvince = false
-  ministryCode = ''
-  listMinistry:any = []
+  sector = ''
+  subMinistryCode = ''
+  bedTypeId = ''
+  // listMinistry:any = []
   listSubMinistry: any = []
+  bedTypes:any = [
+    { id: 11, name: 'ระดับ 1 ไม่ใช้ Oxygen' },
+    { id: 12, name: 'ระดับ 2.1 Oxygen low flow' },
+    { id: 13, name: 'ระดับ 2.2 Oxygen high flow' },
+    { id: 14, name: 'ระดับ 3 ใส่ท่อและเครื่องช่วยหายใจ' },
+  ]
 
   // startDate:any = {
   //   date: {
@@ -81,15 +90,47 @@ export class BedsTypeComponent implements OnInit {
   stackChartOptions = {}
 
   constructor(
-    private bedsTypeService: BedsTypeService
+    private bedsTypeService: BedsTypeService,
+    private filterService: FilterService
   ) { }
 
   ngOnInit() {
-    // this.getMinistryList()
-    // this.getSubMinistryList()
     this.loadData()
-    // this.setPieChartBed()
-    // this.setStackChartBed()
+    this.getSubMinistry()
+    this.getProvince()
+  }
+
+  async getSubMinistry () {
+    try {
+      const res:any = await this.filterService.getSubMinistryList()
+      if (res.ok) {
+        this.listSubMinistry = res.rows
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async getProvince () {
+    try {
+      const res:any = await this.filterService.getProvince()
+      if (res.ok) {
+        this.provinces = res.rows
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  filterItems (id) {
+    if (this.items.results.length) {
+      return this.items.results.find(item => item.bed_id === id) || []
+    }
+    return []
+  }
+
+  checkNaN (value) {
+    return isNaN(value) ? 0 : this.formatNumber(value)
   }
 
   formatPercent (total, value) {
@@ -104,42 +145,56 @@ export class BedsTypeComponent implements OnInit {
     })
   }
 
+  clearData () {
+    this.items = {
+      results: []
+    }
+  }
+
   selectStartDate (value) {
     this.startDate = {
       date: value.date
     }
-    // TODO : RE GET DATA
-    // this.loadData()
+    this.clearData()
+    this.loadData()
   }
 
   selectEndDate (value) {
     this.endDate = {
       date: value.date
     }
-    // TODO : RE GET DATA
-    // this.loadData()
+    this.clearData()
+    this.loadData()
   }
 
-  selectMinistry () {
-    // TODO : CHANGE MINISTRY AND GET DATA
+  selectSector () {
+    this.clearData()
+    this.loadData()
+  }
+
+  selectSubMinistry () {
+    this.clearData()
+    this.loadData()
   }
 
   selectZone () {
-    // TODO : CHANGE ZONE AND GET DATA
+    this.clearData()
+    this.loadData()
   }
 
   selectBedType () {
-    // TODO : CHANGE BED TYPE AND GET DATA
+    this.clearData()
+    this.loadData()
   }
 
   selectProvince (value) {
-    const index = this.provinceGroup.findIndex(item => item === value)
+    const index = this.selectedProvince.findIndex(item => item.code === value.code)
     if (index > -1) {
-      this.provinceGroup.splice(index, 1)
+      this.selectedProvince.splice(index, 1)
     } else {
-      this.provinceGroup.push(value)
+      this.selectedProvince.push(value)
     }
-    this.items = []
+    this.clearData()
     this.loadData()
   }
 
@@ -148,7 +203,7 @@ export class BedsTypeComponent implements OnInit {
   }
 
   checkProvince (province) {
-    return this.provinceGroup.some(item => item === province)
+    return this.selectedProvince.some(item => item.code === province.code)
   }
 
   async loadData () {
@@ -157,7 +212,12 @@ export class BedsTypeComponent implements OnInit {
       const endDate = `${this.endDate.date.year}-${this.endDate.date.month}-${this.endDate.date.day}`
       const res:any = await this.bedsTypeService.getBedType({
         startDate,
-        endDate
+        endDate,
+        zone: this.zone,
+        province: this.selectedProvince,
+        sector: this.sector,
+        subMinistry: this.subMinistryCode,
+        bedType: this.bedTypeId
       })
       if (res.ok) {
         this.items = res.rows

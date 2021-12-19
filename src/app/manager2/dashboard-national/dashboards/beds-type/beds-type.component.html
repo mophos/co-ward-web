@@ -1,8 +1,5 @@
-<div style="margin-bottom: 24px;">
-  <h3> การใช้งานเตียงแต่ละประเภท </h3>
-</div>
-
-<div style="display: flex; margin-bottom: 8px;">
+<div style="display: flex; margin-bottom: 24px;">
+  <h3 style="margin-right: 24px;"> การใช้งานเตียงแต่ละประเภท </h3>
   <div style="width: 160px; margin-right: 16px;">
     <label> วันที่เริ่ม </label>
     <my-date-picker-th
@@ -21,19 +18,41 @@
         (dateChanged)="selectEndDate($event)">
     </my-date-picker-th>
   </div>
+</div>
 
+<div style="display: flex; margin-bottom: 8px;">
   <div style="width: 160px; margin-right: 16px;">
       <label> หน่วยงาน </label>
       <div class="clr-select-wrapper" style="width: 100%;">
           <select
-              [(ngModel)]="ministryCode"
-              name="ministryBedsType"
+              [(ngModel)]="sector"
+              name="sectorBedsType"
               style="width: 100%;"
               class="clr-select"
-              (change)="selectMinistry()">
-              <option value=""> เลือกหน่วยงาน </option>
-              <option *ngFor="let ministry of listMinistry; let i = index" [value]="ministry.code">
-                  {{ ministry.name }}
+              (change)="selectSector()">
+              <option value=""> ทุกหน่วยงาน </option>
+              <option value="GOVERNMENT">
+                ภาครัฐ
+              </option>
+              <option value="PRIVATE">
+                เอกชน
+              </option>
+          </select>
+      </div>
+  </div>
+
+  <div style="width: 160px; margin-right: 16px;">
+      <label> หน่วยงานย่อย </label>
+      <div class="clr-select-wrapper" style="width: 100%;">
+          <select
+              [(ngModel)]="subMinistryCode"
+              name="subMinistryBedType"
+              style="width: 100%;"
+              class="clr-select"
+              (change)="selectSubMinistry()">
+              <option value=""> ทุกหน่วยงานย่อย </option>
+              <option *ngFor="let subMinistry of listSubMinistry; let i = index" [value]="subMinistry.code">
+                  {{ subMinistry.name }}
               </option>
           </select>
       </div>
@@ -44,36 +63,37 @@
       <div class="clr-select-wrapper" style="width: 100%;">
           <select
               [(ngModel)]="zone"
-              name="zoneBedsTypeDashboard"
+              name="zoneBedsType"
               style="width: 100%;"
               class="clr-select"
               (change)="selectZone()">
-              <option value="">เลือกเขต</option>
+              <option value=""> ทุกเขตสุขภาพ </option>
               <option *ngFor="let zone of zones; let i = index" [value]="zone.value">
                   {{ zone.name }}
               </option>
           </select>
       </div>
   </div>
+
   <div style="width: 160px; margin-right: 16px;">
       <label> จังหวัด </label>
       <div class="clr-select-wrapper" style="width: 100%;">
           <select
               [(ngModel)]="displayProvince"
-              name="provinceBedsTypeDashboard"
+              name="provinceBedType"
               style="width: 100%;"
               class="clr-select"
               readonly="true"
               (click)="setSelectMultiProvince()">
-              <option style="display: none;" value=""> เลือกจังหวัด </option>
+              <option style="display: none;" value=""> ทุกจังหวัด </option>
               <option
-                  [selected]="provinceGroup.length"
+                  [selected]="selectedProvince.length"
                   style="display: none;">
-                  <div *ngIf="provinceGroup.length === 1">
-                      {{ provinceGroup[0] }}
+                  <div *ngIf="selectedProvince.length === 1">
+                      {{ selectedProvince[0].name_th }}
                   </div>
-                  <div *ngIf="provinceGroup.length > 1">
-                      {{ provinceGroup[0] + ' + ' + ( provinceGroup.length - 1 ) }}
+                  <div *ngIf="selectedProvince.length > 1">
+                      {{ selectedProvince[0].name_th + ' + ' + ( selectedProvince.length - 1 ) }}
                   </div>
               </option>
           </select>
@@ -82,26 +102,25 @@
               class="beds-type__select-menu">
               <clr-checkbox-wrapper *ngFor="let province of provinces; let i = index">
                   <input
-                      [value]="province"
                       [checked]="checkProvince(province)"
                       type="checkbox"
                       clrCheckbox
-                      (change)="selectProvince($event.target.value)" />
-                  <label> {{ province }} </label>
+                      (change)="selectProvince(province)" />
+                  <label> {{ province.name_th }} </label>
               </clr-checkbox-wrapper>
           </div>
       </div>
   </div>
-  <div style="width: 160px;">
+  <div style="min-width: 160px; max-width: 200px;">
     <label> ประเภทเตียง </label>
-    <div class="clr-select-wrapper" style="width: 100%;">
+    <div class="clr-select-wrapper">
         <select
-            [(ngModel)]="ministryCode"
+            [(ngModel)]="bedTypeId"
             name="bedTypeBedsType"
             style="width: 100%;"
             class="clr-select"
             (change)="selectBedType()">
-            <option value=""> เลือกประเภทเตียง </option>
+            <option value=""> ทุกประเภทเตียง </option>
             <option *ngFor="let bedType of bedTypes; let i = index" [value]="bedType.id">
                 {{ bedType.name }}
             </option>
@@ -149,7 +168,7 @@
         <div
           style="text-align: center;"
           class="card-text">
-          {{ formatNumber(items.total_covid_qty - items.total_used_qty) }}
+          {{ checkNaN(items.total_covid_qty - items.total_used_qty) }}
         </div>
     </div>
   </div>
@@ -190,62 +209,72 @@
       style="display: flex; justify-content: space-around; border-bottom: 1px solid black;">
       <div style="width: 60px; height: 300px;">
         <div
-          [style.height]="(100 - formatPercent(items.results[3].covid_qty, items.results[3].used_qty)).toFixed(2) + '%'"
+          *ngIf="filterItems.length"
+          [style.height]="(100 - formatPercent(filterItems(14).covid_qty, filterItems(14).used_qty)).toFixed(2) + '%'"
           style="width: 100%; height: 55%; background-color: #BFBFBF;"
           class="beds-type__chart-column">
-          {{ (items.results[3].covid_qty - items.results[3].used_qty) || '' }}
+          {{ (filterItems(14).covid_qty - filterItems(14).used_qty) || '' }}
         </div>
         <div
-        [style.height]="formatPercent(items.results[3].covid_qty, items.results[3].used_qty).toFixed(2) + '%'"
+          *ngIf="filterItems.length"
+          [style.height]="formatPercent(filterItems(14).covid_qty, filterItems(14).used_qty).toFixed(2) + '%'"
           style="width: 100%; height: 45%; background-color: #FF0000;"
           class="beds-type__chart-column">
-          {{ items.results[3].used_qty || '' }}
+          {{ filterItems(14).used_qty || '' }}
         </div>
       </div>
       <div style="width: 60px; height: 300px;">
         <div
-          [style.height]="(100 - formatPercent(items.results[2].covid_qty, items.results[2].used_qty)).toFixed(2) + '%'"
+          *ngIf="filterItems.length"
+          [style.height]="(100 - formatPercent(filterItems(13).covid_qty, filterItems(13).used_qty)).toFixed(2) + '%'"
           style="width: 100%; background-color: #BFBFBF;"
           class="beds-type__chart-column">
-          {{ (items.results[2].covid_qty - items.results[2].used_qty) || '' }}
+          {{ (filterItems(13).covid_qty - filterItems(13).used_qty) || '' }}
         </div>
         <div
-          [style.height]="formatPercent(items.results[2].covid_qty, items.results[2].used_qty).toFixed(2) + '%'"
+          *ngIf="filterItems.length"
+          [style.height]="formatPercent(filterItems(13).covid_qty, filterItems(13).used_qty).toFixed(2) + '%'"
           style="width: 100%; height: 0%; background-color: #EC7D31;"
           class="beds-type__chart-column">
-          {{ items.results[2].used_qty || '' }}
+          {{ filterItems(13).used_qty || '' }}
         </div>
       </div>
       <div style="width: 60px; height: 300px;">
         <div
-          [style.height]="(100 - formatPercent(items.results[1].covid_qty, items.results[1].used_qty)).toFixed(2) + '%'"
+          *ngIf="filterItems.length"
+          [style.height]="(100 - formatPercent(filterItems(12).covid_qty, filterItems(12).used_qty)).toFixed(2) + '%'"
           style="width: 100%; background-color: #BFBFBF;"
           class="beds-type__chart-column">
-          {{ (items.results[1].covid_qty - items.results[1].used_qty) || '' }}
+          {{ (filterItems(12).covid_qty - filterItems(12).used_qty) || '' }}
         </div>
         <div
-          [style.height]="formatPercent(items.results[1].covid_qty, items.results[1].used_qty).toFixed(2) + '%'"
+          *ngIf="filterItems.length"
+          [style.height]="formatPercent(filterItems(12).covid_qty, filterItems(12).used_qty).toFixed(2) + '%'"
           style="width: 100%; background-color: #FFFF8F;"
           class="beds-type__chart-column">
-          {{ items.results[1].used_qty || '' }}
+          {{ filterItems(12).used_qty || '' }}
         </div>
       </div>
       <div style="width: 60px; height: 300px;">
         <div
-          [style.height]="(100 - formatPercent(items.results[0].covid_qty, items.results[0].used_qty)).toFixed(2) + '%'"
+          *ngIf="filterItems.length"
+          [style.height]="(100 - formatPercent(filterItems(11).covid_qty, filterItems(11).used_qty)).toFixed(2) + '%'"
           style="width: 100%; background-color: #BFBFBF;"
           class="beds-type__chart-column">
-          {{ (items.results[0].covid_qty - items.results[0].used_qty) || '' }}
+          {{ (filterItems(11).covid_qty - filterItems(11).used_qty) || '' }}
         </div>
         <div
-          [style.height]="formatPercent(items.results[0].covid_qty, items.results[0].used_qty).toFixed(2) + '%'"
+          *ngIf="filterItems.length"
+          [style.height]="formatPercent(filterItems(11).covid_qty, filterItems(11).used_qty).toFixed(2) + '%'"
           style="width: 100%; background-color: #70AC47;"
           class="beds-type__chart-column">
-          {{ items.results[0].used_qty || '' }}
+          {{ filterItems(11).used_qty || '' }}
         </div>
       </div>
     </div>
-    <div style="display: flex; justify-content: center; margin-top: 24px;">
+    <div
+      *ngIf="items.results.length"
+      style="display: flex; justify-content: center; margin-top: 24px;">
       <div style="display: flex; align-items: center; margin-right: 24px;">
         <div style="background-color: #FF0000;" class="beds-type__chart-title-circle"></div>
         <div style="font-weight: 700;"> ระดับ 3 </div>
