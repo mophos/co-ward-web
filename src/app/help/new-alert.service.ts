@@ -33,4 +33,19 @@ export class NewAlertService {
     })
   }
 
+  alert (options) {
+    const option: any = {
+      title: `<p style="font-size: 28px; font-weight: 600; line-height: 1.2;"> ${options.title} </p>`,
+      html: `<p style="font-size: 24px; line-height: 1.2;"> ${options.text} </p>`,
+      icon: options.type,
+      showCancelButton: false,
+      confirmButtonText: '<div style="font-size: 20px;"> ตกลง </div>',
+      confirmButtonColor: '#3085d6',
+      // cancelButtonText: '<div style="font-size: 20px;"> ยกเลิก </div>',
+      // cancelButtonColor: '#d33',
+      width: 600,
+    }
+    Swal.fire(option)
+  }
+
 }
