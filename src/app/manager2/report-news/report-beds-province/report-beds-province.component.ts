@@ -57,7 +57,7 @@ export class ReportBedsProvinceComponent implements OnInit {
 
   constructor(
     private bedsProvinceService: BedsProvinceService,
-    private cal: CalculateService
+    public cal: CalculateService
   ) { }
 
   ngOnInit() {

@@ -8,27 +8,27 @@ import { ResultLabService } from '../services/result-lab.service'
 })
 export class ResultLabComponent implements OnInit {
 
-  items: any
-
+  items: any;
+  code: any;
   constructor(
     private resultLabService: ResultLabService,
   ) { }
 
   ngOnInit() {
-    this.loadData()
+    this.loadData();
   }
 
-  async loadData () {
+  async loadData() {
     try {
       // this.loading.show()
-      const res = await this.resultLabService.getResultLab()
+      const res = await this.resultLabService.getResultLab();
       if (res) {
-        this.items = res
+        this.items = res;
         // this.loading.hide()
         // this.items = res
       }
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   }
 
