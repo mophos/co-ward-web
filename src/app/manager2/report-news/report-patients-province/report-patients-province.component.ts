@@ -57,7 +57,7 @@ export class ReportPatientsProvinceComponent implements OnInit {
 
   constructor(
     private patientsProvinceService: PatientsProvinceService,
-    private cal: CalculateService
+    public cal: CalculateService
   ) { }
 
   ngOnInit() {
