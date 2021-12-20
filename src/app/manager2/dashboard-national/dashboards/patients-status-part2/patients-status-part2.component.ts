@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyOptions } from 'mydatepicker-th';
 import * as Highcharts from 'highcharts';
 import moment from 'moment';
@@ -92,8 +92,9 @@ export class PatientsStatusPart2Component implements OnInit {
   }
 
   highcharts = null
-
   lineChartOptions = {}
+
+  @ViewChild('loading', { static: true }) loading: any;
 
   constructor(
     private patientsStatusService: PatientsStatusService,
@@ -101,8 +102,9 @@ export class PatientsStatusPart2Component implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadDataTotal()
-    this.loadDataChart()
+    this.loadAllData()
+    // this.loadDataTotal()
+    // this.loadDataChart()
     this.getSubMinistry()
     this.getProvince()
   }
@@ -146,8 +148,7 @@ export class PatientsStatusPart2Component implements OnInit {
       date: value.date
     }
     this.clearData()
-    this.loadDataTotal()
-    this.loadDataChart()
+    this.loadAllData()
   }
 
   selectEndDate (value) {
@@ -155,32 +156,27 @@ export class PatientsStatusPart2Component implements OnInit {
       date: value.date
     }
     this.clearData()
-    this.loadDataTotal()
-    this.loadDataChart()
+    this.loadAllData()
   }
 
   selectSector () {
     this.clearData()
-    this.loadDataTotal()
-    this.loadDataChart()
+    this.loadAllData()
   }
 
   selectSubMinistry () {
     this.clearData()
-    this.loadDataTotal()
-    this.loadDataChart()
+    this.loadAllData()
   }
 
   selectZone () {
     this.clearData()
-    this.loadDataTotal()
-    this.loadDataChart()
+    this.loadAllData()
   }
 
   selectBedType () {
     this.clearData()
-    this.loadDataTotal()
-    this.loadDataChart()
+    this.loadAllData()
   }
 
   selectProvince (value) {
@@ -191,8 +187,7 @@ export class PatientsStatusPart2Component implements OnInit {
       this.selectedProvince.push(value)
     }
     this.clearData()
-    this.loadDataTotal()
-    this.loadDataChart()
+    this.loadAllData()
   }
 
   setSelectMultiProvince () {
@@ -201,6 +196,22 @@ export class PatientsStatusPart2Component implements OnInit {
 
   checkProvince (province) {
     return this.selectedProvince.some(item => item.code === province.code)
+  }
+
+  async loadAllData () {
+    try {
+      this.loading.show()
+      const requests = []
+      requests.push(this.loadDataTotal())
+      requests.push(this.loadDataChart())
+      const res = await Promise.all(requests)
+      if (res) {
+        this.loading.hide()
+      }
+    } catch (error) {
+      console.log(error)
+      this.loading.hide()
+    }
   }
 
   async loadDataTotal () {

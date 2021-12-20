@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyOptions } from 'mydatepicker-th';
-import provinceJson from '../../../../../assets/provinces.json'
 import * as Highcharts from 'highcharts';
 import moment from 'moment';
 import { BedsTypeService } from 'src/app/manager2/services-new-dashboard/beds-type.service';
@@ -85,9 +84,10 @@ export class BedsTypeComponent implements OnInit {
   }
 
   highcharts = null
-
   pieChartOptions = {}
   stackChartOptions = {}
+
+  @ViewChild('loading', { static: true }) loading: any;
 
   constructor(
     private bedsTypeService: BedsTypeService,
@@ -208,6 +208,7 @@ export class BedsTypeComponent implements OnInit {
 
   async loadData () {
     try {
+      this.loading.show()
       const startDate = `${this.startDate.date.year}-${this.startDate.date.month}-${this.startDate.date.day}`
       const endDate = `${this.endDate.date.year}-${this.endDate.date.month}-${this.endDate.date.day}`
       const res:any = await this.bedsTypeService.getBedType({
@@ -222,10 +223,11 @@ export class BedsTypeComponent implements OnInit {
       if (res.ok) {
         this.items = res.rows
         this.setPieChartBed()
-        console.log('bed type ', res.rows)
+        this.loading.hide()
       }
     } catch (error) {
       console.error(error)
+      this.loading.hide()
     }
   }
 
@@ -275,12 +277,6 @@ export class BedsTypeComponent implements OnInit {
         }
       ]
     }
-
     this.highcharts = Highcharts;
   }
-
-  setStackChartBed () {
-
-  }
-
 }

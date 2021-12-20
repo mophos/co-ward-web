@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyOptions } from 'mydatepicker-th';
 import * as Highcharts from 'highcharts';
 import moment from 'moment';
@@ -91,8 +91,9 @@ export class PatientsStatusPart1Component implements OnInit {
   }
 
   highcharts = null
-
   lineChartOptions = {}
+
+  @ViewChild('loading', { static: true }) loading: any;
 
   constructor(
     private patientsStatusService: PatientsStatusService,
@@ -191,6 +192,7 @@ export class PatientsStatusPart1Component implements OnInit {
 
   async loadData () {
     try {
+      this.loading.show()
       const startDate = `${this.startDate.date.year}-${this.startDate.date.month}-${this.startDate.date.day}`
       const endDate = `${this.endDate.date.year}-${this.endDate.date.month}-${this.endDate.date.day}`
       const res:any = await this.patientsStatusService.getPatientsStatus({
@@ -205,10 +207,11 @@ export class PatientsStatusPart1Component implements OnInit {
       if (res.ok) {
         this.items = res.rows
         this.setLineChartPatientEachStatus()
-        console.log('patients sum ', res)
+        this.loading.hide()
       }
     } catch (error) {
       console.error(error)
+      this.loading.hide()
     }
   }
 
@@ -225,8 +228,6 @@ export class PatientsStatusPart1Component implements OnInit {
       categories.push(moment(startDate).format('DD-MM-YYYY'))
       startDate.add(1, 'days');
     }
-
-    console.log('categories ', categories)
 
     categories.forEach((categorie, i) => {
       if (this.items.admit && this.items.admit.length) {
@@ -287,8 +288,6 @@ export class PatientsStatusPart1Component implements OnInit {
           data: death
       }]
     }
-
     this.highcharts = Highcharts
   }
-
 }
