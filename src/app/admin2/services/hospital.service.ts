@@ -57,4 +57,9 @@ export class HospitalService {
     const url = `${this.url}/v1/admin/supplies/check-supplie`;
     return await this.http.get(url).toPromise();
   }
+
+  getHeadHospital (code) {
+    const url = `${this.url}/v1/admin/hospital/${code}/hospcode`;
+    return this.http.get(url).toPromise();
+  }
 }

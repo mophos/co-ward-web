@@ -17,7 +17,6 @@ export class NewAlertService {
       title: `<p style="font-size: 28px; font-weight: 600;"> ${title} </p>`,
       html: `<p style="font-size: 24px;"> ${text} </p>`,
       icon: 'warning',
-      type: 'warning',
       showCancelButton: true,
       confirmButtonText: '<div style="font-size: 20px;"> ตกลง </div>',
       confirmButtonColor: '#3085d6',

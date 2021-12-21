@@ -334,10 +334,18 @@ export class ManageHospitalComponent implements OnInit {
     this.hospBed = l.bed_spd;
 
     //new
+    try {
+      const res:any = await this.hospitalService.getHeadHospital(l.head_hospcode)
+      if (res.ok) {
+        this.headHospname = res.rows[0].hospname
+      }
+    } catch (error) {
+      console.error(error)
+    }
+
     this.hospType = l.hospital_type
     this.contact_name = l.contact_name
     this.headHospcode = l.head_hospcode
-    this.headHospname = l.head_hospname
 
     this.setValue();
   }
