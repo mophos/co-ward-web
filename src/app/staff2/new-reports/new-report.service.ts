@@ -19,22 +19,22 @@ export class NewReportService {
   }
 
   getNewBeds (params) {
-    // const zonesQuery = params.zone ? `&zones[]=${params.zone}` : ''
-    // let provinceQuery = ''
-    // params.province.forEach(item => {
-    //   provinceQuery += `&provinces[]=${item.code}`
-    // })
     const url = `${this.url}/v1/new-staff/report-all/bed-report-by-hospital?date=${params.date}`;
     return this.http.get(url).toPromise();
   }
 
   exportExcelPatientAdmit (params) {
-    const url = `${this.url}/v1/new-manager/export/admit-case?date=${params.date}`;
+    const url = `${this.url}/v1/new-staff/export/admit-case?date=${params.date}`;
     return this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 
   exportExcelPatientAdmitSummary (params) {
-    const url = `${this.url}/v1/new-manager/export/admit-case-summary?start=${params.date}&end=${params.date}`;
+    const url = `${this.url}/v1/new-staff/export/admit-case-summary?start=${params.date}&end=${params.date}`;
+    return this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+
+  exportExcelBed2 (params) {
+    const url = `${this.url}/v1/new-staff/export/bed2?date=${params.date}`;
     return this.http.get(url, { responseType: 'blob' }).toPromise();
   }
 

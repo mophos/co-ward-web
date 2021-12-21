@@ -116,7 +116,7 @@ export class ReportPatientsAdmitConfirmComponent implements OnInit {
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
       const res:any = await this.newReportService.exportExcelPatientAdmitSummary({ date })
       if (res) {
-        this.downloadFile('รายงานผู้ป่วย Admit(สะสม)', 'xlsx', res)
+        this.downloadFile('รายงานผู้ป่วย Admit Confirm(สะสม)', 'xlsx', res)
         this.loading.hide()
       }
 
@@ -132,7 +132,7 @@ export class ReportPatientsAdmitConfirmComponent implements OnInit {
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
       const res:any = await this.newReportService.exportExcelPatientAdmit({ date })
       if (res) {
-        this.downloadFile('รายงานผู้ป่วย Admit(ทั้งหมด)', 'xlsx', res)
+        this.downloadFile('รายงานผู้ป่วย Admit Confirm(ทั้งหมด)', 'xlsx', res)
         this.loading.hide()
       }
 

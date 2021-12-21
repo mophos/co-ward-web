@@ -7,8 +7,10 @@
 <div style="display: flex; justify-content: space-between;">
   <div> </div>
   <div>
-    <button class="btn btn-primary btn-sm">
-      export
+    <button
+      class="btn btn-primary btn-sm"
+      (click)="exportExcel()">
+      export excel
     </button>
   </div>
 </div>
@@ -18,7 +20,6 @@
     <thead>
       <tr>
         <th rowspan="2" class="td-border"> โรงพยาบาล </th>
-        <th rowspan="2" class="td-border"> วันที่ตั้งค่าเตียงล่าสุด </th>
         <th colspan="3" class="td-border"> ระดับ 3 ใส่ท่อและเครื่องช่วยหายใจได้ </th>
         <th colspan="3" class="td-border"> ระดับ 2.2 Oxygen high flow </th>
         <th colspan="3" class="td-border"> ระดับ 2.1 Oxygen low flow </th>
@@ -52,7 +53,6 @@
             {{ item.hospname || '-' }}
           </div>
         </td>
-        <td class="td-border">  </td>
         <td class="td-border"> {{ checkValue(item.level3_total) }} </td>
         <td class="td-border"> {{ checkValue(item.level3_used) }} </td>
         <td class="td-border"> {{ getRemaining(item.level3_total, item.level3_used) }} </td>
@@ -101,3 +101,17 @@
     </tbody>
   </table>
 </div>
+
+<div
+    *ngIf="isLoading && !items.length"
+    style="display: flex; justify-content: center; padding: 24px;">
+    กำลังโหลดข้อมูล ...
+</div>
+
+<div
+    *ngIf="!isLoading && !items.length"
+    style="display: flex; justify-content: center; padding: 24px;">
+    ไม่พบข้อมูล
+</div>
+
+<app-loadding #loading></app-loadding>

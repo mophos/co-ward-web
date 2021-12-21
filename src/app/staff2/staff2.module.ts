@@ -76,15 +76,9 @@ import { BedHospManageComponent } from './bed-hosp-manage/bed-hosp-manage.compon
 import { ReportDcComponent } from './report-dc/report-dc.component';
 
 // new
-
-import { ResultLabComponent } from './result-lab/result-lab.component';
-import { ResultVaccineComponent } from './result-vaccine/result-vaccine.component';
 import { TimePipe } from './pipes/time.pipe';
 import { DatePipe } from './pipes/date.pipe';
 import { DateTimePipe } from './pipes/date-time.pipe';
-import { BedEachTypeChartComponent } from './bed-each-type-chart/bed-each-type-chart.component';
-import { CovidEachCaseChartComponent } from './covid-each-case-chart/covid-each-case-chart.component';
-import { CovidEachStatusChartComponent } from './covid-each-status-chart/covid-each-status-chart.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { ConnectHisComponent } from './connect-his/connect-his.component';
 import { ReportPatientsAdmitConfirmComponent } from './new-reports/report-patients-admit-confirm/report-patients-admit-confirm.component';
@@ -135,14 +129,9 @@ import { ReportBed2Component } from './new-reports/report-bed2/report-bed2.compo
     ReportMedicalSuppliesComponent,
     BedHospManageComponent,
     ReportDcComponent,
-    ResultLabComponent,
-    ResultVaccineComponent,
     TimePipe,
     DatePipe,
     DateTimePipe,
-    BedEachTypeChartComponent,
-    CovidEachCaseChartComponent,
-    CovidEachStatusChartComponent,
     ConnectHisComponent,
     ReportPatientsAdmitConfirmComponent,
     ReportPatientsAdmitPuiComponent,

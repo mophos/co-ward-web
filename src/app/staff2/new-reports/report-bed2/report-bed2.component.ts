@@ -200,7 +200,40 @@ export class ReportBed2Component implements OnInit {
       }
     } catch (error) {
       console.error(error)
+      this.isLoading = false
     }
   }
 
+  downloadFile (name, type, data: any) {
+    try {
+      const url = window.URL.createObjectURL(new Blob([data]))
+      const fileName = `${name}.${type}`
+      const a = document.createElement('a')
+      document.body.appendChild(a)
+      a.setAttribute('style', 'display: none')
+      a.href = url
+      a.download = fileName
+      a.click()
+      window.URL.revokeObjectURL(url)
+      a.remove()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async exportExcel() {
+    try {
+      this.loading.show()
+      const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
+      const res:any = await this.newReportService.exportExcelBed2({ date })
+      if (res) {
+        this.downloadFile('รายงานเตียง', 'xlsx', res)
+        this.loading.hide()
+      }
+
+    } catch (error) {
+      console.log(error)
+      this.loading.hide()
+    }
+  }
 }
