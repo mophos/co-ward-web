@@ -169,7 +169,6 @@ export class ReportBedsHospitalComponent implements OnInit {
         this.provinces = provinces
 
         this.items = items
-        console.log('beds hospital ', this.items)
         this.isLoading = false
       }
     } catch (error) {
@@ -190,7 +189,7 @@ export class ReportBedsHospitalComponent implements OnInit {
       window.URL.revokeObjectURL(url)
       a.remove()
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 
@@ -209,7 +208,7 @@ export class ReportBedsHospitalComponent implements OnInit {
       }
 
     } catch (error) {
-      console.log(error)
+      console.error(error)
       this.loading.hide()
     }
   }

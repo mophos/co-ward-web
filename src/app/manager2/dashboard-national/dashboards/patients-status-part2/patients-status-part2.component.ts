@@ -103,8 +103,6 @@ export class PatientsStatusPart2Component implements OnInit {
 
   ngOnInit() {
     this.loadAllData()
-    // this.loadDataTotal()
-    // this.loadDataChart()
     this.getSubMinistry()
     this.getProvince()
   }
@@ -209,7 +207,7 @@ export class PatientsStatusPart2Component implements OnInit {
         this.loading.hide()
       }
     } catch (error) {
-      console.log(error)
+      console.error(error)
       this.loading.hide()
     }
   }
@@ -270,8 +268,6 @@ export class PatientsStatusPart2Component implements OnInit {
       startDate.add(1, 'days');
     }
 
-    console.log('categories ', categories)
-
     categories.forEach((categorie, i) => {
       if (this.items.deathCases && this.items.deathCases.length) {
         const data = this.items.deathCases.find(item => moment(item.date_admit).format('DD-MM-YYYY') === categorie)
@@ -320,7 +316,6 @@ export class PatientsStatusPart2Component implements OnInit {
           data: death
       }]
     }
-
     this.highcharts = Highcharts
   }
 }

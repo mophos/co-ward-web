@@ -102,7 +102,6 @@ export class ReportBedsZoneComponent implements OnInit {
         })
 
         this.items = items
-        console.log('beds zone ', this.items)
         this.isLoading = false
       }
     } catch (error) {
@@ -123,7 +122,7 @@ export class ReportBedsZoneComponent implements OnInit {
       window.URL.revokeObjectURL(url)
       a.remove()
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 
@@ -136,9 +135,8 @@ export class ReportBedsZoneComponent implements OnInit {
         this.downloadFile('รายงานเตียงรายเขต', 'xlsx', res)
         this.loading.hide()
       }
-
     } catch (error) {
-      console.log(error)
+      console.error(error)
       this.loading.hide()
     }
   }

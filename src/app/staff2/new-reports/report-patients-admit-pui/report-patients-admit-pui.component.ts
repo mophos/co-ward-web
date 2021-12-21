@@ -70,7 +70,6 @@ export class ReportPatientsAdmitPuiComponent implements OnInit {
       const res:any = await this.newReportService.getPatientAdmit({ date })
       if (res.ok) {
         this.items = res.rows.results
-        console.log(res.rows.results)
         this.isLoading = false
       }
     } catch (error) {
@@ -85,7 +84,7 @@ export class ReportPatientsAdmitPuiComponent implements OnInit {
       const res:any = await this.newReportService.getPatientAdmitSummary({ date })
       if (res.ok) {
         this.summaries = res.rows
-        console.log(res.rows)
+        console.error(res.rows)
         this.isLoading = false
       }
     } catch (error) {
@@ -106,7 +105,7 @@ export class ReportPatientsAdmitPuiComponent implements OnInit {
       window.URL.revokeObjectURL(url)
       a.remove()
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 

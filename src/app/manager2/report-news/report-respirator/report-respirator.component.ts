@@ -61,7 +61,6 @@ export class ReportRespiratorComponent implements OnInit {
       const res:any = await this.respiratorService.getRespirator({ date })
       if (res.ok) {
         this.items = res.rows
-        console.log('respirator ', res.rows)
         this.isLoading = false
       }
     } catch (error) {
@@ -82,7 +81,7 @@ export class ReportRespiratorComponent implements OnInit {
       window.URL.revokeObjectURL(url)
       a.remove()
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 
@@ -97,7 +96,7 @@ export class ReportRespiratorComponent implements OnInit {
       }
 
     } catch (error) {
-      console.log(error)
+      console.error(error)
       this.loading.hide()
     }
   }

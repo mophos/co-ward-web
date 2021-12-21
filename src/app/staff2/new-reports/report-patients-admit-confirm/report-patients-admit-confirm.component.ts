@@ -70,7 +70,6 @@ export class ReportPatientsAdmitConfirmComponent implements OnInit {
       const res:any = await this.newReportService.getPatientAdmit({ date })
       if (res.ok) {
         this.items = res.rows.results
-        console.log(res.rows.results)
         this.isLoading = false
       }
     } catch (error) {
@@ -121,7 +120,7 @@ export class ReportPatientsAdmitConfirmComponent implements OnInit {
       }
 
     } catch (error) {
-      console.log(error)
+      console.error(error)
       this.loading.hide()
     }
   }
@@ -137,7 +136,7 @@ export class ReportPatientsAdmitConfirmComponent implements OnInit {
       }
 
     } catch (error) {
-      console.log(error)
+      console.error(error)
       this.loading.hide()
     }
   }

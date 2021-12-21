@@ -124,12 +124,10 @@ export class ReportPatientsProvinceComponent implements OnInit {
             this.items[12].push(item)
           }
         })
-        console.log(this.items)
         this.isLoading = false
       }
     } catch (error) {
       console.error(error)
-      this.isLoading = false
     }
   }
 
@@ -146,7 +144,7 @@ export class ReportPatientsProvinceComponent implements OnInit {
       window.URL.revokeObjectURL(url)
       a.remove()
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 
@@ -164,7 +162,7 @@ export class ReportPatientsProvinceComponent implements OnInit {
       }
 
     } catch (error) {
-      console.log(error)
+      console.error(error)
       this.loading.hide()
     }
   }

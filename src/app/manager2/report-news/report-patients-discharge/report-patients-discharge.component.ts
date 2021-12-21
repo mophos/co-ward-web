@@ -74,7 +74,6 @@ export class ReportPatientsDischargeComponent implements OnInit {
       const res:any = await this.patientsDischargeService.getPatientDischarge({ date })
       if (res.ok) {
         this.items = res.rows
-        console.log('patient discharge ', res.rows)
         this.isLoading = false
       }
     } catch (error) {
@@ -89,7 +88,6 @@ export class ReportPatientsDischargeComponent implements OnInit {
       const res:any = await this.patientsDischargeService.getPatientDischargeSummary({ date })
       if (res.ok) {
         this.summaries = res.rows
-        console.log('patient discharge summary ', res.rows)
         this.isLoading = false
       }
     } catch (error) {
@@ -110,7 +108,7 @@ export class ReportPatientsDischargeComponent implements OnInit {
       window.URL.revokeObjectURL(url)
       a.remove()
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 
@@ -125,7 +123,7 @@ export class ReportPatientsDischargeComponent implements OnInit {
       }
 
     } catch (error) {
-      console.log(error)
+      console.error(error)
       this.loading.hide()
     }
   }
@@ -141,7 +139,7 @@ export class ReportPatientsDischargeComponent implements OnInit {
       }
 
     } catch (error) {
-      console.log(error)
+      console.error(error)
       this.loading.hide()
     }
   }

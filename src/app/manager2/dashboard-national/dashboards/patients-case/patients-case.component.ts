@@ -311,7 +311,6 @@ export class PatientsCaseComponent implements OnInit {
           data: asymptomatic
       }]
     }
-
     this.highcharts = Highcharts
   }
 }

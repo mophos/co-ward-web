@@ -109,7 +109,6 @@ export class ReportPatientsHospitalComponent implements OnInit {
       })
       if (res.ok) {
         this.items = res.rows
-        console.log('patient hospital ', res.rows)
         this.isLoading = false
 
         const provinces = []
@@ -141,7 +140,7 @@ export class ReportPatientsHospitalComponent implements OnInit {
       window.URL.revokeObjectURL(url)
       a.remove()
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 
@@ -160,7 +159,7 @@ export class ReportPatientsHospitalComponent implements OnInit {
       }
 
     } catch (error) {
-      console.log(error)
+      console.error(error)
       this.loading.hide()
     }
   }
