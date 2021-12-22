@@ -15,18 +15,11 @@ export class ReportPatientsDischargeComponent implements OnInit {
 
   items:any = []
   summaries:any = []
-  // date:any = {
-  //   date: {
-  //     year: moment().year(),
-  //     month: moment().month() + 1,
-  //     day: moment().date()
-  //   }
-  // }
   date:any = {
     date: {
-      year: 2020,
-      month: 5,
-      day: 20
+      year: moment().year(),
+      month: moment().month() + 1,
+      day: moment().date()
     }
   }
   myDatePickerOptions: IMyOptions = {

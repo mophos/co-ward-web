@@ -39,18 +39,11 @@ export class ReportBedsProvinceComponent implements OnInit {
     editableDateField: false,
     showClearDateBtn: false
   }
-  // date:any = {
-  //   date: {
-  //     year: moment().year(),
-  //     month: moment().month() + 1,
-  //     day: moment().date()
-  //   }
-  // }
   date:any = {
     date: {
-      year: 2020,
-      month: 4,
-      day: 27
+      year: moment().year(),
+      month: moment().month() + 1,
+      day: moment().date()
     }
   }
   @ViewChild('loading', { static: true }) loading: any;
