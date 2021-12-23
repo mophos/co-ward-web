@@ -42,8 +42,8 @@
                 <label for="example" class="clr-control-label">เลขที่บัตรประชาชน <span class="required">*</span></label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper ">
-                    <input type="text" id="example" name="cid" maxlength="13" [(ngModel)]="cid" class="clr-input width-fit"
-                      readonly>
+                    <input type="text" id="example" name="cid" maxlength="13" [(ngModel)]="cid"
+                      class="clr-input width-fit" readonly>
                   </div>
                 </div>
               </div>
@@ -161,7 +161,8 @@
                 <label for="example" class="clr-control-label">เบอร์โทรศัพท์</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <input type="text" name="tel" appNumberOnly maxlength="10" [(ngModel)]="tel" class="clr-input  width-fit">
+                    <input type="text" name="tel" appNumberOnly maxlength="10" [(ngModel)]="tel"
+                      class="clr-input  width-fit">
                   </div>
                 </div>
               </div>
@@ -205,7 +206,8 @@
                 <label class="clr-control-label">ประเทศ</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <app-autocomplete-countries style="padding: 0px" #countries [query]="'ไทย'" (onselect)="onSelectCountry($event)">
+                    <app-autocomplete-countries style="padding: 0px" #countries [query]="'ไทย'"
+                      (onselect)="onSelectCountry($event)">
                     </app-autocomplete-countries>
                   </div>
                 </div>
@@ -360,7 +362,8 @@
             </div>
             <div class="clr-col-6 " *ngIf="countryId == 20">
               <clr-checkbox-wrapper>
-                <input type="checkbox" clrCheckbox [(ngModel)]="addNow" value="addNow" name="addNow" (change)="checkAddNow()" />
+                <input type="checkbox" clrCheckbox [(ngModel)]="addNow" value="addNow" name="addNow"
+                  (change)="checkAddNow()" />
                 <label>ตามบัตรประชาชน</label>
               </clr-checkbox-wrapper>
             </div>
@@ -374,7 +377,8 @@
                 <label for="example" class="clr-control-label">บ้านเลขที่</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <input type="text" id="example" name="houseNoCurr" [(ngModel)]="houseNoCurr" class="clr-input  width-fit">
+                    <input type="text" id="example" name="houseNoCurr" [(ngModel)]="houseNoCurr"
+                      class="clr-input  width-fit">
                   </div>
                 </div>
               </div>
@@ -404,7 +408,8 @@
                 <label class="clr-control-label">ชื่อหมู่บ้าน</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <input type="text" name="villageNameCurr" [(ngModel)]="villageNameCurr" class="clr-input  width-fit">
+                    <input type="text" name="villageNameCurr" [(ngModel)]="villageNameCurr"
+                      class="clr-input  width-fit">
                   </div>
                 </div>
               </div>
@@ -424,7 +429,8 @@
                 <label class="clr-control-label">ตำบล</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <app-autocomplete-subdistrict style="padding: 0px" #tambonCurr (onselect)="onSelectTambonCurr($event)">
+                    <app-autocomplete-subdistrict style="padding: 0px" #tambonCurr
+                      (onselect)="onSelectTambonCurr($event)">
                     </app-autocomplete-subdistrict>
                   </div>
                 </div>
@@ -466,7 +472,8 @@
                 <label class="clr-control-label">จังหวัด</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <app-autocomplete-province style="padding: 0px" #provinceCurr (onselect)="onSelectProvinceCurr($event)">
+                    <app-autocomplete-province style="padding: 0px" #provinceCurr
+                      (onselect)="onSelectProvinceCurr($event)">
                     </app-autocomplete-province>
                   </div>
                 </div>
@@ -477,7 +484,8 @@
                 <label class="clr-control-label">จังหวัด</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <input type="text" name="provinceNameCurrn" [(ngModel)]="provinceNameCurr" class="clr-input  width-fit">
+                    <input type="text" name="provinceNameCurrn" [(ngModel)]="provinceNameCurr"
+                      class="clr-input  width-fit">
                   </div>
                 </div>
               </div>
@@ -487,7 +495,8 @@
                 <label class="clr-control-label">รหัสไปรษณีย์</label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <app-autocomplete-zipcode style="padding: 0px" #zipcodeCurr (onselect)="onSelectZipcodeCurr($event)">
+                    <app-autocomplete-zipcode style="padding: 0px" #zipcodeCurr
+                      (onselect)="onSelectZipcodeCurr($event)">
                     </app-autocomplete-zipcode>
                   </div>
                 </div>
@@ -537,8 +546,8 @@
                 <label for="example" class="clr-control-label">วันที่ Admit <span class="required">*</span></label>
                 <div class="clr-control-container clr-error width-fit">
                   <div class="clr-input-wrapper">
-                    <my-date-picker-th (dateChanged)="dateAdmit($event)" name="admitDate" [options]="myDatePickerOptions"
-                      [(ngModel)]="admitDate" required>
+                    <my-date-picker-th (dateChanged)="dateAdmit($event)" name="admitDate"
+                      [options]="myDatePickerOptions" [(ngModel)]="admitDate" required>
                     </my-date-picker-th>
                   </div>
                 </div>
@@ -581,7 +590,8 @@
                 <label for="basic" class="clr-control-label">อาการ</label>
                 <div class="clr-control-container  width-fit">
                   <div class="clr-input-wrapper">
-                    <input type="text" id="basic" [disabled]="!(returnFromAbroad == 'covid' || returnFromAbroad == 'other')"
+                    <input type="text" id="basic"
+                      [disabled]="!(returnFromAbroad == 'covid' || returnFromAbroad == 'other')"
                       class="clr-input width-fit" name="icdName" [(ngModel)]="icdName">
                   </div>
                 </div>
@@ -595,7 +605,8 @@
                   <div class="clr-row">
                     <div class="clr-col-10">
                       <div class="clr-input-wrapper" style="max-height: 3rem;">
-                        <app-autocomplete-icd10 #icd [disabled]="!(returnFromAbroad == 'covid' || returnFromAbroad == 'other')"
+                        <app-autocomplete-icd10 #icd
+                          [disabled]="!(returnFromAbroad == 'covid' || returnFromAbroad == 'other')"
                           (onselect)="onSelectIcdCode($event)"></app-autocomplete-icd10>
                       </div>
                     </div>
@@ -605,8 +616,8 @@
                   </div>
                   <div class="clr-row">
                     <div class="clr-col-12">
-                      <span *ngFor="let i of icdCodes; let idx=index;">{{i}} <clr-icon (click)="removeIcd(idx)" class="alert-icon"
-                          shape="minus-circle"></clr-icon></span>
+                      <span *ngFor="let i of icdCodes; let idx=index;">{{i}} <clr-icon (click)="removeIcd(idx)"
+                          class="alert-icon" shape="minus-circle"></clr-icon></span>
                     </div>
                   </div>
                 </div>
@@ -640,8 +651,10 @@
           </td>
           <td class="left">
             <div *ngFor="let i of gcs">
-              <input type="radio" [disabled]="!(returnFromAbroad == 'covid' || returnFromAbroad == 'other') && i.id == 6"
-                name="gcs-{{l.id}}" id="gcs-{{i.id}}-{{l.id}}" (click)="checkGcs(i,l)" [(ngModel)]="l.gcs_id" [value]="i.id">
+              <input type="radio"
+                [disabled]="!(returnFromAbroad == 'covid' || returnFromAbroad == 'other') && i.id == 6"
+                name="gcs-{{l.id}}" id="gcs-{{i.id}}-{{l.id}}" (click)="checkGcs(i,l)" [(ngModel)]="l.gcs_id"
+                [value]="i.id">
               <label [title]="i.name" class="pointer" for="gcs-{{i.id}}-{{l.id}}">
                 {{i.name}}
               </label>
@@ -649,7 +662,8 @@
           </td>
           <td class="left">
             <div *ngFor="let i of beds">
-              <input type="radio" [disabled]="!(returnFromAbroad == 'covid' || returnFromAbroad == 'other') && i.id == 6"
+              <input type="radio"
+                [disabled]="!(returnFromAbroad == 'covid' || returnFromAbroad == 'other') && i.id == 6"
                 name="bed-{{l.id}}" id="bed-{{i.id}}-{{l.id}}" [(ngModel)]="l.bed_id" [value]="i.id">
               <label [title]="i.name" class="pointer" for="bed-{{i.id}}-{{l.id}}">
                 {{i.name}}
@@ -659,35 +673,23 @@
           <td class="left">
             <div *ngFor="let i of medicalSupplies">
               <input type="radio" (click)='uncheckRadioMedicalSupplies(l.id,i.id)' (click)="checkMedicalSupplies(i,l)"
-                name="medicalSupplie-id-{{l.id}}" id="medicalSupplie-{{i.id}}-{{l.id}}" [(ngModel)]="l.medical_supplie_id"
-                [value]="i.id">
+                name="medicalSupplie-id-{{l.id}}" id="medicalSupplie-{{i.id}}-{{l.id}}"
+                [(ngModel)]="l.medical_supplie_id" [value]="i.id">
               <label [title]="i.name" class="pointer" for="medicalSupplie-{{i.id}}-{{l.id}}">
                 {{i.name}}
               </label>
             </div>
           </td>
           <td class="left">
-            <!-- <div class="clr-control-inline">
-              <div *ngFor="let i of s1" class="clr-col-6" style="padding: 0rem;">
-                <input (click)='uncheckRadio(l.id,i.generic,"set1")' type="radio" name="s1-{{l.id}}" id="s1-{{i.generic}}-{{l.id}}"
-                  [value]="i.generic" [(ngModel)]="l.set1">
-                <label [title]="i.name" class="pointer" for="s1-{{i.generic}}-{{l.id}}"> {{i.name}}</label>
-              </div>
+            <div *ngFor="let i of drugs">
+              <input type="checkbox" (click)="checkDrug(i,l)" name="drug-id-{{l.id}}" id="drug-{{i.id}}-{{l.id}}"
+                [value]="i.id">
+              <label [title]="i.name" class="pointer" for="drug-{{i.id}}-{{l.id}}">
+                {{i.name}}
+              </label>
             </div>
-            <div class="clr-control-inline">
-              <div *ngFor="let i of s2" class="clr-col-6" style="padding: 0rem;">
-                <input (click)='uncheckRadio(l.id,i.generic,"set2")' type="radio" name="s2-{{l.id}}" id="s2-{{i.generic}}-{{l.id}}"
-                  [value]="i.generic" [(ngModel)]="l.set2">
-                <label [title]="i.name" class="pointer" for="s2-{{i.generic}}-{{l.id}}"> {{i.name}}</label>
-              </div>
-            </div>
-            <div class="clr-control-inline">
-              <div *ngFor="let i of s3" class="clr-col-6" style="padding: 0rem;">
-                <input (click)='uncheckRadio(l.id,i.generic,"set3")' type="radio" name="s3-{{l.id}}" id="s3-{{i.generic}}-{{l.id}}"
-                  [value]="i.generic" [(ngModel)]="l.set3">
-                <label [title]="i.name" class="pointer" for="s3-{{i.generic}}-{{l.id}}"> {{i.name}}</label>
-              </div>
-            </div> -->
+          </td>
+          <!-- <td class="left">
             <div class="clr-control-inline">
               <div *ngFor="let i of s4" class="clr-col-6" style="padding: 0rem;">
                 <input (click)='uncheckRadio(l.id,i.generic,"set4")' type="radio" name="s4-{{l.id}}" id="s4-{{i.generic}}-{{l.id}}"
@@ -695,7 +697,21 @@
                 <label [title]="i.name" class="pointer" for="s4-{{i.generic}}-{{l.id}}"> <span [innerHTML]="i.name"></span></label>
               </div>
             </div>
-          </td>
+            <div class="clr-control-inline">
+              <div *ngFor="let i of s5" class="clr-col-6" style="padding: 0rem;">
+                <input (click)='uncheckRadio(l.id,i.generic,"set5")' type="radio" name="s5-{{l.id}}" id="s5-{{i.generic}}-{{l.id}}"
+                  [value]="i.generic" [(ngModel)]="l.set5">
+                <label [title]="i.name" class="pointer" for="s5-{{i.generic}}-{{l.id}}"> <span [innerHTML]="i.name"></span></label>
+              </div>
+            </div>
+            <div class="clr-control-inline">
+              <div *ngFor="let i of s6" class="clr-col-6" style="padding: 0rem;">
+                <input (click)='uncheckRadio(l.id,i.generic,"set6")' type="radio" name="s6-{{l.id}}" id="s6-{{i.generic}}-{{l.id}}"
+                  [value]="i.generic" [(ngModel)]="l.set6">
+                <label [title]="i.name" class="pointer" for="s6-{{i.generic}}-{{l.id}}"> <span [innerHTML]="i.name"></span></label>
+              </div>
+            </div>
+          </td> -->
         </tr>
       </tbody>
     </table>
@@ -705,7 +721,8 @@
 <div class="clr-row" [ngClass]="{hidden: !isKey}">
   <div class="clr-col-12">
     <div class="card" style="margin-top: 0;">
-      <button class="btn btn-success btn-block" (click)="onClickSave()" title="บันทึก" [disabled]="!peopleType || !admitDate || isSave || !hn || !an || !fname || !lname ||!titleId ||!genderId ||!birthDate">
+      <button class="btn btn-success btn-block" (click)="onClickSave()" title="บันทึก"
+        [disabled]="!peopleType || !admitDate || isSave || !hn || !an || !fname || !lname ||!titleId ||!genderId ||!birthDate">
         <clr-icon shape="floppy"></clr-icon> บันทึก
       </button>
     </div>
@@ -717,27 +734,27 @@
 <clr-modal [(clrModalOpen)]="modalConfirm" [clrModalClosable]="false">
   <h3 class="modal-title">มีข้อมูลนี้อยู่ในระบบแล้ว ต้องการอัพเดตข้อมูลดังนี้ใช่หรือไม่?</h3>
   <div class="modal-body">
-     <div class="clr-row">
-       <div class="clr-col-md-2"></div>
-       <div class="clr-col-md-5">ข้อมูลปัจจุบัน</div>
-       <div class="clr-col-md-5">ข้อมูลใหม่</div>
-       <div class="clr-col-md-2">ชื่อ</div>
-       <div class="clr-col-md-5">{{dataOld.first_name}}</div>
-       <div class="clr-col-md-5">{{dataNew.fname}}</div>
-       <div class="clr-col-md-2">ชื่อกลาง</div>
-       <div class="clr-col-md-5">{{dataOld.middle_name}}</div>
-       <div class="clr-col-md-5">{{dataNew.mname}}</div>
-       <div class="clr-col-md-2">นามสกุล</div>
-       <div class="clr-col-md-5">{{dataOld.last_name}}</div>
-       <div class="clr-col-md-5">{{dataNew.lname}}</div>
-     </div>
+    <div class="clr-row">
+      <div class="clr-col-md-2"></div>
+      <div class="clr-col-md-5">ข้อมูลปัจจุบัน</div>
+      <div class="clr-col-md-5">ข้อมูลใหม่</div>
+      <div class="clr-col-md-2">ชื่อ</div>
+      <div class="clr-col-md-5">{{dataOld.first_name}}</div>
+      <div class="clr-col-md-5">{{dataNew.fname}}</div>
+      <div class="clr-col-md-2">ชื่อกลาง</div>
+      <div class="clr-col-md-5">{{dataOld.middle_name}}</div>
+      <div class="clr-col-md-5">{{dataNew.mname}}</div>
+      <div class="clr-col-md-2">นามสกุล</div>
+      <div class="clr-col-md-5">{{dataOld.last_name}}</div>
+      <div class="clr-col-md-5">{{dataNew.lname}}</div>
+    </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-success" (click)="onConfirmModal()">
-       ยืนยัน
+      ยืนยัน
     </button>
-      <button type="button" class="btn btn-danger" (click)="modalConfirm = false;isSave = false">
-         ยกเลืก
-      </button>
+    <button type="button" class="btn btn-danger" (click)="modalConfirm = false;isSave = false">
+      ยกเลืก
+    </button>
   </div>
 </clr-modal>

@@ -149,36 +149,13 @@
             </div>
           </td>
           <td class="left">
-            <!-- <div class="clr-control-inline">
-              <div *ngFor="let i of s1" class="clr-col-6" style="padding: 0rem;">
-                <input [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)"
-                  (click)='uncheckRadio(l.covid_case_id,i.generic,"set1")' type="radio" name="s1-{{l.covid_case_id}}"
-                  id="s1-{{i.generic}}-{{l.covid_case_id}}" [value]="i.generic" [(ngModel)]="l.set1">
-                <label [title]="i.name" class="pointer" for="s1-{{i.generic}}-{{l.covid_case_id}}"> {{i.name}}</label>
-              </div>
-            </div>
             <div class="clr-control-inline">
-              <div *ngFor="let i of s2" class="clr-col-6" style="padding: 0rem;">
+              <div *ngFor="let i of l.drugs"  style="padding: 0rem;">
                 <input [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)"
-                  (click)='uncheckRadio(l.covid_case_id,i.generic,"set2")' type="radio" name="s2-{{l.covid_case_id}}"
-                  id="s2-{{i.generic}}-{{l.covid_case_id}}" [value]="i.generic" [(ngModel)]="l.set2">
-                <label [title]="i.name" class="pointer" for="s2-{{i.generic}}-{{l.covid_case_id}}"> {{i.name}}</label>
-              </div>
-            </div>
-            <div class="clr-control-inline">
-              <div *ngFor="let i of s3" class="clr-col-6" style="padding: 0rem;">
-                <input [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)"
-                  (click)='uncheckRadio(l.covid_case_id,i.generic,"set3")' type="radio" name="s3-{{l.covid_case_id}}"
-                  id="s3-{{i.generic}}-{{l.covid_case_id}}" [value]="i.generic" [(ngModel)]="l.set3">
-                <label [title]="i.name" class="pointer" for="s3-{{i.generic}}-{{l.covid_case_id}}"> {{i.name}}</label>
-              </div>
-            </div> -->
-            <div class="clr-control-inline">
-              <div *ngFor="let i of s4" class="clr-col-6" style="padding: 0rem;">
-                <input [disabled]="(!(l.entry_date | checkCutTime) && !l.is_edit)"
-                  (click)='uncheckRadio(l.covid_case_id,i.generic,"set4")' type="radio" name="s4-{{l.covid_case_id}}"
-                  id="s4-{{i.generic}}-{{l.covid_case_id}}" [value]="i.generic" [(ngModel)]="l.set4">
-                <label [title]="i.name" class="pointer" for="s4-{{i.generic}}-{{l.covid_case_id}}"> <span
+                  (click)='checkDrug(l.covid_case_id,i)' type="checkbox" name="s4-{{l.covid_case_id}}"
+                  id="s4-{{i.id}}-{{l.covid_case_id}}"   [checked]="+i.is_check">
+
+                <label [title]="i.name" class="pointer" for="s4-{{i.id}}-{{l.covid_case_id}}"> <span
                     [innerHTML]="i.name"></span></label>
               </div>
             </div>

@@ -1,15 +1,18 @@
 <div class="container">
-  <div class="clr-row" >
+  <div class="clr-row">
     <div [ngClass]="{'clr-col-5 clr-offset-1': btn1==1,'display-none':btn1==2,'clr-col-4':btn1==3}">
-      <button class="btn  btn-block" style="font-size: 1.5rem;height:3rem" [ngClass]="{'btn-success': province === 'IN','btn-outline-success':province != 'IN' }"
+      <button class="btn  btn-block" style="font-size: 1.5rem;height:3rem"
+        [ngClass]="{'btn-success': province === 'IN','btn-outline-success':province != 'IN' }"
         (click)="province = 'IN'">ผู้ป่วยอยู่ในประเทศไทย</button>
     </div>
     <div [ngClass]="{'clr-col-5': btn1==1,'display-none':btn1==2,'clr-col-4' : btn1==3}">
-      <button class="btn  btn-block" title="ผู้ป่วยกลับจากต่างประเทศ" style="font-size: 1.5rem;height:3rem;" [ngClass]="{'btn-success': province === 'OUT','btn-outline-success':province != 'OUT' }"
+      <button class="btn  btn-block" title="ผู้ป่วยกลับจากต่างประเทศ" style="font-size: 1.5rem;height:3rem;"
+        [ngClass]="{'btn-success': province === 'OUT','btn-outline-success':province != 'OUT' }"
         (click)="province = 'OUT'">ผู้ป่วยกลับจากตปท.</button>
     </div>
     <div [ngClass]="{'clr-col-4 clr-offset-4': btn1==2,'display-none':btn1==1,'clr-col-4':btn1==3}">
-      <button class="btn btn-block" style="font-size: 1.5rem;height:3rem;" [ngClass]="{'btn-success': province === 'FACTORY','btn-outline-success':province != 'FACTORY' }"
+      <button class="btn btn-block" style="font-size: 1.5rem;height:3rem;"
+        [ngClass]="{'btn-success': province === 'FACTORY','btn-outline-success':province != 'FACTORY' }"
         (click)="province = 'FACTORY'">ผู้ป่วยในโรงงาน</button>
     </div>
   </div>
@@ -17,21 +20,25 @@
   <br>
   <div class="clr-row" [ngClass]="{'display-none': province.length == 0 || province == 'FACTORY'}">
     <div class="clr-col-3 clr-offset-3">
-      <button class="btn  btn-block" style="font-size: 1.5rem;height:3rem" [ngClass]="{'btn-success': peopleType === 'THAI','btn-outline-success':peopleType != 'THAI' }"
+      <button class="btn  btn-block" style="font-size: 1.5rem;height:3rem"
+        [ngClass]="{'btn-success': peopleType === 'THAI','btn-outline-success':peopleType != 'THAI' }"
         (click)="changePeopleType('THAI')">คนไทย</button>
     </div>
     <div class="clr-col-3 ">
-      <button class="btn  btn-block" style="font-size: 1.5rem;height:3rem;" [ngClass]="{'btn-success': peopleType === 'FOREIGN','btn-outline-success':peopleType != 'FOREIGN' }"
+      <button class="btn  btn-block" style="font-size: 1.5rem;height:3rem;"
+        [ngClass]="{'btn-success': peopleType === 'FOREIGN','btn-outline-success':peopleType != 'FOREIGN' }"
         (click)="changePeopleType('FOREIGN')">คนต่างชาติ</button>
     </div>
   </div>
   <div class="clr-row" [ngClass]="{'display-none': province.length ==0 || province=='OUT' || province =='IN'}">
     <div class="clr-col-3 clr-offset-3">
-      <button class="btn  btn-block" style="font-size: 1.5rem;height:3rem" [ngClass]="{'btn-success': peopleType === 'THAI','btn-outline-success':peopleType != 'THAI' }"
+      <button class="btn  btn-block" style="font-size: 1.5rem;height:3rem"
+        [ngClass]="{'btn-success': peopleType === 'THAI','btn-outline-success':peopleType != 'THAI' }"
         (click)="changePeopleType('THAI')">คนไทย</button>
     </div>
     <div class="clr-col-3 ">
-      <button class="btn  btn-block" style="font-size: 1.5rem;height:3rem;" [ngClass]="{'btn-success': peopleType === 'STATELESS','btn-outline-success':peopleType != 'STATELESS' }"
+      <button class="btn  btn-block" style="font-size: 1.5rem;height:3rem;"
+        [ngClass]="{'btn-success': peopleType === 'STATELESS','btn-outline-success':peopleType != 'STATELESS' }"
         (click)="changePeopleType('STATELESS')">ต่างด้าว</button>
     </div>
   </div>
@@ -39,16 +46,19 @@
   <br>
   <div class="clr-row" [ngClass]="{hidden: !province || !peopleType,'display-none':province=='FACTORY'}">
     <div class="clr-col-4">
-      <button class="btn btn-outline-primary btn-block" style="font-size: 1.5rem;height:3rem" [ngClass]="{'btn-primary': caseType === 'IPPUI','btn-outline-primary':caseType != 'IPPUI' }"
-        (click)="caseType='IPPUI'">IP PUI <span class="p4">(ผู้ป่วย admit รอผลตรวจ)</span></button>
+      <button class="btn btn-outline-primary btn-block" style="font-size: 1.5rem; line-height: 12pt; height:3rem"
+        [ngClass]="{'btn-primary': caseType === 'IPPUI','btn-outline-primary':caseType != 'IPPUI' }"
+        (click)="caseType='IPPUI'">IP PUI/ATK <br><span class="p4">(ผู้ป่วย admit รอผลตรวจ)</span></button>
     </div>
     <div class="clr-col-4">
-      <button class="btn btn-outline-primary  btn-block" style="font-size: 1.5rem;height:3rem;" [ngClass]="{'btn-primary': caseType === 'COVID','btn-outline-primary':caseType != 'COVID' }"
-        (click)="caseType='COVID'">COVID <span class="p4">(ผู้ป่วย admit ผลคอนเฟิร์มเป็น +)</span></button>
+      <button class="btn btn-outline-primary  btn-block" style="font-size: 1.5rem; line-height: 12pt; height:3rem;"
+        [ngClass]="{'btn-primary': caseType === 'COVID','btn-outline-primary':caseType != 'COVID' }"
+        (click)="caseType='COVID'">COVID <br><span class="p4">(ผู้ป่วย admit ผลคอนเฟิร์มเป็น +)</span></button>
     </div>
     <div class="clr-col-4">
-      <button class="btn btn-outline-primary  btn-block" style="font-size: 1.5rem;height:3rem;" [ngClass]="{'btn-primary': caseType === 'OBSERVE','btn-outline-primary':caseType != 'OBSERVE',hidden:province!='OUT' }"
-        (click)="caseType='OBSERVE'">HQ/AHQ <span class="p4">(ผู้ป่วยโรคอื่น ต้องการมารักษาในไทย)</span></button>
+      <button class="btn btn-outline-primary  btn-block" style="font-size: 1.5rem; line-height: 12pt; height:3rem;"
+        [ngClass]="{'btn-primary': caseType === 'OBSERVE','btn-outline-primary':caseType != 'OBSERVE',hidden:province!='OUT' }"
+        (click)="caseType='OBSERVE'">HQ/AHQ <br><span class="p4">(ผู้ป่วยโรคอื่น ต้องการมารักษาในไทย)</span></button>
     </div>
   </div>
   <br>
@@ -59,8 +69,8 @@
         <label for="basic" class="clr-control-label">เลขที่บัตรประชาชน</label>
         <div class="clr-control-container">
           <div class="clr-input-wrapper" style="max-height: 3rem !important;">
-            <input type="text" id="basic" class="clr-input" appNumberOnly maxlength="13" style="height:3rem !important;font-size: 1.3rem;"
-              (keyup)="onKeyCid($event)" name="cid" [(ngModel)]="cid">
+            <input type="text" id="basic" class="clr-input" appNumberOnly maxlength="13"
+              style="height:3rem !important;font-size: 1.3rem;" (keyup)="onKeyCid($event)" name="cid" [(ngModel)]="cid">
             <clr-icon shape="exclamation-circle" size="36" *ngIf="cidError"></clr-icon>
           </div>
           <span *ngIf="cidError" class="clr-subtext">เลขที่บัตรประชาชนผิด</span>
@@ -72,12 +82,13 @@
         <label for="basic" class="clr-control-label">เลขที่หนังสือเดินทาง</label>
         <div class="clr-control-container">
           <div class="clr-input-wrapper" style="max-height: 3rem !important;">
-            <input type="text" id="basic" class="clr-input" (keyup)="onKeyPassport($event)" maxlength="13" style="height:3rem !important;font-size: 1.3rem;"
-              name="passpost" [(ngModel)]="passpost">
+            <input type="text" id="basic" class="clr-input" (keyup)="onKeyPassport($event)" maxlength="13"
+              style="height:3rem !important;font-size: 1.3rem;" name="passpost" [(ngModel)]="passpost">
             <!-- <clr-icon shape="exclamation-circle" size="36" *ngIf="passpostError"></clr-icon> -->
           </div>
           <div class="clr-input-wrapper" style="max-height: 3rem !important;">
-            <input type="checkbox" [(ngModel)]="blankPassport" (click)="activeButton()" style="margin-right: 0.5rem;"> ไม่มีเลขที่หนังสือเดินทาง (ไม่แนะนำ)
+            <input type="checkbox" [(ngModel)]="blankPassport" (click)="activeButton()" style="margin-right: 0.5rem;">
+            ไม่มีเลขที่หนังสือเดินทาง (ไม่แนะนำ)
           </div>
           <!-- <span *ngIf="passpostError" class="clr-subtext">เลขที่หนังสือเดินทางผิด</span> -->
         </div>
@@ -88,15 +99,16 @@
         <label for="basic" class="clr-control-label">Sat Code</label>
         <div class="clr-control-container">
           <div class="clr-input-wrapper" style="max-height: 3rem !important;">
-            <input type="text" id="basic" class="clr-input" (keyup)="onKeyPassport($event)" style="height:3rem !important;font-size: 1.3rem;"
-              name="satcode" [(ngModel)]="satcode">
+            <input type="text" id="basic" class="clr-input" (keyup)="onKeyPassport($event)"
+              style="height:3rem !important;font-size: 1.3rem;" name="satcode" [(ngModel)]="satcode">
           </div>
 
         </div>
       </div>
     </div>
     <div class="clr-col-2 clr-offset-1">
-      <button [disabled]="cidError" class="btn btn-success btn-block" style="font-size: 1.2rem;height:2rem;" (click)="next()">ถัดไป</button>
+      <button [disabled]="cidError" class="btn btn-success btn-block" style="font-size: 1.2rem;height:2rem;"
+        (click)="next()">ถัดไป</button>
     </div>
   </div>
 </div>

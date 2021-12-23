@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AutocompleteHospitalComponent } from 'src/app/help/autocomplete-hospital/autocomplete-hospital.component';
 import { IMyOptions } from 'mydatepicker-th';
-import { findIndex, cloneDeep, filter } from 'lodash';
+import { findIndex, cloneDeep, filter, indexOf } from 'lodash';
 import { AutocompleteProvinceComponent } from '../../../help/autocomplete-address/autocomplete-province/autocomplete-province.component';
 import { AutocompleteDistrictComponent } from '../../../help/autocomplete-address/autocomplete-district/autocomplete-district.component';
 import { AutocompleteSubdistrictComponent } from '../../../help/autocomplete-address/autocomplete-subdistrict/autocomplete-subdistrict.component';
@@ -119,6 +119,9 @@ export class CovidCaseNewComponent implements OnInit {
   s2 = [{ generic: 3, name: 'Darunavir 600mg+Ritonavir100 mg.' }, { generic: 4, name: 'Lopinavir 200 mg/Ritonavir 50 mg.' }];
   s3 = [{ generic: 7, name: 'Azithromycin 250 mg.' }];
   s4 = [{ generic: 8, name: 'Favipiravir (เบิกจาก AntiDote) <a target="_BLANK" href="http://drug.nhso.go.th/Antidotes/index.jsp">คลิก</a>' }];
+  s5 = [{ generic: 26, name: 'Casirivimab and imdevimab Modified' }];
+  s6 = [{ generic: 27, name: 'Molnupiravir' }];
+
   data: any;
   drugDay = '5';
   caseId: any;
@@ -178,6 +181,7 @@ export class CovidCaseNewComponent implements OnInit {
     await this.getTitle();
     await this.getGCS();
     await this.getBeds();
+    await this.getGeneric();
     await this.getMedicalSupplies();
     if (this.peopleCaseType === 'THAI') {
       await this.getInfo(this.cid, this.peopleCaseType);
@@ -294,9 +298,9 @@ export class CovidCaseNewComponent implements OnInit {
     }
   }
 
-  async getGenericSet() {
+  async getGeneric() {
     try {
-      const rs: any = await this.basicAuthService.getGenericSet('DRUG');
+      const rs: any = await this.basicAuthService.getGenerics('DRUG');
       if (rs.ok) {
         this.drugs = rs.rows;
       } else {
@@ -315,7 +319,9 @@ export class CovidCaseNewComponent implements OnInit {
         if (this.caseStatus === 'OBSERVE') {
           this.gcs = filter(rs.rows, { name: 'Observe (Hospital Q)' });
         } else if (this.caseStatus === 'IPPUI') {
-          this.gcs = filter(rs.rows, { name: 'IP PUI' });
+          this.gcs = filter(rs.rows, (v) => {
+            if (v.name === 'IP PUI' || v.name === 'ATK') return v
+          });
         } else {
           this.gcs = rs.rows;
         }
@@ -451,26 +457,26 @@ export class CovidCaseNewComponent implements OnInit {
         this.isSave = true;
         try {
           if (await this.verifyInput()) {
-            const drugs = [];
-            if (+this.s1 === 1) {
-              drugs.push({ genericId: 1 });
-            } else if (+this.s1 === 2) {
-              drugs.push({ genericId: 2 });
-            }
-            if (+this.s2 === 1) {
-              drugs.push({ genericId: 3 });
-              drugs.push({ genericId: 5 });
-            } else if (+this.s2 === 2) {
-              drugs.push({ genericId: 4 });
-            }
+            // const drugs = [];
+            // if (+this.s1 === 1) {
+            //   drugs.push({ genericId: 1 });
+            // } else if (+this.s1 === 2) {
+            //   drugs.push({ genericId: 2 });
+            // }
+            // if (+this.s2 === 1) {
+            //   drugs.push({ genericId: 3 });
+            //   drugs.push({ genericId: 5 });
+            // } else if (+this.s2 === 2) {
+            //   drugs.push({ genericId: 4 });
+            // }
 
-            if (+this.s3 === 1) {
-              drugs.push({ genericId: 7 });
-            }
+            // if (+this.s3 === 1) {
+            //   drugs.push({ genericId: 7 });
+            // }
 
-            if (+this.s4 === 1) {
-              drugs.push({ genericId: 7 });
-            }
+            // if (+this.s4 === 1) {
+            //   drugs.push({ genericId: 7 });
+            // }
 
             const obj: any = {
               covidCaseId: this.caseId,
@@ -521,8 +527,8 @@ export class CovidCaseNewComponent implements OnInit {
               icdCode: this.icdCode,
               icdName: this.icdName,
               caseStatus: this.caseStatus,
-              icdCodes: this.icdCodes
-              // drugs
+              icdCodes: this.icdCodes,
+              // drugs: this.drugs
             };
 
             if (this.confirmDate) {
@@ -992,13 +998,13 @@ export class CovidCaseNewComponent implements OnInit {
     }
   }
 
-  uncheckRadio(listId, generic, type = '') {
-    const idx: any = findIndex(this.admitDetail[listId - 1].drugs, { set: type });
-    if (idx > -1) {
-      this.admitDetail[listId - 1].drugs.splice(idx, 1);
-    }
-    this.admitDetail[listId - 1].drugs.push({ set: type, generic_id: generic });
-  }
+  // uncheckRadio(listId, generic, type = '') {
+  //   const idx: any = findIndex(this.admitDetail[listId - 1].drugs, { set: type });
+  //   if (idx > -1) {
+  //     this.admitDetail[listId - 1].drugs.splice(idx, 1);
+  //   }
+  //   this.admitDetail[listId - 1].drugs.push({ set: type, generic_id: generic });
+  // }
 
   async checkGcs(i, l) {
     if (i.id === 5 && l.medical_supplie_id !== null) {
@@ -1017,6 +1023,18 @@ export class CovidCaseNewComponent implements OnInit {
       if (confirm) {
       } else {
         l.gcs_id = 5;
+      }
+    }
+  }
+
+  checkDrug(i, l) {
+    const idx = findIndex(this.admitDetail, { id: l.id });
+    if (idx > -1) {
+      const idxD = findIndex(this.admitDetail[idx].drugs, { generic_id: i.id });
+      if (idxD > -1) {
+        this.admitDetail[idx].drugs.splice(idxD, 1);
+      } else {
+        this.admitDetail[idx].drugs.push({ generic_id: i.id });
       }
     }
   }

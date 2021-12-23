@@ -62,8 +62,8 @@ export class BasicAuthService {
     return await this.http.get(url).toPromise();
   }
 
-  async getGenerics() {
-    const url = `${this.apiUrl}/v1/basic-auth/generics`;
+  async getGenerics(type='') {
+    const url = `${this.apiUrl}/v1/basic-auth/generics?type=${type}`;
     return await this.http.get(url).toPromise();
   }
 

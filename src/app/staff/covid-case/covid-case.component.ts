@@ -113,7 +113,6 @@ export class CovidCaseComponent implements OnInit {
     this.modalDetails = true;
     try {
       const rs: any = await this.covidCaseService.getCovidCaseDetails(l.covid_case_id);
-      console.log(rs);
       if (rs.ok) {
         this.details = rs.rows;
         console.log(this.details);
@@ -152,7 +151,6 @@ export class CovidCaseComponent implements OnInit {
   }
 
   onClickOpenModalDateConfirm(l) {
-    console.log(l);
     this.id = l.covid_case_id;
     this.modalConfirmDate = true;
   }
@@ -176,8 +174,6 @@ export class CovidCaseComponent implements OnInit {
   }
 
   onClickHPVC(e) {
-    console.log(e);
-
     this.personId = e.person_id;
     this.modalHPVC.openModal(e.person_id);
   }

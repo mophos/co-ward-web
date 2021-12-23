@@ -9,7 +9,7 @@
             <div class="clr-col-12">
               <h3>ข้อมูลสรุป ณ วันที่ {{date | dateTh:'D MMM YYYY hh:mm'}}</h3>
             </div>
-            <div class="clr-col-5">
+            <div class="clr-col-6">
               <div class="card" style="box-shadow:none">
                 <div class="card-header" style="padding-bottom: 0;">
                   ความรุนแรง
@@ -31,30 +31,8 @@
                 </div>
               </div>
             </div>
-            <div class="clr-col-4">
-              <div class="card" style="box-shadow:none">
-                <div class="card-header" style="padding-bottom: 0;">
-                  เตียง (ใช้ไป/สำหรับผู้ป่วย Covid)
-                </div>
-                <div class="card-block" style="padding: 0;">
-                  <!-- <div class="card-title">
-							</div> -->
-                  <div class="card-text" style="text-align:center;">
-                    <table class="table" style="margin-top: 0.2rem;border: none;">
-                      <tr>
-                        <td *ngFor="let i of BedsSum">
-                          {{i.name}} 
-                          <br>
-                          {{i.usage_qty || 0}}/{{i.covid_qty || 0}}
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-            <div class="clr-col-3">
+           
+            <div class="clr-col-6">
               <div class="card" style="box-shadow:none">
                 <div class="card-header" style="padding-bottom: 0;">
                   เครื่องช่วยหายใจ (ใช้ไป/สำหรับผู้ป่วย Covid)
@@ -67,6 +45,29 @@
                       <tr>
                         <td *ngFor="let i of medicalSuppliesSum">
                           {{i.name}}
+                          <br>
+                          {{i.usage_qty || 0}}/{{i.covid_qty || 0}}
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="clr-col-12">
+              <div class="card" style="box-shadow:none">
+                <div class="card-header" style="padding-bottom: 0;">
+                  เตียง (ใช้ไป/สำหรับผู้ป่วย Covid)
+                </div>
+                <div class="card-block" style="padding: 0;">
+                  <!-- <div class="card-title">
+							</div> -->
+                  <div class="card-text" style="text-align:center;">
+                    <table class="table" style="margin-top: 0.2rem;border: none;">
+                      <tr>
+                        <td *ngFor="let i of BedsSum">
+                          {{i.name}} 
                           <br>
                           {{i.usage_qty || 0}}/{{i.covid_qty || 0}}
                         </td>
@@ -93,8 +94,10 @@
 
         <h2 *ngIf="alertBed && isHospital">โรงพยาบาลของคุณยังไม่ตั้งค่าเตียง!!!</h2>
         <h3 *ngIf="alertBed && isHospital" (click)="goToBed()"><a>ไปที่เมนูตั้งค่าเตียงทันที</a> <br></h3>
-
-        <img src="https://sv1.picz.in.th/images/2021/04/23/Abiogt.png" style="width:70%" alt="">
+        <br>
+        <img src="https://sv1.picz.in.th/images/2021/12/22/6LQySt.png" style="width:100%" alt="">
+        <br>
+        <img src="https://sv1.picz.in.th/images/2021/12/22/6LQE8n.png" style="width:100%" alt="">
         <!-- <img src="https://sv1.picz.in.th/images/2021/01/12/lc8nLg.jpg" style="width:70%" alt=""> -->
         <!-- <h4>ระบบมีการปรับปรุงเมนู "บันทึกผู้ป่วยใหม่" เพื่อรองรับสถานการณ์ COVID-19 ในระยะที่ 2 ดังนี้</h4>
 
