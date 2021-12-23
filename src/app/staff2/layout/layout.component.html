@@ -3,7 +3,7 @@
     <div class="branding">
       <a href="javascript://" class="nav-link">
         <!-- <img src="./assets/logo-co-ward.png" alt="logo" style="width: 200px; padding-right: 10px;"> -->
-        <span class="title" routerLink="/staff/home">CO-Ward
+        <span class="title" routerLink="/staff2/home">CO-Ward
           <span class="font-version">
             (Version :  1.7.10)
           </span>
@@ -32,7 +32,7 @@
       <router-outlet></router-outlet>
     </div>
     <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
-      <a clrVerticalNavLink routerLink="/staff/home" title="หน้าหลัก" routerLinkActive="active">
+      <a clrVerticalNavLink routerLink="/staff2/home" title="หน้าหลัก" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="home" class="is-solid"></clr-icon>
         หนัาหลัก
       </a>
@@ -132,7 +132,7 @@
         <clr-icon clrVerticalNavIcon shape="link"></clr-icon>
         เชื่อมต่อข้อมูล HIS (new)
       </a>
-      <!-- <a *ngIf="trackingMenu" clrVerticalNavLink routerLink="/staff/tracking" title="สถานะของ" routerLinkActive="active">
+      <!-- <a *ngIf="trackingMenu" clrVerticalNavLink routerLink="/staff2/tracking" title="สถานะของ" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         ติดตามสถานะสินค้า
       </a> -->
@@ -236,7 +236,7 @@
       </a> -->
 
 
-      <!-- <a *ngIf="checkBedsMenu" clrVerticalNavLink routerLink="/staff/check-bed" title="ตรวจสอบการบันทึกข้อมูลเตียง" routerLinkActive="active">
+      <!-- <a *ngIf="checkBedsMenu" clrVerticalNavLink routerLink="/staff2/check-bed" title="ตรวจสอบการบันทึกข้อมูลเตียง" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         ตรวจสอบเตียง
       </a> -->
@@ -247,52 +247,52 @@
           รายงานรวมประเทศ
         </a>
         <clr-vertical-nav-group-children>
-          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff/report/1']"
+          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff2/report/1']"
             title="รายงานเตียงตามสังกัดหน่วยงาน" routerLinkActive="active">
             <clr-icon shape="folder-open" class="is-solid"></clr-icon>
             1. รายงานเตียงตามสังกัดหน่วยงาน
           </a>
-          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff/report/2']"
+          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff2/report/2']"
             title="ประเภทความรุนแรงของผู้ป่วยที่ยังรักษาตัวอยู่" routerLinkActive="active">
             <clr-icon shape="folder-open" class="is-solid"></clr-icon>
             2. ประเภทความรุนแรงของผู้ป่วยที่ยังรักษาตัวอยู่
           </a>
-          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff/report/3']"
+          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff2/report/3']"
             title="รายงานการแจ้งจำนวนผู้ป่วยเพื่อเบิกเวชภัณฑ์​สิ้นเปลืองประจำวัน" routerLinkActive="active">
             <clr-icon shape="folder-open" class="is-solid"></clr-icon>
             3. รายงานการแจ้งจำนวนผู้ป่วยเพื่อเบิกเวชภัณฑ์​สิ้นเปลืองประจำวัน
           </a>
-          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff/report/4']"
+          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff2/report/4']"
             title="ยอดผู้ป่วยสะสมรวมที่รับไว้รักษาในโรงพยาบาล" routerLinkActive="active">
             <clr-icon shape="folder-open" class="is-solid"></clr-icon>
             4. ยอดผู้ป่วยสะสมรวมที่รับไว้รักษาในโรงพยาบาล
           </a>
-          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff/report/5']" title="รายงานการใช้เตียง"
+          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff2/report/5']" title="รายงานการใช้เตียง"
             routerLinkActive="active">
             <clr-icon shape="folder-open" class="is-solid"></clr-icon>
             5. รายงานการใช้เตียง
           </a>
-          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff/report/6']" title="รายงานเตียงว่างแยกประเภท"
+          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff2/report/6']" title="รายงานเตียงว่างแยกประเภท"
             routerLinkActive="active">
             <clr-icon shape="folder-open" class="is-solid"></clr-icon>
             6. รายงานเตียงว่างแยกประเภท
           </a>
-          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff/report/7']"
+          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff2/report/7']"
             title="รายงานจำนวนประเภทเครื่องช่วยหายใจ" routerLinkActive="active">
             <clr-icon shape="folder-open" class="is-solid"></clr-icon>
             7. รายงานจำนวนประเภทเครื่องช่วยหายใจ
           </a>
-          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff/report/8']" title="รายงานเวชภัณฑ์สิ้นเปลือง"
+          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff2/report/8']" title="รายงานเวชภัณฑ์สิ้นเปลือง"
             routerLinkActive="active">
             <clr-icon shape="folder-open" class="is-solid"></clr-icon>
             8. รายงานเวชภัณฑ์สิ้นเปลือง
           </a>
-          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff/report/9']" title="รายงานจำนวนบุคลากร (แพทย์)"
+          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff2/report/9']" title="รายงานจำนวนบุคลากร (แพทย์)"
             routerLinkActive="active">
             <clr-icon shape="folder-open" class="is-solid"></clr-icon>
             9. รายงานจำนวนบุคลากร (แพทย์)
           </a>
-          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff/report/10']"
+          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff2/report/10']"
             title="รายงานจำนวนบุคลากร (พยาบาล) นับจำนวนทั้งหมดไม่นับเป็นเวร" routerLinkActive="active">
             <clr-icon shape="folder-open" class="is-solid"></clr-icon>
             10. รายงานจำนวนบุคลากร (พยาบาล) นับจำนวนทั้งหมดไม่นับเป็นเวร
@@ -306,21 +306,21 @@
         <clr-icon shape="cog" clrVerticalNavIcon></clr-icon>
         ตั้งค่า
         <clr-vertical-nav-group-children>
-          <a *ngIf="settingBasicMenu" clrVerticalNavLink routerLink="/staff/setting/basic" routerLinkActive="active">
+          <a *ngIf="settingBasicMenu" clrVerticalNavLink routerLink="/staff2/setting/basic" routerLinkActive="active">
             ตั้งค่าพื้นฐาน
           </a>
-          <a *ngIf="settingBedsMenu" clrVerticalNavLink routerLink="/staff/setting/beds" routerLinkActive="active">
+          <a *ngIf="settingBedsMenu" clrVerticalNavLink routerLink="/staff2/setting/beds" routerLinkActive="active">
             ตั้งค่าเตียง
           </a>
-          <a *ngIf="settingMedicalSuppliesMenu" clrVerticalNavLink routerLink="/staff/setting/medical-supplies"
+          <a *ngIf="settingMedicalSuppliesMenu" clrVerticalNavLink routerLink="/staff2/setting/medical-supplies"
             routerLinkActive="active">
             ตั้งค่าเครื่องมือทางการแพทย์
           </a>
-          <a *ngIf="settingProfessionalMenu" clrVerticalNavLink routerLink="/staff/setting/professional"
+          <a *ngIf="settingProfessionalMenu" clrVerticalNavLink routerLink="/staff2/setting/professional"
             routerLinkActive="active">
             ตั้งค่าบุคลากร
           </a>
-          <a *ngIf="settingUserMenu" clrVerticalNavLink routerLink="/staff/setting/users" routerLinkActive="active">
+          <a *ngIf="settingUserMenu" clrVerticalNavLink routerLink="/staff2/setting/users" routerLinkActive="active">
             ตั้งค่าสิทธิ์ผู้ใช้งาน
           </a>
         </clr-vertical-nav-group-children>

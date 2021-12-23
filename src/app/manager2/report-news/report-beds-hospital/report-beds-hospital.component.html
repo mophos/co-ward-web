@@ -55,7 +55,7 @@
                     </option>
                 </select>
                 <div
-                    *ngIf="isSelectProvince"
+                    *ngIf="isSelectProvince && provinces.length"
                     class="beds-hospital__select-menu">
                     <clr-checkbox-wrapper *ngFor="let province of provinces; let i = index">
                         <input

@@ -15,18 +15,11 @@ export class ReportPatientsHospitalComponent implements OnInit {
   isLoading = false
 
   items:any = []
-  // date:any = {
-  //   date: {
-  //     year: moment().year(),
-  //     month: moment().month() + 1,
-  //     day: moment().date()
-  //   }
-  // }
   date:any = {
     date: {
-      year: 2020,
-      month: 4,
-      day: 27
+      year: moment().year(),
+      month: moment().month() + 1,
+      day: moment().date()
     }
   }
   myDatePickerOptions: IMyOptions = {
@@ -62,7 +55,7 @@ export class ReportPatientsHospitalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadData()
+    this.loadData(null)
   }
 
   selectDate (value) {
@@ -70,12 +63,13 @@ export class ReportPatientsHospitalComponent implements OnInit {
       date: value.date
     }
     this.items = []
-    this.loadData()
+    this.loadData('date')
   }
 
   selectZone () {
     this.items = []
-    this.loadData()
+    this.provinceGroup = []
+    this.loadData('zone')
     this.isSelectProvince = false
   }
 
@@ -87,7 +81,7 @@ export class ReportPatientsHospitalComponent implements OnInit {
       this.provinceGroup.push(value)
     }
     this.items = []
-    this.loadData()
+    this.loadData('province')
   }
 
   setSelectMultiProvince () {
@@ -98,7 +92,7 @@ export class ReportPatientsHospitalComponent implements OnInit {
     return this.provinceGroup.some(item => item.name === province.name)
   }
 
-  async loadData () {
+  async loadData (filter) {
     try {
       this.isLoading = true
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
@@ -109,19 +103,20 @@ export class ReportPatientsHospitalComponent implements OnInit {
       })
       if (res.ok) {
         this.items = res.rows
-        console.log('patient hospital ', res.rows)
         this.isLoading = false
 
-        const provinces = []
-        res.rows.forEach(item => {
-          if (!provinces.some(x => x.code === item.province_code)) {
-            provinces.push({
-              code: item.province_code,
-              name: item.province_name
-            })
-          }
-        })
-        this.provinces = provinces
+        if (filter === 'zone') {
+          const provinces = []
+          res.rows.forEach(item => {
+            if (!provinces.some(x => x.code === item.province_code)) {
+              provinces.push({
+                code: item.province_code,
+                name: item.province_name
+              })
+            }
+          })
+          this.provinces = provinces
+        }
       }
     } catch (error) {
       console.error(error)
@@ -141,7 +136,7 @@ export class ReportPatientsHospitalComponent implements OnInit {
       window.URL.revokeObjectURL(url)
       a.remove()
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 
@@ -160,7 +155,7 @@ export class ReportPatientsHospitalComponent implements OnInit {
       }
 
     } catch (error) {
-      console.log(error)
+      console.error(error)
       this.loading.hide()
     }
   }

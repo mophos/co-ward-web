@@ -14,20 +14,20 @@ export class ReportPatientsAdmitPuiComponent implements OnInit {
 
   items:any = []
   summaries:any = []
-  // date:any = {
-  //   date: {
-  //     year: moment().year(),
-  //     month: moment().month() + 1,
-  //     day: moment().date()
-  //   }
-  // }
   date:any = {
     date: {
-      year: 2020,
-      month: 4,
-      day: 19
+      year: moment().year(),
+      month: moment().month() + 1,
+      day: moment().date()
     }
   }
+  // date:any = {
+  //   date: {
+  //     year: 2020,
+  //     month: 4,
+  //     day: 19
+  //   }
+  // }
   myDatePickerOptions: IMyOptions = {
     inline: false,
     dateFormat: 'dd-mm-yyyy',
@@ -70,7 +70,6 @@ export class ReportPatientsAdmitPuiComponent implements OnInit {
       const res:any = await this.newReportService.getPatientAdmit({ date })
       if (res.ok) {
         this.items = res.rows.results
-        console.log(res.rows.results)
         this.isLoading = false
       }
     } catch (error) {
@@ -85,7 +84,7 @@ export class ReportPatientsAdmitPuiComponent implements OnInit {
       const res:any = await this.newReportService.getPatientAdmitSummary({ date })
       if (res.ok) {
         this.summaries = res.rows
-        console.log(res.rows)
+        console.error(res.rows)
         this.isLoading = false
       }
     } catch (error) {
@@ -106,7 +105,7 @@ export class ReportPatientsAdmitPuiComponent implements OnInit {
       window.URL.revokeObjectURL(url)
       a.remove()
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 
@@ -116,7 +115,7 @@ export class ReportPatientsAdmitPuiComponent implements OnInit {
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
       const res:any = await this.newReportService.exportExcelPatientAdmitSummary({ date })
       if (res) {
-        this.downloadFile('รายงานผู้ป่วย Admit(สะสม)', 'xlsx', res)
+        this.downloadFile('รายงานผู้ป่วย Admit PUI(สะสม)', 'xlsx', res)
         this.loading.hide()
       }
 
@@ -132,7 +131,7 @@ export class ReportPatientsAdmitPuiComponent implements OnInit {
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
       const res:any = await this.newReportService.exportExcelPatientAdmit({ date })
       if (res) {
-        this.downloadFile('รายงานผู้ป่วย Admit(ทั้งหมด)', 'xlsx', res)
+        this.downloadFile('รายงานผู้ป่วย Admit PUI(ทั้งหมด)', 'xlsx', res)
         this.loading.hide()
       }
 

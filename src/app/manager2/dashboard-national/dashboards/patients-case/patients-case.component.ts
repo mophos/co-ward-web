@@ -43,7 +43,6 @@ export class PatientsCaseComponent implements OnInit {
   sector = ''
   subMinistryCode = ''
   bedTypeId = ''
-  // listMinistry:any = []
   listSubMinistry: any = []
   bedTypes:any = [
     { id: 1, name: 'AIIR' },
@@ -61,34 +60,34 @@ export class PatientsCaseComponent implements OnInit {
     { id: 14, name: 'ระดับ 3 ใส่ท่อและเครื่องช่วยหายใจ' },
   ]
 
-  // startDate:any = {
-  //   date: {
-  //     year: moment().year(),
-  //     month: moment().month() + 1,
-  //     day: moment().date()
-  //   }
-  // }
   startDate:any = {
     date: {
-      year: 2020,
-      month: 4,
-      day: 27
+      year: moment().year(),
+      month: moment().month() + 1,
+      day: moment().date()
     }
   }
-  // endDate:any = {
+  // startDate:any = {
   //   date: {
-  //     year: moment().year(),
-  //     month: moment().month() + 1,
-  //     day: moment().date()
+  //     year: 2020,
+  //     month: 4,
+  //     day: 27
   //   }
   // }
   endDate:any = {
     date: {
-      year: 2020,
-      month: 4,
-      day: 30
+      year: moment().year(),
+      month: moment().month() + 1,
+      day: moment().date()
     }
   }
+  // endDate:any = {
+  //   date: {
+  //     year: 2020,
+  //     month: 4,
+  //     day: 30
+  //   }
+  // }
 
   highcharts = null;
   lineChartOptions = {}
@@ -103,20 +102,8 @@ export class PatientsCaseComponent implements OnInit {
   ngOnInit() {
     this.loadData()
     this.getProvince()
-    // this.getMinistry()
     this.getSubMinistry()
   }
-
-  // async getMinistry () {
-  //   try {
-  //     const res:any = await this.filter.getMinistryList()
-  //     if (res.ok) {
-  //       this.listMinistry = res.rows
-  //     }
-  //   } catch (error) {
-  //     console.error(error)
-  //   }
-  // }
 
   async getSubMinistry () {
     try {
@@ -311,7 +298,6 @@ export class PatientsCaseComponent implements OnInit {
           data: asymptomatic
       }]
     }
-
     this.highcharts = Highcharts
   }
 }

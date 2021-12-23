@@ -14,18 +14,11 @@ export class ReportPatientsZoneComponent implements OnInit {
   isLoading = false
 
   items:any = []
-  // date:any = {
-  //   date: {
-  //     year: moment().year(),
-  //     month: moment().month() + 1,
-  //     day: moment().date()
-  //   }
-  // }
   date:any = {
     date: {
-      year: 2020,
-      month: 4,
-      day: 27
+      year: moment().year(),
+      month: moment().month() + 1,
+      day: moment().date()
     }
   }
   myDatePickerOptions: IMyOptions = {
@@ -60,7 +53,6 @@ export class ReportPatientsZoneComponent implements OnInit {
       const res:any = await this.patientsZoneService.getPatientZone({ date })
       if (res.ok) {
         this.items = res.rows
-        console.log(res.rows)
         this.isLoading = false
       }
     } catch (error) {
@@ -81,7 +73,7 @@ export class ReportPatientsZoneComponent implements OnInit {
       window.URL.revokeObjectURL(url)
       a.remove()
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 
@@ -94,11 +86,9 @@ export class ReportPatientsZoneComponent implements OnInit {
         this.downloadFile('รายงานผู้ป่วยรายเขต', 'xlsx', res)
         this.loading.hide()
       }
-
     } catch (error) {
-      console.log(error)
+      console.error(error)
       this.loading.hide()
     }
   }
-
 }

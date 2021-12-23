@@ -59,7 +59,6 @@ export class ReportPatientsSumDailyComponent implements OnInit {
       const res:any = await this.patientsSumDailyService.getPatientSumDaily({ date })
       if (res.ok) {
         this.items = res.rows
-        console.log('paitent sum daily ', res.rows)
         this.isLoading = false
       }
     } catch (error) {
@@ -80,7 +79,7 @@ export class ReportPatientsSumDailyComponent implements OnInit {
       window.URL.revokeObjectURL(url)
       a.remove()
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 
@@ -95,7 +94,7 @@ export class ReportPatientsSumDailyComponent implements OnInit {
       }
 
     } catch (error) {
-      console.log(error)
+      console.error(error)
       this.loading.hide()
     }
   }

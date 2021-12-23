@@ -48,7 +48,6 @@ export class ManageHospitalComponent implements OnInit {
   listMinistryType: any;
   listMinistry: any;
   listSubMinistry: any;
-  listNode:any
   tambonId: any;
   tambonName: any;
   ampurName: any;
@@ -94,7 +93,6 @@ export class ManageHospitalComponent implements OnInit {
     this.getMinistryTypeList();
     this.getSubMinistryList();
     this.getList();
-    this.getListNode()
   }
 
   onSelectHosp (value) {
@@ -336,10 +334,18 @@ export class ManageHospitalComponent implements OnInit {
     this.hospBed = l.bed_spd;
 
     //new
+    try {
+      const res:any = await this.hospitalService.getHeadHospital(l.head_hospcode)
+      if (res.ok) {
+        this.headHospname = res.rows[0].hospname
+      }
+    } catch (error) {
+      console.error(error)
+    }
+
     this.hospType = l.hospital_type
     this.contact_name = l.contact_name
     this.headHospcode = l.head_hospcode
-    this.headHospname = l.head_hospname
 
     this.setValue();
   }
@@ -362,23 +368,4 @@ export class ManageHospitalComponent implements OnInit {
       this.alertService.error(error);
     }
   }
-
-  async getListNode() {
-    try {
-      this.loading = true;
-      const rs: any = await this.nodeSurgicalService.getList();
-      if (rs.ok) {
-        console.log('node surgical', rs)
-        // this.listNode = rs.rows;
-        this.loading = false;
-      } else {
-        this.alertService.error(rs.error);
-        this.loading = false;
-      }
-    } catch (error) {
-      this.alertService.error(error);
-      this.loading = false;
-    }
-  }
-
 }

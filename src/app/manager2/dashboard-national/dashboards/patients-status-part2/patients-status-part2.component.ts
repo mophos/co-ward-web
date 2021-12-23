@@ -44,7 +44,6 @@ export class PatientsStatusPart2Component implements OnInit {
   sector = ''
   subMinistryCode = ''
   bedTypeId = ''
-  // listMinistry:any = []
   listSubMinistry: any = []
   bedTypes:any = [
     { id: 1, name: 'AIIR' },
@@ -62,34 +61,34 @@ export class PatientsStatusPart2Component implements OnInit {
     { id: 14, name: 'ระดับ 3 ใส่ท่อและเครื่องช่วยหายใจ' },
   ]
 
-  // startDate:any = {
-  //   date: {
-  //     year: moment().year(),
-  //     month: moment().month() + 1,
-  //     day: moment().date()
-  //   }
-  // }
   startDate:any = {
     date: {
-      year: 2020,
-      month: 4,
-      day: 10
+      year: moment().year(),
+      month: moment().month() + 1,
+      day: moment().date()
     }
   }
-  // endDate:any = {
+  // startDate:any = {
   //   date: {
-  //     year: moment().year(),
-  //     month: moment().month() + 1,
-  //     day: moment().date()
+  //     year: 2020,
+  //     month: 4,
+  //     day: 10
   //   }
   // }
   endDate:any = {
     date: {
-      year: 2020,
-      month: 4,
-      day: 30
+      year: moment().year(),
+      month: moment().month() + 1,
+      day: moment().date()
     }
   }
+  // endDate:any = {
+  //   date: {
+  //     year: 2020,
+  //     month: 4,
+  //     day: 30
+  //   }
+  // }
 
   highcharts = null
   lineChartOptions = {}
@@ -103,8 +102,6 @@ export class PatientsStatusPart2Component implements OnInit {
 
   ngOnInit() {
     this.loadAllData()
-    // this.loadDataTotal()
-    // this.loadDataChart()
     this.getSubMinistry()
     this.getProvince()
   }
@@ -209,7 +206,7 @@ export class PatientsStatusPart2Component implements OnInit {
         this.loading.hide()
       }
     } catch (error) {
-      console.log(error)
+      console.error(error)
       this.loading.hide()
     }
   }
@@ -270,8 +267,6 @@ export class PatientsStatusPart2Component implements OnInit {
       startDate.add(1, 'days');
     }
 
-    console.log('categories ', categories)
-
     categories.forEach((categorie, i) => {
       if (this.items.deathCases && this.items.deathCases.length) {
         const data = this.items.deathCases.find(item => moment(item.date_admit).format('DD-MM-YYYY') === categorie)
@@ -320,7 +315,6 @@ export class PatientsStatusPart2Component implements OnInit {
           data: death
       }]
     }
-
     this.highcharts = Highcharts
   }
 }

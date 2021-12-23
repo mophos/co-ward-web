@@ -28,48 +28,48 @@
             <router-outlet></router-outlet>
         </div>
         <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
-            <a clrVerticalNavLink routerLink="/admin/fulfill-drugs" title="เติมยา" routerLinkActive="active">
+            <a clrVerticalNavLink routerLink="/admin2/fulfill-drugs" title="เติมยา" routerLinkActive="active">
                 <clr-icon shape="archive"></clr-icon>
                 เติมยา
             </a>
-            <!-- <a clrVerticalNavLink routerLink="/admin/fulfill-surgical-masks-list" title="เติม Surgical Mask"
+            <!-- <a clrVerticalNavLink routerLink="/admin2/fulfill-surgical-masks-list" title="เติม Surgical Mask"
                 routerLinkActive="active">
                 <clr-icon shape="archive" class="is-solid"></clr-icon>
                 เติม Surgical Mask
             </a> -->
-            <a clrVerticalNavLink routerLink="/admin/fulfill-supplies" title="เติมเวชภัณฑ์" routerLinkActive="active">
+            <a clrVerticalNavLink routerLink="/admin2/fulfill-supplies" title="เติมเวชภัณฑ์" routerLinkActive="active">
                 <clr-icon shape="archive" class="is-solid"></clr-icon>
                 เติมเวชภัณฑ์
             </a>
-            <a clrVerticalNavLink routerLink="/admin/min-max-drugs" title="จัดการ min/max ยา" routerLinkActive="active">
+            <a clrVerticalNavLink routerLink="/admin2/min-max-drugs" title="จัดการ min/max ยา" routerLinkActive="active">
                 <clr-icon shape="bar-chart"></clr-icon>
                 จัดการ min/max ยา
             </a>
-            <a clrVerticalNavLink routerLink="/admin/min-max-supplies" title="จัดการ min/max เวชภัณฑ์"
+            <a clrVerticalNavLink routerLink="/admin2/min-max-supplies" title="จัดการ min/max เวชภัณฑ์"
                 routerLinkActive="active">
                 <clr-icon shape="bar-chart" class="is-solid"></clr-icon>
                 จัดการ min/max เวชภัณฑ์
             </a>
-            <!-- <a  clrVerticalNavLink routerLink="/admin/fulfill-supplies" title="เติมเวชภัณฑ์"
+            <!-- <a  clrVerticalNavLink routerLink="/admin2/fulfill-supplies" title="เติมเวชภัณฑ์"
                 routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 เติมเวชภัณฑ์
             </a> -->
-            <!-- <a *ngIf="restockCollectionMenu" clrVerticalNavLink routerLink="/admin/manage-restock-collection"
+            <!-- <a *ngIf="restockCollectionMenu" clrVerticalNavLink routerLink="/admin2/manage-restock-collection"
                 title="เติมกลุ่มสินค้า" routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 เติมกลุ่มสินค้า
             </a>
-            <a *ngIf="restockMenu" clrVerticalNavLink routerLink="/admin/manage-restock" title="เติมเวชภัณฑ์"
+            <a *ngIf="restockMenu" clrVerticalNavLink routerLink="/admin2/manage-restock" title="เติมเวชภัณฑ์"
                 routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 เติมเวชภัณฑ์
             </a> -->
-            <!-- <a *ngIf="" clrVerticalNavLink routerLink="/admin/manage-request" title="กรอกคงคลัง" routerLinkActive="active">
+            <!-- <a *ngIf="" clrVerticalNavLink routerLink="/admin2/manage-request" title="กรอกคงคลัง" routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 จัดส่งเวชภัณฑ์
             </a> -->
-            <!-- <a *ngIf="minMaxMenu" clrVerticalNavLink routerLink="/admin/manage-min-max" title="จัดการ Min-Max"
+            <!-- <a *ngIf="minMaxMenu" clrVerticalNavLink routerLink="/admin2/manage-min-max" title="จัดการ Min-Max"
                 routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 จัดการ Min-Max
@@ -79,42 +79,42 @@
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 จัดการสถานบริการ
             </a>
-            <a *ngIf="systemManageMenu" clrVerticalNavLink routerLink="/admin/systems" title="จัดการระบบ"
+            <a *ngIf="systemManageMenu" clrVerticalNavLink routerLink="/admin2/systems" title="จัดการระบบ"
                 routerLinkActive="active">
                 <clr-icon shape="cog" class="is-solid"></clr-icon>
                 จัดการระบบ
             </a>
-            <a clrVerticalNavLink routerLink="/admin/manage-node-surgical" title="จัดการ รพ. แม่ข่ายsurgical"
+            <a clrVerticalNavLink routerLink="/admin2/manage-node-surgical" title="จัดการ รพ. แม่ข่ายsurgical"
                 routerLinkActive="active">
                 <clr-icon shape="cog" class="is-solid"></clr-icon>
                 จัดการ รพ. แม่ข่ายsurgical
             </a>
-            <a clrVerticalNavLink routerLink="/admin/export" title="ส่งออกข้อมูล" routerLinkActive="active">
+            <a clrVerticalNavLink routerLink="/admin2/export" title="ส่งออกข้อมูล" routerLinkActive="active">
                 <clr-icon shape="export" class="is-solid"></clr-icon>
                 ส่งออกข้อมูล
             </a>
 
-            <a *ngIf="patientManageMenu" clrVerticalNavLink routerLink="/admin/manage-patients" title="จัดการผู้ป่วย"
+            <a *ngIf="patientManageMenu" clrVerticalNavLink routerLink="/admin2/manage-patients" title="จัดการผู้ป่วย"
                 routerLinkActive="active">
                 <clr-icon shape="cog" class="is-solid"></clr-icon>
                 จัดการผู้ป่วย
             </a>
-            <a *ngIf="patientManageMenu" clrVerticalNavLink routerLink="/admin/manage-patient-discharge" title="จัดการผู้ป่วย discharge"
+            <a *ngIf="patientManageMenu" clrVerticalNavLink routerLink="/admin2/manage-patient-discharge" title="จัดการผู้ป่วย discharge"
                 routerLinkActive="active">
                 <clr-icon shape="user" class="is-solid"></clr-icon>
                 จัดการผู้ป่วย discharge
             </a>
-            <a *ngIf="userManageMenu" clrVerticalNavLink routerLink="/admin/manage-user" title="จัดการผู้ใช้งาน"
+            <a *ngIf="userManageMenu" clrVerticalNavLink routerLink="/admin2/manage-user" title="จัดการผู้ใช้งาน"
                 routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 จัดการผู้ใช้งาน
             </a>
-            <!-- <a clrVerticalNavLink routerLink="/admin/manage-drug" title="จัดการยา" routerLinkActive="active">
+            <!-- <a clrVerticalNavLink routerLink="/admin2/manage-drug" title="จัดการยา" routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 จัดการยา
             </a>
 
-            <a clrVerticalNavLink routerLink="/admin/requisition-min-max" title="ตั้งค่า MIN-MAX การเบิก" routerLinkActive="active">
+            <a clrVerticalNavLink routerLink="/admin2/requisition-min-max" title="ตั้งค่า MIN-MAX การเบิก" routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
                 ตั้งค่า MIN-MAX การเบิก
             </a> -->

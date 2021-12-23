@@ -4,23 +4,139 @@
   <span class="breadcrumb-item active"> เชื่อมต่อข้อมูล HIS </span>
 </nav>
 
-<input type="file" (change)="onChange($event)">
+<div style="display: flex; justify-content: space-between;">
+  <input type="file" (change)="onChange($event)" #takeInput>
+  <button
+    [disabled]="file == null"
+    class="btn btn-primary btn-sm"
+    (click)="importCsv()">
+    import
+  </button>
+</div>
 
-<button class="btn" (click)="importCsv()">
-  import
-</button>
+<div
+  *ngIf="items.length"
+  style="overflow-x: auto;">
+  <table style="border-collapse: collapse;" class="table table-compact">
+    <thead>
+      <tr>
+        <th class="td-border"> CID </th>
+        <th class="td-border"> HN </th>
+        <th class="td-border"> AN </th>
+        <th class="td-border"> Passport </th>
+        <th class="td-border"> First Name </th>
+        <th class="td-border"> Middle Name </th>
+        <th class="td-border"> Last Name </th>
+        <th class="td-border"> Gender ID </th>
+        <th class="td-border"> Birth Date </th>
+        <th class="td-border"> Title ID </th>
+        <th class="td-border"> Telephone </th>
+        <th class="td-border"> People Type </th>
+        <th class="td-border"> House No. </th>
+        <th class="td-border"> Room No. </th>
+        <th class="td-border"> Village </th>
+        <th class="td-border"> Village Name </th>
+        <th class="td-border"> Road </th>
+        <th class="td-border"> Tambon Name </th>
+        <th class="td-border"> Ampur Name </th>
+        <th class="td-border"> Province Name </th>
+        <th class="td-border"> Zipcode </th>
+        <th class="td-border"> Country Code </th>
+        <th class="td-border"> Current House No. </th>
+        <th class="td-border"> Current Room No. </th>
+        <th class="td-border"> Current Village </th>
+        <th class="td-border"> Current Village Name </th>
+        <th class="td-border"> Current Road </th>
+        <th class="td-border"> Current Zipcode </th>
+        <th class="td-border"> Current Tambon Name </th>
+        <th class="td-border"> Current Ampur Name </th>
+        <th class="td-border"> Current Province Name </th>
+        <th class="td-border"> Date Admit </th>
+        <th class="td-border"> Confirm Date </th>
+        <th> Case Status </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items; let i = index">
+        <td class="td-border"> {{ item.cid || '' }} </td>
+        <td class="td-border"> {{ item.hn || '' }} </td>
+        <td class="td-border"> {{ item.an || '' }} </td>
+        <td class="td-border"> {{ item.passport || '' }} </td>
+        <td class="td-border"> {{ item.first_name || '' }} </td>
+        <td class="td-border"> {{ item.middle_name || '' }} </td>
+        <td class="td-border"> {{ item.last_name || '' }} </td>
+        <td class="td-border"> {{ item.gender_id || '' }} </td>
+        <td class="td-border"> {{ item.birth_date || '' }} </td>
+        <td class="td-border"> {{ item.title_id || '' }} </td>
+        <td class="td-border"> {{ item.telephone || '' }} </td>
+        <td class="td-border"> {{ item.people_type || '' }} </td>
+        <td class="td-border"> {{ item.house_no || '' }} </td>
+        <td class="td-border"> {{ item.room_no || '' }} </td>
+        <td class="td-border"> {{ item.village || '' }} </td>
+        <td class="td-border"> {{ item.village_name || '' }} </td>
+        <td class="td-border"> {{ item.road || '' }} </td>
+        <td class="td-border"> {{ item.tambon_name || '' }} </td>
+        <td class="td-border"> {{ item.ampur_name || '' }} </td>
+        <td class="td-border"> {{ item.province_name || '' }} </td>
+        <td class="td-border"> {{ item.zipcode || '' }} </td>
+        <td class="td-border"> {{ item.country_code || '' }} </td>
+        <td class="td-border"> {{ item.current_house_no || '' }} </td>
+        <td class="td-border"> {{ item.current_room_no || '' }} </td>
+        <td class="td-border"> {{ item.current_village || '' }} </td>
+        <td class="td-border"> {{ item.current_village_name || '' }} </td>
+        <td class="td-border"> {{ item.current_road || '' }} </td>
+        <td class="td-border"> {{ item.current_zipcode || '' }} </td>
+        <td class="td-border"> {{ item.current_tambon_name || '' }} </td>
+        <td class="td-border"> {{ item.current_amput_name || '' }} </td>
+        <td class="td-border"> {{ item.current_province_name || '' }} </td>
+        <td class="td-border"> {{ item.date_admit || '' }} </td>
+        <td class="td-border"> {{ item.confirm_date || '' }} </td>
+        <td> {{ item.case_status || '' }} </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-{{ items }}
+<ng-container *ngIf="modal">
+  <div class="modal">
+    <div class="modal-dialog modal-sm" role="dialog" aria-hidden="true">
+      <div
+        style="padding-top: 16px;"
+        class="modal-content">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <div style="font-size: 20px;"> Ict Portal MOPH </div>
+          <div
+            style="cursor: pointer;"
+            (click)="setModal(false)">
+            X
+          </div>
+        </div>
+        <div style="margin-bottom: 16px;">
+          <input
+            [(ngModel)]="form.username"
+            type="text"
+            placeholder="E-mail"
+            style="width: 100%;">
+        </div>
+        <div style="margin-bottom: 16px;">
+          <input
+            [(ngModel)]="form.password"
+            type="password"
+            placeholder="Password"
+            style="width: 100%;">
+        </div>
+        <div style="text-align: right;">
+          <button
+            class="btn btn-primary btn-sm"
+            (click)="loginIctPortal()">
+            Sign In
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<table style="border-collapse: collapse;" class="table table-compact">
-  <thead>
-    <tr>
-      <!-- <th class="td-border"> เขตสุขภาพ </th> -->
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of items; let i = index">
-      <td> {{ item.name }} </td>
-    </tr>
-  </tbody>
-</table>
+  <div class="modal-backdrop" aria-hidden="true"></div>
+</ng-container>
+
+<app-loadding #loading></app-loadding>

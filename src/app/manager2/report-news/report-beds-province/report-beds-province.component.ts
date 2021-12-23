@@ -39,18 +39,11 @@ export class ReportBedsProvinceComponent implements OnInit {
     editableDateField: false,
     showClearDateBtn: false
   }
-  // date:any = {
-  //   date: {
-  //     year: moment().year(),
-  //     month: moment().month() + 1,
-  //     day: moment().date()
-  //   }
-  // }
   date:any = {
     date: {
-      year: 2020,
-      month: 4,
-      day: 27
+      year: moment().year(),
+      month: moment().month() + 1,
+      day: moment().date()
     }
   }
   @ViewChild('loading', { static: true }) loading: any;
@@ -166,13 +159,10 @@ export class ReportBedsProvinceComponent implements OnInit {
             this.items[12].push(item)
           }
         })
-
-        console.log('items ', this.items)
         this.isLoading = false
       }
     } catch (error) {
       console.error(error)
-      this.isLoading = false
     }
   }
 
@@ -189,7 +179,7 @@ export class ReportBedsProvinceComponent implements OnInit {
       window.URL.revokeObjectURL(url)
       a.remove()
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 
@@ -207,7 +197,7 @@ export class ReportBedsProvinceComponent implements OnInit {
       }
 
     } catch (error) {
-      console.log(error)
+      console.error(error)
       this.loading.hide()
     }
   }

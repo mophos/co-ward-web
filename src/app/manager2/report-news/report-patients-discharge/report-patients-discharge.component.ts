@@ -15,18 +15,11 @@ export class ReportPatientsDischargeComponent implements OnInit {
 
   items:any = []
   summaries:any = []
-  // date:any = {
-  //   date: {
-  //     year: moment().year(),
-  //     month: moment().month() + 1,
-  //     day: moment().date()
-  //   }
-  // }
   date:any = {
     date: {
-      year: 2020,
-      month: 5,
-      day: 20
+      year: moment().year(),
+      month: moment().month() + 1,
+      day: moment().date()
     }
   }
   myDatePickerOptions: IMyOptions = {
@@ -74,7 +67,6 @@ export class ReportPatientsDischargeComponent implements OnInit {
       const res:any = await this.patientsDischargeService.getPatientDischarge({ date })
       if (res.ok) {
         this.items = res.rows
-        console.log('patient discharge ', res.rows)
         this.isLoading = false
       }
     } catch (error) {
@@ -89,7 +81,6 @@ export class ReportPatientsDischargeComponent implements OnInit {
       const res:any = await this.patientsDischargeService.getPatientDischargeSummary({ date })
       if (res.ok) {
         this.summaries = res.rows
-        console.log('patient discharge summary ', res.rows)
         this.isLoading = false
       }
     } catch (error) {
@@ -110,7 +101,7 @@ export class ReportPatientsDischargeComponent implements OnInit {
       window.URL.revokeObjectURL(url)
       a.remove()
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 
@@ -125,7 +116,7 @@ export class ReportPatientsDischargeComponent implements OnInit {
       }
 
     } catch (error) {
-      console.log(error)
+      console.error(error)
       this.loading.hide()
     }
   }
@@ -141,7 +132,7 @@ export class ReportPatientsDischargeComponent implements OnInit {
       }
 
     } catch (error) {
-      console.log(error)
+      console.error(error)
       this.loading.hide()
     }
   }

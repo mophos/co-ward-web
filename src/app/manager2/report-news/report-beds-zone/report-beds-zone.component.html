@@ -92,7 +92,7 @@
             </ng-container>
         </tbody>
         <tfoot *ngIf="items.length">
-            <tr>
+            <tr *ngIf="cal.countExistingZone(items) >= 12">
                 <td class="td-border"> รวม 12 เขต </td>
                 <td class="td-border"> {{ cal.checkValue(cal.sum12Zone(items, 'level3_total')) }} </td>
                 <td class="td-border"> {{ cal.checkValue(cal.sum12Zone(items, 'level3_used')) }} </td>
@@ -116,7 +116,7 @@
                 <td class="td-border"> {{ cal.checkValue(cal.sum12Zone(items, 'community_isolation_used')) }} </td>
                 <td> {{ cal.getRemaining(cal.sum12Zone(items, 'community_isolation_total') - cal.sum12Zone(items, 'community_isolation_used')) }} </td>
             </tr>
-            <tr>
+            <tr *ngIf="cal.countExistingZone(items) > 12">
                 <td class="td-border"> ทั่วประเทศ </td>
                 <td class="td-border"> {{ cal.checkValue(cal.sumAllZone(items, 'level3_total')) }} </td>
                 <td class="td-border"> {{ cal.checkValue(cal.sumAllZone(items, 'level3_used')) }} </td>

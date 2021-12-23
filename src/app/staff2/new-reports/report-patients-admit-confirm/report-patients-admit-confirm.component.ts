@@ -14,20 +14,20 @@ export class ReportPatientsAdmitConfirmComponent implements OnInit {
 
   items:any = []
   summaries:any = []
-  // date:any = {
-  //   date: {
-  //     year: moment().year(),
-  //     month: moment().month() + 1,
-  //     day: moment().date()
-  //   }
-  // }
   date:any = {
     date: {
-      year: 2020,
-      month: 4,
-      day: 19
+      year: moment().year(),
+      month: moment().month() + 1,
+      day: moment().date()
     }
   }
+  // date:any = {
+  //   date: {
+  //     year: 2020,
+  //     month: 4,
+  //     day: 19
+  //   }
+  // }
   myDatePickerOptions: IMyOptions = {
     inline: false,
     dateFormat: 'dd-mm-yyyy',
@@ -70,7 +70,6 @@ export class ReportPatientsAdmitConfirmComponent implements OnInit {
       const res:any = await this.newReportService.getPatientAdmit({ date })
       if (res.ok) {
         this.items = res.rows.results
-        console.log(res.rows.results)
         this.isLoading = false
       }
     } catch (error) {
@@ -116,12 +115,12 @@ export class ReportPatientsAdmitConfirmComponent implements OnInit {
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
       const res:any = await this.newReportService.exportExcelPatientAdmitSummary({ date })
       if (res) {
-        this.downloadFile('รายงานผู้ป่วย Admit(สะสม)', 'xlsx', res)
+        this.downloadFile('รายงานผู้ป่วย Admit Confirm(สะสม)', 'xlsx', res)
         this.loading.hide()
       }
 
     } catch (error) {
-      console.log(error)
+      console.error(error)
       this.loading.hide()
     }
   }
@@ -132,12 +131,12 @@ export class ReportPatientsAdmitConfirmComponent implements OnInit {
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
       const res:any = await this.newReportService.exportExcelPatientAdmit({ date })
       if (res) {
-        this.downloadFile('รายงานผู้ป่วย Admit(ทั้งหมด)', 'xlsx', res)
+        this.downloadFile('รายงานผู้ป่วย Admit Confirm(ทั้งหมด)', 'xlsx', res)
         this.loading.hide()
       }
 
     } catch (error) {
-      console.log(error)
+      console.error(error)
       this.loading.hide()
     }
   }
