@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build-prod": "npx ng build --prod --build-optimizer --base-href=./",
-    "build-demo": "npx ng build --configuration demo --build-optimizer --base-href=./",
+    "build-demo": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --configuration demo --build-optimizer --base-href=./",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
