@@ -1,0 +1,151 @@
+<nav
+    style="margin-bottom: 16px;"
+    class="breadcrumb">
+    <span class="breadcrumb-item active">
+        รายงานผู้ป่วย Admit PUI (new)
+    </span>
+</nav>
+
+<div style="display: flex; justify-content: flex-end;">
+    <button class="btn btn-sm btn-primary" (click)="exportExcelSumData()">
+        <clr-icon shape="download"></clr-icon>export excel
+    </button>
+</div>
+
+<div style="overflow-x: auto;">
+    <table style="border-collapse: collapse;" class="table table-compact">
+        <thead>
+            <tr>
+                <th class="td-border"> เขต </th>
+                <th> Admit </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let summary of summaries; let i = index">
+                <td class="td-border">
+                    <div *ngIf="summary.zone_code !== '13'"> {{ summary.zone_code }} </div>
+                    <div *ngIf="summary.zone_code === '13'"> กรุงเทพมหานคร </div>
+                </td>
+                <td> {{ checkValue(summary.admit) }} </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div
+    *ngIf="isLoading && !summaries.length"
+    style="display: flex; justify-content: center; padding: 24px;">
+    กำลังโหลดข้อมูล ...
+</div>
+
+<div
+    *ngIf="!isLoading && !summaries.length"
+    style="display: flex; justify-content: center; padding: 24px;">
+    ไม่พบข้อมูล
+</div>
+
+<div style="display: flex; justify-content: flex-end; margin-top: 24px;">
+    <button class="btn btn-sm btn-primary" (click)="exportExcelList()">
+        <clr-icon shape="download"></clr-icon>export excel
+    </button>
+</div>
+
+<div style="overflow-x: auto;">
+    <table style="border-collapse: collapse;" class="table table-compact">
+        <thead>
+            <tr>
+                <th class="td-border"> เขต </th>
+                <th class="td-border"> จังหวัด </th>
+                <th class="td-border"> โรงพยาบาล </th>
+                <th class="td-border"> HN </th>
+                <th class="td-border"> AN </th>
+                <th class="td-border"> CID </th>
+                <th class="td-border"> ชื่อ </th>
+                <th class="td-border"> นามสกุล </th>
+                <th class="td-border"> เพศ </th>
+                <th class="td-border"> อายุ </th>
+                <th class="td-border"> วันที่ Admit </th>
+                <th class="td-border"> วันที่บันทึก </th>
+                <th class="td-border"> ความรุนแรง </th>
+                <th class="td-border"> เตียง </th>
+                <th class="td-border"> เครื่องช่วยหายใจ </th>
+                <th class="td-border"> วันที่ update อาการล่าสุด </th>
+                <th class="td-border"> ไม่ได้บันทึกมา </th>
+                <th class="td-border"> Darunavir 600 mg. </th>
+                <th class="td-border"> Lopinavir 200 mg. / Ritonavir 50 mg. </th>
+                <th class="td-border"> Ritonavir 100 mg. </th>
+                <th class="td-border"> Azithromycin 250 mg. </th>
+                <th class="td-border"> Favipiravi </th>
+                <th> หน่วยงานสังกัด </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of items; let i = index">
+                <td class="td-border"> {{ item.zone_code }} </td>
+                <td class="td-border"> {{ item.province_name }} </td>
+                <td class="td-border"> {{ item.hospname }} </td>
+                <td class="td-border"> {{ item.hn }} </td>
+                <td class="td-border"> {{ item.an }} </td>
+                <td class="td-border"> {{ item.cid }} </td>
+                <td class="td-border"> {{ item.first_name }} </td>
+                <td class="td-border"> {{ item.last_name }} </td>
+                <td class="td-border"> {{ item.gender }} </td>
+                <td class="td-border"> {{ getAge(item.birth_date) }} </td>
+                <td class="td-border">
+                    <div style="width: 100px;">
+                        {{ formatDate(item.date_admit) }}
+                    </div>
+                </td>
+                <td class="td-border">
+                    <div style="width: 100px;">
+                        {{ formatDate(item.create_date) }}
+                    </div>
+                </td>
+                <td class="td-border"> {{ item.gcs_name || '-' }} </td>
+                <td class="td-border"> {{ item.bed_name || '-' }} </td>
+                <td class="td-border"> {{ item.supplies_name || '-' }} </td>
+                <td class="td-border">
+                    <div style="width: 100px;">
+                        {{ formatDate(item.update_date) }}
+                    </div>
+                </td>
+                <td class="td-border"> {{ item.notUpdated || '-' }} </td>
+                <td class="td-border">
+                    <clr-icon *ngIf="item['Darunavir 600 mg.']" shape="check" class="is-success"></clr-icon>
+                    <clr-icon *ngIf="!item['Darunavir 600 mg.']" shape="times" class="is-error"></clr-icon>
+                </td>
+                <td class="td-border">
+                    <clr-icon *ngIf="item['Lopinavir 200 mg. / Ritonavir 50 mg.']" shape="check" class="is-success"></clr-icon>
+                    <clr-icon *ngIf="!item['Lopinavir 200 mg. / Ritonavir 50 mg.']" shape="times" class="is-error"></clr-icon>
+                </td>
+                <td class="td-border">
+                    <clr-icon *ngIf="item['Ritonavir 100 mg.']" shape="check" class="is-success"></clr-icon>
+                    <clr-icon *ngIf="!item['Ritonavir 100 mg.']" shape="times" class="is-error"></clr-icon>
+                </td>
+                <td class="td-border">
+                    <clr-icon *ngIf="item['Azithromycin 250 mg.']" shape="check" class="is-success"></clr-icon>
+                    <clr-icon *ngIf="!item['Azithromycin 250 mg.']" shape="times" class="is-error"></clr-icon>
+                </td>
+                <td class="td-border">
+                    <clr-icon *ngIf="item['Favipiravi']" shape="check" class="is-success"></clr-icon>
+                    <clr-icon *ngIf="!item['Favipiravi']" shape="times" class="is-error"></clr-icon>
+                </td>
+                <td> {{ item.sub_ministry_name || '-' }} </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div
+    *ngIf="isLoading && !items.length"
+    style="display: flex; justify-content: center; padding: 24px;">
+    กำลังโหลดข้อมูล ...
+</div>
+
+<div
+    *ngIf="!isLoading && !items.length"
+    style="display: flex; justify-content: center; padding: 24px;">
+    ไม่พบข้อมูล
+</div>
+
+<app-loadding #loading></app-loadding>

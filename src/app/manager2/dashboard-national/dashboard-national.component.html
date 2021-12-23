@@ -1,0 +1,35 @@
+<nav
+  style="margin-bottom: 16px;"
+  class="breadcrumb">
+  <div class="breadcrumb-item active">
+    Dashboard ภาพรวมระดับประเทศ
+  </div>
+</nav>
+
+<div class="dashboard-national__menus">
+  <button
+    style="margin-right: 24px;"
+    class="btn btn-primary btn-sm"
+    routerLink="beds-type">
+    การใช้งานเตียงแต่ละประเภท
+  </button>
+  <button
+    style="margin-right: 24px;"
+    class="btn btn-primary btn-sm"
+    routerLink="patients-case">
+    ผู้ป่วยแต่ละอาการ
+  </button>
+  <button
+    style="margin-right: 24px;"
+    class="btn btn-primary btn-sm"
+    routerLink="patients-status-part1">
+    ผู้ป่วยแต่ละสถานะ (ส่วนที่ 1)
+  </button>
+  <button
+    class="btn btn-primary btn-sm"
+    routerLink="patients-status-part2">
+    ผู้ป่วยแต่ละสถานะ (ส่วนที่ 2)
+  </button>
+</div>
+
+<router-outlet></router-outlet>

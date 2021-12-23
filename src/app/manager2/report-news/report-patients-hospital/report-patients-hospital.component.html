@@ -1,0 +1,139 @@
+<nav
+    style="margin-bottom: 16px;"
+    class="breadcrumb">
+    <span class="breadcrumb-item active">
+        รายงานผู้ป่วยรายสถานพยาบาล
+    </span>
+</nav>
+
+<div style="display: flex; justify-content: space-between;">
+    <div style="display: flex;">
+        <div style="width: 200px; margin-right: 24px;">
+            <label> วันที่แสดงข้อมูล </label>
+            <my-date-picker-th
+                [(ngModel)]="date"
+                [options]="myDatePickerOptions"
+                name="datePatientsZone"
+                (dateChanged)="selectDate($event)">
+            </my-date-picker-th>
+        </div>
+        <div style="width: 200px; margin-right: 24px;">
+            <label> เขตสุขภาพ </label>
+            <div class="clr-select-wrapper" style="width: 100%;">
+                <select
+                    [(ngModel)]="zone"
+                    name="zonePatientsHospital"
+                    style="width: 100%;"
+                    class="clr-select"
+                    (change)="selectZone()">
+                    <option value=""> ทุกเขต </option>
+                    <option *ngFor="let zone of zones; let i = index" [value]="zone.value">
+                        {{ zone.name }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div style="width: 200px;">
+            <label> จังหวัด </label>
+            <div class="clr-select-wrapper" style="width: 100%;">
+                <select
+                    name="provincePatientsHospital"
+                    style="width: 100%;"
+                    class="clr-select"
+                    readonly="true"
+                    (click)="setSelectMultiProvince()">
+                    <option style="display: none;" value=""> ทุกจังหวัด </option>
+                    <option
+                        [selected]="provinceGroup.length"
+                        style="display: none;">
+                        <div *ngIf="provinceGroup.length === 1">
+                            {{ provinceGroup[0].name }}
+                        </div>
+                        <div *ngIf="provinceGroup.length > 1">
+                            {{ provinceGroup[0].name + ' + ' + '( ' + ( provinceGroup.length - 1 ) + ' )' }}
+                        </div>
+                    </option>
+                </select>
+                <div
+                    *ngIf="isSelectProvince && provinces.length"
+                    class="patients-hospital__select-menu">
+                    <clr-checkbox-wrapper *ngFor="let province of provinces; let i = index">
+                        <input
+                            [value]="province.code"
+                            [checked]="checkProvince(province)"
+                            type="checkbox"
+                            clrCheckbox
+                            (change)="selectProvince(province)" />
+                        <label> {{ province.name }} </label>
+                    </clr-checkbox-wrapper>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding-top: 16px;">
+        <button class="btn btn-sm btn-primary" (click)="exportExcel()">
+            <clr-icon shape="download"></clr-icon>export excel
+        </button>
+    </div>
+</div>
+
+<div style="overflow-x: auto;">
+    <table style="border-collapse: collapse;" class="table table-compact">
+        <thead>
+            <th class="td-border"> เขตสุขภาพ </th>
+            <th class="td-border"> จังหวัด </th>
+            <th class="td-border"> รหัสสถานพยาบาล </th>
+            <th class="td-border"> โรงพยาบาล </th>
+            <th class="td-border"> ระดับขีดความสามารถ </th>
+            <th class="td-border"> ผู้ป่วยทั้งหมด </th>
+            <th class="td-border"> Severe </th>
+            <th class="td-border"> Invasive Ventilator </th>
+            <th class="td-border"> Non-Invasive Ventilator  </th>
+            <th class="td-border"> High flow </th>
+            <th class="td-border"> Moderate </th>
+            <th class="td-border"> Mild </th>
+            <th class="td-border"> Asymptomatic </th>
+            <th class="td-border"> Dead </th>
+            <th class="td-border"> PUI </th>
+            <th> หน่วยงาน </th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of items; let i = index">
+                <td class="td-border"> {{ item.zone_code }} </td>
+                <td class="td-border"> {{ item.province_name }} </td>
+                <td class="td-border"> {{ item.hospcode }} </td>
+                <td class="td-border"> {{ item.hospname }} </td>
+                <td class="td-border"> {{ item.level }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.total) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.severe) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.invasive) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.non_invasive) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.high_flow) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.moderate) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.mild) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.asymptomatic) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.death) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.pui) }} </td>
+                <td>
+                    <div style="width: 200px">
+                        {{ item.sub_ministry_name }}
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div
+    *ngIf="isLoading && !items.length"
+    style="display: flex; justify-content: center; padding: 24px;">
+    กำลังโหลดข้อมูล ...
+</div>
+
+<div
+    *ngIf="!isLoading && !items.length"
+    style="display: flex; justify-content: center; padding: 24px;">
+    ไม่พบข้อมูล
+</div>
+
+<app-loadding #loading></app-loadding>

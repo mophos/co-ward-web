@@ -1,0 +1,64 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">รายงานการใช้เตียง</span>
+</nav>
+<br>
+<div class="clr-row">
+  <div class="clr-col-12" style="text-align: right;">
+    <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
+      <clr-icon shape="download"></clr-icon>export excel
+    </button>
+  </div>
+</div>
+
+<table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
+
+  <tr>
+    <th rowspan="2" class="td-border" style="position: sticky; top: 0;">โรงพยาบาล</th>
+    <th colspan="4" class="td-border" style="position: sticky; top: 0;">จำนวนเตียง (ไม่รวม Hospitel)</th>
+    <th rowspan="2" class="td-border" style="position: sticky; top: 0;">หน่วยงาน</th>
+  </tr>
+
+  <tr>
+    <th class="td-border" style="position: sticky; top: 0;">จำนวนเตียงทั้งหมด</th>
+    <th class="td-border" style="position: sticky; top: 0;">Admit รวม</th>
+    <th class="td-border" style="position: sticky; top: 0;">สำรองเตียงรอรับย้าย</th>
+    <th class="td-border" style="position: sticky; top: 0;">ว่าง</th>
+  </tr>
+
+
+  <tr>
+    <th class=" td-border" >รวม</th>
+    <th class="text-right  td-border" >{{totalQty}}</th>
+    <th class="text-right  td-border" >{{admitQty}}</th>
+    <th class="text-right  td-border" >{{spareQty}}</th>
+    <th class="text-right  td-border" >{{standbyQty}}</th>
+    <th class="text-right  td-border" ></th>
+  </tr>
+
+  <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+    <td class="left td-border">{{h.hospname}}<br>
+      <label style="color: red;">
+        ข้อมูลล่าสุด: {{ h.updated_entry | dateTh:'DD/MM/YYYY hh:mm'}}
+      </label>
+    </td>
+    <td class="text-right  td-border">{{(h.aiir_qty || 0)+(h.modified_aiir_qty || 0)+(h.isolate_qty || 0)+(h.cohort_qty || 0)}}</td>
+    <td class="text-right  td-border">{{(h.sum || 0)}}</td>
+    <td class="text-right  td-border">{{(h.aiir_spare_qty || 0)+(h.modified_aiir_spare_qty || 0)+(h.isolate_spare_qty ||
+      0)+(h.cohort_spare_qty || 0)}}</td>
+    <td class="text-right  td-border">{{(h.sum)-((h.aiir_spare_qty || 0)+(h.modified_aiir_spare_qty || 0)+(h.isolate_spare_qty || 0)+(h.cohort_spare_qty ||
+      0))}}</td>
+    <td class="left td-border">{{h.sub_ministry_name}}</td>
+  </tr>
+
+  <tr>
+    <th class="text-right  td-border" >รวม</th>
+    <th class="text-right  td-border" >{{totalQty}}</th>
+    <th class="text-right  td-border" >{{admitQty}}</th>
+    <th class="text-right  td-border" >{{spareQty}}</th>
+    <th class="text-right  td-border" >{{standbyQty}}</th>
+    <th class="text-right  td-border" ></th>
+  </tr>
+</table>
+<label>{{list.length | number:'1.0-0' }} รายการ</label>
+
+<app-loadding #loading></app-loadding>

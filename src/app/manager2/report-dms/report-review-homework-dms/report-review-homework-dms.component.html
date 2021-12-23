@@ -1,0 +1,39 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">รายงานการลงทะเบียนหน่วยบริการเครือข่าย COVID-19 ในกรุงเทพและปริมณฑล</span>
+</nav>
+
+<div class="clr-row">
+  <div class="clr-col-12" style="text-align: right;">
+    <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
+      <clr-icon shape="download"></clr-icon>export excel
+    </button>
+  </div>
+</div>
+
+<table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
+  <tr>
+    <th class="td-border"></th>
+    <th class="td-border">โรงพยาบาล</th>
+    <th class="td-border">วันที่ลงทะเบียนล่าสุด</th>
+    <th class="td-border">สังกัด</th>
+    <th class="td-border">จังหวัด</th>
+  </tr>
+
+
+  <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+    <td class="left td-border" >{{idx+1}}</td>
+    <td class="left td-border" >{{h.hospcode}}:{{h.hospname}}</td>
+    <td class="right td-border" >{{h.register_last_date | dateTh:'DD/MM/YYYY hh:mm'}}</td>
+    <td class="left td-border" >{{h.sub_ministry_name}}</td>
+    <td class="left td-border" >{{h.province_code}}:{{h.province_name}}</td>
+  </tr>
+  <tr  class="isProblem">
+    <td class="left td-border" ></td>
+    <td class="left td-border" ></td>
+    <td class="right td-border" ></td>
+    <td class="left td-border" >ลงทะเบียนแล้ว {{sum1}}/{{sum2}} รพ.</td>
+    <td class="left td-border" >{{sum1*100/sum2 | number:'1.0-2'}}%</td>
+  </tr>
+</table>
+
+<app-loadding #loading></app-loadding>

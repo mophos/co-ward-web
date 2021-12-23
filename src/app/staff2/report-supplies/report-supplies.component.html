@@ -1,0 +1,97 @@
+<nav class="breadcrumb">
+  <!-- <a class="breadcrumb-item" href="javascript://" routerLink="/admin/manage-min-max">รายการสังกัด</a> -->
+  <span class="breadcrumb-item active">รายงานจำนวนเวชภัณฑ์</span>
+</nav>
+
+<br>
+<div class="clr-row">
+  <div class="clr-col-2">วันที่แสดงข้อมูล</div>
+  <div class="clr-col-2">
+    <my-date-picker-th name="date" [options]="myDatePickerOptions" (dateChanged)="onChangeDate($event)" [(ngModel)]="date"
+      required>
+    </my-date-picker-th>
+  </div>
+  <div class="clr-col-8">
+    <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
+      <clr-icon shape="download"></clr-icon>export excel
+    </button>
+  </div>
+</div>
+<div class="clr-row">
+  <div class="clr-col-8"><span class="required">*</span> หมายเหตุ หากดูรายงานวันปัจจุบัน ข้อมูลอาจเปลี่ยนแปลง
+    เพราะรพ.สามารถแก้ไขข้อมูลในวันปัจจุบันได้
+  </div>
+</div>
+<div class="clr-row">
+  <div class="clr-col-8"><span class="required">*</span> หมายเหตุ Export Excel จะได้ข้อมูลอัตราการใช้ต่อเดือนด้วย
+  </div>
+</div>
+
+<div *ngFor="let l of list">
+  <h4> {{l.provinces == 1 ? '' : 'เขต '+l.name}}</h4>
+  <table class="table" *ngFor="let p of l.provinces">
+    <thead>
+      <tr>
+        <th colspan="19" style="text-align: left;">
+          <h3>{{p.province_name}}</h3>
+        </th>
+      </tr>
+      <tr>
+        <th class="right">โรงพยาบาล</th>
+        <th class="right">วันที่บันทึกล่าสุด</th>
+        <th class="right">Surgical Gown</th>
+        <th class="right">Cover All-1</th>
+        <th class="right">Cover All-2</th>
+        <th class="right">N95</th>
+        <th class="right">Shoe Cover</th>
+        <th class="right">Hood cover</th>
+        <th class="right">Nitrile Glove</th>
+        <th class="right">Face shield</th>
+        <th class="right">Surgical Mask</th>
+        <th class="right">Powered air-purifying respirator</th>
+        <th class="right">Alcohol 70%</th>
+        <th class="right">Alcohol 95%</th>
+        <th class="right">Alcohol Gel</th>
+        <th class="right">Disposable Glove (latex,nonsterile)</th>
+        <th class="right">Isolation gown</th>
+        <th class="right">Leg Cover</th>
+        <th class="right">Disposable cap</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let h of p.hospitals">
+        <td class="left">{{h.hospname}}</td>
+        <td class="left">{{h.entry_date | dateTh:'DD/MM/YYYY'}}</td>
+        <td class="right">{{h.surgical_gown_qty }}</td>
+        <td class="right">{{h.cover_all1_qty}}</td>
+        <td class="right">{{h.cover_all2_qty}}</td>
+        <td class="right">{{h.n95_qty}}</td>
+        <td class="right">{{h.shoe_cover_qty}}</td>
+        <td class="right">{{h.surgical_hood_qty}}</td>
+        <td class="right">{{h.long_glove_qty}}</td>
+        <td class="right">{{h.face_shield_qty}}</td>
+        <td class="right">{{h.surgical_mask_qty}}</td>
+        <td class="right">{{h.powered_air_qty}}</td>
+        <td class="right">{{h.alcohol_70_qty}}</td>
+        <td class="right">{{h.alcohol_95_qty}}</td>
+        <td class="right">{{h.alcohol_gel_qty}}</td>
+        <td class="right">{{h.disposable_glove_qty}}</td>
+        <td class="right">{{h.isolation_gown_qty}}</td>
+        <td class="right">{{h.leg_cover_qty}}</td>
+        <td class="right">{{h.disposable_cap_qty}}</td>
+      </tr>
+      <!-- <tr>
+        <td class="right" style="font-weight: bold;">รวม</td>
+        <td class="right" style="font-weight: bold;">{{l.sum}}</td>
+        <td class="right" style="font-weight: bold;">{{l.ippui}}</td>
+        <td class="right" style="font-weight: bold;">{{l.severe}}</td>
+        <td class="right" style="font-weight: bold;">{{l.moderate}}</td>
+        <td class="right" style="font-weight: bold;">{{l.mild}}</td>
+        <td class="right" style="font-weight: bold;">{{l.asymptomatic}}</td>
+      </tr> -->
+    </tbody>
+  </table>
+</div>
+
+
+<app-loadding #loading></app-loadding>

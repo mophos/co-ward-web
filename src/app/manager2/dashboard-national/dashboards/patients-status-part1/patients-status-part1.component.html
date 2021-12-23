@@ -1,0 +1,187 @@
+<div style="display: flex; margin-bottom: 24px;">
+  <h3 style="margin-right: 24px"> ผู้ป่วยแต่ละสถานะ (สะสม) </h3>
+  <div style="width: 160px; margin-right: 16px;">
+    <label> วันที่เริ่ม </label>
+    <my-date-picker-th
+        [(ngModel)]="startDate"
+        [options]="myDatePickerOptions"
+        name="startDatePatientsStatusPart1"
+        (dateChanged)="selectStartDate($event)">
+    </my-date-picker-th>
+  </div>
+  <div style="width: 160px; margin-right: 16px;">
+    <label> วันที่สิ้นสุด </label>
+    <my-date-picker-th
+        [(ngModel)]="endDate"
+        [options]="myDatePickerOptions"
+        name="endDatePatientsStatusPart1"
+        (dateChanged)="selectEndDate($event)">
+    </my-date-picker-th>
+  </div>
+</div>
+
+<div style="display: flex; margin-bottom: 8px;">
+  <div style="width: 160px; margin-right: 16px;">
+      <label> หน่วยงาน </label>
+      <div class="clr-select-wrapper" style="width: 100%;">
+          <select
+              [(ngModel)]="sector"
+              name="sectorPatientsStatusPart1"
+              style="width: 100%;"
+              class="clr-select"
+              (change)="selectSector()">
+              <option value=""> ทุกหน่วยงาน </option>
+              <option value="GOVERNMENT">
+                ภาครัฐ
+              </option>
+              <option value="PRIVATE">
+                เอกชน
+              </option>
+          </select>
+      </div>
+  </div>
+
+  <div style="width: 160px; margin-right: 16px;">
+      <label> หน่วยงานย่อย </label>
+      <div class="clr-select-wrapper" style="width: 100%;">
+          <select
+              [(ngModel)]="subMinistryCode"
+              name="subMinistryPatientsStatusPart1"
+              style="width: 100%;"
+              class="clr-select"
+              (change)="selectSubMinistry()">
+              <option value=""> ทุกหน่วยงานย่อย </option>
+              <option *ngFor="let subMinistry of listSubMinistry; let i = index" [value]="subMinistry.code">
+                  {{ subMinistry.name }}
+              </option>
+          </select>
+      </div>
+  </div>
+
+  <div style="width: 160px; margin-right: 16px;">
+      <label> เขตสุขภาพ </label>
+      <div class="clr-select-wrapper" style="width: 100%;">
+          <select
+              [(ngModel)]="zone"
+              name="zonePatientsStatusPart1"
+              style="width: 100%;"
+              class="clr-select"
+              (change)="selectZone()">
+              <option value=""> ทุกเขตสุขภาพ </option>
+              <option *ngFor="let zone of zones; let i = index" [value]="zone.value">
+                  {{ zone.name }}
+              </option>
+          </select>
+      </div>
+  </div>
+  <div style="width: 160px; margin-right: 16px;">
+      <label> จังหวัด </label>
+      <div class="clr-select-wrapper" style="width: 100%;">
+          <select
+              [(ngModel)]="displayProvince"
+              name="provincePatientsStatusPart1"
+              style="width: 100%;"
+              class="clr-select"
+              readonly="true"
+              (click)="setSelectMultiProvince()">
+              <option style="display: none;" value=""> ทุกจังหวัด </option>
+              <option
+                  [selected]="selectedProvince.length"
+                  style="display: none;">
+                  <div *ngIf="selectedProvince.length === 1">
+                      {{ selectedProvince[0].name_th }}
+                  </div>
+                  <div *ngIf="selectedProvince.length > 1">
+                      {{ selectedProvince[0].name_th + ' + ' + ( selectedProvince.length - 1 ) }}
+                  </div>
+              </option>
+          </select>
+          <div
+              *ngIf="isSelectProvince"
+              class="patients-status-part1__select-menu">
+              <clr-checkbox-wrapper *ngFor="let province of provinces; let i = index">
+                  <input
+                      [checked]="checkProvince(province)"
+                      type="checkbox"
+                      clrCheckbox
+                      (change)="selectProvince(province)" />
+                  <label> {{ province.name_th }} </label>
+              </clr-checkbox-wrapper>
+          </div>
+      </div>
+  </div>
+  <div style="min-width: 160px; max-width: 200px;">
+    <label> ประเภทเตียง </label>
+    <div class="clr-select-wrapper" style="width: 100%;">
+        <select
+            [(ngModel)]="bedTypeId"
+            name="bedTypePatientsStatusPart1"
+            style="width: 100%;"
+            class="clr-select"
+            (change)="selectBedType()">
+            <option value=""> ทุกประเภทเตียง </option>
+            <option *ngFor="let bedType of bedTypes; let i = index" [value]="bedType.id">
+                {{ bedType.name }}
+            </option>
+        </select>
+    </div>
+  </div>
+</div>
+
+<div style="display: flex;">
+  <div
+    style="margin-right: 24px"
+    class="card patients-status-part1__card">
+    <div class="card-block">
+        <div  class="card-title">
+          Admit
+        </div>
+        <div
+          style="text-align: center;"
+          class="card-text">
+          {{ formatNumber(items.admit_total) }}
+        </div>
+    </div>
+  </div>
+  <div
+    style="margin-right: 24px"
+    class="card patients-status-part1__card">
+    <div class="card-block">
+        <div class="card-title">
+          Discharge
+        </div>
+        <div
+          style="text-align: center;"
+          class="card-text">
+          {{ formatNumber(items.discharge_total) }}
+        </div>
+    </div>
+  </div>
+  <div
+    style="margin-right: 24px"
+    class="card patients-status-part1__card">
+    <div class="card-block">
+        <div class="card-title">
+          Dead
+        </div>
+        <div
+          style="text-align: center;"
+          class="card-text">
+          {{ formatNumber(items.death_total) }}
+        </div>
+    </div>
+  </div>
+</div>
+<div
+  style="width: 636px;"
+  class="card">
+  <div class="card-block">
+    <highcharts-chart
+        *ngIf="highcharts"
+        [Highcharts] = "highcharts"
+        [options] = "lineChartOptions">
+    </highcharts-chart>
+  </div>
+</div>
+
+<app-loadding #loading></app-loadding>

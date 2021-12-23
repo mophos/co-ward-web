@@ -1,0 +1,24 @@
+<nav class="breadcrumb">
+    <!-- <a class="breadcrumb-item" href="javascript://" routerLink="/admin/manage-min-max">รายการสังกัด</a> -->
+    <span class="breadcrumb-item active">ตรวจสอบการบันทึกข้อมูลเตียง</span>
+</nav>
+
+<clr-stack-view *ngFor="let b of data">
+    <clr-stack-header>เขต {{b.zone_code}}</clr-stack-header>
+
+    <clr-stack-block>
+        <clr-stack-label>จังหวัด</clr-stack-label>
+        <clr-stack-content>วันที่บันทึกล่าสุด</clr-stack-content>
+    </clr-stack-block>
+
+    <clr-stack-block [clrSbExpanded]="false" *ngFor="let p of b.provinces">
+        <clr-stack-label>{{p.province_name}}</clr-stack-label>
+        <clr-stack-content></clr-stack-content>
+        <clr-stack-block *ngFor="let h of p.hospitals">
+            <clr-stack-label>{{h.hospname}}</clr-stack-label>
+            <clr-stack-content>{{h.eoc_resource_entrydate | dateTh:'DD/MM/YYYY hh:mm'}}</clr-stack-content>
+        </clr-stack-block>
+    </clr-stack-block>
+</clr-stack-view>
+
+<app-loadding #loadding></app-loadding>

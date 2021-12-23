@@ -1,0 +1,55 @@
+<nav class="breadcrumb">
+  <span>จัดการ min/max ยา</span>
+</nav>
+
+<div class="clr-row">
+  <div class="clr-col-5">
+    <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
+      <clr-dg-column>โรงพยาบาล</clr-dg-column>
+      <clr-dg-column>จังหวัด</clr-dg-column>
+      <clr-dg-column></clr-dg-column>
+
+      <clr-dg-row *clrDgItems="let i of listHospNode">
+        <clr-dg-cell>{{i.hospname}}</clr-dg-cell>
+        <clr-dg-cell>{{i.province_name}}</clr-dg-cell>
+        <clr-dg-cell>
+          <div class="btn-group btn-primary">
+            <button class="btn btn-primary btn-sm" (click)="getDrugEdit(i)">แก้ไข</button>
+            <button class="btn btn-success btn-sm" [disabled]="hospId != i.id" (click)="saveDrug()">บันทึก</button>
+          </div>
+        </clr-dg-cell>
+      </clr-dg-row>
+    </clr-datagrid>
+  </div>
+  <div class="clr-col-7">
+    <clr-datagrid [clrDgLoading]="loading" [style.height.px]="800">
+      <clr-dg-column>ชื่อยา</clr-dg-column>
+      <clr-dg-column>min</clr-dg-column>
+      <clr-dg-column>max</clr-dg-column>
+      <clr-dg-column>safety stock</clr-dg-column>
+      <clr-dg-column>หน่วย</clr-dg-column>
+
+      <clr-dg-row *clrDgItems="let i of listDrugEdit">
+        <clr-dg-cell>{{i.generic_name}}</clr-dg-cell>
+        <clr-dg-cell>
+          <input type="text" appNumberOnly name="{{i.min}}" [(ngModel)]="i.min">
+        </clr-dg-cell>
+        <clr-dg-cell>
+          <input type="text" appNumberOnly name="{{i.max}}" [(ngModel)]="i.max">
+        </clr-dg-cell>
+        <clr-dg-cell>
+          <input type="text" appNumberOnly name="{{i.safety_stock}}" [(ngModel)]="i.safety_stock">
+        </clr-dg-cell>
+        <clr-dg-cell>
+          {{i.unit_name}}
+        </clr-dg-cell>
+      </clr-dg-row>
+      <clr-dg-footer>
+        <!-- <clr-dg-pagination #pagination [clrDgTotalItems]="total" [clrDgPageSize]="limit">
+          <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
+          {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} จาก {{pagination.totalItems}} รายการ
+        </clr-dg-pagination> -->
+      </clr-dg-footer>
+    </clr-datagrid>
+  </div>
+</div>

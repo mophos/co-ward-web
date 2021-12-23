@@ -1,0 +1,85 @@
+<nav
+    style="margin-bottom: 16px;"
+    class="breadcrumb">
+    <span class="breadcrumb-item active">
+        รายงานการใช้เครื่องช่วยหายใจ
+    </span>
+</nav>
+
+<div style="display: flex; justify-content: space-between;">
+    <div style="display: flex;">
+        <label style="padding-top: 4px; margin-right: 16px;"> วันที่แสดงข้อมูล </label>
+        <div style="width: 200px; margin-right: 16px;">
+            <my-date-picker-th
+                [(ngModel)]="date"
+                [options]="myDatePickerOptions"
+                name="dateRespirator"
+                (dateChanged)="selectDate($event)">
+            </my-date-picker-th>
+        </div>
+    </div>
+    <button class="btn btn-sm btn-primary" (click)="exportExcel()">
+        <clr-icon shape="download"></clr-icon>export excel
+    </button>
+</div>
+
+<table style="border-collapse: collapse;" class="table table-compact">
+    <thead>
+        <tr>
+            <th rowspan="2" class="td-border"> เขตสุขภาพ </th>
+            <th rowspan="2" class="td-border"> จังหวัด </th>
+            <th rowspan="2" class="td-border"> รหัสโรงพยาบาล </th>
+            <th rowspan="2" class="td-border"> โรงพยาบาล </th>
+            <th colspan="2" class="td-border"> Non Invasive </th>
+            <th colspan="2" class="td-border"> Invasive Ventilator </th>
+            <th colspan="2" class="td-border"> High Flow </th>
+            <th colspan="2" class="td-border"> PAPR </th>
+            <th rowspan="2"> หน่วยงาน </th>
+        </tr>
+        <tr>
+            <th class="td-border"> ใช้กับผู้ป่วย </th>
+            <th class="td-border"> ทั้งหมด </th>
+            <th class="td-border"> ใช้กับผู้ป่วย </th>
+            <th class="td-border"> ทั้งหมด </th>
+            <th class="td-border"> ใช้กับผู้ป่วย </th>
+            <th class="td-border"> ทั้งหมด </th>
+            <th class="td-border"> ใช้กับผู้ป่วย </th>
+            <th class="td-border"> ทั้งหมด </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of items; let i = index">
+            <td class="td-border"> {{ item.zone_code }} </td>
+            <td class="td-border"> {{ item.province_name }} </td>
+            <td class="td-border"> {{ item.hospcode }} </td>
+            <td class="td-border"> {{ item.hospname }} </td>
+            <td class="td-border"> {{ cal.checkValue(item.non_invasive_usage_qty) }} </td>
+            <td class="td-border"> {{ cal.checkValue(item.non_invasive_covid_qty) }} </td>
+            <td class="td-border"> {{ cal.checkValue(item.invasive_usage_qty) }} </td>
+            <td class="td-border"> {{ cal.checkValue(item.invasive_covid_qty) }} </td>
+            <td class="td-border"> {{ cal.checkValue(item.high_flow_usage_qty) }} </td>
+            <td class="td-border"> {{ cal.checkValue(item.high_flow_covid_qty) }} </td>
+            <td class="td-border"> {{ cal.checkValue(item.papr_usage_qty) }} </td>
+            <td class="td-border"> {{ cal.checkValue(item.papr_covid_qty) }} </td>
+            <td>
+                <div style="width: 200px;">
+                    {{ item.sub_ministry_name || '-' }}
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div
+    *ngIf="isLoading && !items.length"
+    style="display: flex; justify-content: center; padding: 24px;">
+    กำลังโหลดข้อมูล ...
+</div>
+
+<div
+    *ngIf="!isLoading && !items.length"
+    style="display: flex; justify-content: center; padding: 24px;">
+    ไม่พบข้อมูล
+</div>
+
+<app-loadding #loading></app-loadding>

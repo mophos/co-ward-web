@@ -1,0 +1,226 @@
+<nav
+    style="margin-bottom: 16px;"
+    class="breadcrumb">
+    <span class="breadcrumb-item active">
+        รายงานเตียงรายจังหวัด
+    </span>
+</nav>
+
+<div style="display: flex; justify-content: space-between;">
+    <div style="display: flex;">
+        <div style="width: 200px; margin-right: 24px;">
+            <label> วันที่แสดงข้อมูล </label>
+            <my-date-picker-th
+                [(ngModel)]="date"
+                [options]="myDatePickerOptions"
+                name="dateBedsProvince"
+                (dateChanged)="selectDate($event)">
+            </my-date-picker-th>
+        </div>
+        <div style="width: 200px;">
+            <label> เขตสุขภาพ </label>
+            <div class="clr-select-wrapper" style="width: 100%;">
+                <select
+                    [(ngModel)]="zone"
+                    name="zoneBedsProvince"
+                    style="width: 100%;"
+                    class="clr-select"
+                    (change)="selectZone()">
+                    <option value=""> ทุกเขต </option>
+                    <option *ngFor="let zone of zones; let i = index" [value]="zone.value">
+                        {{ zone.name }}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div style="padding-top: 16px;">
+        <button class="btn btn-sm btn-primary" (click)="exportExcel()">
+            <clr-icon shape="download"></clr-icon>export excel
+        </button>
+    </div>
+</div>
+
+<div style="overflow: auto;">
+    <table style="border-collapse: collapse;" class="table table-compact">
+        <thead>
+            <tr>
+                <th rowspan="2" class="td-border"> เขตสุขภาพ </th>
+                <th rowspan="2" class="td-border"> จังหวัด </th>
+                <th colspan="3" class="td-border"> ระดับ 3 ใส่ท่อและเครื่องช่วยหายใจได้ </th>
+                <th colspan="3" class="td-border"> ระดับ 2.2 Oxygen high flow </th>
+                <th colspan="3" class="td-border"> ระดับ 2.1 Oxygen low flow </th>
+                <th colspan="3" class="td-border"> ระดับ 1 ไม่ใช้ Oxygen </th>
+                <th colspan="3" class="td-border"> ระดับ 0 Home Isolation (stepdown) </th>
+                <th colspan="3" class="td-border">  Home Isolation (New case) </th>
+                <th colspan="3"> Community Isolation (New case) </th>
+            </tr>
+            <tr>
+                <th class="td-border"> ทั้งหมด </th>
+                <th class="td-border"> ใช้ไป </th>
+                <th class="td-border"> คงเหลือ </th>
+                <th class="td-border"> ทั้งหมด </th>
+                <th class="td-border"> ใช้ไป </th>
+                <th class="td-border"> คงเหลือ </th>
+                <th class="td-border"> ทั้งหมด </th>
+                <th class="td-border"> ใช้ไป </th>
+                <th class="td-border"> คงเหลือ </th>
+                <th class="td-border"> ทั้งหมด </th>
+                <th class="td-border"> ใช้ไป </th>
+                <th class="td-border"> คงเหลือ </th>
+                <th class="td-border"> ทั้งหมด </th>
+                <th class="td-border"> ใช้ไป </th>
+                <th class="td-border"> คงเหลือ </th>
+                <th class="td-border"> ทั้งหมด </th>
+                <th class="td-border"> ใช้ไป </th>
+                <th class="td-border"> คงเหลือ </th>
+                <th class="td-border"> ทั้งหมด </th>
+                <th class="td-border"> ใช้ไป </th>
+                <th> คงเหลือ </th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let count of items; let i = index">
+                <ng-container *ngFor="let item of items[i]; let j = index">
+                    <tr *ngIf="item.zone_code !== '13'">
+                        <td class="td-border"> {{ item.zone_code }} </td>
+                        <td class="td-border"> {{ item.province_name }} </td>
+                        <td class="td-border"> {{ cal.checkValue(item.level3_total) }} </td>
+                        <td class="td-border"> {{ cal.checkValue(item.level3_used) }} </td>
+                        <td class="td-border"> {{ cal.getRemaining(item.level3_total, item.level3_used) }} </td>
+                        <td class="td-border"> {{ cal.checkValue(item.level2_2_total) }} </td>
+                        <td class="td-border"> {{ cal.checkValue(item.level2_2_used) }} </td>
+                        <td class="td-border"> {{ cal.getRemaining(item.level2_2_total, item.level2_2_used) }} </td>
+                        <td class="td-border"> {{ cal.checkValue(item.level2_1_total) }} </td>
+                        <td class="td-border"> {{ cal.checkValue(item.level2_1_used) }} </td>
+                        <td class="td-border"> {{ cal.getRemaining(item.level2_1_total, item.level2_1_used) }} </td>
+                        <td class="td-border"> {{ cal.checkValue(item.level1_total) }} </td>
+                        <td class="td-border"> {{ cal.checkValue(item.level1_used) }} </td>
+                        <td class="td-border"> {{ cal.getRemaining(item.level1_total, item.level1_used) }} </td>
+                        <td class="td-border"> {{ cal.checkValue(item.level0_total) }} </td>
+                        <td class="td-border"> {{ cal.checkValue(item.level0_used) }} </td>
+                        <td class="td-border"> {{ cal.getRemaining(item.level0_total, item.level0_used) }} </td>
+                        <td class="td-border"> {{ cal.checkValue(item.home_isolation_total) }} </td>
+                        <td class="td-border"> {{ cal.checkValue(item.home_isolation_used) }} </td>
+                        <td class="td-border"> {{ cal.getRemaining(item.home_isolation_total, item.home_isolation_used) }} </td>
+                        <td class="td-border"> {{ cal.checkValue(item.community_isolation_total) }} </td>
+                        <td class="td-border"> {{ cal.checkValue(item.community_isolation_used) }} </td>
+                        <td> {{ cal.getRemaining(item.community_isolation_total, item.community_isolation_used) }} </td>
+                    </tr>
+                </ng-container>
+                <tr *ngIf="items.length && items[i].length && items[i][0].zone_code !== '13'">
+                    <td colspan="2" class="td-border"> รวมเขต {{ items[i][0].zone_code }} </td>
+                    <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'level3_total')) }} </td>
+                    <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'level3_used')) }} </td>
+                    <td class="td-border"> {{ cal.getRemaining(cal.sumZone(items[i], 'level3_total'), cal.sumZone(items[i], 'level3_used')) }} </td>
+                    <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'level2_2_total')) }} </td>
+                    <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'level2_2_used')) }} </td>
+                    <td class="td-border"> {{ cal.getRemaining(cal.sumZone(items[i], 'level2_2_total'), cal.sumZone(items[i], 'level2_2_used')) }} </td>
+                    <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'level2_1_total')) }} </td>
+                    <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'level2_1_used')) }} </td>
+                    <td class="td-border"> {{ cal.getRemaining(cal.sumZone(items[i], 'level2_1_total'), cal.sumZone(items[i], 'level2_1_used')) }} </td>
+                    <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'level1_total')) }} </td>
+                    <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'level1_used')) }} </td>
+                    <td class="td-border"> {{ cal.getRemaining(cal.sumZone(items[i], 'level1_total'), cal.sumZone(items[i], 'level1_used')) }} </td>
+                    <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'level0_total')) }} </td>
+                    <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'level0_used')) }} </td>
+                    <td class="td-border"> {{ cal.getRemaining(cal.sumZone(items[i], 'level0_total'), cal.sumZone(items[i], 'level0_used')) }} </td>
+                    <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'home_isolation_total')) }} </td>
+                    <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'home_isolation_used')) }} </td>
+                    <td class="td-border"> {{ cal.getRemaining(cal.sumZone(items[i], 'home_isolation_total'), cal.sumZone(items[i], 'home_isolation_used')) }} </td>
+                    <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'community_isolation_total')) }} </td>
+                    <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'community_isolation_used')) }} </td>
+                    <td> {{ cal.getRemaining(cal.sumZone(items[i], 'community_isolation_total'), cal.sumZone(items[i], 'community_isolation_used')) }} </td>
+                </tr>
+            </ng-container>
+        </tbody>
+        <tfoot *ngIf="cal.checkExistingZone(items)">
+            <tr  *ngIf="items[12].length">
+                <td colspan="2" class="td-border"> กรุงเทพมหานคร </td>
+                <td class="td-border"> {{ cal.checkValue(items[12][0].level3_total) }} </td>
+                <td class="td-border"> {{ cal.checkValue(items[12][0].level3_used) }} </td>
+                <td class="td-border"> {{ cal.getRemaining(items[12][0].level3_total, items[12][0].level3_used) }} </td>
+                <td class="td-border"> {{ cal.checkValue(items[12][0].level2_2_total) }} </td>
+                <td class="td-border"> {{ cal.checkValue(items[12][0].level2_2_used) }} </td>
+                <td class="td-border"> {{ cal.getRemaining(items[12][0].level2_2_total, items[12][0].level2_2_used) }} </td>
+                <td class="td-border"> {{ cal.checkValue(items[12][0].level2_1_total) }} </td>
+                <td class="td-border"> {{ cal.checkValue(items[12][0].level2_1_used) }} </td>
+                <td class="td-border"> {{ cal.getRemaining(items[12][0].level2_1_total, items[12][0].level2_1_used) }} </td>
+                <td class="td-border"> {{ cal.checkValue(items[12][0].level1_total) }} </td>
+                <td class="td-border"> {{ cal.checkValue(items[12][0].level1_used) }} </td>
+                <td class="td-border"> {{ cal.getRemaining(items[12][0].level1_total, items[12][0].level1_used) }} </td>
+                <td class="td-border"> {{ cal.checkValue(items[12][0].level0_total) }} </td>
+                <td class="td-border"> {{ cal.checkValue(items[12][0].level0_used) }} </td>
+                <td class="td-border"> {{ cal.getRemaining(items[12][0].level0_total, items[12][0].level0_used) }} </td>
+                <td class="td-border"> {{ cal.checkValue(items[12][0].home_isolation_total) }} </td>
+                <td class="td-border"> {{ cal.checkValue(items[12][0].home_isolation_used) }} </td>
+                <td class="td-border"> {{ cal.getRemaining(items[12][0].home_isolation_total, items[12][0].home_isolation_used) }} </td>
+                <td class="td-border"> {{ cal.checkValue(items[12][0].community_isolation_total) }} </td>
+                <td class="td-border"> {{ cal.checkValue(items[12][0].community_isolation_used) }} </td>
+                <td> {{ cal.getRemaining(items[12][0].community_isolation_total, items[12][0].community_isolation_used) }} </td>
+            </tr>
+            <tr *ngIf="cal.countExistingZone(items) >= 12">
+                <td colspan="2" class="td-border"> รวม 12 เขต </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'level3_total')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'level3_used')) }} </td>
+                <td class="td-border"> {{ cal.getRemaining(cal.sum12ZoneByProvince(items, 'level3_total') - cal.sum12ZoneByProvince(items, 'level3_used')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'level2_2_total')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'level2_2_used')) }} </td>
+                <td class="td-border"> {{ cal.getRemaining(cal.sum12ZoneByProvince(items, 'level2_2_total') - cal.sum12ZoneByProvince(items, 'level2_2_used')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'level2_1_total')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'level2_1_used')) }} </td>
+                <td class="td-border"> {{ cal.getRemaining(cal.sum12ZoneByProvince(items, 'level2_1_total') - cal.sum12ZoneByProvince(items, 'level2_1_used')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'level1_total')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'level1_used')) }} </td>
+                <td class="td-border"> {{ cal.getRemaining(cal.sum12ZoneByProvince(items, 'level1_total') - cal.sum12ZoneByProvince(items, 'level1_used')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'level0_total')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'level0_used')) }} </td>
+                <td class="td-border"> {{ cal.getRemaining(cal.sum12ZoneByProvince(items, 'level0_total') - cal.sum12ZoneByProvince(items, 'level0_used')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'home_isolation_total')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'home_isolation_used')) }} </td>
+                <td class="td-border"> {{ cal.getRemaining(cal.sum12ZoneByProvince(items, 'home_isolation_total') - cal.sum12ZoneByProvince(items, 'home_isolation_used')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'community_isolation_total')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'community_isolation_used')) }} </td>
+                <td> {{ cal.getRemaining(cal.sum12ZoneByProvince(items, 'community_isolation_total') - cal.sum12ZoneByProvince(items, 'community_isolation_used')) }} </td>
+            </tr>
+            <tr *ngIf="cal.countExistingZone(items) > 12">
+                <td colspan="2" class="td-border"> ทั่วประเทศ </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'level3_total')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'level3_used')) }} </td>
+                <td class="td-border"> {{ cal.getRemaining(cal.sumAllZoneByProvince(items, 'level3_total') - cal.sumAllZoneByProvince(items, 'level3_used')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'level2_2_total')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'level2_2_used')) }} </td>
+                <td class="td-border"> {{ cal.getRemaining(cal.sumAllZoneByProvince(items, 'level2_2_total') - cal.sumAllZoneByProvince(items, 'level2_2_used')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'level2_1_total')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'level2_1_used')) }} </td>
+                <td class="td-border"> {{ cal.getRemaining(cal.sumAllZoneByProvince(items, 'level2_1_total') - cal.sumAllZoneByProvince(items, 'level2_1_used')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'level1_total')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'level1_used')) }} </td>
+                <td class="td-border"> {{ cal.getRemaining(cal.sumAllZoneByProvince(items, 'level1_total') - cal.sumAllZoneByProvince(items, 'level1_used')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'level0_total')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'level0_used')) }} </td>
+                <td class="td-border"> {{ cal.getRemaining(cal.sumAllZoneByProvince(items, 'level0_total') - cal.sumAllZoneByProvince(items, 'level0_used')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'home_isolation_total')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'home_isolation_used')) }} </td>
+                <td class="td-border"> {{ cal.getRemaining(cal.sumAllZoneByProvince(items, 'home_isolation_total') - cal.sumAllZoneByProvince(items, 'home_isolation_used')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'community_isolation_total')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'community_isolation_used')) }} </td>
+                <td> {{ cal.getRemaining(cal.sumAllZoneByProvince(items, 'community_isolation_total') - cal.sumAllZoneByProvince(items, 'community_isolation_used')) }} </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<div
+    *ngIf="isLoading && !cal.checkExistingZone(items)"
+    style="display: flex; justify-content: center; padding: 24px;">
+    กำลังโหลดข้อมูล ...
+</div>
+
+<div
+    *ngIf="!isLoading && !cal.checkExistingZone(items)"
+    style="display: flex; justify-content: center; padding: 24px;">
+    ไม่พบข้อมูล
+</div>
+
+<app-loadding #loading></app-loadding>

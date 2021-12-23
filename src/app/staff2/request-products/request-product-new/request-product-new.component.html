@@ -1,0 +1,55 @@
+<div class="clr-row">
+  <div class="clr-col-3"></div>
+  <div class="clr-col-6">
+    ความต้องการ {{requests.length}} รายการ
+  </div>
+  <div class="clr-col-3" style="text-align: right;">
+    <button class="btn btn-sm btn-success" (click)="onClickSave()">บันทึกความต้องการ</button>
+  </div>
+</div>
+<div class="clr-row">
+  <div class="clr-col-3">
+    <clr-datagrid [style.height.px]="700">
+      <clr-dg-column>หมวดหมู่</clr-dg-column>
+
+      <clr-dg-row (click)="getProducts(null);typeId=null;" [ngClass]="{ 'isSuccess': null == typeId }">
+        <clr-dg-cell>
+          ทั้งหมด
+        </clr-dg-cell>
+      </clr-dg-row>
+      <clr-dg-row *ngFor="let l of productTypes;" (click)="getProducts(l.id);typeId=l.id;" [ngClass]="{ 'isSuccess': l.id == typeId }">
+        <clr-dg-cell>
+          {{l.name_th}}
+        </clr-dg-cell>
+      </clr-dg-row>
+    </clr-datagrid>
+  </div>
+  <div class="clr-col-9">
+    <div class="clr-row">
+      <div class="clr-col-3" *ngFor="let i of products">
+        <div class="card">
+          <div class="card-block">
+            <p class="card-text">
+              <span style="font-size: 0.6rem;">{{i.product_name}}</span>
+            </p>
+          </div>
+          <div class="card-img" style="display: flex;justify-content: center;align-items: center;width: 200px;height: 200px;">
+            <img style="max-width: 200px;
+            max-height: 200px;
+            width:auto;height: auto;align-items: center;justify-items: center;"
+              [src]="i.picture_url || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'"
+              alt="">
+          </div>
+          <div class="card-block">
+            <div class="card-text">
+              <input class="clr-input" type="text" appNumberOnly #qty [value]="i.qty" (keyup)="onKeyQty(i,qty.value)">
+              {{i.unit}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<app-loadding #loading></app-loadding>

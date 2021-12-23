@@ -1,0 +1,10 @@
+.dashboard-national__menus {
+    display: flex;
+    margin-bottom: 16px;
+}
+
+.dashboard-national__bed-card {
+    width: 220px;
+    border-radius: 14px;
+    box-shadow: none;
+}

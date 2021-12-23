@@ -1,0 +1,69 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">รายงานเวชภัณฑ์สิ้นเปลือง ณ. วันที่ {{date | dateTh:'D MMM YYYY'}}</span>
+</nav>
+<br>
+<div class="clr-row">
+  <div class="clr-col-4">
+    <!-- <my-date-picker-th name="date" [options]="myDatePickerOptions" [(ngModel)]="date" required>
+    </my-date-picker-th> -->
+  </div>
+  <div class="clr-col-1">
+    <!-- <button class="btn btn-sm btn-primary" (click)="doEnter()">
+      <clr-icon shape="search"></clr-icon>
+    </button> -->
+  </div>
+  <div class="clr-col-7" style="text-align: right;">
+    <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
+      <clr-icon shape="download"></clr-icon>export excel
+    </button>
+  </div>
+</div>
+
+<table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
+  <tr>
+    <th rowspan="2" class="td-border">โรงพยาบาล</th>
+    <th class="td-border">Mask N95</th>
+    <th class="td-border">Surgical mask</th>
+    <th class="td-border">Cover All </th>
+    <th class="td-border">Surgical gown (ชุด) </th>
+    <th rowspan="2">หน่วยงาน</th>
+  </tr>
+  <tr>
+    <th class="td-border">ปริมาณคงคลัง(ชิ้น)</th>
+    <th class="td-border">ปริมาณคงคลัง(ชิ้น)</th>
+    <th class="td-border">ปริมาณคงคลัง(ชิ้น)</th>
+    <th class="td-border">ปริมาณคงคลัง(ชิ้น)</th>
+  </tr>
+  <tr>
+    <th class="left td-border">รวม</th>
+    <th class="right td-border">{{n95| number}}</th>
+    <th class="right td-border">{{surgicalMask| number}}</th>
+    <th class="right td-border">{{coverAll| number}}</th>
+    <th class="right td-border">{{surgicalGown| number}}</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let i of list">
+    <td class=" left td-border">{{i.hospname}}
+      <br>
+      <label style="color: red;">
+        ข้อมูลล่าสุด: {{ i.update_date | dateTh:'DD/MM/YYYY hh:mm'}}
+      </label>
+    </td>
+    <td class="right td-border">{{i.n95_qty | number}}</td>
+    <td class="right td-border">{{i.surgical_mask_qty| number}}</td>
+    <td class="right td-border">{{i.cover_all2_qty| number}}</td>
+    <td class="right td-border">{{i.surgical_gown_qty| number}}</td>
+    <td>{{i.sub_ministry_name}}</td>
+  </tr>
+  <tr>
+    <th class="left td-border">รวม</th>
+    <th class="right td-border">{{n95| number}}</th>
+    <th class="right td-border">{{surgicalMask| number}}</th>
+    <th class="right td-border">{{coverAll| number}}</th>
+    <th class="right td-border">{{surgicalGown| number}}</th>
+    <th></th>
+  </tr>
+</table>
+<label>{{list.length | number:'1.0-0' }} รายการ</label>
+
+<app-loadding #loading></app-loadding>

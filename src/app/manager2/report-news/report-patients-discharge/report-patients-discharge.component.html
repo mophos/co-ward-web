@@ -1,0 +1,139 @@
+<nav
+    style="margin-bottom: 16px;"
+    class="breadcrumb">
+    <span class="breadcrumb-item active">
+        รายงานผู้ป่วย Discharge
+    </span>
+</nav>
+
+<div style="display: flex; justify-content: space-between;">
+    <div style="display: flex;">
+        <label style="padding-top: 4px; margin-right: 16px;"> วันที่แสดงข้อมูล </label>
+        <div style="width: 200px; margin-right: 16px;">
+            <my-date-picker-th
+                [(ngModel)]="date"
+                [options]="myDatePickerOptions"
+                name="dateDischarge"
+                (dateChanged)="selectDate($event)">
+            </my-date-picker-th>
+        </div>
+    </div>
+    <button class="btn btn-sm btn-primary" (click)="exportExcelSumData()">
+        <clr-icon shape="download"></clr-icon>export excel
+    </button>
+</div>
+
+<div style="overflow-x: auto;">
+    <table style="border-collapse: collapse;" class="table table-compact">
+        <thead>
+            <tr>
+                <th class="td-border"> เขต </th>
+                <th class="td-border"> Discharge </th>
+                <th class="td-border"> Negative </th>
+                <th class="td-border"> Refer </th>
+                <th class="td-border"> Death </th>
+                <th> รวม </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let summary of summaries; let i = index">
+                <td class="td-border">
+                    <div *ngIf="summary.zone_code !== '13'"> {{ summary.zone_code }} </div>
+                    <div *ngIf="summary.zone_code === '13'"> กรุงเทพมหานคร </div>
+                </td>
+                <td class="td-border"> {{ cal.checkValue(summary.DISCHARGE) }} </td>
+                <td class="td-border"> {{ cal.checkValue(summary.NEGATIVE) }} </td>
+                <td class="td-border"> {{ cal.checkValue(summary.REFER) }} </td>
+                <td class="td-border"> {{ cal.checkValue(summary.DEATH) }} </td>
+                <td> {{ cal.sumField(summary) }} </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div
+    *ngIf="isLoading && !summaries.length"
+    style="display: flex; justify-content: center; padding: 24px;">
+    กำลังโหลดข้อมูล ...
+</div>
+
+<div
+    *ngIf="!isLoading && !summaries.length"
+    style="display: flex; justify-content: center; padding: 24px;">
+    ไม่พบข้อมูล
+</div>
+
+<div style="display: flex; justify-content: flex-end; margin-top: 24px;">
+    <button class="btn btn-sm btn-primary" (click)="exportExcelList()">
+        <clr-icon shape="download"></clr-icon>export excel
+    </button>
+</div>
+
+<div style="overflow-x: auto;">
+    <table style="border-collapse: collapse;" class="table table-compact">
+        <thead>
+            <tr>
+                <th class="td-border"> เขต </th>
+                <th class="td-border"> จังหวัด </th>
+                <th class="td-border"> รหัสโรงพยาบาล </th>
+                <th class="td-border"> โรงพยาบาล </th>
+                <th class="td-border"> HN </th>
+                <th class="td-border"> AN </th>
+                <th class="td-border"> CID </th>
+                <th class="td-border"> ชื่อ </th>
+                <th class="td-border"> นามสกุล </th>
+                <th class="td-border"> เพศ </th>
+                <th class="td-border"> อายุ </th>
+                <th class="td-border"> Status </th>
+                <th class="td-border"> Date Admit </th>
+                <th class="td-border"> Date Discharge </th>
+                <th class="td-border"> Refer Hospital Code </th>
+                <th class="td-border"> Refer Hospital Name </th>
+                <th> หน่วยงานสังกัด </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of items; let i = index">
+                <td class="td-border"> {{ item.zone_code }} </td>
+                <td class="td-border"> {{ item.province_name || '-' }} </td>
+                <td class="td-border"> {{ item.hospcode }} </td>
+                <td class="td-border"> {{ item.hospname }} </td>
+                <td class="td-border"> {{ item.hn || '-' }} </td>
+                <td class="td-border"> {{ item.an || '-' }} </td>
+                <td class="td-border"> {{ item.cid || '-' }} </td>
+                <td class="td-border"> {{ item.first_name }} </td>
+                <td class="td-border"> {{ item.last_name }} </td>
+                <td class="td-border"> {{ item.gender }} </td>
+                <td class="td-border"> {{ getAge(item.birth_date) }} </td>
+                <td class="td-border"> {{ item.status }} </td>
+                <td class="td-border">
+                    <div style="width: 100px;">
+                        {{ formatDate(item.date_admit) }}
+                    </div>
+                </td>
+                <td class="td-border">
+                    <div style="width: 100px;">
+                        {{ formatDate(item.date_discharge) }}
+                    </div>
+                </td>
+                <td class="td-border"> {{ item.refer_hospcode || '-' }} </td>
+                <td class="td-border"> {{ item.refer_hospname || '-' }} </td>
+                <td> {{ item.sub_ministry_name || '-' }} </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div
+    *ngIf="isLoading && !items.length"
+    style="display: flex; justify-content: center; padding: 24px;">
+    กำลังโหลดข้อมูล ...
+</div>
+
+<div
+    *ngIf="!isLoading && !items.length"
+    style="display: flex; justify-content: center; padding: 24px;">
+    ไม่พบข้อมูล
+</div>
+
+<app-loadding #loading></app-loadding>

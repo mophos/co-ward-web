@@ -1,0 +1,298 @@
+<div style="display: flex; margin-bottom: 24px;">
+  <h3 style="margin-right: 24px;"> การใช้งานเตียงแต่ละประเภท </h3>
+  <div style="width: 160px; margin-right: 16px;">
+    <label> วันที่เริ่ม </label>
+    <my-date-picker-th
+        [(ngModel)]="startDate"
+        [options]="myDatePickerOptions"
+        name="startDateBedsType"
+        (dateChanged)="selectStartDate($event)">
+    </my-date-picker-th>
+  </div>
+  <div style="width: 160px; margin-right: 16px;">
+    <label> วันที่สิ้นสุด </label>
+    <my-date-picker-th
+        [(ngModel)]="endDate"
+        [options]="myDatePickerOptions"
+        name="endDateBedsType"
+        (dateChanged)="selectEndDate($event)">
+    </my-date-picker-th>
+  </div>
+</div>
+
+<div style="display: flex; margin-bottom: 8px;">
+  <div style="width: 160px; margin-right: 16px;">
+      <label> หน่วยงาน </label>
+      <div class="clr-select-wrapper" style="width: 100%;">
+          <select
+              [(ngModel)]="sector"
+              name="sectorBedsType"
+              style="width: 100%;"
+              class="clr-select"
+              (change)="selectSector()">
+              <option value=""> ทุกหน่วยงาน </option>
+              <option value="GOVERNMENT">
+                ภาครัฐ
+              </option>
+              <option value="PRIVATE">
+                เอกชน
+              </option>
+          </select>
+      </div>
+  </div>
+
+  <div style="width: 160px; margin-right: 16px;">
+      <label> หน่วยงานย่อย </label>
+      <div class="clr-select-wrapper" style="width: 100%;">
+          <select
+              [(ngModel)]="subMinistryCode"
+              name="subMinistryBedType"
+              style="width: 100%;"
+              class="clr-select"
+              (change)="selectSubMinistry()">
+              <option value=""> ทุกหน่วยงานย่อย </option>
+              <option *ngFor="let subMinistry of listSubMinistry; let i = index" [value]="subMinistry.code">
+                  {{ subMinistry.name }}
+              </option>
+          </select>
+      </div>
+  </div>
+
+  <div style="width: 160px; margin-right: 16px;">
+      <label> เขตสุขภาพ </label>
+      <div class="clr-select-wrapper" style="width: 100%;">
+          <select
+              [(ngModel)]="zone"
+              name="zoneBedsType"
+              style="width: 100%;"
+              class="clr-select"
+              (change)="selectZone()">
+              <option value=""> ทุกเขตสุขภาพ </option>
+              <option *ngFor="let zone of zones; let i = index" [value]="zone.value">
+                  {{ zone.name }}
+              </option>
+          </select>
+      </div>
+  </div>
+
+  <div style="width: 160px; margin-right: 16px;">
+      <label> จังหวัด </label>
+      <div class="clr-select-wrapper" style="width: 100%;">
+          <select
+              [(ngModel)]="displayProvince"
+              name="provinceBedType"
+              style="width: 100%;"
+              class="clr-select"
+              readonly="true"
+              (click)="setSelectMultiProvince()">
+              <option style="display: none;" value=""> ทุกจังหวัด </option>
+              <option
+                  [selected]="selectedProvince.length"
+                  style="display: none;">
+                  <div *ngIf="selectedProvince.length === 1">
+                      {{ selectedProvince[0].name_th }}
+                  </div>
+                  <div *ngIf="selectedProvince.length > 1">
+                      {{ selectedProvince[0].name_th + ' + ' + ( selectedProvince.length - 1 ) }}
+                  </div>
+              </option>
+          </select>
+          <div
+              *ngIf="isSelectProvince"
+              class="beds-type__select-menu">
+              <clr-checkbox-wrapper *ngFor="let province of provinces; let i = index">
+                  <input
+                      [checked]="checkProvince(province)"
+                      type="checkbox"
+                      clrCheckbox
+                      (change)="selectProvince(province)" />
+                  <label> {{ province.name_th }} </label>
+              </clr-checkbox-wrapper>
+          </div>
+      </div>
+  </div>
+  <div style="min-width: 160px; max-width: 200px;">
+    <label> ประเภทเตียง </label>
+    <div class="clr-select-wrapper">
+        <select
+            [(ngModel)]="bedTypeId"
+            name="bedTypeBedsType"
+            style="width: 100%;"
+            class="clr-select"
+            (change)="selectBedType()">
+            <option value=""> ทุกประเภทเตียง </option>
+            <option *ngFor="let bedType of bedTypes; let i = index" [value]="bedType.id">
+                {{ bedType.name }}
+            </option>
+        </select>
+    </div>
+  </div>
+</div>
+
+<div style="display: flex;">
+  <div
+    style="margin-right: 24px"
+    class="card beds-type__card">
+    <div class="card-block">
+        <div  class="card-title">
+          เตียงทั้งหมด
+        </div>
+        <div
+          style="text-align: center;"
+          class="card-text">
+          {{ formatNumber(items.total_covid_qty) }}
+        </div>
+    </div>
+  </div>
+  <div
+    style="margin-right: 24px"
+    class="card beds-type__card">
+    <div class="card-block">
+        <div class="card-title">
+          ครอบครองเตียงทั้งหมด
+        </div>
+        <div
+          style="text-align: center;"
+          class="card-text">
+          {{ formatNumber(items.total_used_qty) }}
+        </div>
+    </div>
+  </div>
+  <div
+    style="margin-right: 24px"
+    class="card beds-type__card">
+    <div class="card-block">
+        <div class="card-title">
+          เตียงว่าง
+        </div>
+        <div
+          style="text-align: center;"
+          class="card-text">
+          {{ checkNaN(items.total_covid_qty - items.total_used_qty) }}
+        </div>
+    </div>
+  </div>
+  <div class="card beds-type__card">
+    <div class="card-block">
+        <div class="card-title">
+          อัตราครองเตียง
+        </div>
+        <div
+          style="text-align: center;"
+          class="card-text">
+          {{ formatPercent(items.total_covid_qty, items.total_used_qty).toFixed(2) }} %
+        </div>
+    </div>
+  </div>
+</div>
+
+<div
+  style="width: 636px;"
+  class="card">
+  <div class="card-block">
+    <highcharts-chart
+        *ngIf="highcharts"
+        [Highcharts] = "highcharts"
+        [options] = "pieChartOptions">
+    </highcharts-chart>
+  </div>
+</div>
+
+<div
+  style="width: 636px; height: 400px;"
+  class="card">
+  <div
+    style="padding-top: 24px;"
+    class="card-block">
+    <div
+      *ngIf="items.results.length"
+      style="display: flex; justify-content: space-around; border-bottom: 1px solid black;">
+      <div style="width: 60px; height: 300px;">
+        <div
+          *ngIf="filterItems.length"
+          [style.height]="(100 - formatPercent(filterItems(14).covid_qty, filterItems(14).used_qty)).toFixed(2) + '%'"
+          style="width: 100%; height: 55%; background-color: #BFBFBF;"
+          class="beds-type__chart-column">
+          {{ (filterItems(14).covid_qty - filterItems(14).used_qty) || '' }}
+        </div>
+        <div
+          *ngIf="filterItems.length"
+          [style.height]="formatPercent(filterItems(14).covid_qty, filterItems(14).used_qty).toFixed(2) + '%'"
+          style="width: 100%; height: 45%; background-color: #FF0000;"
+          class="beds-type__chart-column">
+          {{ filterItems(14).used_qty || '' }}
+        </div>
+      </div>
+      <div style="width: 60px; height: 300px;">
+        <div
+          *ngIf="filterItems.length"
+          [style.height]="(100 - formatPercent(filterItems(13).covid_qty, filterItems(13).used_qty)).toFixed(2) + '%'"
+          style="width: 100%; background-color: #BFBFBF;"
+          class="beds-type__chart-column">
+          {{ (filterItems(13).covid_qty - filterItems(13).used_qty) || '' }}
+        </div>
+        <div
+          *ngIf="filterItems.length"
+          [style.height]="formatPercent(filterItems(13).covid_qty, filterItems(13).used_qty).toFixed(2) + '%'"
+          style="width: 100%; height: 0%; background-color: #EC7D31;"
+          class="beds-type__chart-column">
+          {{ filterItems(13).used_qty || '' }}
+        </div>
+      </div>
+      <div style="width: 60px; height: 300px;">
+        <div
+          *ngIf="filterItems.length"
+          [style.height]="(100 - formatPercent(filterItems(12).covid_qty, filterItems(12).used_qty)).toFixed(2) + '%'"
+          style="width: 100%; background-color: #BFBFBF;"
+          class="beds-type__chart-column">
+          {{ (filterItems(12).covid_qty - filterItems(12).used_qty) || '' }}
+        </div>
+        <div
+          *ngIf="filterItems.length"
+          [style.height]="formatPercent(filterItems(12).covid_qty, filterItems(12).used_qty).toFixed(2) + '%'"
+          style="width: 100%; background-color: #FFFF8F;"
+          class="beds-type__chart-column">
+          {{ filterItems(12).used_qty || '' }}
+        </div>
+      </div>
+      <div style="width: 60px; height: 300px;">
+        <div
+          *ngIf="filterItems.length"
+          [style.height]="(100 - formatPercent(filterItems(11).covid_qty, filterItems(11).used_qty)).toFixed(2) + '%'"
+          style="width: 100%; background-color: #BFBFBF;"
+          class="beds-type__chart-column">
+          {{ (filterItems(11).covid_qty - filterItems(11).used_qty) || '' }}
+        </div>
+        <div
+          *ngIf="filterItems.length"
+          [style.height]="formatPercent(filterItems(11).covid_qty, filterItems(11).used_qty).toFixed(2) + '%'"
+          style="width: 100%; background-color: #70AC47;"
+          class="beds-type__chart-column">
+          {{ filterItems(11).used_qty || '' }}
+        </div>
+      </div>
+    </div>
+    <div
+      *ngIf="items.results.length"
+      style="display: flex; justify-content: center; margin-top: 24px;">
+      <div style="display: flex; align-items: center; margin-right: 24px;">
+        <div style="background-color: #FF0000;" class="beds-type__chart-title-circle"></div>
+        <div style="font-weight: 700;"> ระดับ 3 </div>
+      </div>
+      <div style="display: flex; align-items: center; margin-right: 24px;">
+        <div style="background-color: #EC7D31;" class="beds-type__chart-title-circle"></div>
+        <div style="font-weight: 700;"> ระดับ 2.2 </div>
+      </div>
+      <div style="display: flex; align-items: center; margin-right: 24px;">
+        <div style="background-color: #FFFF8F;" class="beds-type__chart-title-circle"></div>
+        <div style="font-weight: 700;"> ระดับ 2.1 </div>
+      </div>
+      <div style="display: flex; align-items: center;">
+        <div style="background-color: #70AC47;" class="beds-type__chart-title-circle"></div>
+        <div style="font-weight: 700;"> ระดับ 1 </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-loadding #loading></app-loadding>

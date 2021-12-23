@@ -1,0 +1,119 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">รายงานจำนวนบุคลากร (พยาบาล) นับจำนวนทั้งหมดไม่นับเป็นเวร ณ. วันที่ {{date |
+    dateTh:'D MMM YYYY'}}</span>
+</nav>
+<br>
+<div class="clr-row">
+  <div class="clr-col-4">
+    <!-- รายงานจำนวนเตียงผู้ป่วย ณ วันที่ {{date | dateTh:'D MMM YYYY'}} -->
+    <!-- <my-date-picker-th name="date" [options]="myDatePickerOptions" [(ngModel)]="date" required>
+      </my-date-picker-th> -->
+  </div>
+  <div class="clr-col-1">
+    <!-- <button class="btn btn-sm btn-primary" (click)="doEnter()">
+        <clr-icon shape="search"></clr-icon>
+      </button> -->
+  </div>
+  <div class="clr-col-7" style="text-align: right;">
+    <button class="btn btn-sm btn-primary" (click)="doExportExcel()">
+      <clr-icon shape="download"></clr-icon>export excel
+    </button>
+    <!-- <button class="btn btn-sm btn-success" (click)="doExportCsv()">
+                <clr-icon shape="download"></clr-icon>export csv
+              </button> -->
+  </div>
+</div>
+
+<table class="table table-compact" style="position: relative; border-collapse: collapse; font-size: 5rem;">
+  <tr>
+    <th rowspan="2" class="right td-border" style="position: sticky; top: 0; ">โรงพยาบาล</th>
+    <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">พยาบาลวิสัญญี</th>
+    <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">พยาบาล IC</th>
+    <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">พยาบาล ICU</th>
+    <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">พยาบาล Critical Care</th>
+    <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">พยาบาลทั่วไป</th>
+    <th rowspan="3" class="right" style="position: sticky; top: 0;">หน่วยงาน</th>
+  </tr>
+  <tr>
+    <th class="right td-border" style="position: sticky; top: 0;">รวม</th>
+    <th class="right td-border" style="position: sticky; top: 0;">ปฎิบัติจริง</th>
+    <th class="right td-border" style="position: sticky; top: 0;">รับการสนับสนุน</th>
+    <th class="right td-border" style="position: sticky; top: 0;">รวม</th>
+    <th class="right td-border" style="position: sticky; top: 0;">ปฎิบัติจริง</th>
+    <th class="right td-border" style="position: sticky; top: 0;">รับการสนับสนุน</th>
+    <th class="right td-border" style="position: sticky; top: 0;">รวม</th>
+    <th class="right td-border" style="position: sticky; top: 0;">ปฎิบัติจริง</th>
+    <th class="right td-border" style="position: sticky; top: 0;">รับการสนับสนุน</th>
+    <th class="right td-border" style="position: sticky; top: 0;">รวม</th>
+    <th class="right td-border" style="position: sticky; top: 0;">ปฎิบัติจริง</th>
+    <th class="right td-border" style="position: sticky; top: 0;">รับการสนับสนุน</th>
+    <th class="right td-border" style="position: sticky; top: 0;">รวม</th>
+    <th class="right td-border" style="position: sticky; top: 0;">ปฎิบัติจริง</th>
+    <th class="right" style="position: sticky; top: 0;">รับการสนับสนุน</th>
+  </tr>
+  <tr>
+    <th class="right td-border" style="position: sticky; top: 0;">รวม</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{anesthetistNurseQty1 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{anesthetistNurseQty2 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{anesthetistNurseQty3 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{infectiousDiseaseNurseQty1 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{infectiousDiseaseNurseQty2 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{infectiousDiseaseNurseQty3 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{intensiveCareUnitQty1 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{intensiveCareUnitQty2 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{intensiveCareUnitQty3 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{criticalCareMedicineQty1 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{criticalCareMedicineQty2 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{criticalCareMedicineQty3 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{nurseQty1 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{nurseQty2 || 0}}</th>
+    <th class="right" style="position: sticky; top: 0;">{{nurseQty3 || 0}}</th>
+  </tr>
+  <tr *ngFor="let h of list; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
+    <td class="left td-border">{{h.hospname}}
+      <br>
+      <label style="color: red;">
+        ข้อมูลล่าสุด: {{ h.update_date | dateTh:'DD/MM/YYYY hh:mm'}}
+      </label>
+    </td>
+    <td class="right td-border">{{h.anesthetist_nurse_qty || 0 + h.anesthetist_nurse_support_qty || 0}}</td>
+    <td class="right td-border">{{h.anesthetist_nurse_qty || 0 }}</td>
+    <td class="right td-border">{{h.anesthetist_nurse_support_qty || 0}}</td>
+    <td class="right td-border">{{h.infectious_disease_nurse_qty || 0 + h.infectious_disease_nurse_support_qty ||
+      0}}</td>
+    <td class="right td-border">{{h.infectious_disease_nurse_qty||0 }}</td>
+    <td class="right td-border">{{h.infectious_disease_nurse_support_qty || 0}}</td>
+    <td class="right td-border">{{h.intensive_care_unit_qty || 0 + h.intensive_care_unit_support_qty || 0}}</td>
+    <td class="right td-border">{{h.intensive_care_unit_qty||0 }}</td>
+    <td class="right td-border">{{h.intensive_care_unit_support_qty || 0}}</td>
+    <td class="right td-border">{{h.critical_care_medicine_qty || 0 + h.critical_care_medicine_support_qty || 0}}</td>
+    <td class="right td-border">{{h.critical_care_medicine_qty ||0 }}</td>
+    <td class="right td-border">{{h.critical_care_medicine_support_qty || 0}}</td>
+    <td class="right td-border">{{h.nurse_qty || 0 + h.nurse_support_qty || 0}}</td>
+    <td class="right td-border">{{h.nurse_qty || 0 }}</td>
+    <td class="right">{{h.nurse_support_qty || 0}}</td>
+    <td class="left td-border">{{h.sub_ministry_name}}</td>
+  </tr>
+  <tr>
+    <th class="right td-border" style="position: sticky; top: 0;">รวม</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{anesthetistNurseQty1 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{anesthetistNurseQty2 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{anesthetistNurseQty3 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{infectiousDiseaseNurseQty1 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{infectiousDiseaseNurseQty2 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{infectiousDiseaseNurseQty3 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{intensiveCareUnitQty1 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{intensiveCareUnitQty2 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{intensiveCareUnitQty3 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{criticalCareMedicineQty1 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{criticalCareMedicineQty2 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{criticalCareMedicineQty3 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{nurseQty1 || 0}}</th>
+    <th class="right td-border" style="position: sticky; top: 0;">{{nurseQty2 || 0}}</th>
+    <th class="right" style="position: sticky; top: 0;">{{nurseQty3 || 0}}</th>
+    <th></th>
+  </tr>
+</table>
+<label>{{list.length | number:'1.0-0' }} รายการ</label>
+
+<app-loadding #loading></app-loadding>

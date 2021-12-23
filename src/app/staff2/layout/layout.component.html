@@ -1,0 +1,353 @@
+<div class="main-container">
+  <header class="header">
+    <div class="branding">
+      <a href="javascript://" class="nav-link">
+        <!-- <img src="./assets/logo-co-ward.png" alt="logo" style="width: 200px; padding-right: 10px;"> -->
+        <span class="title" routerLink="/staff2/home">CO-Ward
+          <span class="font-version">
+            (Version :  1.7.10)
+          </span>
+        </span>
+      </a>
+    </div>
+    <div class="header-nav">
+      <a href="javascript://" class="nav-link nav-text" [routerLink]="['/staff']" routerLinkActive="router-link-active" >Staff Old</a>
+      <a href="javascript://" class="active nav-link nav-text" [routerLink]="['/staff2']" routerLinkActive="router-link-active" >Staff New</a>
+    </div>
+    <div class="header-actions">
+      <clr-dropdown>
+        <button class="nav-text" clrDropdownTrigger>
+          {{fullname}}-{{hospname}}
+          <clr-icon shape="caret down"></clr-icon>
+        </button>
+        <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+          <!-- <a href="javascript://" clrDropdownItem>เปลี่ยนรหัสผ่าน</a> -->
+          <a href="javascript://" (click)="logout()" clrDropdownItem>ออกจากระบบ</a>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </div>
+  </header>
+  <div class="content-container">
+    <div class="content-area">
+      <router-outlet></router-outlet>
+    </div>
+    <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
+      <a clrVerticalNavLink routerLink="/staff2/home" title="หน้าหลัก" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="home" class="is-solid"></clr-icon>
+        หนัาหลัก
+      </a>
+      <a *ngIf="covidCaseMenu" clrVerticalNavLink routerLink="/staff2/covid-case-new-v2" title="Case COVID"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="helix" class="is-solid"></clr-icon>
+        บันทึกผู้ป่วย
+      </a>
+      <a *ngIf="covidCaseOldMenu" clrVerticalNavLink routerLink="/staff2/covid-case-old" title="Case COVID"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="helix" class="is-solid"></clr-icon>
+        บันทึกผู้ป่วยเก่า
+      </a>
+      <!-- <a *ngIf="covidCaseMenu" clrVerticalNavLink routerLink="/staff2/covid-case-update" title="Case COVID"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="helix" class="is-solid"></clr-icon>
+        แก้ไขข้อมูลผู้ป่วยเก่า
+      </a> -->
+      <a *ngIf="covidCaseMenu" clrVerticalNavLink routerLink="/staff2/covid-case" title="Case COVID"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="helix"></clr-icon>
+        ผู้ป่วยทั้งหมด
+      </a>
+      <a *ngIf="covidCaseStatusMenu" clrVerticalNavLink routerLink="/staff2/covid-case-status" title="สถานะผู้ป่วยรายวัน"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="wand"></clr-icon>
+        สถานะผู้ป่วยรายวัน
+      </a>
+      <!-- <a clrVerticalNavLink routerLink="/staff22/result-lab" title="ผลการตรวจ lab"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="volume"></clr-icon>
+        ผลการตรวจ lab (new)
+      </a>
+      <a clrVerticalNavLink routerLink="/staff22/result-vaccine" title="การฉีดวัคซีน"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="color-picker"></clr-icon>
+        การฉีดวัคซีน (new)
+      </a> -->
+
+      <a *ngIf="covidApproveDrugsMenu" clrVerticalNavLink routerLink="/staff2/covid-case-approved-drugs" title="จ่ายยา"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
+        จ่ายยา
+      </a>
+      <a *ngIf="covidApproveSuppliesMenu" clrVerticalNavLink routerLink="/staff2/covid-case-approved-supplies"
+        title="จ่ายเวชภัณฑ์" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
+        จ่ายเวชภัณฑ์
+      </a>
+
+      <a *ngIf="settingProvinceSubUserMenu" clrVerticalNavLink routerLink="/staff2/province-set-sup-user"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="cog"></clr-icon>
+        ตั้งค่า admin ภายในจังหวัด
+      </a>
+
+      <div clrVerticalNavLink routerLinkActive="active" style="background-color: rgba(165, 165, 165,0.2);">
+
+      </div>
+      <a *ngIf="covidCaseRequisitionMenu" clrVerticalNavLink routerLink="/staff2/covid-case-requisition"
+        title="รายการเบิก" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="book"></clr-icon>
+        รายการเบิก
+      </a>
+      <a clrVerticalNavLink *ngIf="covidProductStock" routerLink="/staff2/stock-products" title="รายการคงคลัง"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="store"></clr-icon>
+        รายการคงคลัง
+      </a>
+      <!-- <a clrVerticalNavLink routerLink="/staff2/receive-products" title="รายการจ่ายจากส่วนกลาง"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="store"></clr-icon>
+        รายการจ่ายจากส่วนกลาง
+      </a> -->
+      <a *ngIf="surgicalSPHP" clrVerticalNavLink routerLink="/staff2/surgical-sphp" title="จ่าย Surgical Mask ให้รพสต."
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="users"></clr-icon>
+        จ่าย Surgical Mask ให้รพสต.
+      </a>
+      <a *ngIf="checkManageBedHosp" clrVerticalNavLink routerLink="/staff2/bed-hosp-manage" title="จัดการเตียงให้โรงพยาบาล"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="users"></clr-icon>
+        จัดการเตียงให้โรงพยาบาล
+      </a>
+      <a *ngIf="stockSuppliesMenu" clrVerticalNavLink routerLink="/staff2/supplies" title="บันทึกเวชภัณฑ์คงคลัง"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="cursor-hand-open"></clr-icon>
+        บันทึกเวชภัณฑ์คงคลัง
+      </a>
+      <a clrVerticalNavLink routerLink="/staff2/request-products" title="บันทึกความต้องการสินค้า"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="cursor-hand-open"></clr-icon>
+        บันทึกความต้องการสินค้า
+      </a>
+      <a clrVerticalNavLink routerLink="/staff2/connect-his" title="เชื่อมต่อข้อมูล HIS"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="link"></clr-icon>
+        เชื่อมต่อข้อมูล HIS (new)
+      </a>
+      <!-- <a *ngIf="trackingMenu" clrVerticalNavLink routerLink="/staff2/tracking" title="สถานะของ" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        ติดตามสถานะสินค้า
+      </a> -->
+      <div clrVerticalNavLink routerLinkActive="active" style="background-color: rgba(165, 165, 165,0.2);"></div>
+
+      <!-- <a *ngIf="checkSuppliesMenu" clrVerticalNavLink routerLink="/staff2/check-supplie"
+        title="ตรวจสอบการบันทึกข้อมูลเวชภัณฑ์" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        ตรวจสอบเวชภัณฑ์
+      </a> -->
+      <a *ngIf="cioMenu" clrVerticalNavLink routerLink="/staff2/cio-check-patient" title="CIO ตรวจความถูกต้องของผู้ป่วย"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        CIO ตรวจความถูกต้องของผู้ป่วย
+      </a>
+      <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff2/report-admit-confirm-case"
+        title="รายงานผู้ป่วย Admit (Confirm)" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        รายงานผู้ป่วย Admit (Confirm)
+      </a>
+      <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff2/report-admit-pui" title="รายงานผู้ป่วย Admit PUI"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        รายงานผู้ป่วย Admit PUI
+      </a>
+      <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff2/report-patient-admit"
+        title="รายงานการบันทึกผู้ป่วยใหม่ประจำวัน" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        รายงานการบันทึกผู้ป่วยใหม่ประจำวัน
+      </a>
+      <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff2/report-dc" title="รายงานผู้ป่วย Discharge"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        รายงานผู้ป่วย Discharge
+      </a>
+      <!-- <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff2/report-patient" title="รายงานผู้ป่วย Admit"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        รายงานผู้ป่วยทั้งหมด
+      </a> -->
+      <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff2/report-supplies" title="รายงานเวชภัณฑ์"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        รายงานเวชภัณฑ์
+      </a>
+      <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff2/report-bed" title="รายงานเตียง"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        รายงานเตียง
+      </a>
+
+      <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff2/report-medical" title="รายงานเตียง"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        รายงานเครื่องช่วยหายใจ
+      </a>
+
+      <a *ngIf="reportMenu" clrVerticalNavLink routerLink="/staff2/dashboard" title="Dashboard"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="file"></clr-icon>
+        Dashboard
+      </a>
+
+      <div clrVerticalNavLink routerLinkActive="active" style="background-color: rgba(165, 165, 165,0.2);"></div>
+
+      <a clrVerticalNavLink routerLink="/staff2/report-patients-admit-confirm" title="รายงานผู้ป่วย Admit Confirm (new)"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        รายงานผู้ป่วย Admit Confirm (new)
+      </a>
+
+      <a clrVerticalNavLink routerLink="/staff2/report-patients-admit-pui" title="รายงานผู้ป่วย Admit PUI (new)"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        รายงานผู้ป่วย Admit PUI (new)
+      </a>
+
+      <a clrVerticalNavLink routerLink="/staff2/report-bed2" title="รายงานเตียง (new)"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        รายงานเตียง (new)
+      </a>
+
+
+      <!-- <a clrVerticalNavLink routerLink="/staff2/bed-each-type-chart" title="กราฟการใช้เตียงแต่ละประเภท"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="line-chart"></clr-icon>
+        กราฟการใช้เตียงแต่ละประเภท (new)
+      </a>
+
+      <a clrVerticalNavLink routerLink="/staff2/covid-each-case-chart" title="กราฟจำนวนผู้ป่วยแต่ละอาการ"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="line-chart"></clr-icon>
+        กราฟจำนวนผู้ป่วยแต่ละอาการ (new)
+      </a>
+
+      <a clrVerticalNavLink routerLink="/staff2/covid-each-status-chart" title="กราฟจำนวนผู้ป่วยแต่ละสถานะ"
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="line-chart"></clr-icon>
+        กราฟจำนวนผู้ป่วยแต่ละสถานะ (new)
+      </a> -->
+
+
+      <!-- <a *ngIf="checkBedsMenu" clrVerticalNavLink routerLink="/staff2/check-bed" title="ตรวจสอบการบันทึกข้อมูลเตียง" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
+        ตรวจสอบเตียง
+      </a> -->
+
+      <clr-vertical-nav-group routerLinkActive="active" *ngIf="reportAll">
+        <a clrVerticalNavLink href="javascript://">
+          <clr-icon shape="folder" class="is-solid" clrVerticalNavIcon></clr-icon>
+          รายงานรวมประเทศ
+        </a>
+        <clr-vertical-nav-group-children>
+          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff2/report/1']"
+            title="รายงานเตียงตามสังกัดหน่วยงาน" routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            1. รายงานเตียงตามสังกัดหน่วยงาน
+          </a>
+          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff2/report/2']"
+            title="ประเภทความรุนแรงของผู้ป่วยที่ยังรักษาตัวอยู่" routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            2. ประเภทความรุนแรงของผู้ป่วยที่ยังรักษาตัวอยู่
+          </a>
+          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff2/report/3']"
+            title="รายงานการแจ้งจำนวนผู้ป่วยเพื่อเบิกเวชภัณฑ์​สิ้นเปลืองประจำวัน" routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            3. รายงานการแจ้งจำนวนผู้ป่วยเพื่อเบิกเวชภัณฑ์​สิ้นเปลืองประจำวัน
+          </a>
+          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff2/report/4']"
+            title="ยอดผู้ป่วยสะสมรวมที่รับไว้รักษาในโรงพยาบาล" routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            4. ยอดผู้ป่วยสะสมรวมที่รับไว้รักษาในโรงพยาบาล
+          </a>
+          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff2/report/5']" title="รายงานการใช้เตียง"
+            routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            5. รายงานการใช้เตียง
+          </a>
+          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff2/report/6']" title="รายงานเตียงว่างแยกประเภท"
+            routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            6. รายงานเตียงว่างแยกประเภท
+          </a>
+          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff2/report/7']"
+            title="รายงานจำนวนประเภทเครื่องช่วยหายใจ" routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            7. รายงานจำนวนประเภทเครื่องช่วยหายใจ
+          </a>
+          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff2/report/8']" title="รายงานเวชภัณฑ์สิ้นเปลือง"
+            routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            8. รายงานเวชภัณฑ์สิ้นเปลือง
+          </a>
+          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff2/report/9']" title="รายงานจำนวนบุคลากร (แพทย์)"
+            routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            9. รายงานจำนวนบุคลากร (แพทย์)
+          </a>
+          <a *ngIf="reportAll" clrVerticalNavLink [routerLink]="['/staff2/report/10']"
+            title="รายงานจำนวนบุคลากร (พยาบาล) นับจำนวนทั้งหมดไม่นับเป็นเวร" routerLinkActive="active">
+            <clr-icon shape="folder-open" class="is-solid"></clr-icon>
+            10. รายงานจำนวนบุคลากร (พยาบาล) นับจำนวนทั้งหมดไม่นับเป็นเวร
+          </a>
+        </clr-vertical-nav-group-children>
+      </clr-vertical-nav-group>
+      <div clrVerticalNavLink routerLinkActive="active" style="background-color: rgba(165, 165, 165,0.2);">
+      </div>
+
+      <clr-vertical-nav-group routerLinkActive="active">
+        <clr-icon shape="cog" clrVerticalNavIcon></clr-icon>
+        ตั้งค่า
+        <clr-vertical-nav-group-children>
+          <a *ngIf="settingBasicMenu" clrVerticalNavLink routerLink="/staff2/setting/basic" routerLinkActive="active">
+            ตั้งค่าพื้นฐาน
+          </a>
+          <a *ngIf="settingBedsMenu" clrVerticalNavLink routerLink="/staff2/setting/beds" routerLinkActive="active">
+            ตั้งค่าเตียง
+          </a>
+          <a *ngIf="settingMedicalSuppliesMenu" clrVerticalNavLink routerLink="/staff2/setting/medical-supplies"
+            routerLinkActive="active">
+            ตั้งค่าเครื่องมือทางการแพทย์
+          </a>
+          <a *ngIf="settingProfessionalMenu" clrVerticalNavLink routerLink="/staff2/setting/professional"
+            routerLinkActive="active">
+            ตั้งค่าบุคลากร
+          </a>
+          <a *ngIf="settingUserMenu" clrVerticalNavLink routerLink="/staff2/setting/users" routerLinkActive="active">
+            ตั้งค่าสิทธิ์ผู้ใช้งาน
+          </a>
+        </clr-vertical-nav-group-children>
+      </clr-vertical-nav-group>
+    </clr-vertical-nav>
+  </div>
+</div>
+
+
+<clr-modal [(clrModalOpen)]="modalClose" [clrModalClosable]="false">
+  <h3 class="modal-title">ระบบปิดปรับปรุงชั่วคราว ขออภัยในความไม่สะดวก</h3>
+  <div class="modal-body">
+    <span class="spinner">
+      Loading...
+    </span>
+    กรุณารอจนหน้าจอนี้หายไป
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="modalAlert">
+  <h3 class="modal-title">ข้อความ</h3>
+  <div class="modal-body">
+    <span [innerHTML]="message"></span>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modalAlert = false">
+      ปิด
+    </button>
+  </div>
+</clr-modal>
