@@ -53,7 +53,10 @@ export class ReportPatientsAdmitConfirmComponent implements OnInit {
   }
 
   formatDate (value) {
-    return moment(value).format('DD-MM-YYYY')
+    if (moment(value).isValid()) {
+      return moment(value).format('DD-MM-YYYY')
+    }
+    return '-'
   }
 
   checkValue (value) {
