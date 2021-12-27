@@ -15,6 +15,7 @@ export class ReportPatientsAdmitComponent implements OnInit {
 
   items:any = []
   summaries:any = []
+  // 2020-04-19
   date:any = {
     date: {
       year: moment().year(),

@@ -70,7 +70,10 @@ export class ReportPatientsAdmitPuiComponent implements OnInit {
     try {
       this.isLoading = true
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.newReportService.getPatientAdmit({ date })
+      const res:any = await this.newReportService.getPatientAdmit({
+        date,
+        case: 'IPPUI'
+      })
       if (res.ok) {
         this.items = res.rows.results
         this.isLoading = false
@@ -84,7 +87,10 @@ export class ReportPatientsAdmitPuiComponent implements OnInit {
     try {
       this.isLoading = true
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.newReportService.getPatientAdmitSummary({ date })
+      const res:any = await this.newReportService.getPatientAdmitSummary({
+        date,
+        case: 'IPPUI'
+      })
       if (res.ok) {
         this.summaries = res.rows
         console.error(res.rows)

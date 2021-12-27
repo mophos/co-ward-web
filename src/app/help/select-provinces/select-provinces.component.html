@@ -1,0 +1,33 @@
+<div class="clr-select-wrapper" style="width: 100%;">
+  <select
+      name="provinces"
+      style="width: 100%;"
+      class="clr-select"
+      readonly="true"
+      (click)="setSelectMultiProvince()">
+      <option style="display: none;" value=""> ทุกจังหวัด </option>
+      <option
+          [selected]="selectedProvince.length"
+          style="display: none;">
+          <div *ngIf="selectedProvince.length === 1">
+              {{ selectedProvince[0].name }}
+          </div>
+          <div *ngIf="selectedProvince.length > 1">
+              {{ selectedProvince[0].name + ' + ' + '( ' + ( selectedProvince.length - 1 ) + ' )' }}
+          </div>
+      </option>
+  </select>
+  <div
+      *ngIf="isSelectProvince && provinces.length"
+      class="select-province__select-menu">
+      <clr-checkbox-wrapper *ngFor="let province of provinces; let i = index">
+          <input
+              [value]="province.code"
+              [checked]="checkProvince(province)"
+              type="checkbox"
+              clrCheckbox
+              (change)="selectProvince(province)" />
+          <label> {{ province.name }} </label>
+      </clr-checkbox-wrapper>
+  </div>
+</div>
