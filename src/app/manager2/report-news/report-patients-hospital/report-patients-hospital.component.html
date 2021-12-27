@@ -87,14 +87,15 @@
             <th class="td-border"> ระดับขีดความสามารถ </th>
             <th class="td-border"> ผู้ป่วยทั้งหมด </th>
             <th class="td-border"> Severe </th>
-            <th class="td-border"> Invasive Ventilator </th>
-            <th class="td-border"> Non-Invasive Ventilator  </th>
-            <th class="td-border"> High flow </th>
             <th class="td-border"> Moderate </th>
             <th class="td-border"> Mild </th>
             <th class="td-border"> Asymptomatic </th>
+            <th class="td-border"> Invasive Ventilator </th>
+            <th class="td-border"> Non-Invasive Ventilator  </th>
+            <th class="td-border"> High flow </th>
             <th class="td-border"> Dead </th>
             <th class="td-border"> PUI </th>
+            <th class="td-border"> ATK </th>
             <th> หน่วยงาน </th>
         </thead>
         <tbody>
@@ -106,14 +107,15 @@
                 <td class="td-border"> {{ item.level }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.total) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.severe) }} </td>
-                <td class="td-border"> {{ cal.checkValue(item.invasive) }} </td>
-                <td class="td-border"> {{ cal.checkValue(item.non_invasive) }} </td>
-                <td class="td-border"> {{ cal.checkValue(item.high_flow) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.moderate) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.mild) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.asymptomatic) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.invasive) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.non_invasive) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.high_flow) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.death) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.pui) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.atk) }} </td>
                 <td>
                     <div style="width: 200px">
                         {{ item.sub_ministry_name }}

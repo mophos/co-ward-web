@@ -82,10 +82,12 @@
                 <th class="td-border"> เครื่องช่วยหายใจ </th>
                 <th class="td-border"> วันที่ update อาการล่าสุด </th>
                 <th class="td-border"> ไม่ได้บันทึกมา </th>
-                <th class="td-border"> Darunavir 600 mg. </th>
+                <!-- <th class="td-border"> Darunavir 600 mg. </th>
                 <th class="td-border"> Lopinavir 200 mg. / Ritonavir 50 mg. </th>
                 <th class="td-border"> Ritonavir 100 mg. </th>
-                <th class="td-border"> Azithromycin 250 mg. </th>
+                <th class="td-border"> Azithromycin 250 mg. </th> -->
+                <th class="td-border"> Casirivimab and imdevimab Modified </th>
+                <th class="td-border"> Molnupiravir </th>
                 <th class="td-border"> Favipiravir </th>
                 <th> หน่วยงานสังกัด </th>
             </tr>
@@ -121,7 +123,7 @@
                     </div>
                 </td>
                 <td class="td-border"> {{ item.notUpdated || '-' }} </td>
-                <td class="td-border">
+                <!-- <td class="td-border">
                     <clr-icon *ngIf="item['Darunavir 600 mg.']" shape="check" class="is-success"></clr-icon>
                     <clr-icon *ngIf="!item['Darunavir 600 mg.']" shape="times" class="is-error"></clr-icon>
                 </td>
@@ -136,6 +138,14 @@
                 <td class="td-border">
                     <clr-icon *ngIf="item['Azithromycin 250 mg.']" shape="check" class="is-success"></clr-icon>
                     <clr-icon *ngIf="!item['Azithromycin 250 mg.']" shape="times" class="is-error"></clr-icon>
+                </td> -->
+                <td class="td-border">
+                    <clr-icon *ngIf="item['Casirivimab and imdevimab Modified']" shape="check" class="is-success"></clr-icon>
+                    <clr-icon *ngIf="!item['Casirivimab and imdevimab Modified']" shape="times" class="is-error"></clr-icon>
+                </td>
+                <td class="td-border">
+                    <clr-icon *ngIf="item['Molnupiravir']" shape="check" class="is-success"></clr-icon>
+                    <clr-icon *ngIf="!item['Molnupiravir']" shape="times" class="is-error"></clr-icon>
                 </td>
                 <td class="td-border">
                     <clr-icon *ngIf="item['Favipiravir']" shape="check" class="is-success"></clr-icon>
