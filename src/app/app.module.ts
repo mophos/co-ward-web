@@ -37,6 +37,7 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   protocol: 'wss'
 };
 import { HighchartsChartModule } from 'highcharts-angular';
+import { NewRegisterComponent } from './new-register/new-register.component';
 
 export function tokenGetter() {
   return sessionStorage.getItem('token');
@@ -49,7 +50,8 @@ export function tokenGetter() {
     RegisterComponent,
     RegisterDrugComponent,
     Register2Component,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    NewRegisterComponent
   ],
   imports: [
     AppRoutingModule,

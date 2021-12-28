@@ -129,7 +129,8 @@ export class LoginComponent implements OnInit {
   }
 
   doRegister() {
-    this.route.navigate(['/register']);
+    // this.route.navigate(['/register']);
+    this.route.navigate(['/new-register']);
   }
 
   async enterCid() {
