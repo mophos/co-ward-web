@@ -35,39 +35,11 @@
         </div>
         <div style="width: 200px;">
             <label> จังหวัด </label>
-            <div class="clr-select-wrapper" style="width: 100%;">
-                <select
-                    name="provincePatientsHospital"
-                    style="width: 100%;"
-                    class="clr-select"
-                    readonly="true"
-                    (click)="setSelectMultiProvince()">
-                    <option style="display: none;" value=""> ทุกจังหวัด </option>
-                    <option
-                        [selected]="provinceGroup.length"
-                        style="display: none;">
-                        <div *ngIf="provinceGroup.length === 1">
-                            {{ provinceGroup[0].name }}
-                        </div>
-                        <div *ngIf="provinceGroup.length > 1">
-                            {{ provinceGroup[0].name + ' + ' + '( ' + ( provinceGroup.length - 1 ) + ' )' }}
-                        </div>
-                    </option>
-                </select>
-                <div
-                    *ngIf="isSelectProvince && provinces.length"
-                    class="patients-hospital__select-menu">
-                    <clr-checkbox-wrapper *ngFor="let province of provinces; let i = index">
-                        <input
-                            [value]="province.code"
-                            [checked]="checkProvince(province)"
-                            type="checkbox"
-                            clrCheckbox
-                            (change)="selectProvince(province)" />
-                        <label> {{ province.name }} </label>
-                    </clr-checkbox-wrapper>
-                </div>
-            </div>
+            <app-select-provinces
+                #province
+                [provinces]="provinces"
+                (onselect)="updateProvince($event)">
+            </app-select-provinces>
         </div>
     </div>
     <div style="padding-top: 16px;">
@@ -87,14 +59,15 @@
             <th class="td-border"> ระดับขีดความสามารถ </th>
             <th class="td-border"> ผู้ป่วยทั้งหมด </th>
             <th class="td-border"> Severe </th>
-            <th class="td-border"> Invasive Ventilator </th>
-            <th class="td-border"> Non-Invasive Ventilator  </th>
-            <th class="td-border"> High flow </th>
             <th class="td-border"> Moderate </th>
             <th class="td-border"> Mild </th>
             <th class="td-border"> Asymptomatic </th>
+            <th class="td-border"> Invasive Ventilator </th>
+            <th class="td-border"> Non-Invasive Ventilator  </th>
+            <th class="td-border"> High flow </th>
             <th class="td-border"> Dead </th>
             <th class="td-border"> PUI </th>
+            <th class="td-border"> ATK </th>
             <th> หน่วยงาน </th>
         </thead>
         <tbody>
@@ -106,14 +79,15 @@
                 <td class="td-border"> {{ item.level }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.total) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.severe) }} </td>
-                <td class="td-border"> {{ cal.checkValue(item.invasive) }} </td>
-                <td class="td-border"> {{ cal.checkValue(item.non_invasive) }} </td>
-                <td class="td-border"> {{ cal.checkValue(item.high_flow) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.moderate) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.mild) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.asymptomatic) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.invasive) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.non_invasive) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.high_flow) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.death) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.pui) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.atk) }} </td>
                 <td>
                     <div style="width: 200px">
                         {{ item.sub_ministry_name }}

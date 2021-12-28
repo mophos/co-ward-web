@@ -2,7 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyOptions } from '@tanjaae/mydatepicker'
 import { PatientsProvinceService } from '../../services-new-report/patients-province.service'
 import { CalculateService } from '../../services-new-report/calculate.service';
-import moment from 'moment';
+import * as moment from 'moment';
+import { SelectZonesComponent } from 'src/app/help/select-zones/select-zones.component';
+import { SelectProvincesComponent } from 'src/app/help/select-provinces/select-provinces.component';
 
 @Component({
   selector: 'app-report-patients-province',
@@ -13,6 +15,12 @@ export class ReportPatientsProvinceComponent implements OnInit {
 
   isLoading = false
   zone = ''
+  selectedZone:any = []
+  items = [
+    [], [], [], [], [],
+    [], [], [], [], [],
+    [], [], []
+  ]
   zones = [
     { name: 'เขต 01', value: '01' },
     { name: 'เขต 02', value: '02' },
@@ -28,23 +36,11 @@ export class ReportPatientsProvinceComponent implements OnInit {
     { name: 'เขต 12', value: '12' },
     { name: 'เขต 13', value: '13' }
   ]
-  items = [
-    [], [], [], [], [],
-    [], [], [], [], [],
-    [], [], []
-  ]
-  // date:any = {
-  //   date: {
-  //     year: moment().year(),
-  //     month: moment().month() + 1,
-  //     day: moment().date()
-  //   }
-  // }
   date:any = {
     date: {
-      year: 2020,
-      month: 4,
-      day: 27
+      year: moment().year(),
+      month: moment().month() + 1,
+      day: moment().date()
     }
   }
   myDatePickerOptions: IMyOptions = {
@@ -53,7 +49,12 @@ export class ReportPatientsProvinceComponent implements OnInit {
     editableDateField: false,
     showClearDateBtn: false
   }
+  provinces:any = []
+  selectedProvince:any = []
+
   @ViewChild('loading', { static: true }) loading: any;
+  // @ViewChild('zone', { static: false }) zone: SelectZonesComponent
+  @ViewChild('province', { static: false }) province: SelectProvincesComponent;
 
   constructor(
     private patientsProvinceService: PatientsProvinceService,
@@ -61,7 +62,7 @@ export class ReportPatientsProvinceComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadData()
+    this.loadData(null)
   }
 
   clearData () {
@@ -72,29 +73,45 @@ export class ReportPatientsProvinceComponent implements OnInit {
     ]
   }
 
-  selectZone () {
-    this.clearData()
-    this.loadData()
-  }
-
   selectDate (value) {
     this.date = {
       date: value.date
     }
     this.clearData()
-    this.loadData()
+    this.loadData('province')
   }
 
-  async loadData () {
+  selectZone () {
+    this.clearData()
+    this.loadData(null)
+  }
+
+  updateZone (value) {
+    this.selectedZone = value
+    this.clearData()
+    this.loadData('province')
+  }
+
+  updateProvince (value) {
+    this.selectedProvince = value
+    this.clearData()
+    this.loadData(null)
+  }
+
+  async loadData (filter) {
     try {
       this.isLoading = true
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
+      // const res:any = await this.patientsProvinceService.getPatientProvince({
+      //   date,
+      //   zone: this.selectedZone,
+      //   province: this.selectedProvince
+      // })
       const res:any = await this.patientsProvinceService.getPatientProvince({
         date,
-        zone: this.zone
+        zone: this.zone,
       })
       if (res.ok) {
-
         res.rows.forEach(item => {
           if (item.zone_code === '01') {
             this.items[0].push(item)
@@ -125,6 +142,19 @@ export class ReportPatientsProvinceComponent implements OnInit {
           }
         })
         this.isLoading = false
+
+        // if (filter === 'province') {
+        //   const provinces = []
+        //   res.rows.forEach(item => {
+        //     if (!provinces.some(x => x.code === item.province_code)) {
+        //       provinces.push({
+        //         code: item.province_code,
+        //         name: item.province_name
+        //       })
+        //     }
+        //   })
+        //   this.provinces = provinces
+        // }
       }
     } catch (error) {
       console.error(error)
@@ -154,7 +184,7 @@ export class ReportPatientsProvinceComponent implements OnInit {
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
       const res:any = await this.patientsProvinceService.exportExcelPatientProvince({
         date,
-        zone: this.zone
+        zone: this.selectedZone
       })
       if (res) {
         this.downloadFile('รายงานผู้ป่วยรายจังหวัด', 'xlsx', res)

@@ -56,6 +56,9 @@ export class ReportBedsZoneComponent implements OnInit {
         const items = []
 
         res.rows.forEach((row, i) => {
+          // if (!row.length) {
+          //   items.push({})
+          // }
           row.forEach((x, j) => {
             if (!items.some(item => item.zone_code === x.zone_code)) {
               items.push({

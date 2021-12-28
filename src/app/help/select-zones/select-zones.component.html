@@ -1,0 +1,33 @@
+<div class="clr-select-wrapper" style="width: 100%;">
+  <select
+      name="zones"
+      style="width: 100%;"
+      class="clr-select"
+      readonly="true"
+      (click)="setSelectMultiZone()">
+      <option style="display: none;" value=""> ทุกเขต </option>
+      <option
+          [selected]="selectedZone.length"
+          style="display: none;">
+          <div *ngIf="selectedZone.length === 1">
+              {{ selectedZone[0].name }}
+          </div>
+          <div *ngIf="selectedZone.length > 1">
+              {{ selectedZone[0].name + ' + ' + '( ' + ( selectedZone.length - 1 ) + ' )' }}
+          </div>
+      </option>
+  </select>
+  <div
+      *ngIf="isSelectZone && zones.length"
+      class="select-zone__select-menu">
+      <clr-checkbox-wrapper *ngFor="let zone of zones; let i = index">
+          <input
+              [value]="zone.code"
+              [checked]="checkZone(zone)"
+              type="checkbox"
+              clrCheckbox
+              (change)="selectZone(zone)" />
+          <label> {{ zone.name }} </label>
+      </clr-checkbox-wrapper>
+  </div>
+</div>

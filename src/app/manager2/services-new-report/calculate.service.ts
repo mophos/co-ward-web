@@ -8,6 +8,13 @@ export class CalculateService {
 
   constructor() { }
 
+  getPercent (total, used) {
+    const value1 = total !== null && total !== undefined ? total : 0
+    const value2 = used !== null && used !== undefined ? used : 0
+
+    return ((value2 * 100) / value1) || 0
+  }
+
   checkExistingZone (items) {
     let check = false
     items.forEach((item) => {
@@ -29,7 +36,7 @@ export class CalculateService {
   }
 
   checkValue (value) {
-    if (value !== undefined && (value !== null && !isNaN(value))) {
+    if ((value !== undefined && value !== Infinity) && (value !== null && !isNaN(value))) {
       return value
     }
     return '-'

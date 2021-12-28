@@ -53,7 +53,10 @@ export class ReportPatientsAdmitConfirmComponent implements OnInit {
   }
 
   formatDate (value) {
-    return moment(value).format('DD-MM-YYYY')
+    if (moment(value).isValid()) {
+      return moment(value).format('DD-MM-YYYY')
+    }
+    return '-'
   }
 
   checkValue (value) {
@@ -67,7 +70,10 @@ export class ReportPatientsAdmitConfirmComponent implements OnInit {
     try {
       this.isLoading = true
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.newReportService.getPatientAdmit({ date })
+      const res:any = await this.newReportService.getPatientAdmit({
+        date,
+        case: 'COVID'
+      })
       if (res.ok) {
         this.items = res.rows.results
         this.isLoading = false
@@ -81,7 +87,10 @@ export class ReportPatientsAdmitConfirmComponent implements OnInit {
     try {
       this.isLoading = true
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.newReportService.getPatientAdmitSummary({ date })
+      const res:any = await this.newReportService.getPatientAdmitSummary({
+        date,
+        case: 'COVID'
+      })
       if (res.ok) {
         this.summaries = res.rows
         console.log(res.rows)

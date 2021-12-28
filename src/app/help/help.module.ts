@@ -25,6 +25,8 @@ import { FulfillSurgicalMaskDetailsComponent } from './fulfill-surgical-mask-det
 import { HpvcComponent } from './hpvc/hpvc.component';
 import { AutocompleteIcd10Component } from './autocomplete-icd10/autocomplete-icd10.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { SelectProvincesComponent } from './select-provinces/select-provinces.component';
+import { SelectZonesComponent } from './select-zones/select-zones.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
     FulfillSuppliesDetailsComponent,
     FulfillSurgicalMaskDetailsComponent,
     HpvcComponent,
-    AutocompleteIcd10Component
+    AutocompleteIcd10Component,
+    SelectProvincesComponent,
+    SelectZonesComponent
   ],
   imports: [
     CommonModule,
@@ -78,7 +82,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
     FulfillSuppliesDetailsComponent,
     FulfillSurgicalMaskDetailsComponent,
     HpvcComponent,
-    AutocompleteIcd10Component
+    AutocompleteIcd10Component,
+    SelectProvincesComponent,
+    SelectZonesComponent
   ],
   providers: [
     HelpService

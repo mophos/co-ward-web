@@ -15,6 +15,7 @@ export class ReportPatientsAdmitComponent implements OnInit {
 
   items:any = []
   summaries:any = []
+  // 2020-04-19
   date:any = {
     date: {
       year: moment().year(),
@@ -47,7 +48,10 @@ export class ReportPatientsAdmitComponent implements OnInit {
   }
 
   formatDate (value) {
-    return moment(value).format('DD-MM-YYYY')
+    if (moment(value).isValid()) {
+      return moment(value).format('DD-MM-YYYY')
+    }
+    return '-'
   }
 
   selectDate (value) {

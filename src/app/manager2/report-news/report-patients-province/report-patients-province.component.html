@@ -17,8 +17,12 @@
                 (dateChanged)="selectDate($event)">
             </my-date-picker-th>
         </div>
-        <div style="width: 200px;">
+        <div style="width: 200px; margin-right: 24px;">
             <label> เขตสุขภาพ </label>
+            <!-- <app-select-zones
+                #zone
+                (onselect)="updateZone($event)">
+            </app-select-zones> -->
             <div class="clr-select-wrapper" style="width: 100%;">
                 <select
                     [(ngModel)]="zone"
@@ -33,6 +37,14 @@
                 </select>
             </div>
         </div>
+        <!-- <div style="width: 200px;">
+            <label> จังหวัด </label>
+            <app-select-provinces
+                #province
+                [provinces]="provinces"
+                (onselect)="updateProvince($event)">
+            </app-select-provinces>
+        </div> -->
     </div>
     <div style="padding-top: 16px;">
         <button class="btn btn-sm btn-primary" (click)="exportExcel()">
@@ -48,14 +60,15 @@
             <th class="td-border"> จังหวัด </th>
             <th class="td-border"> ผู้ป่วยทั้งหมด </th>
             <th class="td-border"> Severe </th>
-            <th class="td-border"> Invasive Ventilator </th>
-            <th class="td-border"> Non-Invasive Ventilator  </th>
-            <th class="td-border"> High flow </th>
             <th class="td-border"> Moderate </th>
             <th class="td-border"> Mild </th>
             <th class="td-border"> Asymptomatic </th>
+            <th class="td-border"> Invasive Ventilator </th>
+            <th class="td-border"> Non-Invasive Ventilator  </th>
+            <th class="td-border"> High flow </th>
             <th class="td-border"> Dead </th>
-            <th> PUI </th>
+            <th class="td-border"> PUI </th>
+            <th> ATK </th>
         </tr>
     </thead>
     <tbody>
@@ -66,28 +79,30 @@
                     <td class="td-border"> {{ item.province_name }} </td>
                     <td class="td-border"> {{ cal.checkValue(item.total) }} </td>
                     <td class="td-border"> {{ cal.checkValue(item.severe) }} </td>
-                    <td class="td-border"> {{ cal.checkValue(item.invasive) }} </td>
-                    <td class="td-border"> {{ cal.checkValue(item.non_invasive) }} </td>
-                    <td class="td-border"> {{ cal.checkValue(item.high_flow) }} </td>
                     <td class="td-border"> {{ cal.checkValue(item.moderate) }} </td>
                     <td class="td-border"> {{ cal.checkValue(item.mild) }} </td>
                     <td class="td-border"> {{ cal.checkValue(item.asymptomatic) }} </td>
+                    <td class="td-border"> {{ cal.checkValue(item.invasive) }} </td>
+                    <td class="td-border"> {{ cal.checkValue(item.non_invasive) }} </td>
+                    <td class="td-border"> {{ cal.checkValue(item.high_flow) }} </td>
                     <td class="td-border"> {{ cal.checkValue(item.death) }} </td>
-                    <td> {{ cal.checkValue(item.pui) }} </td>
+                    <td class="td-border"> {{ cal.checkValue(item.pui) }} </td>
+                    <td> {{ cal.checkValue(item.atk) }} </td>
                 </tr>
             </ng-container>
             <tr *ngIf="items[i].length && items[i][0].zone_code !== '13'">
                 <td colspan="2" class="td-border"> รวมเขต {{ items[i][0].zone_code }} </td>
                 <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'total')) }} </td>
                 <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'severe')) }} </td>
-                <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'invasive')) }} </td>
-                <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'non_invasive')) }} </td>
-                <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'high_flow')) }} </td>
                 <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'moderate')) }} </td>
                 <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'mild')) }} </td>
                 <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'asymptomatic')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'invasive')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'non_invasive')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'high_flow')) }} </td>
                 <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'death')) }} </td>
-                <td> {{ cal.checkValue(cal.sumZone(items[i], 'pui')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'pui')) }} </td>
+                <td> {{ cal.checkValue(cal.sumZone(items[i], 'atk')) }} </td>
             </tr>
         </ng-container>
     </tbody>
@@ -96,40 +111,43 @@
             <td colspan="2" class="td-border"> กรุงเทพมหานคร </td>
             <td class="td-border"> {{ cal.checkValue(items[12][0].total) }} </td>
             <td class="td-border"> {{ cal.checkValue(items[12][0].severe) }} </td>
-            <td class="td-border"> {{ cal.checkValue(items[12][0].invasive) }} </td>
-            <td class="td-border"> {{ cal.checkValue(items[12][0].non_invasive) }} </td>
-            <td class="td-border"> {{ cal.checkValue(items[12][0].high_flow) }} </td>
             <td class="td-border"> {{ cal.checkValue(items[12][0].moderate) }} </td>
             <td class="td-border"> {{ cal.checkValue(items[12][0].mild) }} </td>
             <td class="td-border"> {{ cal.checkValue(items[12][0].asymptomatic) }} </td>
+            <td class="td-border"> {{ cal.checkValue(items[12][0].invasive) }} </td>
+            <td class="td-border"> {{ cal.checkValue(items[12][0].non_invasive) }} </td>
+            <td class="td-border"> {{ cal.checkValue(items[12][0].high_flow) }} </td>
             <td class="td-border"> {{ cal.checkValue(items[12][0].death) }} </td>
-            <td> {{ cal.checkValue(items[12][0].pui) }} </td>
+            <td class="td-border"> {{ cal.checkValue(items[12][0].pui) }} </td>
+            <td> {{ cal.checkValue(items[12][0].atk) }} </td>
         </tr>
         <tr *ngIf="cal.countExistingZone(items) >= 12">
             <td colspan="2" class="td-border"> รวม 12 เขต </td>
             <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'total')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'severe')) }} </td>
-            <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'invasive')) }} </td>
-            <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'non_invasive')) }} </td>
-            <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'high_flow')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'moderate')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'mild')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'asymptomatic')) }} </td>
+            <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'invasive')) }} </td>
+            <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'non_invasive')) }} </td>
+            <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'high_flow')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'death')) }} </td>
-            <td> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'pui')) }} </td>
+            <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'pui')) }} </td>
+            <td> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'atk')) }} </td>
         </tr>
         <tr *ngIf="cal.countExistingZone(items) > 12">
             <td colspan="2" class="td-border"> ทั่วประเทศ </td>
             <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'total')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'severe')) }} </td>
-            <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'invasive')) }} </td>
-            <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'non_invasive')) }} </td>
-            <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'high_flow')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'moderate')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'mild')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'asymptomatic')) }} </td>
+            <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'invasive')) }} </td>
+            <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'non_invasive')) }} </td>
+            <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'high_flow')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'death')) }} </td>
-            <td> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'pui')) }} </td>
+            <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'pui')) }} </td>
+            <td> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'atk')) }} </td>
         </tr>
     </tfoot>
 </table>
