@@ -78,7 +78,7 @@ export class ManageHospitalComponent implements OnInit {
       value: 'CI'
     }
   ]
-  contact_name = ''
+  contactName = ''
   headHospcode = ''
   headHospname = ''
 
@@ -175,8 +175,9 @@ export class ManageHospitalComponent implements OnInit {
   }
 
   async onClickAdd() {
-    this.modal = true;
-    this.clearForm();
+    this.isUpdate = false
+    this.clearForm()
+    this.modal = true
   }
 
   onSelectProvince(e) {
@@ -241,7 +242,7 @@ export class ManageHospitalComponent implements OnInit {
 
   }
 
-  async clearForm() {
+  clearForm () {
     this.id = null;
     this.tambonId = null;
     this.tambonName = null;
@@ -256,6 +257,14 @@ export class ManageHospitalComponent implements OnInit {
     this.telephoneManager = null;
     this.hospBed = null;
     this.hospTypeId = null;
+    this.ministryCode = null
+    this.subMinistryCode = null
+
+    // new
+    this.hospType = ''
+    this.contactName = ''
+    this.headHospcode = ''
+    this.headHospname = ''
     this.setValue();
   }
 
@@ -285,7 +294,7 @@ export class ManageHospitalComponent implements OnInit {
         // new
         hospital_type: this.hospType || null,
         head_hospcode: this.headHospcode || null,
-        contact_name: this.contact_name || null
+        contact_name: this.contactName || null
       };
 
       let rs: any;
@@ -335,18 +344,18 @@ export class ManageHospitalComponent implements OnInit {
 
     //new
     try {
-      const res:any = await this.hospitalService.getHeadHospital(l.head_hospcode)
-      if (res.ok) {
-        this.headHospname = res.rows[0].hospname
+      if (l.head_hospcode) {
+        const res:any = await this.hospitalService.getHeadHospital(l.head_hospcode)
+        if (res.ok) {
+          this.headHospname = res.rows[0].hospname
+        }
       }
     } catch (error) {
       console.error(error)
     }
-
     this.hospType = l.hospital_type
-    this.contact_name = l.contact_name
+    this.contactName = l.contact_name
     this.headHospcode = l.head_hospcode
-
     this.setValue();
   }
 

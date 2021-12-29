@@ -46,6 +46,10 @@ export class ReportPatientsAdmitConfirmComponent implements OnInit {
     this.loadDataSummary()
   }
 
+  checkHasDrug (value, key) {
+    return value.hasOwnProperty(key)
+  }
+
   getAge (value) {
     const now =  moment()
     const dateBirth = moment(value)
