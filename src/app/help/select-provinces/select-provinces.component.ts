@@ -17,6 +17,11 @@ export class SelectProvincesComponent implements OnInit {
   ngOnInit() {
   }
 
+  clear () {
+    this.selectedProvince = []
+    this.isSelectProvince = false
+  }
+
   selectProvince (value) {
     const index = this.selectedProvince.findIndex(item => item.code === value.code)
     if (index > -1) {
