@@ -34,25 +34,28 @@
             <th colspan="2" class="td-border"> Invasive Ventilator </th>
             <th colspan="2" class="td-border"> High Flow </th>
             <th colspan="2" class="td-border"> PAPR </th>
+
+            <!-- <th colspan="2" class="td-border"> Low Flow </th> -->
+
             <th rowspan="2"> หน่วยงาน </th>
         </tr>
         <tr>
-            <th class="td-border"> ใช้กับผู้ป่วย </th>
-            <th class="td-border"> ทั้งหมด </th>
-            <th class="td-border"> ใช้กับผู้ป่วย </th>
-            <th class="td-border"> ทั้งหมด </th>
-            <th class="td-border"> ใช้กับผู้ป่วย </th>
-            <th class="td-border"> ทั้งหมด </th>
-            <th class="td-border"> ใช้กับผู้ป่วย </th>
-            <th class="td-border"> ทั้งหมด </th>
+            <ng-container *ngFor="let i of [].constructor(4)">
+                <th class="td-border"> ใช้กับผู้ป่วย </th>
+                <th class="td-border"> ทั้งหมด </th>
+            </ng-container>
+            <!-- <ng-container *ngFor="let i of [].constructor(5)">
+                <th class="td-border"> ใช้กับผู้ป่วย </th>
+                <th class="td-border"> ทั้งหมด </th>
+            </ng-container> -->
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let item of items; let i = index">
             <td class="td-border"> {{ item.zone_code }} </td>
-            <td class="td-border"> {{ item.province_name }} </td>
-            <td class="td-border"> {{ item.hospcode }} </td>
-            <td class="td-border"> {{ item.hospname }} </td>
+            <td class="td-border"> {{ item.province_name || '-' }} </td>
+            <td class="td-border"> {{ item.hospcode || '-' }} </td>
+            <td class="td-border"> {{ item.hospname || '-' }} </td>
             <td class="td-border"> {{ cal.checkValue(item.non_invasive_usage_qty) }} </td>
             <td class="td-border"> {{ cal.checkValue(item.non_invasive_covid_qty) }} </td>
             <td class="td-border"> {{ cal.checkValue(item.invasive_usage_qty) }} </td>
@@ -61,6 +64,10 @@
             <td class="td-border"> {{ cal.checkValue(item.high_flow_covid_qty) }} </td>
             <td class="td-border"> {{ cal.checkValue(item.papr_usage_qty) }} </td>
             <td class="td-border"> {{ cal.checkValue(item.papr_covid_qty) }} </td>
+
+            <!-- <td class="td-border"> {{ cal.checkValue(item.low_flow_usage_qty) }} </td>
+            <td class="td-border"> {{ cal.checkValue(item.low_flow_covid_qty) }} </td> -->
+
             <td>
                 <div style="width: 200px;">
                     {{ item.sub_ministry_name || '-' }}
