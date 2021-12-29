@@ -15,7 +15,6 @@ export class ReportPatientsProvinceComponent implements OnInit {
 
   isLoading = false
   zone = ''
-  selectedZone:any = []
   items = [
     [], [], [], [], [],
     [], [], [], [], [],
@@ -49,12 +48,13 @@ export class ReportPatientsProvinceComponent implements OnInit {
     editableDateField: false,
     showClearDateBtn: false
   }
-  provinces:any = []
-  selectedProvince:any = []
+  // provinces:any = []
+  // selectedProvince:any = []
+  // selectedZone:any = []
 
   @ViewChild('loading', { static: true }) loading: any;
   // @ViewChild('zone', { static: false }) zone: SelectZonesComponent
-  @ViewChild('province', { static: false }) province: SelectProvincesComponent;
+  // @ViewChild('province', { static: false }) province: SelectProvincesComponent;
 
   constructor(
     private patientsProvinceService: PatientsProvinceService,
@@ -86,17 +86,17 @@ export class ReportPatientsProvinceComponent implements OnInit {
     this.loadData(null)
   }
 
-  updateZone (value) {
-    this.selectedZone = value
-    this.clearData()
-    this.loadData('province')
-  }
+  // updateZone (value) {
+  //   this.selectedZone = value
+  //   this.clearData()
+  //   this.loadData('province')
+  // }
 
-  updateProvince (value) {
-    this.selectedProvince = value
-    this.clearData()
-    this.loadData(null)
-  }
+  // updateProvince (value) {
+  //   this.selectedProvince = value
+  //   this.clearData()
+  //   this.loadData(null)
+  // }
 
   async loadData (filter) {
     try {
@@ -182,9 +182,13 @@ export class ReportPatientsProvinceComponent implements OnInit {
     try {
       this.loading.show()
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
+      // const res:any = await this.patientsProvinceService.exportExcelPatientProvince({
+      //   date,
+      //   zone: this.selectedZone
+      // })
       const res:any = await this.patientsProvinceService.exportExcelPatientProvince({
         date,
-        zone: this.selectedZone
+        zone: this.zone
       })
       if (res) {
         this.downloadFile('รายงานผู้ป่วยรายจังหวัด', 'xlsx', res)

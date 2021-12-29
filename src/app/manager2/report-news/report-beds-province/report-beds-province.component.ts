@@ -2,7 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyOptions } from 'mydatepicker-th';
 import { BedsProvinceService } from '../../services-new-report/beds-province.service'
 import { CalculateService } from '../../services-new-report/calculate.service';
-import moment from 'moment';
+import * as moment from 'moment';
+import { SelectZonesComponent } from 'src/app/help/select-zones/select-zones.component';
+import { SelectProvincesComponent } from 'src/app/help/select-provinces/select-provinces.component';
 
 @Component({
   selector: 'app-report-beds-province',
@@ -46,7 +48,13 @@ export class ReportBedsProvinceComponent implements OnInit {
       day: moment().date()
     }
   }
-  @ViewChild('loading', { static: true }) loading: any;
+  // provinces:any = []
+  // selectedProvince:any = []
+  // selectedZone:any = []
+
+  @ViewChild('loading', { static: true }) loading: any
+  // @ViewChild('zone', { static: false }) zone: SelectZonesComponent
+  // @ViewChild('province', { static: false }) province: SelectProvincesComponent
 
   constructor(
     private bedsProvinceService: BedsProvinceService,
@@ -54,7 +62,7 @@ export class ReportBedsProvinceComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadData()
+    this.loadData(null)
   }
 
   clearData () {
@@ -65,23 +73,41 @@ export class ReportBedsProvinceComponent implements OnInit {
     ]
   }
 
-  selectZone () {
-    this.clearData()
-    this.loadData()
-  }
-
   selectDate (value) {
     this.date = {
       date: value.date
     }
     this.clearData()
-    this.loadData()
+    this.loadData('province')
   }
 
-  async loadData () {
+  selectZone () {
+    this.clearData()
+    this.loadData(null)
+  }
+
+  // updateZone (value) {
+  //   this.selectedZone = value
+  //   this.clearData()
+  //   this.loadData('province')
+  // }
+
+  // updateProvince (value) {
+  //   this.selectedProvince = value
+  //   this.clearData()
+  //   this.loadData(null)
+  // }
+
+
+  async loadData (filter) {
     try {
       this.isLoading = true
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
+      // const res:any = await this.bedsProvinceService.getBedProvince({
+      //   date,
+      //   zone: this.selectedZone,
+      //   province: this.selectedProvince
+      // })
       const res:any = await this.bedsProvinceService.getBedProvince({
         date,
         zone: this.zone
@@ -160,6 +186,21 @@ export class ReportBedsProvinceComponent implements OnInit {
           }
         })
         this.isLoading = false
+
+        // if (filter === 'province') {
+        //   const provinces = []
+        //   res.rows.forEach(row => {
+        //     row.forEach(item => {
+        //       if (!provinces.some(x => x.code === item.province_code)) {
+        //         provinces.push({
+        //           code: item.province_code,
+        //           name: item.province_name
+        //         })
+        //       }
+        //     })
+        //   })
+        //   this.provinces = provinces
+        // }
       }
     } catch (error) {
       console.error(error)
@@ -187,6 +228,10 @@ export class ReportBedsProvinceComponent implements OnInit {
     try {
       this.loading.show()
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
+      // const res:any = await this.bedsProvinceService.exportExcelBedProvince({
+      //   date,
+      //   zone: this.selectedZone
+      // })
       const res:any = await this.bedsProvinceService.exportExcelBedProvince({
         date,
         zone: this.zone
