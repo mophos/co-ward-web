@@ -56,19 +56,25 @@ export class ReportPatientsHospitalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadData(null)
+    this.loadData('province')
+  }
+
+  clearData () {
+    this.items = []
+    this.selectedProvince = []
+    this.province.clear()
   }
 
   selectDate (value) {
     this.date = {
       date: value.date
     }
-    this.items = []
+    this.clearData()
     this.loadData('province')
   }
 
   selectZone () {
-    this.items = []
+    this.clearData()
     this.loadData('province')
   }
 

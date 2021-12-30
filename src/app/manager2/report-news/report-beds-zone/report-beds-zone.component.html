@@ -61,8 +61,8 @@
             <ng-container >
                 <tr *ngFor="let item of items; let i = index">
                     <td class="td-border">
-                        <div *ngIf="item.zone_code !== '13'"> รวมเขต {{ i + 1 }} </div>
-                        <div *ngIf="item.zone_code === '13'"> กรุงเทพมหานคร </div>
+                        <div *ngIf="i !== 12"> รวมเขต {{ i + 1 }} </div>
+                        <div *ngIf="i === 12"> กรุงเทพมหานคร </div>
                     </td>
                     <td class="td-border"> {{ cal.checkValue(item.level3_total) }} </td>
                     <td class="td-border"> {{ cal.checkValue(item.level3_used) }} </td>

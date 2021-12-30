@@ -73,10 +73,10 @@
         <tbody>
             <tr *ngFor="let item of items; let i = index">
                 <td class="td-border"> {{ item.zone_code }} </td>
-                <td class="td-border"> {{ item.province_name }} </td>
-                <td class="td-border"> {{ item.hospcode }} </td>
-                <td class="td-border"> {{ item.hospname }} </td>
-                <td class="td-border"> {{ item.level }} </td>
+                <td class="td-border"> {{ item.province_name || '-' }} </td>
+                <td class="td-border"> {{ item.hospcode || '-'  }} </td>
+                <td class="td-border"> {{ item.hospname || '-' }} </td>
+                <td class="td-border"> {{ item.level || '-' }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.total) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.severe) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.moderate) }} </td>
@@ -90,7 +90,7 @@
                 <td class="td-border"> {{ cal.checkValue(item.atk) }} </td>
                 <td>
                     <div style="width: 200px">
-                        {{ item.sub_ministry_name }}
+                        {{ item.sub_ministry_name || '-' }}
                     </div>
                 </td>
             </tr>

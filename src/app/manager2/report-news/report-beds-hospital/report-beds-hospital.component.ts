@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyOptions } from 'mydatepicker-th';
 import { BedsHospitalService } from '../../services-new-report/beds-hospital.service'
 import { CalculateService } from '../../services-new-report/calculate.service';
-import moment from 'moment';
-
+import * as moment from 'moment';
+import { SelectProvincesComponent } from 'src/app/help/select-provinces/select-provinces.component';
 @Component({
   selector: 'app-report-beds-hospital',
   templateUrl: './report-beds-hospital.component.html',
@@ -44,10 +44,11 @@ export class ReportBedsHospitalComponent implements OnInit {
     { name: 'เขต 12', value: '12' },
     { name: 'เขต 13', value: '13' }
   ]
-  provinceGroup = []
   provinces:any = []
-  isSelectProvince = false
+  selectedProvince:any = []
+
   @ViewChild('loading', { static: true }) loading: any;
+  @ViewChild('province', { static: false }) province: SelectProvincesComponent;
 
   constructor(
     private bedsHospitalService: BedsHospitalService,
@@ -55,41 +56,32 @@ export class ReportBedsHospitalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadData(null)
+    this.loadData('province')
+  }
+
+  clearData () {
+    this.items = []
+    this.selectedProvince = []
+    this.province.clear()
   }
 
   selectDate (value) {
     this.date = {
       date: value.date
     }
-    this.items = []
-    this.loadData('date')
-  }
-
-  async selectZone () {
-    this.items = []
-    this.provinceGroup = []
-    this.loadData('zone')
-    this.isSelectProvince = false
-  }
-
-  selectProvince (value) {
-    const index = this.provinceGroup.findIndex(item => item.code === value.code)
-    if (index > -1) {
-      this.provinceGroup.splice(index, 1)
-    } else {
-      this.provinceGroup.push(value)
-    }
-    this.items = []
+    this.clearData()
     this.loadData('province')
   }
 
-  setSelectMultiProvince () {
-    this.isSelectProvince = !this.isSelectProvince
+  async selectZone () {
+    this.clearData()
+    this.loadData('province')
   }
 
-  checkProvince (province) {
-    return this.provinceGroup.some(item => item.name === province.name)
+  updateProvince (value) {
+    this.selectedProvince = value
+    this.items = []
+    this.loadData(null)
   }
 
   async loadData (filter) {
@@ -99,7 +91,7 @@ export class ReportBedsHospitalComponent implements OnInit {
       const res:any = await this.bedsHospitalService.getBedHospital({
         date,
         zone: this.zone,
-        province: this.provinceGroup
+        province: this.selectedProvince
       })
       if (res.ok) {
         const items = []
@@ -149,7 +141,7 @@ export class ReportBedsHospitalComponent implements OnInit {
           })
         })
 
-        if (filter === 'zone') {
+        if (filter === 'province') {
           const provinces = []
           res.rows.forEach(row => {
             row.forEach(item => {
@@ -196,7 +188,7 @@ export class ReportBedsHospitalComponent implements OnInit {
       const res:any = await this.bedsHospitalService.exportExcelBedHospital({
         date,
         zone: this.zone,
-        province: this.provinceGroup
+        province: this.selectedProvince
       })
       if (res) {
         this.downloadFile('รายงานเตียงรายสถานพยาบาล', 'xlsx', res)

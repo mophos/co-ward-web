@@ -33,35 +33,30 @@
                 <th rowspan="2" class="td-border"> โรงพยาบาล </th>
                 <th colspan="4" class="td-border"> Positive ยอดสะสม </th>
                 <th colspan="4" class="td-border"> PUI ยอดสะสม </th>
+
+                <!-- <th colspan="4" class="td-border"> ATK ยอดสะสม </th> -->
+
                 <th colspan="4" class="td-border"> Positive วันนี้ </th>
                 <th colspan="4" class="td-border"> PUI วันนี้ </th>
+
+                <!-- <th colspan="4" class="td-border"> ATK วันนี้ </th> -->
                 <th rowspan="2"> หน่วยงาน </th>
             </tr>
             <tr>
-                <th class="td-border"> Admit </th>
-                <th class="td-border"> Discharge รวมสะสม </th>
-                <th class="td-border"> Discharge ส่ง Hospitel </th>
-                <th class="td-border"> Discharge ตายสะสม </th>
-                <th class="td-border"> Admit </th>
-                <th class="td-border"> Discharge รวมสะสม </th>
-                <th class="td-border"> Discharge ส่ง Hospitel </th>
-                <th class="td-border"> Discharge ตายสะสม </th>
-                <th class="td-border"> Admit </th>
-                <th class="td-border"> Discharge รวมสะสม </th>
-                <th class="td-border"> Discharge ส่ง Hospitel </th>
-                <th class="td-border"> Discharge ตายสะสม </th>
-                <th class="td-border"> Admit </th>
-                <th class="td-border"> Discharge รวมสะสม </th>
-                <th class="td-border"> Discharge ส่ง Hospitel </th>
-                <th class="td-border"> Discharge ตายสะสม </th>
+                <ng-container *ngFor="let i of [].constructor(4)">
+                    <th class="td-border"> Admit </th>
+                    <th class="td-border"> Discharge รวมสะสม </th>
+                    <th class="td-border"> Discharge ส่ง Hospitel </th>
+                    <th class="td-border"> Discharge ตายสะสม </th>
+                </ng-container>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let item of items; let i = index">
                 <td class="td-border"> {{ item.zone_code }} </td>
-                <td class="td-border"> {{ item.province_name }} </td>
-                <td class="td-border"> {{ item.hospcode }} </td>
-                <td class="td-border"> {{ item.hospname }} </td>
+                <td class="td-border"> {{ item.province_name || '-' }} </td>
+                <td class="td-border"> {{ item.hospcode || '-' }} </td>
+                <td class="td-border"> {{ item.hospname || '-' }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.admit) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.discharge) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.discharge_hospitel) }} </td>
@@ -70,6 +65,12 @@
                 <td class="td-border"> {{ cal.checkValue(item.pui_discharge) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.pui_discharge_hospitel) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.pui_discharge_death) }} </td>
+
+                <!-- <td class="td-border"> {{ cal.checkValue(item.atk_admit) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.atk_discharge) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.atk_discharge_hospitel) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.atk_discharge_death) }} </td> -->
+
                 <td class="td-border"> {{ cal.checkValue(item.today_admit) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.today_discharge) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.today_discharge_hospitel) }} </td>
@@ -78,9 +79,15 @@
                 <td class="td-border"> {{ cal.checkValue(item.today_pui_discharge) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.today_pui_discharge_hospitel) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.today_pui_discharge_death) }} </td>
+
+                <!-- <td class="td-border"> {{ cal.checkValue(item.today_atk_admit) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.today_atk_discharge) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.today_atk_discharge_hospitel) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.today_atk_discharge_death) }} </td> -->
+
                 <td>
                     <div style="width: 200px;">
-                        {{ item.sub_ministry_name }}
+                        {{ item.sub_ministry_name || '-' }}
                     </div>
                 </td>
             </tr>

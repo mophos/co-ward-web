@@ -86,9 +86,9 @@
                 <th class="td-border"> Lopinavir 200 mg. / Ritonavir 50 mg. </th>
                 <th class="td-border"> Ritonavir 100 mg. </th>
                 <th class="td-border"> Azithromycin 250 mg. </th> -->
+                <th class="td-border"> Favipiravir </th>
                 <th class="td-border"> Casirivimab and imdevimab Modified </th>
                 <th class="td-border"> Molnupiravir </th>
-                <th class="td-border"> Favipiravir </th>
                 <th> หน่วยงานสังกัด </th>
             </tr>
         </thead>
@@ -140,16 +140,16 @@
                     <clr-icon *ngIf="!item['Azithromycin 250 mg.']" shape="times" class="is-error"></clr-icon>
                 </td> -->
                 <td class="td-border">
-                    <clr-icon *ngIf="item['Casirivimab and imdevimab Modified']" shape="check" class="is-success"></clr-icon>
-                    <clr-icon *ngIf="!item['Casirivimab and imdevimab Modified']" shape="times" class="is-error"></clr-icon>
+                    <clr-icon *ngIf="checkHasDrug(item, 'Favipiravir')" shape="check" class="is-success"></clr-icon>
+                    <clr-icon *ngIf="!checkHasDrug(item, 'Favipiravir')" shape="times" class="is-error"></clr-icon>
                 </td>
                 <td class="td-border">
-                    <clr-icon *ngIf="item['Molnupiravir']" shape="check" class="is-success"></clr-icon>
-                    <clr-icon *ngIf="!item['Molnupiravir']" shape="times" class="is-error"></clr-icon>
+                    <clr-icon *ngIf="checkHasDrug(item, 'Casirivimab and imdevimab Modified')" shape="check" class="is-success"></clr-icon>
+                    <clr-icon *ngIf="!checkHasDrug(item, 'Casirivimab and imdevimab Modified')" shape="times" class="is-error"></clr-icon>
                 </td>
                 <td class="td-border">
-                    <clr-icon *ngIf="item['Favipiravir']" shape="check" class="is-success"></clr-icon>
-                    <clr-icon *ngIf="!item['Favipiravir']" shape="times" class="is-error"></clr-icon>
+                    <clr-icon *ngIf="checkHasDrug(item, 'Molnupiravir')" shape="check" class="is-success"></clr-icon>
+                    <clr-icon *ngIf="!checkHasDrug(item, 'Molnupiravir')" shape="times" class="is-error"></clr-icon>
                 </td>
                 <td> {{ item.sub_ministry_name || '-' }} </td>
             </tr>
