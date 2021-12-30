@@ -160,7 +160,7 @@
                 รหัสสถานบริการ (5-8 หลัก)<span class="required">*</span> :
               </div>
               <div class="clr-col-md-8">
-                <input type="text" minlength="5" maxlength="8" id="hospcodeConfirm" placeholder="ระบุรหัสโรงพยาบาล"
+                <input type="text" maxlength="8" id="hospcodeConfirm" placeholder="ระบุรหัสสถานบริการ"
                   name="hospcodeConfirm" class="clr-input clr-col-md-12" [(ngModel)]="hospcodeConfirm">
               </div>
               <div class="clr-col-md-4" style="text-align: right;">
@@ -402,7 +402,6 @@
 
                 <button class="btn btn-success" (click)="save()"
                   [disabled]="
-                  (hospcodeConfirm.length >= 5 && hospcodeConfirm.length <= 8) ||
                   onSelectHospcode != hospcodeConfirm || !checkCid || !position || !title || firstName == '' || lastName == '' ||
                   username == '' || !checkPasswordConfirm || !checkEmail || !checkPhone || !isVerify || !checkUsername">บันทึก</button>
                 <button class="btn btn-danger-outline" (click)="cancel()">ยกเลิก</button>
