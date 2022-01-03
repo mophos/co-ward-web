@@ -65,6 +65,7 @@ export class ReportPatientsAdmitComponent implements OnInit {
     this.items = []
     this.summaries = []
     this.loadData()
+    this.loadDataSummary()
   }
 
   async loadData () {
