@@ -9,17 +9,20 @@ export class NewReportService {
   constructor(private http: HttpClient, @Inject('API_URL') private url: string) { }
 
   getPatientAdmit (params) {
-    const url = `${this.url}/v1/new-report/admit-case?date=${params.date}&case_status[]=${params.case}`;
+    const url = `${this.url}/v1/new-report/admit-case?start=2010-01-01&end=${params.date}&case_status[]=${params.case}`;
+    // const url = `${this.url}/v1/new-report/admit-case?date=${params.date}&case_status[]=${params.case}`;
     return this.http.get(url).toPromise();
   }
 
   getPatientAdmitSummary (params) {
-    const url = `${this.url}/v1/new-report/admit-case-summary?start=${params.date}&end=${params.date}&case_status[]=${params.case}`;
+    const url = `${this.url}/v1/new-report/admit-case-summary?start=2010-01-01&end=${params.date}&case_status[]=${params.case}`;
+    // const url = `${this.url}/v1/new-report/admit-case-summary?start=${params.date}&end=${params.date}&case_status[]=${params.case}`;
     return this.http.get(url).toPromise();
   }
 
   getNewBeds (params) {
-    const url = `${this.url}/v1/new-staff/report-all/bed-report-by-hospital?date=${params.date}`;
+    const url = `${this.url}/v1/new-staff/report-all/bed-report-by-hospital?start=2010-01-01&end=${params.date}`
+    // const url = `${this.url}/v1/new-staff/report-all/bed-report-by-hospital?date=${params.date}`;
     return this.http.get(url).toPromise();
   }
 
