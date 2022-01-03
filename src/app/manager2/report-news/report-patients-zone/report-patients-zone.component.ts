@@ -1,3 +1,4 @@
+import { AlertService } from 'src/app/help/alert.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyOptions } from '@tanjaae/mydatepicker';
 import { PatientsZoneService } from '../../services-new-report/patients-zone.service';
@@ -13,8 +14,8 @@ export class ReportPatientsZoneComponent implements OnInit {
 
   isLoading = false
 
-  items:any = []
-  date:any = {
+  items: any = []
+  date: any = {
     date: {
       year: moment().year(),
       month: moment().month() + 1,
@@ -31,36 +32,38 @@ export class ReportPatientsZoneComponent implements OnInit {
 
   constructor(
     private patientsZoneService: PatientsZoneService,
+    private alertService: AlertService,
     private cal: CalculateService
   ) { }
 
   ngOnInit() {
-    this.loadData()
+    this.loadData();
   }
 
-  selectDate (value) {
+  selectDate(value) {
     this.date = {
       date: value.date
-    }
-    this.items = []
-    this.loadData()
+    };
+    this.items = [];
+    this.loadData();
   }
 
-  async loadData () {
+  async loadData() {
     try {
-      this.isLoading = true
-      const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.patientsZoneService.getPatientZone({ date })
+      this.isLoading = true;
+      const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`;
+      const res: any = await this.patientsZoneService.getPatientZone({ date });
       if (res.ok) {
-        this.items = res.rows
-        this.isLoading = false
+        this.items = res.rows;
+        this.isLoading = false;
       }
     } catch (error) {
-      console.error(error)
+      this.alertService.serverError();
+      console.error(error);
     }
   }
 
-  downloadFile (name, type, data: any) {
+  downloadFile(name, type, data: any) {
     try {
       const url = window.URL.createObjectURL(new Blob([data]))
       const fileName = `${name}.${type}`
@@ -81,7 +84,7 @@ export class ReportPatientsZoneComponent implements OnInit {
     try {
       this.loading.show()
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.patientsZoneService.exportExcelPatientZone({ date })
+      const res: any = await this.patientsZoneService.exportExcelPatientZone({ date })
       if (res) {
         this.downloadFile('รายงานผู้ป่วยรายเขต', 'xlsx', res)
         this.loading.hide()

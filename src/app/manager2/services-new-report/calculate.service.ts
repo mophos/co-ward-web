@@ -8,14 +8,14 @@ export class CalculateService {
 
   constructor() { }
 
-  getPercent (total, used) {
+  getPercent(total, used) {
     const value1 = total !== null && total !== undefined ? total : 0
     const value2 = used !== null && used !== undefined ? used : 0
 
     return ((value2 * 100) / value1) || 0
   }
 
-  checkExistingZone (items) {
+  checkExistingZone(items) {
     let check = false
     items.forEach((item) => {
       if (item.length) {
@@ -25,7 +25,7 @@ export class CalculateService {
     return check
   }
 
-  countExistingZone (items) {
+  countExistingZone(items) {
     let count = 0
     items.forEach((item) => {
       if (item.length) {
@@ -35,21 +35,21 @@ export class CalculateService {
     return count
   }
 
-  checkValue (value) {
+  checkValue(value) {
     if ((value !== undefined && value !== Infinity) && (value !== null && !isNaN(value))) {
       return value
     }
     return '-'
   }
 
-  getRemaining (num1, num2) {
+  getRemaining(num1, num2) {
     if (!num1 && !num2) {
       return '-'
     }
     return (num1 || 0) - (num2 || 0)
   }
 
-  sumField (value) {
+  sumField(value) {
     let sum = 0
     const keys = Object.keys(value)
     keys.forEach(key => {
@@ -62,15 +62,16 @@ export class CalculateService {
     return sum
   }
 
-  sumZone (items, value) {
+  sumZone(items, value) {
     return sumBy(items, value)
   }
 
-  sum12Zone (items, value) {
-    return sumBy(items, value) - items[12][value]
+  sum12Zone(items, value) {
+    console.log(items);
+    return +(sumBy(items, value)) - +(items[12][value]);
   }
 
-  sum12ZoneByProvince (items, value) {
+  sum12ZoneByProvince(items, value) {
     let sum = 0
     items.forEach(item => {
       sum += sumBy(item, value) || 0
@@ -78,11 +79,11 @@ export class CalculateService {
     return sum - (items[12].length ? items[12][0][value] : 0)
   }
 
-  sumAllZone (items, value) {
+  sumAllZone(items, value) {
     return sumBy(items, value)
   }
 
-  sumAllZoneByProvince (items, value) {
+  sumAllZoneByProvince(items, value) {
     let sum = 0
     items.forEach(item => {
       sum += sumBy(item, value) || 0
