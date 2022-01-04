@@ -55,6 +55,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   private subscription2: Subscription;
   private subscription3: Subscription;
   checkManageBedHosp: boolean;
+  providerType: any;
   constructor(
     private route: Router,
     private basicService: BasicService,
@@ -65,6 +66,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.hospname = decoded.hospname;
     this.rights = decoded.rights;
     this.topic = decoded.mqttTopic;
+    this.providerType = decoded.providerType;
 
     this.covidCaseMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE' }) === -1 ? false : true;
     this.covidCaseOldMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE_OLD' }) === -1 ? false : true;

@@ -103,7 +103,7 @@
                 <td class="td-border"> {{ item.first_name }} </td>
                 <td class="td-border"> {{ item.last_name }} </td>
                 <td class="td-border"> {{ item.gender }} </td>
-                <td class="td-border"> {{ getAge(item.birth_date) }} </td>
+                <td class="td-border"> {{ cal.checkValue(getAge(item.birth_date)) }} </td>
                 <td class="td-border">
                     <div style="width: 100px;">
                         {{ formatDate(item.date_admit) }}
