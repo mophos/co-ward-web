@@ -15,8 +15,8 @@ export class NewReportService {
   }
 
   getPatientAdmitSummary (params) {
-    // const url = `${this.url}/v1/new-report/admit-case-summary?start=2010-01-01&end=${params.date}&case_status[]=${params.case}`;
-    const url = `${this.url}/v1/new-report/admit-case-summary?start=${params.date}&end=${params.date}&case_status[]=${params.case}`;
+    const url = `${this.url}/v1/new-report/admit-case-summary?start=2010-01-01&end=${params.date}&case_status[]=${params.case}`;
+    // const url = `${this.url}/v1/new-report/admit-case-summary?start=${params.date}&end=${params.date}&case_status[]=${params.case}`;
     return this.http.get(url).toPromise();
   }
 
