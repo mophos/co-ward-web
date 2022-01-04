@@ -43,7 +43,7 @@ export class ReportPatientsAdmitPuiComponent implements OnInit {
 
   ngOnInit() {
     this.loadData()
-    this.loadDataSummary()
+    // this.loadDataSummary()
   }
 
   getAge (value) {
@@ -76,30 +76,39 @@ export class ReportPatientsAdmitPuiComponent implements OnInit {
       })
       if (res.ok) {
         this.items = res.rows.results
-        this.isLoading = false
+        const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
+        const rs:any = await this.newReportService.getPatientAdmitSummary({
+          date,
+          case: 'IPPUI'
+        })
+        if (rs.ok) {
+          this.summaries = rs.rows
+          console.error(rs.rows)
+          this.isLoading = false
+        }
       }
     } catch (error) {
       console.error(error)
     }
   }
 
-  async loadDataSummary () {
-    try {
-      this.isLoading = true
-      const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.newReportService.getPatientAdmitSummary({
-        date,
-        case: 'IPPUI'
-      })
-      if (res.ok) {
-        this.summaries = res.rows
-        console.error(res.rows)
-        this.isLoading = false
-      }
-    } catch (error) {
-      console.error(error)
-    }
-  }
+  // async loadDataSummary () {
+  //   try {
+  //     this.isLoading = true
+  //     const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
+  //     const res:any = await this.newReportService.getPatientAdmitSummary({
+  //       date,
+  //       case: 'IPPUI'
+  //     })
+  //     if (res.ok) {
+  //       this.summaries = res.rows
+  //       console.error(res.rows)
+  //       this.isLoading = false
+  //     }
+  //   } catch (error) {
+  //     console.error(error)
+  //   }
+  // }
 
   downloadFile (name, type, data: any) {
     try {
