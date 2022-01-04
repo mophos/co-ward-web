@@ -12,9 +12,9 @@ export class ReportPatientsAdmitPuiComponent implements OnInit {
 
   isLoading = false
 
-  items:any = []
-  summaries:any = []
-  date:any = {
+  items: any = []
+  summaries: any = []
+  date: any = {
     date: {
       year: moment().year(),
       month: moment().month() + 1,
@@ -46,32 +46,32 @@ export class ReportPatientsAdmitPuiComponent implements OnInit {
     this.loadDataSummary()
   }
 
-  getAge (value) {
-    const now =  moment()
+  getAge(value) {
+    const now = moment()
     const dateBirth = moment(value)
     return now.diff(dateBirth, 'years')
   }
 
-  formatDate (value) {
+  formatDate(value) {
     if (moment(value).isValid()) {
       return moment(value).format('DD-MM-YYYY')
     }
     return '-'
   }
 
-  checkValue (value) {
+  checkValue(value) {
     if (value !== undefined && (value !== null && !isNaN(value))) {
       return value
     }
     return '-'
   }
 
-  async loadData () {
+  async loadData() {
     try {
       this.isLoading = true
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.newReportService.getPatientAdmit({
-        date,
+      const res: any = await this.newReportService.getPatientAdmit({
+        date: null,
         case: 'IPPUI'
       })
       if (res.ok) {
@@ -83,12 +83,12 @@ export class ReportPatientsAdmitPuiComponent implements OnInit {
     }
   }
 
-  async loadDataSummary () {
+  async loadDataSummary() {
     try {
       this.isLoading = true
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.newReportService.getPatientAdmitSummary({
-        date,
+      const res: any = await this.newReportService.getPatientAdmitSummary({
+        date: null,
         case: 'IPPUI'
       })
       if (res.ok) {
@@ -101,7 +101,7 @@ export class ReportPatientsAdmitPuiComponent implements OnInit {
     }
   }
 
-  downloadFile (name, type, data: any) {
+  downloadFile(name, type, data: any) {
     try {
       const url = window.URL.createObjectURL(new Blob([data]))
       const fileName = `${name}.${type}`
@@ -122,7 +122,7 @@ export class ReportPatientsAdmitPuiComponent implements OnInit {
     try {
       this.loading.show()
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.newReportService.exportExcelPatientAdmitSummary({ date })
+      const res: any = await this.newReportService.exportExcelPatientAdmitSummary({ date })
       if (res) {
         this.downloadFile('รายงานผู้ป่วย Admit PUI(สะสม)', 'xlsx', res)
         this.loading.hide()
@@ -138,7 +138,7 @@ export class ReportPatientsAdmitPuiComponent implements OnInit {
     try {
       this.loading.show()
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.newReportService.exportExcelPatientAdmit({ date })
+      const res: any = await this.newReportService.exportExcelPatientAdmit({ date })
       if (res) {
         this.downloadFile('รายงานผู้ป่วย Admit PUI(ทั้งหมด)', 'xlsx', res)
         this.loading.hide()

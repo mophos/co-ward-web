@@ -317,9 +317,14 @@ export class CovidCaseNewComponent implements OnInit {
         if (this.caseStatus === 'OBSERVE') {
           this.gcs = filter(rs.rows, { name: 'Observe (Hospital Q)' });
         } else if (this.caseStatus === 'IPPUI') {
-          this.gcs = filter(rs.rows, { name: 'IP PUI' });
+          this.gcs = filter(rs.rows, (v) => {
+            if (v.name === 'IP PUI' || v.name === 'ATK') return v
+          });
         } else {
           this.gcs = rs.rows;
+          this.gcs = filter(rs.rows, (v) => {
+            if (v.id >= 1 && v.id <= 4) { return v; }
+          });
         }
       } else {
         this.alertService.serverError();
