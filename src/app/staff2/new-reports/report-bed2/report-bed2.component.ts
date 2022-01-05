@@ -18,7 +18,7 @@ export class ReportBed2Component implements OnInit {
     editableDateField: false,
     showClearDateBtn: false
   }
-  date:any = {
+  date: any = {
     date: {
       year: moment().year(),
       month: moment().month() + 1,
@@ -33,7 +33,7 @@ export class ReportBed2Component implements OnInit {
   //   }
   // }
 
-  items:any = []
+  items: any = []
   zone = ''
   zones = [
     { name: 'เขต 01', value: '01' },
@@ -51,7 +51,7 @@ export class ReportBed2Component implements OnInit {
     { name: 'เขต 13', value: '13' }
   ]
   provinceGroup = []
-  provinces:any = []
+  provinces: any = []
   isSelectProvince = false
   @ViewChild('loading', { static: true }) loading: any;
 
@@ -63,21 +63,21 @@ export class ReportBed2Component implements OnInit {
     this.loadData()
   }
 
-  checkValue (value) {
+  checkValue(value) {
     if (value !== undefined && (value !== null && !isNaN(value))) {
       return value
     }
     return '-'
   }
 
-  getRemaining (num1, num2) {
+  getRemaining(num1, num2) {
     if (!num1 && !num2) {
       return '-'
     }
     return (num1 || 0) - (num2 || 0)
   }
 
-  selectDate (value) {
+  selectDate(value) {
     this.date = {
       date: value.date
     }
@@ -85,13 +85,13 @@ export class ReportBed2Component implements OnInit {
     this.loadData()
   }
 
-  selectZone () {
+  selectZone() {
     this.items = []
     this.loadData()
     this.isSelectProvince = false
   }
 
-  selectProvince (value) {
+  selectProvince(value) {
     const index = this.provinceGroup.findIndex(item => item.code === value.code)
     if (index > -1) {
       this.provinceGroup.splice(index, 1)
@@ -102,19 +102,19 @@ export class ReportBed2Component implements OnInit {
     this.loadData()
   }
 
-  setSelectMultiProvince () {
+  setSelectMultiProvince() {
     this.isSelectProvince = !this.isSelectProvince
   }
 
-  checkProvince (province) {
+  checkProvince(province) {
     return this.provinceGroup.some(item => item.name === province.name)
   }
 
-  async loadData () {
+  async loadData() {
     try {
       this.isLoading = true
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.newReportService.getNewBeds({ date })
+      const res: any = await this.newReportService.getNewBeds({ date: null })
       if (res.ok) {
         const items = []
 
@@ -203,7 +203,7 @@ export class ReportBed2Component implements OnInit {
     }
   }
 
-  downloadFile (name, type, data: any) {
+  downloadFile(name, type, data: any) {
     try {
       const url = window.URL.createObjectURL(new Blob([data]))
       const fileName = `${name}.${type}`
@@ -224,7 +224,7 @@ export class ReportBed2Component implements OnInit {
     try {
       this.loading.show()
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.newReportService.exportExcelBed2({ date })
+      const res: any = await this.newReportService.exportExcelBed2({ date })
       if (res) {
         this.downloadFile('รายงานเตียง', 'xlsx', res)
         this.loading.hide()

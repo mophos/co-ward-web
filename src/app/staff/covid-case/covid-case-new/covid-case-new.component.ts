@@ -324,6 +324,9 @@ export class CovidCaseNewComponent implements OnInit {
           });
         } else {
           this.gcs = rs.rows;
+          this.gcs = filter(rs.rows, (v) => {
+            if (v.id >= 1 && v.id <= 4) { return v; }
+          });
         }
       } else {
         this.alertService.serverError();
