@@ -1,103 +1,71 @@
-<nav
-    style="margin-bottom: 16px;"
-    class="breadcrumb">
-    <span class="breadcrumb-item active">
-        รายงานเตียงรายสถานพยาบาล
-    </span>
+<nav style="margin-bottom: 16px;" class="breadcrumb">
+  <span class="breadcrumb-item active">
+    รายงานเตียงรายสถานพยาบาล
+  </span>
 </nav>
 
 <div style="display: flex; justify-content: space-between;">
-    <div style="display: flex;">
-        <div style="width: 200px; margin-right: 24px;">
-            <label> วันที่แสดงข้อมูล </label>
-            <my-date-picker-th
-                [(ngModel)]="date"
-                [options]="myDatePickerOptions"
-                name="dateBedsHospital"
-                (dateChanged)="selectDate($event)">
-            </my-date-picker-th>
-        </div>
-        <div style="width: 200px; margin-right: 24px;">
-            <label> เขตสุขภาพ </label>
-            <div class="clr-select-wrapper" style="width: 100%;">
-                <select
-                    [(ngModel)]="zone"
-                    name="zoneBedsHospital"
-                    style="width: 100%;"
-                    class="clr-select"
-                    (change)="selectZone()">
-                    <option value=""> ทุกเขต </option>
-                    <option *ngFor="let zone of zones; let i = index" [value]="zone.value">
-                        {{ zone.name }}
-                    </option>
-                </select>
-            </div>
-        </div>
-        <div style="width: 200px;">
-            <label> จังหวัด </label>
-            <app-select-provinces
-                #province
-                [provinces]="provinces"
-                (onselect)="updateProvince($event)">
-            </app-select-provinces>
-        </div>
+  <div style="display: flex;">
+    <div style="width: 200px; margin-right: 24px;">
+      <label> วันที่แสดงข้อมูล </label>
+      <my-date-picker-th [(ngModel)]="date" [options]="myDatePickerOptions" name="dateBedsHospital"
+        (dateChanged)="selectDate($event)">
+      </my-date-picker-th>
     </div>
-    <div style="padding-top: 16px;">
-        <button class="btn btn-sm btn-primary" (click)="exportExcel()">
-            <clr-icon shape="download"></clr-icon>export excel
-        </button>
+    <div style="width: 200px; margin-right: 24px;">
+      <label> เขตสุขภาพ </label>
+      <div class="clr-select-wrapper" style="width: 100%;">
+        <select [(ngModel)]="zone" name="zoneBedsHospital" style="width: 100%;" class="clr-select"
+          (change)="selectZone()">
+          <option value=""> ทุกเขต </option>
+          <option *ngFor="let zone of zones; let i = index" [value]="zone.value">
+            {{ zone.name }}
+          </option>
+        </select>
+      </div>
     </div>
+    <div style="width: 200px;">
+      <label> จังหวัด </label>
+      <app-select-provinces #province [provinces]="provinces" (onselect)="updateProvince($event)">
+      </app-select-provinces>
+    </div>
+  </div>
+  <div style="padding-top: 16px;">
+    <button class="btn btn-sm btn-primary" (click)="exportExcel()">
+      <clr-icon shape="download"></clr-icon>export excel
+    </button>
+  </div>
 </div>
 
 <div style="overflow: auto;">
-    <table style="border-collapse: collapse;" class="table table-compact">
-        <thead>
-            <tr>
-                <th rowspan="2" class="td-border"> เขตสุขภาพ </th>
-                <th rowspan="2" class="td-border"> จังหวัด </th>
-                <th rowspan="2" class="td-border"> รหัสโรงพยาบาล </th>
-                <th rowspan="2" class="td-border">
-                    <div style="min-width: 200px;">
-                        โรงพยาบาล
-                    </div>
-                </th>
-                <th rowspan="2" class="td-border"> ระดับขีดความสามารถ </th>
-                <th colspan="3" class="td-border"> ระดับ 3 ใส่ท่อและเครื่องช่วยหายใจได้ </th>
-                <th colspan="3" class="td-border"> ระดับ 2.2 Oxygen high flow </th>
-                <th colspan="3" class="td-border"> ระดับ 2.1 Oxygen low flow </th>
-                <th colspan="3" class="td-border"> ระดับ 1 ไม่ใช้ Oxygen </th>
-                <th colspan="3" class="td-border"> ระดับ 0 Home Isolation (stepdown) </th>
-                <th colspan="3" class="td-border"> Home Isolation (New case) </th>
-                <th colspan="3" class="td-border"> Community Isolation (New case) </th>
-                <th rowspan="2"> หน่วยงาน </th>
-            </tr>
-            <tr>
-                <th class="td-border"> ทั้งหมด </th>
-                <th class="td-border"> ใช้ไป </th>
-                <th class="td-border"> คงเหลือ </th>
-                <th class="td-border"> ทั้งหมด </th>
-                <th class="td-border"> ใช้ไป </th>
-                <th class="td-border"> คงเหลือ </th>
-                <th class="td-border"> ทั้งหมด </th>
-                <th class="td-border"> ใช้ไป </th>
-                <th class="td-border"> คงเหลือ </th>
-                <th class="td-border"> ทั้งหมด </th>
-                <th class="td-border"> ใช้ไป </th>
-                <th class="td-border"> คงเหลือ </th>
-                <th class="td-border"> ทั้งหมด </th>
-                <th class="td-border"> ใช้ไป </th>
-                <th class="td-border"> คงเหลือ </th>
-                <th class="td-border"> ทั้งหมด </th>
-                <th class="td-border"> ใช้ไป </th>
-                <th class="td-border"> คงเหลือ </th>
-                <th class="td-border"> ทั้งหมด </th>
-                <th class="td-border"> ใช้ไป </th>
-                <th class="td-border"> คงเหลือ </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of items; let i = index">
-                <td class="td-border"> {{ item.zone_code }} </td>
+  <table style="border-collapse: collapse;" class="table table-compact">
+    <thead>
+      <tr>
+        <th rowspan="2" class="td-border"> เขตสุขภาพ </th>
+        <th rowspan="2" class="td-border"> จังหวัด </th>
+        <th rowspan="2" class="td-border"> รหัสโรงพยาบาล </th>
+        <th rowspan="2" class="td-border">
+          <div style="min-width: 200px;">
+            โรงพยาบาล
+          </div>
+        </th>
+        <th rowspan="2" class="td-border"> ระดับขีดความสามารถ </th>
+        <th colspan="3" class="td-border" *ngFor="let h of headers">{{h.name}}</th>
+        <th rowspan="2"> หน่วยงาน </th>
+      </tr>
+      <tr>
+        <th class="td-border" *ngFor="let h of subHeader"> ทั้งหมด </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let items of data; let i = index">
+        <td class="td-border"> {{ items.zone_code }} </td>
+        <td class="td-border"> {{ items.province_name }} </td>
+        <td class="td-border"> {{ items.hospcode }} </td>
+        <td class="td-border"> {{ items.hospname }} </td>
+        <td class="td-border"> {{ items.level || '-' }} </td>
+        <td class="td-border" *ngFor="let item of items.array"> {{item || '-' }} </td>
+        <!-- <td class="td-border"> {{ item.zone_code }} </td>
                 <td class="td-border"> {{ item.province_name }} </td>
                 <td class="td-border"> {{ item.hospcode }} </td>
                 <td class="td-border"> {{ item.hospname }} </td>
@@ -122,27 +90,23 @@
                 <td class="td-border"> {{ cal.getRemaining(item.home_isolation_total, item.home_isolation_used) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.community_isolation_total) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.community_isolation_used) }} </td>
-                <td class="td-border"> {{ cal.getRemaining(item.community_isolation_total, item.community_isolation_used) }} </td>
-                <td>
+                <td class="td-border"> {{ cal.getRemaining(item.community_isolation_total, item.community_isolation_used) }} </td> -->
+        <td>
                     <div style="width: 200px;">
-                        {{ item.sub_ministry_name || '-' }}
+                        {{ items.sub_ministry_name || '-' }}
                     </div>
                 </td>
-            </tr>
-        </tbody>
-    </table>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
-<div
-    *ngIf="isLoading && !items.length"
-    style="display: flex; justify-content: center; padding: 24px;">
-    กำลังโหลดข้อมูล ...
+<div *ngIf="isLoading && !data.length" style="display: flex; justify-content: center; padding: 24px;">
+  กำลังโหลดข้อมูล ...
 </div>
 
-<div
-    *ngIf="!isLoading && !items.length"
-    style="display: flex; justify-content: center; padding: 24px;">
-    ไม่พบข้อมูล
+<div *ngIf="!isLoading && !data.length" style="display: flex; justify-content: center; padding: 24px;">
+  ไม่พบข้อมูล
 </div>
 
 <app-loadding #loading></app-loadding>
