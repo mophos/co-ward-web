@@ -7,7 +7,6 @@ import { sumBy } from 'lodash'
 export class CalculateService {
 
   constructor() { }
-
   getPercent(total, used) {
     const value1 = total !== null && total !== undefined ? total : 0
     const value2 = used !== null && used !== undefined ? used : 0
@@ -67,8 +66,7 @@ export class CalculateService {
   }
 
   sum12Zone(items, value) {
-    console.log(items);
-    return +(sumBy(items, value)) - +(items[12][value]);
+    return +(sumBy(items, value)) - +(items[12][value] || 0) ;
   }
 
   sum12ZoneByProvince(items, value) {

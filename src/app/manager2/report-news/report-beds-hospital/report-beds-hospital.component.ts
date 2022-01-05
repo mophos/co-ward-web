@@ -19,7 +19,7 @@ export class ReportBedsHospitalComponent implements OnInit {
     editableDateField: false,
     showClearDateBtn: false
   }
-  date:any = {
+  date: any = {
     date: {
       year: moment().year(),
       month: moment().month() + 1,
@@ -27,7 +27,7 @@ export class ReportBedsHospitalComponent implements OnInit {
     }
   }
 
-  items:any = []
+  items: any = []
   zone = ''
   zones = [
     { name: 'เขต 01', value: '01' },
@@ -44,9 +44,11 @@ export class ReportBedsHospitalComponent implements OnInit {
     { name: 'เขต 12', value: '12' },
     { name: 'เขต 13', value: '13' }
   ]
-  provinces:any = []
-  selectedProvince:any = []
-
+  provinces: any = []
+  selectedProvince: any = []
+  headers: any = [];
+  subHeader: any = [];
+  data: any = [];
   @ViewChild('loading', { static: true }) loading: any;
   @ViewChild('province', { static: false }) province: SelectProvincesComponent;
 
@@ -59,13 +61,13 @@ export class ReportBedsHospitalComponent implements OnInit {
     this.loadData('province')
   }
 
-  clearData () {
+  clearData() {
     this.items = []
     this.selectedProvince = []
     this.province.clear()
   }
 
-  selectDate (value) {
+  selectDate(value) {
     this.date = {
       date: value.date
     }
@@ -73,90 +75,93 @@ export class ReportBedsHospitalComponent implements OnInit {
     this.loadData('province')
   }
 
-  async selectZone () {
+  async selectZone() {
     this.clearData()
     this.loadData('province')
   }
 
-  updateProvince (value) {
+  updateProvince(value) {
     this.selectedProvince = value
     this.items = []
     this.loadData(null)
   }
 
-  async loadData (filter) {
+  async loadData(filter) {
     try {
       this.isLoading = true
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.bedsHospitalService.getBedHospital({
+      const res: any = await this.bedsHospitalService.getBedHospital({
         date,
         zone: this.zone,
         province: this.selectedProvince
       })
       if (res.ok) {
-        const items = []
+        this.headers = res.headers;
+        this.subHeader = res.subHeader;
+        this.data = res.data;
+        // const items = []
 
-        res.rows.forEach((row, i) => {
-          row.forEach((x, j) => {
-            if (!items.some(item => item.hospcode === x.hospcode)) {
-              items.push({
-                zone_code: x.zone_code,
-                province_code: x.province_code,
-                province_name: x.province_name,
-                hospcode: x.hospcode,
-                hospname: x.hospname,
-                level: x.level,
-                sub_ministry_name: x.sub_ministry_name
-              })
-            }
+        // res.rows.forEach((row, i) => {
+        //   row.forEach((x, j) => {
+        //     if (!items.some(item => item.hospcode === x.hospcode)) {
+        //       items.push({
+        //         zone_code: x.zone_code,
+        //         province_code: x.province_code,
+        //         province_name: x.province_name,
+        //         hospcode: x.hospcode,
+        //         hospname: x.hospname,
+        //         level: x.level,
+        //         sub_ministry_name: x.sub_ministry_name
+        //       })
+        //     }
 
-            const index = items.findIndex(item => item.hospcode === x.hospcode)
-            if (index > -1) {
-              if (x.bed_name === 'ระดับ3 ใส่ท่อและเครื่องช่วยหายใจ') {
-                items[index].level3_total = x.total
-                items[index].level3_used = x.used
-              } else if (x.bed_name === 'ระดับ 2.2 Oxygen high flow') {
-                items[index].level2_2_total = x.total
-                items[index].level2_2_used = x.used
-              } else if (x.bed_name === 'ระดับ 2.2 Oxygen high flow') {
-                items[index].level2_2_total = x.total
-                items[index].level2_2_used = x.used
-              } else if (x.bed_name === 'ระดับ 2.1 Oxygen high low') {
-                items[index].level2_1_total = x.total
-                items[index].level2_1_used = x.used
-              } else if (x.bed_name === 'ระดับ 1 ไม่ใช่ Oxygen') {
-                items[index].level1_total = x.total
-                items[index].level1_used = x.used
-              } else if (x.bed_name === 'ระดับ 0 Home Isolation (stepdown)') {
-                items[index].level0_total = x.total
-                items[index].level0_used = x.used
-              } else if (x.bed_name === 'Home Isolation') {
-                items[index].home_isolation_total = x.total
-                items[index].home_isolation_used = x.used
-              } else if (x.bed_name === 'Community Isolation') {
-                items[index].community_isolation_total = x.total
-                items[index].community_isolation_used = x.used
-              }
-            }
-          })
-        })
+        //     const index = items.findIndex(item => item.hospcode === x.hospcode)
+        //     if (index > -1) {
+        //       if (x.bed_name === 'ระดับ3 ใส่ท่อและเครื่องช่วยหายใจ') {
+        //         items[index].level3_total = x.total
+        //         items[index].level3_used = x.used
+        //       } else if (x.bed_name === 'ระดับ 2.2 Oxygen high flow') {
+        //         items[index].level2_2_total = x.total
+        //         items[index].level2_2_used = x.used
+        //       } else if (x.bed_name === 'ระดับ 2.2 Oxygen high flow') {
+        //         items[index].level2_2_total = x.total
+        //         items[index].level2_2_used = x.used
+        //       } else if (x.bed_name === 'ระดับ 2.1 Oxygen high low') {
+        //         items[index].level2_1_total = x.total
+        //         items[index].level2_1_used = x.used
+        //       } else if (x.bed_name === 'ระดับ 1 ไม่ใช่ Oxygen') {
+        //         items[index].level1_total = x.total
+        //         items[index].level1_used = x.used
+        //       } else if (x.bed_name === 'ระดับ 0 Home Isolation (stepdown)') {
+        //         items[index].level0_total = x.total
+        //         items[index].level0_used = x.used
+        //       } else if (x.bed_name === 'Home Isolation') {
+        //         items[index].home_isolation_total = x.total
+        //         items[index].home_isolation_used = x.used
+        //       } else if (x.bed_name === 'Community Isolation') {
+        //         items[index].community_isolation_total = x.total
+        //         items[index].community_isolation_used = x.used
+        //       }
+        //     }
+        //   })
+        // })
 
-        if (filter === 'province') {
-          const provinces = []
-          res.rows.forEach(row => {
-            row.forEach(item => {
-              if (!provinces.some(x => x.code === item.province_code)) {
-                provinces.push({
-                  code: item.province_code,
-                  name: item.province_name
-                })
-              }
-            })
-          })
-          this.provinces = provinces
-        }
+        // if (filter === 'province') {
+        //   const provinces = []
+        //   res.rows.forEach(row => {
+        //     row.forEach(item => {
+        //       if (!provinces.some(x => x.code === item.province_code)) {
+        //         provinces.push({
+        //           code: item.province_code,
+        //           name: item.province_name
+        //         })
+        //       }
+        //     })
+        //   })
+        //   this.provinces = provinces
+        // }
 
-        this.items = items
+        // this.items = items
         this.isLoading = false
       }
     } catch (error) {
@@ -164,7 +169,7 @@ export class ReportBedsHospitalComponent implements OnInit {
     }
   }
 
-  downloadFile (name, type, data: any) {
+  downloadFile(name, type, data: any) {
     try {
       const url = window.URL.createObjectURL(new Blob([data]))
       const fileName = `${name}.${type}`
@@ -185,7 +190,7 @@ export class ReportBedsHospitalComponent implements OnInit {
     try {
       this.loading.show()
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.bedsHospitalService.exportExcelBedHospital({
+      const res: any = await this.bedsHospitalService.exportExcelBedHospital({
         date,
         zone: this.zone,
         province: this.selectedProvince
