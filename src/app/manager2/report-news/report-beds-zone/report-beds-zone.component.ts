@@ -42,6 +42,22 @@ export class ReportBedsZoneComponent implements OnInit {
     this.loadData()
   }
 
+  sum12Zone (index) {
+    let sum = 0
+    this.data.forEach(item => {
+      sum += item[index] || 0
+    })
+    return sum - (this.data[12][index] || 0)
+  }
+
+  sumAllZone (index) {
+    let sum = 0
+    this.data.forEach(item => {
+      sum += item[index] || 0
+    })
+    return sum
+  }
+
   selectDate(value) {
     this.date = {
       date: value.date
