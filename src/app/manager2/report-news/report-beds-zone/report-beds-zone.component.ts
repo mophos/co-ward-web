@@ -19,7 +19,7 @@ export class ReportBedsZoneComponent implements OnInit {
     editableDateField: false,
     showClearDateBtn: false
   }
-  date:any = {
+  date: any = {
     date: {
       year: moment().year(),
       month: moment().month() + 1,
@@ -27,7 +27,10 @@ export class ReportBedsZoneComponent implements OnInit {
     }
   }
 
-  items:any = []
+  items: any = [];
+  headers: any = [];
+  subHeader: any = [];
+  data: any = [];
   @ViewChild('loading', { static: true }) loading: any;
 
   constructor(
@@ -39,7 +42,7 @@ export class ReportBedsZoneComponent implements OnInit {
     this.loadData()
   }
 
-  selectDate (value) {
+  selectDate(value) {
     this.date = {
       date: value.date
     }
@@ -47,65 +50,69 @@ export class ReportBedsZoneComponent implements OnInit {
     this.loadData()
   }
 
-  async loadData () {
+  async loadData() {
     try {
       this.isLoading = true
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.bedsZoneService.getBedZone({ date })
+      const res: any = await this.bedsZoneService.getBedZone({ date })
       if (res.ok) {
-        const items = []
+        this.headers = res.headers;
+        this.subHeader = res.subHeader;
+        this.data = res.data;
+        // const items = []
 
-        res.rows.forEach((row, i) => {
-          // if (!row.length) {
-          //   items.push({})
-          // }
-          row.forEach((x, j) => {
-            if (!items.some(item => item.zone_code === x.zone_code)) {
-              items.push({
-                zone_code: x.zone_code
-              })
-            }
+        // res.rows.forEach((row, i) => {
+        //   // if (!row.length) {
+        //   //   items.push({})
+        //   // }
+        //   row.forEach((x, j) => {
+        //     if (!items.some(item => item.zone_code === x.zone_code)) {
+        //       items.push({
+        //         zone_code: x.zone_code
+        //       })
+        //     }
 
-            const index = items.findIndex(item => item.zone_code === x.zone_code)
-            if (index > -1) {
-              if (x.bed_name === 'ระดับ3 ใส่ท่อและเครื่องช่วยหายใจ') {
-                items[index].level3_total = x.total
-                items[index].level3_used = x.used
-              } else if (x.bed_name === 'ระดับ 2.2 Oxygen high flow') {
-                items[index].level2_2_total = x.total
-                items[index].level2_2_used = x.used
-              } else if (x.bed_name === 'ระดับ 2.2 Oxygen high flow') {
-                items[index].level2_2_total = x.total
-                items[index].level2_2_used = x.used
-              } else if (x.bed_name === 'ระดับ 2.1 Oxygen high low') {
-                items[index].level2_1_total = x.total
-                items[index].level2_1_used = x.used
-              } else if (x.bed_name === 'ระดับ 1 ไม่ใช่ Oxygen') {
-                items[index].level1_total = x.total
-                items[index].level1_used = x.used
-              } else if (x.bed_name === 'ระดับ 0 Home Isolation (stepdown)') {
-                items[index].level0_total = x.total
-                items[index].level0_used = x.used
-              } else if (x.bed_name === 'Home Isolation') {
-                items[index].home_isolation_total = x.total
-                items[index].home_isolation_used = x.used
-              } else if (x.bed_name === 'Community Isolation') {
-                items[index].community_isolation_total = x.total
-                items[index].community_isolation_used = x.used
-              }
-            }
-          })
-        })
+        //     const index = items.findIndex(item => item.zone_code === x.zone_code)
+        //     if (index > -1) {
+        //       if (x.bed_name === 'ระดับ3 ใส่ท่อและเครื่องช่วยหายใจ') {
+        //         items[index].level3_total = x.total
+        //         items[index].level3_used = x.used
+        //       } else if (x.bed_name === 'ระดับ 2.2 Oxygen high flow') {
+        //         items[index].level2_2_total = x.total
+        //         items[index].level2_2_used = x.used
+        //       } else if (x.bed_name === 'ระดับ 2.2 Oxygen high flow') {
+        //         items[index].level2_2_total = x.total
+        //         items[index].level2_2_used = x.used
+        //       } else if (x.bed_name === 'ระดับ 2.1 Oxygen high low') {
+        //         items[index].level2_1_total = x.total
+        //         items[index].level2_1_used = x.used
+        //       } else if (x.bed_name === 'ระดับ 1 ไม่ใช่ Oxygen') {
+        //         items[index].level1_total = x.total
+        //         items[index].level1_used = x.used
+        //       } else if (x.bed_name === 'ระดับ 0 Home Isolation (stepdown)') {
+        //         items[index].level0_total = x.total
+        //         items[index].level0_used = x.used
+        //       } else if (x.bed_name === 'Home Isolation') {
+        //         items[index].home_isolation_total = x.total
+        //         items[index].home_isolation_used = x.used
+        //       } else if (x.bed_name === 'Community Isolation') {
+        //         items[index].community_isolation_total = x.total
+        //         items[index].community_isolation_used = x.used
+        //       }
+        //     }
+        //   })
+        // })
 
-        this.items = items
+        // this.items = items
         this.isLoading = false
       }
     } catch (error) {
+      this.isLoading = false
       console.error(error)
     }
   }
 
-  downloadFile (name, type, data: any) {
+  downloadFile(name, type, data: any) {
     try {
       const url = window.URL.createObjectURL(new Blob([data]))
       const fileName = `${name}.${type}`
@@ -126,7 +133,7 @@ export class ReportBedsZoneComponent implements OnInit {
     try {
       this.loading.show()
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
-      const res:any = await this.bedsZoneService.exportExcelBedZone({ date })
+      const res: any = await this.bedsZoneService.exportExcelBedZone({ date })
       if (res) {
         this.downloadFile('รายงานเตียงรายเขต', 'xlsx', res)
         this.loading.hide()
