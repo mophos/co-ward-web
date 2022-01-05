@@ -592,7 +592,7 @@ export class ManagePatientsComponent implements OnInit {
       const rs: any = await this.basicAuthService.getMedicalSupplies();
       if (rs.ok) {
         this.medicalSupplieList = rs.rows;
-        this.medicalSupplieList.push({ id: null, name: 'ไม่ใช้งาน' });
+        this.medicalSupplieList.push({ id: null, name: 'ไม่ใช้เครื่องช่วยหายใจ (low flow,room air)' });
       } else {
         this.alertService.serverError();
       }
