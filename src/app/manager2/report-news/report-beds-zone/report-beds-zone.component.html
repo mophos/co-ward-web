@@ -23,18 +23,27 @@
     <thead>
       <tr>
         <th rowspan="2" class="td-border"> เขตสุขภาพ </th>
-        <th colspan="3" class="td-border" *ngFor="let h of headers"> {{h.name}}</th>
+        <th
+          *ngFor="let h of headers; let i = index"
+          [class]="i == headers.length - 1 ? '' : 'td-border'"
+          colspan="3">
+          {{h.name}}
+        </th>
         <!-- <th colspan="3" class="td-border"> ระดับ 2.2 Oxygen high flow </th>
-                <th colspan="3" class="td-border"> ระดับ 2.1 Oxygen low flow </th>
-                <th colspan="3" class="td-border"> ระดับ 1 ไม่ใช้ Oxygen </th>
-                <th colspan="3" class="td-border"> ระดับ 0 Home Isolation (stepdown) </th>
-                <th colspan="3" class="td-border">  Home Isolation (New case) </th>
-                <th colspan="3"> Community Isolation (New case) </th> -->
+        <th colspan="3" class="td-border"> ระดับ 2.1 Oxygen low flow </th>
+        <th colspan="3" class="td-border"> ระดับ 1 ไม่ใช้ Oxygen </th>
+        <th colspan="3" class="td-border"> ระดับ 0 Home Isolation (stepdown) </th>
+        <th colspan="3" class="td-border">  Home Isolation (New case) </th>
+        <th colspan="3"> Community Isolation (New case) </th> -->
       </tr>
       <tr>
-          <th class="td-border"  *ngFor="let i of subHeader"> {{i}} </th>
+          <th
+            *ngFor="let sub of subHeader; let i = index"
+            [class]="i == subHeader.length - 1 ? '' : 'td-border'">
+            {{ sub }}
+          </th>
         <!-- <ng-container *ngFor="let i of subHeader; let i = index"> -->
-          <!-- <th class="td-border"> อัตราครองเตียง </th> -->
+        <!-- <th class="td-border"> อัตราครองเตียง </th> -->
         <!-- </ng-container> -->
         <!-- <th class="td-border"> ทั้งหมด </th>
         <th class="td-border"> ใช้ไป </th>
@@ -46,7 +55,12 @@
     <tbody>
       <ng-container>
           <tr *ngFor="let items of data; let i = index">
-            <td class="td-border" *ngFor="let item of items"> {{ cal.checkValue(item) }} </td>
+            <td
+              *ngFor="let item of items; let j = index"
+              [class]="j == items.length - 1 ? '' : 'td-border'">
+              <div *ngIf="item !== '13'"> {{ cal.checkValue(item) }} </div>
+              <div *ngIf="item === '13'"> กรุงเทพมหานคร </div>
+            </td>
           <!-- <td class="td-border">
             <div *ngIf="i !== 12"> รวมเขต {{ i + 1 }} </div>
             <div *ngIf="i === 12"> กรุงเทพมหานคร </div>
@@ -104,9 +118,15 @@
         </tr>
       </ng-container>
     </tbody>
-    <tfoot *ngIf="items.length">
-      <tr *ngIf="cal.countExistingZone(items) >= 12">
-        <td class="td-border"> รวม 12 เขต </td>
+    <tfoot *ngIf="data.length">
+      <tr *ngIf="cal.countExistingZone(data) >= 12">
+        <td
+          *ngFor="let item of data[0]; let i = index"
+          [class]="i == data[0].length - 1 ? '' : 'td-border'">
+          <div *ngIf="i == 0"> รวม 12 เขต </div>
+          <div *ngIf="i != 0" class="td-border"> {{ cal.checkValue(sum12Zone(i)) }} </div>
+        </td>
+        <!-- <td class="td-border"> รวม 12 เขต </td>
         <td class="td-border"> {{ cal.checkValue(cal.sum12Zone(items, 'level3_total')) }} </td>
         <td class="td-border"> {{ cal.checkValue(cal.sum12Zone(items, 'level3_used')) }} </td>
         <td class="td-border">
@@ -136,7 +156,7 @@
         <td class="td-border"> {{ cal.checkValue(cal.sum12Zone(items, 'community_isolation_used')) }} </td>
         <td>
           {{ cal.getRemaining(cal.sum12Zone(items, 'community_isolation_total') - cal.sum12Zone(items, 'community_isolation_used')) }}
-        </td>
+        </td> -->
 
         <!-- <td class="td-border"> {{ cal.checkValue(cal.sum12Zone(items, 'level3_total')) }} </td>
                 <td class="td-border"> {{ cal.checkValue(cal.sum12Zone(items, 'level3_used')) }} </td>
@@ -167,8 +187,14 @@
                 <td class="td-border"> {{ cal.getRemaining(cal.sum12Zone(items, 'community_isolation_total') - cal.sum12Zone(items, 'community_isolation_used')) }} </td>
                 <td> {{ cal.checkValue(cal.getPercent(cal.sum12Zone(items, 'community_isolation_total'), cal.sum12Zone(items, 'community_isolation_used'))) }} </td> -->
       </tr>
-      <tr *ngIf="cal.countExistingZone(items) > 12">
-        <td class="td-border"> ทั่วประเทศ </td>
+      <tr *ngIf="cal.countExistingZone(data) > 12">
+        <td
+          *ngFor="let item of data[0]; let i = index"
+          [class]="i == data[0].length - 1 ? '' : 'td-border'">
+          <div *ngIf="i == 0"> ทั่วประเทศ </div>
+          <div *ngIf="i != 0" class="td-border"> {{ cal.checkValue(sumAllZone(i)) }} </div>
+        </td>
+        <!-- <td class="td-border"> ทั่วประเทศ </td>
         <td class="td-border"> {{ cal.checkValue(cal.sumAllZone(items, 'level3_total')) }} </td>
         <td class="td-border"> {{ cal.checkValue(cal.sumAllZone(items, 'level3_used')) }} </td>
         <td class="td-border">
@@ -198,7 +224,7 @@
         <td class="td-border"> {{ cal.checkValue(cal.sumAllZone(items, 'community_isolation_used')) }} </td>
         <td>
           {{ cal.getRemaining(cal.sumAllZone(items, 'community_isolation_total') - cal.sumAllZone(items, 'community_isolation_used')) }}
-        </td>
+        </td> -->
 
         <!-- <td class="td-border"> {{ cal.checkValue(cal.sumAllZone(items, 'level3_total')) }} </td>
                 <td class="td-border"> {{ cal.checkValue(cal.sumAllZone(items, 'level3_used')) }} </td>
@@ -233,12 +259,12 @@
   </table>
 </div>
 
-<div *ngIf="isLoading && !data.length" style="display: flex; justify-content: center; padding: 24px;">
+<!-- <div *ngIf="isLoading && !data.length" style="display: flex; justify-content: center; padding: 24px;">
   กำลังโหลดข้อมูล ...
 </div>
 
 <div *ngIf="!isLoading && !data.length" style="display: flex; justify-content: center; padding: 24px;">
   ไม่พบข้อมูล
-</div>
+</div> -->
 
 <app-loadding #loading></app-loadding>
