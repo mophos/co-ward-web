@@ -102,7 +102,7 @@ export class LoginComponent implements OnInit {
             // }
             this.route.navigate(['/staff/home']);
           } else if (decoded.type === 'MANAGER') {
-            this.route.navigate(['/manager']);
+            this.route.navigate(['/manager2']);
           }
         } else {
           this.isError = true;
