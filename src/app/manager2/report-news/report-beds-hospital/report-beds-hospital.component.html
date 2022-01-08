@@ -64,7 +64,7 @@
         <td class="td-border"> {{ items.hospcode }} </td>
         <td class="td-border"> {{ items.hospname }} </td>
         <td class="td-border"> {{ items.level || '-' }} </td>
-        <td class="td-border" *ngFor="let item of items.array"> {{item || '-' }} </td>
+        <td class="td-border" *ngFor="let item of items.array"> {{cal.checkValue(item) }} </td>
         <!-- <td class="td-border"> {{ item.zone_code }} </td>
                 <td class="td-border"> {{ item.province_name }} </td>
                 <td class="td-border"> {{ item.hospcode }} </td>

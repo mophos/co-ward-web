@@ -19,7 +19,7 @@ export class NewReportService {
   }
 
   getNewBeds (params) {
-    const url = `${this.url}/v1/new-staff/report-all/bed-report-by-hospital?start=2010-01-01&end=${params.date}`
+    const url = `${this.url}/v1/new-staff/report-all/bed-report-by-hospital`;
     // const url = `${this.url}/v1/new-staff/report-all/bed-report-by-hospital?date=${params.date}`;
     return this.http.get(url).toPromise();
   }

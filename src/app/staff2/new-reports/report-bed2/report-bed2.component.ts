@@ -1,3 +1,4 @@
+import { CalculateService } from './../../../manager2/services-new-report/calculate.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyOptions } from 'mydatepicker-th';
 import { NewReportService } from '../new-report.service';
@@ -53,10 +54,14 @@ export class ReportBed2Component implements OnInit {
   provinceGroup = []
   provinces: any = []
   isSelectProvince = false
+  header: any = [];
+  subHeader: any = [];
+  data: any = [];
   @ViewChild('loading', { static: true }) loading: any;
 
   constructor(
     private newReportService: NewReportService,
+    public cal: CalculateService
   ) { }
 
   ngOnInit() {
@@ -116,83 +121,86 @@ export class ReportBed2Component implements OnInit {
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
       const res: any = await this.newReportService.getNewBeds({ date: null })
       if (res.ok) {
-        const items = []
+        this.header = res.headers;
+        this.subHeader = res.subHeader;
+        this.data = res.data;
+        const items = [];
 
-        res.rows.forEach((row, i) => {
-          row.forEach((x, j) => {
-            if (!items.some(item => item.hospcode === x.hospcode)) {
-              items.push({
-                zone_code: x.zone_code,
-                province_code: x.province_code,
-                province_name: x.province_name,
-                hospcode: x.hospcode,
-                hospname: x.hospname,
-                level: x.level,
-                sub_ministry_name: x.sub_ministry_name
-              })
-            }
+        // res.rows.forEach((row, i) => {
+        //   row.forEach((x, j) => {
+        //     if (!items.some(item => item.hospcode === x.hospcode)) {
+        //       items.push({
+        //         zone_code: x.zone_code,
+        //         province_code: x.province_code,
+        //         province_name: x.province_name,
+        //         hospcode: x.hospcode,
+        //         hospname: x.hospname,
+        //         level: x.level,
+        //         sub_ministry_name: x.sub_ministry_name
+        //       })
+        //     }
 
-            const index = items.findIndex(item => item.hospcode === x.hospcode)
-            if (index > -1) {
-              if (x.bed_name === 'ระดับ3 ใส่ท่อและเครื่องช่วยหายใจ') {
-                items[index].level3_total = x.total
-                items[index].level3_used = x.used
-              } else if (x.bed_name === 'ระดับ 2.2 Oxygen high flow') {
-                items[index].level2_2_total = x.total
-                items[index].level2_2_used = x.used
-              } else if (x.bed_name === 'ระดับ 2.2 Oxygen high flow') {
-                items[index].level2_2_total = x.total
-                items[index].level2_2_used = x.used
-              } else if (x.bed_name === 'ระดับ 2.1 Oxygen high low') {
-                items[index].level2_1_total = x.total
-                items[index].level2_1_used = x.used
-              } else if (x.bed_name === 'ระดับ 1 ไม่ใช่ Oxygen') {
-                items[index].level1_total = x.total
-                items[index].level1_used = x.used
-              } else if (x.bed_name === 'ระดับ 0 Home Isolation (stepdown)') {
-                items[index].level0_total = x.total
-                items[index].level0_used = x.used
-              } else if (x.bed_name === 'Home Isolation') {
-                items[index].home_isolation_total = x.total
-                items[index].home_isolation_used = x.used
-              } else if (x.bed_name === 'Community Isolation') {
-                items[index].community_isolation_total = x.total
-                items[index].community_isolation_used = x.used
-              } else if (x.bed_name === 'AIIR') {
-                items[index].aiir_total = x.total
-                items[index].aiir_used = x.used
-              } else if (x.bed_name === 'Modified AIIR') {
-                items[index].modified_aiir_total = x.total
-                items[index].modified_aiir_used = x.used
-              } else if (x.bed_name === 'Isolate') {
-                items[index].isolate_total = x.total
-                items[index].isolate_used = x.used
-              } else if (x.bed_name === 'Cohort') {
-                items[index].cohort_total = x.total
-                items[index].cohort_used = x.used
-              } else if (x.bed_name === 'Hospitel') {
-                items[index].hospitel_total = x.total
-                items[index].hospitel_used = x.used
-              } else if (x.bed_name === 'Cohort ICU') {
-                items[index].cohort_icu_total = x.total
-                items[index].cohort_icu_used = x.used
-              }
-            }
-          })
-        })
+        //     const index = items.findIndex(item => item.hospcode === x.hospcode)
+        //     if (index > -1) {
+        //       if (x.bed_name === 'ระดับ3 ใส่ท่อและเครื่องช่วยหายใจ') {
+        //         items[index].level3_total = x.total
+        //         items[index].level3_used = x.used
+        //       } else if (x.bed_name === 'ระดับ 2.2 Oxygen high flow') {
+        //         items[index].level2_2_total = x.total
+        //         items[index].level2_2_used = x.used
+        //       } else if (x.bed_name === 'ระดับ 2.2 Oxygen high flow') {
+        //         items[index].level2_2_total = x.total
+        //         items[index].level2_2_used = x.used
+        //       } else if (x.bed_name === 'ระดับ 2.1 Oxygen high low') {
+        //         items[index].level2_1_total = x.total
+        //         items[index].level2_1_used = x.used
+        //       } else if (x.bed_name === 'ระดับ 1 ไม่ใช่ Oxygen') {
+        //         items[index].level1_total = x.total
+        //         items[index].level1_used = x.used
+        //       } else if (x.bed_name === 'ระดับ 0 Home Isolation (stepdown)') {
+        //         items[index].level0_total = x.total
+        //         items[index].level0_used = x.used
+        //       } else if (x.bed_name === 'Home Isolation') {
+        //         items[index].home_isolation_total = x.total
+        //         items[index].home_isolation_used = x.used
+        //       } else if (x.bed_name === 'Community Isolation') {
+        //         items[index].community_isolation_total = x.total
+        //         items[index].community_isolation_used = x.used
+        //       } else if (x.bed_name === 'AIIR') {
+        //         items[index].aiir_total = x.total
+        //         items[index].aiir_used = x.used
+        //       } else if (x.bed_name === 'Modified AIIR') {
+        //         items[index].modified_aiir_total = x.total
+        //         items[index].modified_aiir_used = x.used
+        //       } else if (x.bed_name === 'Isolate') {
+        //         items[index].isolate_total = x.total
+        //         items[index].isolate_used = x.used
+        //       } else if (x.bed_name === 'Cohort') {
+        //         items[index].cohort_total = x.total
+        //         items[index].cohort_used = x.used
+        //       } else if (x.bed_name === 'Hospitel') {
+        //         items[index].hospitel_total = x.total
+        //         items[index].hospitel_used = x.used
+        //       } else if (x.bed_name === 'Cohort ICU') {
+        //         items[index].cohort_icu_total = x.total
+        //         items[index].cohort_icu_used = x.used
+        //       }
+        //     }
+        //   })
+        // })
 
-        const provinces = []
-        res.rows.forEach(row => {
-          row.forEach(item => {
-            if (!provinces.some(x => x.code === item.province_code)) {
-              provinces.push({
-                code: item.province_code,
-                name: item.province_name
-              })
-            }
-          })
-        })
-        this.provinces = provinces
+        // const provinces = []
+        // res.rows.forEach(row => {
+        //   row.forEach(item => {
+        //     if (!provinces.some(x => x.code === item.province_code)) {
+        //       provinces.push({
+        //         code: item.province_code,
+        //         name: item.province_name
+        //       })
+        //     }
+        //   })
+        // })
+        // this.provinces = provinces
 
         this.items = items
         this.isLoading = false
