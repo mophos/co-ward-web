@@ -92,8 +92,12 @@
             </tr>
         </thead>
         <tbody>
-            <ng-container *ngFor="let count of items; let i = index">
-                <ng-container *ngFor="let item of items[i]; let j = index">
+            <tr *ngFor="let items of data">
+                <td class="td-border" *ngFor="let item of items">{{item}}</td>
+            </tr>
+            <!-- <ng-container *ngFor="let count of items; let i = index"> -->
+               
+                <!-- <ng-container *ngFor="let item of items[i]; let j = index">
                     <tr *ngIf="item.zone_code !== '13'">
                         <td class="td-border"> {{ item.zone_code }} </td>
                         <td class="td-border"> {{ item.province_name }} </td>
@@ -144,10 +148,18 @@
                     <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'community_isolation_used')) }} </td>
                     <td> {{ cal.getRemaining(cal.sumZone(items[i], 'community_isolation_total'), cal.sumZone(items[i], 'community_isolation_used')) }} </td>
                 </tr>
-            </ng-container>
+            </ng-container> -->
         </tbody>
-        <tfoot *ngIf="cal.checkExistingZone(items)">
-            <tr  *ngIf="items[12].length">
+        <tfoot *ngIf="cal.checkExistingZone(footer)">
+            <tr  *ngFor="let item of footer">
+            <ng-container *ngFor="let i of item">
+                <td class="td-border" *ngIf="i=='รวมทั้งหมด'" colspan="2"> {{i}} </td>
+                <td class="td-border" *ngIf="i!='รวมทั้งหมด'"> {{i}} </td>
+            </ng-container>
+            </tr>
+        </tfoot>
+        <!-- <tfoot *ngIf="cal.checkExistingZone(items)">
+            <tr  *ngFor="let item of footer">
                 <td colspan="2" class="td-border"> กรุงเทพมหานคร </td>
                 <td class="td-border"> {{ cal.checkValue(items[12][0].level3_total) }} </td>
                 <td class="td-border"> {{ cal.checkValue(items[12][0].level3_used) }} </td>
@@ -219,18 +231,18 @@
                 <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'community_isolation_used')) }} </td>
                 <td> {{ cal.getRemaining(cal.sumAllZoneByProvince(items, 'community_isolation_total') - cal.sumAllZoneByProvince(items, 'community_isolation_used')) }} </td>
             </tr>
-        </tfoot>
+        </tfoot> -->
     </table>
 </div>
 
 <div
-    *ngIf="isLoading && !cal.checkExistingZone(items)"
+    *ngIf="isLoading && !cal.checkExistingZone(data)"
     style="display: flex; justify-content: center; padding: 24px;">
     กำลังโหลดข้อมูล ...
 </div>
 
 <div
-    *ngIf="!isLoading && !cal.checkExistingZone(items)"
+    *ngIf="!isLoading && !cal.checkExistingZone(data)"
     style="display: flex; justify-content: center; padding: 24px;">
     ไม่พบข้อมูล
 </div>

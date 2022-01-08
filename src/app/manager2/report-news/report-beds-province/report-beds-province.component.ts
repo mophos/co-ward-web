@@ -41,7 +41,7 @@ export class ReportBedsProvinceComponent implements OnInit {
     editableDateField: false,
     showClearDateBtn: false
   }
-  date:any = {
+  date: any = {
     date: {
       year: moment().year(),
       month: moment().month() + 1,
@@ -55,7 +55,10 @@ export class ReportBedsProvinceComponent implements OnInit {
   @ViewChild('loading', { static: true }) loading: any
   // @ViewChild('zone', { static: false }) zone: SelectZonesComponent
   // @ViewChild('province', { static: false }) province: SelectProvincesComponent
-
+  header: any = [];
+  subHeader: any = [];
+  data: any = [];
+  footer:any = [];
   constructor(
     private bedsProvinceService: BedsProvinceService,
     public cal: CalculateService
@@ -65,7 +68,7 @@ export class ReportBedsProvinceComponent implements OnInit {
     this.loadData(null)
   }
 
-  clearData () {
+  clearData() {
     this.items = [
       [], [], [], [], [],
       [], [], [], [], [],
@@ -73,7 +76,7 @@ export class ReportBedsProvinceComponent implements OnInit {
     ]
   }
 
-  selectDate (value) {
+  selectDate(value) {
     this.date = {
       date: value.date
     }
@@ -81,7 +84,7 @@ export class ReportBedsProvinceComponent implements OnInit {
     this.loadData('province')
   }
 
-  selectZone () {
+  selectZone() {
     this.clearData()
     this.loadData(null)
   }
@@ -99,7 +102,7 @@ export class ReportBedsProvinceComponent implements OnInit {
   // }
 
 
-  async loadData (filter) {
+  async loadData(filter) {
     try {
       this.isLoading = true
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
@@ -108,12 +111,16 @@ export class ReportBedsProvinceComponent implements OnInit {
       //   zone: this.selectedZone,
       //   province: this.selectedProvince
       // })
-      const res:any = await this.bedsProvinceService.getBedProvince({
+      const res: any = await this.bedsProvinceService.getBedProvince({
         date,
         zone: this.zone
       })
       if (res.ok) {
-        const items = []
+        this.header = res.headers;
+        this.subHeader = res.subHeader;
+        this.data = res.data;
+        this.footer = res.footer;
+        const items = [];
 
         res.rows.forEach((row, i) => {
           row.forEach((x, j) => {
@@ -207,7 +214,7 @@ export class ReportBedsProvinceComponent implements OnInit {
     }
   }
 
-  downloadFile (name, type, data: any) {
+  downloadFile(name, type, data: any) {
     try {
       const url = window.URL.createObjectURL(new Blob([data]))
       const fileName = `${name}.${type}`
@@ -232,7 +239,7 @@ export class ReportBedsProvinceComponent implements OnInit {
       //   date,
       //   zone: this.selectedZone
       // })
-      const res:any = await this.bedsProvinceService.exportExcelBedProvince({
+      const res: any = await this.bedsProvinceService.exportExcelBedProvince({
         date,
         zone: this.zone
       })
