@@ -100,7 +100,7 @@ export class LoginComponent implements OnInit {
             // } else {
             //   this.route.navigate(['/staff/inventory']);
             // }
-            this.route.navigate(['/staff/home']);
+            this.route.navigate(['/staff2/home']);
           } else if (decoded.type === 'MANAGER') {
             this.route.navigate(['/manager2']);
           }

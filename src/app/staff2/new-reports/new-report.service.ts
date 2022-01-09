@@ -9,12 +9,12 @@ export class NewReportService {
   constructor(private http: HttpClient, @Inject('API_URL') private url: string) { }
 
   getPatientAdmit (params) {
-    const url = `${this.url}/v1/new-report/admit-case?case_status[]=${params.case}`;
+    const url = `${this.url}/v1/new-staff/report-all/admit-case?case_status[]=${params.case}`;
     return this.http.get(url).toPromise();
   }
 
   getPatientAdmitSummary (params) {
-    const url = `${this.url}/v1/new-report/admit-case-summary?case_status[]=${params.case}`;
+    const url = `${this.url}/v1/new-staff/report-all/admit-case-summary?case_status[]=${params.case}`;
     return this.http.get(url).toPromise();
   }
 
