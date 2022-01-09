@@ -93,7 +93,7 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('token', rs.token);
           const decoded = this.jwtHelper.decodeToken(rs.token);
           if (decoded.type === 'ADMIN') {
-            this.route.navigate(['/admin']);
+            this.route.navigate(['/admin2']);
           } else if (decoded.type === 'STAFF') {
             // if (findIndex(rights, { name: 'STAFF_REQUISITION_SUPPLIES' }) > -1) {
             //   this.route.navigate(['/staff/requisition-supplies']);

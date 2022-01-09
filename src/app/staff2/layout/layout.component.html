@@ -11,7 +11,7 @@
       </a>
     </div>
     <div class="header-nav">
-      <a href="javascript://" class="nav-link nav-text" [routerLink]="['/staff/home']" routerLinkActive="router-link-active" >Staff Old</a>
+      <!-- <a href="javascript://" class="nav-link nav-text" [routerLink]="['/staff/home']" routerLinkActive="router-link-active" >Staff Old</a> -->
       <a href="javascript://" class="active nav-link nav-text" [routerLink]="['/staff2/home']" routerLinkActive="router-link-active" >Staff New</a>
     </div>
     <div class="header-actions">
@@ -127,7 +127,7 @@
         <clr-icon clrVerticalNavIcon shape="cursor-hand-open"></clr-icon>
         บันทึกความต้องการสินค้า
       </a>
-      <a clrVerticalNavLink routerLink="/staff2/connect-his" title="เชื่อมต่อข้อมูล HIS"
+      <a *ngIf="importHIS" clrVerticalNavLink routerLink="/staff2/connect-his" title="เชื่อมต่อข้อมูล HIS"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="link"></clr-icon>
         เชื่อมต่อข้อมูล HIS (new)
