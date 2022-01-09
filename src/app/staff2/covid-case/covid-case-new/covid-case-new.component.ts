@@ -556,7 +556,7 @@ export class CovidCaseNewComponent implements OnInit {
                   this.isKey = false;
                   this.isSave = false;
                   this.alertService.success();
-                  this.router.navigate(['/staff/covid-case-new-v2']);
+                  this.router.navigate(['/staff2/covid-case-new-v2']);
                 } else if (rs.code === 3301) {
                   console.log('3301');
                   this.dataOld = rs.rows;
