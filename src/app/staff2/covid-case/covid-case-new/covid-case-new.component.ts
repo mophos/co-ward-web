@@ -180,6 +180,8 @@ export class CovidCaseNewComponent implements OnInit {
     await this.getTitle();
     await this.getGCS();
     await this.getBeds();
+    await this.getGeneric();
+
     await this.getMedicalSupplies();
     if (this.peopleCaseType === 'THAI') {
       await this.getInfo(this.cid, this.peopleCaseType);
@@ -299,6 +301,20 @@ export class CovidCaseNewComponent implements OnInit {
   async getGenericSet() {
     try {
       const rs: any = await this.basicAuthService.getGenericSet('DRUG');
+      if (rs.ok) {
+        this.drugs = rs.rows;
+      } else {
+        this.alertService.serverError();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.serverError();
+    }
+  }
+
+  async getGeneric() {
+    try {
+      const rs: any = await this.basicAuthService.getGenerics('DRUG');
       if (rs.ok) {
         this.drugs = rs.rows;
       } else {
@@ -458,26 +474,26 @@ export class CovidCaseNewComponent implements OnInit {
         this.isSave = true;
         try {
           if (await this.verifyInput()) {
-            const drugs = [];
-            if (+this.s1 === 1) {
-              drugs.push({ genericId: 1 });
-            } else if (+this.s1 === 2) {
-              drugs.push({ genericId: 2 });
-            }
-            if (+this.s2 === 1) {
-              drugs.push({ genericId: 3 });
-              drugs.push({ genericId: 5 });
-            } else if (+this.s2 === 2) {
-              drugs.push({ genericId: 4 });
-            }
+            // const drugs = [];
+            // if (+this.s1 === 1) {
+            //   drugs.push({ genericId: 1 });
+            // } else if (+this.s1 === 2) {
+            //   drugs.push({ genericId: 2 });
+            // }
+            // if (+this.s2 === 1) {
+            //   drugs.push({ genericId: 3 });
+            //   drugs.push({ genericId: 5 });
+            // } else if (+this.s2 === 2) {
+            //   drugs.push({ genericId: 4 });
+            // }
 
-            if (+this.s3 === 1) {
-              drugs.push({ genericId: 7 });
-            }
+            // if (+this.s3 === 1) {
+            //   drugs.push({ genericId: 7 });
+            // }
 
-            if (+this.s4 === 1) {
-              drugs.push({ genericId: 7 });
-            }
+            // if (+this.s4 === 1) {
+            //   drugs.push({ genericId: 7 });
+            // }
 
             const obj: any = {
               covidCaseId: this.caseId,
@@ -1067,6 +1083,18 @@ export class CovidCaseNewComponent implements OnInit {
     } else {
       this.isSave = false;
       this.alertService.error(rs2.error);
+    }
+  }
+
+  checkDrug(i, l) {
+    const idx = findIndex(this.admitDetail, { id: l.id });
+    if (idx > -1) {
+      const idxD = findIndex(this.admitDetail[idx].drugs, { generic_id: i.id });
+      if (idxD > -1) {
+        this.admitDetail[idx].drugs.splice(idxD, 1);
+      } else {
+        this.admitDetail[idx].drugs.push({ generic_id: i.id });
+      }
     }
   }
 }
