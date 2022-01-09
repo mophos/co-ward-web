@@ -26,6 +26,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   covidApproveDrugsMenu: any;
   covidApproveSuppliesMenu: any;
   covidCaseOldMenu: any;
+  importHIS: any;
   // ---------------------------------
   covidCaseRequisitionMenu: any;
   covidProductStock: any;
@@ -68,6 +69,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.topic = decoded.mqttTopic;
     this.providerType = decoded.providerType;
 
+    this.importHIS = findIndex(this.rights, { name: 'STAFF_IMPORT_HIS' }) === -1 ? false : true;
     this.covidCaseMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE' }) === -1 ? false : true;
     this.covidCaseOldMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE_OLD' }) === -1 ? false : true;
     this.covidCaseStatusMenu = findIndex(this.rights, { name: 'STAFF_COVID_CASE_STATUS' }) === -1 ? false : true;
