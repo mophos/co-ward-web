@@ -83,6 +83,21 @@ export class ReportBedComponent implements OnInit {
             a.sum_community_isolation_covid_qty = sumBy(a.hospitals, 'community_isolation_covid_qty');
             a.sum_community_isolation_usage_qty = sumBy(a.hospitals, 'community_isolation_usage_qty');
             a.sum_community_isolation_inven_qty = sumBy(a.hospitals, 'community_isolation_covid_qty') - sumBy(a.hospitals, 'community_isolation_usage_qty');
+            a.sum_lv0_covid_qty = sumBy(a.hospitals, 'lv0_covid_qty');
+            a.sum_lv0_usage_qty = sumBy(a.hospitals, 'lv0_usage_qty');
+            a.sum_lv0_inven_qty = sumBy(a.hospitals, 'lv0_covid_qty') - sumBy(a.hospitals, 'lv0_usage_qty');
+            a.sum_lv1_covid_qty = sumBy(a.hospitals, 'lv1_covid_qty');
+            a.sum_lv1_usage_qty = sumBy(a.hospitals, 'lv1_usage_qty');
+            a.sum_lv1_inven_qty = sumBy(a.hospitals, 'lv1_covid_qty') - sumBy(a.hospitals, 'lv1_usage_qty');
+            a.sum_lv21_covid_qty = sumBy(a.hospitals, 'lv2-1_covid_qty');
+            a.sum_lv21_usage_qty = sumBy(a.hospitals, 'lv2-1_usage_qty');
+            a.sum_lv21_inven_qty = sumBy(a.hospitals, 'lv2-1_covid_qty') - sumBy(a.hospitals, 'lv2-1_usage_qty');
+            a.sum_lv22_covid_qty = sumBy(a.hospitals, 'lv2-2_covid_qty');
+            a.sum_lv22_usage_qty = sumBy(a.hospitals, 'lv2-2_usage_qty');
+            a.sum_lv22_inven_qty = sumBy(a.hospitals, 'lv2-2_covid_qty') - sumBy(a.hospitals, 'lv2-2_usage_qty');
+            a.sum_lv3_covid_qty = sumBy(a.hospitals, 'lv3_covid_qty');
+            a.sum_lv3_usage_qty = sumBy(a.hospitals, 'lv3_usage_qty');
+            a.sum_lv3_inven_qty = sumBy(a.hospitals, 'lv3_covid_qty') - sumBy(a.hospitals, 'lv3_usage_qty');
           }
         }
         this.loading.hide();
