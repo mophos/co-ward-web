@@ -26,7 +26,7 @@
     *ngFor="let p of l.provinces">
     <thead>
       <tr>
-        <th colspan="27" style="text-align: left;">
+        <th colspan="42" style="text-align: left;">
           <h3>{{p.province_name}}</h3>
         </th>
       </tr>
@@ -41,9 +41,29 @@
         <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Hospitel</th>
         <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Home Isolation</th>
         <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">Community Isolation</th>
+        <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">ระดับ3 ใส่ท่อและเครื่องช่วยหายใจ</th>
+        <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">ระดับ 2.2 Oxygen high flow</th>
+        <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">ระดับ 2.1 Oxygen low flow</th>
+        <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">ระดับ 1 ไม่ใช้ Oxygen</th>
+        <th colspan="3" class="right td-border" style="position: sticky; top: 0; ">ระดับ 0 Home Isolation (stepdown)</th>
         <th rowspan="3" class="right" style="position: sticky; top: 0;">สังกัด</th>
       </tr>
       <tr>
+        <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+        <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+        <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+        <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+        <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
+        <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
+        <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
         <th class="right td-border" style="position: sticky; top: 0;">ทั้งหมด</th>
         <th class="right td-border" style="position: sticky; top: 0;">ใช้ไปแล้ว</th>
         <th class="right td-border" style="position: sticky; top: 0;">คงเหลือ</th>
@@ -116,6 +136,23 @@
         <td class="right td-border">{{h['community_isolation_covid_qty'] || 0}}</td>
         <td class="right td-border">{{h['community_isolation_usage_qty']||0 }}</td>
         <td class="right">{{h['community_isolation_covid_qty'] - h['community_isolation_usage_qty'] || 0}}</td>
+        <td class="right td-border">{{h['lv3_covid_qty'] || 0}}</td>
+        <td class="right td-border">{{h['lv3_usage_qty']||0 }}</td>
+        <td class="right">{{h['lv3_covid_qty'] - h['lv3_usage_qty'] || 0}}</td>
+        <td class="right td-border">{{h['lv2-2_covid_qty'] || 0}}</td>
+        <td class="right td-border">{{h['lv2-2_usage_qty']||0 }}</td>
+        <td class="right">{{h['lv2-2_covid_qty'] - h['lv2-2_usage_qty'] || 0}}</td>
+        <td class="right td-border">{{h['lv2-1_covid_qty'] || 0}}</td>
+        <td class="right td-border">{{h['lv2-1_usage_qty']||0 }}</td>
+        <td class="right">{{h['lv2-1_covid_qty'] - h['lv2-1_usage_qty'] || 0}}</td>
+        
+        <td class="right td-border">{{h['lv1_covid_qty'] || 0}}</td>
+        <td class="right td-border">{{h['lv1_usage_qty']||0 }}</td>
+        <td class="right">{{h['lv1_covid_qty'] - h['lv1_usage_qty'] || 0}}</td>
+        <td class="right td-border">{{h['lv0_covid_qty'] || 0}}</td>
+        <td class="right td-border">{{h['lv0_usage_qty']||0 }}</td>
+        <td class="right">{{h['lv0_covid_qty'] - h['lv0_usage_qty'] || 0}}</td>
+
         <td class="left td-border">{{h.sub_ministry_name}}</td>
       </tr>
 
@@ -146,6 +183,22 @@
         <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_community_isolation_covid_qty}}</th>
         <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_community_isolation_usage_qty}}</th>
         <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_community_isolation_inven_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_lv0_covid_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_lv0_usage_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_lv0_inven_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_lv1_covid_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_lv1_usage_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_lv1_inven_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_lv21_covid_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_lv21_usage_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_lv21_inven_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_lv22_covid_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_lv22_usage_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_lv22_inven_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_lv3_covid_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_lv3_usage_qty}}</th>
+        <th class="right td-border" style="position: sticky; top: 0;">{{p.sum_lv3_inven_qty}}</th>
+
         <th class=" td-border" style="position: sticky; top: 0;"></th>
       </tr>
     </tbody>
