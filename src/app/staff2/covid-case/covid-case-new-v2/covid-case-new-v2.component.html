@@ -40,7 +40,7 @@
   <div class="clr-row" [ngClass]="{hidden: !province || !peopleType,'display-none':province=='FACTORY'}">
     <div class="clr-col-4">
       <button class="btn btn-outline-primary btn-block" style="font-size: 1.5rem;height:3rem" [ngClass]="{'btn-primary': caseType === 'IPPUI','btn-outline-primary':caseType != 'IPPUI' }"
-        (click)="caseType='IPPUI'">IP PUI <span class="p4">(ผู้ป่วย admit รอผลตรวจ)</span></button>
+        (click)="caseType='IPPUI'">IP PUI/ATK+ <span class="p4">(ผู้ป่วย admit รอผลตรวจ)</span></button>
     </div>
     <div class="clr-col-4">
       <button class="btn btn-outline-primary  btn-block" style="font-size: 1.5rem;height:3rem;" [ngClass]="{'btn-primary': caseType === 'COVID','btn-outline-primary':caseType != 'COVID' }"
