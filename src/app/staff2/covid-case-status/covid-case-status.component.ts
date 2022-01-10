@@ -1,7 +1,7 @@
-import { BasicAuthService } from '../services/basic-auth.service';
-import { CovidCaseService } from '../services/covid-case.service';
-import { BasicService } from '../services/basic.service';
-import { AlertService } from '../../help/alert.service';
+import { BasicAuthService } from './../services/basic-auth.service';
+import { CovidCaseService } from './../services/covid-case.service';
+import { BasicService } from './../services/basic.service';
+import { AlertService } from './../../help/alert.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyOptions } from 'mydatepicker-th';
 import { findIndex } from 'lodash';
@@ -63,6 +63,7 @@ export class CovidCaseStatusComponent implements OnInit {
   modalDischarge = false;
   modalDeath = false;
   modalDischargeType = 'HOME';
+  drugs: any = [];
   s1 = [{ generic: 1, name: 'Hydroxychloroquine 200 mg.' }, { generic: 2, name: 'Chloroquine 250 mg.' }];
   s2 = [{ generic: 3, name: 'Darunavir 600mg+Ritonavir100 mg.' }, { generic: 4, name: 'Lopinavir 200 mg/Ritonavir 50 mg.' }];
   s3 = [{ generic: 7, name: 'Azithromycin 250 mg.' }];
@@ -104,6 +105,7 @@ export class CovidCaseStatusComponent implements OnInit {
     await this.getDate();
     await this.getDateCut();
     await this.getGCS();
+    await this.getDrugs();
     await this.getBeds();
     await this.getMedicalSupplies();
     await this.getList();
@@ -125,7 +127,7 @@ export class CovidCaseStatusComponent implements OnInit {
 
   async getList() {
     try {
-      this.loading.show();
+      // this.loading.show();
       const rs: any = await this.covidCaseService.getCovidCasePresent(this.query, this.gcsSearchId, this.bedSearchId);
       if (rs.ok) {
         for (const i of rs.rows) {
@@ -185,6 +187,19 @@ export class CovidCaseStatusComponent implements OnInit {
 
   }
 
+  async getDrugs() {
+    try {
+      const rs: any = await this.basicAuthService.getGenerics('DRUG');
+      if (rs.ok) {
+        this.drugs = rs.rows;
+      } else {
+        this.alertService.serverError();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.serverError();
+    }
+  }
   async getBeds() {
     try {
       const rs: any = await this.basicAuthService.getBeds();
@@ -348,7 +363,7 @@ export class CovidCaseStatusComponent implements OnInit {
         if (idx > -1) {
           // this.list[idx].create_date = this.dateCut;
           // this.list[idx].entry_date = this.dateCut;
-          this.list[idx].drugs = await this.setGenericSave(this.list[idx]);
+          // this.list[idx].drugs = await this.setGenericSave(this.list[idx]);
           const rs: any = await this.covidCaseService.updateStatus(this.list[idx]);
           if (rs.ok) {
             this.getList();
@@ -473,6 +488,28 @@ export class CovidCaseStatusComponent implements OnInit {
     const idx = findIndex(this.list, { covid_case_id: listId });
     if (idx > -1 && type) {
       this.list[idx][type] = this.list[idx][type] === generic ? null : generic;
+    }
+  }
+
+  checkDrug(id, i) {
+    console.log(id, i.id);
+    console.log(this.list);
+    
+    const idx = findIndex(this.list, { covid_case_id:id });
+    if (idx > -1) {
+      console.log(this.list[idx].drugs);
+      
+      const idxD = findIndex(this.list[idx].drugs, { id: +i.id });
+      if (idxD > -1) {
+        console.log('this.list[idx].drugs[idxD].is_check', this.list[idx].drugs[idxD].is_check);
+        if (this.list[idx].drugs[idxD].is_check) {
+          this.list[idx].drugs[idxD].is_check = 0;
+        } else {
+          this.list[idx].drugs[idxD].is_check = 1;
+        }
+      } else {
+        // this.list[idx].drugs.push({ generic_id: i.id });
+      }
     }
   }
 
