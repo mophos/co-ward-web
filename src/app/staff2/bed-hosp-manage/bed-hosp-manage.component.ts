@@ -40,6 +40,22 @@ export class BedHospManageComponent implements OnInit {
     community_isolation_qty: null,
     community_isolation_covid_qty: null,
     community_isolation_spare_qty: null,
+    
+    lv0_qty: null,
+    lv0_covid_qty: null,
+    lv0_spare_qty: null,
+    lv1_qty: null,
+    lv1_covid_qty: null,
+    lv1_spare_qty: null,
+    lv21_qty: null,
+    lv21_covid_qty: null,
+    lv21_spare_qty: null,
+    lv22_qty: null,
+    lv22_covid_qty: null,
+    lv22_spare_qty: null,
+    lv3_qty: null,
+    lv3_covid_qty: null,
+    lv3_spare_qty: null,
     hospital_type: null
   };
   modal = false;
@@ -81,6 +97,16 @@ export class BedHospManageComponent implements OnInit {
               this.list[idx].home_isolation_usage_qty = item.usage_qty;
             } else if (item.bed_id === 9) {
               this.list[idx].community_isolation_usage_qty = item.usage_qty;
+            } else if (item.bed_id === 10) {
+              this.list[idx].lv0_usage_qty = item.usage_qty;
+            } else if (item.bed_id === 11) {
+              this.list[idx].lv1_usage_qty = item.usage_qty;
+            } else if (item.bed_id === 12) {
+              this.list[idx].lv21_usage_qty = item.usage_qty;
+            } else if (item.bed_id === 13) {
+              this.list[idx].lv22_usage_qty = item.usage_qty;
+            } else if (item.bed_id === 14) {
+              this.list[idx].lv3_usage_qty = item.usage_qty;
             }
           }
         }
@@ -113,6 +139,11 @@ export class BedHospManageComponent implements OnInit {
     const b7: any = find(this.listUsage, { hospital_id: l.id, bed_id: 7 });
     const b8: any = find(this.listUsage, { hospital_id: l.id, bed_id: 8 });
     const b9: any = find(this.listUsage, { hospital_id: l.id, bed_id: 9 });
+    const b10: any = find(this.listUsage, { hospital_id: l.id, bed_id: 10 });
+    const b11: any = find(this.listUsage, { hospital_id: l.id, bed_id: 11 });
+    const b12: any = find(this.listUsage, { hospital_id: l.id, bed_id: 12 });
+    const b13: any = find(this.listUsage, { hospital_id: l.id, bed_id: 13 });
+    const b14: any = find(this.listUsage, { hospital_id: l.id, bed_id: 14 });
     //     0: {bed_id: 1, name: "AIIR", qty: null, covid_qty: null, spare_qty: null}
     // 1: {bed_id: 2, name: "Modified AIIR", qty: null, covid_qty: null, spare_qty: null}
     // 2: {bed_id: 3, name: "Isolate", qty: null, covid_qty: null, spare_qty: null}
@@ -127,14 +158,24 @@ export class BedHospManageComponent implements OnInit {
         { bed_id: 4, name: 'Cohort', use_covid_qty: b4 ? b4.usage_qty : 0, qty: this.detail.cohort_qty, covid_qty: this.detail.cohort_covid_qty, spare_qty: this.detail.cohort_spare_qty },
         { bed_id: 7, name: 'Cohort ICU', use_covid_qty: b7 ? b7.usage_qty : 0, qty: this.detail.cohort_icu_qty, covid_qty: this.detail.cohort_icu_covid_qty, spare_qty: this.detail.cohort_icu_spare_qty },
         { bed_id: 8, name: 'Home Isolation', use_covid_qty: b8 ? b8.usage_qty : 0, qty: this.detail.home_isolation_qty, covid_qty: this.detail.home_isolation_covid_qty, spare_qty: this.detail.home_isolation_spare_qty },
-        { bed_id: 9, name: 'Community Isolation', use_covid_qty: b9 ? b9.usage_qty : 0, qty: this.detail.community_isolation_qty, covid_qty: this.detail.community_isolation_covid_qty, spare_qty: this.detail.community_isolation_spare_qty }
+        { bed_id: 9, name: 'Community Isolation', use_covid_qty: b9 ? b9.usage_qty : 0, qty: this.detail.community_isolation_qty, covid_qty: this.detail.community_isolation_covid_qty, spare_qty: this.detail.community_isolation_spare_qty },
+        { bed_id: 10, name: 'ระดับ 0 Home Isolation (stepdown)', use_covid_qty: b10 ? b10.usage_qty : 0, qty: this.detail.lv0_qty, covid_qty: this.detail.lv0_covid_qty, spare_qty: this.detail.lv0_spare_qty },
+        { bed_id: 11, name: 'ระดับ 1 ไม่ใช้ Oxygen', use_covid_qty: b11 ? b11.usage_qty : 0, qty: this.detail.lv1_qty, covid_qty: this.detail.lv1_covid_qty, spare_qty: this.detail.lv1_spare_qty },
+        { bed_id: 12, name: 'ระดับ 2.1 Oxygen low flow', use_covid_qty: b12 ? b12.usage_qty : 0, qty: this.detail.lv21_qty, covid_qty: this.detail.lv21_covid_qty, spare_qty: this.detail.lv21_spare_qty },
+        { bed_id: 13, name: 'ระดับ 2.2 Oxygen high flow', use_covid_qty: b13 ? b13.usage_qty : 0, qty: this.detail.lv22_qty, covid_qty: this.detail.lv22_covid_qty, spare_qty: this.detail.lv22_spare_qty },
+        { bed_id: 14, name: 'ระดับ3 ใส่ท่อและเครื่องช่วยหายใจ', use_covid_qty: b14 ? b14.usage_qty : 0, qty: this.detail.lv3_qty, covid_qty: this.detail.lv3_covid_qty, spare_qty: this.detail.lv3_spare_qty }
       ];
     } else {
       this.listBed = [
         { bed_id: 4, name: 'Cohort', use_covid_qty: b4 ? b4.usage_qty : 0, qty: this.detail.cohort_qty, covid_qty: this.detail.cohort_covid_qty, spare_qty: this.detail.cohort_spare_qty },
         { bed_id: 5, name: 'Hospitel', use_covid_qty: b5 ? b5.usage_qty : 0, qty: this.detail.hospitel_qty, covid_qty: this.detail.hospitel_covid_qty, spare_qty: this.detail.hospitel_spare_qty },
         { bed_id: 8, name: 'Home Isolation', use_covid_qty: b8 ? b8.usage_qty : 0, qty: this.detail.home_isolation_qty, covid_qty: this.detail.home_isolation_covid_qty, spare_qty: this.detail.home_isolation_spare_qty },
-        { bed_id: 9, name: 'Community Isolation', use_covid_qty: b9 ? b9.usage_qty : 0, qty: this.detail.community_isolation_qty, covid_qty: this.detail.community_isolation_covid_qty, spare_qty: this.detail.community_isolation_spare_qty }
+        { bed_id: 9, name: 'Community Isolation', use_covid_qty: b9 ? b9.usage_qty : 0, qty: this.detail.community_isolation_qty, covid_qty: this.detail.community_isolation_covid_qty, spare_qty: this.detail.community_isolation_spare_qty },
+        { bed_id: 10, name: 'ระดับ 0 Home Isolation (stepdown)', use_covid_qty: b10 ? b10.usage_qty : 0, qty: this.detail.lv0_qty, covid_qty: this.detail.lv0_covid_qty, spare_qty: this.detail.lv0_spare_qty },
+        { bed_id: 11, name: 'ระดับ 1 ไม่ใช้ Oxygen', use_covid_qty: b11 ? b11.usage_qty : 0, qty: this.detail.lv1_qty, covid_qty: this.detail.lv1_covid_qty, spare_qty: this.detail.lv1_spare_qty },
+        { bed_id: 12, name: 'ระดับ 2.1 Oxygen low flow', use_covid_qty: b12 ? b12.usage_qty : 0, qty: this.detail.lv21_qty, covid_qty: this.detail.lv21_covid_qty, spare_qty: this.detail.lv21_spare_qty },
+        { bed_id: 13, name: 'ระดับ 2.2 Oxygen high flow', use_covid_qty: b13 ? b13.usage_qty : 0, qty: this.detail.lv22_qty, covid_qty: this.detail.lv22_covid_qty, spare_qty: this.detail.lv22_spare_qty },
+        { bed_id: 14, name: 'ระดับ3 ใส่ท่อและเครื่องช่วยหายใจ', use_covid_qty: b14 ? b14.usage_qty : 0, qty: this.detail.lv3_qty, covid_qty: this.detail.lv3_covid_qty, spare_qty: this.detail.lv3_spare_qty }
       ];
     }
 

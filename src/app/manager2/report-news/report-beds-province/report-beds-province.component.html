@@ -93,7 +93,9 @@
         </thead>
         <tbody>
             <tr *ngFor="let items of data">
-                <td class="td-border" *ngFor="let item of items">{{item}}</td>
+                <td class="td-border" >{{items.zone_code}}</td>
+                <td class="td-border" >{{items.province_name}}</td>
+                <td class="td-border" *ngFor="let item of items.array">{{cal.checkValue(item)}}</td>
             </tr>
             <!-- <ng-container *ngFor="let count of items; let i = index"> -->
                

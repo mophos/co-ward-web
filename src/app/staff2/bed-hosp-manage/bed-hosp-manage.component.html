@@ -105,6 +105,66 @@
                         </tr>
                     </table>
                 </th>
+                <th colspan="3" class="right td-border" style="position: sticky; top: 0; padding: 0;">
+                    <table>
+                        <tr>
+                            <th colspan="3" class="right td-border">ระดับ 0 Home Isolation (stepdown)</th>
+                        </tr>
+                        <tr>
+                            <th class="right td-border">ทั้งหมด</th>
+                            <th class="right td-border">ใช้ไปแล้ว</th>
+                            <th class="right td-border">คงเหลือ</th>
+                        </tr>
+                    </table>
+                </th>
+                <th colspan="3" class="right td-border" style="position: sticky; top: 0; padding: 0;">
+                    <table>
+                        <tr>
+                            <th colspan="3" class="right td-border">ระดับ 1 ไม่ใช้ Oxygen</th>
+                        </tr>
+                        <tr>
+                            <th class="right td-border">ทั้งหมด</th>
+                            <th class="right td-border">ใช้ไปแล้ว</th>
+                            <th class="right td-border">คงเหลือ</th>
+                        </tr>
+                    </table>
+                </th>
+                <th colspan="3" class="right td-border" style="position: sticky; top: 0; padding: 0;">
+                    <table>
+                        <tr>
+                            <th colspan="3" class="right td-border">ระดับ 2.1 Oxygen low flow</th>
+                        </tr>
+                        <tr>
+                            <th class="right td-border">ทั้งหมด</th>
+                            <th class="right td-border">ใช้ไปแล้ว</th>
+                            <th class="right td-border">คงเหลือ</th>
+                        </tr>
+                    </table>
+                </th>
+                <th colspan="3" class="right td-border" style="position: sticky; top: 0; padding: 0;">
+                    <table>
+                        <tr>
+                            <th colspan="3" class="right td-border">ระดับ 2.2 Oxygen high flow</th>
+                        </tr>
+                        <tr>
+                            <th class="right td-border">ทั้งหมด</th>
+                            <th class="right td-border">ใช้ไปแล้ว</th>
+                            <th class="right td-border">คงเหลือ</th>
+                        </tr>
+                    </table>
+                </th>
+                <th colspan="3" class="right td-border" style="position: sticky; top: 0; padding: 0;">
+                    <table>
+                        <tr>
+                            <th colspan="3" class="right td-border">ระดับ3 ใส่ท่อและเครื่องช่วยหายใจ</th>
+                        </tr>
+                        <tr>
+                            <th class="right td-border">ทั้งหมด</th>
+                            <th class="right td-border">ใช้ไปแล้ว</th>
+                            <th class="right td-border">คงเหลือ</th>
+                        </tr>
+                    </table>
+                </th>
 
             </tr>
 
@@ -136,6 +196,22 @@
             <td class="right td-border">{{l.community_isolation_covid_qty || 0}}</td>
             <td class="right td-border">{{l.community_isolation_usage_qty ||0 }}</td>
             <td class="right">{{l.community_isolation_covid_qty - l.community_isolation_usage_qty || 0}}</td>
+            
+            <td class="right td-border">{{l.lv0_covid_qty || 0}}</td>
+            <td class="right td-border">{{l.lv0_usage_qty ||0 }}</td>
+            <td class="right">{{l.lv0_covid_qty - l.lv0_usage_qty || 0}}</td>
+            <td class="right td-border">{{l.lv1_covid_qty || 0}}</td>
+            <td class="right td-border">{{l.lv1_usage_qty ||0 }}</td>
+            <td class="right">{{l.lv1_covid_qty - l.lv1_usage_qty || 0}}</td>
+            <td class="right td-border">{{l.lv21_covid_qty || 0}}</td>
+            <td class="right td-border">{{l.lv21_usage_qty ||0 }}</td>
+            <td class="right">{{l.lv21_covid_qty - l.lv21_usage_qty || 0}}</td>
+            <td class="right td-border">{{l.lv22_covid_qty || 0}}</td>
+            <td class="right td-border">{{l.lv22_usage_qty ||0 }}</td>
+            <td class="right">{{l.lv22_covid_qty - l.lv22_usage_qty || 0}}</td>
+            <td class="right td-border">{{l.lv3_covid_qty || 0}}</td>
+            <td class="right td-border">{{l.lv3_usage_qty ||0 }}</td>
+            <td class="right">{{l.lv3_covid_qty - l.lv3_usage_qty || 0}}</td>
         </tr>
         <tfoot>
             <tr>
@@ -244,8 +320,8 @@
                 </clr-dg-cell>
             </clr-dg-row>
             <clr-dg-footer>
-                <clr-dg-pagination #pagination>
-                    <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
+                <clr-dg-pagination #pagination [clrDgPageSize]="20">
+                    <clr-dg-page-size [clrPageSizeOptions]="[20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
                     {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} จาก {{pagination.totalItems}} รายการ
                 </clr-dg-pagination>
             </clr-dg-footer>
