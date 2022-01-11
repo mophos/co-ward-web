@@ -39,16 +39,19 @@
   <br>
   <div class="clr-row" [ngClass]="{hidden: !province || !peopleType,'display-none':province=='FACTORY'}">
     <div class="clr-col-4">
-      <button class="btn btn-outline-primary btn-block" style="font-size: 1.5rem;height:3rem" [ngClass]="{'btn-primary': caseType === 'IPPUI','btn-outline-primary':caseType != 'IPPUI' }"
-        (click)="caseType='IPPUI'">IP PUI/ATK+ <span class="p4">(ผู้ป่วย admit รอผลตรวจ)</span></button>
+      <button class="btn btn-outline-primary btn-block" style="font-size: 1.5rem; line-height: 12pt; height:3rem"
+        [ngClass]="{'btn-primary': caseType === 'IPPUI','btn-outline-primary':caseType != 'IPPUI' }"
+        (click)="caseType='IPPUI'">IP PUI/ATK+ <br><span class="p4">(ผู้ป่วย admit รอผลตรวจ)</span></button>
     </div>
     <div class="clr-col-4">
-      <button class="btn btn-outline-primary  btn-block" style="font-size: 1.5rem;height:3rem;" [ngClass]="{'btn-primary': caseType === 'COVID','btn-outline-primary':caseType != 'COVID' }"
-        (click)="caseType='COVID'">COVID <span class="p4">(ผู้ป่วย admit ผลคอนเฟิร์มเป็น +)</span></button>
+      <button class="btn btn-outline-primary  btn-block" style="font-size: 1.5rem; line-height: 12pt; height:3rem;"
+        [ngClass]="{'btn-primary': caseType === 'COVID','btn-outline-primary':caseType != 'COVID' }"
+        (click)="caseType='COVID'">COVID <br><span class="p4">(ผู้ป่วย admit ผลคอนเฟิร์มเป็น +)</span></button>
     </div>
     <div class="clr-col-4">
-      <button class="btn btn-outline-primary  btn-block" style="font-size: 1.5rem;height:3rem;" [ngClass]="{'btn-primary': caseType === 'OBSERVE','btn-outline-primary':caseType != 'OBSERVE',hidden:province!='OUT' }"
-        (click)="caseType='OBSERVE'">HQ/AHQ <span class="p4">(ผู้ป่วยโรคอื่น ต้องการมารักษาในไทย)</span></button>
+      <button class="btn btn-outline-primary  btn-block" style="font-size: 1.5rem; line-height: 12pt; height:3rem;"
+        [ngClass]="{'btn-primary': caseType === 'OBSERVE','btn-outline-primary':caseType != 'OBSERVE',hidden:province!='OUT' }"
+        (click)="caseType='OBSERVE'">HQ/AHQ <br><span class="p4">(ผู้ป่วยโรคอื่น ต้องการมารักษาในไทย)</span></button>
     </div>
   </div>
   <br>
