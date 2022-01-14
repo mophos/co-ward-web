@@ -615,6 +615,8 @@ export class CovidCaseNewComponent implements OnInit {
                 this.clear();
                 this.isKey = false;
                 this.isSave = false;
+                console.log(rs.error);
+
                 if (rs.error) {
                   if (rs.error === 'beds are not enough') {
                     this.alertService.error('มีการใช้งานเตียงเกินปริมาณที่กำหนด', 'ไปยังหน้าตั้งค่าเตียง ?');
