@@ -193,7 +193,8 @@
         <input type="radio" clrRadio value="HOME" name="modalDischargeType" [(ngModel)]="modalDischargeType" />
         <label>รักษาหาย/กลับบ้าน</label>
       </clr-radio-wrapper>
-      <clr-radio-wrapper *ngIf="selected.gcs_id == 5">
+      <clr-radio-wrapper>
+      <!-- <clr-radio-wrapper *ngIf="selected.gcs_id == 5"> -->
         <input type="radio" clrRadio value="NEGATIVE" name="modalDischargeType" [(ngModel)]="modalDischargeType" />
         <label>ตรวจไม่พบเชื้อ</label>
       </clr-radio-wrapper>

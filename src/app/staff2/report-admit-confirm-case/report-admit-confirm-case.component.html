@@ -21,21 +21,21 @@
         <th class="text-left td-border">moderate</th>
         <th class="text-left td-border">mild</th>
         <th class="text-left td-border">asymptomatic</th>
-        <th class="text-left td-border">aiir</th>
-        <th class="text-left td-border">modified_aiir</th>
-        <th class="text-left td-border">isolate</th>
-        <th class="text-left td-border">cohort</th>
-        <th class="text-left td-border">Hospitel</th>
+       
+        <th class="text-left td-border">ระดับ 3 ใส่ท่อและเครื่องช่วยหายใจได้</th>
+        <th class="text-left td-border">ระดับ 2.2 Oxygen high flow</th>
+        <th class="text-left td-border">ระดับ 2.1 Oxygen low flow</th>
+        <th class="text-left td-border">ระดับ 1 ไม่ใช้ Oxygen</th>
+        <th class="text-left td-border">ระดับ 0 Home Isolation (stepdown)</th>
+        <th class="text-left td-border">Home Isolation (New case)</th>
+        <th class="text-left td-border">Community Isolation (New case)</th>
+
         <th class="text-left td-border">invasive</th>
         <th class="text-left td-border">noninvasive</th>
         <th class="text-left td-border">high_flow</th>
-        <th class="text-left td-border">Hydroxychloroquine 200 mg.</th>
-        <th class="text-left td-border">Chloroquine 250 mg.</th>
-        <th class="text-left td-border">Darunavir 600 mg.</th>
-        <th class="text-left td-border">Lopinavir 200 mg./Ritonavir 50 mg.</th>
-        <th class="text-left td-border">Ritonavir 100 mg.</th>
-        <th class="text-left td-border">Azithromycin 250 mg.</th>
-        <th class="text-left td-border">Favipiravi</th>
+        <th class="text-left td-border">Favipiravir</th>
+        <th class="text-left td-border">Casirivimab and imdevimab</th>
+        <th class="text-left td-border">Molnupiravir</th>
 
       </tr>
     </thead>
@@ -47,21 +47,19 @@
         <td class="text-right td-border"> {{l.moderate || 0}}</td>
         <td class="text-right td-border"> {{l.mild || 0}}</td>
         <td class="text-right td-border"> {{l.asymptomatic || 0}}</td>
-        <td class="text-right td-border"> {{l.aiir || 0}}</td>
-        <td class="text-right td-border"> {{l.modified_aiir || 0}}</td>
-        <td class="text-right td-border"> {{l.isolate || 0}}</td>
-        <td class="text-right td-border"> {{l.cohort || 0}}</td>
-        <td class="text-right td-border"> {{l.hospitel || 0}}</td>
+        <td class="text-right td-border"> {{l.lv3 || 0}}</td>
+        <td class="text-right td-border"> {{l.lv22 || 0}}</td>
+        <td class="text-right td-border"> {{l.lv21 || 0}}</td>
+        <td class="text-right td-border"> {{l.lv1 || 0}}</td>
+        <td class="text-right td-border"> {{l.lv0 || 0}}</td>
+        <td class="text-right td-border"> {{l.community_isolation || 0}}</td>
+        <td class="text-right td-border"> {{l.home_isolation || 0}}</td>
         <td class="text-right td-border"> {{l.invasive || 0}}</td>
         <td class="text-right td-border"> {{l.noninvasive || 0}}</td>
         <td class="text-right td-border"> {{l.high_flow || 0}}</td>
-        <td class="text-right td-border">{{l.d1 || 0}}</td>
-        <td class="text-right td-border">{{l.d2 || 0}}</td>
-        <td class="text-right td-border">{{l.d3 || 0}}</td>
-        <td class="text-right td-border">{{l.d4 || 0}}</td>
-        <td class="text-right td-border">{{l.d5 || 0}}</td>
-        <td class="text-right td-border">{{l.d7 || 0}}</td>
         <td class="text-right td-border">{{l.d8 || 0}}</td>
+        <td class="text-right td-border">{{l.d26 || 0}}</td>
+        <td class="text-right td-border">{{l.d27 || 0}}</td>
       </tr>
     </tbody>
     <tfoot>
@@ -72,21 +70,20 @@
         <td class="text-right td-border"> {{moderate}}</td>
         <td class="text-right td-border"> {{mild}}</td>
         <td class="text-right td-border"> {{asymptomatic}}</td>
-        <td class="text-right td-border"> {{aiir}}</td>
-        <td class="text-right td-border"> {{modifiedAiir}}</td>
-        <td class="text-right td-border"> {{isolate}}</td>
-        <td class="text-right td-border"> {{cohort}}</td>
-        <td class="text-right td-border"> {{hospitel}}</td>
+
+        <td class="text-right td-border"> {{lv3}}</td>
+        <td class="text-right td-border"> {{lv22}}</td>
+        <td class="text-right td-border"> {{lv21}}</td>
+        <td class="text-right td-border"> {{lv1}}</td>
+        <td class="text-right td-border"> {{lv0}}</td>
+        <td class="text-right td-border"> {{communityIsolation}}</td>
+        <td class="text-right td-border"> {{homeIsolation}}</td>
         <td class="text-right td-border"> {{invasive}}</td>
         <td class="text-right td-border"> {{noninvasive}}</td>
         <td class="text-right td-border"> {{highFlow}}</td>
-        <td class="text-right td-border">{{d1}}</td>
-        <td class="text-right td-border">{{d2}}</td>
-        <td class="text-right td-border">{{d3}}</td>
-        <td class="text-right td-border">{{d4}}</td>
-        <td class="text-right td-border">{{d5}}</td>
-        <td class="text-right td-border">{{d7}}</td>
         <td class="text-right td-border">{{d8}}</td>
+        <td class="text-right td-border">{{d26}}</td>
+        <td class="text-right td-border">{{d27}}</td>
 
       </tr>
     </tfoot>

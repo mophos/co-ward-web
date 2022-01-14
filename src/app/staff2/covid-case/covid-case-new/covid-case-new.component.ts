@@ -611,9 +611,9 @@ export class CovidCaseNewComponent implements OnInit {
                   this.isSave = false;
                   // this.alertService.error(rs.error);
                   if (rs.error === 'beds are not enough') {
-                    this.newAlertService.warningBedType('มีการใช้งานเตียงเกินปริมาณที่กำหนด', 'คำเตือน');
+                    this.newAlertService.warningBedType('มีการใช้งานเตียงเกินปริมาณที่กำหนด', 'ไปยังหน้าตั้งค่าเตียง ?');
                   } else if (rs.error === 'beds have not been set amount') {
-                    this.newAlertService.warningBedType('มีเตียงที่ยังไม่ได้ถูกตั้งค่า', 'คำเตือน');
+                    this.newAlertService.warningBedType('มีเตียงที่ยังไม่ได้ถูกตั้งค่า', 'ไปยังหน้าตั้งค่าเตียง ?');
                   }
                 }
               } else {
@@ -628,9 +628,9 @@ export class CovidCaseNewComponent implements OnInit {
                 console.log(rs.error);
                 if (rs.error) {
                   if (rs.error === 'beds are not enough') {
-                    this.alertService.error('มีการใช้งานเตียงเกินปริมาณที่กำหนด', 'ไปยังหน้าตั้งค่าเตียง ?');
+                    this.alertService.error('มีการใช้งานเตียงเกินปริมาณที่กำหนด', 'คำเตือน');
                   } else if (rs.error === 'beds have not been set amount') {
-                    this.alertService.error('มีเตียงที่ยังไม่ได้ถูกตั้งค่า', 'ไปยังหน้าตั้งค่าเตียง ?');
+                    this.alertService.error('มีเตียงที่ยังไม่ได้ถูกตั้งค่า', 'คำเตือน');
                   } else {
                     this.alertService.error(rs.error);
                   }

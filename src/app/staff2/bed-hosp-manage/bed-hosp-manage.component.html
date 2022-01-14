@@ -9,7 +9,7 @@
             <tr>
                 <th class="right td-border" style="position: sticky; top: 0; ">โรงพยาบาล</th>
                 <th class="right td-border" style="position: sticky; top: 0; ">วันที่ตั้งค่าเตียงล่าสุด</th>
-                <th colspan="3" style="position: sticky; top: 0; padding: 0;">
+                <!-- <th colspan="3" style="position: sticky; top: 0; padding: 0;">
                     <table>
                         <tr>
                             <th colspan="3" class="right td-border">AIIR</th>
@@ -80,7 +80,7 @@
                             <th class="right td-border">คงเหลือ</th>
                         </tr>
                     </table>
-                </th>
+                </th> -->
                 <th colspan="3" class="right td-border" style="position: sticky; top: 0; padding: 0;">
                     <table>
                         <tr>
@@ -172,7 +172,7 @@
         <tr *ngFor="let l of list; let idx=index;" class="pointer" [ngClass]="{isWarning: idx % 2 === 0}" (click)="editBed(l);">
             <td class="left td-border">{{l.hospname}}</td>
             <td class="left td-border">{{l.entry_date | dateTh:'DD/MM/YYYY'}}</td>
-            <td class="right td-border">{{l.aiir_covid_qty || 0}}</td>
+            <!-- <td class="right td-border">{{l.aiir_covid_qty || 0}}</td>
             <td class="right td-border">{{l.aiir_usage_qty || 0 }}</td>
             <td class="right td-border">{{l.aiir_covid_qty - l.aiir_usage_qty || 0}}</td>
             <td class="right td-border">{{l.modified_aiir_covid_qty || 0}}</td>
@@ -189,7 +189,7 @@
             <td class="right td-border">{{l.cohort_icu_covid_qty - l.cohort_icu_usage_qty || 0}}</td>
             <td class="right td-border">{{l.hospitel_covid_qty || 0}}</td>
             <td class="right td-border">{{l.hospitel_usage_qty ||0 }}</td>
-            <td class="right td-border">{{l.hospitel_covid_qty - l.hospitel_usage_qty || 0}}</td>
+            <td class="right td-border">{{l.hospitel_covid_qty - l.hospitel_usage_qty || 0}}</td> -->
             <td class="right td-border">{{l.home_isolation_covid_qty || 0}}</td>
             <td class="right td-border">{{l.home_isolation_usage_qty ||0 }}</td>
             <td class="right td-border">{{l.home_isolation_covid_qty - l.home_isolation_usage_qty || 0}}</td>
