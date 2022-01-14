@@ -28,6 +28,14 @@ export class ReportAdmitPuiComponent implements OnInit {
   invasive = 0;
   noninvasive = 0;
   highFlow = 0;
+
+  lv3 = 0;
+  lv22 = 0;
+  lv21 = 0;
+  lv1 = 0;
+  lv0 = 0;
+  homeIsolation = 0;
+  communityIsolation = 0;
   d1 = 0;
   d2 = 0;
   d3 = 0;
@@ -35,6 +43,8 @@ export class ReportAdmitPuiComponent implements OnInit {
   d5 = 0;
   d7 = 0;
   d8 = 0;
+  d26 = 0;
+  d27 = 0;
   rights: any;
   dataDate1: any;
   dataDate2: any;
@@ -87,6 +97,13 @@ export class ReportAdmitPuiComponent implements OnInit {
         this.invasive = sumBy(rs.rows, 'invasive');
         this.noninvasive = sumBy(rs.rows, 'noninvasive');
         this.highFlow = sumBy(rs.rows, 'high_flow');
+        this.lv3 = sumBy(rs.rows, 'lv3');
+        this.lv22 = sumBy(rs.rows, 'lv22');
+        this.lv21 = sumBy(rs.rows, 'lv21');
+        this.lv1 = sumBy(rs.rows, 'lv1');
+        this.lv0 = sumBy(rs.rows, 'lv0');
+        this.communityIsolation = sumBy(rs.rows, 'community_isolation');
+        this.homeIsolation = sumBy(rs.rows, 'home_isolation');
         this.d1 = sumBy(rs.rows, 'd1');
         this.d2 = sumBy(rs.rows, 'd2');
         this.d3 = sumBy(rs.rows, 'd3');
@@ -94,6 +111,8 @@ export class ReportAdmitPuiComponent implements OnInit {
         this.d5 = sumBy(rs.rows, 'd5');
         this.d7 = sumBy(rs.rows, 'd7');
         this.d8 = sumBy(rs.rows, 'd8');
+        this.d26 = sumBy(rs.rows, 'd26');
+        this.d27 = sumBy(rs.rows, 'd27');
 
       } else {
         this.alertService.error(rs.error);

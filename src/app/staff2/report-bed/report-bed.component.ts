@@ -59,6 +59,8 @@ export class ReportBedComponent implements OnInit {
 
         for (const i of this.list) {
           for (const a of i.provinces) {
+            console.log(a);
+            
             a.sum_aiir_covid_qty = sumBy(a.hospitals, 'aiir_covid_qty');
             a.sum_aiir_usage_qty = sumBy(a.hospitals, 'aiir_usage_qty');
             a.sum_aiir_inven_qty = sumBy(a.hospitals, 'aiir_covid_qty') - sumBy(a.hospitals, 'aiir_usage_qty');

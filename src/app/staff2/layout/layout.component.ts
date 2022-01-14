@@ -114,7 +114,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
 
   async ngOnInit() {
-    await this.getSystems();
+    // await this.getSystems();
     // await this.initialSocket();
   }
 
