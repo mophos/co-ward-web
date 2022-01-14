@@ -611,9 +611,9 @@ export class CovidCaseNewComponent implements OnInit {
                   this.isSave = false;
                   // this.alertService.error(rs.error);
                   if (rs.error === 'beds are not enough') {
-                    this.newAlertService.warningBedType('มีการใช้งานเตียงเกินปริมาณที่กำหนด', 'ไปยังหน้าตั้งค่าเตียง ?')
+                    this.newAlertService.warningBedType('มีการใช้งานเตียงเกินปริมาณที่กำหนด', 'คำเตือน');
                   } else if (rs.error === 'beds have not been set amount') {
-                    this.newAlertService.warningBedType('มีเตียงที่ยังไม่ได้ถูกตั้งค่า', 'ไปยังหน้าตั้งค่าเตียง ?')
+                    this.newAlertService.warningBedType('มีเตียงที่ยังไม่ได้ถูกตั้งค่า', 'คำเตือน');
                   }
                 }
               } else {
