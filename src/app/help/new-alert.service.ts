@@ -18,9 +18,9 @@ export class NewAlertService {
       html: `<p style="font-size: 24px;"> ${text} </p>`,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: '<div style="font-size: 20px;"> ตกลง </div>',
+      confirmButtonText: '<div style="font-size: 20px;"> ตั้งค่า </div>',
       confirmButtonColor: '#3085d6',
-      cancelButtonText: '<div style="font-size: 20px;"> ยกเลิก </div>',
+      cancelButtonText: '<div style="font-size: 20px;"> บันทึก </div>',
       cancelButtonColor: '#d33',
       width: 600,
     }
