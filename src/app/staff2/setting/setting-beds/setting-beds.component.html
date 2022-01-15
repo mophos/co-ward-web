@@ -7,7 +7,7 @@
   <clr-dg-column>ประเภทเตียง</clr-dg-column>
   <clr-dg-column >จำนวนเตียงทั้งหมดของโรงพยาบาล</clr-dg-column>
   <clr-dg-column >สำหรับผู้ป่วย Covid</clr-dg-column>
-  <clr-dg-column >สำรองเตียงรอรับย้าย</clr-dg-column>
+  <!-- <clr-dg-column >สำรองเตียงรอรับย้าย</clr-dg-column> -->
   <!-- <clr-dg-column>ใช้ไปแล้ว</clr-dg-column> -->
 
   <clr-dg-row *clrDgItems="let l of list; let idx=index;">
@@ -20,10 +20,10 @@
       <input class="clr-input width-fit" style="text-align: right;" type="text" appNumberOnly name="{{l.covid_qty}}"
         [(ngModel)]="l.covid_qty">
     </clr-dg-cell>
-    <clr-dg-cell>
+    <!-- <clr-dg-cell>
       <input class="clr-input width-fit" style="text-align: right;" type="text" appNumberOnly name="{{l.spare_qty}}"
         [(ngModel)]="l.spare_qty">
-    </clr-dg-cell>
+    </clr-dg-cell> -->
     <!-- <clr-dg-cell>
       <label for="" style="float: right;">{{l.use_covid_qty}}</label>
     </clr-dg-cell> -->
