@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertService } from 'src/app/help/alert.service';
 import { BedService } from '../bed.service';
 import { findIndex, find } from 'lodash';
@@ -8,7 +8,7 @@ import { findIndex, find } from 'lodash';
   styleUrls: ['./bed-hosp-manage.component.css']
 })
 export class BedHospManageComponent implements OnInit {
-  loading = false;
+  // loading = false;
   list: any;
   listBed: any = [];
   listUsage: any;
@@ -61,6 +61,8 @@ export class BedHospManageComponent implements OnInit {
   modal = false;
   listHospitel: any[];
   isSave: boolean;
+  @ViewChild('loading', { static: true }) loading: any;
+
   constructor(
     private bedService: BedService,
     private alertService: AlertService
@@ -152,11 +154,11 @@ export class BedHospManageComponent implements OnInit {
     this.modal = true;
     if (this.detail.hospital_type === 'HOSPITAL') {
       this.listBed = [
-        { bed_id: 1, name: 'AIIR', use_covid_qty: b1 ? b1.usage_qty : 0, qty: this.detail.aiir_qty, covid_qty: this.detail.aiir_covid_qty, spare_qty: this.detail.aiir_spare_qty },
-        { bed_id: 2, name: 'Modified AIIR', use_covid_qty: b2 ? b2.usage_qty : 0, qty: this.detail.modified_aiir_qty, covid_qty: this.detail.modified_aiir_covid_qty, spare_qty: this.detail.modified_aiir_spare_qty },
-        { bed_id: 3, name: 'Isolate', use_covid_qty: b3 ? b3.usage_qty : 0, qty: this.detail.isolate_qty, covid_qty: this.detail.isolate_covid_qty, spare_qty: this.detail.isolate_spare_qty },
-        { bed_id: 4, name: 'Cohort', use_covid_qty: b4 ? b4.usage_qty : 0, qty: this.detail.cohort_qty, covid_qty: this.detail.cohort_covid_qty, spare_qty: this.detail.cohort_spare_qty },
-        { bed_id: 7, name: 'Cohort ICU', use_covid_qty: b7 ? b7.usage_qty : 0, qty: this.detail.cohort_icu_qty, covid_qty: this.detail.cohort_icu_covid_qty, spare_qty: this.detail.cohort_icu_spare_qty },
+        // { bed_id: 1, name: 'AIIR', use_covid_qty: b1 ? b1.usage_qty : 0, qty: this.detail.aiir_qty, covid_qty: this.detail.aiir_covid_qty, spare_qty: this.detail.aiir_spare_qty },
+        // { bed_id: 2, name: 'Modified AIIR', use_covid_qty: b2 ? b2.usage_qty : 0, qty: this.detail.modified_aiir_qty, covid_qty: this.detail.modified_aiir_covid_qty, spare_qty: this.detail.modified_aiir_spare_qty },
+        // { bed_id: 3, name: 'Isolate', use_covid_qty: b3 ? b3.usage_qty : 0, qty: this.detail.isolate_qty, covid_qty: this.detail.isolate_covid_qty, spare_qty: this.detail.isolate_spare_qty },
+        // { bed_id: 4, name: 'Cohort', use_covid_qty: b4 ? b4.usage_qty : 0, qty: this.detail.cohort_qty, covid_qty: this.detail.cohort_covid_qty, spare_qty: this.detail.cohort_spare_qty },
+        // { bed_id: 7, name: 'Cohort ICU', use_covid_qty: b7 ? b7.usage_qty : 0, qty: this.detail.cohort_icu_qty, covid_qty: this.detail.cohort_icu_covid_qty, spare_qty: this.detail.cohort_icu_spare_qty },
         { bed_id: 8, name: 'Home Isolation', use_covid_qty: b8 ? b8.usage_qty : 0, qty: this.detail.home_isolation_qty, covid_qty: this.detail.home_isolation_covid_qty, spare_qty: this.detail.home_isolation_spare_qty },
         { bed_id: 9, name: 'Community Isolation', use_covid_qty: b9 ? b9.usage_qty : 0, qty: this.detail.community_isolation_qty, covid_qty: this.detail.community_isolation_covid_qty, spare_qty: this.detail.community_isolation_spare_qty },
         { bed_id: 10, name: 'ระดับ 0 Home Isolation (stepdown)', use_covid_qty: b10 ? b10.usage_qty : 0, qty: this.detail.lv0_qty, covid_qty: this.detail.lv0_covid_qty, spare_qty: this.detail.lv0_spare_qty },
