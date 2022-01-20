@@ -169,8 +169,8 @@ export class BedHospManageComponent implements OnInit {
       ];
     } else {
       this.listBed = [
-        { bed_id: 4, name: 'Cohort', use_covid_qty: b4 ? b4.usage_qty : 0, qty: this.detail.cohort_qty, covid_qty: this.detail.cohort_covid_qty, spare_qty: this.detail.cohort_spare_qty },
-        { bed_id: 5, name: 'Hospitel', use_covid_qty: b5 ? b5.usage_qty : 0, qty: this.detail.hospitel_qty, covid_qty: this.detail.hospitel_covid_qty, spare_qty: this.detail.hospitel_spare_qty },
+        // { bed_id: 4, name: 'Cohort', use_covid_qty: b4 ? b4.usage_qty : 0, qty: this.detail.cohort_qty, covid_qty: this.detail.cohort_covid_qty, spare_qty: this.detail.cohort_spare_qty },
+        // { bed_id: 5, name: 'Hospitel', use_covid_qty: b5 ? b5.usage_qty : 0, qty: this.detail.hospitel_qty, covid_qty: this.detail.hospitel_covid_qty, spare_qty: this.detail.hospitel_spare_qty },
         { bed_id: 8, name: 'Home Isolation', use_covid_qty: b8 ? b8.usage_qty : 0, qty: this.detail.home_isolation_qty, covid_qty: this.detail.home_isolation_covid_qty, spare_qty: this.detail.home_isolation_spare_qty },
         { bed_id: 9, name: 'Community Isolation', use_covid_qty: b9 ? b9.usage_qty : 0, qty: this.detail.community_isolation_qty, covid_qty: this.detail.community_isolation_covid_qty, spare_qty: this.detail.community_isolation_spare_qty },
         { bed_id: 10, name: 'ระดับ 0 Home Isolation (stepdown)', use_covid_qty: b10 ? b10.usage_qty : 0, qty: this.detail.lv0_qty, covid_qty: this.detail.lv0_covid_qty, spare_qty: this.detail.lv0_spare_qty },
