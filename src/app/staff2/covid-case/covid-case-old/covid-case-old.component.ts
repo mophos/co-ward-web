@@ -752,6 +752,15 @@ export class CovidCaseOldComponent implements OnInit {
               this.modalCID = false;
               this.data = rs.rows;
               this.setData();
+            } else if (rs.case === 'ADMIT') {
+              this.typeRegister = 'ADMIT';
+              // const confirm = await this.alertService.confirm(`คุณรับผู้ป่วย Refer มาจาก ${rs.rows.hospname} ใช่หรือไม่ ?`);
+              // if (confirm) {
+              // }
+              this.isKey = true;
+              this.modalCID = false;
+              this.data = rs.rows;
+              this.setData();
             }
           } else {
             this.alertService.error(rs.error);

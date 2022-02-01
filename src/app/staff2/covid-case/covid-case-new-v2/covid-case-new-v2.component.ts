@@ -20,7 +20,7 @@ export class CovidCaseNewV2Component implements OnInit {
   cidError = true;
   blankPassport = false;
   btn1: any;
-  @ViewChild('loading' ,{ static: true }) loading: any;
+  @ViewChild('loading', { static: true }) loading: any;
   constructor(
     private covidCaseService: CovidCaseService,
     private alertService: AlertService,
@@ -81,6 +81,8 @@ export class CovidCaseNewV2Component implements OnInit {
           if (confirm) {
             this.router.navigate(['/staff2/covid-case-new', { province: this.province, caseStatus: this.caseType, peopleType: this.peopleType, cid: this.cid, passport: this.passpost, typeRegister: this.typeRegister, covidCaseId: rs.rows.covid_case_id }]);
           }
+        } else if (rs.case === 'ADMIT') {
+          await this.alertService.error(`ผู้ป่วย ADMIT อยู่ ${rs.rows.hospname} ไม่สามารถบันทึกได้`);
         }
       } else {
         this.alertService.error(rs.error);
