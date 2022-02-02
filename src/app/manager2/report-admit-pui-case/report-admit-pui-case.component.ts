@@ -37,6 +37,8 @@ export class ReportAdmitPuiCaseComponent implements OnInit {
   d5 = 0;
   d7 = 0;
   d8 = 0;
+  pui = 0;
+  atk = 0;
   showPersons: any;
   rights: any;
   dataDate1: any;
@@ -97,7 +99,9 @@ export class ReportAdmitPuiCaseComponent implements OnInit {
       if (rs.ok) {
         this.summary = rs.rows;
         this.dataDate1 = rs.rows[0].timestamp;
-        this.total = sumBy(rs.rows, 'pui');
+        this.total = +sumBy(rs.rows, 'pui') + +sumBy(rs.rows, 'atk');
+        this.pui = sumBy(rs.rows, 'pui');
+        this.atk = sumBy(rs.rows, 'atk');
         this.severe = sumBy(rs.rows, 'severe');
         this.moderate = sumBy(rs.rows, 'moderate');
         this.mild = sumBy(rs.rows, 'mild');

@@ -1,5 +1,5 @@
 <nav class="breadcrumb">
-  <span class="breadcrumb-item active">รายงานผู้ป่วย ADMIT ทั้งหมด</span>
+  <span class="breadcrumb-item active">รายงานผู้ป่วย ADMIT PUI+ATK </span>
 </nav>
 <div class="clr-row">
   <div class="clr-col-6">
@@ -15,6 +15,8 @@
     <tr>
       <th class="text-left td-border">เขต</th>
       <th class="text-left td-border">รวม</th>
+      <th class="text-left td-border">pui</th>
+      <th class="text-left td-border">atk</th>
       <th class="text-left td-border">aiir</th>
       <th class="text-left td-border">modified aiir</th>
       <th class="text-left td-border">isolate</th>
@@ -37,7 +39,9 @@
   <tbody>
     <tr *ngFor="let l of summary; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
       <td class="text-left td-border">{{+l.zone_code}}</td>
+      <td class="text-right td-border">{{+l.pui++l.atk || 0}}</td>
       <td class="text-right td-border">{{l.pui || 0}}</td>
+      <td class="text-right td-border">{{l.atk || 0}}</td>
       <td class="text-right td-border"> {{l.aiir || 0}}</td>
       <td class="text-right td-border"> {{l.modified_aiir || 0}}</td>
       <td class="text-right td-border"> {{l.isolate || 0}}</td>
@@ -60,6 +64,8 @@
     <tr>
       <td class="text-left td-border">รวม</td>
       <td class="text-right td-border">{{total}}</td>
+      <td class="text-right td-border">{{pui}}</td>
+      <td class="text-right td-border">{{atk}}</td>
       <td class="text-right td-border"> {{aiir}}</td>
       <td class="text-right td-border"> {{modifiedAiir}}</td>
       <td class="text-right td-border"> {{isolate}}</td>
