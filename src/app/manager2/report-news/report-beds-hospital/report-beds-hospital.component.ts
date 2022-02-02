@@ -1,9 +1,11 @@
+import { BasicService } from './../../../staff/services/basic.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyOptions } from 'mydatepicker-th';
 import { BedsHospitalService } from '../../services-new-report/beds-hospital.service'
 import { CalculateService } from '../../services-new-report/calculate.service';
 import * as moment from 'moment';
 import { SelectProvincesComponent } from 'src/app/help/select-provinces/select-provinces.component';
+import { BasicAuthService } from 'src/app/staff2/services/basic-auth.service';
 @Component({
   selector: 'app-report-beds-hospital',
   templateUrl: './report-beds-hospital.component.html',
@@ -54,13 +56,32 @@ export class ReportBedsHospitalComponent implements OnInit {
 
   constructor(
     private bedsHospitalService: BedsHospitalService,
+    private basicService: BasicService,
     private cal: CalculateService
   ) { }
 
   ngOnInit() {
+    this.getProvince();
     this.loadData('province')
   }
 
+  async getProvince() {
+    try {
+      const rs: any = await this.basicService.getProvince();
+      if (rs.ok) {
+        const provinces = [];
+        for (const item of rs.rows) {
+          provinces.push({
+            code: item.code,
+            name: item.name_th
+          });
+        }
+        this.provinces = provinces;
+      }
+    } catch (error) {
+
+    }
+  }
   clearData() {
     this.items = []
     this.selectedProvince = []
@@ -146,20 +167,7 @@ export class ReportBedsHospitalComponent implements OnInit {
         //   })
         // })
 
-        // if (filter === 'province') {
-        //   const provinces = []
-        //   res.rows.forEach(row => {
-        //     row.forEach(item => {
-        //       if (!provinces.some(x => x.code === item.province_code)) {
-        //         provinces.push({
-        //           code: item.province_code,
-        //           name: item.province_name
-        //         })
-        //       }
-        //     })
-        //   })
-        //   this.provinces = provinces
-        // }
+
 
         // this.items = items
         this.isLoading = false

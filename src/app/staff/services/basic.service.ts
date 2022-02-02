@@ -13,6 +13,11 @@ export class BasicService {
     return await this.http.get(url).toPromise();
   }
 
+  async getProvince() {
+    const url = `${this.apiUrl}/v1/basic/province`;
+    return await this.http.get(url).toPromise();
+  }
+
   async getDate() {
     const url = `${this.apiUrl}/date`;
     return await this.http.get(url).toPromise();
