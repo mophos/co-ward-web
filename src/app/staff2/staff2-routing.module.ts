@@ -97,6 +97,7 @@ const routes: Routes = [
       { path: 'covid-case-approved-drugs', canActivate: [AuthApprovedDrugsService], component: ApproveDrugsComponent },
       { path: 'covid-case-approved-supplies', canActivate: [AuthApprovedSuppliesService], component: CovidCaseApprovedComponent },
       { path: 'province-set-sup-user', canActivate: [AuthProvinceSetSupUserService], component: ManageProvinceSetSupUserComponent },
+      { path: 'connect-his', canActivate: [AuthCovidCaseService], component: ConnectHisComponent },
       // ----------------------------------------------------------------------------------------------------------
       { path: 'covid-case-requisition', canActivate: [AuthCovidCaseRequisitionService], component: CovidCaseRequisitionComponent },
       { path: 'stock-products', canActivate: [AuthStockProductsService], component: InventoryStatusComponent },
@@ -155,7 +156,7 @@ const routes: Routes = [
       { path: 'report/10', component: Report10Component },
 
       //////////// new ////////////////
-      { path: 'connect-his', component: ConnectHisComponent },
+
       { path: 'report-patients-admit-confirm', component: ReportPatientsAdmitConfirmComponent },
       { path: 'report-patients-admit-pui', component: ReportPatientsAdmitPuiComponent },
       { path: 'report-bed2', component: ReportBed2Component }
