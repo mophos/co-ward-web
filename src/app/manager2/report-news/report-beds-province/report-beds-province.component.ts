@@ -58,7 +58,7 @@ export class ReportBedsProvinceComponent implements OnInit {
   header: any = [];
   subHeader: any = [];
   data: any = [];
-  footer:any = [];
+  footer: any = [];
   constructor(
     private bedsProvinceService: BedsProvinceService,
     public cal: CalculateService
@@ -105,6 +105,7 @@ export class ReportBedsProvinceComponent implements OnInit {
   async loadData(filter) {
     try {
       this.isLoading = true
+      this.loading = true
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
       // const res:any = await this.bedsProvinceService.getBedProvince({
       //   date,
@@ -192,7 +193,8 @@ export class ReportBedsProvinceComponent implements OnInit {
             this.items[12].push(item)
           }
         })
-        this.isLoading = false
+        this.isLoading = false;
+        this.loading = false;
 
         // if (filter === 'province') {
         //   const provinces = []
@@ -210,7 +212,9 @@ export class ReportBedsProvinceComponent implements OnInit {
         // }
       }
     } catch (error) {
-      console.error(error)
+      this.isLoading = false;
+      this.loading = false;
+      console.error(error);
     }
   }
 

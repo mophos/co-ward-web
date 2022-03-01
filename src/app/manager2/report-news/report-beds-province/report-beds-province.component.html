@@ -238,13 +238,13 @@
 </div>
 
 <div
-    *ngIf="isLoading && !cal.checkExistingZone(data)"
+    *ngIf="isLoading"
     style="display: flex; justify-content: center; padding: 24px;">
     กำลังโหลดข้อมูล ...
 </div>
 
 <div
-    *ngIf="!isLoading && !cal.checkExistingZone(data)"
+    *ngIf="!isLoading && !data.length"
     style="display: flex; justify-content: center; padding: 24px;">
     ไม่พบข้อมูล
 </div>
