@@ -92,8 +92,13 @@ export class ReportService {
     return await this.http.get(url).toPromise();
   }
 
-  async admitPuiCase() {
-    const url = `${this.apiUrl}/v1/report/admit-pui-case`;
+  async admitPuiCase(limit = 100, offset = 0) {
+    const url = `${this.apiUrl}/v1/report/admit-pui-case?limit=${limit}&offset=${offset}`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async admitPuiCaseTotal() {
+    const url = `${this.apiUrl}/v1/report/admit-pui-case/total`;
     return await this.http.get(url).toPromise();
   }
 

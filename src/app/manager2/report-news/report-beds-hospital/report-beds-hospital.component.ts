@@ -6,6 +6,7 @@ import { CalculateService } from '../../services-new-report/calculate.service';
 import * as moment from 'moment';
 import { SelectProvincesComponent } from 'src/app/help/select-provinces/select-provinces.component';
 import { BasicAuthService } from 'src/app/staff2/services/basic-auth.service';
+import * as _ from 'lodash';
 @Component({
   selector: 'app-report-beds-hospital',
   templateUrl: './report-beds-hospital.component.html',
@@ -46,6 +47,7 @@ export class ReportBedsHospitalComponent implements OnInit {
     { name: 'เขต 12', value: '12' },
     { name: 'เขต 13', value: '13' }
   ]
+  provinceAll: any = [];
   provinces: any = []
   selectedProvince: any = []
   headers: any = [];
@@ -73,10 +75,12 @@ export class ReportBedsHospitalComponent implements OnInit {
         for (const item of rs.rows) {
           provinces.push({
             code: item.code,
-            name: item.name_th
+            name: item.name_th,
+            zone_code: item.zone_code
           });
         }
         this.provinces = provinces;
+        this.provinceAll = provinces;
       }
     } catch (error) {
 
@@ -97,8 +101,14 @@ export class ReportBedsHospitalComponent implements OnInit {
   }
 
   async selectZone() {
-    this.clearData()
-    this.loadData('province')
+    if (this.zone === '') {
+      this.provinces = this.provinceAll;
+    } else {
+      this.provinces = _.filter(this.provinceAll, { zone_code: this.zone });
+    }
+    this.clearData();
+    this.loadData('province');
+
   }
 
   updateProvince(value) {
