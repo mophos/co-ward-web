@@ -60,12 +60,12 @@ export class ReportAdmitPuiCaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.getList();
+    this.getTotal();
     this.getSummary();
   }
 
   async refresh(state: ClrDatagridStateInterface) {
-    if (!isEmpty(state)) {
+    if (!isEmpty(state) && this.totalList) {
       this.loadings = true;
       this.limit = +state.page.size;
       this.offset = (state.page.current - 1) * this.limit;
@@ -75,12 +75,28 @@ export class ReportAdmitPuiCaseComponent implements OnInit {
     // const state.page.from, state.page.size
   }
 
+  async getTotal() {
+    try {
+      this.loading.show();
+      const rs: any = await this.reportService.admitPuiCaseTotal();
+      if (rs.ok) {
+        this.totalList = rs.rows;
+        await this.getList();
+      } else {
+        this.alertService.error(rs.error);
+      }
+      this.loading.hide();
+    } catch (error) {
+      this.loading.hide();
+      this.alertService.error(error);
+    }
+  }
+
   async getList() {
     try {
       this.loading.show();
-      const rs: any = await this.reportService.admitPuiCase();
+      const rs: any = await this.reportService.admitPuiCase(this.limit, this.offset);
       if (rs.ok) {
-        this.totalList = rs.total;
         this.list = rs.rows;
         this.dataDate2 = rs.rows[0].timestamp;
       } else {

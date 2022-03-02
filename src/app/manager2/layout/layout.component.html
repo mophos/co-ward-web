@@ -32,17 +32,17 @@
       <router-outlet></router-outlet>
     </div>
     <clr-vertical-nav [clrVerticalNavCollapsible]="collapsible" [(clrVerticalNavCollapsed)]="collapse">
-      <a *ngIf="reportBed" clrVerticalNavLink
+      <!-- <a *ngIf="reportBed" clrVerticalNavLink
       [routerLink]="['/manager2/report-bed-zone']" title="รายงานเตียงว่าง"
       routerLinkActive="active">
       <clr-icon shape="folder-open" class="is-solid"></clr-icon>
     รายงานเตียงว่าง
-    </a>
-      <a *ngIf="reportLabPositive" clrVerticalNavLink routerLink="/manager2/report-lab-positive" title="รายงานไม่มีชื่อ"
+    </a> -->
+      <!-- <a *ngIf="reportLabPositive" clrVerticalNavLink routerLink="/manager2/report-lab-positive" title="รายงานไม่มีชื่อ"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="folder-open" class="is-solid"></clr-icon>
         รายงานผู้ป่วยค้าง Admit
-      </a>
+      </a> -->
       <!-- <a *ngIf="reportLabPositive" clrVerticalNavLink routerLink="/manager2/report-lab-positive-colab" title="รายงานไม่มีชื่อ"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="folder-open" class="is-solid"></clr-icon>
@@ -103,11 +103,11 @@
         <clr-icon clrVerticalNavIcon shape="user" class="is-solid"></clr-icon>
         รายงานยอดผู้ป่วย(จังหวัด)
       </a> -->
-      <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager2/report-beds" title="รายงานเตียงผู้ป่วย"
+      <!-- <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager2/report-beds" title="รายงานเตียงผู้ป่วย"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="briefcase"></clr-icon>
         รายงานเตียงผู้ป่วย
-      </a>
+      </a> -->
       <a *ngIf="reportResource" clrVerticalNavLink routerLink="/manager2/report-professionals" title="รายงานบุคลากร"
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="employee-group"></clr-icon>
@@ -119,7 +119,7 @@
         ค้นหาผู้ป่วย
       </a>
 
-      <clr-vertical-nav-group routerLinkActive="active">
+      <!-- <clr-vertical-nav-group routerLinkActive="active">
         <a clrVerticalNavLink href="javascript://">
           <clr-icon shape="folder" class="is-solid" clrVerticalNavIcon></clr-icon>
           รายงานรวมประเทศ
@@ -176,7 +176,7 @@
             10. รายงานจำนวนบุคลากร (พยาบาล) นับจำนวนทั้งหมดไม่นับเป็นเวร
           </a>
         </clr-vertical-nav-group-children>
-      </clr-vertical-nav-group>
+      </clr-vertical-nav-group> -->
 
       <clr-vertical-nav-group routerLinkActive="active">
         <a clrVerticalNavLink href="javascript://">

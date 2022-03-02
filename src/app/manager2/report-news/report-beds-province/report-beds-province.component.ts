@@ -5,6 +5,7 @@ import { CalculateService } from '../../services-new-report/calculate.service';
 import * as moment from 'moment';
 import { SelectZonesComponent } from 'src/app/help/select-zones/select-zones.component';
 import { SelectProvincesComponent } from 'src/app/help/select-provinces/select-provinces.component';
+import { LoaddingComponent } from 'src/app/help/loadding/loadding.component';
 
 @Component({
   selector: 'app-report-beds-province',
@@ -52,7 +53,7 @@ export class ReportBedsProvinceComponent implements OnInit {
   // selectedProvince:any = []
   // selectedZone:any = []
 
-  @ViewChild('loading', { static: true }) loading: any
+  @ViewChild('loading', { static: true }) loading: LoaddingComponent;
   // @ViewChild('zone', { static: false }) zone: SelectZonesComponent
   // @ViewChild('province', { static: false }) province: SelectProvincesComponent
   header: any = [];
@@ -105,7 +106,7 @@ export class ReportBedsProvinceComponent implements OnInit {
   async loadData(filter) {
     try {
       this.isLoading = true
-      this.loading = true
+      this.loading.show();
       const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
       // const res:any = await this.bedsProvinceService.getBedProvince({
       //   date,
@@ -194,8 +195,7 @@ export class ReportBedsProvinceComponent implements OnInit {
           }
         })
         this.isLoading = false;
-        this.loading = false;
-
+        this.loading.hide();
         // if (filter === 'province') {
         //   const provinces = []
         //   res.rows.forEach(row => {
@@ -213,7 +213,7 @@ export class ReportBedsProvinceComponent implements OnInit {
       }
     } catch (error) {
       this.isLoading = false;
-      this.loading = false;
+      this.loading.hide();
       console.error(error);
     }
   }
@@ -237,8 +237,8 @@ export class ReportBedsProvinceComponent implements OnInit {
 
   async exportExcel() {
     try {
-      this.loading.show()
-      const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`
+      this.loading.show();
+      const date = `${this.date.date.year}-${this.date.date.month}-${this.date.date.day}`;
       // const res:any = await this.bedsProvinceService.exportExcelBedProvince({
       //   date,
       //   zone: this.selectedZone
@@ -248,8 +248,8 @@ export class ReportBedsProvinceComponent implements OnInit {
         zone: this.zone
       })
       if (res) {
-        this.downloadFile('รายงานเตียงรายจังหวัด', 'xlsx', res)
-        this.loading.hide()
+        this.downloadFile('รายงานเตียงรายจังหวัด', 'xlsx', res);
+        this.loading.hide();
       }
 
     } catch (error) {
