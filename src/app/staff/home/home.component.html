@@ -31,7 +31,7 @@
                 </div>
               </div>
             </div>
-           
+
             <div class="clr-col-6">
               <div class="card" style="box-shadow:none">
                 <div class="card-header" style="padding-bottom: 0;">
@@ -67,7 +67,7 @@
                     <table class="table" style="margin-top: 0.2rem;border: none;">
                       <tr>
                         <td *ngFor="let i of BedsSum">
-                          {{i.name}} 
+                          {{i.name}}
                           <br>
                           {{i.usage_qty || 0}}/{{i.covid_qty || 0}}
                         </td>
@@ -82,24 +82,33 @@
         </div>
       </div>
     </div>
-  <div class="card">
+    <div class="card">
 
-    <div class="card-block">
-      <div class="card-title">
-      </div>
-      <div class="card-text" style="text-align:center;">
-
-
+      <div class="card-block">
+        <div class="card-title">
+        </div>
+        <div class="card-text" style="text-align:center;">
 
 
-        <h2 *ngIf="alertBed && isHospital">โรงพยาบาลของคุณยังไม่ตั้งค่าเตียง!!!</h2>
-        <h3 *ngIf="alertBed && isHospital" (click)="goToBed()"><a>ไปที่เมนูตั้งค่าเตียงทันที</a> <br></h3>
-        <br>
-        <img src="https://sv1.picz.in.th/images/2021/12/22/6LQySt.png" style="width:100%" alt="">
-        <br>
-        <img src="https://sv1.picz.in.th/images/2021/12/22/6LQE8n.png" style="width:100%" alt="">
-        <!-- <img src="https://sv1.picz.in.th/images/2021/01/12/lc8nLg.jpg" style="width:70%" alt=""> -->
-        <!-- <h4>ระบบมีการปรับปรุงเมนู "บันทึกผู้ป่วยใหม่" เพื่อรองรับสถานการณ์ COVID-19 ในระยะที่ 2 ดังนี้</h4>
+
+
+          <h2 *ngIf="alertBed && isHospital">โรงพยาบาลของคุณยังไม่ตั้งค่าเตียง!!!</h2>
+          <h3 *ngIf="alertBed && isHospital" (click)="goToBed()"><a>ไปที่เมนูตั้งค่าเตียงทันที</a> <br></h3>
+          <br>
+          <div class="clr-row">
+            <div class="clr-col-12">
+              <img src="https://imgz.io/images/2022/03/04/2.png" style="width:100%" alt="">
+            </div>
+            <div class="clr-col-6">
+              <img src="https://sv1.picz.in.th/images/2021/12/22/6LQySt.png" style="width:100%" alt="">
+            </div>
+            <div class="clr-col-6">
+              <img src="https://sv1.picz.in.th/images/2021/12/22/6LQE8n.png" style="width:100%" alt="">
+            </div>
+          </div>
+
+          <!-- <img src="https://sv1.picz.in.th/images/2021/01/12/lc8nLg.jpg" style="width:70%" alt=""> -->
+          <!-- <h4>ระบบมีการปรับปรุงเมนู "บันทึกผู้ป่วยใหม่" เพื่อรองรับสถานการณ์ COVID-19 ในระยะที่ 2 ดังนี้</h4>
 
         <h4>การบันทึกผู้ป่วยใหม่ ก่อนเข้าสู่หน้าจอบันทึกข้อมูลผู้ป่วยจะมีการแบ่งผู้ป่วยออกเป็น 2 ประเภท คือ</h4>
         <h4>1.ผู้ป่วยอยู่ในประเทศ</h4>
@@ -114,30 +123,30 @@
           "ข้อมูลการกลับจากต่างประเทศ"
           <br>โดยเลือกว่า ซึ่งสามารถคีย์อาการของผู้ป่วย และคีย์ค้นหารหัส ICD10 ได้</h4> -->
 
-        <h2>ระบบจะประมวลผลทุก 23:00น กรุณาบันทึกก่อน 23.00น.</h2>
-        <h2 *ngIf="list.length > 0" style="color: red;">โรงพยาบาลของท่านมีผู้ป่วยที่ข้อมูลไม่ครบถ้วน
-          {{list.length || 0}}
-          ราย <a href="javascript://" routerLink="/staff/covid-case-update">คลิกเพื่อกรอกข้อมูล</a></h2>
-        <h3>คู่มือ </h3>
-        <a
-          href="https://drive.google.com/drive/folders/13C86_2bF7jYdkpx_u0r0mAgSfGX3Pak9?usp=sharing">https://drive.google.com/drive/folders/13C86_2bF7jYdkpx_u0r0mAgSfGX3Pak9?usp=sharing</a>
-        <h3>คำถามที่พบบ่อย </h3>
-        <a
-          href="https://ops.moph.go.th/public/uploads/files/pdf/Q-A_COward.pdf">https://ops.moph.go.th/public/uploads/files/pdf/Q-A_COward.pdf</a>
-        <br>
-        <br>
-        <br>
-        <br>
-        <img src="./assets/qrcode.jpg" alt="" width="10%;">
-        สแกน QRCODE สำหรับติดต่อสอบถามแจ้งปัญหา
-        <br>
-        <!-- <a href="https://line.me/ti/g2/Tu4N72FlOK24W6miKYwg5g?utm_source=invitation&utm_medium=link_copy&utm_campaign=default">
+          <h2>ระบบจะประมวลผลทุก 23:00น กรุณาบันทึกก่อน 23.00น.</h2>
+          <h2 *ngIf="list.length > 0" style="color: red;">โรงพยาบาลของท่านมีผู้ป่วยที่ข้อมูลไม่ครบถ้วน
+            {{list.length || 0}}
+            ราย <a href="javascript://" routerLink="/staff/covid-case-update">คลิกเพื่อกรอกข้อมูล</a></h2>
+          <h3>คู่มือ </h3>
+          <a
+            href="https://drive.google.com/drive/folders/13C86_2bF7jYdkpx_u0r0mAgSfGX3Pak9?usp=sharing">https://drive.google.com/drive/folders/13C86_2bF7jYdkpx_u0r0mAgSfGX3Pak9?usp=sharing</a>
+          <h3>คำถามที่พบบ่อย </h3>
+          <a
+            href="https://ops.moph.go.th/public/uploads/files/pdf/Q-A_COward.pdf">https://ops.moph.go.th/public/uploads/files/pdf/Q-A_COward.pdf</a>
+          <br>
+          <br>
+          <br>
+          <br>
+          <img src="./assets/qrcode.jpg" alt="" width="10%;">
+          สแกน QRCODE สำหรับติดต่อสอบถามแจ้งปัญหา
+          <br>
+          <!-- <a href="https://line.me/ti/g2/Tu4N72FlOK24W6miKYwg5g?utm_source=invitation&utm_medium=link_copy&utm_campaign=default">
                         https://line.me/ti/g2/Tu4N72FlOK24W6miKYwg5g?utm_source=invitation&utm_medium=link_copy&utm_campaign=default
                     </a> -->
-        <br>
-        <h3>*** กรุณาตั้งชื่อไลน์ Open chat ตามรูปแบบให้ถูกต้อง รหัสโรงพยาบาล-ชื่อ เช่น 41124-ป๊อด</h3>
-        <!-- <h2>ระบบจะเคลียข้อมูลที่ทดสอบทั้งหมดวันอาทิตย์ที่ 19 เมษายน 63 เวลา 23:59น.</h2> -->
-        <!-- 1.Severe คือ มีอาการรุนแรงที่ต้องช่วยการหายใจชั้นสูง (HFNC, NIV, invasive mechanical ventilation)
+          <br>
+          <h3>*** กรุณาตั้งชื่อไลน์ Open chat ตามรูปแบบให้ถูกต้อง รหัสโรงพยาบาล-ชื่อ เช่น 41124-ป๊อด</h3>
+          <!-- <h2>ระบบจะเคลียข้อมูลที่ทดสอบทั้งหมดวันอาทิตย์ที่ 19 เมษายน 63 เวลา 23:59น.</h2> -->
+          <!-- 1.Severe คือ มีอาการรุนแรงที่ต้องช่วยการหายใจชั้นสูง (HFNC, NIV, invasive mechanical ventilation)
                     หรือ ต้องได้รับ other organs support
                     <br>
                     2.Moderate คือ มีอาการรุนแรงปานกลาง มีปัจจัยเสี่ยงโรครุนแรง และ ลักษณะทางคลินิกรุนแรง
@@ -168,12 +177,12 @@
                     2.Non invasive ventilator คือ เครื่องช่วยหายใจปรับความดันโดยไม่ใส่ท่อช่วยหายใจ เช่น CPAP, BIPAP
                     <br>
                     3.High Flow คือเครื่องมือที่ให้ออกซิเจน อัตราไหลสูง -->
+        </div>
+      </div>
+      <div class="card-footer">
+        <!-- <button class="btn btn-sm btn-link">Footer Action 1</button>
+                <button class="btn btn-sm btn-link">Footer Action 2</button> -->
       </div>
     </div>
-    <div class="card-footer">
-      <!-- <button class="btn btn-sm btn-link">Footer Action 1</button>
-                <button class="btn btn-sm btn-link">Footer Action 2</button> -->
-    </div>
   </div>
-</div>
 </div>

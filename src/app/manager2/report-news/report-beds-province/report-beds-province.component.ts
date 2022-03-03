@@ -123,47 +123,48 @@ export class ReportBedsProvinceComponent implements OnInit {
         this.data = res.data;
         this.footer = res.footer;
         const items = [];
-
-        res.rows.forEach((row, i) => {
-          row.forEach((x, j) => {
-            if (!items.some(item => item.province_code === x.province_code)) {
-              items.push({
-                zone_code: x.zone_code,
-                province_code: x.province_code,
-                province_name: x.province_name,
-              })
-            }
-
-            const index = items.findIndex(item => item.province_code === x.province_code)
-            if (index > -1) {
-              if (x.bed_name === 'ระดับ3 ใส่ท่อและเครื่องช่วยหายใจ') {
-                items[index].level3_total = x.total
-                items[index].level3_used = x.used
-              } else if (x.bed_name === 'ระดับ 2.2 Oxygen high flow') {
-                items[index].level2_2_total = x.total
-                items[index].level2_2_used = x.used
-              } else if (x.bed_name === 'ระดับ 2.2 Oxygen high flow') {
-                items[index].level2_2_total = x.total
-                items[index].level2_2_used = x.used
-              } else if (x.bed_name === 'ระดับ 2.1 Oxygen high low') {
-                items[index].level2_1_total = x.total
-                items[index].level2_1_used = x.used
-              } else if (x.bed_name === 'ระดับ 1 ไม่ใช่ Oxygen') {
-                items[index].level1_total = x.total
-                items[index].level1_used = x.used
-              } else if (x.bed_name === 'ระดับ 0 Home Isolation (stepdown)') {
-                items[index].level0_total = x.total
-                items[index].level0_used = x.used
-              } else if (x.bed_name === 'Home Isolation') {
-                items[index].home_isolation_total = x.total
-                items[index].home_isolation_used = x.used
-              } else if (x.bed_name === 'Community Isolation') {
-                items[index].community_isolation_total = x.total
-                items[index].community_isolation_used = x.used
+        if (res.rows) {
+          res.rows.forEach((row, i) => {
+            row.forEach((x, j) => {
+              if (!items.some(item => item.province_code === x.province_code)) {
+                items.push({
+                  zone_code: x.zone_code,
+                  province_code: x.province_code,
+                  province_name: x.province_name,
+                });
               }
-            }
+
+              const index = items.findIndex(item => item.province_code === x.province_code)
+              if (index > -1) {
+                if (x.bed_name === 'ระดับ3 ใส่ท่อและเครื่องช่วยหายใจ') {
+                  items[index].level3_total = x.total
+                  items[index].level3_used = x.used
+                } else if (x.bed_name === 'ระดับ 2.2 Oxygen high flow') {
+                  items[index].level2_2_total = x.total
+                  items[index].level2_2_used = x.used
+                } else if (x.bed_name === 'ระดับ 2.2 Oxygen high flow') {
+                  items[index].level2_2_total = x.total
+                  items[index].level2_2_used = x.used
+                } else if (x.bed_name === 'ระดับ 2.1 Oxygen high low') {
+                  items[index].level2_1_total = x.total
+                  items[index].level2_1_used = x.used
+                } else if (x.bed_name === 'ระดับ 1 ไม่ใช่ Oxygen') {
+                  items[index].level1_total = x.total
+                  items[index].level1_used = x.used
+                } else if (x.bed_name === 'ระดับ 0 Home Isolation (stepdown)') {
+                  items[index].level0_total = x.total
+                  items[index].level0_used = x.used
+                } else if (x.bed_name === 'Home Isolation') {
+                  items[index].home_isolation_total = x.total
+                  items[index].home_isolation_used = x.used
+                } else if (x.bed_name === 'Community Isolation') {
+                  items[index].community_isolation_total = x.total
+                  items[index].community_isolation_used = x.used
+                }
+              }
+            })
           })
-        })
+        }
 
         items.forEach(item => {
           if (item.zone_code === '01') {
