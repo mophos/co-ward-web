@@ -12,12 +12,12 @@ import { IMyOptions } from 'mydatepicker-th';
 export class ReportPatientAdmitComponent implements OnInit {
 
 
-  list: any;
+  list: any = [];
   query: any = '';
   date: any;
   public jwtHelper = new JwtHelperService();
-  @ViewChild('loading' ,{ static: true }) loading: any;
-
+  @ViewChild('loading', { static: true }) loading: any;
+  isLoading = false;
   myDatePickerOptions: IMyOptions = {
     inline: false,
     dateFormat: 'dd mmm yyyy',
@@ -49,18 +49,29 @@ export class ReportPatientAdmitComponent implements OnInit {
 
   async getGcs() {
     this.loading.show();
+    this.isLoading = true;
     try {
-      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
-      const rs: any = await this.service.getPatients(date, null);
+      const date = this.date.date.year +
+        (this.date.date.month <= 9 ? '-0' + this.date.date.month : '-' + this.date.date.month) +
+        (this.date.date.day.length === 1 ? '-0' + this.date.date.day : '-' + this.date.date.day);
+      console.log(this.date.date.month);
+
+      console.log(date);
+
+      const rs: any = await this.service.reportPatientNewAdmit(date);
       if (rs.ok) {
-        this.list = rs.rows[0].provinces;
-        console.log(this.list);
+        if (rs.rows.length) {
+          this.list = rs.rows;
+        }
         this.loading.hide();
+        this.isLoading = false;
       } else {
         this.loading.hide();
+        this.isLoading = false;
         this.alertService.error();
       }
     } catch (error) {
+      this.isLoading = false;
       this.loading.hide();
       this.alertService.error(error);
     }
@@ -76,8 +87,11 @@ export class ReportPatientAdmitComponent implements OnInit {
   async doExportExcel() {
     this.loading.show();
     try {
-      const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
-      const rs: any = await this.service.getPatientExport(date);
+      const date = this.date.date.year +
+        (this.date.date.month.length === 1 ? '-0' + this.date.date.month : '-' + this.date.date.month) +
+        (this.date.date.day.length === 1 ? '-0' + this.date.date.day : '-' + this.date.date.day);
+
+      const rs: any = await this.service.getPatientExport(moment(date, 'YYYY-MM-DD').format('YYYY-MM-DD'));
       console.log(rs);
       if (!rs) {
         this.loading.hide();

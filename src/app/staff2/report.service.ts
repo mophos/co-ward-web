@@ -45,6 +45,10 @@ export class ReportService {
     const url = `${this.apiUrl}/v1/report/get-gcs?date=${date}&query=${query}`;
     return await this.http.get(url).toPromise();
   }
+  async reportPatientNewAdmit(date) {
+    const url = `${this.apiUrl}/v1/report/get-gcs/new-admit?date=${date}`;
+    return await this.http.get(url).toPromise();
+  }
 
   async getPatientExport(date) {
     const url = `${this.apiUrl}/v1/report/get-gcs/export?date=${date}`;
@@ -97,6 +101,11 @@ export class ReportService {
 
   async exportCheckAdmitConfirmCase() {
     const url = `${this.apiUrl}/v1/report/check-admit-confirm-case/export`;
+    return await this.http.get(url, { responseType: 'blob' }).toPromise();
+  }
+
+  async exportMedicalSupplies() {
+    const url = `${this.apiUrl}/v1/report/medical-supplies/excel`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
   async medicalSupplies() {

@@ -171,7 +171,7 @@
         </thead>
         <tr *ngFor="let l of list; let idx=index;" class="pointer" [ngClass]="{isWarning: idx % 2 === 0}" (click)="editBed(l);">
             <td class="left td-border">{{l.hospname}}</td>
-            <td class="left td-border">{{l.entry_date | dateTh:'DD/MM/YYYY'}}</td>
+            <td class="left td-border">{{l.date | dateTh:'DD/MM/YYYY'}}</td>
             <!-- <td class="right td-border">{{l.aiir_covid_qty || 0}}</td>
             <td class="right td-border">{{l.aiir_usage_qty || 0 }}</td>
             <td class="right td-border">{{l.aiir_covid_qty - l.aiir_usage_qty || 0}}</td>

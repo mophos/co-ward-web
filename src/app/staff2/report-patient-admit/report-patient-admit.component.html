@@ -56,7 +56,7 @@
 </div>
 
 
-<clr-datagrid *ngIf="providerType == 'ZONE'">
+<clr-datagrid *ngIf="providerType == 'ZONE'" [clrDgLoading]="isLoading" >
   <clr-dg-column>จังหวัด</clr-dg-column>
   <clr-dg-column>รวม</clr-dg-column>
   <clr-dg-column>Severe</clr-dg-column>
@@ -64,30 +64,36 @@
   <clr-dg-column>Mild</clr-dg-column>
   <clr-dg-column>Asymptomatic</clr-dg-column>
   <clr-dg-column>IP PUI</clr-dg-column>
+  <clr-dg-column>ATK</clr-dg-column>
   <clr-dg-row *ngFor="let p of list">
     <clr-dg-cell>{{p.province_name}}</clr-dg-cell>
-    <clr-dg-cell>{{p.count}}</clr-dg-cell>
+    <clr-dg-cell>{{p.total}}</clr-dg-cell>
     <clr-dg-cell>{{p.severe}}</clr-dg-cell>
     <clr-dg-cell>{{p.moderate}}</clr-dg-cell>
     <clr-dg-cell>{{p.mild}}</clr-dg-cell>
     <clr-dg-cell>{{p.asymptomatic}}</clr-dg-cell>
-    <clr-dg-cell>{{p.ip_pui}}</clr-dg-cell>
+    <clr-dg-cell>{{p.ippui}}</clr-dg-cell>
+    <clr-dg-cell>{{p.atk}}</clr-dg-cell>
 
     <clr-datagrid ngProjectAs="clr-dg-row-detail" *clrIfExpanded>
       <clr-dg-column>โรงพยาบาล</clr-dg-column>
+      <clr-dg-column>รวม</clr-dg-column>
       <clr-dg-column>Severe</clr-dg-column>
       <clr-dg-column>Moderate</clr-dg-column>
       <clr-dg-column>Mild</clr-dg-column>
       <clr-dg-column>Asymptomatic</clr-dg-column>
       <clr-dg-column>IP PUI</clr-dg-column>
+      <clr-dg-column>ATK</clr-dg-column>
 
       <clr-dg-row *ngFor="let h of p.hospitals">
         <clr-dg-cell>{{h.hospname}}</clr-dg-cell>
+        <clr-dg-cell>{{h.total}}</clr-dg-cell>
         <clr-dg-cell>{{h.severe}}</clr-dg-cell>
         <clr-dg-cell>{{h.moderate}}</clr-dg-cell>
         <clr-dg-cell>{{h.mild}}</clr-dg-cell>
         <clr-dg-cell>{{h.asymptomatic}}</clr-dg-cell>
-        <clr-dg-cell>{{h.ip_pui}}</clr-dg-cell>
+        <clr-dg-cell>{{h.ippui}}</clr-dg-cell>
+        <clr-dg-cell>{{h.atk}}</clr-dg-cell>
         <clr-datagrid ngProjectAs="clr-dg-row-detail" *clrIfExpanded>
           <clr-dg-column>HN</clr-dg-column>
           <clr-dg-column>AN</clr-dg-column>
@@ -105,7 +111,7 @@
             <!-- <clr-dg-cell>{{h.moderate}}</clr-dg-cell>
             <clr-dg-cell>{{h.mild}}</clr-dg-cell>
             <clr-dg-cell>{{h.asymptomatic}}</clr-dg-cell>
-            <clr-dg-cell>{{h.ip_pui}}</clr-dg-cell> -->
+            <clr-dg-cell>{{h.ippui}}</clr-dg-cell> -->
           </clr-dg-row>
         </clr-datagrid>
       </clr-dg-row>
@@ -114,20 +120,22 @@
 </clr-datagrid>
 
 
-<clr-datagrid *ngIf="providerType == 'SSJ'">
+<clr-datagrid *ngIf="providerType == 'SSJ' && list.length"  [clrDgLoading]="isLoading">
   <clr-dg-column>โรงพยาบาล</clr-dg-column>
   <clr-dg-column>Severe</clr-dg-column>
   <clr-dg-column>Moderate</clr-dg-column>
   <clr-dg-column>Mild</clr-dg-column>
   <clr-dg-column>Asymptomatic</clr-dg-column>
   <clr-dg-column>IP PUI</clr-dg-column>
+  <clr-dg-column>ATK</clr-dg-column>
   <clr-dg-row *ngFor="let h of list[0].hospitals">
     <clr-dg-cell>{{h.hospname}}</clr-dg-cell>
     <clr-dg-cell>{{h.severe}}</clr-dg-cell>
     <clr-dg-cell>{{h.moderate}}</clr-dg-cell>
     <clr-dg-cell>{{h.mild}}</clr-dg-cell>
     <clr-dg-cell>{{h.asymptomatic}}</clr-dg-cell>
-    <clr-dg-cell>{{h.ip_pui}}</clr-dg-cell>
+    <clr-dg-cell>{{h.ippui}}</clr-dg-cell>
+    <clr-dg-cell>{{h.atk}}</clr-dg-cell>
 
     <clr-datagrid ngProjectAs="clr-dg-row-detail" *clrIfExpanded>
       <clr-dg-column>HN</clr-dg-column>
