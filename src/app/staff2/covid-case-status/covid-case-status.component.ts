@@ -127,7 +127,7 @@ export class CovidCaseStatusComponent implements OnInit {
 
   async getList() {
     try {
-      // this.loading.show();
+      this.loading.show();
       const rs: any = await this.covidCaseService.getCovidCasePresent(this.query, this.gcsSearchId, this.bedSearchId);
       if (rs.ok) {
         for (const i of rs.rows) {
