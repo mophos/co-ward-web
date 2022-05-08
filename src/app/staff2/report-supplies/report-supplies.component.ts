@@ -41,13 +41,17 @@ export class ReportSuppliesComponent implements OnInit {
         day: moment().get('date')
       }
     };
-    const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
-    await this.getList(date);
+    // const date = this.date.date.year + '-' + this.date.date.month + '-' + this.date.date.day;
+    await this.getList();
   }
 
-  async getList(date) {
+  async getList() {
     this.loading.show();
     try {
+      const date = this.date.date.year +
+      (this.date.date.month <= 9 ? '-0' + this.date.date.month : '-' + this.date.date.month) +
+      (this.date.date.day <= 9 ? '-0' + this.date.date.day : '-' + this.date.date.day);
+
       const rs: any = await this.service.getSupplies(date, null);
       if (rs.ok) {
         this.list = rs.rows;
@@ -65,8 +69,8 @@ export class ReportSuppliesComponent implements OnInit {
 
   async onChangeDate(e) {
     if (e) {
-      const date = e.date.year + '-' + e.date.month + '-' + e.date.day;
-      await this.getList(date);
+      // const date = e.date.year + '-' + e.date.month + '-' + e.date.day;
+      await this.getList();
     }
   }
 
