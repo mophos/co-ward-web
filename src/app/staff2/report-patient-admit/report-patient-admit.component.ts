@@ -53,7 +53,7 @@ export class ReportPatientAdmitComponent implements OnInit {
     try {
       const date = this.date.date.year +
         (this.date.date.month <= 9 ? '-0' + this.date.date.month : '-' + this.date.date.month) +
-        (this.date.date.day.length === 1 ? '-0' + this.date.date.day : '-' + this.date.date.day);
+        (this.date.date.day <= 9 ? '-0' + this.date.date.day : '-' + this.date.date.day);
       console.log(this.date.date.month);
 
       console.log(date);
@@ -88,8 +88,8 @@ export class ReportPatientAdmitComponent implements OnInit {
     this.loading.show();
     try {
       const date = this.date.date.year +
-        (this.date.date.month.length === 1 ? '-0' + this.date.date.month : '-' + this.date.date.month) +
-        (this.date.date.day.length === 1 ? '-0' + this.date.date.day : '-' + this.date.date.day);
+        (this.date.date.month <= 9 ? '-0' + this.date.date.month : '-' + this.date.date.month) +
+        (this.date.date.day <= 9 ? '-0' + this.date.date.day : '-' + this.date.date.day);
 
       const rs: any = await this.service.getPatientExport(moment(date, 'YYYY-MM-DD').format('YYYY-MM-DD'));
       console.log(rs);

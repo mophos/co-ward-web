@@ -94,9 +94,13 @@ export class ReportAdmitConfirmCaseComponent implements OnInit {
       // this.loadings = true;
       const rs: any = await this.reportService.admitConfirmCase(this.limit, this.offset);
       if (rs.ok) {
-        this.totalList = rs.total;
-        this.list = rs.rows;
-        this.dataDate2 = rs.rows[0].timestamp;
+        if (rs.rows) {
+          this.totalList = rs.total;
+          this.list = rs.rows;
+          this.dataDate2 = rs.rows[0].timestamp;
+        } else {
+          this.alertService.error('ไม่พบข้อมูล หรือกำลังประมวลผล กรุณารีเฟรชใหม่')
+        }
       } else {
         this.alertService.error(rs.error);
       }
@@ -113,30 +117,33 @@ export class ReportAdmitConfirmCaseComponent implements OnInit {
     try {
       const rs: any = await this.reportService.admitConfirmCaseSummary();
       if (rs.ok) {
-        this.summary = rs.rows;
-        this.dataDate1 = rs.rows[0].timestamp;
-        this.total = sumBy(rs.rows, 'confirm');
-        this.severe = sumBy(rs.rows, 'severe');
-        this.moderate = sumBy(rs.rows, 'moderate');
-        this.mild = sumBy(rs.rows, 'mild');
-        this.asymptomatic = sumBy(rs.rows, 'asymptomatic');
-        this.aiir = sumBy(rs.rows, 'aiir');
-        this.modifiedAiir = sumBy(rs.rows, 'modified_aiir');
-        this.isolate = sumBy(rs.rows, 'isolate');
-        this.cohort = sumBy(rs.rows, 'cohort');
-        this.cohortIcu = sumBy(rs.rows, 'cohort_icu');
-        this.hospitel = sumBy(rs.rows, 'hospitel');
-        this.invasive = sumBy(rs.rows, 'invasive');
-        this.noninvasive = sumBy(rs.rows, 'noninvasive');
-        this.highFlow = sumBy(rs.rows, 'high_flow');
-        this.d1 = sumBy(rs.rows, 'd1');
-        this.d2 = sumBy(rs.rows, 'd2');
-        this.d3 = sumBy(rs.rows, 'd3');
-        this.d4 = sumBy(rs.rows, 'd4');
-        this.d5 = sumBy(rs.rows, 'd5');
-        this.d7 = sumBy(rs.rows, 'd7');
-        this.d8 = sumBy(rs.rows, 'd8');
-
+        if (rs.rows.length) {
+          this.summary = rs.rows;
+          this.dataDate1 = rs.rows[0].timestamp;
+          this.total = sumBy(rs.rows, 'confirm');
+          this.severe = sumBy(rs.rows, 'severe');
+          this.moderate = sumBy(rs.rows, 'moderate');
+          this.mild = sumBy(rs.rows, 'mild');
+          this.asymptomatic = sumBy(rs.rows, 'asymptomatic');
+          this.aiir = sumBy(rs.rows, 'aiir');
+          this.modifiedAiir = sumBy(rs.rows, 'modified_aiir');
+          this.isolate = sumBy(rs.rows, 'isolate');
+          this.cohort = sumBy(rs.rows, 'cohort');
+          this.cohortIcu = sumBy(rs.rows, 'cohort_icu');
+          this.hospitel = sumBy(rs.rows, 'hospitel');
+          this.invasive = sumBy(rs.rows, 'invasive');
+          this.noninvasive = sumBy(rs.rows, 'noninvasive');
+          this.highFlow = sumBy(rs.rows, 'high_flow');
+          this.d1 = sumBy(rs.rows, 'd1');
+          this.d2 = sumBy(rs.rows, 'd2');
+          this.d3 = sumBy(rs.rows, 'd3');
+          this.d4 = sumBy(rs.rows, 'd4');
+          this.d5 = sumBy(rs.rows, 'd5');
+          this.d7 = sumBy(rs.rows, 'd7');
+          this.d8 = sumBy(rs.rows, 'd8');
+        } else {
+          this.alertService.error('ไม่พบข้อมูล หรือกำลังประมวลผล กรุณารีเฟรชใหม่');
+        }
       } else {
         this.alertService.error(rs.error);
       }

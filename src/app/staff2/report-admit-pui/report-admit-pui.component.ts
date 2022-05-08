@@ -67,7 +67,9 @@ export class ReportAdmitPuiComponent implements OnInit {
       const rs: any = await this.reportService.admitPuiCase();
       if (rs.ok) {
         this.list = rs.rows;
-        this.dataDate2 = rs.rows[0].timestamp;
+        if (rs.rows.length) {
+          this.dataDate2 = rs.rows[0].timestamp;
+        }
       } else {
         this.alertService.error(rs.error);
       }
@@ -83,7 +85,9 @@ export class ReportAdmitPuiComponent implements OnInit {
       const rs: any = await this.reportService.admitPuiCaseSummary();
       if (rs.ok) {
         this.summary = rs.rows;
-        this.dataDate1 = rs.rows[0].timestamp;
+        if (rs.rows.length) {
+          this.dataDate1 = rs.rows[0].timestamp;
+        }
         this.total = sumBy(rs.rows, 'pui');
         this.severe = sumBy(rs.rows, 'severe');
         this.moderate = sumBy(rs.rows, 'moderate');
