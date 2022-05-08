@@ -101,6 +101,8 @@
           <td class="left">{{l.hn}}<br>
             <div>
               {{l.title_name}}{{l.first_name}} {{l.last_name}}
+              <br>
+              admit : {{l.date_admit | dateTh:'DD/MM/YYYY'}}
             </div>
             <div style="margin-top: 0.2rem;">
               อัพเดทล่าสุด
@@ -109,6 +111,11 @@
               <span>
                 : {{l.updated_date | dateTh:'DD/MM/YYYY hh:mm'}}
               </span>
+              <div style="margin-top: 0.2rem;">
+                <span style="float:left;font-size: 0.7rem;color: red;"> Admit มา  {{l.admit_day}} วัน</span>
+
+                
+              </div>
               <!-- <span *ngIf="!(l.updated_date)">
                 : {{l.create_date | dateTh:'DD/MM/YYYY hh:mm'}}
               </span> -->
