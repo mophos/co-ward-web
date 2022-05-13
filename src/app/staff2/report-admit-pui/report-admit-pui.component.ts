@@ -16,6 +16,8 @@ export class ReportAdmitPuiComponent implements OnInit {
   summary = [];
 
   total = 0;
+  pui = 0;
+  atk = 0;
   severe = 0;
   moderate = 0;
   mild = 0;
@@ -91,7 +93,9 @@ export class ReportAdmitPuiComponent implements OnInit {
         if (rs.rows.length) {
           this.dataDate1 = rs.rows[0].timestamp;
         }
-        this.total = sumBy(rs.rows, 'pui');
+        this.total = sumBy(rs.rows, 'pui') + sumBy(rs.rows, 'atk');
+        this.pui = sumBy(rs.rows, 'pui');
+        this.atk = sumBy(rs.rows, 'atk');
         this.severe = sumBy(rs.rows, 'severe');
         this.moderate = sumBy(rs.rows, 'moderate');
         this.mild = sumBy(rs.rows, 'mild');
