@@ -14,6 +14,8 @@
         <tr>
             <th class="text-left td-border">เขต</th>
             <th class="text-left td-border">รวม</th>
+            <th class="text-left td-border">pui</th>
+            <th class="text-left td-border">atk</th>
             <th class="text-left td-border">ระดับ 3 ใส่ท่อและเครื่องช่วยหายใจได้</th>
             <th class="text-left td-border">ระดับ 2.2 Oxygen high flow</th>
             <th class="text-left td-border">ระดับ 2.1 Oxygen low flow</th>
@@ -33,7 +35,9 @@
     <tbody>
         <tr *ngFor="let l of summary; let idx=index;" [ngClass]="{isWarning: idx % 2 === 0}">
             <td class="text-left td-border">{{+l.zone_code}}</td>
+            <td class="text-right td-border">{{+l.pui+ +l.atk || 0}}</td>
             <td class="text-right td-border">{{l.pui || 0}}</td>
+            <td class="text-right td-border">{{l.atk || 0}}</td>
             <td class="text-right td-border"> {{l.lv3 || 0}}</td>
             <td class="text-right td-border"> {{l.lv22 || 0}}</td>
             <td class="text-right td-border"> {{l.lv21 || 0}}</td>
@@ -80,9 +84,9 @@
                 <th class="text-left td-border" style="position: sticky; top: 0;">จังหวัด</th>
                 <th class="text-left td-border" style="position: sticky; top: 0;">โรงพยาบาล</th>
                 <th class="text-left td-border" style="position: sticky; top: 0;">HN/AN</th>
-                <th class="text-left td-border" style="position: sticky; top: 0;">CID</th>
-                <th class="text-left td-border" style="position: sticky; top: 0;">ชื่อ</th>
-                <th class="text-left td-border" style="position: sticky; top: 0;">นามสกุล</th>
+                <th class="text-left td-border" *ngIf='showPersons' style="position: sticky; top: 0;">CID</th>
+                <th class="text-left td-border" *ngIf='showPersons' style="position: sticky; top: 0;">ชื่อ</th>
+                <th class="text-left td-border" *ngIf='showPersons' style="position: sticky; top: 0;">นามสกุล</th>
                 <th class="text-left td-border" style="position: sticky; top: 0;">SAT ID</th>
                 <th class="text-left td-border" style="position: sticky; top: 0;">วันที่ ADMIT</th>
                 <th class="text-left td-border" style="position: sticky; top: 0;">ความรุนแรง</th>
@@ -101,9 +105,9 @@
                 <td class="text-left td-border">{{l.province_name}}</td>
                 <td class="text-left td-border">{{l.hospname}}</td>
                 <td class="text-left td-border"> {{l.hn}}/{{l.an}}</td>
-                <td class="text-left td-border"> {{l.cid}}</td>
-                <td class="text-left td-border"> {{l.first_name}}</td>
-                <td class="text-left td-border"> {{l.last_name}}</td>
+                <td class="text-left td-border" *ngIf='showPersons'> {{l.cid}}</td>
+                <td class="text-left td-border" *ngIf='showPersons'> {{l.first_name}}</td>
+                <td class="text-left td-border" *ngIf='showPersons'> {{l.last_name}}</td>
                 <td class="text-left td-border"> {{l.sat_id}}</td>
                 <td class="text-left td-border"> {{l.date_admit | dateTh:'DD/MM/YYYY'}}</td>
                 <td class="text-left td-border"> {{l.gcs_name}}</td>
