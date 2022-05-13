@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AlertService } from 'src/app/help/alert.service';
 import { ReportService } from '../report.service';
-import { findIndex } from 'lodash';
+import { findIndex, isEmpty } from 'lodash';
+import { ClrDatagridStateInterface } from '@clr/angular';
 @Component({
   selector: 'app-report-dc',
   templateUrl: './report-dc.component.html',
@@ -13,6 +14,9 @@ export class ReportDcComponent implements OnInit {
   isLoadding = false;
   query = '';
   showPersons = false;
+  offset = 0;
+  limit = 500;
+  total: any = 0;
   @ViewChild('loading', { static: true }) loading: any;
 
   public jwtHelper = new JwtHelperService();
@@ -29,20 +33,37 @@ export class ReportDcComponent implements OnInit {
   }
 
   async ngOnInit() {
-    await this.getList();
+    await this.getTotal();
+    // await this.getList();
 
   }
 
-  doEnter(e) {
+  async doEnter(e) {
     if (e.keyCode === 13) {
-      this.getList();
+      await this.getTotal();
     }
   }
-  async getList() {
 
+  async getTotal() {
     try {
       this.isLoadding = true;
-      const rs: any = await this.service.getCovidCaseDc(this.query);
+      const rs: any = await this.service.getCovidCaseDcTotal(this.query);
+      if (rs.ok) {
+        this.total = rs.count;
+      } else {
+        this.alertService.error(rs.error);
+      }
+      this.isLoadding = false;
+    } catch (error) {
+      this.isLoadding = false;
+      this.alertService.error(error);
+    }
+  }
+
+  async getList() {
+    try {
+      this.isLoadding = true;
+      const rs: any = await this.service.getCovidCaseDc(this.query, this.limit, this.offset);
       if (rs.ok) {
         this.list = rs.rows;
       } else {
@@ -91,5 +112,14 @@ export class ReportDcComponent implements OnInit {
       console.log(error);
       this.alertService.error();
     }
+  }
+
+  refresh(state: ClrDatagridStateInterface) {
+    console.log(state);
+    if (!isEmpty(state)) {
+      this.offset = +(state.page.current - 1) * +state.page.size;
+      this.limit = +state.page.size;
+    }
+    this.getList();
   }
 }
