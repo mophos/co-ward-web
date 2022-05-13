@@ -1,7 +1,7 @@
 import { AlertService } from '../../help/alert.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportService } from '../report.service';
-import { sumBy } from 'lodash';
+import { sumBy, findIndex } from 'lodash';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
@@ -48,13 +48,16 @@ export class ReportAdmitPuiComponent implements OnInit {
   rights: any;
   dataDate1: any;
   dataDate2: any;
+  showPersons: boolean;
   public jwtHelper = new JwtHelperService();
 
   @ViewChild('loading', { static: true }) loading: any;
   constructor(
     private reportService: ReportService,
     private alertService: AlertService
-  ) { }
+  ) {
+    this.showPersons = findIndex(this.rights, { name: 'MANAGER_REPORT_PERSON' }) === -1 ? false : true;
+  }
 
   ngOnInit() {
     this.getList();
