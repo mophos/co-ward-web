@@ -19,7 +19,7 @@
 </div>
 <div class="clr-row">
   <div class="clr-col-12">
-    <clr-datagrid [clrDgLoading]="isLoadding" [style.height.px]="800">
+    <clr-datagrid  (clrDgRefresh)="refresh($event)" [clrDgLoading]="isLoadding" [style.height.px]="800">
       <clr-dg-column>จังหวัด</clr-dg-column>
       <clr-dg-column>โรงพยาบาล</clr-dg-column>
       <clr-dg-column>HN</clr-dg-column>
@@ -34,8 +34,8 @@
       <clr-dg-column>Refer Hospital Name</clr-dg-column>
       <!-- <clr-dg-column></clr-dg-column> -->
 
-      <clr-dg-row *clrDgItems="let l of list;let idx=index;" [clrDgItem]="l">
-        <clr-dg-cell>{{l.hosp_province}}</clr-dg-cell>
+      <clr-dg-row *ngFor="let l of list;let idx=index;" [clrDgItem]="l">
+        <clr-dg-cell>{{l.province_name}}</clr-dg-cell>
         <clr-dg-cell>{{l.hospname}}</clr-dg-cell>
         <clr-dg-cell>{{l.hn}}</clr-dg-cell>
         <clr-dg-cell *ngIf="showPersons">{{l.an}}</clr-dg-cell>
@@ -46,7 +46,7 @@
         <clr-dg-cell>{{l.status }}</clr-dg-cell>
         <clr-dg-cell>{{l.date_admit | dateTh:'DD/MM/YYYY'}}</clr-dg-cell>
         <clr-dg-cell class="text-center">{{l.date_discharge | dateTh:'DD/MM/YYYY' }}</clr-dg-cell>
-        <clr-dg-cell class="text-center">{{l.refer_hospital_name }}</clr-dg-cell>
+        <clr-dg-cell class="text-center">{{l.refer_hospname }}</clr-dg-cell>
         <!-- <clr-dg-cell >
             <button class="btn btn-sm btn-success" style="margin:0" (click)="onClickEdit(l)">
               <clr-icon shape="search"></clr-icon> 
@@ -55,11 +55,17 @@
       </clr-dg-row>
 
       <clr-dg-placeholder>ไม่มีข้อมูล</clr-dg-placeholder>
-      <clr-dg-footer>
+      <!-- <clr-dg-footer>
         <clr-dg-pagination #pagination [clrDgPageSize]="50">
           <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">จำนวนรายการต่อหน้า</clr-dg-page-size>
           {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
           of {{pagination.totalItems}} รายการ
+        </clr-dg-pagination>
+      </clr-dg-footer> -->
+      <clr-dg-footer>
+        <clr-dg-pagination #pagination [clrDgTotalItems]="total" [clrDgPageSize]="limit">
+          <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100,500,1000]">จำนวนรายการต่อหน้า</clr-dg-page-size>
+          {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} จาก {{pagination.totalItems}} รายการ
         </clr-dg-pagination>
       </clr-dg-footer>
     </clr-datagrid>

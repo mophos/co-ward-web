@@ -51,9 +51,13 @@ export class ReportService {
   }
 
   async getPatientExport(date) {
-    const url = `${this.apiUrl}/v1/report/get-gcs/export?date=${date}`;
+    const url = `${this.apiUrl}/v1/report/get-gcs/new-admit/export?date=${date}`;
     return await this.http.get(url, { responseType: 'blob' }).toPromise();
   }
+  // async getPatientExport(date) {
+  //   const url = `${this.apiUrl}/v1/report/get-gcs/export?date=${date}`;
+  //   return await this.http.get(url, { responseType: 'blob' }).toPromise();
+  // }
 
   async getSupplies(date, query) {
     const url = `${this.apiUrl}/v1/report/get-supplies?date=${date}&query=${query}`;
@@ -113,8 +117,12 @@ export class ReportService {
     return await this.http.get(url).toPromise();
   }
 
-  async getCovidCaseDc(query = '') {
-    const url = `${this.apiUrl}/v1/staff/report/discharge-case?query=${query}`;
+  async getCovidCaseDc(query = '', limit = 500, offset = 0) {
+    const url = `${this.apiUrl}/v1/staff/report/discharge-case?query=${query}&limit=${limit}&offset=${offset}`;
+    return await this.http.get(url).toPromise();
+  }
+  async getCovidCaseDcTotal(query = '') {
+    const url = `${this.apiUrl}/v1/staff/report/discharge-case/total?query=${query}`;
     return await this.http.get(url).toPromise();
   }
 
