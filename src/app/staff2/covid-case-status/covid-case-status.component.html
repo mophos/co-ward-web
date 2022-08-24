@@ -57,7 +57,7 @@
         <input class="clr-input width-fit" (keyup)="doEnter($event)" name="query" [(ngModel)]="query"
           placeholder="ระบุ HN,ชื่อ,นามสกุล เพื่อค้นหา" />
       </div>
-     
+
       <div class="clr-col-2" style="text-align: right;">
         ความรุนแรง
         <div class="clr-select-wrapper" style="width: 60%;">
@@ -112,9 +112,9 @@
                 : {{l.updated_date | dateTh:'DD/MM/YYYY hh:mm'}}
               </span>
               <div style="margin-top: 0.2rem;">
-                <span style="float:left;font-size: 0.7rem;color: red;"> Admit มา  {{l.admit_day}} วัน</span>
+                <span style="float:left;font-size: 0.7rem;color: red;"> Admit มา {{l.admit_day}} วัน</span>
 
-                
+
               </div>
               <!-- <span *ngIf="!(l.updated_date)">
                 : {{l.create_date | dateTh:'DD/MM/YYYY hh:mm'}}
@@ -201,7 +201,7 @@
         <label>รักษาหาย/กลับบ้าน</label>
       </clr-radio-wrapper>
       <clr-radio-wrapper>
-      <!-- <clr-radio-wrapper *ngIf="selected.gcs_id == 5"> -->
+        <!-- <clr-radio-wrapper *ngIf="selected.gcs_id == 5"> -->
         <input type="radio" clrRadio value="NEGATIVE" name="modalDischargeType" [(ngModel)]="modalDischargeType" />
         <label>ตรวจไม่พบเชื้อ</label>
       </clr-radio-wrapper>
@@ -264,10 +264,9 @@
     </div>
     <div class="clr-form-control" *ngIf="modalDischargeType == 'DEATH'">
       <label for="basic" class="clr-control-label">วันเวลาที่เสียชีวิต</label>
-      <div class="clr-row" style="padding-bottom: 10rem;">
+      <div class="clr-row">
         <div class="clr-col-6">
-          <my-date-picker-th style="padding-bottom: 10rem;" name="dateDischarge" [options]="myDatePickerOptions"
-            [(ngModel)]="dateDischarge" required>
+          <my-date-picker-th name="dateDischarge" [options]="myDatePickerOptions" [(ngModel)]="dateDischarge" required>
           </my-date-picker-th>
         </div>
         <div class="clr-col-6">
@@ -283,6 +282,21 @@
             </option>
           </select>
           <span style="padding-left: 1em;"> น. </span>
+        </div>
+      </div>
+      <label for="basic" class="clr-control-label">สาเหตุการเสียชีวิต</label>
+      <div class="clr-row" style="padding-bottom: 10rem;">
+        <div class="clr-col-12">
+          <clr-radio-container clrInline>
+            <clr-radio-wrapper>
+              <input type="radio" clrRadio value="COVID" name="dischargeReason" [(ngModel)]="dischargeReason" />
+              <label>Covid</label>
+            </clr-radio-wrapper>
+            <clr-radio-wrapper>
+              <input type="radio" clrRadio value="NONCOVID" name="dischargeReason" [(ngModel)]="dischargeReason" />
+              <label>Non Covid</label>
+            </clr-radio-wrapper>
+          </clr-radio-container>
         </div>
       </div>
     </div>
