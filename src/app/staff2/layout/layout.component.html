@@ -12,7 +12,8 @@
     </div>
     <div class="header-nav">
       <!-- <a href="javascript://" class="nav-link nav-text" [routerLink]="['/staff/home']" routerLinkActive="router-link-active" >Staff Old</a> -->
-      <a href="javascript://" class="active nav-link nav-text" [routerLink]="['/staff2/home']" routerLinkActive="router-link-active" >Staff New</a>
+      <a href="javascript://" class="active nav-link nav-text" [routerLink]="['/staff2/home']"
+        routerLinkActive="router-link-active">Staff New</a>
     </div>
     <div class="header-actions">
       <clr-dropdown>
@@ -56,8 +57,8 @@
         <clr-icon clrVerticalNavIcon shape="helix"></clr-icon>
         ผู้ป่วยทั้งหมด
       </a>
-      <a *ngIf="covidCaseStatusMenu" clrVerticalNavLink routerLink="/staff2/covid-case-status" title="สถานะผู้ป่วยรายวัน"
-        routerLinkActive="active">
+      <a *ngIf="covidCaseStatusMenu" clrVerticalNavLink routerLink="/staff2/covid-case-status"
+        title="สถานะผู้ป่วยรายวัน" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="wand"></clr-icon>
         สถานะผู้ป่วยรายวัน
       </a>
@@ -112,8 +113,8 @@
         <clr-icon clrVerticalNavIcon shape="users"></clr-icon>
         จ่าย Surgical Mask ให้รพสต.
       </a>
-      <a *ngIf="checkManageBedHosp" clrVerticalNavLink routerLink="/staff2/bed-hosp-manage" title="จัดการเตียงให้โรงพยาบาล"
-        routerLinkActive="active">
+      <a *ngIf="checkManageBedHosp" clrVerticalNavLink routerLink="/staff2/bed-hosp-manage"
+        title="จัดการเตียงให้โรงพยาบาล" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="users"></clr-icon>
         จัดการเตียงให้โรงพยาบาล
       </a>
@@ -305,9 +306,7 @@
         รายงานเตียง (new)
       </a> -->
 
-      <div
-        *ngIf="providerType != 'HOSPITAL'"
-        clrVerticalNavLink routerLinkActive="active"
+      <div *ngIf="providerType != 'HOSPITAL'" clrVerticalNavLink routerLinkActive="active"
         style="background-color: rgba(165, 165, 165,0.2);"></div>
 
       <clr-vertical-nav-group routerLinkActive="active">

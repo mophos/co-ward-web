@@ -22,6 +22,9 @@ export class HomeComponent implements OnInit {
   date: any;
   public jwtHelper = new JwtHelperService();
   isHospital = true;
+  deathCovid: any;
+  deathNonCovid: any;
+  risk: any;
   constructor(
     private alertService: AlertService,
     private basicService: BasicService,
@@ -42,6 +45,8 @@ export class HomeComponent implements OnInit {
     this.getGCSSum();
     this.getBedSum();
     this.getMedicalSuppliesSum();
+    this.getDeath();
+    this.getRisk();
   }
   goToBed() {
     this.router.navigate(['/staff/setting/beds']);
@@ -115,6 +120,35 @@ export class HomeComponent implements OnInit {
       const rs: any = await this.covidCaseService.getVentilators();
       if (rs.ok) {
         this.medicalSuppliesSum = rs.rows;
+      } else {
+        this.alertService.serverError();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.serverError();
+    }
+  }
+
+  async getDeath() {
+    try {
+      const rs: any = await this.covidCaseService.getDeath();
+      if (rs.ok) {
+        this.deathCovid = rs.rows.covid;
+        this.deathNonCovid = rs.rows.nonCovid;
+      } else {
+        this.alertService.serverError();
+      }
+    } catch (error) {
+      console.log(error);
+      this.alertService.serverError();
+    }
+  }
+
+  async getRisk() {
+    try {
+      const rs: any = await this.covidCaseService.getRisk();
+      if (rs.ok) {
+        this.risk = rs.rows.risk
       } else {
         this.alertService.serverError();
       }
