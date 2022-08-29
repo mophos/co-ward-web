@@ -174,4 +174,14 @@ export class CovidCaseService {
     const url = `${this.apiUrl}/v1/staff/covid-case/update/all-case?gcsSearchId=${gcsSearchId}&bedSearchId=${bedSearchId}`;
     return await this.http.get(url).toPromise();
   }
+
+  async getDeath() {
+    const url = `${this.apiUrl}/v1/staff/covid-case/death`;
+    return await this.http.get(url).toPromise();
+  }
+
+  async getRisk() {
+    const url = `${this.apiUrl}/v1/staff/covid-case/risk`;
+    return await this.http.get(url).toPromise();
+  }
 }

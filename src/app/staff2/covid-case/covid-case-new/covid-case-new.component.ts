@@ -48,6 +48,7 @@ export class CovidCaseNewComponent implements OnInit {
   provinceType: any;
   caseStatus: any;
   icdCodes: any = [];
+  risk: any = 'N'
 
   admitDate: any;
   diffDate: any;
@@ -544,9 +545,11 @@ export class CovidCaseNewComponent implements OnInit {
               icdCode: this.icdCode,
               icdName: this.icdName,
               caseStatus: this.caseStatus,
-              icdCodes: this.icdCodes
+              icdCodes: this.icdCodes,
+              Isrisk: this.risk
               // drugs
             };
+
 
             if (this.confirmDate) {
               obj.confirmDate = `${this.confirmDate.date.year}-${this.confirmDate.date.month}-${this.confirmDate.date.day}`;
