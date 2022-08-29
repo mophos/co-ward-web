@@ -63,6 +63,7 @@ export class CovidCaseStatusComponent implements OnInit {
   modalDischarge = false;
   modalDeath = false;
   modalDischargeType = 'HOME';
+  dischargeReason = 'COVID';
   drugs: any = [];
   s1 = [{ generic: 1, name: 'Hydroxychloroquine 200 mg.' }, { generic: 2, name: 'Chloroquine 250 mg.' }];
   s2 = [{ generic: 3, name: 'Darunavir 600mg+Ritonavir100 mg.' }, { generic: 4, name: 'Lopinavir 200 mg/Ritonavir 50 mg.' }];
@@ -461,6 +462,7 @@ export class CovidCaseStatusComponent implements OnInit {
           obj.dateDischarge = this.dateDischarge.date.year + '-' + this.dateDischarge.date.month + '-' + this.dateDischarge.date.day + ' ' + this.hour + ':' + this.minute + ':00';
           obj.covidCaseId = this.selected.covid_case_id;
           obj.status = status;
+          obj.dischargeReason = this.dischargeReason;
 
           const rs: any = await this.covidCaseService.updateDischarge(obj, this.selected);
           if (rs.ok) {
@@ -494,11 +496,11 @@ export class CovidCaseStatusComponent implements OnInit {
   checkDrug(id, i) {
     console.log(id, i.id);
     console.log(this.list);
-    
-    const idx = findIndex(this.list, { covid_case_id:id });
+
+    const idx = findIndex(this.list, { covid_case_id: id });
     if (idx > -1) {
       console.log(this.list[idx].drugs);
-      
+
       const idxD = findIndex(this.list[idx].drugs, { id: +i.id });
       if (idxD > -1) {
         console.log('this.list[idx].drugs[idxD].is_check', this.list[idx].drugs[idxD].is_check);
