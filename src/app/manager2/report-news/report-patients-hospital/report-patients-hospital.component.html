@@ -65,7 +65,9 @@
             <th class="td-border"> Invasive Ventilator </th>
             <th class="td-border"> Non-Invasive Ventilator  </th>
             <th class="td-border"> High flow </th>
-            <th class="td-border"> Dead </th>
+            <th class="td-border"> Dead Covid</th>
+            <th class="td-border"> Dead PUI</th>
+            <th class="td-border"> Dead ATK</th>
             <th class="td-border"> PUI </th>
             <th class="td-border"> ATK </th>
             <th> หน่วยงาน </th>
@@ -86,6 +88,8 @@
                 <td class="td-border"> {{ cal.checkValue(item.non_invasive_ventilator) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.high_flow) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.death) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.death_pui) }} </td>
+                <td class="td-border"> {{ cal.checkValue(item.death_atk) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.pui) }} </td>
                 <td class="td-border"> {{ cal.checkValue(item.atk) }} </td>
                 <td>

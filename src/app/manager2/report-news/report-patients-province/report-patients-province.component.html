@@ -66,7 +66,9 @@
             <th class="td-border"> Invasive Ventilator </th>
             <th class="td-border"> Non-Invasive Ventilator  </th>
             <th class="td-border"> High flow </th>
-            <th class="td-border"> Dead </th>
+            <th class="td-border"> Dead Case</th>
+            <th class="td-border"> Dead PUI</th>
+            <th class="td-border"> Dead ATK</th>
             <th class="td-border"> PUI </th>
             <th> ATK </th>
         </tr>
@@ -86,6 +88,8 @@
                     <td class="td-border"> {{ cal.checkValue(item.non_invasive_ventilator) }} </td>
                     <td class="td-border"> {{ cal.checkValue(item.high_flow) }} </td>
                     <td class="td-border"> {{ cal.checkValue(item.death) }} </td>
+                    <td class="td-border"> {{ cal.checkValue(item.death_pui) }} </td>
+                    <td class="td-border"> {{ cal.checkValue(item.death_atk) }} </td>
                     <td class="td-border"> {{ cal.checkValue(item.pui) }} </td>
                     <td> {{ cal.checkValue(item.atk) }} </td>
                 </tr>
@@ -101,6 +105,8 @@
                 <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'non_invasive_ventilator')) }} </td>
                 <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'high_flow')) }} </td>
                 <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'death')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'death_pui')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'death_atk')) }} </td>
                 <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'pui')) }} </td>
                 <td> {{ cal.checkValue(cal.sumZone(items[i], 'atk')) }} </td>
             </tr>
@@ -118,6 +124,8 @@
             <td class="td-border"> {{ cal.checkValue(items[12][0].non_invasive_ventilator) }} </td>
             <td class="td-border"> {{ cal.checkValue(items[12][0].high_flow) }} </td>
             <td class="td-border"> {{ cal.checkValue(items[12][0].death) }} </td>
+            <td class="td-border"> {{ cal.checkValue(items[12][0].death_pui) }} </td>
+            <td class="td-border"> {{ cal.checkValue(items[12][0].death_atk) }} </td>
             <td class="td-border"> {{ cal.checkValue(items[12][0].pui) }} </td>
             <td> {{ cal.checkValue(items[12][0].atk) }} </td>
         </tr>
@@ -132,6 +140,8 @@
             <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'non_invasive_ventilator')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'high_flow')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'death')) }} </td>
+            <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'death_pui')) }} </td>
+            <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'death_atk')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'pui')) }} </td>
             <td> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'atk')) }} </td>
         </tr>
@@ -146,6 +156,8 @@
             <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'non_invasive_ventilator')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'high_flow')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'death')) }} </td>
+            <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'death_pui')) }} </td>
+            <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'death_atk')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'pui')) }} </td>
             <td> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'atk')) }} </td>
         </tr>
