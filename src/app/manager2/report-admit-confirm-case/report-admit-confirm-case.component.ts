@@ -38,6 +38,10 @@ export class ReportAdmitConfirmCaseComponent implements OnInit {
   d5 = 0;
   d7 = 0;
   d8 = 0;
+  d27 = 0;
+  d28 = 0;
+  d29 = 0;
+  isrisk = 0;
   showPersons: any;
   rights: any;
   dataDate1: any;
@@ -99,7 +103,7 @@ export class ReportAdmitConfirmCaseComponent implements OnInit {
           this.list = rs.rows;
           this.dataDate2 = rs.rows[0].timestamp;
         } else {
-          this.alertService.error('ไม่พบข้อมูล หรือกำลังประมวลผล กรุณารีเฟรชใหม่')
+          this.alertService.error('ไม่พบข้อมูล หรือกำลังประมวลผล กรุณารีเฟรชใหม่');
         }
       } else {
         this.alertService.error(rs.error);
@@ -141,6 +145,10 @@ export class ReportAdmitConfirmCaseComponent implements OnInit {
           this.d5 = sumBy(rs.rows, 'd5');
           this.d7 = sumBy(rs.rows, 'd7');
           this.d8 = sumBy(rs.rows, 'd8');
+          this.d27 = sumBy(rs.rows, 'd27');
+          this.d28 = sumBy(rs.rows, 'd28');
+          this.d29 = sumBy(rs.rows, 'd29');
+          this.isrisk = sumBy(rs.rows, 'is_risk');
         } else {
           this.alertService.error('ไม่พบข้อมูล หรือกำลังประมวลผล กรุณารีเฟรชใหม่');
         }

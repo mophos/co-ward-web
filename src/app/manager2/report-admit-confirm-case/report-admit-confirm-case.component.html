@@ -35,7 +35,10 @@
       <th class="text-left td-border">Ritonavir 100 mg.</th>
       <th class="text-left td-border">Azithromycin 250 mg.</th>
       <th class="text-left td-border">Favipiravi</th>
-
+      <th class="text-left td-border">Molnupiravir</th>
+      <th class="text-left td-border">Remdesivir</th>
+      <th class="text-left td-border">Paxlovid</th>
+      <th class="text-left td-border">ผู้ป่วยปัจจัยเสี่ยง(608)</th>
     </tr>
   </thead>
   <tbody>
@@ -60,6 +63,10 @@
       <td class="text-right td-border">{{l.d5 || 0}}</td>
       <td class="text-right td-border">{{l.d7 || 0}}</td>
       <td class="text-right td-border">{{l.d8 || 0}}</td>
+      <td class="text-right td-border">{{l.d27 || 0}}</td>
+      <td class="text-right td-border">{{l.d28 || 0}}</td>
+      <td class="text-right td-border">{{l.d29 || 0}}</td>
+      <td class="text-right td-border">{{l.is_risk || 0}}</td>
     </tr>
   </tbody>
   <tfoot>
@@ -86,7 +93,10 @@
       <td class="text-right td-border">{{d5}}</td>
       <td class="text-right td-border">{{d7}}</td>
       <td class="text-right td-border">{{d8}}</td>
-
+      <td class="text-right td-border">{{d27}}</td>
+      <td class="text-right td-border">{{d28}}</td>
+      <td class="text-right td-border">{{d29}}</td>
+      <td class="text-right td-border">{{isrisk}}</td>
     </tr>
   </tfoot>
 </table>
@@ -138,6 +148,21 @@
         Favipiravi
       </ng-container>
     </clr-dg-column>
+    <clr-dg-column>
+      <ng-container *clrDgHideableColumn="{hidden: true}">
+        Molnupiravir
+      </ng-container>
+    </clr-dg-column>
+    <clr-dg-column>
+      <ng-container *clrDgHideableColumn="{hidden: true}">
+        Remdesivir
+      </ng-container>
+    </clr-dg-column>
+    <clr-dg-column>
+      <ng-container *clrDgHideableColumn="{hidden: true}">
+        Paxlovid
+      </ng-container>
+    </clr-dg-column>
 
     <clr-dg-row *ngFor="let l of list; let idx=index" [ngClass]="{isWarning: idx % 2 === 0}">
       <!-- <clr-dg-cell></clr-dg-cell> -->
@@ -174,6 +199,18 @@
       <clr-dg-cell>
         <clr-icon shape="times" class="is-error" *ngIf='!l.d8 || l.d8 == 0'></clr-icon>
         <clr-icon shape="check" class="is-success" *ngIf='l.d8 > 0'></clr-icon>
+      </clr-dg-cell>
+      <clr-dg-cell>
+        <clr-icon shape="times" class="is-error" *ngIf='!l.d27 || l.d27 == 0'></clr-icon>
+        <clr-icon shape="check" class="is-success" *ngIf='l.d27 > 0'></clr-icon>
+      </clr-dg-cell>
+      <clr-dg-cell>
+        <clr-icon shape="times" class="is-error" *ngIf='!l.d28 || l.d28 == 0'></clr-icon>
+        <clr-icon shape="check" class="is-success" *ngIf='l.d28 > 0'></clr-icon>
+      </clr-dg-cell>
+      <clr-dg-cell>
+        <clr-icon shape="times" class="is-error" *ngIf='!l.d29 || l.d29 == 0'></clr-icon>
+        <clr-icon shape="check" class="is-success" *ngIf='l.d29 > 0'></clr-icon>
       </clr-dg-cell>
 
     </clr-dg-row>
