@@ -69,12 +69,14 @@ export class ReportAdmitConfirmCaseComponent implements OnInit {
       this.loading.show();
       const rs: any = await this.reportService.admitConfirmCase();
       if (rs.ok) {
-        this.dataDate2 = rs.rows[0].timestamp;
-        for (const v of rs.rows) {
-          v.birth_date = moment(v.birth_date);
-          v.old = moment().diff(v.birth_date, 'year');
+        if (rs.rows.length > 0) {
+          this.dataDate2 = rs.rows[0].timestamp;
+          for (const v of rs.rows) {
+            v.birth_date = moment(v.birth_date);
+            v.old = moment().diff(v.birth_date, 'year');
+          }
+          this.list = rs.rows;
         }
-        this.list = rs.rows;
       } else {
         this.alertService.error(rs.error);
       }
@@ -90,38 +92,40 @@ export class ReportAdmitConfirmCaseComponent implements OnInit {
       this.loading.show();
       const rs: any = await this.reportService.admitConfirmCaseSummary();
       if (rs.ok) {
-        this.summary = rs.rows;
-        this.dataDate1 = rs.rows[0].timestamp;
-        this.total = sumBy(rs.rows, 'confirm');
-        this.severe = sumBy(rs.rows, 'severe');
-        this.moderate = sumBy(rs.rows, 'moderate');
-        this.mild = sumBy(rs.rows, 'mild');
-        this.asymptomatic = sumBy(rs.rows, 'asymptomatic');
-        this.aiir = sumBy(rs.rows, 'aiir');
-        this.modifiedAiir = sumBy(rs.rows, 'modified_aiir');
-        this.isolate = sumBy(rs.rows, 'isolate');
-        this.cohort = sumBy(rs.rows, 'cohort');
-        this.hospitel = sumBy(rs.rows, 'hospitel');
-        this.invasive = sumBy(rs.rows, 'invasive');
-        this.noninvasive = sumBy(rs.rows, 'noninvasive');
-        this.highFlow = sumBy(rs.rows, 'high_flow');
+        if (rs.rows.length > 0) {
+          this.dataDate1 = rs.rows[0].timestamp;
+          this.summary = rs.rows;
+          this.total = sumBy(rs.rows, 'confirm');
+          this.severe = sumBy(rs.rows, 'severe');
+          this.moderate = sumBy(rs.rows, 'moderate');
+          this.mild = sumBy(rs.rows, 'mild');
+          this.asymptomatic = sumBy(rs.rows, 'asymptomatic');
+          this.aiir = sumBy(rs.rows, 'aiir');
+          this.modifiedAiir = sumBy(rs.rows, 'modified_aiir');
+          this.isolate = sumBy(rs.rows, 'isolate');
+          this.cohort = sumBy(rs.rows, 'cohort');
+          this.hospitel = sumBy(rs.rows, 'hospitel');
+          this.invasive = sumBy(rs.rows, 'invasive');
+          this.noninvasive = sumBy(rs.rows, 'noninvasive');
+          this.highFlow = sumBy(rs.rows, 'high_flow');
 
-        this.lv3 = sumBy(rs.rows, 'lv3');
-        this.lv22 = sumBy(rs.rows, 'lv22');
-        this.lv21 = sumBy(rs.rows, 'lv21');
-        this.lv1 = sumBy(rs.rows, 'lv1');
-        this.lv0 = sumBy(rs.rows, 'lv0');
-        this.communityIsolation = sumBy(rs.rows, 'community_isolation');
-        this.homeIsolation = sumBy(rs.rows, 'home_isolation');
-        this.d1 = sumBy(rs.rows, 'd1');
-        this.d2 = sumBy(rs.rows, 'd2');
-        this.d3 = sumBy(rs.rows, 'd3');
-        this.d4 = sumBy(rs.rows, 'd4');
-        this.d5 = sumBy(rs.rows, 'd5');
-        this.d7 = sumBy(rs.rows, 'd7');
-        this.d8 = sumBy(rs.rows, 'd8');
-        this.d26 = sumBy(rs.rows, 'd26');
-        this.d27 = sumBy(rs.rows, 'd27');
+          this.lv3 = sumBy(rs.rows, 'lv3');
+          this.lv22 = sumBy(rs.rows, 'lv22');
+          this.lv21 = sumBy(rs.rows, 'lv21');
+          this.lv1 = sumBy(rs.rows, 'lv1');
+          this.lv0 = sumBy(rs.rows, 'lv0');
+          this.communityIsolation = sumBy(rs.rows, 'community_isolation');
+          this.homeIsolation = sumBy(rs.rows, 'home_isolation');
+          this.d1 = sumBy(rs.rows, 'd1');
+          this.d2 = sumBy(rs.rows, 'd2');
+          this.d3 = sumBy(rs.rows, 'd3');
+          this.d4 = sumBy(rs.rows, 'd4');
+          this.d5 = sumBy(rs.rows, 'd5');
+          this.d7 = sumBy(rs.rows, 'd7');
+          this.d8 = sumBy(rs.rows, 'd8');
+          this.d26 = sumBy(rs.rows, 'd26');
+          this.d27 = sumBy(rs.rows, 'd27');
+        }
       } else {
         this.alertService.error(rs.error);
       }
