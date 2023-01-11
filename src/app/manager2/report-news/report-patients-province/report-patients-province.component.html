@@ -1,6 +1,4 @@
-<nav
-    style="margin-bottom: 16px;"
-    class="breadcrumb">
+<nav style="margin-bottom: 16px;" class="breadcrumb">
     <span class="breadcrumb-item active">
         รายงานผู้ป่วยรายจังหวัด
     </span>
@@ -10,10 +8,7 @@
     <div style="display: flex;">
         <div style="width: 200px; margin-right: 24px;">
             <label> วันที่แสดงข้อมูล </label>
-            <my-date-picker-th
-                [(ngModel)]="date"
-                [options]="myDatePickerOptions"
-                name="datePatientsZone"
+            <my-date-picker-th [(ngModel)]="date" [options]="myDatePickerOptions" name="datePatientsZone"
                 (dateChanged)="selectDate($event)">
             </my-date-picker-th>
         </div>
@@ -24,11 +19,7 @@
                 (onselect)="updateZone($event)">
             </app-select-zones> -->
             <div class="clr-select-wrapper" style="width: 100%;">
-                <select
-                    [(ngModel)]="zone"
-                    name="zonePatientsProvince"
-                    style="width: 100%;"
-                    class="clr-select"
+                <select [(ngModel)]="zone" name="zonePatientsProvince" style="width: 100%;" class="clr-select"
                     (change)="selectZone()">
                     <option value=""> ทุกเขต </option>
                     <option *ngFor="let zone of zones let i = index" [value]="zone.value">
@@ -64,11 +55,11 @@
             <th class="td-border"> Mild </th>
             <th class="td-border"> Asymptomatic </th>
             <th class="td-border"> Invasive Ventilator </th>
-            <th class="td-border"> Non-Invasive Ventilator  </th>
+            <th class="td-border"> Non-Invasive Ventilator </th>
             <th class="td-border"> High flow </th>
-            <th class="td-border"> Dead Case</th>
-            <th class="td-border"> Dead PUI</th>
-            <th class="td-border"> Dead ATK</th>
+            <th class="td-border"> Dead </th>
+            <th class="td-border"> Dead Covid</th>
+            <th class="td-border"> Dead Non Covid</th>
             <th class="td-border"> PUI </th>
             <th> ATK </th>
         </tr>
@@ -88,8 +79,8 @@
                     <td class="td-border"> {{ cal.checkValue(item.non_invasive_ventilator) }} </td>
                     <td class="td-border"> {{ cal.checkValue(item.high_flow) }} </td>
                     <td class="td-border"> {{ cal.checkValue(item.death) }} </td>
-                    <td class="td-border"> {{ cal.checkValue(item.death_pui) }} </td>
-                    <td class="td-border"> {{ cal.checkValue(item.death_atk) }} </td>
+                    <td class="td-border"> {{ cal.checkValue(item.death_covid) }} </td>
+                    <td class="td-border"> {{ cal.checkValue(item.death_non) }} </td>
                     <td class="td-border"> {{ cal.checkValue(item.pui) }} </td>
                     <td> {{ cal.checkValue(item.atk) }} </td>
                 </tr>
@@ -105,8 +96,8 @@
                 <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'non_invasive_ventilator')) }} </td>
                 <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'high_flow')) }} </td>
                 <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'death')) }} </td>
-                <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'death_pui')) }} </td>
-                <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'death_atk')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'death_covid')) }} </td>
+                <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'death_non')) }} </td>
                 <td class="td-border"> {{ cal.checkValue(cal.sumZone(items[i], 'pui')) }} </td>
                 <td> {{ cal.checkValue(cal.sumZone(items[i], 'atk')) }} </td>
             </tr>
@@ -124,8 +115,8 @@
             <td class="td-border"> {{ cal.checkValue(items[12][0].non_invasive_ventilator) }} </td>
             <td class="td-border"> {{ cal.checkValue(items[12][0].high_flow) }} </td>
             <td class="td-border"> {{ cal.checkValue(items[12][0].death) }} </td>
-            <td class="td-border"> {{ cal.checkValue(items[12][0].death_pui) }} </td>
-            <td class="td-border"> {{ cal.checkValue(items[12][0].death_atk) }} </td>
+            <td class="td-border"> {{ cal.checkValue(items[12][0].death_covid) }} </td>
+            <td class="td-border"> {{ cal.checkValue(items[12][0].death_non) }} </td>
             <td class="td-border"> {{ cal.checkValue(items[12][0].pui) }} </td>
             <td> {{ cal.checkValue(items[12][0].atk) }} </td>
         </tr>
@@ -140,8 +131,8 @@
             <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'non_invasive_ventilator')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'high_flow')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'death')) }} </td>
-            <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'death_pui')) }} </td>
-            <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'death_atk')) }} </td>
+            <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'death_covid')) }} </td>
+            <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'death_non')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'pui')) }} </td>
             <td> {{ cal.checkValue(cal.sum12ZoneByProvince(items, 'atk')) }} </td>
         </tr>
@@ -153,26 +144,23 @@
             <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'mild')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'asymptomatic')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'invasive_ventilator')) }} </td>
-            <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'non_invasive_ventilator')) }} </td>
+            <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'non_invasive_ventilator')) }}
+            </td>
             <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'high_flow')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'death')) }} </td>
-            <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'death_pui')) }} </td>
-            <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'death_atk')) }} </td>
+            <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'death_covid')) }} </td>
+            <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'death_non')) }} </td>
             <td class="td-border"> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'pui')) }} </td>
             <td> {{ cal.checkValue(cal.sumAllZoneByProvince(items, 'atk')) }} </td>
         </tr>
     </tfoot>
 </table>
 
-<div
-    *ngIf="isLoading && !cal.checkExistingZone(items)"
-    style="display: flex; justify-content: center; padding: 24px;">
+<div *ngIf="isLoading && !cal.checkExistingZone(items)" style="display: flex; justify-content: center; padding: 24px;">
     กำลังโหลดข้อมูล ...
 </div>
 
-<div
-    *ngIf="!isLoading && !cal.checkExistingZone(items)"
-    style="display: flex; justify-content: center; padding: 24px;">
+<div *ngIf="!isLoading && !cal.checkExistingZone(items)" style="display: flex; justify-content: center; padding: 24px;">
     ไม่พบข้อมูล
 </div>
 
